@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +10,7 @@ import { PresortPage } from './pages/presort/Presort';
 import { SortPage } from './pages/sort/Sort';
 import { SubmitPage } from './pages/submit/Submit';
 import { SurveyPage } from './pages/survey/Survey';
+import { view } from '@risingstack/react-easy-state';
 
 function App() {
   return (
@@ -50,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default view(App);
