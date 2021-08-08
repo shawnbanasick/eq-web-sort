@@ -3,8 +3,9 @@ import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
+import { view } from "@risingstack/react-easy-state";
 
-export function LandingPage() {
+const LandingPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "landing");
   }, 100);
@@ -16,7 +17,9 @@ export function LandingPage() {
       <SpanDiv>{ReactHtmlParser(window.languageXML.welcomeText)}</SpanDiv>
     </ContainerDiv>
   );
-}
+};
+
+export default view(LandingPage);
 
 const ContainerDiv = styled.div`
   display: flex;

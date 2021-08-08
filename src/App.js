@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LandingPage } from "./pages/landing/Landing";
+import LandingPage from "./pages/landing/Landing";
 import { PostsortPage } from "./pages/postsort/Postsort";
 import { PresortPage } from "./pages/presort/Presort";
 import { SortPage } from "./pages/sort/Sort";
