@@ -1,7 +1,10 @@
-import { store } from '@risingstack/react-easy-state';
+import { store } from "@risingstack/react-easy-state";
 
 const globalState = store({
-currentPage: "landing",
+  currentPage: "landing",
+  presortPosCards: [],
+  presortNeuCards: [],
+  presortNegCards: [],
 });
 
 export default globalState;

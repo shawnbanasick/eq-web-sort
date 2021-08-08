@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 // import ReactDOM from "react-dom";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -22,6 +23,9 @@ const PresortPage = () => {
   useEffect(() => {
     setOpen(true);
   }, []);
+
+  const presortCards = getGlobalState("presortCards");
+  // console.log(JSON.stringify(presortCards));
 
   return (
     <div>

@@ -9,6 +9,7 @@ import { view } from "@risingstack/react-easy-state";
 // import styled from "styled-components";
 import globalState from "./globalState/globalState";
 import NextButton from "./pages/NextButton";
+import shuffleCards from "./utilities/shuffleCards";
 
 const getNextPage = () => {
   const currentPage = globalState.currentPage;
@@ -30,6 +31,7 @@ const getNextPage = () => {
 };
 
 function App() {
+  shuffleCards();
   return (
     <div className="App">
       <Router>

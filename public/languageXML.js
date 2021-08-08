@@ -11,6 +11,9 @@ const languageXML = {
   into one of the three piles or <b>press 1, 2, 3</b> on your keyboard. Changes can be made 
   later.<br/><br/>If you want to read this instruction a second time, press the 
   help-button at the bottom left corner.`,
+  btnAgreement: "Agree",
+  btnNeutral: "Neutral",
+  btnDisagreement: "Disagree",
 };
 
 window.languageXML = languageXML;
@@ -19,9 +22,6 @@ window.languageXML = languageXML;
 // <item id="btnContinue">Continue...</item>
 // <item id="btnclose">Close</item>
 // <item id="btnHelp">Help me!</item>
-// <item id="btnAgreement">Agree</item>
-// <item id="btnNeutral">Neutral</item>
-// <item id="btnDisagreement">Disagree</item>
 // <item id="btnTransfer">Submit data</item>
 // <item id="btnExit">Exit</item>
 // <item id="selectItem">Please select...</item>
