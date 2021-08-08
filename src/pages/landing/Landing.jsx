@@ -1,11 +1,7 @@
 import React from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
 
 export function LandingPage() {
@@ -17,7 +13,7 @@ export function LandingPage() {
   return (
     <ContainerDiv>
       <h1>Welcome!</h1>
-      <p>{ReactHtmlParser(window.languageXML.welcomeText)}</p>
+      <SpanDiv>{ReactHtmlParser(window.languageXML.welcomeText)}</SpanDiv>
     </ContainerDiv>
   );
 }
@@ -27,4 +23,8 @@ const ContainerDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const SpanDiv = styled.span`
+  font-size: 1.25em;
 `;

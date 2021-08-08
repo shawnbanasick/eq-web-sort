@@ -3,7 +3,7 @@ const languageXML = {
   welcomeText: `This is a demo project on iPad use in the classroom.<br/><br/>
   <b>** Important Information **</b><br/>For this survey you will need as much 
   screen space as possible!<br/><br/>If necessary, please <strong>MAXIMIZE</strong> the 
-  size of your browser window, reload this web page, 
+  size of your browser window, <b><i>reload</i></b> this web page, 
   <br/>and click on the "Continue" button to start the survey.`,
 };
 
