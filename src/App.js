@@ -11,6 +11,29 @@ import { SortPage } from './pages/sort/Sort';
 import { SubmitPage } from './pages/submit/Submit';
 import { SurveyPage } from './pages/survey/Survey';
 import { view } from '@risingstack/react-easy-state';
+// import styled from "styled-components";
+import globalState from "./globalState/globalState";
+import NextButton from "./pages/NextButton";
+
+const getNextPage = () => {
+  const currentPage = globalState.currentPage;
+  console.log(currentPage);
+  if (currentPage === "landing") {
+    return `/presort`;
+  }; 
+  if (currentPage === "presort") {
+    return `/sort`;
+  }; 
+  if (currentPage === "sort") {
+    return `/postsort`;
+  }; 
+  if (currentPage === "postsort") {
+    return `/submit`;
+  }; 
+  
+    return `/`;
+   
+}
 
 function App() {
   return (
@@ -24,29 +47,30 @@ function App() {
         <Route exact path="/survey" component={SurveyPage} />
         <Route exact path="/submit" component={SubmitPage} />
         </Switch>
-        <ul>
-          <li>
-            <Link to="/">Landing</Link>
-          </li>
-          <li>
-            <Link to="/presort">Presort</Link>
-          </li>
-          <li>
-            <Link to="/sort">Sort</Link>
-          </li>
-          <li>
-            <Link to="/postsort">Postsort</Link>
-          </li>
-          <li>
-            <Link to="/survey">Survey</Link>
-          </li>
-          <li>
-            <Link to="/submit">Submit</Link>
-          </li>
-         </ul> 
+        <footer>
+          <NextButton to={getNextPage()}>Next</NextButton>
+        </footer>
+         
       </Router>
     </div>
   );
 }
 
 export default view(App);
+
+
+// const FooterDiv = styled.div`
+//   display: inline;
+// `;
+
+
+// const NextButton = styled.button`
+//   background: blue;
+//   color: white;
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+//   border-radius: 3px;
+//   text-decoration: none;
+//   float: right;
+// `;
