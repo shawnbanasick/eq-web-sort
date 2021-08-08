@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import React from 'react'
-import { withRouter } from 'react-router'
+import React from "react";
+import { withRouter } from "react-router";
 
 const LinkButton = (props) => {
   const {
@@ -12,21 +12,22 @@ const LinkButton = (props) => {
     onClick,
     // ⬆ filtering out props that `button` doesn’t know what to do with.
     ...rest
-  } = props
+  } = props;
   return (
     <NextButton
       {...rest} // `children` is just another prop!
       onClick={(event) => {
-        onClick && onClick(event)
-        history.push(to)
+        onClick && onClick(event);
+        history.push(to);
       }}
     />
-  )
-}
-export default withRouter(LinkButton)
+  );
+};
+export default withRouter(LinkButton);
 
 const NextButton = styled.button`
-  background: blue;
+  background: #337ab7;
+  border-color: #2e6da4;
   color: white;
   font-size: 1em;
   margin: 1em;
@@ -34,4 +35,4 @@ const NextButton = styled.button`
   border-radius: 3px;
   text-decoration: none;
   float: right;
-`
+`;
