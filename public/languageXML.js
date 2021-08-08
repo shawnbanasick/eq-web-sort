@@ -5,6 +5,12 @@ const languageXML = {
   screen space as possible!<br/><br/>If necessary, please <strong>MAXIMIZE</strong> the 
   size of your browser window, <b><i>reload</i></b> this web page, 
   <br/>and click on the "Continue" button to start the survey.`,
+  presortModalText: `Read the following statements carefully and split them up into 
+  three piles: a pile for statements you tend to disagree with, a pile for cards you 
+  tend to agree with, and a pile for the rest.<br/><br/>You can either drag the cards 
+  into one of the three piles or <b>press 1, 2, 3</b> on your keyboard. Changes can be made 
+  later.<br/><br/>If you want to read this instruction a second time, press the 
+  help-button at the bottom left corner.`,
 };
 
 window.languageXML = languageXML;

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { view } from "@risingstack/react-easy-state";
+import styled from "styled-components";
+import ReactHtmlParser from "react-html-parser";
 
-export function PresortPage() {
+const PresortPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "presort");
   }, 100);
@@ -23,10 +26,30 @@ export function PresortPage() {
   return (
     <div>
       {/* <button onClick={onOpenModal}>Open modal</button> */}
-      <Modal open={open} onClose={onCloseModal} center>
-        <h2>Simple centered modal</h2>
+      <Modal className="customModal" open={open} onClose={onCloseModal} center>
+        <ModalHeader>Step 1 of 5</ModalHeader>
+        <hr />
+        <ModalContent>
+          {ReactHtmlParser(window.languageXML.presortModalText)}
+        </ModalContent>
       </Modal>
       <h1>Presort Page!</h1>
     </div>
   );
-}
+};
+
+export default view(PresortPage);
+
+const ModalHeader = styled.div`
+  font-size: 24px;
+  line-height: 1.42;
+  padding: 10px 0px 10px 0px;
+
+  hr {
+    color: black;
+  }
+`;
+
+const ModalContent = styled.div`
+  margin-top: 15px;
+`;

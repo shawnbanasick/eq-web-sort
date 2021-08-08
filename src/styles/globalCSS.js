@@ -1,6 +1,6 @@
-import {createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
- export default createGlobalStyle`
+export default createGlobalStyle`
     *{
         margin: 0;
         padding: 0;
@@ -371,4 +371,12 @@ footer {
   background: whitesmoke; 
 }
 
- `
+.react-responsive-modal-modal {
+  background: white;
+  max-width: 700px;
+  width: 100%;
+  padding: 15px;
+
+}
+
+ `;
