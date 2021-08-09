@@ -1,72 +1,68 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
 
-const itemsFromBackend = [
-  { id: "card1", content: "First task" },
-  { id: "card2", content: "Second task" },
-  { id: "card3", content: "Third task" },
-  { id: "card4", content: "Fourth task" },
-  { id: "card5", content: "Fifth task" },
-];
+function PresortDND(props) {
+  const itemsFromBackend = props.statements;
+  console.log(JSON.stringify(itemsFromBackend));
 
-const columnsFromBackend = {
-  cards: {
-    name: "Statements",
-    items: itemsFromBackend,
-  },
-  neg: {
-    name: "Negative",
-    items: [],
-  },
-  neutral: {
-    name: "Neutral",
-    items: [],
-  },
-  pos: {
-    name: "Positive",
-    items: [],
-  },
-};
+  const columnsFromBackend = {
+    cards: {
+      name: "Statements",
+      items: itemsFromBackend,
+    },
+    neg: {
+      name: "Negative",
+      items: [],
+    },
+    neutral: {
+      name: "Neutral",
+      items: [],
+    },
+    pos: {
+      name: "Positive",
+      items: [],
+    },
+  };
 
-const onDragEnd = (result, columns, setColumns) => {
-  if (!result.destination) return;
-  const { source, destination } = result;
+  const onDragEnd = (result, columns, setColumns) => {
+    if (!result.destination) return;
+    const { source, destination } = result;
 
-  if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems,
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems,
-      },
-    });
-  } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems,
-      },
-    });
-  }
-};
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems,
+        },
+      });
+    } else {
+      const column = columns[source.droppableId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems,
+        },
+      });
+    }
+  };
 
-function PresortDND() {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>

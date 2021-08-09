@@ -5,6 +5,7 @@ const globalState = store({
   presortPosCards: [],
   presortNeuCards: [],
   presortNegCards: [],
+  presortCards: [],
 });
 
 export default globalState;
