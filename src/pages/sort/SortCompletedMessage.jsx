@@ -1,18 +1,20 @@
 import React from "react";
 // import styled from 'styled-components';
-import { view } from "react-easy-state";
-import state from "../state";
+import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 // eslint-disable-next-line react/button-has-type
 /* eslint react/prop-types: 0 */
 
 const handleClick = () => {
   console.log("clicked");
-  state.setState({ displayPostsort: true, displaySort: false });
+  setGlobalState("displayPostsort", true);
+  setGlobalState("displaySort", false);
 };
 
-const SortCompletedMessageBox = props => {
-  const sortCompleted = state.getState("sortCompleted");
+const SortCompletedMessageBox = (props) => {
+  const sortCompleted = getGlobalState("sortCompleted");
   // const sortCompleted = localStorage.getItem("sortCompleted");
   console.log("TCL: sortCompleted", sortCompleted);
 

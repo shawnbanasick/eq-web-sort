@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-// import { useStore } from 'easy-peasy';
-import { view } from "react-easy-state";
-import state from "../state";
-
+import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
 /* eslint react/prop-types: 0 */
 
-const NumberCardsSortedMessage = props => {
+const NumberCardsSortedMessage = (props) => {
   // const numSortedStatements = useStore(state => state.numSortedStatements);
-  const numSortedStatements = state.getState("numSortedStatements");
+  const numSortedStatements = getGlobalState("numSortedStatements");
 
   // const isSortingCards = useStore(state => state.isSortingCards);
-  const isSortingCards = state.getState("isSortingCards");
+  const isSortingCards = getGlobalState("isSortingCards");
   console.log("TCL: isSortingCards", isSortingCards);
   // const isSortingCards = localStorage.getItem("isSortingCards");
   console.log("TCL: isSortingCards", isSortingCards);

@@ -1,26 +1,31 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
+
+let presortSortedStatements = getGlobalState("presortSortedStatements");
+console.log(presortSortedStatements);
 
 function PresortDND(props) {
   const itemsFromBackend = props.statements;
-  console.log(JSON.stringify(itemsFromBackend));
+  const cardFontSize = props.cardFontSize;
 
   const columnsFromBackend = {
     cards: {
-      name: "Statements",
+      name: window.languageXML.statements,
       items: itemsFromBackend,
     },
     neg: {
-      name: "Negative",
+      name: window.languageXML.negative,
       items: [],
     },
     neutral: {
-      name: "Neutral",
+      name: window.languageXML.neutral,
       items: [],
     },
     pos: {
-      name: "Positive",
+      name: window.languageXML.positive,
       items: [],
     },
   };
@@ -37,7 +42,23 @@ function PresortDND(props) {
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
+      console.log(sourceColumn);
       console.log(result.draggableId);
+
+      // calc remaining statements
+      if (sourceColumn.name === "Statements") {
+        presortSortedStatements =
+          window.statementsXML.length - sourceColumn.items.length + 1;
+        console.log("remaining: ", presortSortedStatements);
+        setGlobalState("presortSortedStatements", presortSortedStatements);
+      }
+
+      // update progress bar
+      const sortedStatements = getGlobalState("presortSortedStatements");
+      const progressScore = getGlobalState("progressScore");
+      const ratio = sortedStatements / window.statementsXML.length;
+      const completedPercent = (ratio * 30 + 20).toFixed();
+      setGlobalState("progressScore", +completedPercent);
 
       setColumns({
         ...columns,
@@ -68,6 +89,9 @@ function PresortDND(props) {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <div className="presortGrid">
+      <div id="completionRatio">
+        {presortSortedStatements}/{window.statementsXML.length}
+      </div>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
@@ -118,6 +142,8 @@ function PresortDND(props) {
                                       padding: 16,
                                       margin: "0 0 8px 0",
                                       height: "142px",
+                                      overflow: "hidden",
+                                      fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
                                         ? "gray"
                                         : "#ececec",

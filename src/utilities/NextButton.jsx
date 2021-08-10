@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { withRouter } from "react-router";
+import { view } from "@risingstack/react-easy-state";
 
 const LinkButton = (props) => {
   const {
@@ -23,14 +24,13 @@ const LinkButton = (props) => {
     />
   );
 };
-export default withRouter(LinkButton);
+export default view(withRouter(LinkButton));
 
 const NextButton = styled.button`
   background: #337ab7;
   border-color: #2e6da4;
   color: white;
   font-size: 1em;
-  margin: 1em;
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;

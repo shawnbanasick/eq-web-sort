@@ -6,6 +6,11 @@ const globalState = store({
   presortNeuCards: [],
   presortNegCards: [],
   presortCards: [],
+  cardFontSize: "18px",
+  defaultCardFontSize: 18,
+  presortSortedStatements: 0,
+  progressScore: 10,
+  overloadedColumn: "",
 });
 
 export default globalState;

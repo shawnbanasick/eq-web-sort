@@ -7,6 +7,7 @@ import { view } from "@risingstack/react-easy-state";
 
 const LandingPage = () => {
   setTimeout(function () {
+    setGlobalState("progressScore", 10);
     setGlobalState("currentPage", "landing");
   }, 100);
   console.log(globalState);

@@ -1,5 +1,4 @@
-import state from '../state';
-// import state from '../../store';
+import setGlobalState from "../../globalState/setGlobalState";
 
 // card and column styling
 const getListStyle = (
@@ -18,15 +17,15 @@ const getListStyle = (
 
   // to set highlighting for column headers
   if (isDraggingOver) {
-    state.setState({ draggingOverColumnId: props.columnId });
+    setGlobalState("draggingOverColumnId", props.columnId);
   }
 
   return {
     background: isDraggingOver
-      ? 'lightblue'
+      ? "lightblue"
       : isUnderMaxCards
       ? columnColor
-      : 'orange',
+      : "orange",
     padding: `3px 5px 0px 5px`,
 
     minWidth: columnWidth + 13,

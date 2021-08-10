@@ -1,13 +1,11 @@
 import React from "react";
-// import styled from "styled-components";
-// import { useStore } from "easy-peasy";
 import { view } from "react-easy-state";
-import state from "../state";
+import getGlobalState from "../../globalState/getGlobalState";
 
-const ColumnOverloadMessage = props => {
-  const columnOverload = state.getState("columnOverload");
+const ColumnOverloadMessage = (props) => {
+  const columnOverload = getGlobalState("columnOverload");
   console.log("TCL: columnOverload", columnOverload);
-  const overloadedColumn = state.getState("overloadedColumn");
+  const overloadedColumn = getGlobalState("overloadedColumn");
 
   if (columnOverload) {
     return (

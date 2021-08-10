@@ -368,7 +368,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background: whitesmoke; 
+  background: #ececec; 
 }
 
 .react-responsive-modal-modal {
@@ -382,9 +382,9 @@ footer {
 .presortGrid {
   display: grid;
   height: calc(100vh-50);
-  grid-template-rows: 200px auto;
+  grid-template-rows: 200px 30px auto;
   grid-template-columns: 1fr 300px 300px 300px 1fr;
-  row-gap: 30px;
+  row-gap: 10px;
   column-gap: 30px;
   margin-top: 30px;
 
@@ -399,8 +399,15 @@ footer {
     overflow: hidden;
   }
   
-  #negDiv{
+  #completionRatio {
     grid-row-start: 2;
+    grid-column-start: 3;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #negDiv{
+    grid-row-start: 3;
     grid-column-start: 2;
     overflow-y: auto;
     background-color: lightpink;
@@ -409,11 +416,23 @@ footer {
     padding-top: 5px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
   }
   
 
   #neutralDiv{
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-column-start: 3;
     overflow-y: auto;
     background-color: lightgray;
@@ -421,10 +440,23 @@ footer {
     max-height: 60vh;
     padding-top: 5px;
 
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+
   }
 
   #posDiv{
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-column-start: 4;
     overflow-y: auto;
     background-color: lightgreen;
@@ -432,20 +464,32 @@ footer {
     padding-top: 5px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
   }
 
   #pos{
-    min-height: 300px;
+    min-height: 50vh;
     border-radius: 3px;
   }
 
   #neutral{
-    min-height: 300px;
+    min-height: 50vh;
     border-radius: 3px;
   }
 
   #neg{
-    min-height: 300px;
+    min-height: 50vh;
     border-radius: 3px;
   }
 
@@ -456,6 +500,7 @@ footer {
     text-align: center;
     border-radius: 2px;
   }
+
 
 }
 

@@ -1,11 +1,12 @@
-import state from '../state';
+import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 const checkForColumnOverload = (
   columnLengthCheckArray,
   forcedSorts,
   totalStatements
 ) => {
-  const sortCharacteristics = state.getState('sortCharacteristics');
+  const sortCharacteristics = getGlobalState("sortCharacteristics");
 
   const qSortPattern = [...sortCharacteristics.qSortPattern];
 
@@ -13,36 +14,39 @@ const checkForColumnOverload = (
 
   if (forcedSorts === true) {
     const tempArray = [];
-    columnLengthCheckArray.forEach(function(item, index) {
+    columnLengthCheckArray.forEach(function (item, index) {
       if (item > qSortPattern[index]) {
         tempArray.push(qSortHeaderNumbers[index]);
-        state.setState({ setSortCompleted: false });
-        state.setState({ setOverloadedColumn: qSortHeaderNumbers[index] });
-        state.setState({ setColumnOverload: true });
-        state.setState({ setIsSortingCards: false });
+        setGlobalState("setSortCompleted", false);
+        setGlobalState("setOverloadedColumn", qSortHeaderNumbers[index]);
+        setGlobalState("setColumnOverload", true);
+        setGlobalState("setIsSortingCards", false);
 
         return null;
       }
     });
     if (tempArray.length === 0) {
-      state.setState({ setColumnOverload: false });
-      state.setState({ setIsSortingCards: true });
+      setGlobalState("setColumnOverload", false);
+      setGlobalState("setIsSortingCards", true);
     }
   }
 
-  const numSortedStatements = columnLengthCheckArray.reduce(function(acc, val) {
+  const numSortedStatements = columnLengthCheckArray.reduce(function (
+    acc,
+    val
+  ) {
     return acc + val;
   });
 
-  state.setState({ numSortedStatements });
+  setGlobalState("numSortedStatements", numSortedStatements);
 
   if (forcedSorts === false) {
     if (numSortedStatements === totalStatements) {
-      state.setState({ setSortCompleted: true });
-      state.setState({ setIsSortingCards: false });
+      setGlobalState("setSortCompleted", true);
+      setGlobalState("setIsSortingCards", false);
     } else {
-      state.setState({ setSortCompleted: false });
-      state.setState({ setIsSortingCards: true });
+      setGlobalState("setSortCompleted", false);
+      setGlobalState("setIsSortingCards", true);
     }
   }
 };

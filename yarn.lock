@@ -1580,6 +1580,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@ramonak/react-progress-bar@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@ramonak/react-progress-bar/-/react-progress-bar-3.2.1.tgz#dbb494f5b1c96af67489168dc5923e5982791bf2"
+  integrity sha512-maDK1QLnh8o0ziT6o6xPe76PBERkM1/pO+VHzomOpFW/dFPragmQm3Pd8+0AA/hl9YC3vJtgttK18TMOuDAxYA==
+
 "@risingstack/react-easy-state@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@risingstack/react-easy-state/-/react-easy-state-6.3.0.tgz#3590031f7382c5c6c7866790ba7a72e557a12407"

@@ -1,11 +1,11 @@
-import './Sort.css';
-import React from 'react';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { view } from 'react-easy-state';
-import styled from 'styled-components';
-import state from '../state';
-import getItemStyle from './getItemStyle';
-import getListStyle from './getListStyle';
+import "./Sort.css";
+import React from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
+import { view } from "@risingstack/react-easy-state";
+import styled from "styled-components";
+import getItemStyle from "./getItemStyle";
+import setGlobalState from "../../globalState/setGlobalState";
+import getListStyle from "./getListStyle";
 
 /* eslint react/prop-types: 0 */
 
@@ -28,8 +28,8 @@ class SortColumn extends React.Component {
       <Droppable droppableId={columnId}>
         {(provided, snapshot) => {
           if (snapshot.isDraggingOver) {
-            state.setState({ draggingOverColumnId: columnId });
-            state.setState({ currentSortValue: sortValue });
+            setGlobalState("draggingOverColumnId", columnId);
+            setGlobalState("currentSortValue", sortValue);
           }
 
           return (

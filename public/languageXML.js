@@ -14,6 +14,10 @@ const languageXML = {
   btnAgreement: "Agree",
   btnNeutral: "Neutral",
   btnDisagreement: "Disagree",
+  statements: "Statements",
+  negative: "Negative",
+  neutral: "Neutral",
+  positive: "Positive",
 };
 
 window.languageXML = languageXML;

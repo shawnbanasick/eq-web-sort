@@ -1,7 +1,6 @@
-import isEqual from 'lodash/isEqual';
-import state from '../state';
-import checkForColumnOverload from './checkForColumnOverload';
-
+import isEqual from "lodash/isEqual";
+import checkForColumnOverload from "./checkForColumnOverload";
+import setGlobalState from "../../globalState/setGlobalState";
 /**
  * Moves an item from one list to another list.
  */
@@ -31,7 +30,7 @@ const move = (
   result[droppableDestination.droppableId] = [...destinationListArray];
 
   // to save to state and auto update lists
-  state.setState({ result });
+  setGlobalState("result", result);
 
   // for sort complete checking
   const columnLengthCheckArray = [];
@@ -51,12 +50,12 @@ const move = (
   if (forcedSorts === true) {
     if (match === true) {
       state.setState({ sortCompleted: true });
-      localStorage.setItem('sortCompleted', 'true');
+      localStorage.setItem("sortCompleted", "true");
       state.setState({ isSortingCards: false });
-      localStorage.setItem('isSortingCards', 'false');
+      localStorage.setItem("isSortingCards", "false");
     } else {
       state.setState({ sortCompleted: false });
-      localStorage.setItem('sortCompleted', 'false');
+      localStorage.setItem("sortCompleted", "false");
     }
   }
   return null;
