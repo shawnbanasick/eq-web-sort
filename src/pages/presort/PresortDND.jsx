@@ -80,24 +80,23 @@ function PresortDND(props) {
                 alignItems: "center",
               }}
               key={columnId}
-              id={columnId}
+              id={`${columnId}Div`}
             >
               <h2>{column.name}</h2>
-              <div id={`${columnId}Div`} style={{ margin: 8 }}>
+              <div style={{ margin: 8 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
                       <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
+                        id={columnId}
                         style={{
                           background: snapshot.isDraggingOver
                             ? "lightblue"
-                            : "lightgrey",
+                            : "white",
                           padding: 4,
                           width: 250,
-                          height: 500,
-                          overflowY: "auto",
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -113,15 +112,18 @@ function PresortDND(props) {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
+                                    className="droppableCards"
                                     style={{
                                       userSelect: "none",
                                       padding: 16,
                                       margin: "0 0 8px 0",
-                                      minHeight: "50px",
+                                      height: "142px",
                                       backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
-                                      color: "white",
+                                        ? "gray"
+                                        : "#ececec",
+                                      color: snapshot.isDragging
+                                        ? "white"
+                                        : "black",
                                       ...provided.draggableProps.style,
                                     }}
                                   >

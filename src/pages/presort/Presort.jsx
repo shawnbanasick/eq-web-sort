@@ -18,7 +18,6 @@ console.log(JSON.stringify(statements));
 const PresortPage = () => {
   return (
     <React.Fragment>
-      <h1>Presort Page!</h1>
       <PresortModal />
       <PresortDND statements={statements} />
     </React.Fragment>

@@ -381,44 +381,80 @@ footer {
 
 .presortGrid {
   display: grid;
-  grid-template-rows: 2;
-  grid-template-columns: 5;
+  height: calc(100vh-50);
+  grid-template-rows: 200px auto;
+  grid-template-columns: 1fr 300px 300px 300px 1fr;
+  row-gap: 30px;
+  column-gap: 30px;
+  margin-top: 30px;
 
-
-
-  #cards{
-    max-height:150px;
-    grid-column-start: 3;
-  }
 
   #cardsDiv{
-    max-height: 150px;
+    grid-column-start: 3;
+    overflow: hidden;
   }
-
-  #neg{
-    grid-row-start: 2;
-    grid-column-start: 2;
-    border: 2px solid red;
-    
+  
+  #cards{
+    max-height:150px;
+    overflow: hidden;
   }
   
   #negDiv{
-    
-    height: 500px;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    overflow-y: auto;
+    background-color: lightpink;
+    min-height: 300px;
+    max-height: 60vh;
+    padding-top: 5px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
   }
+  
 
-  #neutral{
+  #neutralDiv{
     grid-row-start: 2;
     grid-column-start: 3;
-    border: 2px solid red;
+    overflow-y: auto;
+    background-color: lightgray;
+    min-height: 300px;
+    max-height: 60vh;
+    padding-top: 5px;
 
+  }
+
+  #posDiv{
+    grid-row-start: 2;
+    grid-column-start: 4;
+    overflow-y: auto;
+    background-color: lightgreen;
+    max-height: 60vh;
+    padding-top: 5px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 
   #pos{
-    grid-row-start: 2;
-    grid-column-start: 4;
-    border: 2px solid red;
+    min-height: 300px;
+    border-radius: 3px;
+  }
 
+  #neutral{
+    min-height: 300px;
+    border-radius: 3px;
+  }
+
+  #neg{
+    min-height: 300px;
+    border-radius: 3px;
+  }
+
+  .droppableCards {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 2px;
   }
 
 }
