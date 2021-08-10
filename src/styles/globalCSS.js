@@ -379,4 +379,48 @@ footer {
 
 }
 
+.presortGrid {
+  display: grid;
+  grid-template-rows: 2;
+  grid-template-columns: 5;
+
+
+
+  #cards{
+    max-height:150px;
+    grid-column-start: 3;
+  }
+
+  #cardsDiv{
+    max-height: 150px;
+  }
+
+  #neg{
+    grid-row-start: 2;
+    grid-column-start: 2;
+    border: 2px solid red;
+    
+  }
+  
+  #negDiv{
+    
+    height: 500px;
+  }
+
+  #neutral{
+    grid-row-start: 2;
+    grid-column-start: 3;
+    border: 2px solid red;
+
+  }
+
+  #pos{
+    grid-row-start: 2;
+    grid-column-start: 4;
+    border: 2px solid red;
+
+  }
+
+}
+
  `;

@@ -31,7 +31,7 @@ const getNextPage = () => {
 };
 
 function App() {
-  shuffleCards();
+  // shuffleCards();
   return (
     <div className="App">
       <Router>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 
 function PresortDND(props) {
   const itemsFromBackend = props.statements;
@@ -37,6 +36,9 @@ function PresortDND(props) {
       const destItems = [...destColumn.items];
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
+
+      console.log(result.draggableId);
+
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -65,7 +67,7 @@ function PresortDND(props) {
 
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
-    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+    <div className="presortGrid">
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
@@ -78,9 +80,10 @@ function PresortDND(props) {
                 alignItems: "center",
               }}
               key={columnId}
+              id={columnId}
             >
               <h2>{column.name}</h2>
-              <div style={{ margin: 8 }}>
+              <div id={`${columnId}Div`} style={{ margin: 8 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -93,7 +96,8 @@ function PresortDND(props) {
                             : "lightgrey",
                           padding: 4,
                           width: 250,
-                          minHeight: 500,
+                          height: 500,
+                          overflowY: "auto",
                         }}
                       >
                         {column.items.map((item, index) => {
