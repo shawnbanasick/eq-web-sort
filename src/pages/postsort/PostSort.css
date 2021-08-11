@@ -1,0 +1,65 @@
+.titleDiv {
+  display: flex;
+  padding-top: 20px;
+  height: 350px;
+  background: steelblue;
+  top: 0;
+  left: 0;
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+}
+
+.titleDiv h1 {
+  color: white;
+  font-size: 36px;
+  margin-left: 30px;
+}
+
+.titleDiv h3 {
+  color: white;
+  width: 80%;
+  height: 50px;
+  font-size: 22px;
+  margin-left: 30px;
+}
+
+.scrollableDiv {
+  overflow: auto;
+  position: absolute;
+  top: 200px;
+  bottom: 70px;
+  left: 0px;
+  right: 0px;
+  background: #dedede; /* #5d80b2; */
+}
+
+.postSortFooter {
+  position: absolute;
+  overflow: hidden;
+  background: steelblue;
+  left: 0;
+  bottom: 0;
+}
+
+.postSortButton {
+  height: 50px;
+  width: 100px;
+  margin-top: 25px;
+  margin-right: 15px;
+  margin-left: 15px;
+  font-size: 20px;
+  text-align: center;
+  padding-right: 5px;
+}
+
+.commentTextArea {
+  background-color: whitesmoke;
+  min-height: 120px;
+  width: calc(100% - 10px);
+}
+
+.tagContainerDiv {
+  padding-top: 3px;
+  width: 100%;
+}

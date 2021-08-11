@@ -1,9 +1,3 @@
-// import React from "react";
-import setGlobalState from "../../globalState/setGlobalState";
-import globalState from "../../globalState/globalState";
-import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-
 import "./PostSort.css";
 import React, { Component } from "react";
 import LowCards from "./LowCards";
@@ -12,7 +6,8 @@ import HighCards from "./HighCards";
 import HighCards2 from "./HighCards2";
 import NeutralCards from "./NeutralCards";
 import state from "../state";
-import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import calculateTimeOnPage from "../Utils/calculateTimeOnPage";
+// import displayDataObject from "../../Utils/displayDataObjectPostSort";
 
 /* eslint react/prop-types: 0 */
 
@@ -21,14 +16,13 @@ const styles = {
   flexDirection: "column",
   justifyContent: "center",
   width: "100%",
-  paddingBottom: 25,
+  paddingBottom: 25
 };
 
 let startTime;
 
 const handleClick = () => {
-  setGlobalState("displaySurvey", true);
-  setGlobalState("displayPostsort", false);
+  state.setState({ displaySurvey: true, displayPostsort: false });
 };
 
 class PostSort extends Component {
@@ -62,7 +56,7 @@ class PostSort extends Component {
       cardHeight,
       agreeObj,
       disagreeObj,
-      neutralObj,
+      neutralObj
     } = this.props;
 
     console.log("TCL: PostSort -> render -> this.props", this.props);
@@ -149,20 +143,3 @@ class PostSort extends Component {
 }
 
 export default PostSort;
-
-// const PostsortPage = () => {
-//   setTimeout(function () {
-//     setGlobalState("currentPage", "postsort");
-//   }, 100);
-//   console.log(globalState);
-
-//   const isSortComplete = getGlobalState("isSortingCards");
-
-//   return (
-//     <div>
-//       <h1>PostSort Page!</h1>
-//     </div>
-//   );
-// };
-
-// export default view(PostsortPage);
