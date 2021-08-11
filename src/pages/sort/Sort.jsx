@@ -23,6 +23,8 @@ setTimeout(function () {
   setGlobalState("progressScore", 50);
 }, 100);
 
+console.log("CONFIG", window.configXML);
+
 class Sort extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +94,8 @@ class Sort extends Component {
       }
       const droppableSource = source;
       const droppableDestination = destination;
-      const { totalStatements, sortCharacteristics } = this.props;
+      const totalStatements = window.configXML.totalStatements;
+      const sortCharacteristics = window.configXML.sortCharacteristics;
       move(
         sourceListArray,
         destinationListArray,
@@ -123,25 +126,26 @@ class Sort extends Component {
   }; // end of dragEnd helper function
 
   render() {
-    setGlobalState("sortCharacteristics", this.props.sortCharacteristics);
+    setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
-    const {
-      cardHeight,
-      columnWidth,
-      sortCompleteText,
-      nextButtonText,
-      horiCardMinHeight,
-      columnColorsArray,
-      sortCharacteristics,
-      totalStatements,
-    } = this.props;
+    const sortCompleteText = window.configXML.sortCompleteText;
+    const nextButtonText = window.configXML.nextButtonText;
+    const horiCardMinHeight = window.configXML.horiCardMinHeight;
+    const columnColorsArray = window.configXML.columnColorsArray;
+    const sortCharacteristics = window.configXML.sortCharacteristics;
+    const totalStatements = window.configXML.totalStatements;
 
-    // console.log(
-    //   "TCL: Sort -> render -> this.props",
-    //   JSON.stringify(this.props, null, 2)
-    // );
+    const cardHeight = window.configXML.cardHeight;
 
-    // const { sortCharacteristics, totalStatements } = this.props;
+    const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
+
+    // set dynamic width on page load or reload
+    // todo make responsive
+    const columnWidth = (window.innerWidth - 150) / qSortPattern.length;
+    // const columnWidth = window.configXML.columnWidth;
+
+    console.log("CONFIG", window.configXML);
+
     const changeColumnHeaderColor = (columnId) => {
       this.setState({ draggingOverColumnId: columnId });
     };
@@ -159,7 +163,6 @@ class Sort extends Component {
     // code inside render so that column lists update automatically
     const qSortHeaders = [...sortCharacteristics.qSortHeaders];
     const qSortHeaderNumbers = [...sortCharacteristics.qSortHeaderNumbers];
-    const qSortPattern = [...sortCharacteristics.qSortPattern];
     const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
       const columnId = `column${qSortHeaders[index]}`;
       const sortValue = qSortHeaderNumbers[index];

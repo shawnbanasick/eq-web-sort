@@ -7,19 +7,15 @@ import { SubmitPage } from "./pages/submit/Submit";
 import { SurveyPage } from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
 import StyledFooter from "./utilities/StyledFooter";
-import getSortProps from "./utilities/getSortProps";
 
 function App() {
-  // shuffleCards();
-  const props = getSortProps();
-  console.log(props);
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/presort" component={PresortPage} />
-          <Route exact path="/sort" render={() => <SortPage {...props} />} />
+          <Route exact path="/sort" component={SortPage} />
           <Route exact path="/postsort" component={PostsortPage} />
           <Route exact path="/survey" component={SurveyPage} />
           <Route exact path="/submit" component={SubmitPage} />
