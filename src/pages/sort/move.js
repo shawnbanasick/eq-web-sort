@@ -1,5 +1,4 @@
 import isEqual from "lodash/isEqual";
-import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import checkForColumnOverload from "./checkForColumnOverload";
 

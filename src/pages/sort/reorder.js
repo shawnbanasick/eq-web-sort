@@ -1,4 +1,3 @@
-import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 // to reorder within the same column

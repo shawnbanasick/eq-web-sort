@@ -6,7 +6,6 @@ import { view } from "@risingstack/react-easy-state";
 import globalState from "../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../globalState/getGlobalState";
-import setGlobalState from "../globalState/setGlobalState";
 
 const getNextPage = () => {
   const currentPage = globalState.currentPage;

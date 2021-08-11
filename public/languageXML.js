@@ -18,6 +18,8 @@ const languageXML = {
   negative: "Negative",
   neutral: "Neutral",
   positive: "Positive",
+  sortCompleteText: "Sort Complete!",
+  sortedText: "cards sorted",
 };
 
 window.languageXML = languageXML;

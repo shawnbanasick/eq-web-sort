@@ -126,12 +126,10 @@ class SortGrid extends Component {
     const cardFontSize = this.props.cardFontSize;
     console.log("rend size", cardFontSize);
 
-    setGlobalState("currentPage", "sort");
-    setGlobalState("progressScore", 50);
     setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
-    const sortCompleteText = window.configXML.sortCompleteText;
-    const nextButtonText = window.configXML.nextButtonText;
+    const sortCompleteText = window.languageXML.sortCompleteText;
+    const nextButtonText = window.languageXML.nextButtonText;
     const horiCardMinHeight = window.configXML.horiCardMinHeight;
     const columnColorsArray = [...window.configXML.columnColorsArray];
     const sortCharacteristics = window.configXML.sortCharacteristics;
@@ -146,9 +144,6 @@ class SortGrid extends Component {
     // set dynamic width on page load or reload
     // todo make responsive
     const columnWidth = (window.innerWidth - 150) / qSortPattern.length;
-    // const columnWidth = window.configXML.columnWidth;
-
-    console.log("CONFIG", window.configXML);
 
     const changeColumnHeaderColor = (columnId) => {
       this.setState({ draggingOverColumnId: columnId });
@@ -160,7 +155,6 @@ class SortGrid extends Component {
     );
 
     const statements = columnStatements.statementList;
-    // const overloadedColumn = store.getState().overloadedColumn;
     const overloadedColumn = getGlobalState("overloadedColumn");
 
     // MAP out SORT COLUMNS component before render

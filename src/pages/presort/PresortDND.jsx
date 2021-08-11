@@ -55,7 +55,6 @@ function PresortDND(props) {
 
       // update progress bar
       const sortedStatements = getGlobalState("presortSortedStatements");
-      const progressScore = getGlobalState("progressScore");
       const ratio = sortedStatements / window.statementsXML.length;
       const completedPercent = (ratio * 30 + 20).toFixed();
       setGlobalState("progressScore", +completedPercent);
