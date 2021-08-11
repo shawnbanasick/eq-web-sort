@@ -9,7 +9,7 @@ const getItemStyle = (
   userSelect: "none",
   padding: `0 2px 0 2px`,
   margin: `0 2px 8px 3px`,
-  lineHeight: `1em`,
+  lineHeight: `1.3em`,
   fontSize: cardFontSize,
   height: cardHeight,
   width: cardWidth,

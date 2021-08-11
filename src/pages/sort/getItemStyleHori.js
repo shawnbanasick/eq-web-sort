@@ -21,7 +21,7 @@ const getItemStyleHori = (
   return {
     userSelect: "none",
     WebkitUserSelect: "none",
-    lineHeight: `1em`,
+    lineHeight: `1.3em`,
     fontSize: cardFontSize,
     height: cardHeight,
     minWidth: columnWidth,
