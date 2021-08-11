@@ -2,17 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
-const SurveyTextElement = () => {
+const SurveyTextAreaElement = () => {
   return (
     <Container>
-      <TitleBar>Age*</TitleBar>
-      <NoteText>Please enter your year of birth </NoteText>
-      <TextInput />
+      <TitleBar>Comments</TitleBar>
+      <TextAreaInput />
     </Container>
   );
 };
 
-export default view(SurveyTextElement);
+export default view(SurveyTextAreaElement);
 
 const Container = styled.div`
   width: 90vw;
@@ -36,27 +35,13 @@ const TitleBar = styled.div`
   border-radius: 3px;
 `;
 
-const NoteText = styled.div`
+const TextAreaInput = styled.textarea`
   display: flex;
   justify-content: left;
   align-items: center;
   vertical-align: center;
   margin-top: 5px;
-  height: 50px;
-  font-size: 18px;
-  text-align: center;
-  background-color: whitesmoke;
-  width: 100%;
-  border-radius: 3px;
-`;
-
-const TextInput = styled.input`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  vertical-align: center;
-  margin-top: 5px;
-  height: 50px;
+  height: 150px;
   font-size: 18px;
   background-color: white;
   width: 100%;
