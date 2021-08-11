@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "./Sort.css";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import move from "./move";

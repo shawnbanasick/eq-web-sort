@@ -1,4 +1,3 @@
-import "./Sort.css";
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
