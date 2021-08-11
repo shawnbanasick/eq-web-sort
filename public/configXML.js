@@ -28,6 +28,32 @@ const configXML = {
     qSortHeaderNumbers: ["-3", "-2", "-1", "0", "+1", "+2", "+3"],
   },
   out: true,
+  titleText: "Post-Sort Comments",
+  instructionsText:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae tristique eros. Nullam laoreet varius massa ac finibus. Nullam eget lobortis dolor. Praesent enim risus, hendrerit at dui eu, facilisis maximus nibh. Quisque pharetra ante sit amet nulla facilisis, quis faucibus ex mollis. Morbi molestie mi id justo tincidunt dapibus.",
+  nextButtonText: "Next",
+  agreeObj: {
+    agreeText: "Agree",
+    columnDisplay: ["column3"],
+    columnDisplay2: ["column2"],
+    displaySecondColumn: true,
+    placeholder: "Click here to add comment",
+  },
+  neutralObj: {
+    displayNeutralObjects: false,
+    neutralText: "Neutral",
+    columnDisplay: ["column0"],
+    placeholder: "Click here to add comment",
+  },
+  disagreeObj: {
+    disagreeText: "Disagree",
+    columnDisplay: ["columnN3"],
+    columnDisplay2: ["columnN2"],
+    displaySecondColumn: true,
+    placeholder: "Click here to add comment",
+  },
+  columnWidth: 200,
+  cardHeight: 150,
 };
 
 window.configXML = configXML;

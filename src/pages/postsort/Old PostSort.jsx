@@ -7,6 +7,7 @@ import HighCards2 from "./HighCards2";
 import NeutralCards from "./NeutralCards";
 import state from "../state";
 import calculateTimeOnPage from "../Utils/calculateTimeOnPage";
+import styled from "styled-components";
 // import displayDataObject from "../../Utils/displayDataObjectPostSort";
 
 /* eslint react/prop-types: 0 */
@@ -16,7 +17,7 @@ const styles = {
   flexDirection: "column",
   justifyContent: "center",
   width: "100%",
-  paddingBottom: 25
+  paddingBottom: 25,
 };
 
 let startTime;
@@ -56,7 +57,7 @@ class PostSort extends Component {
       cardHeight,
       agreeObj,
       disagreeObj,
-      neutralObj
+      neutralObj,
     } = this.props;
 
     console.log("TCL: PostSort -> render -> this.props", this.props);
@@ -68,7 +69,7 @@ class PostSort extends Component {
     const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
 
     return (
-      <div>
+      <>
         <div className="titleDiv">
           <h1>{titleText}</h1>
           <h3>{instructionsText}</h3>
@@ -80,7 +81,6 @@ class PostSort extends Component {
             Next
           </button>
         </div>
-        <div className="scrollableDiv">
           <div style={styles}>
             <HighCards
               agreeObj={agreeObj}
@@ -133,10 +133,8 @@ class PostSort extends Component {
               columnDisplay={disagreeObj.columnDisplay}
             />
           </div>
-        </div>
-        <div className="footer fix-footer postSortFooter">
-          <nav />
-        </div>
+        
+        
       </div>
     );
   }

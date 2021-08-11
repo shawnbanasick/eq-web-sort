@@ -4,32 +4,18 @@ import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 
-import "./PostSort.css";
 import React, { Component } from "react";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
 import HighCards2 from "./HighCards2";
 import NeutralCards from "./NeutralCards";
-import state from "../state";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import styled from "styled-components";
 
 /* eslint react/prop-types: 0 */
 
-const styles = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  width: "100%",
-  paddingBottom: 25,
-};
-
 let startTime;
-
-const handleClick = () => {
-  setGlobalState("displaySurvey", true);
-  setGlobalState("displayPostsort", false);
-};
 
 class PostSort extends Component {
   componentDidMount() {
@@ -45,6 +31,9 @@ class PostSort extends Component {
     const columnStatements = JSON.parse(
       localStorage.getItem("columnStatements")
     );
+
+    console.log(columnStatements);
+
     // if (!columnStatements) {
     //   console.log("no local storage");
     //   columnStatements = store.getState().columnStatements;
@@ -55,17 +44,14 @@ class PostSort extends Component {
       columnStatements
     );
 
-    const {
-      titleText,
-      columnWidth,
-      instructionsText,
-      cardHeight,
-      agreeObj,
-      disagreeObj,
-      neutralObj,
-    } = this.props;
+    const titleText = window.configXML.titleText;
+    const columnWidth = window.configXML.columnWidth;
 
-    console.log("TCL: PostSort -> render -> this.props", this.props);
+    const instructionsText = window.configXML.instructionsText;
+    const cardHeight = window.configXML.cardHeight;
+    const agreeObj = window.configXML.agreeObj;
+    const disagreeObj = window.configXML.disagreeObj;
+    const neutralObj = window.configXML.neutralObj;
 
     const highCards = columnStatements.vCols[agreeObj.columnDisplay];
     const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
@@ -75,80 +61,100 @@ class PostSort extends Component {
 
     return (
       <div>
-        <div className="titleDiv">
+        <TitleDiv>
           <h1>{titleText}</h1>
           <h3>{instructionsText}</h3>
-          <button
-            className="postSortButton"
-            type="button"
-            onClick={handleClick}
-          >
-            Next
-          </button>
-        </div>
-        <div className="scrollableDiv">
-          <div style={styles}>
-            <HighCards
+        </TitleDiv>
+        <CardsContainer>
+          <HighCards
+            agreeObj={agreeObj}
+            height={cardHeight}
+            width={columnWidth}
+            highCards={highCards}
+            columnDisplay={agreeObj.columnDisplay}
+            columnStatements={columnStatements}
+          />
+
+          {agreeObj.displaySecondColumn && (
+            <HighCards2
               agreeObj={agreeObj}
               height={cardHeight}
               width={columnWidth}
-              highCards={highCards}
-              columnDisplay={agreeObj.columnDisplay}
+              highCards2={highCards2}
+              columnDisplay={agreeObj.columnDisplay2}
               columnStatements={columnStatements}
             />
+          )}
 
-            {agreeObj.displaySecondColumn && (
-              <HighCards2
-                agreeObj={agreeObj}
-                height={cardHeight}
-                width={columnWidth}
-                highCards2={highCards2}
-                columnDisplay={agreeObj.columnDisplay2}
-                columnStatements={columnStatements}
-              />
-            )}
+          {neutralObj.displayNeutralObjects && (
+            <NeutralCards
+              neutralObj={neutralObj}
+              height={cardHeight}
+              width={columnWidth}
+              columnDisplay={neutralObj.columnDisplay}
+              neutralCards={neutralCards}
+              columnStatements={columnStatements}
+            />
+          )}
 
-            {neutralObj.displayNeutralObjects && (
-              <NeutralCards
-                neutralObj={neutralObj}
-                height={cardHeight}
-                width={columnWidth}
-                columnDisplay={neutralObj.columnDisplay}
-                neutralCards={neutralCards}
-                columnStatements={columnStatements}
-              />
-            )}
-
-            {disagreeObj.displaySecondColumn && (
-              <LowCards2
-                disagreeObj={disagreeObj}
-                height={cardHeight}
-                width={columnWidth}
-                lowCards2={lowCards2}
-                columnStatements={columnStatements}
-                columnDisplay={disagreeObj.columnDisplay2}
-              />
-            )}
-
-            <LowCards
+          {disagreeObj.displaySecondColumn && (
+            <LowCards2
               disagreeObj={disagreeObj}
               height={cardHeight}
               width={columnWidth}
-              lowCards={lowCards}
+              lowCards2={lowCards2}
               columnStatements={columnStatements}
-              columnDisplay={disagreeObj.columnDisplay}
+              columnDisplay={disagreeObj.columnDisplay2}
             />
-          </div>
-        </div>
-        <div className="footer fix-footer postSortFooter">
-          <nav />
-        </div>
+          )}
+
+          <LowCards
+            disagreeObj={disagreeObj}
+            height={cardHeight}
+            width={columnWidth}
+            lowCards={lowCards}
+            columnStatements={columnStatements}
+            columnDisplay={disagreeObj.columnDisplay}
+          />
+        </CardsContainer>
       </div>
     );
   }
 }
 
-export default PostSort;
+export default view(PostSort);
+
+const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 150px;
+  border: 2px solid red;
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  padding: 20px;
+  height: auto;
+  background: steelblue;
+  overflow: hidden;
+
+  h1 {
+    color: white;
+    font-size: 36px;
+    margin-left: 30px;
+  }
+
+  h3 {
+    color: white;
+    width: 80%;
+    height: 50px;
+    font-size: 22px;
+    margin-left: 30px;
+  }
+`;
 
 // const PostsortPage = () => {
 //   setTimeout(function () {

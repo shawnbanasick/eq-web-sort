@@ -1,26 +1,10 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import getPostSortCardStyleHigh from './getPostSortCardStyleHigh';
+import React, { Component } from "react";
+import styled from "styled-components";
+import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
+import { view } from "@risingstack/react-easy-state";
+
 // import './highCards.css';
 /* eslint react/prop-types: 0 */
-
-const styles = {
-  cardAndTextHolder: {
-    display: `flex`,
-    alignContent: `center`,
-    background: `#7e7e7e`,
-  },
-  textHolder: {
-    marginTop: 5,
-    padding: 2,
-  },
-  cardTag: {
-    width: `100%`,
-    background: `#c7f6c7`,
-    color: `black`,
-    textAlign: `center`,
-  },
-};
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
@@ -35,15 +19,15 @@ class HighCards extends Component {
 
     // pull in state object for comments
     const statementCommentsObj =
-      JSON.parse(localStorage.getItem('statementCommentsObj')) || {};
+      JSON.parse(localStorage.getItem("statementCommentsObj")) || {};
 
     // to update just the card that changed
-    cards.map(el => {
+    cards.map((el) => {
       if (el.id === targetCard) {
         const comment3 = userEnteredText;
         // remove new line and commas to make csv export easier
-        const comment2 = comment3.replace(/\n/g, ' ');
-        const comment = comment2.replace(/,/g, ' ');
+        const comment2 = comment3.replace(/\n/g, " ");
+        const comment = comment2.replace(/,/g, " ");
         // assign to main data object for confirmation / debugging
         el.comment = comment;
 
@@ -54,11 +38,11 @@ class HighCards extends Component {
     });
 
     localStorage.setItem(
-      'statementCommentsObj',
+      "statementCommentsObj",
       JSON.stringify(statementCommentsObj)
     );
 
-    localStorage.setItem('columnStatements', JSON.stringify(columnStatements));
+    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
   render() {
@@ -74,36 +58,61 @@ class HighCards extends Component {
 
     return highCards.map((item, index) => (
       <Container key={item.statement}>
-        <div style={styles.cardTag}>{agreeText}</div>
-        <div style={styles.cardAndTextHolder}>
+        <CardTag>{agreeText}</CardTag>
+        <CardAndTextHolder>
           <div />
           <div style={getPostSortCardStyleHigh(height, width)}>
             {item.statement}
           </div>
-          <div className="tagContainerDiv">
-            <textarea
+          <TagContainerDiv>
+            <CommentArea
               data-gramm_editor="false"
               id={item.id}
-              className="commentTextArea"
               placeholder={placeholder}
               defaultValue={item.comment}
-              onBlur={e => {
+              onBlur={(e) => {
                 this.onBlur(e, columnStatements, columnDisplay, index);
               }}
             />
-          </div>
-        </div>
+          </TagContainerDiv>
+        </CardAndTextHolder>
       </Container>
     ));
   }
 }
 
-export default HighCards;
+export default view(HighCards);
 
 const Container = styled.div`
-   width: 80%;
-    margin-top: 50px;
-    margin-left: 10%;
-    border-radius: 3px;
-    border: 2px solid red';
+  width: 90vw;
+  max-width: 900px;
+  margin-top: 50px;
+  border-radius: 3px;
+`;
+
+const CardTag = styled.div`
+  width: 100%;
+  background: #c7f6c7;
+  color: black;
+  text-align: center;
+`;
+
+const CardAndTextHolder = styled.div`
+  display: flex;
+  align-content: center;
+  background: #7e7e7e;
+  width: 90vw;
+  max-width: 900px;
+`;
+
+const CommentArea = styled.textarea`
+  padding: 10px;
+  background-color: whitesmoke;
+  min-height: 120px;
+  width: calc(100% - 10px);
+`;
+
+const TagContainerDiv = styled.div`
+  padding-top: 3px;
+  width: 100%;
 `;
