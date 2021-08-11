@@ -20,6 +20,9 @@ const getNextPage = () => {
     return `/postsort`;
   }
   if (currentPage === "postsort") {
+    return `/survey`;
+  }
+  if (currentPage === "survey") {
     return `/submit`;
   }
   return `/`;

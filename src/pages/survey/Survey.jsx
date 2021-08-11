@@ -2,6 +2,7 @@ import React from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
+import SurveyTextElement from "./SurveyTextElement";
 
 const SurveyPage = () => {
   setTimeout(function () {
@@ -12,6 +13,7 @@ const SurveyPage = () => {
   return (
     <div>
       <h1>Survey Page!</h1>
+      <SurveyTextElement />
     </div>
   );
 };

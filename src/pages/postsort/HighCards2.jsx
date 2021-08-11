@@ -1,4 +1,3 @@
-// import state from "../../store";
 import React, { Component } from "react";
 import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 import styled from "styled-components";
