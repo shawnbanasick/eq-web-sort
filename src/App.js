@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./pages/landing/Landing";
-import { PostsortPage } from "./pages/postsort/Postsort";
+import PostsortPage from "./pages/postsort/Postsort";
 import PresortPage from "./pages/presort/Presort";
 import SortPage from "./pages/sort/Sort";
-import { SubmitPage } from "./pages/submit/Submit";
-import { SurveyPage } from "./pages/survey/Survey";
+import SubmitPage from "./pages/submit/Submit";
+import SurveyPage from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
 import StyledFooter from "./utilities/StyledFooter";
 

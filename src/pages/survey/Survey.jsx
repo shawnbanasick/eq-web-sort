@@ -1,8 +1,9 @@
 import React from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import { view } from "@risingstack/react-easy-state";
 
-export function SurveyPage() {
+const SurveyPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
@@ -13,4 +14,6 @@ export function SurveyPage() {
       <h1>Survey Page!</h1>
     </div>
   );
-}
+};
+
+export default view(SurveyPage);

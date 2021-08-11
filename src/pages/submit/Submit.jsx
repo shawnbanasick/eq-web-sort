@@ -1,8 +1,9 @@
 import React from "react";
 import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import { view } from "@risingstack/react-easy-state";
 
-export function SubmitPage() {
+const SubmitPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "submit");
   }, 100);
@@ -14,4 +15,6 @@ export function SubmitPage() {
       <h1>Submit Data Page!</h1>
     </div>
   );
-}
+};
+
+export default view(SubmitPage);

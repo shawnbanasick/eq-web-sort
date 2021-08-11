@@ -5,7 +5,8 @@ const getItemStyleHori = (
   sortValue,
   cardColor,
   columnWidth,
-  cardHeight
+  cardHeight,
+  cardFontSize
 ) => {
   let newSortValue = sortValue;
   let newCardColor = cardColor;
@@ -14,14 +15,14 @@ const getItemStyleHori = (
     newSortValue = 999;
   }
 
-  if (newCardColor === 'undefined') {
-    newCardColor = '#eeeeee';
+  if (newCardColor === "undefined") {
+    newCardColor = "#eeeeee";
   }
   return {
-    userSelect: 'none',
-    WebkitUserSelect: 'none',
+    userSelect: "none",
+    WebkitUserSelect: "none",
     lineHeight: `1em`,
-    fontSize: 15,
+    fontSize: cardFontSize,
     height: cardHeight,
     minWidth: columnWidth,
     maxWidth: columnWidth,
@@ -33,13 +34,13 @@ const getItemStyleHori = (
     marginTop: 5,
     marginRight: `2px`,
     marginLeft: `2px`,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     textAlign: `center`,
     // border: `1px solid lightgray`,
     order: newSortValue,
     // change background color if dragging, otherwise pre-sort value color
-    background: isDragging ? '#e6bbad' : newCardColor,
+    background: isDragging ? "#e6bbad" : newCardColor,
     // styles to apply on draggables
     ...draggableStyle,
   };

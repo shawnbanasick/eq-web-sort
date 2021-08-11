@@ -1,8 +1,9 @@
 import React from "react";
 import setGlobalState from "../../globalState/setGlobalState";
 import globalState from "../../globalState/globalState";
+import { view } from "@risingstack/react-easy-state";
 
-export function PostsortPage() {
+const PostsortPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "postsort");
   }, 100);
@@ -13,4 +14,6 @@ export function PostsortPage() {
       <h1>PostSort Page!</h1>
     </div>
   );
-}
+};
+
+export default view(PostsortPage);
