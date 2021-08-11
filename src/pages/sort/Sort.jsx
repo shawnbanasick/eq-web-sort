@@ -131,13 +131,15 @@ class Sort extends Component {
     const sortCompleteText = window.configXML.sortCompleteText;
     const nextButtonText = window.configXML.nextButtonText;
     const horiCardMinHeight = window.configXML.horiCardMinHeight;
-    const columnColorsArray = window.configXML.columnColorsArray;
+    const columnColorsArray = [...window.configXML.columnColorsArray];
     const sortCharacteristics = window.configXML.sortCharacteristics;
     const totalStatements = window.configXML.totalStatements;
 
-    const cardHeight = window.configXML.cardHeight;
-
     const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
+
+    // const cardHeight = window.configXML.cardHeight;
+    const maxNumCardsInCol = Math.max(...qSortPattern);
+    const cardHeight = (window.innerHeight - 230) / maxNumCardsInCol;
 
     // set dynamic width on page load or reload
     // todo make responsive
