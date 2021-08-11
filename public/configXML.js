@@ -1,5 +1,5 @@
 const configXML = {
-  horiCardMinHeight: 100,
+  horiCardMinHeight: 50,
   totalStatements: 30,
   headerColorsArray: [
     "white",

@@ -12,7 +12,7 @@ const NumberCardsSortedMessage = (props) => {
   const isSortingCards = getGlobalState("isSortingCards");
   console.log("TCL: isSortingCards", isSortingCards);
   // const isSortingCards = localStorage.getItem("isSortingCards");
-  console.log("TCL: isSortingCards", isSortingCards);
+  // console.log("TCL: isSortingCards", isSortingCards);
 
   if (isSortingCards === true) {
     // if (true === true) {

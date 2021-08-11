@@ -2,7 +2,7 @@
 const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
   background: isDraggingOver ? "lightblue" : "#e4e4e4",
   display: "flex",
-  paddingRight: 120,
+  paddingRight: 20,
   width: "100vw",
   minHeight: horiCardMinHeight,
   overflowX: `scroll`,

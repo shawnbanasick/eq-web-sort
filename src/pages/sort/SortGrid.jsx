@@ -113,16 +113,24 @@ class SortGrid extends Component {
         JSON.stringify(columnStatements)
       );
 
-      // if (columnStatements.statementList.length === 0) {
-      //   state.setState('isSortingCards', false);
-      //   state.setState('sortCompleted', true);
-      // }
+      if (columnStatements.statementList.length === 0) {
+        setGlobalState("isSortingCards", false);
+        setGlobalState("sortCompleted", true);
+      } else {
+        setGlobalState("isSortingCards", true);
+        setGlobalState("sortCompleted", false);
+      }
 
       this.forceUpdate();
     }
   }; // end of dragEnd helper function
 
   render() {
+    const isSortingCards = getGlobalState("isSortingCards");
+    if (isSortingCards === true) {
+      console.log("true");
+    }
+
     const cardFontSize = this.props.cardFontSize;
     console.log("rend size", cardFontSize);
 
@@ -187,17 +195,10 @@ class SortGrid extends Component {
     }); // end map of sort columns
 
     // returning main content => horizontal feeder
+
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="rootDiv">
-          {/* <Headers
-            className="hoverBlue"
-            qSortHeaders={qSortHeaders}
-            qSortHeaderNumbers={qSortHeaderNumbers}
-            columnWidth={columnWidth}
-            headerColorsArray={headerColorsArray}
-            highlightedColHeader={this.state.draggingOverColumnId}
-          /> */}
           {columns}
           <SortFooterDiv>
             <div className="cardSlider">
@@ -243,14 +244,6 @@ class SortGrid extends Component {
                   </div>
                 )}
               </Droppable>
-              <FooterMessageBox>
-                <SortCompletedMessage
-                  sortCompleteText={sortCompleteText}
-                  nextButtonText={nextButtonText}
-                />
-                <ColumnOverloadMessage overloadedColumn={overloadedColumn} />
-                <NumberCardsSortedMessage totalStatements={totalStatements} />
-              </FooterMessageBox>
             </div>
           </SortFooterDiv>
         </div>
@@ -265,7 +258,7 @@ const SortFooterDiv = styled.div`
   flex-direction: row;
   background: #e4e4e4;
   position: fixed;
-  padding-right: 120px;
+  padding-right: 10px;
   left: 0px;
   bottom: 50px;
   width: 100vw;
