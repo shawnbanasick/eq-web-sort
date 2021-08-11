@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 import { view } from "@risingstack/react-easy-state";
+import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 
 // import './highCards.css';
 /* eslint react/prop-types: 0 */
@@ -60,7 +60,6 @@ class HighCards extends Component {
       <Container key={item.statement}>
         <CardTag>{agreeText}</CardTag>
         <CardAndTextHolder>
-          <div />
           <div style={getPostSortCardStyleHigh(height, width)}>
             {item.statement}
           </div>

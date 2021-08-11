@@ -6,31 +6,6 @@ import { view } from "@risingstack/react-easy-state";
 
 /* eslint react/prop-types: 0 */
 
-// const styles = {
-//   container: {
-//     width: '80%',
-//     border: `2px solid black`,
-//     marginTop: 50,
-//     marginLeft: '10%',
-//     borderRadius: `3px`,
-//   },
-//   cardAndTextHolder: {
-//     display: `flex`,
-//     alignContent: `center`,
-//     background: `#7e7e7e`,
-//   },
-//   textHolder: {
-//     marginTop: 5,
-//     flexGrow: 5,
-//   },
-//   cardTag: {
-//     width: `100%`,
-//     background: `#c7f6c7`,
-//     color: `black`,
-//     textAlign: `center`,
-//   },
-// };
-
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 class HighCards2 extends Component {
@@ -92,7 +67,6 @@ class HighCards2 extends Component {
             <CommentArea
               data-gramm_editor="false"
               id={item.id}
-              className="commentTextArea"
               placeholder={placeholder}
               defaultValue={item.comment}
               onBlur={(e) => {
