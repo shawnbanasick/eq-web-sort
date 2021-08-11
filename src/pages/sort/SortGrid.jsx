@@ -18,10 +18,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 let startTime;
 
-setTimeout(function () {
-  setGlobalState("currentPage", "sort");
-  setGlobalState("progressScore", 50);
-}, 100);
+setTimeout(function () {}, 100);
 
 // console.log("CONFIG", window.configXML);
 
@@ -129,6 +126,8 @@ class SortGrid extends Component {
     const cardFontSize = this.props.cardFontSize;
     console.log("rend size", cardFontSize);
 
+    setGlobalState("currentPage", "sort");
+    setGlobalState("progressScore", 50);
     setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
     const sortCompleteText = window.configXML.sortCompleteText;
@@ -186,6 +185,7 @@ class SortGrid extends Component {
           cardHeight={cardHeight}
           sortValue={sortValue}
           columnColor={columnColor}
+          cardFontSize={cardFontSize}
           qSortHeaderNumber={qSortHeaderNumbers[index]}
           changeColumnHeaderColor={changeColumnHeaderColor}
         />

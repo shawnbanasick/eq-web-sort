@@ -19,6 +19,7 @@ class SortColumn extends React.Component {
       columnStatementsArray,
       qSortHeaderNumber,
       columnColor,
+      cardFontSize,
     } = this.props;
 
     // had to push column sort value to state because didn't want to edit dnd library result object
@@ -56,7 +57,8 @@ class SortColumn extends React.Component {
                         snapshot.isDragging,
                         provided.draggableProps.style,
                         columnWidth,
-                        cardHeight
+                        cardHeight,
+                        cardFontSize
                       )}
                     >
                       {item.statement}
