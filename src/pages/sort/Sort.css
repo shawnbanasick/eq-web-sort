@@ -54,7 +54,7 @@
   background: #e4e4e4;
   position: fixed;
   left: 0px;
-  bottom: 0;
+  bottom: 50px !important;
   width: 100%;
   height: 150px;
 }
@@ -84,7 +84,7 @@
 }
 
 .cardSlider {
-  width: 1024px;
+  width: 100vw;
   overflow: hidden;
   display: flex;
   justify-content: center;

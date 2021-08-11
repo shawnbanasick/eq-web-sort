@@ -54,4 +54,7 @@ const StyledFooterDiv = styled.footer`
   align-items: center;
   justify-content: space-around;
   text-align: center;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
 `;

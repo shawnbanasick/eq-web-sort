@@ -19,6 +19,11 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 let startTime;
 
+setTimeout(function () {
+  setGlobalState("currentPage", "sort");
+  setGlobalState("progressScore", 50);
+}, 100);
+
 class Sort extends Component {
   constructor(props) {
     super(props);
@@ -119,6 +124,8 @@ class Sort extends Component {
   }; // end of dragEnd helper function
 
   render() {
+    setGlobalState("sortCharacteristics", this.props.sortCharacteristics);
+
     const {
       cardHeight,
       columnWidth,
@@ -258,8 +265,8 @@ const SortFooterDiv = styled.div`
   position: fixed;
   padding-right: 120px;
   left: 0px;
-  bottom: 0;
-  width: 100%;
+  bottom: 50px;
+  width: 100vw;
   height: ${(props) => `${+props.cardHeight + 20}px;`};
 `;
 
