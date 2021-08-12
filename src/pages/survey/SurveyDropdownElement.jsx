@@ -29,6 +29,9 @@ const SurveyDropdownElement = (props) => {
   };
 
   const [selected, setSelected] = useState([]);
+  if (selected[0] !== undefined) {
+    console.log(JSON.stringify(selected));
+  }
 
   return (
     <Container>
