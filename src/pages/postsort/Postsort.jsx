@@ -1,8 +1,8 @@
 // import React from "react";
-import setGlobalState from "../../globalState/setGlobalState";
-import globalState from "../../globalState/globalState";
+// import setGlobalState from "../../globalState/setGlobalState";
+// import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
+// import getGlobalState from "../../globalState/getGlobalState";
 
 import React, { Component } from "react";
 import LowCards from "./LowCards";

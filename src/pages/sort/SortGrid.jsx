@@ -9,9 +9,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 import SortColumn from "./SortColumn";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHori from "./getItemStyleHori";
-import SortCompletedMessage from "./SortCompletedMessage";
-import ColumnOverloadMessage from "./ColumnOverloadMessage";
-import NumberCardsSortedMessage from "./NumberCardsSortedMessage";
+// import SortCompletedMessage from "./SortCompletedMessage";
+// import ColumnOverloadMessage from "./ColumnOverloadMessage";
+// import NumberCardsSortedMessage from "./NumberCardsSortedMessage";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 /* eslint react/prop-types: 0 */
@@ -136,12 +136,12 @@ class SortGrid extends Component {
 
     setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
-    const sortCompleteText = window.languageXML.sortCompleteText;
-    const nextButtonText = window.languageXML.nextButtonText;
+    // const sortCompleteText = window.languageXML.sortCompleteText;
+    // const nextButtonText = window.languageXML.nextButtonText;
     const horiCardMinHeight = window.configXML.horiCardMinHeight;
     const columnColorsArray = [...window.configXML.columnColorsArray];
     const sortCharacteristics = window.configXML.sortCharacteristics;
-    const totalStatements = window.configXML.totalStatements;
+    // const totalStatements = window.configXML.totalStatements;
 
     const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
 
@@ -163,7 +163,7 @@ class SortGrid extends Component {
     );
 
     const statements = columnStatements.statementList;
-    const overloadedColumn = getGlobalState("overloadedColumn");
+    // const overloadedColumn = getGlobalState("overloadedColumn");
 
     // MAP out SORT COLUMNS component before render
     // code inside render so that column lists update automatically
@@ -265,26 +265,26 @@ const SortFooterDiv = styled.div`
   height: ${(props) => `${+props.cardHeight + 20}px;`};
 `;
 
-const FooterMessageBox = styled.div`
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  flex-basis: 100px;
-  padding-right: 5px;
-  padding-left: 5px;
-  width: 100px;
-  height: ${(props) => `${+props.cardHeight}px`};
-  border: 2px solid lightgray;
-  text-align: center;
-  border: 2px solid black;
+// const FooterMessageBox = styled.div`
+//   position: fixed;
+//   bottom: 0;
+//   right: 0;
+//   flex-basis: 100px;
+//   padding-right: 5px;
+//   padding-left: 5px;
+//   width: 100px;
+//   height: ${(props) => `${+props.cardHeight}px`};
+//   border: 2px solid lightgray;
+//   text-align: center;
+//   border: 2px solid black;
 
-  p {
-    padding: 0px;
-    margin-top: 10px;
-    font-size: 20px;
-    color: #3273dc;
-  }
-`;
+//   p {
+//     padding: 0px;
+//     margin-top: 10px;
+//     font-size: 20px;
+//     color: #3273dc;
+//   }
+// `;
 
 /*
 <div className="footerMessageBox">

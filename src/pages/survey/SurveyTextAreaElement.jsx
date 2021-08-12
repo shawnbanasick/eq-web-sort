@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
-const SurveyTextAreaElement = () => {
+const SurveyTextAreaElement = (props) => {
   return (
     <Container>
-      <TitleBar>Comments</TitleBar>
+      <TitleBar>{props.opts.label}</TitleBar>
       <TextAreaInput />
     </Container>
   );

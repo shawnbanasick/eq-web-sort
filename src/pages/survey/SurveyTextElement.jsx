@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
-const SurveyTextElement = () => {
+const SurveyTextElement = (props) => {
   return (
     <Container>
-      <TitleBar>Age*</TitleBar>
-      <NoteText>Please enter your year of birth </NoteText>
+      <TitleBar>{props.opts.label}</TitleBar>
+      <NoteText>{props.opts.note}</NoteText>
       <TextInput />
     </Container>
   );
