@@ -12,18 +12,10 @@ const getOptionsArray = (options) => {
   return array;
 };
 
-const getScaleArray = (options) => {
-  let array = options.split(";");
-  console.log("scale: ", array);
-  return array;
-};
-
 const SurveyRatings2Element = (props) => {
   console.log(props);
   const optsArray = getOptionsArray(props.opts.options);
-  const scaleArray = getScaleArray(props.opts.scale);
   console.log(optsArray);
-  console.log(scaleArray);
 
   //   const nameValue = `question${props.opts.qNum}`;
 
@@ -39,14 +31,35 @@ const SurveyRatings2Element = (props) => {
           key={`Q-${index}`}
           id={`Q-${index}`}
           type="radio"
-          value={scaleArray[0]}
+          value={1}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={`Q2-${index}`}
           id={`Q2-${index}`}
           type="radio"
-          value={scaleArray[1]}
+          value={2}
+          name={`${props.opts.qNum}-${index + 1}`}
+        />
+        <input
+          key={`Q3-${index}`}
+          id={`Q3-${index}`}
+          type="radio"
+          value={3}
+          name={`${props.opts.qNum}-${index + 1}`}
+        />
+        <input
+          key={`Q4-${index}`}
+          id={`Q4-${index}`}
+          type="radio"
+          value={4}
+          name={`${props.opts.qNum}-${index + 1}`}
+        />
+        <input
+          key={`Q5-${index}`}
+          id={`Q5-${index}`}
+          type="radio"
+          value={5}
           name={`${props.opts.qNum}-${index + 1}`}
         />
       </ItemContainer>
@@ -60,8 +73,11 @@ const SurveyRatings2Element = (props) => {
       <RadioContainer>
         <RatingTitle>
           <div />
-          <span>{scaleArray[0]}</span>
-          <span>{scaleArray[1]}</span>
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
         </RatingTitle>
         <RadioItems />
       </RadioContainer>
@@ -103,7 +119,7 @@ const RadioContainer = styled.div`
   margin-top: 5px;
   height: auto;
   min-height: 50px;
-  font-size: 16px;
+  font-size: 18px;
   background-color: white;
   width: 100%;
   border-radius: 3px;
@@ -120,13 +136,13 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 650px 100px 100px 150px;
+  grid-template-columns: 600px 50px 50px 50px 50px 50px 50px;
   margin-bottom: 7px;
-  padding-left: 5px;
+  font-size: 16px;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 650px 100px 100px 150px;
+  grid-template-columns: 600px 50px 50px 50px 50px 50px 50px;
   margin-bottom: 7px;
 `;

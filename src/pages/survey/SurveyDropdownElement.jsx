@@ -37,6 +37,7 @@ const SurveyDropdownElement = (props) => {
     <Container>
       <TitleBar>{props.opts.label}</TitleBar>
       <MultiSelect
+        className={"multiselect"}
         options={getOptionsArray(props.opts.options)}
         labelledBy="Select"
         onChange={setSelected}
@@ -55,7 +56,12 @@ const Container = styled.div`
   margin-right: 20px;
   max-width: 900px;
   background-color: whitesmoke;
-  min-height: 120px;
+  min-height: 125px;
+
+  .multiselect {
+    font-size: 16px;
+    line-height: 1.1em;
+  }
 `;
 
 const TitleBar = styled.div`
@@ -63,7 +69,7 @@ const TitleBar = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
   background-color: lightgray;
   width: 100%;

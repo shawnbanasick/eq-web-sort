@@ -28,7 +28,7 @@ const TitleBar = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
   background-color: lightgray;
   width: 100%;

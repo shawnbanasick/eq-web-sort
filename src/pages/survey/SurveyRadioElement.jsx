@@ -68,7 +68,7 @@ const TitleBar = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
   background-color: lightgray;
   width: 100%;
@@ -83,8 +83,8 @@ const RadioContainer = styled.div`
   padding: 20px;
   vertical-align: center;
   margin-top: 5px;
-  min-height: 150px;
-  font-size: 18px;
+  min-height: 100px;
+  font-size: 16px;
   background-color: white;
   width: 100%;
   border-radius: 3px;
