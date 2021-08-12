@@ -23,10 +23,10 @@ const getOptionsArray = (options) => {
 };
 
 const SurveyDropdownElement = (props) => {
-  const handleChange = (e) => {
-    console.log(e);
-    // console.log(props.opts.qNum, e.target.value);
-  };
+  //   const handleChange = (e) => {
+  //     console.log(e);
+  //     // console.log(props.opts.qNum, e.target.value);
+  //   };
 
   const [selected, setSelected] = useState([]);
   if (selected[0] !== undefined) {

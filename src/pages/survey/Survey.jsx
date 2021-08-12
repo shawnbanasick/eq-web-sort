@@ -8,6 +8,7 @@ import SurveyTextAreaElement from "./SurveyTextAreaElement";
 import SurveyRadioElement from "./SurveyRadioElement";
 import SurveyDropdownElement from "./SurveyDropdownElement";
 import SurveyCheckboxElement from "./SurveyCheckboxElement";
+import SurveyRating2Element from "./SurveyRating2Element";
 
 const SurveyPage = () => {
   const textOptions = {
@@ -53,6 +54,16 @@ const SurveyPage = () => {
     options: "Lecture; Group Discussion; Active Learning",
   };
 
+  const rating2Options = {
+    qNum: 6,
+    type: "rating2",
+    mandatory: true,
+    label: "Please answer the following questions",
+    scale: "Yes; No",
+    options:
+      "I have used an iPad in class before.; I have used a notebook computer in class before.",
+  };
+
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
@@ -66,6 +77,7 @@ const SurveyPage = () => {
       <SurveyRadioElement opts={radioOptions} />
       <SurveyDropdownElement opts={dropdownOptions} />
       <SurveyCheckboxElement opts={checkboxOptions} />
+      <SurveyRating2Element opts={rating2Options} />
     </Container>
   );
 };
@@ -76,4 +88,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 150px;
 `;
