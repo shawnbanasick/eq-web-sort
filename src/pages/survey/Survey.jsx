@@ -7,6 +7,7 @@ import SurveyTextElement from "./SurveyTextElement";
 import SurveyTextAreaElement from "./SurveyTextAreaElement";
 import SurveyRadioElement from "./SurveyRadioElement";
 import SurveyDropdownElement from "./SurveyDropdownElement";
+import SurveyCheckboxElement from "./SurveyCheckboxElement";
 
 const SurveyPage = () => {
   const textOptions = {
@@ -44,6 +45,14 @@ const SurveyPage = () => {
     options: "Global Studies; Linguistics; English Literature",
   };
 
+  const checkboxOptions = {
+    qNum: 5,
+    type: "checkbox",
+    mandatory: true,
+    label: "What type of class do you prefer?",
+    options: "Lecture; Group Discussion; Active Learning",
+  };
+
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
@@ -56,6 +65,7 @@ const SurveyPage = () => {
       <SurveyTextAreaElement opts={textAreaOptions} />
       <SurveyRadioElement opts={radioOptions} />
       <SurveyDropdownElement opts={dropdownOptions} />
+      <SurveyCheckboxElement opts={checkboxOptions} />
     </Container>
   );
 };
