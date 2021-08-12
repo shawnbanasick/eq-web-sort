@@ -9,20 +9,13 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
   array = array.map((x) => x.replace(/\s/g, ""));
-
   array.map((x) => (localStore[x] = false));
-  console.log(array);
-
   return array;
 };
 
-console.log(localStore);
-
 const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
-  console.log(optsArray);
   const nameValue = `question${props.opts.qNum}`;
 
   const handleChange = (e) => {

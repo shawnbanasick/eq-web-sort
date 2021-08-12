@@ -1,5 +1,5 @@
 import React from "react";
-import globalState from "../../globalState/globalState";
+// import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
@@ -11,7 +11,6 @@ import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
-import { object } from "prop-types";
 
 const SurveyPage = () => {
   const surveyQuestionObjects = [
@@ -106,6 +105,7 @@ const SurveyPage = () => {
       if (object.type === "rating10") {
         return <SurveyRating10Element opts={object} />;
       }
+      return null;
     });
     return QuestionList;
   };
@@ -113,7 +113,6 @@ const SurveyPage = () => {
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
-  console.log(globalState);
 
   return (
     <Container>

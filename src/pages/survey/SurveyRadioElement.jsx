@@ -7,16 +7,12 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
   array = array.map((x) => x.replace(/\s/g, ""));
-
-  console.log(array);
   return array;
 };
 
 const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
-  console.log(optsArray);
   const nameValue = `question${props.opts.qNum}`;
 
   const handleChange = (e) => {

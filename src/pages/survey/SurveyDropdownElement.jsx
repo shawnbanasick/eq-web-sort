@@ -8,7 +8,6 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
   const objArray = array.map((x) => {
     x.replace(/\s/g, "");
     const tempObj = {};
@@ -16,9 +15,6 @@ const getOptionsArray = (options) => {
     tempObj.value = x;
     return tempObj;
   });
-
-  console.log(objArray);
-
   return objArray;
 };
 

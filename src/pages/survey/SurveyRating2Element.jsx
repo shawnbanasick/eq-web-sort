@@ -7,14 +7,11 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
-  console.log(array);
   return array;
 };
 
 const getScaleArray = (options) => {
   let array = options.split(";");
-  console.log("scale: ", array);
   return array;
 };
 
@@ -22,8 +19,6 @@ const SurveyRatings2Element = (props) => {
   console.log(props);
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
-  console.log(optsArray);
-  console.log(scaleArray);
 
   //   const nameValue = `question${props.opts.qNum}`;
 

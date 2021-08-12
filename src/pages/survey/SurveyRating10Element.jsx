@@ -7,15 +7,11 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
-  console.log(array);
   return array;
 };
 
-const SurveyRatings2Element = (props) => {
-  console.log(props);
+const SurveyRatings10Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
-  console.log(optsArray);
 
   //   const nameValue = `question${props.opts.qNum}`;
 
@@ -125,7 +121,7 @@ const SurveyRatings2Element = (props) => {
   );
 };
 
-export default view(SurveyRatings2Element);
+export default view(SurveyRatings10Element);
 
 const Container = styled.div`
   width: 90vw;

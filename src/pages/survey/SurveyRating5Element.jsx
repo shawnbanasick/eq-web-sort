@@ -7,15 +7,11 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-
-  console.log(array);
   return array;
 };
 
 const SurveyRatings2Element = (props) => {
-  console.log(props);
   const optsArray = getOptionsArray(props.opts.options);
-  console.log(optsArray);
 
   //   const nameValue = `question${props.opts.qNum}`;
 
