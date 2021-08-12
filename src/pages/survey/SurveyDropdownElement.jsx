@@ -54,7 +54,7 @@ const Container = styled.div`
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 900px;
+  max-width: 1100px;
   background-color: whitesmoke;
   min-height: 125px;
 

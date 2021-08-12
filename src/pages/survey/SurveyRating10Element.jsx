@@ -132,7 +132,7 @@ const Container = styled.div`
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 900px;
+  max-width: 1100px;
   background-color: whitesmoke;
   min-height: 200px;
 `;
@@ -176,13 +176,14 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 430px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-columns: 600px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
   margin-bottom: 7px;
   font-size: 16px;
+  align-items: center;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 430px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-columns: 600px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
   margin-bottom: 7px;
 `;
