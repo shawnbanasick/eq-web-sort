@@ -6,6 +6,7 @@ import styled from "styled-components";
 import SurveyTextElement from "./SurveyTextElement";
 import SurveyTextAreaElement from "./SurveyTextAreaElement";
 import SurveyRadioElement from "./SurveyRadioElement";
+import SurveyDropdownElement from "./SurveyDropdownElement";
 
 const SurveyPage = () => {
   const textOptions = {
@@ -35,6 +36,14 @@ const SurveyPage = () => {
     options: "Freshman; Sophomore; Junior; Senior;",
   };
 
+  const dropdownOptions = {
+    qNum: 4,
+    type: "select",
+    mandatory: true,
+    label: "What is your program focus?",
+    options: "Global Studies; Linguistics; English Literature",
+  };
+
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
@@ -46,6 +55,7 @@ const SurveyPage = () => {
       <SurveyTextElement opts={textOptions} />
       <SurveyTextAreaElement opts={textAreaOptions} />
       <SurveyRadioElement opts={radioOptions} />
+      <SurveyDropdownElement opts={dropdownOptions} />
     </Container>
   );
 };
