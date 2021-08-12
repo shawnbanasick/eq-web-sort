@@ -20,6 +20,9 @@ const languageXML = {
   positive: "Positive",
   sortCompleteText: "Sort Complete!",
   sortedText: "cards sorted",
+  agree: "Agree",
+  disagree: "Disagree",
+  condOfInst: "Conditions of Instruction",
 };
 
 window.languageXML = languageXML;

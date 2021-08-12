@@ -412,10 +412,11 @@ footer {
     overflow-y: auto;
     background-color: lightpink;
     min-height: 300px;
-    max-height: 60vh;
+    height: 58vh;
     padding-top: 5px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+    border: 1px solid #aeaeae;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
@@ -437,9 +438,9 @@ footer {
     overflow-y: auto;
     background-color: lightgray;
     min-height: 300px;
-    max-height: 60vh;
+    height: 58vh;
     padding-top: 5px;
-
+    border: 1px solid #aeaeae;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
@@ -460,10 +461,11 @@ footer {
     grid-column-start: 4;
     overflow-y: auto;
     background-color: lightgreen;
-    max-height: 60vh;
+    height: 58vh;
     padding-top: 5px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    border: 1px solid #aeaeae;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
@@ -499,6 +501,7 @@ footer {
     justify-content: center;
     text-align: center;
     border-radius: 2px;
+    border: 1px solid #a8a8a8
   }
 }
 
@@ -514,7 +517,8 @@ footer {
 }
 
 .rootDiv {
-  background-color: #6a9bc3;
+  background-color: white;
+  /* background-color: #6a9bc3; */
   padding: 0px, 0px, 10px, 10px;
   min-height: 100vh;
   display: flex;

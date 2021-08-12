@@ -5,7 +5,6 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 let presortSortedStatements = getGlobalState("presortSortedStatements");
-console.log(presortSortedStatements);
 
 function PresortDND(props) {
   const itemsFromBackend = props.statements;
@@ -42,9 +41,6 @@ function PresortDND(props) {
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
-      console.log(sourceColumn);
-      console.log(result.draggableId);
-
       // calc remaining statements
       if (sourceColumn.name === "Statements") {
         presortSortedStatements =
@@ -59,6 +55,7 @@ function PresortDND(props) {
       const completedPercent = (ratio * 30 + 20).toFixed();
       setGlobalState("progressScore", +completedPercent);
 
+      // update columns
       setColumns({
         ...columns,
         [source.droppableId]: {

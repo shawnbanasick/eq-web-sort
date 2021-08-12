@@ -79,7 +79,8 @@ export default view(SortColumn);
 
 const HeaderDiv = styled.div`
   text-align: center;
-  border: 1px solid black;
+  border-bottom: 2px solid black;
   margin-bottom: 7px;
+  font-weight: bold;
   font-size: 25px;
 `;

@@ -16,7 +16,6 @@ const getScaleArray = (options) => {
 };
 
 const SurveyRatings2Element = (props) => {
-  console.log(props);
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
 

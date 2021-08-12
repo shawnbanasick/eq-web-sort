@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
+import CardHeightSizer from "./CardHeightSizer";
 import { view } from "@risingstack/react-easy-state";
 import globalState from "../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -35,6 +36,7 @@ const StyledFooter = () => {
   return (
     <StyledFooterDiv>
       <FooterFontSizer />
+      <CardHeightSizer />
       <ProgressBar
         completed={progressScore}
         width={"370px"}
