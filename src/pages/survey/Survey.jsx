@@ -10,6 +10,7 @@ import SurveyDropdownElement from "./SurveyDropdownElement";
 import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
+import SurveyRating10Element from "./SurveyRating10Element";
 
 const SurveyPage = () => {
   const textOptions = {
@@ -74,6 +75,15 @@ const SurveyPage = () => {
       "How would you rate the use of iPads in this class?; How would you rate this class overall",
   };
 
+  const rating10Options = {
+    qNum: 8,
+    type: "rating10",
+    mandatory: true,
+    label: "Please answer the following questions.",
+    options:
+      "How would you rate the use of the Socrative website in this class?; How would you rate the use of the Quizlet website in this class?",
+  };
+
   setTimeout(function () {
     setGlobalState("currentPage", "survey");
   }, 100);
@@ -89,6 +99,7 @@ const SurveyPage = () => {
       <SurveyCheckboxElement opts={checkboxOptions} />
       <SurveyRating2Element opts={rating2Options} />
       <SurveyRating5Element opts={rating5Options} />
+      <SurveyRating10Element opts={rating10Options} />
     </Container>
   );
 };
