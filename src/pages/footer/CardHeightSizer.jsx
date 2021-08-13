@@ -1,11 +1,11 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../globalState/getGlobalState";
-import setGlobalState from "../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const increaseFontSize = () => {
-  const currentSize1 = getGlobalState("cardFontSize");
+  const currentSize1 = getGlobalState("cardHeight");
   const currentSize = currentSize1.substring(0, 2);
   const newSize1 = parseInt(currentSize, 10);
   const newSize2 = newSize1 + 1;
@@ -13,18 +13,18 @@ const increaseFontSize = () => {
   setGlobalState("cardFontSize", newSize);
 };
 const decreaseFontSize = () => {
-  const currentSize1 = getGlobalState("cardFontSize");
+  const currentSize1 = getGlobalState("cardHeight");
   const currentSize = currentSize1.substring(0, 2);
   const newSize1 = parseInt(currentSize, 10);
   const newSize2 = newSize1 - 1;
   const newSize = `${newSize2}px`;
-  setGlobalState("cardFontSize", newSize);
+  setGlobalState("cardHeight", newSize);
 };
 
 const FooterFontSizer = () => {
   return (
     <Container>
-      <span>Font Size</span>
+      <span>Card Height</span>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
@@ -51,4 +51,5 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-left: 15px;
 `;

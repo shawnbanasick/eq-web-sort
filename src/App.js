@@ -6,7 +6,7 @@ import SortPage from "./pages/sort/Sort";
 import SubmitPage from "./pages/submit/Submit";
 import SurveyPage from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
-import StyledFooter from "./utilities/StyledFooter";
+import StyledFooter from "./pages/footer/StyledFooter.jsx";
 
 function App() {
   return (

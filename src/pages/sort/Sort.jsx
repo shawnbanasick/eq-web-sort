@@ -25,7 +25,7 @@ const Sort = () => {
 export default view(Sort);
 
 const SortTitleBar = styled.div`
-  width: 100vw;
+  width: 99vw;
   padding-left: 1vw;
   padding-right: 2vw;
   min-height: 30px;

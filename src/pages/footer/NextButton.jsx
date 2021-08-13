@@ -34,5 +34,7 @@ const NextButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  float: right;
+  width: 100px;
+  justify-self: right;
+  margin-right: 15px;
 `;

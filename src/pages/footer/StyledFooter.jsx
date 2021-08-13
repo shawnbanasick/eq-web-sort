@@ -4,9 +4,9 @@ import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
 import CardHeightSizer from "./CardHeightSizer";
 import { view } from "@risingstack/react-easy-state";
-import globalState from "../globalState/globalState";
+import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
-import getGlobalState from "../globalState/getGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 const getNextPage = () => {
   const currentPage = globalState.currentPage;
@@ -35,15 +35,19 @@ const StyledFooter = () => {
 
   return (
     <StyledFooterDiv>
-      <FooterFontSizer />
-      <CardHeightSizer />
-      <ProgressBar
-        completed={progressScore}
-        width={"370px"}
-        bgColor="#337ab7"
-        labelColor="#f0f0f0"
-        baseBgColor="lightgray"
-      />
+      <AdjustmentsContainer>
+        <FooterFontSizer />
+        <CardHeightSizer />
+      </AdjustmentsContainer>
+      <ProgressBarDiv>
+        <ProgressBar
+          completed={progressScore}
+          width={"370px"}
+          bgColor="#337ab7"
+          labelColor="#f0f0f0"
+          baseBgColor="lightgray"
+        />
+      </ProgressBarDiv>
       <NextButton to={getNextPage()}>
         {window.languageXML.nextButtonText}
       </NextButton>
@@ -54,11 +58,21 @@ const StyledFooter = () => {
 export default view(StyledFooter);
 
 const StyledFooterDiv = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;
   position: fixed;
   bottom: 0px;
   left: 0px;
+
+  display: inline-grid;
+  grid-template-columns: 25% 1fr 25%;
+  align-items: center;
+`;
+
+const AdjustmentsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+`;
+
+const ProgressBarDiv = styled.div`
+  justify-self: center;
 `;
