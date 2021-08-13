@@ -11,6 +11,7 @@ import NoPageFound from "./utilities/NoPageFound";
 import axios from "axios";
 import { useEffect } from "react";
 import processConfigXMLData from "./utilities/processConfigXMLData";
+import processMapXMLData from "./utilities/processMapXMLData";
 
 const convert = require("xml-js");
 
@@ -42,18 +43,19 @@ function App() {
     //     console.log(error);
     //   });
 
-    // axios
-    //   .get("./settings/map.xml", {
-    //     "Content-Type": "application/xml; charset=utf-8",
-    //   })
-    //   .then(function (response) {
-    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    //     const mapData = convert.xml2js(response.data, options);
-    //     console.log(JSON.stringify(mapData));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("./settings/map.xml", {
+        "Content-Type": "application/xml; charset=utf-8",
+      })
+      .then(function (response) {
+        const options = { compact: true, ignoreComment: true, spaces: 4 };
+        const mapData = convert.xml2js(response.data, options);
+        console.log(JSON.stringify(mapData));
+        processMapXMLData(mapData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // axios
     //   .get("./settings/statements.xml", {
