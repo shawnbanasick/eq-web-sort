@@ -1,5 +1,4 @@
-// import React from "react";
-// import setGlobalState from "../../globalState/setGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 // import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
 // import getGlobalState from "../../globalState/getGlobalState";
@@ -27,6 +26,9 @@ class PostSort extends Component {
   }
 
   render() {
+    setGlobalState("currentPage", "postsort");
+    setGlobalState("progressScore", 50);
+
     // pull data from localStorage
     const columnStatements = JSON.parse(
       localStorage.getItem("columnStatements")
