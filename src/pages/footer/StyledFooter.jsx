@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
@@ -7,6 +7,12 @@ import { view } from "@risingstack/react-easy-state";
 import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
+
+function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue((value) => value + 1); // update the state to force render
+}
 
 const getNextPage = () => {
   const currentPage = globalState.currentPage;
@@ -32,6 +38,7 @@ const getNextPage = () => {
 const StyledFooter = () => {
   const progressScore = getGlobalState("progressScore");
   console.log(progressScore);
+  window.onresize = useForceUpdate();
 
   return (
     <StyledFooterDiv>

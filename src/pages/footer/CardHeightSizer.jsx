@@ -5,19 +5,13 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const increaseFontSize = () => {
-  const currentSize1 = getGlobalState("cardHeight");
-  const currentSize = currentSize1.substring(0, 2);
-  const newSize1 = parseInt(currentSize, 10);
-  const newSize2 = newSize1 + 1;
-  const newSize = `${newSize2}px`;
-  setGlobalState("cardFontSize", newSize);
+  const currentSize = getGlobalState("cardHeight");
+  const newSize = currentSize + 2;
+  setGlobalState("cardHeight", newSize);
 };
 const decreaseFontSize = () => {
-  const currentSize1 = getGlobalState("cardHeight");
-  const currentSize = currentSize1.substring(0, 2);
-  const newSize1 = parseInt(currentSize, 10);
-  const newSize2 = newSize1 - 1;
-  const newSize = `${newSize2}px`;
+  const currentSize = getGlobalState("cardHeight");
+  const newSize = currentSize - 2;
   setGlobalState("cardHeight", newSize);
 };
 

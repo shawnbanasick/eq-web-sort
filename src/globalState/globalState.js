@@ -11,7 +11,7 @@ const globalState = store({
   presortSortedStatements: 0,
   progressScore: 10,
   overloadedColumn: "",
-  cardHeight: "150px",
+  cardHeight: 0,
 });
 
 export default globalState;

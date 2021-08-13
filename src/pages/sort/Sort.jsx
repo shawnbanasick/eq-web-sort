@@ -26,8 +26,8 @@ export default view(Sort);
 
 const SortTitleBar = styled.div`
   width: 99vw;
-  padding-left: 1vw;
-  padding-right: 2vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
   min-height: 30px;
   display: inline-grid;
   grid-template-columns: 200px 1fr 200px;
@@ -44,7 +44,6 @@ const CondOfInst = styled.div`
   padding: 5px;
   margin-top: 5px;
   border-radius: 5px;
-  margin-right: 1.5vw;
   text-align: center;
 `;
 
@@ -57,4 +56,5 @@ const Agree = styled.div`
 const Disagree = styled.div`
   font-size: 22px;
   align-self: end;
+  justify-self: start;
 `;

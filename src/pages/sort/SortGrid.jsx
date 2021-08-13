@@ -20,6 +20,10 @@ let startTime;
 
 setTimeout(function () {}, 100);
 
+// const getCardHeight = (maxNumCardsInCol, cardHeightSetting) => {
+
+// };
+
 // console.log("CONFIG", window.configXML);
 
 class SortGrid extends Component {
@@ -28,6 +32,7 @@ class SortGrid extends Component {
     console.log(props);
     this.state = {
       draggingOverColumnId: "column99",
+      windowSize: 100,
     };
   }
 
@@ -126,33 +131,38 @@ class SortGrid extends Component {
   }; // end of dragEnd helper function
 
   render() {
+    // state management
     const isSortingCards = getGlobalState("isSortingCards");
     if (isSortingCards === true) {
       console.log("true");
     }
-
-    const cardFontSize = this.props.cardFontSize;
-    console.log("rend size", cardFontSize);
-
     setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
-    // const sortCompleteText = window.languageXML.sortCompleteText;
-    // const nextButtonText = window.languageXML.nextButtonText;
+    // get user settings
+    const cardFontSize = this.props.cardFontSize;
     const horiCardMinHeight = window.configXML.horiCardMinHeight;
     const columnColorsArray = [...window.configXML.columnColorsArray];
     const sortCharacteristics = window.configXML.sortCharacteristics;
-    // const totalStatements = window.configXML.totalStatements;
-
     const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
 
-    // const cardHeight = window.configXML.cardHeight;
+    // calc card height
     const maxNumCardsInCol = Math.max(...qSortPattern);
-    const cardHeight = (window.innerHeight - 230) / maxNumCardsInCol;
+    let cardHeight = getGlobalState("cardHeight");
+    console.log(cardHeight);
+    if (cardHeight === 0) {
+      cardHeight = (window.innerHeight - 230) / maxNumCardsInCol;
+      setGlobalState("cardHeight", cardHeight);
+    }
+    if (cardHeight < 50) {
+      cardHeight = 50;
+      setGlobalState("cardHeight", cardHeight);
+    }
 
     // set dynamic width on page load or reload
     // todo make responsive
     const columnWidth = (window.innerWidth - 150) / qSortPattern.length;
 
+    // UI updates
     const changeColumnHeaderColor = (columnId) => {
       this.setState({ draggingOverColumnId: columnId });
     };
@@ -161,9 +171,7 @@ class SortGrid extends Component {
     const columnStatements = JSON.parse(
       localStorage.getItem("columnStatements")
     );
-
     const statements = columnStatements.statementList;
-    // const overloadedColumn = getGlobalState("overloadedColumn");
 
     // MAP out SORT COLUMNS component before render
     // code inside render so that column lists update automatically
@@ -173,7 +181,6 @@ class SortGrid extends Component {
       const columnId = `column${qSortHeaders[index]}`;
       const sortValue = qSortHeaderNumbers[index];
       const columnColor = columnColorsArray[index];
-      // columnColors -> redBase #ff7f7f greenBase #32cd32
 
       return (
         <SortColumn
@@ -195,7 +202,6 @@ class SortGrid extends Component {
     }); // end map of sort columns
 
     // returning main content => horizontal feeder
-
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="rootDiv">
