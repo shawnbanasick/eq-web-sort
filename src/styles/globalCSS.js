@@ -394,7 +394,7 @@ footer {
   
   #cards{
     max-height:150px;
-    min-height: 150px;
+    min-height:150px;
     overflow: hidden;
   }
   

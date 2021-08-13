@@ -4,7 +4,7 @@ import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
 import CardHeightSizer from "./CardHeightSizer";
 import { view } from "@risingstack/react-easy-state";
-import globalState from "../../globalState/globalState";
+// import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
 // import setGlobalState from "../../globalState/setGlobalState";
@@ -14,8 +14,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 //   return () => setValue((value) => value + 1); // update the state to force render
 // }
 
-const getNextPage = () => {
-  const currentPage = globalState.currentPage;
+const getNextPage = (currentPage) => {
   console.log(currentPage);
   if (currentPage === "landing") {
     return `/presort`;
@@ -27,24 +26,35 @@ const getNextPage = () => {
     return `/postsort`;
   }
   if (currentPage === "postsort") {
+    console.log("sending to survey");
     return `/survey`;
   }
   if (currentPage === "survey") {
     return `/submit`;
   }
-  return `/`;
+  if (currentPage === "submit") {
+    return `/`;
+  }
+  return `/nopagefound`;
 };
 
 const StyledFooter = () => {
+  const currentPage = getGlobalState("currentPage");
   const progressScore = getGlobalState("progressScore");
+  let displayCardHeightAdj = false;
+  if (currentPage === "sort") {
+    displayCardHeightAdj = true;
+  }
   console.log(progressScore);
   // window.onresize = useForceUpdate();
+
+  const nextPage = getNextPage(currentPage);
 
   return (
     <StyledFooterDiv>
       <AdjustmentsContainer>
         <FooterFontSizer />
-        <CardHeightSizer />
+        {displayCardHeightAdj && <CardHeightSizer />}
       </AdjustmentsContainer>
       <ProgressBarDiv>
         <ProgressBar
@@ -55,9 +65,7 @@ const StyledFooter = () => {
           baseBgColor="lightgray"
         />
       </ProgressBarDiv>
-      <NextButton to={getNextPage()}>
-        {window.languageXML.nextButtonText}
-      </NextButton>
+      <NextButton to={nextPage}>{window.languageXML.nextButtonText}</NextButton>
     </StyledFooterDiv>
   );
 };

@@ -22,12 +22,14 @@ const PresortPage = () => {
     cardHeight = 145;
     setGlobalState("cardHeight", cardHeight);
   }
+  const cardHeightText = `${cardHeight + 10}px 30px 1fr;`;
   return (
     <React.Fragment>
       <PresortModal />
       <PresortDND
         statements={statements}
         cardHeight={cardHeight}
+        cardHeightText={cardHeightText}
         cardFontSize={cardFontSize}
       />
     </React.Fragment>
@@ -35,3 +37,5 @@ const PresortPage = () => {
 };
 
 export default view(PresortPage);
+
+// 250px 30px auto;

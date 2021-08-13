@@ -10,7 +10,7 @@ let presortSortedStatements = getGlobalState("presortSortedStatements");
 function PresortDND(props) {
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
-  const cardHeight = `${props.cardHeight}px`;
+  const cardHeight = props.cardHeight;
 
   const columnsFromBackend = {
     cards: {
@@ -145,11 +145,9 @@ function PresortDND(props) {
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
-                                        ? "gray"
-                                        : "#ececec",
-                                      color: snapshot.isDragging
-                                        ? "white"
-                                        : "black",
+                                        ? "#e6bbad"
+                                        : "#eeeeee",
+                                      color: "black",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
@@ -177,14 +175,14 @@ function PresortDND(props) {
 export default view(PresortDND);
 
 const ColumnNamesDiv = styled.div`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
 const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-50);
-  grid-template-rows: ${(props) => props.cardHeight} 30px auto;
+  grid-template-rows: ${(props) => props.cardHeightText};
   grid-template-columns: 1fr 300px 300px 300px 1fr;
   row-gap: 10px;
   column-gap: 30px;
