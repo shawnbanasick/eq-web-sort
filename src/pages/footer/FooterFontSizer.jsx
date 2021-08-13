@@ -24,7 +24,7 @@ const decreaseFontSize = () => {
 const FooterFontSizer = () => {
   return (
     <Container>
-      <span>Font Size</span>
+      <SpanDiv>Font Size</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
@@ -37,7 +37,7 @@ const SizeButton = styled.button`
   background: #337ab7;
   border-color: #2e6da4;
   color: white;
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: bold;
   margin: 0 3px 0 3px;
   padding: 0.25em 1em;
@@ -51,4 +51,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+`;
+
+const SpanDiv = styled.div`
+  font-size: 16px;
 `;

@@ -363,6 +363,10 @@ template {
   display: none;
 }
 
+
+/***********************************
+  FOOTER CSS
+ *******************************************************************************/
 footer { 
   position: absolute;
   bottom: 0;
@@ -371,6 +375,9 @@ footer {
   background: #ececec; 
 }
 
+/***********************************
+  PRESORT CSS
+ *******************************************************************************/
 .react-responsive-modal-modal {
   background: white;
   max-width: 700px;
@@ -379,23 +386,15 @@ footer {
 
 }
 
-.presortGrid {
-  display: grid;
-  height: calc(100vh-50);
-  grid-template-rows: 200px 30px auto;
-  grid-template-columns: 1fr 300px 300px 300px 1fr;
-  row-gap: 10px;
-  column-gap: 30px;
-  margin-top: 30px;
-
-
   #cardsDiv{
     grid-column-start: 3;
     overflow: hidden;
+    align-self: end;
   }
   
   #cards{
     max-height:150px;
+    min-height: 150px;
     overflow: hidden;
   }
   
@@ -505,7 +504,10 @@ footer {
   }
 }
 
-/* SORT PAGE CSS */
+
+/***********************************
+  SORT CSS
+ *******************************************************************************/
 .sortContainer {
   display: flex;
   flex-direction: column;

@@ -30,11 +30,10 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   min-height: 30px;
   display: inline-grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 15% 1fr 15%;
   /* background-color: #6a9bc3; */
   color: black;
   font-weight: bold;
-  padding-bottom: 5px;
 `;
 
 const CondOfInst = styled.div`
@@ -42,7 +41,6 @@ const CondOfInst = styled.div`
   color: white;
   max-width: 80vw;
   padding: 5px;
-  margin-top: 5px;
   border-radius: 5px;
   text-align: center;
 `;
@@ -51,10 +49,12 @@ const Agree = styled.div`
   font-size: 22px;
   align-self: end;
   justify-self: end;
+  padding-bottom: 5px;
 `;
 
 const Disagree = styled.div`
   font-size: 22px;
   align-self: end;
   justify-self: start;
+  padding-bottom: 5px;
 `;

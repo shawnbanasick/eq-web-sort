@@ -17,10 +17,19 @@ const statements = cloneDeep(window.statementsXML);
 const PresortPage = () => {
   setGlobalState("currentPage", "presort");
   const cardFontSize = getGlobalState("cardFontSize");
+  let cardHeight = getGlobalState("cardHeight");
+  if (cardHeight < 145) {
+    cardHeight = 145;
+    setGlobalState("cardHeight", cardHeight);
+  }
   return (
     <React.Fragment>
       <PresortModal />
-      <PresortDND statements={statements} cardFontSize={cardFontSize} />
+      <PresortDND
+        statements={statements}
+        cardHeight={cardHeight}
+        cardFontSize={cardFontSize}
+      />
     </React.Fragment>
   );
 };

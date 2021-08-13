@@ -3,12 +3,14 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import styled from "styled-components";
 
 let presortSortedStatements = getGlobalState("presortSortedStatements");
 
 function PresortDND(props) {
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
+  const cardHeight = `${props.cardHeight}px`;
 
   const columnsFromBackend = {
     cards: {
@@ -83,8 +85,10 @@ function PresortDND(props) {
   };
 
   const [columns, setColumns] = useState(columnsFromBackend);
+
+  // RENDER COMPONENT
   return (
-    <div className="presortGrid">
+    <PresortGrid>
       <div id="completionRatio">
         {presortSortedStatements}/{window.statementsXML.length}
       </div>
@@ -102,8 +106,8 @@ function PresortDND(props) {
               key={columnId}
               id={`${columnId}Div`}
             >
-              <h2>{column.name}</h2>
-              <div style={{ margin: 8 }}>
+              <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
+              <div style={{ margin: 4 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -137,7 +141,7 @@ function PresortDND(props) {
                                       userSelect: "none",
                                       padding: 16,
                                       margin: "0 0 8px 0",
-                                      height: "142px",
+                                      height: cardHeight,
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
@@ -166,8 +170,23 @@ function PresortDND(props) {
           );
         })}
       </DragDropContext>
-    </div>
+    </PresortGrid>
   );
 }
 
 export default view(PresortDND);
+
+const ColumnNamesDiv = styled.div`
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+const PresortGrid = styled.div`
+  display: grid;
+  height: calc(100vh-50);
+  grid-template-rows: ${(props) => props.cardHeight} 30px auto;
+  grid-template-columns: 1fr 300px 300px 300px 1fr;
+  row-gap: 10px;
+  column-gap: 30px;
+  margin-top: 10px;
+`;

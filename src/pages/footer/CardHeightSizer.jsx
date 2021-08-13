@@ -18,7 +18,7 @@ const decreaseFontSize = () => {
 const FooterFontSizer = () => {
   return (
     <Container>
-      <span>Card Height</span>
+      <SpanDiv>Card Height</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
@@ -31,7 +31,7 @@ const SizeButton = styled.button`
   background: #337ab7;
   border-color: #2e6da4;
   color: white;
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: bold;
   margin: 0 3px 0 3px;
   padding: 0.25em 1em;
@@ -46,4 +46,8 @@ const Container = styled.div`
   justify-content: center;
   text-align: center;
   margin-left: 15px;
+`;
+
+const SpanDiv = styled.div`
+  font-size: 16px;
 `;
