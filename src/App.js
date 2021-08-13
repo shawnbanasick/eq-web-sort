@@ -8,8 +8,67 @@ import SurveyPage from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
 import StyledFooter from "./pages/footer/StyledFooter.jsx";
 import NoPageFound from "./utilities/NoPageFound";
+import axios from "axios";
+import { useEffect } from "react";
+import processConfigXMLData from "./utilities/processConfigXMLData";
+
+const convert = require("xml-js");
 
 function App() {
+  useEffect(() => {
+    axios
+      .get("./settings/config.xml", {
+        "Content-Type": "application/xml; charset=utf-8",
+      })
+      .then(function (response) {
+        const options = { compact: false, ignoreComment: true, spaces: 2 };
+        const configData = convert.xml2js(response.data, options);
+        processConfigXMLData(configData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // axios
+    //   .get("./settings/language.xml", {
+    //     "Content-Type": "application/xml; charset=utf-8",
+    //   })
+    //   .then(function (response) {
+    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
+    //     const languageData = convert.xml2js(response.data, options);
+    //     console.log(JSON.stringify(languageData));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    // axios
+    //   .get("./settings/map.xml", {
+    //     "Content-Type": "application/xml; charset=utf-8",
+    //   })
+    //   .then(function (response) {
+    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
+    //     const mapData = convert.xml2js(response.data, options);
+    //     console.log(JSON.stringify(mapData));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    // axios
+    //   .get("./settings/statements.xml", {
+    //     "Content-Type": "application/xml; charset=utf-8",
+    //   })
+    //   .then(function (response) {
+    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
+    //     const statementsData = convert.xml2js(response.data, options);
+    //     console.log(JSON.stringify(statementsData));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  }, []);
+
   return (
     <div className="App">
       <Router>
