@@ -1,351 +1,238 @@
-const one = {
-  type: "element",
-  name: "config",
-  attributes: {
-    version: "1.0",
-    htmlParse: "false",
-  },
-  elements: [
+const data = [
+  [
     {
       type: "element",
-      name: "item",
+      name: "note",
       attributes: {
-        id: "studyTitle",
+        bg: "true",
       },
       elements: [
         {
           type: "text",
-          text: "Name of your study",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "textAlign",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "left",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "shuffleCards",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "true",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "loginrequired",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "false",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "loginPassword",
-      },
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "loginUrl",
-      },
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "loginUrlMethod",
-      },
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "showStep3",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "true",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "showStep4",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "true",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "showStep5",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "true",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "disableBackButton",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "true",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "form",
-      },
-      elements: [
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "Age*",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "note",
-          elements: [
-            {
-              type: "text",
-              text: "Please enter your year of birth (YYYY, eg. 1980).",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "text",
-            required: "true",
-            maxlength: "4",
-            restricted: "0-9",
-          },
-        },
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "Gender*",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "note",
-          elements: [
-            {
-              type: "text",
-              text: "Please select your gender.",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "radio",
-            required: "true",
-          },
-          elements: [
-            {
-              type: "text",
-              text: "female;male",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "Please answer the following questions.",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "rating2",
-            required: "false",
-            scale: "Yes;No;",
-          },
-          elements: [
-            {
-              type: "text",
-              text: "There's a car in my household;I own a car for myself",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "What kind of transportation do you use?",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "checkbox",
-            required: "false",
-          },
-          elements: [
-            {
-              type: "text",
-              text: "Car;Railroad;Bike",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "What kind of transportation do you prefer?",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "select",
-            required: "false",
-          },
-          elements: [
-            {
-              type: "text",
-              text: "Car;Railroad;Bike",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "label",
-          elements: [
-            {
-              type: "text",
-              text: "Comments",
-            },
-          ],
-        },
-        {
-          type: "element",
-          name: "input",
-          attributes: {
-            type: "textarea",
-            required: "false",
-          },
-        },
-        {
-          type: "element",
-          name: "note",
-          attributes: {
-            bg: "false",
-          },
-          elements: [
-            {
-              type: "text",
-              text: "All fields marked with an * are mandatory.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "submitUrl",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "exe.php?do=save",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "submitUrlMethod",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "firebase",
-        },
-      ],
-    },
-    {
-      type: "element",
-      name: "item",
-      attributes: {
-        id: "submitMail",
-      },
-      elements: [
-        {
-          type: "text",
-          text: "yourdomain.com",
+          text: "All fields marked with an * are mandatory",
         },
       ],
     },
   ],
-};
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Age*",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "note",
+      elements: [
+        {
+          type: "text",
+          text: "Please enter your year of birth (YYYY, eg. 1980).",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "text",
+        required: "true",
+        maxlength: "4",
+        restricted: "0-9",
+      },
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Describe your experience using the iPads in this class*",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "textarea",
+        required: "true",
+      },
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Year*",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "note",
+      elements: [
+        {
+          type: "text",
+          text: "Please select your year",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "radio",
+        required: "true",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "Freshman;Sophomore;Junior;Senior",
+        },
+      ],
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "What is your program focus?",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "select",
+        required: "false",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "Global Studies;Linguistics;English Literature",
+        },
+      ],
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "What kind of class do you prefer?",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "checkbox",
+        required: "false",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "Lecture;Group Discussion;Active Learning",
+        },
+      ],
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Please respond to the following statements",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "rating2",
+        required: "false",
+        scale: "Yes;No",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "I have used an iPad in class before.; I have used a notebook computer in class before.",
+        },
+      ],
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Please answer the following questions",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "rating5",
+        required: "false",
+        scale: "1;2;3;4;5",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "How would you rate the use of iPads in this class?;How would you rate this class overall?",
+        },
+      ],
+    },
+  ],
+  [
+    {
+      type: "element",
+      name: "label",
+      elements: [
+        {
+          type: "text",
+          text: "Please answer the following questions",
+        },
+      ],
+    },
+    {
+      type: "element",
+      name: "input",
+      attributes: {
+        type: "rating10",
+        required: "false",
+        scale: "1;2;3;4;5;6;7;8;9;10",
+      },
+      elements: [
+        {
+          type: "text",
+          text: "How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?",
+        },
+      ],
+    },
+  ],
+];

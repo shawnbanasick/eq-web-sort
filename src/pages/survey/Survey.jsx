@@ -16,7 +16,7 @@ const SurveyPage = () => {
     {
       qNum: 1,
       type: "text",
-      mandatory: true,
+      required: true,
       label: "Age*",
       note: "Please enter your year of birth",
       limitLength: true,
@@ -26,13 +26,13 @@ const SurveyPage = () => {
     {
       qNum: 2,
       type: "textArea",
-      mandatory: true,
+      required: true,
       label: "Comments",
     },
     {
       qNum: 3,
       type: "radio",
-      mandatory: true,
+      required: true,
       label: "Year*",
       note: "Please select your year",
       options: "Freshman; Sophomore; Junior; Senior;",
@@ -40,21 +40,21 @@ const SurveyPage = () => {
     {
       qNum: 4,
       type: "select",
-      mandatory: true,
+      required: true,
       label: "What is your program focus?",
       options: "Global Studies; Linguistics; English Literature",
     },
     {
       qNum: 5,
       type: "checkbox",
-      mandatory: true,
+      required: true,
       label: "What type of class do you prefer?",
       options: "Lecture; Group Discussion; Active Learning",
     },
     {
       qNum: 6,
       type: "rating2",
-      mandatory: true,
+      required: true,
       label: "Please answer the following questions",
       scale: "Yes; No",
       options:
@@ -63,7 +63,7 @@ const SurveyPage = () => {
     {
       qNum: 7,
       type: "rating5",
-      mandatory: true,
+      required: true,
       label: "Please answer the following questions.",
       options:
         "How would you rate the use of iPads in this class?; How would you rate this class overall",
@@ -71,7 +71,7 @@ const SurveyPage = () => {
     {
       qNum: 8,
       type: "rating10",
-      mandatory: true,
+      required: true,
       label: "Please answer the following questions.",
       options:
         "How would you rate the use of the Socrative website in this class?; How would you rate the use of the Quizlet website in this class?",

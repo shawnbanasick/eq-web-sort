@@ -160,7 +160,7 @@ class SortGrid extends Component {
 
     // set dynamic width on page load or reload
     // todo make responsive
-    const columnWidth = (window.innerWidth - 150) / qSortPattern.length;
+    const columnWidth = (window.innerWidth - 130) / qSortPattern.length;
 
     // UI updates
     const changeColumnHeaderColor = (columnId) => {
