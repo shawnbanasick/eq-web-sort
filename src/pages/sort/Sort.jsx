@@ -31,7 +31,7 @@ const SortTitleBar = styled.div`
   min-height: 30px;
   display: inline-grid;
   grid-template-columns: 15% 1fr 15%;
-  /* background-color: #6a9bc3; */
+  background-color: black;
   color: black;
   font-weight: bold;
 `;
@@ -49,12 +49,16 @@ const Agree = styled.div`
   font-size: 22px;
   align-self: end;
   justify-self: end;
+  color: white;
   padding-bottom: 5px;
+  background-color: black;
 `;
 
 const Disagree = styled.div`
   font-size: 22px;
   align-self: end;
   justify-self: start;
+  color: white;
   padding-bottom: 5px;
+  background-color: black;
 `;

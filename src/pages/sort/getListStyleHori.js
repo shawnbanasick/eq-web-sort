@@ -6,7 +6,7 @@ const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
   width: "100vw",
   minHeight: horiCardMinHeight,
   overflowX: `scroll`,
-  // flexDirection: "row-reverse",
+  flexDirection: "row-reverse",
 });
 
 export default getListStyleHori;

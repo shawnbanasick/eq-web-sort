@@ -8,9 +8,9 @@ const reorder = (
   columnStatements
 ) => {
   // no re-ordering of statements list / it's arranged by flexbox "order" css property
-  // if (columnToBeReordered === "statements") {
-  //   return;
-  // }
+  if (columnToBeReordered === "statements") {
+    return;
+  }
   // let list = state.getState(columnList);
   const list = columnStatements.vCols[columnToBeReordered];
   console.log("TCL: list", JSON.stringify(list));
