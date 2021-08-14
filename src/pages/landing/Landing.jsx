@@ -15,24 +15,14 @@ const LandingPage = () => {
   const dataLoaded = getGlobalState("dataLoaded");
   const languageObject = getGlobalState("languageObject");
 
-  // for (let i = 0; i < 500; i++) {
-  //   setTimeout(() => {
-  //     let testValue = globalState.languageObject;
-  //     if (testValue.welcomeHead !== undefined) {
-  //       return;
-  //     }
-  //   }, 100);
-  // }
-  // setTimeout(function () {
-  //   console.log(JSON.stringify(languageObject, null, 2));
-  // }, 3000);
-  // const welcome = language.welcomeHeader;
-
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
-      <ContainerDiv>
-        {dataLoaded && <h1>{languageObject.welcomeHead}</h1>}
-      </ContainerDiv>
+      {dataLoaded && (
+        <ContainerDiv>
+          <h1>{languageObject.welcomeHead}</h1>
+          <SpanDiv>{ReactHtmlParser(languageObject.welcomeText)}</SpanDiv>
+        </ContainerDiv>
+      )}
     </Suspense>
   );
 };
@@ -49,5 +39,3 @@ const ContainerDiv = styled.div`
 const SpanDiv = styled.span`
   font-size: 1.25em;
 `;
-
-/* <SpanDiv>{ReactHtmlParser(language.welcomeText)}</SpanDiv> */
