@@ -40,7 +40,9 @@ const getNextPage = (currentPage) => {
 
 const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
-  const progressScore = getGlobalState("progressScore");
+  const progressScore2 = getGlobalState("progressScore");
+  const progressScore = +localStorage.getItem("progressScore");
+
   let displayCardHeightAdj = false;
   if (currentPage === "sort") {
     displayCardHeightAdj = true;

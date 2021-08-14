@@ -11,6 +11,7 @@ const LandingPage = () => {
       setGlobalState("progressScore", 10);
     }, 100);
     setGlobalState("currentPage", "landing");
+    localStorage.setItem("progressScore", `10`);
   }, []);
 
   const dataLoaded = getGlobalState("dataLoaded");

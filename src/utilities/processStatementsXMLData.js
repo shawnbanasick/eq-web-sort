@@ -10,12 +10,12 @@ const processStatementsXMLData = (dataObject) => {
     let tempObj = {};
     tempObj.id = `s${data[i]._attributes.id}`;
     tempObj.statementNum = data[i]._attributes.id;
-    tempObj.divColor = "";
-    tempObj.cardColor = "";
+    tempObj.divColor = "isUncertainStatement";
+    tempObj.cardColor = "yellowSortCard";
     tempObj.pinkChecked = false;
-    tempObj.yellowChecked = false;
+    tempObj.yellowChecked = true;
     tempObj.greenChecked = false;
-    tempObj.sortValue = 0;
+    tempObj.sortValue = 222;
     tempObj.statement = data[i]._text.trim();
     statementsArray.push(tempObj);
   }
