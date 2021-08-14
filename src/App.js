@@ -12,6 +12,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import processConfigXMLData from "./utilities/processConfigXMLData";
 import processMapXMLData from "./utilities/processMapXMLData";
+import processLanguageXMLData from "./utilities/processLanguageXMLData";
+import processStatementsXMLData from "./utilities/processStatementsXMLData";
 
 const convert = require("xml-js");
 
@@ -30,18 +32,19 @@ function App() {
         console.log(error);
       });
 
-    // axios
-    //   .get("./settings/language.xml", {
-    //     "Content-Type": "application/xml; charset=utf-8",
-    //   })
-    //   .then(function (response) {
-    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    //     const languageData = convert.xml2js(response.data, options);
-    //     console.log(JSON.stringify(languageData));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("./settings/language.xml", {
+        "Content-Type": "application/xml; charset=utf-8",
+      })
+      .then(function (response) {
+        const options = { compact: true, ignoreComment: true, spaces: 4 };
+        const languageData = convert.xml2js(response.data, options);
+        // console.log(JSON.stringify(languageData));
+        processLanguageXMLData(languageData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     axios
       .get("./settings/map.xml", {
@@ -50,25 +53,24 @@ function App() {
       .then(function (response) {
         const options = { compact: true, ignoreComment: true, spaces: 4 };
         const mapData = convert.xml2js(response.data, options);
-        console.log(JSON.stringify(mapData));
         processMapXMLData(mapData);
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    // axios
-    //   .get("./settings/statements.xml", {
-    //     "Content-Type": "application/xml; charset=utf-8",
-    //   })
-    //   .then(function (response) {
-    //     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    //     const statementsData = convert.xml2js(response.data, options);
-    //     console.log(JSON.stringify(statementsData));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("./settings/statements.xml", {
+        "Content-Type": "application/xml; charset=utf-8",
+      })
+      .then(function (response) {
+        const options = { compact: true, ignoreComment: true, spaces: 4 };
+        const statementsData = convert.xml2js(response.data, options);
+        processStatementsXMLData(statementsData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -90,18 +92,3 @@ function App() {
 }
 
 export default view(App);
-
-// const FooterDiv = styled.div`
-//   display: inline;
-// `;
-
-// const NextButton = styled.button`
-//   background: blue;
-//   color: white;
-//   font-size: 1em;
-//   margin: 1em;
-//   padding: 0.25em 1em;
-//   border-radius: 3px;
-//   text-decoration: none;
-//   float: right;
-// `;
