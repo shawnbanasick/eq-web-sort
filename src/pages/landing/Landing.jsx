@@ -1,5 +1,4 @@
 import React, { useEffect, Suspense } from "react";
-import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
@@ -8,7 +7,9 @@ import getGlobalState from "../../globalState/getGlobalState";
 
 const LandingPage = () => {
   useEffect(() => {
-    setGlobalState("progressScore", 10);
+    setTimeout(() => {
+      setGlobalState("progressScore", 10);
+    }, 100);
     setGlobalState("currentPage", "landing");
   }, []);
 

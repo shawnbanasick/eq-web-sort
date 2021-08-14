@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
-import PresortModal from "./PresortModal";
-import PresortDND from "./PresortDND";
-import getGlobalState from "../../globalState/getGlobalState";
 import cloneDeep from "lodash/cloneDeep";
+import PresortModal from "./PresortModal";
+import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
+import PresortDND from "./PresortDND";
 
-const statements = cloneDeep(window.statementsXML);
+const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+// console.log(JSON.stringify(columnStatements.statementList, null, 2));
+
+const statements = columnStatements.statementList;
+
+// console.log(JSON.stringify(statements));
 
 const PresortPage = () => {
   useEffect(() => {
