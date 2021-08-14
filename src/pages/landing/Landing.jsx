@@ -15,12 +15,19 @@ const LandingPage = () => {
   const dataLoaded = getGlobalState("dataLoaded");
   const languageObject = getGlobalState("languageObject");
 
+  const getWelcomeText = () => {
+    let welcomeText1 = languageObject.welcomeText;
+    const charReplace = { "{": "<", "}": ">" };
+    let welcomeText = welcomeText1.replace(/{|}/g, (char) => charReplace[char]);
+    return welcomeText;
+  };
+
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
         <ContainerDiv>
           <h1>{languageObject.welcomeHead}</h1>
-          <SpanDiv>{ReactHtmlParser(languageObject.welcomeText)}</SpanDiv>
+          <ContentDiv>{ReactHtmlParser(getWelcomeText())}</ContentDiv>
         </ContainerDiv>
       )}
     </Suspense>
@@ -32,10 +39,17 @@ export default view(LandingPage);
 const ContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 `;
 
-const SpanDiv = styled.span`
+const ContentDiv = styled.div`
+  margin-left: 20px;
+  display: flex;
+  width: 75vw;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+
   font-size: 1.25em;
 `;
