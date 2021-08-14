@@ -12,6 +12,7 @@ const globalState = store({
   progressScore: 10,
   overloadedColumn: "",
   cardHeight: 0,
+  dataLoaded: false,
 });
 
 export default globalState;

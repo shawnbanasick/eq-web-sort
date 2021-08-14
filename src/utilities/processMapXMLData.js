@@ -1,19 +1,30 @@
+import setGlobalState from "../globalState/setGlobalState";
+
 const processMapXMLData = (dataObject) => {
-  //   console.log(JSON.stringify(dataObject, null, 2));
-
   const data = dataObject.map.column;
-  //   console.log(JSON.stringify(data, null, 2));
-
+  const vColsObj = {};
   const colInfoArray = [];
   for (let i = 0; i < data.length; i++) {
+    let keyVal;
+    let label = data[i]._attributes.id;
+    let labelInt = parseInt(label, 10);
+    if (labelInt < 0) {
+      keyVal = `columnN${Math.abs(labelInt)}`;
+      vColsObj[keyVal] = [];
+    } else {
+      keyVal = `column${labelInt}`;
+      vColsObj[keyVal] = [];
+    }
+
     let tempObj = {};
     tempObj.colNum = i + 1;
-    tempObj.label = data[i]._attributes.id;
+    tempObj.label = label;
     tempObj.colour = `#${data[i]._attributes.colour}`;
     tempObj.numCards = data[i]._text;
     colInfoArray.push(tempObj);
   }
-  //   console.log(JSON.stringify(colInfoArray, null, 2));
+  setGlobalState("colInfoArray", colInfoArray);
+  setGlobalState("vColsObj", vColsObj);
 };
 
 export default processMapXMLData;
