@@ -44,12 +44,6 @@ const ContainerDiv = styled.div`
 `;
 
 const ContentDiv = styled.div`
-  margin-left: 20px;
-  display: flex;
   width: 75vw;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-
   font-size: 1.25em;
 `;
