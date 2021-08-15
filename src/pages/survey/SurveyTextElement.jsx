@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
 const SurveyTextElement = (props) => {
+  const [number, setNumber] = useState();
+
   const handleOnChange = (e) => {
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, e.target.value);
+    let value = e.target.value;
+    if (props.opts.limitLength === true) {
+      if (value.length > props.opts.maxLen) {
+        value = value.substring(0, props.opts.maxLen);
+      }
+    }
+    setNumber(value);
+
+    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
   return (
     <Container>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
-      <TextInput onChange={handleOnChange} />
+      <TextInput value={number} onChange={handleOnChange} />
     </Container>
   );
 };

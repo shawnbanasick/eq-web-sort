@@ -20,7 +20,7 @@ const SurveyPage = () => {
       required: true,
       label: "Age*",
       note: "Please enter your year of birth",
-      limitLength: true,
+      limitLength: false,
       maxLen: 4,
       numsOnly: false,
     },
