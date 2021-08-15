@@ -38,9 +38,16 @@ const getNextPage = (currentPage) => {
   return `/nopagefound`;
 };
 
-const calcProgressScore = (currentPage, additionalProgress1) => {
+const calcProgressScore = (
+  currentPage,
+  additionalProgress1,
+  additionalProgressSort
+) => {
   const additionalProgressState = +localStorage.getItem(
     "progressScoreAdditional"
+  );
+  const additionalProgressStateSort = +localStorage.getItem(
+    "progressScoreAdditionalSort"
   );
   let totalProgressScore;
 
@@ -51,9 +58,13 @@ const calcProgressScore = (currentPage, additionalProgress1) => {
     additionalProgress = additionalProgressState;
   }
 
+  if (additionalProgressSort !== additionalProgressStateSort) {
+    additionalProgressSort = additionalProgressStateSort;
+  }
+
   // let progressScore;
   if (currentPage === "landing") {
-    totalProgressScore = "10";
+    totalProgressScore = 10;
     return totalProgressScore;
   }
   if (currentPage === "presort") {
@@ -61,7 +72,19 @@ const calcProgressScore = (currentPage, additionalProgress1) => {
     return totalProgressScore;
   }
   if (currentPage === "sort") {
-    totalProgressScore = +additionalProgress + 20;
+    totalProgressScore = +additionalProgressSort + 50;
+    return totalProgressScore;
+  }
+  if (currentPage === "postsort") {
+    totalProgressScore = 80;
+    return totalProgressScore;
+  }
+  if (currentPage === "survey") {
+    totalProgressScore = 90;
+    return totalProgressScore;
+  }
+  if (currentPage === "submit") {
+    totalProgressScore = 100;
     return totalProgressScore;
   }
 };
@@ -70,8 +93,13 @@ const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
 
   const additionalProgress = getGlobalState("progressScoreAdditional");
+  const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
 
-  const totalProgressScore = calcProgressScore(currentPage, additionalProgress);
+  const totalProgressScore = calcProgressScore(
+    currentPage,
+    additionalProgress,
+    additionalProgressSort
+  );
 
   // const totalProgressScore = 10; // calcProgressScore(currentPage, additionalProgress);
 

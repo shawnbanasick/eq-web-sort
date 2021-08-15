@@ -125,6 +125,22 @@ class SortGrid extends Component {
         setGlobalState("sortCompleted", false);
       }
 
+      // increment Progress Bar
+      // const sortedStatements = getGlobalState("presortSortedStatementsNum");
+      const totalStatements2 = window.statementsXML.length;
+      const remainingStatements = columnStatements.statementList.length;
+      const numerator = totalStatements2 - remainingStatements;
+
+      const ratio = numerator / window.statementsXML.length;
+      console.log(ratio);
+      const completedPercent = (ratio * 30).toFixed();
+      // update Progress Bar State
+      setGlobalState("progressScoreAdditionalSort", completedPercent);
+      localStorage.setItem(
+        "progressScoreAdditionalSort",
+        `${completedPercent}`
+      );
+
       this.forceUpdate();
     }
   }; // end of dragEnd helper function
