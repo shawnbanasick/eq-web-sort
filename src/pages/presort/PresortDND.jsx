@@ -7,7 +7,8 @@ import styled from "styled-components";
 
 function PresortDND(props) {
   // let presortSortedStatements = getGlobalState("presortSortedStatements");
-  let presortSortedStatements = localStorage.getItem("presortSortedStatements");
+  let presortSortedStatements =
+    localStorage.getItem("presortSortedStatements") || 0;
 
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
@@ -36,6 +37,46 @@ function PresortDND(props) {
     console.log(JSON.stringify(result));
     if (!result.destination) return;
     const { source, destination } = result;
+
+    // update statement characteristics
+    const columnStatements = JSON.parse(
+      localStorage.getItem("columnStatements")
+    );
+    const statementsArray = [...columnStatements.statementList];
+    const destinationId = result.destination.droppableId;
+    const draggableId = result.draggableId;
+
+    for (let i = 0; i < statementsArray.length; i++) {
+      if (statementsArray[i].id === draggableId) {
+        if (destinationId === "neg") {
+          statementsArray[i].divColor = "isNegativeStatement";
+          statementsArray[i].cardColor = "pinkSortCard";
+          statementsArray[i].pinkChecked = true;
+          statementsArray[i].yellowChecked = false;
+          statementsArray[i].greenChecked = false;
+          statementsArray[i].sortValue = 333;
+        }
+        if (destinationId === "neutral") {
+          statementsArray[i].divColor = "isUncertainStatement";
+          statementsArray[i].cardColor = "yellowSortCard";
+          statementsArray[i].pinkChecked = false;
+          statementsArray[i].yellowChecked = true;
+          statementsArray[i].greenChecked = false;
+          statementsArray[i].sortValue = 222;
+        }
+        if (destinationId === "pos") {
+          statementsArray[i].divColor = "isPositiveStatement";
+          statementsArray[i].cardColor = "greenSortCard";
+          statementsArray[i].pinkChecked = false;
+          statementsArray[i].yellowChecked = false;
+          statementsArray[i].greenChecked = true;
+          statementsArray[i].sortValue = 111;
+        }
+        console.log(statementsArray[i]);
+      }
+    }
+    columnStatements.statementList = [...statementsArray];
+    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
 
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
@@ -93,7 +134,7 @@ function PresortDND(props) {
       });
     }
 
-    console.log(JSON.stringify(columns, null, 2));
+    // console.log(JSON.stringify(columns, null, 2));
   };
 
   // const [columns, setColumns] = useState(columnsFromBackend);
