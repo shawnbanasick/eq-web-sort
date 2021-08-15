@@ -6,9 +6,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 
 function PresortDND(props) {
-  // let presortSortedStatements = getGlobalState("presortSortedStatements");
-  let presortSortedStatements =
-    localStorage.getItem("presortSortedStatements") || 0;
+  // let presortSortedStatementsNum = getGlobalState("presortSortedStatementsNum");
+  let presortSortedStatementsNum =
+    localStorage.getItem("presortSortedStatementsNum") || 0;
 
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
@@ -88,20 +88,23 @@ function PresortDND(props) {
 
       // calc remaining statements
       if (sourceColumn.name === "Statements") {
-        presortSortedStatements =
+        presortSortedStatementsNum =
           window.statementsXML.length - sourceColumn.items.length + 1;
-        console.log("remaining: ", presortSortedStatements);
-        setGlobalState("presortSortedStatements", presortSortedStatements);
-        console.log("sorted: ", presortSortedStatements);
-        presortSortedStatements = presortSortedStatements.toString();
+        console.log("remaining: ", presortSortedStatementsNum);
+        setGlobalState(
+          "presortSortedStatementsNum",
+          presortSortedStatementsNum
+        );
+        console.log("sorted: ", presortSortedStatementsNum);
+        presortSortedStatementsNum = presortSortedStatementsNum.toString();
         localStorage.setItem(
-          "presortSortedStatements",
-          presortSortedStatements
+          "presortSortedStatementsNum",
+          presortSortedStatementsNum
         );
       }
 
       // update progress bar
-      const sortedStatements = getGlobalState("presortSortedStatements");
+      const sortedStatements = getGlobalState("presortSortedStatementsNum");
       const ratio = sortedStatements / window.statementsXML.length;
       console.log(ratio);
       const completedPercent = (ratio * 30).toFixed();
@@ -147,7 +150,7 @@ function PresortDND(props) {
   return (
     <PresortGrid>
       <div id="completionRatio">
-        {presortSortedStatements}/{window.statementsXML.length}
+        {presortSortedStatementsNum}/{window.statementsXML.length}
       </div>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
