@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import { v4 as uuid } from "uuid";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -24,35 +25,35 @@ const SurveyRatings2Element = (props) => {
       <ItemContainer onChange={handleChange} key={`div-${index}`}>
         <span key={`QL-${index}`}>{item}</span>
         <input
-          key={`Q-${index}`}
+          key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={1}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q2-${index}`}
+          key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={2}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q3-${index}`}
+          key={uuid()}
           id={`Q3-${index}`}
           type="radio"
           value={3}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q4-${index}`}
+          key={uuid()}
           id={`Q4-${index}`}
           type="radio"
           value={4}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q5-${index}`}
+          key={uuid()}
           id={`Q5-${index}`}
           type="radio"
           value={5}

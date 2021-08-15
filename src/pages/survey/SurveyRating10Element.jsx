@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import { v4 as uuid } from "uuid";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -22,72 +23,72 @@ const SurveyRatings10Element = (props) => {
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
       <ItemContainer onChange={handleChange} key={`div-${index}`}>
-        <span key={`QL-${index}`}>{item}</span>
+        <span key={uuid()}>{item}</span>
         <input
-          key={`Q-${index}`}
+          key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={1}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q2-${index}`}
+          key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={2}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q3-${index}`}
+          key={uuid()}
           id={`Q3-${index}`}
           type="radio"
           value={3}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q4-${index}`}
+          key={uuid()}
           id={`Q4-${index}`}
           type="radio"
           value={4}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q5-${index}`}
+          key={uuid()}
           id={`Q5-${index}`}
           type="radio"
           value={5}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q6-${index}`}
+          key={uuid()}
           id={`Q6-${index}`}
           type="radio"
           value={6}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q7-${index}`}
+          key={uuid()}
           id={`Q7-${index}`}
           type="radio"
           value={7}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q8-${index}`}
+          key={uuid()}
           id={`Q8-${index}`}
           type="radio"
           value={8}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q9-${index}`}
+          key={uuid()}
           id={`Q9-${index}`}
           type="radio"
           value={9}
           name={`${props.opts.qNum}-${index + 1}`}
         />
         <input
-          key={`Q10-${index}`}
+          key={uuid()}
           id={`Q10-${index}`}
           type="radio"
           value={10}

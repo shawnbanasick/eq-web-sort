@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import { v4 as uuid } from "uuid";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -26,13 +27,13 @@ const SurveyRadioElement = (props) => {
     const radioList = optsArray.map((item, index) => (
       <div key={`div-${index}`}>
         <input
-          key={index}
+          key={uuid()}
           id={`${item}-${index}`}
           type="radio"
           value={item}
           name={nameValue}
         />
-        <label key={`Q-${index}`} htmlFor={`${item}-${index}`}>
+        <label key={uuid()} htmlFor={`${item}-${index}`}>
           {item}
         </label>
       </div>

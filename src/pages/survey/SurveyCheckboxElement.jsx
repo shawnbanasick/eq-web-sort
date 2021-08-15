@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
+import { v4 as uuid } from "uuid";
 
 const localStore = store({});
 
@@ -28,7 +29,7 @@ const SurveyCheckboxElement = (props) => {
         selected += i + 1 + "|";
       }
     }
-    if (selected.charAt(selected.length - 1) == "|") {
+    if (selected.charAt(selected.length - 1) === "|") {
       selected = selected.substr(0, selected.length - 1);
     }
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
@@ -36,15 +37,15 @@ const SurveyCheckboxElement = (props) => {
 
   const CheckboxItems = () => {
     const radioList = optsArray.map((item, index) => (
-      <div key={`div-${index}`}>
+      <div key={uuid()}>
         <input
-          key={index}
+          key={uuid()}
           id={`${item}-${index}`}
           type="checkbox"
           value={item}
           name={nameValue}
         />
-        <label key={`Q-${index}`} htmlFor={`${item}-${index}`}>
+        <label key={uuid()} htmlFor={`${item}-${index}`}>
           {item}
         </label>
       </div>
