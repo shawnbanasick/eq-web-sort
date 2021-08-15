@@ -2,10 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
-const handleOnChange = (e) => {
-  console.log(e.target.id, e.target.value);
-};
-
 const getOptionsArray = (options) => {
   let array = options.split(";");
   array = array.filter(function (e) {
@@ -16,13 +12,14 @@ const getOptionsArray = (options) => {
 };
 
 const SurveyRadioElement = (props) => {
-  const id = props.id;
-
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 
   const handleChange = (e) => {
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, e.target.value);
+    console.log(
+      `qNum${props.opts.qNum}-${props.opts.type}`,
+      optsArray.indexOf(e.target.value) + 1
+    );
   };
 
   const RadioItems = () => {
