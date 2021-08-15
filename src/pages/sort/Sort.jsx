@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -7,7 +7,12 @@ import styled from "styled-components";
 
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
-  setGlobalState("currentPage", "sort");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setGlobalState("currentPage", "sort");
+    }, 200);
+  }, []);
 
   return (
     <React.Fragment>

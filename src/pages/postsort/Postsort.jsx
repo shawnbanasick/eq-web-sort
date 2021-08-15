@@ -19,6 +19,8 @@ let startTime;
 class PostSort extends Component {
   componentDidMount() {
     startTime = Date.now();
+    setGlobalState("currentPage", "postsort");
+    setGlobalState("progressScore", 50);
   }
 
   componentWillUnmount() {
@@ -26,9 +28,6 @@ class PostSort extends Component {
   }
 
   render() {
-    setGlobalState("currentPage", "postsort");
-    setGlobalState("progressScore", 50);
-
     // pull data from localStorage
     const columnStatements = JSON.parse(
       localStorage.getItem("columnStatements")
