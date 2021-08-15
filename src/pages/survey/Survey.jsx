@@ -11,6 +11,7 @@ import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
 import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
+import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 
 const SurveyPage = () => {
@@ -88,6 +89,12 @@ const SurveyPage = () => {
       options:
         "How would you rate the use of the Socrative website in this class?; How would you rate the use of the Quizlet website in this class?",
     },
+    {
+      qNum: 10,
+      type: "information",
+      label: "Please answer the following questions.",
+      backgroundColor: "#83cafe",
+    },
   ];
 
   const SurveyQuestions = () => {
@@ -118,6 +125,9 @@ const SurveyPage = () => {
       }
       if (object.type === "rating10") {
         return <SurveyRating10Element key={uuid()} opts={object} />;
+      }
+      if (object.type === "information") {
+        return <SurveyInformationElement key={uuid()} opts={object} />;
       }
       return null;
     });

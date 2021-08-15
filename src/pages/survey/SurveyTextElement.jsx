@@ -20,7 +20,7 @@ const SurveyTextElement = (props) => {
     <Container>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
-      <TextInput value={number} onChange={handleOnChange} />
+      <TextInput value={number || ""} onChange={handleOnChange} />
     </Container>
   );
 };

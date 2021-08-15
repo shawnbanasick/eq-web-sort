@@ -6,7 +6,6 @@ const SurveyTextElement = (props) => {
   const [number, setNumber] = useState();
 
   const handleOnChange = (e) => {
-    console.log("called");
     let value = e.target.value.replace(/\D/g, "");
     if (props.opts.limitLength === true) {
       if (value.length > props.opts.maxLen) {
@@ -21,7 +20,7 @@ const SurveyTextElement = (props) => {
     <Container>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
-      <TextInput value={number} onChange={handleOnChange} />
+      <TextInput value={number || ""} onChange={handleOnChange} />
     </Container>
   );
 };
