@@ -7,12 +7,7 @@ import { view } from "@risingstack/react-easy-state";
 // import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
-
-// function useForceUpdate() {
-//   const [value, setValue] = useState(0); // integer state
-//   return () => setValue((value) => value + 1); // update the state to force render
-// }
+// import setGlobalState from "../../globalState/setGlobalState";
 
 const getNextPage = (currentPage) => {
   console.log(currentPage);
@@ -26,7 +21,6 @@ const getNextPage = (currentPage) => {
     return `/postsort`;
   }
   if (currentPage === "postsort") {
-    console.log("sending to survey");
     return `/survey`;
   }
   if (currentPage === "survey") {
@@ -49,10 +43,8 @@ const calcProgressScore = (
   const additionalProgressStateSort = +localStorage.getItem(
     "progressScoreAdditionalSort"
   );
+
   let totalProgressScore;
-
-  console.log("COMPARE", additionalProgress1, additionalProgressState);
-
   let additionalProgress;
   if (additionalProgress1 !== additionalProgressState) {
     additionalProgress = additionalProgressState;
@@ -62,7 +54,6 @@ const calcProgressScore = (
     additionalProgressSort = additionalProgressStateSort;
   }
 
-  // let progressScore;
   if (currentPage === "landing") {
     totalProgressScore = 10;
     return totalProgressScore;
@@ -101,14 +92,10 @@ const StyledFooter = () => {
     additionalProgressSort
   );
 
-  // const totalProgressScore = 10; // calcProgressScore(currentPage, additionalProgress);
-
   let displayCardHeightAdj = false;
   if (currentPage === "sort") {
     displayCardHeightAdj = true;
   }
-  console.log(totalProgressScore);
-  // window.onresize = useForceUpdate();
 
   const nextPage = getNextPage(currentPage);
 

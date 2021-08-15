@@ -7,7 +7,7 @@ const globalState = store({
   presortNegCards: [],
   presortCards: [],
   cardFontSize: "18px",
-  defaultCardFontSize: 18,
+  defaultCardFontSize: 15,
   presortSortedStatements: 0,
   progressScore: 10,
   overloadedColumn: "",

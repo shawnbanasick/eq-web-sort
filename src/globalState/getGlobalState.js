@@ -3,7 +3,7 @@ import cloneDeep from "lodash/cloneDeep";
 
 const getGlobalState = (key) => {
   const copyValue = cloneDeep(globalState[key]);
-  console.log(key, copyValue);
+  // console.log(key, copyValue);
   return copyValue;
 };
 

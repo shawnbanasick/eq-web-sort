@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
+const handleOnChange = (e) => {
+  console.log(e.target.id, e.target.value);
+};
+
 const SurveyTextElement = (props) => {
+  const id = props.id;
   return (
     <Container>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
-      <TextInput />
+      <TextInput id={id} onChange={handleOnChange} />
     </Container>
   );
 };
