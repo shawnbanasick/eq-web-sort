@@ -10,6 +10,7 @@ import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
+import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
 
 const SurveyPage = () => {
   const surveyQuestionObjects = [
@@ -21,16 +22,26 @@ const SurveyPage = () => {
       note: "Please enter your year of birth",
       limitLength: true,
       maxLen: 4,
-      numsOnly: true,
+      numsOnly: false,
     },
     {
       qNum: 2,
+      type: "textRestricted",
+      required: true,
+      label: "Restricted Age*",
+      note: "Please enter your year of birth",
+      limitLength: true,
+      maxLen: 4,
+      numsOnly: true,
+    },
+    {
+      qNum: 3,
       type: "textArea",
       required: true,
       label: "Comments",
     },
     {
-      qNum: 3,
+      qNum: 4,
       type: "radio",
       required: true,
       label: "Year*",
@@ -38,21 +49,21 @@ const SurveyPage = () => {
       options: "Freshman; Sophomore; Junior; Senior;",
     },
     {
-      qNum: 4,
+      qNum: 5,
       type: "select",
       required: true,
       label: "What is your program focus?",
       options: "Global Studies; Linguistics; English Literature",
     },
     {
-      qNum: 5,
+      qNum: 6,
       type: "checkbox",
       required: true,
       label: "What type of class do you prefer?",
       options: "Lecture; Group Discussion; Active Learning",
     },
     {
-      qNum: 6,
+      qNum: 7,
       type: "rating2",
       required: true,
       label: "Please answer the following questions",
@@ -61,7 +72,7 @@ const SurveyPage = () => {
         "I have used an iPad in class before.; I have used a notebook computer in class before.",
     },
     {
-      qNum: 7,
+      qNum: 8,
       type: "rating5",
       required: true,
       label: "Please answer the following questions.",
@@ -69,7 +80,7 @@ const SurveyPage = () => {
         "How would you rate the use of iPads in this class?; How would you rate this class overall",
     },
     {
-      qNum: 8,
+      qNum: 9,
       type: "rating10",
       required: true,
       label: "Please answer the following questions.",
@@ -82,6 +93,9 @@ const SurveyPage = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
       if (object.type === "text") {
         return <SurveyTextElement opts={object} />;
+      }
+      if (object.type === "textRestricted") {
+        return <SurveyTextRestrictedElement opts={object} />;
       }
       if (object.type === "textArea") {
         return <SurveyTextAreaElement opts={object} />;
