@@ -11,7 +11,7 @@ const globalState = store({
   presortSortedStatements: 0,
   progressScore: 10,
   overloadedColumn: "",
-  cardHeight: 0,
+  cardHeight: 100,
   dataLoaded: false,
 });
 

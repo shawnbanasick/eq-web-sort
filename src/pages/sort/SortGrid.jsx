@@ -29,7 +29,6 @@ setTimeout(function () {}, 100);
 class SortGrid extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       draggingOverColumnId: "column99",
       windowSize: 100,
@@ -134,7 +133,6 @@ class SortGrid extends Component {
     // state management
     const isSortingCards = getGlobalState("isSortingCards");
     if (isSortingCards === true) {
-      console.log("true");
     }
     setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
@@ -148,9 +146,8 @@ class SortGrid extends Component {
     // calc card height
     const maxNumCardsInCol = Math.max(...qSortPattern);
     let cardHeight = getGlobalState("cardHeight");
-    console.log(cardHeight);
     if (cardHeight === 0) {
-      cardHeight = (window.innerHeight - 230) / maxNumCardsInCol;
+      cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
       setGlobalState("cardHeight", cardHeight);
     }
     if (cardHeight < 50) {
