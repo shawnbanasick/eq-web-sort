@@ -29,70 +29,70 @@ const SurveyRatings10Element = (props) => {
           id={`Q-${index}`}
           type="radio"
           value={1}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={2}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q3-${index}`}
           type="radio"
           value={3}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q4-${index}`}
           type="radio"
           value={4}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q5-${index}`}
           type="radio"
           value={5}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q6-${index}`}
           type="radio"
           value={6}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q7-${index}`}
           type="radio"
           value={7}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q8-${index}`}
           type="radio"
           value={8}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q9-${index}`}
           type="radio"
           value={9}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q10-${index}`}
           type="radio"
           value={10}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
       </ItemContainer>
     ));

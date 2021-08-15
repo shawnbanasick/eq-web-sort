@@ -11,6 +11,7 @@ import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
 import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
+import { v4 as uuid } from "uuid";
 
 const SurveyPage = () => {
   const surveyQuestionObjects = [
@@ -92,31 +93,31 @@ const SurveyPage = () => {
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
       if (object.type === "text") {
-        return <SurveyTextElement opts={object} />;
+        return <SurveyTextElement key={uuid()} opts={object} />;
       }
       if (object.type === "textRestricted") {
-        return <SurveyTextRestrictedElement opts={object} />;
+        return <SurveyTextRestrictedElement key={uuid()} opts={object} />;
       }
       if (object.type === "textArea") {
-        return <SurveyTextAreaElement opts={object} />;
+        return <SurveyTextAreaElement key={uuid()} opts={object} />;
       }
       if (object.type === "radio") {
-        return <SurveyRadioElement opts={object} />;
+        return <SurveyRadioElement key={uuid()} opts={object} />;
       }
       if (object.type === "select") {
-        return <SurveyDropdownElement opts={object} />;
+        return <SurveyDropdownElement key={uuid()} opts={object} />;
       }
       if (object.type === "checkbox") {
-        return <SurveyCheckboxElement opts={object} />;
+        return <SurveyCheckboxElement key={uuid()} opts={object} />;
       }
       if (object.type === "rating2") {
-        return <SurveyRating2Element opts={object} />;
+        return <SurveyRating2Element key={uuid()} opts={object} />;
       }
       if (object.type === "rating5") {
-        return <SurveyRating5Element opts={object} />;
+        return <SurveyRating5Element key={uuid()} opts={object} />;
       }
       if (object.type === "rating10") {
-        return <SurveyRating10Element opts={object} />;
+        return <SurveyRating10Element key={uuid()} opts={object} />;
       }
       return null;
     });

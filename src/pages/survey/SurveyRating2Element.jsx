@@ -35,14 +35,14 @@ const SurveyRatings2Element = (props) => {
           id={`Q-${index}`}
           type="radio"
           value={scaleArray[0]}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
         <input
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={scaleArray[1]}
-          name={`${props.opts.qNum}-${index + 1}`}
+          name={`qNum${props.opts.qNum}-${index + 1}`}
         />
       </ItemContainer>
     ));
