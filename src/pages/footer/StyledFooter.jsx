@@ -42,12 +42,17 @@ const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
   const progressScore2 = getGlobalState("progressScore");
   const progressScore = +localStorage.getItem("progressScore");
+  const progressScoreAdditional = +localStorage.getItem(
+    "progressScoreAdditional"
+  );
+
+  const totalProgressScore = +progressScore + +progressScoreAdditional;
 
   let displayCardHeightAdj = false;
   if (currentPage === "sort") {
     displayCardHeightAdj = true;
   }
-  console.log(progressScore);
+  console.log(totalProgressScore);
   // window.onresize = useForceUpdate();
 
   const nextPage = getNextPage(currentPage);
@@ -60,7 +65,7 @@ const StyledFooter = () => {
       </AdjustmentsContainer>
       <ProgressBarDiv>
         <ProgressBar
-          completed={progressScore}
+          completed={totalProgressScore}
           width={"370px"}
           bgColor="#337ab7"
           labelColor="#f0f0f0"

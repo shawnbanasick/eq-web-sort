@@ -5,12 +5,13 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 
-let presortSortedStatements = getGlobalState("presortSortedStatements");
-
 function PresortDND(props) {
+  // let presortSortedStatements = getGlobalState("presortSortedStatements");
+  let presortSortedStatements = localStorage.getItem("presortSortedStatements");
+
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
-  const cardHeight = props.cardHeight;
+  const cardHeight = 145;
 
   const columnsFromBackend = {
     cards: {
@@ -50,15 +51,21 @@ function PresortDND(props) {
           window.statementsXML.length - sourceColumn.items.length + 1;
         console.log("remaining: ", presortSortedStatements);
         setGlobalState("presortSortedStatements", presortSortedStatements);
+        console.log("sorted: ", presortSortedStatements);
+        presortSortedStatements = presortSortedStatements.toString();
+        localStorage.setItem(
+          "presortSortedStatements",
+          presortSortedStatements
+        );
       }
 
       // update progress bar
       const sortedStatements = getGlobalState("presortSortedStatements");
       const ratio = sortedStatements / window.statementsXML.length;
       console.log(ratio);
-      const completedPercent = (ratio * 30 + 20).toFixed();
+      const completedPercent = (ratio * 30).toFixed();
       setGlobalState("progressScore", +completedPercent);
-      localStorage.setItem("progressScore", `${completedPercent}`);
+      localStorage.setItem("progressScoreAdditional", `${completedPercent}`);
 
       // update columns
       setColumns({
@@ -225,7 +232,7 @@ const ColumnNamesDiv = styled.div`
 const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-50);
-  grid-template-rows: ${(props) => props.cardHeightText};
+  grid-template-rows: 200px 30px 1fr;
   grid-template-columns: 1fr 300px 300px 300px 1fr;
   row-gap: 10px;
   column-gap: 30px;
