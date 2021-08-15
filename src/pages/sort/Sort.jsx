@@ -8,7 +8,6 @@ import styled from "styled-components";
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   setGlobalState("currentPage", "sort");
-  setGlobalState("progressScore", 50);
 
   return (
     <React.Fragment>

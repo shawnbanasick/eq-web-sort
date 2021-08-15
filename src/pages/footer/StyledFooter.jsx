@@ -7,7 +7,7 @@ import { view } from "@risingstack/react-easy-state";
 // import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
-// import setGlobalState from "../../globalState/setGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 // function useForceUpdate() {
 //   const [value, setValue] = useState(0); // integer state
@@ -38,15 +38,42 @@ const getNextPage = (currentPage) => {
   return `/nopagefound`;
 };
 
-const StyledFooter = () => {
-  const currentPage = getGlobalState("currentPage");
-  const progressScore2 = getGlobalState("progressScore");
-  const progressScore = +localStorage.getItem("progressScore");
-  const progressScoreAdditional = +localStorage.getItem(
+const calcProgressScore = (currentPage, additionalProgress1) => {
+  const additionalProgressState = +localStorage.getItem(
     "progressScoreAdditional"
   );
+  let totalProgressScore;
 
-  const totalProgressScore = +progressScore + +progressScoreAdditional;
+  console.log("COMPARE", additionalProgress1, additionalProgressState);
+
+  let additionalProgress;
+  if (additionalProgress1 !== additionalProgressState) {
+    additionalProgress = additionalProgressState;
+  }
+
+  // let progressScore;
+  if (currentPage === "landing") {
+    totalProgressScore = "10";
+    return totalProgressScore;
+  }
+  if (currentPage === "presort") {
+    totalProgressScore = +additionalProgress + 20;
+    return totalProgressScore;
+  }
+  if (currentPage === "sort") {
+    totalProgressScore = +additionalProgress + 20;
+    return totalProgressScore;
+  }
+};
+
+const StyledFooter = () => {
+  const currentPage = getGlobalState("currentPage");
+
+  const additionalProgress = getGlobalState("progressScoreAdditional");
+
+  const totalProgressScore = calcProgressScore(currentPage, additionalProgress);
+
+  // const totalProgressScore = 10; // calcProgressScore(currentPage, additionalProgress);
 
   let displayCardHeightAdj = false;
   if (currentPage === "sort") {

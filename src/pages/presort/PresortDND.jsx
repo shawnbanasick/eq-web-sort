@@ -108,7 +108,8 @@ function PresortDND(props) {
       const ratio = sortedStatements / window.statementsXML.length;
       console.log(ratio);
       const completedPercent = (ratio * 30).toFixed();
-      setGlobalState("progressScore", +completedPercent);
+      // update Progress Bar State
+      setGlobalState("progressScoreAdditional", completedPercent);
       localStorage.setItem("progressScoreAdditional", `${completedPercent}`);
 
       // update columns
