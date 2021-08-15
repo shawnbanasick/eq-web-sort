@@ -79,33 +79,30 @@ const SurveyPage = () => {
   ];
 
   const SurveyQuestions = () => {
-    let id;
     const QuestionList = surveyQuestionObjects.map((object, index) => {
-      id = `qNum${object.qNum}-${object.type}`;
-
       if (object.type === "text") {
-        return <SurveyTextElement id={id} opts={object} />;
+        return <SurveyTextElement opts={object} />;
       }
       if (object.type === "textArea") {
-        return <SurveyTextAreaElement id={id} opts={object} />;
+        return <SurveyTextAreaElement opts={object} />;
       }
       if (object.type === "radio") {
-        return <SurveyRadioElement id={id} opts={object} />;
+        return <SurveyRadioElement opts={object} />;
       }
       if (object.type === "select") {
-        return <SurveyDropdownElement id={id} opts={object} />;
+        return <SurveyDropdownElement opts={object} />;
       }
       if (object.type === "checkbox") {
-        return <SurveyCheckboxElement id={id} opts={object} />;
+        return <SurveyCheckboxElement opts={object} />;
       }
       if (object.type === "rating2") {
-        return <SurveyRating2Element id={id} opts={object} />;
+        return <SurveyRating2Element opts={object} />;
       }
       if (object.type === "rating5") {
-        return <SurveyRating5Element id={id} opts={object} />;
+        return <SurveyRating5Element opts={object} />;
       }
       if (object.type === "rating10") {
-        return <SurveyRating10Element id={id} opts={object} />;
+        return <SurveyRating10Element opts={object} />;
       }
       return null;
     });
