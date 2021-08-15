@@ -19,21 +19,29 @@ const getOptionsArray = (options) => {
 };
 
 const SurveyDropdownElement = (props) => {
+  console.log(props.opts.options.split(";"));
+
+  let originalOptions = props.opts.options.split(";");
+  originalOptions = originalOptions.map((x) => x.trim());
+  console.log("original", JSON.stringify(originalOptions));
+
   const [selected, setSelected] = useState([]);
 
-  if (selected[0] !== undefined) {
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`);
+  console.log(JSON.stringify(selected));
 
+  if (selected[0] !== undefined) {
     let selected2 = "";
     for (let i = 0; i < selected.length; i++) {
-      if (i === selected.length - 1) {
-        selected2 += selected[i].value.trim();
+      let label = selected[i].label.trim();
+      let id = originalOptions.indexOf(label);
+      if (i === 0) {
+        selected2 += id + 1;
       } else {
-        selected2 += selected[i].value.trim() + "|";
+        selected2 += "|" + (id + 1);
       }
     }
 
-    console.log(JSON.stringify(selected2));
+    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected2);
   }
 
   return (
