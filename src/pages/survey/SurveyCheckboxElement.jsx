@@ -9,7 +9,6 @@ const getOptionsArray = (options) => {
   array = array.filter(function (e) {
     return e;
   });
-  // array = array.map((x) => x.replace(/\s/g, ""));
   array.map((x) => (localStore[x] = false));
   return array;
 };
@@ -21,19 +20,18 @@ const SurveyCheckboxElement = (props) => {
   const handleChange = (e) => {
     let bool = localStore[e.target.value];
     localStore[e.target.value] = !bool;
-    console.log(props.opts.qNum, e.target.value);
-    console.log(localStore);
 
     let keys = Object.keys(localStore);
-    console.log(keys);
     let selected = "";
     for (let i = 0; i < keys.length; i++) {
       if (localStore[keys[i]] === true) {
-        console.log(keys[i], "true");
         selected += i + 1 + "|";
       }
     }
-    console.log(selected);
+    if (selected.charAt(selected.length - 1) == "|") {
+      selected = selected.substr(0, selected.length - 1);
+    }
+    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
   };
 
   const CheckboxItems = () => {

@@ -166,8 +166,8 @@ class SortGrid extends Component {
       cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
       setGlobalState("cardHeight", cardHeight);
     }
-    if (cardHeight < 50) {
-      cardHeight = 50;
+    if (cardHeight < 30) {
+      cardHeight = 30;
       setGlobalState("cardHeight", cardHeight);
     }
 
