@@ -26,6 +26,7 @@ const processConfigXMLData = (dataObject) => {
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
       let tempObj = {};
+      let tempObj2 = {};
       let questionType = surveyData[j][0].attributes.type;
 
       // INFORMATION question
@@ -47,12 +48,14 @@ const processConfigXMLData = (dataObject) => {
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.limitLength = surveyData[j][0].attributes.maxlength;
         tempObj.restricted = surveyData[j][0].attributes.restricted;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // TEXT question
       if (questionType === "textRestricted") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "textRestricted";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -60,6 +63,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.limitLength = surveyData[j][0].attributes.maxlength;
         tempObj.restricted = surveyData[j][0].attributes.restricted;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
         console.log(JSON.stringify(tempObj));
@@ -67,78 +71,92 @@ const processConfigXMLData = (dataObject) => {
 
       // TEXTAREA question
       if (questionType === "textarea") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "textarea";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // RADIO question
       if (questionType === "radio") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "radio";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // SELECT question
       if (questionType === "select") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "select";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // CHECKBOX question
       if (questionType === "checkbox") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "checkbox";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // RATING2 question
       if (questionType === "rating2") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "rating2";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.scale = surveyData[j][0].attributes.scale;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // RATING5 question
       if (questionType === "rating5") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "rating5";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
       // RATING10 question
       if (questionType === "rating10") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "rating10";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
+        tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }

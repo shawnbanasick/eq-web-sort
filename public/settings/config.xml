@@ -36,7 +36,7 @@
      <!-- HtmlQ only: Survey Questions -->
      <item id="survey">
         <input type="information"></input>
-        <note bg="orange">All fields marked with an * are mandatory</note>
+        <note bg="goldenrod">All fields marked with an * are required.</note>
      </item>
      
      <item id="survey">
