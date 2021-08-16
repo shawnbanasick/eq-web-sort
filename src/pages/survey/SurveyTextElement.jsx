@@ -4,8 +4,12 @@ import { view } from "@risingstack/react-easy-state";
 
 const SurveyTextElement = (props) => {
   let savedText;
-  const [number, setNumber] = useLocalStorage("savedText", savedText);
-  // const [number, setNumber] = useState();
+
+  const [userText, setUserText] = useLocalStorage("savedText", savedText);
+
+  // required question answer check
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
 
   const handleOnChange = (e) => {
     let value = e.target.value;
@@ -14,15 +18,23 @@ const SurveyTextElement = (props) => {
         value = value.substring(0, props.opts.maxLen);
       }
     }
-    setNumber(value);
+    setUserText(value);
 
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
+
+  // required question answer check
+  if (checkRequiredQuestionsComplete === true && userText.length > 0) {
+    bgColor = "whitesmoke";
+  } else {
+    bgColor = "lightpink";
+  }
+
   return (
-    <Container>
+    <Container bgColor={bgColor}>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
-      <TextInput value={number || ""} onChange={handleOnChange} />
+      <TextInput value={userText || ""} onChange={handleOnChange} />
     </Container>
   );
 
@@ -69,8 +81,8 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1100px;
-  background-color: whitesmoke;
   min-height: 200px;
+  background-color: ${(props) => props.bgColor};
 `;
 
 const TitleBar = styled.div`
@@ -80,9 +92,9 @@ const TitleBar = styled.div`
   height: 50px;
   font-size: 18px;
   text-align: center;
-  background-color: lightgray;
   width: 100%;
   border-radius: 3px;
+  background-color: lightgray;
 `;
 
 const NoteText = styled.div`
