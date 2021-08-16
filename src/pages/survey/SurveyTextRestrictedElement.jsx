@@ -75,4 +75,6 @@ const TextInput = styled.input`
   width: 100%;
   border-radius: 3px;
   border: 2px solid lightgray;
+  padding-left: 5px;
+  padding-right: 5px;
 `;

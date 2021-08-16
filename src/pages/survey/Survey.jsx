@@ -18,6 +18,12 @@ const SurveyPage = () => {
   const surveyQuestionObjects = [
     {
       qNum: 1,
+      type: "information",
+      label: "Please answer the following questions.",
+      backgroundColor: "#83cafe",
+    },
+    {
+      qNum: 2,
       type: "text",
       required: true,
       label: "Age*",
@@ -27,7 +33,7 @@ const SurveyPage = () => {
       numsOnly: false,
     },
     {
-      qNum: 2,
+      qNum: 3,
       type: "textRestricted",
       required: true,
       label: "Restricted Age*",
@@ -37,13 +43,13 @@ const SurveyPage = () => {
       numsOnly: true,
     },
     {
-      qNum: 3,
+      qNum: 4,
       type: "textArea",
       required: true,
       label: "Comments",
     },
     {
-      qNum: 4,
+      qNum: 5,
       type: "radio",
       required: true,
       label: "Year*",
@@ -51,21 +57,21 @@ const SurveyPage = () => {
       options: "Freshman; Sophomore; Junior; Senior;",
     },
     {
-      qNum: 5,
+      qNum: 6,
       type: "select",
       required: true,
       label: "What is your program focus?",
       options: "Global Studies; Linguistics; English Literature",
     },
     {
-      qNum: 6,
+      qNum: 7,
       type: "checkbox",
       required: true,
       label: "What type of class do you prefer?",
       options: "Lecture; Group Discussion; Active Learning",
     },
     {
-      qNum: 7,
+      qNum: 8,
       type: "rating2",
       required: true,
       label: "Please answer the following questions",
@@ -74,7 +80,7 @@ const SurveyPage = () => {
         "I have used an iPad in class before.; I have used a notebook computer in class before.",
     },
     {
-      qNum: 8,
+      qNum: 9,
       type: "rating5",
       required: true,
       label: "Please answer the following questions.",
@@ -82,18 +88,12 @@ const SurveyPage = () => {
         "How would you rate the use of iPads in this class?; How would you rate this class overall",
     },
     {
-      qNum: 9,
+      qNum: 10,
       type: "rating10",
       required: true,
       label: "Please answer the following questions.",
       options:
         "How would you rate the use of the Socrative website in this class?; How would you rate the use of the Quizlet website in this class?",
-    },
-    {
-      qNum: 10,
-      type: "information",
-      label: "Please answer the following questions.",
-      backgroundColor: "#83cafe",
     },
   ];
 
@@ -140,7 +140,7 @@ const SurveyPage = () => {
 
   return (
     <Container>
-      <h1>Survey Page!</h1>
+      <h1>Post-Sort Survey</h1>
       <SurveyQuestions />
     </Container>
   );

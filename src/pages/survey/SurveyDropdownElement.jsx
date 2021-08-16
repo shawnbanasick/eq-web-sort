@@ -19,15 +19,10 @@ const getOptionsArray = (options) => {
 };
 
 const SurveyDropdownElement = (props) => {
-  console.log(props.opts.options.split(";"));
-
   let originalOptions = props.opts.options.split(";");
   originalOptions = originalOptions.map((x) => x.trim());
-  console.log("original", JSON.stringify(originalOptions));
 
   const [selected, setSelected] = useState([]);
-
-  console.log(JSON.stringify(selected));
 
   if (selected[0] !== undefined) {
     let selected2 = "";
