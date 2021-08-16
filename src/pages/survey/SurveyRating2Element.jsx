@@ -115,14 +115,15 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 750px 100px 100px 150px;
-  margin-bottom: 7px;
+  grid-template-columns: 28vw 100px 100px 150px;
+  margin-bottom: 17px;
   padding-left: 5px;
+  align-items: end;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 750px 100px 100px 150px;
+  grid-template-columns: 28vw 100px 100px 150px;
   margin-bottom: 7px;
 `;
 

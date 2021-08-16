@@ -173,22 +173,23 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 600px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-  margin-bottom: 7px;
+  grid-template-columns: 28vw 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  margin-bottom: 17px;
   font-size: 16px;
-  align-items: center;
+  align-items: end;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 600px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-columns: 28vw 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
   margin-bottom: 7px;
+  align-items: end;
 `;
 
 const CircleDiv = styled.div`
   display: flex;
   justify-self: center;
-  align-self: center;
+  align-self: start;
   text-align: center;
 `;
 

@@ -16,6 +16,11 @@ const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 
+  // required question answer check
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
+  let border;
+
   const handleChange = (e) => {
     console.log(
       `qNum${props.opts.qNum}-${props.opts.type}`,

@@ -133,15 +133,17 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 700px 50px 50px 50px 50px 50px 50px;
-  margin-bottom: 7px;
+  grid-template-columns: 28vw 50px 50px 50px 50px 50px 50px;
+  margin-bottom: 17px;
   font-size: 16px;
+  align-items: end;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 700px 50px 50px 50px 50px 50px 50px;
+  grid-template-columns: 28vw 50px 50px 50px 50px 50px 50px;
   margin-bottom: 7px;
+  align-items: end;
 `;
 
 const RadioInput = styled.input`
