@@ -18,6 +18,11 @@ const LinkButton = (props) => {
     // ⬆ filtering out props that `button` doesn’t know what to do with.
     ...rest
   } = props;
+
+  console.log(JSON.stringify(history));
+  console.log(JSON.stringify(staticContext));
+  console.log(JSON.stringify(match));
+
   return (
     <NextButton
       {...rest} // `children` is just another prop!

@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+// import { createBrowserHistory, History } from "history";
 import LandingPage from "./pages/landing/Landing";
 import PostsortPage from "./pages/postsort/Postsort";
 import PresortPage from "./pages/presort/Presort";
@@ -26,6 +27,8 @@ const convert = require("xml-js");
 //   }, []);
 //   return (fn) => !delayed && fn();
 // };
+
+// const history: History = createBrowserHistory({ basename: "/landing" });
 
 function App() {
   useEffect(() => {
@@ -91,12 +94,12 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={LandingPage} />
           <Route exact path="/presort" component={PresortPage} />
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/postsort" component={PostsortPage} />
           <Route exact path="/survey" component={SurveyPage} />
           <Route exact path="/submit" component={SubmitPage} />
+          <Route exact path="/" component={LandingPage} />
           <Route component={NoPageFound} />
         </Switch>
         <StyledFooter />
