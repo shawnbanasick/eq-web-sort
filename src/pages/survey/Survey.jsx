@@ -20,7 +20,7 @@ const SurveyPage = () => {
       qNum: 1,
       type: "information",
       label: "Please answer the following questions.",
-      backgroundColor: "#83cafe",
+      backgroundColor: "orange",
     },
     {
       qNum: 2,
