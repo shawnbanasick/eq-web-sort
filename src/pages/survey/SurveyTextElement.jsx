@@ -10,6 +10,7 @@ const SurveyTextElement = (props) => {
   // required question answer check
   const checkRequiredQuestionsComplete = true;
   let bgColor;
+  let border;
 
   const handleOnChange = (e) => {
     let value = e.target.value;
@@ -24,14 +25,16 @@ const SurveyTextElement = (props) => {
   };
 
   // required question answer check
-  if (checkRequiredQuestionsComplete === true && userText.length > 0) {
-    bgColor = "whitesmoke";
-  } else {
+  if (checkRequiredQuestionsComplete === true && userText.length < 1) {
     bgColor = "lightpink";
+    border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
   }
 
   return (
-    <Container bgColor={bgColor}>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
       <TextInput value={userText || ""} onChange={handleOnChange} />
@@ -83,6 +86,7 @@ const Container = styled.div`
   max-width: 1100px;
   min-height: 200px;
   background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 `;
 
 const TitleBar = styled.div`
