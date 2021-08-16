@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 
 const SurveyInformationElement = (props) => {
+  console.log(props);
   return (
     <Container>
-      <TitleBar backgroundColor={props.opts.backgroundColor}>
-        {props.opts.label}
+      <TitleBar backgroundColor={props.opts.background}>
+        {props.opts.options}
       </TitleBar>
     </Container>
   );

@@ -11,17 +11,39 @@ const SurveyTextElement = (props) => {
 
   const handleOnChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
-    if (props.opts.limitLength === true) {
-      if (value.length > props.opts.maxLen) {
-        value = value.substring(0, props.opts.maxLen);
+    if (props.opts.restricted === "true") {
+      if (value.length > +props.opts.limitLength) {
+        value = value.substring(0, props.opts.limitLength);
       }
     }
     setNumber(value);
 
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
+
+  // required question answer check
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
+  let border;
+
+  // required question answer check
+  let userTextLen;
+
+  if (!number) {
+    userTextLen = 0;
+  } else {
+    userTextLen = number.length;
+  }
+  if (checkRequiredQuestionsComplete === true && userTextLen < 1) {
+    bgColor = "lightpink";
+    border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
+  }
+
   return (
-    <Container>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <NoteText>{props.opts.note}</NoteText>
       <TextInput value={number || ""} onChange={handleOnChange} />
@@ -71,8 +93,9 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1100px;
-  background-color: whitesmoke;
   min-height: 200px;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 `;
 
 const TitleBar = styled.div`

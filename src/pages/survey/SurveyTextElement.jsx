@@ -14,9 +14,9 @@ const SurveyTextElement = (props) => {
 
   const handleOnChange = (e) => {
     let value = e.target.value;
-    if (props.opts.limitLength === true) {
-      if (value.length > props.opts.maxLen) {
-        value = value.substring(0, props.opts.maxLen);
+    if (props.opts.restricted === "true") {
+      if (value.length > +props.opts.limitLength) {
+        value = value.substring(0, props.opts.limitLength);
       }
     }
     setUserText(value);
@@ -25,7 +25,14 @@ const SurveyTextElement = (props) => {
   };
 
   // required question answer check
-  if (checkRequiredQuestionsComplete === true && userText.length < 1) {
+  let userTextLen;
+
+  if (!userText) {
+    userTextLen = 0;
+  } else {
+    userTextLen = userText.length;
+  }
+  if (checkRequiredQuestionsComplete === true && userTextLen < 1) {
     bgColor = "lightpink";
     border = "2px dashed black";
   } else {

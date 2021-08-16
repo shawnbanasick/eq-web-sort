@@ -51,6 +51,20 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
 
+      // TEXT question
+      if (questionType === "textRestricted") {
+        tempObj.qNum = j + 1;
+        tempObj.type = "textRestricted";
+        tempObj.required = surveyData[j][0].attributes.required;
+        tempObj.label = surveyData[j][1].elements[0].text;
+        tempObj.note = surveyData[j][2].elements[0].text;
+        tempObj.limitLength = surveyData[j][0].attributes.maxlength;
+        tempObj.restricted = surveyData[j][0].attributes.restricted;
+
+        surveyQuestionArray.push(tempObj);
+        console.log(JSON.stringify(tempObj));
+      }
+
       // TEXTAREA question
       if (questionType === "textarea") {
         tempObj.qNum = j + 1;
@@ -130,6 +144,10 @@ const processConfigXMLData = (dataObject) => {
       }
     }
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
+    localStorage.setItem(
+      "surveyQuestionObjArray",
+      JSON.stringify(surveyQuestionArray)
+    );
   }
   //   console.log(JSON.stringify(globalState, null, 2));
 };

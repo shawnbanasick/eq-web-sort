@@ -33,19 +33,21 @@
      <!-- HtmlQ only: disable the in-window back button -->
      <item id="disableBackButton">true</item>
 
-     <!-- define form elements for step5; only displayed if showStep5 is true (delete tags if not required) -->
-     <!-- add label: <label>[STRING]</label> -->
-     <!-- add note: <note>[STRING]</note> -->
-     <!-- add input-field: <input type="[text|textarea|radio|select|checkbox|rating2|rating5|rating10]">[VALUE]</input> -->
-     <!-- optional attributes: bg, id, maxlength, restricted, required, scale  -->
+     <!-- HtmlQ only: Survey Questions -->
      <item id="survey">
         <input type="information"></input>
-        <note bg="true">All fields marked with an * are mandatory</note>
+        <note bg="orange">All fields marked with an * are mandatory</note>
      </item>
      
      <item id="survey">
-        <input type="text" required="true" maxlength="4" restricted="true"></input>
-        <label>Age*</label>
+        <input type="text" required="true" maxlength="10" restricted="true"></input>
+        <label>Text - write something cool</label>
+        <note>Tell us of your hometown.</note>
+     </item>
+
+     <item id="survey">
+        <input type="textRestricted" required="true" maxlength="4" restricted="true"></input>
+        <label>Restricted Age*</label>
         <note>Please enter your year of birth (YYYY, eg. 1980).</note>
      </item>
      
@@ -61,27 +63,27 @@
      </item>
      
      <item id="survey">
-        <input type="select" required="false">Global Studies;Linguistics;English Literature</input>
+        <input type="select" required="true">Global Studies;Linguistics;English Literature</input>
         <label>What is your program focus?</label>
      </item>
      
      <item id="survey">
-        <input type="checkbox" required="false">Lecture;Group Discussion;Active Learning</input>
+        <input type="checkbox" required="true">Lecture;Group Discussion;Active Learning</input>
         <label>What kind of class do you prefer?</label>
      </item>
      
      <item id="survey">
-        <input type="rating2" required="false" scale="Yes;No">I have used an iPad in class before.; I have used a notebook computer in class before.</input>
+        <input type="rating2" required="true" scale="Yes;No">I have used an iPad in class before.; I have used a notebook computer in class before.</input>
         <label>Please respond to the following statements</label>
      </item>
      
      <item id="survey">
-        <input type="rating5" required="false" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;How would you rate this class overall?</input>
+        <input type="rating5" required="true" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;How would you rate this class overall?</input>
         <label>Please answer the following questions</label>
      </item>
      
      <item id="survey">
-        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?</input>
+        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?</input>
         <label>Please answer the following questions</label>
      </item>
 
