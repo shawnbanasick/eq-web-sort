@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
@@ -22,59 +22,50 @@ const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
   // required question answer check
-  // console.log(hasBeenAnswered);
   const checkRequiredQuestionsComplete = true;
   let bgColor;
   let border;
-
-  // console.log("test", JSON.parse("true"), JSON.parse("false"));
 
   const [checkedState, setCheckedState] = useState(
     new Array(optsArray.length).fill(false)
   );
 
-  // const [isChecked, setIsChecked] = useState(false);
-
   const handleChange = (position) => {
+    position = parseInt(position, 10);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
 
-    console.log(position);
-
-    const results = updatedCheckedState.reduce(
+    let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
         if (currentState === true) {
           return text + (index + 1).toString() + "|";
         }
         return text;
       },
-      0
+      ""
     );
 
-    console.log(results);
-    // localStore2["hasBeenAnswered"] = true;
+    if (selected.charAt(selected.length - 1) === "|") {
+      selected = selected.substr(0, selected.length - 1);
+    }
 
-    // let bool = localStore[e.target.value];
-    // localStore[e.target.value] = !bool;
+    console.log(selected.length);
+    if (selected.length > 0) {
+      console.log("called");
+      localStore2.hasBeenAnswered = true;
+    } else {
+      localStore2.hasBeenAnswered = false;
+    }
 
-    // let keys = Object.keys(localStore);
-    // let selected = "";
-    // for (let i = 0; i < keys.length; i++) {
-    //   if (localStore[keys[i]] === true) {
-    //     selected += i + 1 + "|";
-    //   }
-    // }
-    // if (selected.charAt(selected.length - 1) === "|") {
-    //   selected = selected.substr(0, selected.length - 1);
-    // }
-    // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
+    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
   };
 
   // required question answered?
-  let hasBeenAnswered = localStore2.hasBeenAnswered;
+  const hasBeenAnswered = localStore2.hasBeenAnswered;
+  console.log(hasBeenAnswered);
   if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
     bgColor = "lightpink";
     border = "2px dashed black";
@@ -83,31 +74,25 @@ const SurveyCheckboxElement = (props) => {
     border = "none";
   }
 
-  const CheckboxItems = () => {
-    const radioList = optsArray.map((item, index) => (
-      <div key={uuid()}>
-        <input
-          key={uuid()}
-          id={`${item}-${index}`}
-          type="checkbox"
-          value={item}
-          name={nameValue}
-          checked={checkedState[index]}
-          onChange={() => handleChange(index)}
-        />
-        <label key={uuid()} htmlFor={`${item}-${index}`}>
-          {item}
-        </label>
-      </div>
-    ));
-    return <div>{radioList}</div>;
-  };
-
   return (
     <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <RadioContainer>
-        <CheckboxItems />
+        {optsArray.map((item, index) => {
+          return (
+            <div key={uuid()}>
+              <input
+                id={`${item}-${index}`}
+                type="checkbox"
+                value={item}
+                name={nameValue}
+                checked={checkedState[index]}
+                onChange={() => handleChange(index)}
+              />
+              <label htmlFor={`${item}-${index}`}>{item}</label>
+            </div>
+          );
+        })}
       </RadioContainer>
     </Container>
   );
