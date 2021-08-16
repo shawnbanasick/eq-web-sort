@@ -17,11 +17,17 @@ import { v4 as uuid } from "uuid";
 
 const SurveyPage = () => {
   let surveyQuestionObjects;
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTimeout(function () {
+      setGlobalState("currentPage", "survey");
+    }, 100);
+  }, []);
 
   surveyQuestionObjects = JSON.parse(
     localStorage.getItem("surveyQuestionObjArray")
   );
+
+  console.log(JSON.stringify(surveyQuestionObjects, null, 2));
 
   // const surveyQuestionObjects = [
   //   {
@@ -141,10 +147,6 @@ const SurveyPage = () => {
     });
     return QuestionList;
   };
-
-  setTimeout(function () {
-    setGlobalState("currentPage", "survey");
-  }, 100);
 
   return (
     <Container>

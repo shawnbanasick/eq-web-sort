@@ -43,10 +43,10 @@ const processConfigXMLData = (dataObject) => {
       if (questionType === "text") {
         tempObj.qNum = j + 1;
         tempObj.type = "text";
-        tempObj.required = surveyData[j][0].attributes.required;
+        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.note = surveyData[j][2].elements[0].text;
-        tempObj.limitLength = surveyData[j][0].attributes.maxlength;
+        tempObj.limitLength = JSON.parse(surveyData[j][0].attributes.maxlength);
         tempObj.restricted = surveyData[j][0].attributes.restricted;
         tempObj.hasBeenAnswered = false;
 
@@ -86,7 +86,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "radio";
-        tempObj.required = surveyData[j][0].attributes.required;
+        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
@@ -113,7 +113,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "checkbox";
-        tempObj.required = surveyData[j][0].attributes.required;
+        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.options = surveyData[j][0].elements[0].text;
         tempObj.hasBeenAnswered = false;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
@@ -22,23 +22,32 @@ const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 
+  // const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
   // required question answer check
   // console.log(hasBeenAnswered);
   const checkRequiredQuestionsComplete = true;
   let bgColor;
   let border;
 
+  const setLocalStore = () => {
+    localStore.hasBeenAnswered = true;
+  };
+
   const handleChange = (e) => {
-    localStore["hasBeenAnswered"] = true;
+    console.log(e);
     console.log(
       `qNum${props.opts.qNum}-${props.opts.type}`,
       optsArray.indexOf(e.target.value) + 1
     );
+    setLocalStore();
+    // setHasBeenAnswered(true);
   };
 
   // required question answered?
-  let hasBeenAnswered = localStore.hasBeenAnswered;
-  if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
+  if (
+    checkRequiredQuestionsComplete === true &&
+    localStore.hasBeenAnswered === false
+  ) {
     bgColor = "lightpink";
     border = "2px dashed black";
   } else {
@@ -55,7 +64,6 @@ const SurveyRadioElement = (props) => {
           type="radio"
           value={item}
           name={nameValue}
-          defaultChecked={false}
         />
         <label key={uuid()} htmlFor={`${item}-${index}`}>
           {item}
@@ -68,7 +76,7 @@ const SurveyRadioElement = (props) => {
   return (
     <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
-      <RadioContainer onChange={handleChange}>
+      <RadioContainer onChange={(e) => handleChange(e)}>
         <RadioItems />
       </RadioContainer>
     </Container>
