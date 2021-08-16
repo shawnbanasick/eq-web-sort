@@ -30,14 +30,14 @@ const SurveyRatings2Element = (props) => {
     const radioList = optsArray.map((item, index) => (
       <ItemContainer onChange={handleChange} key={uuid()}>
         <span key={uuid()}>{item}</span>
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={scaleArray[0]}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
@@ -55,8 +55,8 @@ const SurveyRatings2Element = (props) => {
       <RadioContainer>
         <RatingTitle>
           <div />
-          <span>{scaleArray[0]}</span>
-          <span>{scaleArray[1]}</span>
+          <ScaleDiv>{scaleArray[0]}</ScaleDiv>
+          <ScaleDiv>{scaleArray[1]}</ScaleDiv>
         </RatingTitle>
         <RadioItems />
       </RadioContainer>
@@ -124,4 +124,16 @@ const RatingTitle = styled.div`
   display: inline-grid;
   grid-template-columns: 750px 100px 100px 150px;
   margin-bottom: 7px;
+`;
+
+const ScaleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const RadioInput = styled.input`
+  display: flex;
+  justify-self: center;
+  align-self: center;
 `;

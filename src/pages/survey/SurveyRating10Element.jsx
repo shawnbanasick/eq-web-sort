@@ -24,70 +24,70 @@ const SurveyRatings10Element = (props) => {
     const radioList = optsArray.map((item, index) => (
       <ItemContainer onChange={handleChange} key={`div-${index}`}>
         <span key={uuid()}>{item}</span>
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={1}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={2}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q3-${index}`}
           type="radio"
           value={3}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q4-${index}`}
           type="radio"
           value={4}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q5-${index}`}
           type="radio"
           value={5}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q6-${index}`}
           type="radio"
           value={6}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q7-${index}`}
           type="radio"
           value={7}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q8-${index}`}
           type="radio"
           value={8}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q9-${index}`}
           type="radio"
           value={9}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q10-${index}`}
           type="radio"
@@ -105,16 +105,16 @@ const SurveyRatings10Element = (props) => {
       <RadioContainer>
         <RatingTitle>
           <div />
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
-          <span>6</span>
-          <span>7</span>
-          <span>8</span>
-          <span>9</span>
-          <span>10</span>
+          <CircleDiv>1</CircleDiv>
+          <CircleDiv>2</CircleDiv>
+          <CircleDiv>3</CircleDiv>
+          <CircleDiv>4</CircleDiv>
+          <CircleDiv>5</CircleDiv>
+          <CircleDiv>6</CircleDiv>
+          <CircleDiv>7</CircleDiv>
+          <CircleDiv>8</CircleDiv>
+          <CircleDiv>9</CircleDiv>
+          <CircleDiv>10</CircleDiv>
         </RatingTitle>
         <RadioItems />
       </RadioContainer>
@@ -183,4 +183,18 @@ const RatingTitle = styled.div`
   display: inline-grid;
   grid-template-columns: 600px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
   margin-bottom: 7px;
+`;
+
+const CircleDiv = styled.div`
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+`;
+
+const RadioInput = styled.input`
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
 `;

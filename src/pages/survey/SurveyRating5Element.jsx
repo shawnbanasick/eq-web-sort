@@ -24,35 +24,35 @@ const SurveyRatings2Element = (props) => {
     const radioList = optsArray.map((item, index) => (
       <ItemContainer onChange={handleChange} key={`div-${index}`}>
         <span key={`QL-${index}`}>{item}</span>
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={1}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
           value={2}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q3-${index}`}
           type="radio"
           value={3}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q4-${index}`}
           type="radio"
           value={4}
           name={`qNum${props.opts.qNum}-${index + 1}`}
         />
-        <input
+        <RadioInput
           key={uuid()}
           id={`Q5-${index}`}
           type="radio"
@@ -70,11 +70,11 @@ const SurveyRatings2Element = (props) => {
       <RadioContainer>
         <RatingTitle>
           <div />
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
+          <CircleDiv>1</CircleDiv>
+          <CircleDiv>2</CircleDiv>
+          <CircleDiv>3</CircleDiv>
+          <CircleDiv>4</CircleDiv>
+          <CircleDiv>5</CircleDiv>
         </RatingTitle>
         <RadioItems />
       </RadioContainer>
@@ -142,4 +142,18 @@ const RatingTitle = styled.div`
   display: inline-grid;
   grid-template-columns: 700px 50px 50px 50px 50px 50px 50px;
   margin-bottom: 7px;
+`;
+
+const RadioInput = styled.input`
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+`;
+
+const CircleDiv = styled.div`
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
 `;
