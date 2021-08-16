@@ -38,7 +38,7 @@ const SurveyRadioElement = (props) => {
 
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;
-  if (checkRequiredQuestionsComplete === false && hasBeenAnswered === false) {
+  if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
     bgColor = "lightpink";
     border = "2px dashed black";
   } else {
@@ -55,6 +55,7 @@ const SurveyRadioElement = (props) => {
           type="radio"
           value={item}
           name={nameValue}
+          defaultChecked={false}
         />
         <label key={uuid()} htmlFor={`${item}-${index}`}>
           {item}

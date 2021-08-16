@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
+import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
 
 const getOptionsArray = (options) => {
@@ -18,11 +18,20 @@ const getOptionsArray = (options) => {
   return objArray;
 };
 
+let localStore = store({
+  hasBeenAnswered: false,
+});
+
 const SurveyDropdownElement = (props) => {
   let originalOptions = props.opts.options.split(";");
   originalOptions = originalOptions.map((x) => x.trim());
 
   const [selected, setSelected] = useState([]);
+  // required question answer check
+  // console.log(hasBeenAnswered);
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
+  let border;
 
   if (selected[0] !== undefined) {
     let selected2 = "";
@@ -35,12 +44,22 @@ const SurveyDropdownElement = (props) => {
         selected2 += "|" + (id + 1);
       }
     }
-
+    localStore["hasBeenAnswered"] = true;
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected2);
   }
 
+  // required question answered?
+  let hasBeenAnswered = localStore.hasBeenAnswered;
+  if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
+    bgColor = "lightpink";
+    border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
+  }
+
   return (
-    <Container>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <MultiSelect
         className={"multiselect"}
@@ -61,8 +80,9 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1100px;
-  background-color: whitesmoke;
   min-height: 125px;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 
   .multiselect {
     font-size: 16px;
