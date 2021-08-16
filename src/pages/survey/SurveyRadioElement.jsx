@@ -18,6 +18,22 @@ let localStore = store({
   hasBeenAnswered: false,
 });
 
+// template
+const RadioInput = ({ label, value, checked, setter }) => {
+  return (
+    <label>
+      <InputStyleDiv>
+        <input
+          type="radio"
+          checked={checked === value}
+          onChange={() => setter(value)}
+        />
+        <LabelDiv>{label}</LabelDiv>
+      </InputStyleDiv>
+    </label>
+  );
+};
+
 const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
@@ -29,19 +45,25 @@ const SurveyRadioElement = (props) => {
   let bgColor;
   let border;
 
+  const [selected, setSelected] = useState();
+
   const setLocalStore = () => {
     localStore.hasBeenAnswered = true;
   };
 
   const handleChange = (e) => {
     console.log(e);
-    console.log(
-      `qNum${props.opts.qNum}-${props.opts.type}`,
-      optsArray.indexOf(e.target.value) + 1
-    );
+
     setLocalStore();
     // setHasBeenAnswered(true);
   };
+
+  console.log(
+    `qNum${props.opts.qNum}-${props.opts.type}`,
+    selected
+
+    // optsArray.indexOf(e.target.value) + 1
+  );
 
   // required question answered?
   if (
@@ -58,16 +80,15 @@ const SurveyRadioElement = (props) => {
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
       <div key={uuid()}>
-        <input
-          key={uuid()}
-          id={`${item}-${index}`}
-          type="radio"
+        <RadioInput
+          // id={`${item}-${index}`}
+          // type="radio"
           value={item}
-          name={nameValue}
+          checked={selected}
+          // name={nameValue}
+          label={item}
+          setter={setSelected}
         />
-        <label key={uuid()} htmlFor={`${item}-${index}`}>
-          {item}
-        </label>
       </div>
     ));
     return <div>{radioList}</div>;
@@ -130,4 +151,14 @@ const RadioContainer = styled.div`
   label {
     margin-left: 8px;
   }
+`;
+
+const LabelDiv = styled.div`
+  padding-left: 5px;
+`;
+
+const InputStyleDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 `;
