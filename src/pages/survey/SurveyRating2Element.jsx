@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
+import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 
 const getOptionsArray = (options) => {
@@ -10,6 +10,8 @@ const getOptionsArray = (options) => {
   });
   return array;
 };
+
+const localStore = store({});
 
 const getScaleArray = (options) => {
   let array = options.split(";");
@@ -22,9 +24,32 @@ const SurveyRatings2Element = (props) => {
 
   //   const nameValue = `question${props.opts.qNum}`;
 
-  const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
+  const [checkedState, setCheckedState] = useState(
+    new Array(scaleArray.length).fill(false)
+  );
+
+  const testFunction = (name, value) => {
+    console.log(name);
+    // const value = "test1";
+    // const value2 = value.charAt(value.length - 1) - 1;
+    console.log(value);
+    localStore[name] = value;
+    // const updatedCheckedState = checkedState.map((item, index) =>
+    //   index === value2 ? !item : item
+    // );
+    // setCheckedState(updatedCheckedState);
+    console.log(localStore);
   };
+
+  const handleChange = (e) => {
+    e.stopPropagation();
+    console.log(e.target.name, e.target.value);
+    let name = e.target.name;
+    let value = e.target.value;
+    testFunction(name, value);
+  };
+
+  console.log(checkedState);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
