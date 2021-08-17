@@ -22,11 +22,10 @@ const SurveyRatings2Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
 
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
+  let border;
   //   const nameValue = `question${props.opts.qNum}`;
-
-  const [checkedState, setCheckedState] = useState(
-    new Array(scaleArray.length).fill(false)
-  );
 
   const testFunction = (name, value) => {
     console.log(name);
@@ -39,6 +38,7 @@ const SurveyRatings2Element = (props) => {
     // );
     // setCheckedState(updatedCheckedState);
     console.log(localStore);
+    localStorage.setItem("rating2State", JSON.stringify(localStore));
   };
 
   const handleChange = (e) => {
@@ -49,7 +49,21 @@ const SurveyRatings2Element = (props) => {
     testFunction(name, value);
   };
 
-  console.log(checkedState);
+  const testArray = localStorage.getItem("rating2State");
+  const conditionalLength = testArray.length || 0;
+  console.log(optsArray.length);
+  console.log(testArray.length);
+  const testValue = optsArray.length - conditionalLength;
+
+  console.log("testValue: ", testValue);
+
+  if (checkRequiredQuestionsComplete === true && testValue > 0) {
+    bgColor = "lightpink";
+    border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
+  }
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
@@ -75,7 +89,7 @@ const SurveyRatings2Element = (props) => {
   };
 
   return (
-    <Container>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <RadioContainer>
         <RatingTitle>
@@ -97,8 +111,9 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1100px;
-  background-color: whitesmoke;
   min-height: 200px;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 `;
 
 const TitleBar = styled.div`
