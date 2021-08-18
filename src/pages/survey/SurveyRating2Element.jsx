@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-import setGlobalState from '../../globalState/setGlobalState'
-import getGlobalState from '../../globalState/getGlobalState'
-
+import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 // https://codepen.io/phthhieu/pen/BdOPge?editors=1011
 // https://stackoverflow.com/questions/59249783/update-a-2d-array-matrix-with-usestate-in-react
@@ -19,9 +18,7 @@ const getOptionsArray = (options) => {
 };
 
 // const scale=2;
-// 
-
-
+//
 
 const localStore = store({});
 
@@ -41,35 +38,32 @@ const SurveyRatings2Element = (props) => {
 
   // setup local state
   const [checkedState, setCheckedState] = useState(
-    Array.from({length: rows},()=> Array.from({length: 2}, () => false))
+    Array.from({ length: rows }, () => Array.from({ length: 2 }, () => false))
   );
-  
-
 
   const handleChange = (selectedRow, column, e) => {
+    // let name = e.target.name;
+    // let value = e.target.value;
 
-// let name = e.target.name;
-// let value = e.target.value;
-
-const newArray =   [];
-const newCheckedState = checkedState.map(function(row, index) {
-  if (selectedRow === index) {
-    row.map(function(item, index) {
-      if (column === index) {
-        newArray.push(true)
-        return null;
+    const newArray = [];
+    const newCheckedState = checkedState.map(function (row, index) {
+      if (selectedRow === index) {
+        row.map(function (item, index) {
+          if (column === index) {
+            newArray.push(true);
+            return null;
+          } else {
+            newArray.push(false);
+            return null;
+          }
+        });
+        return newArray;
       } else {
-        newArray.push(false);
-        return null;
+        return row;
       }
-    }) 
-    return newArray;
-  } else {
-  	return row;
-  }
-});
-      setCheckedState(newCheckedState);
-  };        
+    });
+    setCheckedState(newCheckedState);
+  };
 
   // if required, check if all parts answered
   const rating2State = localStore || {};
@@ -94,7 +88,7 @@ const newCheckedState = checkedState.map(function(row, index) {
           type="radio"
           value={scaleArray[0]}
           name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e)=>handleChange(index, 0, e)}
+          onChange={(e) => handleChange(index, 0, e)}
           checked={checkedState[index][0]}
         />
         <RadioInput
@@ -103,7 +97,7 @@ const newCheckedState = checkedState.map(function(row, index) {
           type="radio"
           value={scaleArray[1]}
           name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e)=>handleChange(index, 1, e)}
+          onChange={(e) => handleChange(index, 1, e)}
           checked={checkedState[index][1]}
         />
       </ItemContainer>
