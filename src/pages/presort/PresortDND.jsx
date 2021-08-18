@@ -54,7 +54,7 @@ function PresortDND(props) {
           statementsArray[i].pinkChecked = true;
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = false;
-          statementsArray[i].sortValue = 333;
+          statementsArray[i].sortValue = 111;
         }
         if (destinationId === "neutral") {
           statementsArray[i].divColor = "isUncertainStatement";
@@ -70,10 +70,14 @@ function PresortDND(props) {
           statementsArray[i].pinkChecked = false;
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = true;
-          statementsArray[i].sortValue = 111;
+          statementsArray[i].sortValue = 333;
         }
         console.log(statementsArray[i]);
       }
+    }
+    console.log(JSON.stringify(statementsArray));
+    for (let i=0; i<statementsArray.length; i++) {
+      statementsArray[i].listIndex = i+1;
     }
     columnStatements.statementList = [...statementsArray];
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
