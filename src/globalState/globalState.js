@@ -13,6 +13,7 @@ const globalState = store({
   overloadedColumn: "",
   cardHeight: 100,
   dataLoaded: false,
+  rating2State: {},
 });
 
 export default globalState;

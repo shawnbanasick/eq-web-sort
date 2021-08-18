@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
+import setGlobalState from '../../globalState/setGlobalState'
+import getGlobalState from '../../globalState/getGlobalState'
+
+
+// https://codepen.io/phthhieu/pen/BdOPge?editors=1011
+// https://stackoverflow.com/questions/59249783/update-a-2d-array-matrix-with-usestate-in-react
+// https://stackoverflow.com/questions/48014390/how-to-handle-multiple-radio-button-groups-in-one-component-in-reactjs
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -11,6 +18,11 @@ const getOptionsArray = (options) => {
   return array;
 };
 
+// const scale=2;
+// 
+
+
+
 const localStore = store({});
 
 const getScaleArray = (options) => {
@@ -19,44 +31,51 @@ const getScaleArray = (options) => {
 };
 
 const SurveyRatings2Element = (props) => {
+  console.log(JSON.stringify(props.opts));
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
-
+  const rows = optsArray.length;
   const checkRequiredQuestionsComplete = true;
   let bgColor;
   let border;
-  //   const nameValue = `question${props.opts.qNum}`;
 
-  const testFunction = (name, value) => {
-    console.log(name);
-    // const value = "test1";
-    // const value2 = value.charAt(value.length - 1) - 1;
-    console.log(value);
-    localStore[name] = value;
-    // const updatedCheckedState = checkedState.map((item, index) =>
-    //   index === value2 ? !item : item
-    // );
-    // setCheckedState(updatedCheckedState);
-    console.log(localStore);
-    localStorage.setItem("rating2State", JSON.stringify(localStore));
-  };
+  // setup local state
+  const [checkedState, setCheckedState] = useState(
+    Array.from({length: rows},()=> Array.from({length: 2}, () => false))
+  );
+  
 
-  const handleChange = (e) => {
-    e.stopPropagation();
-    console.log(e.target.name, e.target.value);
-    let name = e.target.name;
-    let value = e.target.value;
-    testFunction(name, value);
-  };
 
-  const testArray = localStorage.getItem("rating2State");
-  const conditionalLength = testArray.length || 0;
-  console.log(optsArray.length);
-  console.log(testArray.length);
+  const handleChange = (selectedRow, column, e) => {
+
+// let name = e.target.name;
+// let value = e.target.value;
+
+const newArray =   [];
+const newCheckedState = checkedState.map(function(row, index) {
+  if (selectedRow === index) {
+    row.map(function(item, index) {
+      if (column === index) {
+        newArray.push(true)
+        return null;
+      } else {
+        newArray.push(false);
+        return null;
+      }
+    }) 
+    return newArray;
+  } else {
+  	return row;
+  }
+});
+      setCheckedState(newCheckedState);
+  };        
+
+  // if required, check if all parts answered
+  const rating2State = localStore || {};
+  const testArray = Object.keys(rating2State);
+  const conditionalLength = testArray.length;
   const testValue = optsArray.length - conditionalLength;
-
-  console.log("testValue: ", testValue);
-
   if (checkRequiredQuestionsComplete === true && testValue > 0) {
     bgColor = "lightpink";
     border = "2px dashed black";
@@ -67,7 +86,7 @@ const SurveyRatings2Element = (props) => {
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
-      <ItemContainer onChange={handleChange} key={uuid()}>
+      <ItemContainer key={uuid()}>
         <span key={uuid()}>{item}</span>
         <RadioInput
           key={uuid()}
@@ -75,6 +94,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={scaleArray[0]}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e)=>handleChange(index, 0, e)}
+          checked={checkedState[index][0]}
         />
         <RadioInput
           key={uuid()}
@@ -82,6 +103,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={scaleArray[1]}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e)=>handleChange(index, 1, e)}
+          checked={checkedState[index][1]}
         />
       </ItemContainer>
     ));
