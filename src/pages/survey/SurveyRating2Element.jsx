@@ -42,8 +42,13 @@ const SurveyRatings2Element = (props) => {
   const handleChange = (selectedRow, column, e) => {
      let name = e.target.name;
      let value = e.target.value;
-    console.log(name,value);
+     
+     // needed for required question check
+     localStore[name] = value;
+    
+     console.log(name,value);
 
+    // update local state with radio selected
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
       if (selectedRow === index) {

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
+import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
+// import setGlobalState from "../../globalState/setGlobalState";
+// import getGlobalState from "../../globalState/getGlobalState";
 
+// filter to remove empty strings if present
 const getOptionsArray = (options) => {
   let array = options.split(";");
   array = array.filter(function (e) {
@@ -11,25 +14,76 @@ const getOptionsArray = (options) => {
   return array;
 };
 
-const SurveyRatings2Element = (props) => {
+// to use with required check and related css formating
+const local5Store = store({});
+
+const SurveyRatings5Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
+  const rows = optsArray.length;
+  const checkRequiredQuestionsComplete = true;
+  let bgColor;
+  let border;
 
-  //   const nameValue = `question${props.opts.qNum}`;
+  // setup local state with length 5
+  const [checked5State, setChecked5State] = useState(
+    Array.from({ length: rows }, () => Array.from({ length: 5 }, () => false))
+  );
 
-  const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
+  const handleChange = (selectedRow, column, e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    
+    // needed for required question check
+     local5Store[name] = value;
+    
+    console.log(name, value);
+
+    // update local state with radio selected
+    const newArray = [];
+    const newChecked5State = checked5State.map(function (row, index) {
+      if (selectedRow === index) {
+        row.map(function (item, index) {
+          if (column === index) {
+            newArray.push(true);
+            return null;
+          } else {
+            newArray.push(false);
+            return null;
+          }
+        });
+        return newArray;
+      } else {
+        return row;
+      }
+    });
+    setChecked5State(newChecked5State);
   };
+
+  // if is a required question, check if all parts answered
+  const rating5State = local5Store || {};
+  const testArray = Object.keys(rating5State);
+  const conditionalLength = testArray.length;
+  const testValue = optsArray.length - conditionalLength;
+  if (checkRequiredQuestionsComplete === true && testValue > 0) {
+    bgColor = "lightpink";
+    border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
+  }
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
-      <ItemContainer onChange={handleChange} key={`div-${index}`}>
-        <span key={`QL-${index}`}>{item}</span>
+      <ItemContainer key={uuid()}>
+        <span key={uuid()}>{item}</span>
         <RadioInput
           key={uuid()}
           id={`Q-${index}`}
           type="radio"
           value={1}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e) => handleChange(index, 0, e)}
+          checked={checked5State[index][0]}
         />
         <RadioInput
           key={uuid()}
@@ -37,6 +91,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={2}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e) => handleChange(index, 1, e)}
+          checked={checked5State[index][1]}
         />
         <RadioInput
           key={uuid()}
@@ -44,6 +100,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={3}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e) => handleChange(index, 2, e)}
+          checked={checked5State[index][2]}
         />
         <RadioInput
           key={uuid()}
@@ -51,6 +109,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={4}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e) => handleChange(index, 3, e)}
+          checked={checked5State[index][3]}
         />
         <RadioInput
           key={uuid()}
@@ -58,6 +118,8 @@ const SurveyRatings2Element = (props) => {
           type="radio"
           value={5}
           name={`qNum${props.opts.qNum}-${index + 1}`}
+          onChange={(e) => handleChange(index, 4, e)}
+          checked={checked5State[index][4]}
         />
       </ItemContainer>
     ));
@@ -65,7 +127,7 @@ const SurveyRatings2Element = (props) => {
   };
 
   return (
-    <Container>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <RadioContainer>
         <RatingTitle>
@@ -82,7 +144,7 @@ const SurveyRatings2Element = (props) => {
   );
 };
 
-export default view(SurveyRatings2Element);
+export default view(SurveyRatings5Element);
 
 const Container = styled.div`
   width: 90vw;
@@ -90,8 +152,9 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1100px;
-  background-color: whitesmoke;
   min-height: 200px;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 `;
 
 const TitleBar = styled.div`
