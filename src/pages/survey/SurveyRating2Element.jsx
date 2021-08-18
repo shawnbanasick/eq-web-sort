@@ -5,10 +5,6 @@ import { v4 as uuid } from "uuid";
 // import setGlobalState from "../../globalState/setGlobalState";
 // import getGlobalState from "../../globalState/getGlobalState";
 
-// https://codepen.io/phthhieu/pen/BdOPge?editors=1011
-// https://stackoverflow.com/questions/59249783/update-a-2d-array-matrix-with-usestate-in-react
-// https://stackoverflow.com/questions/48014390/how-to-handle-multiple-radio-button-groups-in-one-component-in-reactjs
-
 // filter to remove empty strings if present
 const getOptionsArray = (options) => {
   let array = options.split(";");
