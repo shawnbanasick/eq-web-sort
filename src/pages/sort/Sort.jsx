@@ -15,33 +15,31 @@ const Sort = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <HeaderContainer>
       <SortTitleBar>
         <Disagree>{window.languageXML.disagree}</Disagree>
         <CondOfInst>{window.languageXML.condOfInst}</CondOfInst>
         <Agree>{window.languageXML.agree}</Agree>
       </SortTitleBar>
       <SortGrid cardFontSize={cardFontSize} />;
-    </React.Fragment>
+    </HeaderContainer>
   );
 };
 
 export default view(Sort);
 
 const SortTitleBar = styled.div`
-  width: 99vw;
+  width: 98vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   min-height: 30px;
   display: inline-grid;
   grid-template-columns: 15% 1fr 15%;
-  background-color: black;
   color: black;
   font-weight: bold;
 `;
 
 const CondOfInst = styled.div`
-  background-color: black;
   color: white;
   max-width: 80vw;
   padding: 5px;
@@ -55,7 +53,6 @@ const Agree = styled.div`
   justify-self: end;
   color: white;
   padding-bottom: 5px;
-  background-color: black;
 `;
 
 const Disagree = styled.div`
@@ -64,5 +61,8 @@ const Disagree = styled.div`
   justify-self: start;
   color: white;
   padding-bottom: 5px;
+`;
+
+const HeaderContainer = styled.div`
   background-color: black;
 `;
