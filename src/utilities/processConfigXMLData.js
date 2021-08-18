@@ -26,7 +26,7 @@ const processConfigXMLData = (dataObject) => {
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
       let tempObj = {};
-      let tempObj2 = {};
+      // let tempObj2 = {};
       let questionType = surveyData[j][0].attributes.type;
 
       // INFORMATION question

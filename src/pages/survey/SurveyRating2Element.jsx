@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
+// import setGlobalState from "../../globalState/setGlobalState";
+// import getGlobalState from "../../globalState/getGlobalState";
 
 // https://codepen.io/phthhieu/pen/BdOPge?editors=1011
 // https://stackoverflow.com/questions/59249783/update-a-2d-array-matrix-with-usestate-in-react
 // https://stackoverflow.com/questions/48014390/how-to-handle-multiple-radio-button-groups-in-one-component-in-reactjs
 
+// filter to remove empty strings if present
 const getOptionsArray = (options) => {
   let array = options.split(";");
   array = array.filter(function (e) {
@@ -17,9 +18,7 @@ const getOptionsArray = (options) => {
   return array;
 };
 
-// const scale=2;
-//
-
+// to use with required check and related css formating
 const localStore = store({});
 
 const getScaleArray = (options) => {
@@ -28,7 +27,6 @@ const getScaleArray = (options) => {
 };
 
 const SurveyRatings2Element = (props) => {
-  console.log(JSON.stringify(props.opts));
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
   const rows = optsArray.length;
@@ -42,8 +40,9 @@ const SurveyRatings2Element = (props) => {
   );
 
   const handleChange = (selectedRow, column, e) => {
-    // let name = e.target.name;
-    // let value = e.target.value;
+     let name = e.target.name;
+     let value = e.target.value;
+    console.log(name,value);
 
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
@@ -65,7 +64,7 @@ const SurveyRatings2Element = (props) => {
     setCheckedState(newCheckedState);
   };
 
-  // if required, check if all parts answered
+  // if is a required question, check if all parts answered
   const rating2State = localStore || {};
   const testArray = Object.keys(rating2State);
   const conditionalLength = testArray.length;
@@ -86,7 +85,7 @@ const SurveyRatings2Element = (props) => {
           key={uuid()}
           id={`Q-${index}`}
           type="radio"
-          value={scaleArray[0]}
+          value={1}
           name={`qNum${props.opts.qNum}-${index + 1}`}
           onChange={(e) => handleChange(index, 0, e)}
           checked={checkedState[index][0]}
@@ -95,7 +94,7 @@ const SurveyRatings2Element = (props) => {
           key={uuid()}
           id={`Q2-${index}`}
           type="radio"
-          value={scaleArray[1]}
+          value={2}
           name={`qNum${props.opts.qNum}-${index + 1}`}
           onChange={(e) => handleChange(index, 1, e)}
           checked={checkedState[index][1]}

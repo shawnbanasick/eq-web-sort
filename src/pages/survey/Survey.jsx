@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
+// import getGlobalState from "../../globalState/getGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import SurveyTextElement from "./SurveyTextElement";

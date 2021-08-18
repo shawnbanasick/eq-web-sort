@@ -36,7 +36,7 @@ const RadioInput = ({ label, value, checked, setter }) => {
 
 const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
-  const nameValue = `question${props.opts.qNum}`;
+  // const nameValue = `question${props.opts.qNum}`;
 
   // const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
   // required question answer check
