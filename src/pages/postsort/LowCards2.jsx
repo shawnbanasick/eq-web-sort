@@ -1,35 +1,10 @@
 // import state from "../../store";
 import React, { Component } from "react";
-import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+// import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 
 /* eslint react/prop-types: 0 */
-
-// const styles = {
-//   container: {
-//     width: '80%',
-//     border: `2px solid black`,
-//     marginTop: 50,
-//     marginLeft: '10%',
-//     borderRadius: `3px`,
-//   },
-//   cardAndTextHolder: {
-//     display: `flex`,
-//     alignContent: `center`,
-//     background: `#7e7e7e`,
-//   },
-//   textHolder: {
-//     marginTop: 5,
-//     flexGrow: 5,
-//   },
-//   cardTag: {
-//     width: `100%`,
-//     background: `lightpink`,
-//     color: `black`,
-//     textAlign: `center`,
-//   },
-// };
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
@@ -75,6 +50,7 @@ class LowCards2 extends Component {
     const {
       height,
       width,
+      cardFontSize,
       columnDisplay,
       lowCards2,
       columnStatements,
@@ -86,13 +62,14 @@ class LowCards2 extends Component {
       <Container key={item.statement}>
         <CardTag>{disagreeText}</CardTag>
         <CardAndTextHolder>
-          <div style={getPostSortCardStyleHigh(height, width)}>
+          <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
-          </div>
+          </Card>
           <TagContainerDiv>
             <CommentArea
               data-gramm_editor="false"
               id={item.id}
+              height={height}
               className="commentTextArea"
               placeholder={placeholder}
               defaultValue={item.comment}
@@ -134,11 +111,27 @@ const CardAndTextHolder = styled.div`
 const CommentArea = styled.textarea`
   padding: 10px;
   background-color: whitesmoke;
-  min-height: 120px;
-  width: calc(100% - 10px);
+  height: ${(props) => `${props.height}px;`};
+  width: calc(100% - 6px);
 `;
 
 const TagContainerDiv = styled.div`
   padding-top: 3px;
   width: 100%;
+`;
+
+const Card = styled.div`
+  user-select: "none";
+  padding: 0 2px 0 2px;
+  margin: 5px 5px 5px 5px;
+  line-height: 1em;
+  height: ${(props) => `${props.height}px;`};
+  max-width: ${(props) => `${props.width}px;`};
+  border-radius: 5px;
+  font-size: ${(props) => props.cardFontSize};
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  background-color: #f6f6f6;
+  text-align: center;
 `;

@@ -93,7 +93,7 @@ const StyledFooter = () => {
   );
 
   let displayCardHeightAdj = false;
-  if (currentPage === "sort") {
+  if (currentPage === "sort" || currentPage === "postsort") {
     displayCardHeightAdj = true;
   }
 

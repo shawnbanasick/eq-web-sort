@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+// import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 
 /* eslint react/prop-types: 0 */
 
@@ -52,6 +52,7 @@ class HighCards2 extends Component {
       agreeObj,
       highCards2,
       columnStatements,
+      cardFontSize,
     } = this.props;
     const { agreeText, placeholder } = agreeObj;
 
@@ -59,12 +60,13 @@ class HighCards2 extends Component {
       <Container key={item.statement}>
         <CardTag>{agreeText}</CardTag>
         <CardAndTextHolder>
-          <div style={getPostSortCardStyleHigh(height, width)}>
+          <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
-          </div>
+          </Card>
           <TagContainerDiv>
             <CommentArea
               data-gramm_editor="false"
+              height={height}
               id={item.id}
               placeholder={placeholder}
               defaultValue={item.comment}
@@ -105,12 +107,29 @@ const CardAndTextHolder = styled.div`
 
 const CommentArea = styled.textarea`
   padding: 10px;
+  margin-top: 2px;
   background-color: whitesmoke;
-  min-height: 120px;
-  width: calc(100% - 10px);
+  height: ${(props) => `${props.height}px;`};
+  width: calc(100% - 6px);
 `;
 
 const TagContainerDiv = styled.div`
   padding-top: 3px;
   width: 100%;
+`;
+
+const Card = styled.div`
+  user-select: "none";
+  padding: 0 2px 0 2px;
+  margin: 5px 5px 5px 5px;
+  line-height: 1em;
+  height: ${(props) => `${props.height}px;`};
+  max-width: ${(props) => `${props.width}px;`};
+  border-radius: 5px;
+  font-size: ${(props) => props.cardFontSize};
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  background-color: #f6f6f6;
+  text-align: center;
 `;

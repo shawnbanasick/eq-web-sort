@@ -49,7 +49,7 @@ const configXML = {
     placeholder: "Click here to add comment",
   },
   neutralObj: {
-    displayNeutralObjects: false,
+    displayNeutralObjects: true,
     neutralText: "Neutral",
     columnDisplay: ["column0"],
     placeholder: "Click here to add comment",

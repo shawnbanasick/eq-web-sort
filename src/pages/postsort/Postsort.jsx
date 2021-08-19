@@ -33,25 +33,26 @@ class PostSort extends Component {
       localStorage.getItem("columnStatements")
     );
 
-    console.log(columnStatements);
+    // console.log(columnStatements);
 
     // if (!columnStatements) {
     //   console.log("no local storage");
     //   columnStatements = store.getState().columnStatements;
     // }
 
-    console.log(
-      "TCL: PostSort -> render -> columnStatements",
-      columnStatements
-    );
+    // console.log(
+    //   "TCL: PostSort -> render -> columnStatements",
+    //   columnStatements
+    // );
 
     const titleText = window.configXML.titleText;
-    const columnWidth = window.configXML.columnWidth;
+
+    // card appearance
+    const cardFontSize = getGlobalState("cardFontSize");
+    const columnWidth = 250;
+    const cardHeight = getGlobalState("cardHeight");
 
     const instructionsText = window.configXML.instructionsText;
-
-    const cardHeight = getGlobalState("cardHeight");
-    const cardFontSize = getGlobalState("cardFontSize");
 
     const agreeObj = window.configXML.agreeObj;
     const disagreeObj = window.configXML.disagreeObj;
@@ -84,6 +85,7 @@ class PostSort extends Component {
             <HighCards2
               agreeObj={agreeObj}
               height={cardHeight}
+              cardFontSize={cardFontSize}
               width={columnWidth}
               highCards2={highCards2}
               columnDisplay={agreeObj.columnDisplay2}
@@ -96,6 +98,7 @@ class PostSort extends Component {
               neutralObj={neutralObj}
               height={cardHeight}
               width={columnWidth}
+              cardFontSize={cardFontSize}
               columnDisplay={neutralObj.columnDisplay}
               neutralCards={neutralCards}
               columnStatements={columnStatements}
@@ -108,6 +111,7 @@ class PostSort extends Component {
               height={cardHeight}
               width={columnWidth}
               lowCards2={lowCards2}
+              cardFontSize={cardFontSize}
               columnStatements={columnStatements}
               columnDisplay={disagreeObj.columnDisplay2}
             />
@@ -117,6 +121,7 @@ class PostSort extends Component {
             disagreeObj={disagreeObj}
             height={cardHeight}
             width={columnWidth}
+            cardFontSize={cardFontSize}
             lowCards={lowCards}
             columnStatements={columnStatements}
             columnDisplay={disagreeObj.columnDisplay}
@@ -136,7 +141,6 @@ const CardsContainer = styled.div`
   align-items: center;
   width: 100%;
   padding-bottom: 150px;
-  border: 2px solid red;
 `;
 
 const TitleDiv = styled.div`
