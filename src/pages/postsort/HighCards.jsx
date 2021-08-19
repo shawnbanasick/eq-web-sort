@@ -49,6 +49,7 @@ class HighCards extends Component {
     const {
       height,
       width,
+      cardFontSize,
       columnDisplay,
       agreeObj,
       highCards,
@@ -60,7 +61,7 @@ class HighCards extends Component {
       <Container key={item.statement}>
         <CardTag>{agreeText}</CardTag>
         <CardAndTextHolder>
-          <div style={getPostSortCardStyleHigh(height, width)}>
+          <div style={getPostSortCardStyleHigh(height, width, cardFontSize)}>
             {item.statement}
           </div>
           <TagContainerDiv>

@@ -1,7 +1,7 @@
 import setGlobalState from "../../globalState/setGlobalState";
 // import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
-// import getGlobalState from "../../globalState/getGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 import React, { Component } from "react";
 import LowCards from "./LowCards";
@@ -49,7 +49,10 @@ class PostSort extends Component {
     const columnWidth = window.configXML.columnWidth;
 
     const instructionsText = window.configXML.instructionsText;
-    const cardHeight = window.configXML.cardHeight;
+
+    const cardHeight = getGlobalState("cardHeight");
+    const cardFontSize = getGlobalState("cardFontSize");
+
     const agreeObj = window.configXML.agreeObj;
     const disagreeObj = window.configXML.disagreeObj;
     const neutralObj = window.configXML.neutralObj;
@@ -70,6 +73,7 @@ class PostSort extends Component {
           <HighCards
             agreeObj={agreeObj}
             height={cardHeight}
+            cardFontSize={cardFontSize}
             width={columnWidth}
             highCards={highCards}
             columnDisplay={agreeObj.columnDisplay}

@@ -32,10 +32,10 @@ const SurveyRatings5Element = (props) => {
   const handleChange = (selectedRow, column, e) => {
     let name = e.target.name;
     let value = e.target.value;
-    
+
     // needed for required question check
-     local5Store[name] = value;
-    
+    local5Store[name] = value;
+
     console.log(name, value);
 
     // update local state with radio selected
@@ -151,7 +151,7 @@ const Container = styled.div`
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 1100px;
+  max-width: 1300px;
   min-height: 200px;
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border};

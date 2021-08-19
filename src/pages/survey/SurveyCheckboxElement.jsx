@@ -105,7 +105,7 @@ const Container = styled.div`
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 1100px;
+  max-width: 1300px;
   min-height: 150px;
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border};

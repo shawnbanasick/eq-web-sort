@@ -14,7 +14,6 @@ const getOptionsArray = (options) => {
   return array;
 };
 
-
 // to use with required check and related css formating
 const localStore = store({});
 
@@ -25,23 +24,20 @@ const SurveyRatings10Element = (props) => {
   let bgColor;
   let border;
 
-
   // setup local state
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: rows }, () => Array.from({ length: 10 }, () => false))
   );
 
-
   const handleChange = (selectedRow, column, e) => {
     let name = e.target.name;
     let value = e.target.value;
-    
+
     // needed for required question check
     localStore[name] = value;
-   
-    console.log(name,value);
 
-    
+    console.log(name, value);
+
     // update local state with radio selected
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
@@ -62,7 +58,6 @@ const SurveyRatings10Element = (props) => {
     });
     setCheckedState(newCheckedState);
   };
-
 
   // if is a required question, check if all parts answered
   const ratingState = localStore || {};
@@ -206,7 +201,7 @@ const Container = styled.div`
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 1100px;
+  max-width: 1300px;
   min-height: 200px;
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border};
