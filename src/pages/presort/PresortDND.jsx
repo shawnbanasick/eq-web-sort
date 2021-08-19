@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
@@ -6,6 +6,11 @@ import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 
 function PresortDND(props) {
+  useEffect(() => {}, []);
+
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  console.log(langObj);
+
   // let presortSortedStatementsNum = getGlobalState("presortSortedStatementsNum");
   let presortSortedStatementsNum =
     localStorage.getItem("presortSortedStatementsNum") || 0;
@@ -13,22 +18,23 @@ function PresortDND(props) {
   const itemsFromBackend = props.statements;
   const cardFontSize = props.cardFontSize;
   const cardHeight = 145;
+  // const posName = ;
 
   const columnsFromBackend = {
     cards: {
-      name: window.languageXML.statements,
+      name: langObj.statements,
       items: itemsFromBackend,
     },
     neg: {
-      name: window.languageXML.negative,
+      name: langObj.btnDisagreement,
       items: [],
     },
     neutral: {
-      name: window.languageXML.neutral,
+      name: langObj.btnNeutral,
       items: [],
     },
     pos: {
-      name: window.languageXML.positive,
+      name: langObj.btnAgreement,
       items: [],
     },
   };
@@ -76,8 +82,8 @@ function PresortDND(props) {
       }
     }
     console.log(JSON.stringify(statementsArray));
-    for (let i=0; i<statementsArray.length; i++) {
-      statementsArray[i].listIndex = i+1;
+    for (let i = 0; i < statementsArray.length; i++) {
+      statementsArray[i].listIndex = i + 1;
     }
     columnStatements.statementList = [...statementsArray];
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));

@@ -15,10 +15,12 @@ const LandingPage = () => {
   }, []);
 
   const dataLoaded = getGlobalState("dataLoaded");
-  const languageObject = getGlobalState("languageObject");
+  const langObj = getGlobalState("languageObject");
+  console.log(JSON.stringify(langObj, null, 2));
+  localStorage.setItem("langObj", JSON.stringify(langObj));
 
   const getWelcomeText = () => {
-    let welcomeText1 = languageObject.welcomeText;
+    let welcomeText1 = langObj.welcomeText;
     const charReplace = { "{": "<", "}": ">" };
     let welcomeText = welcomeText1.replace(/{|}/g, (char) => charReplace[char]);
     return welcomeText;
@@ -28,7 +30,7 @@ const LandingPage = () => {
     <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
         <ContainerDiv>
-          <h1>{languageObject.welcomeHead}</h1>
+          <h1>{langObj.welcomeHead}</h1>
           <ContentDiv>{ReactHtmlParser(getWelcomeText())}</ContentDiv>
         </ContainerDiv>
       )}
