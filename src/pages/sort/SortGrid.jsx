@@ -151,7 +151,7 @@ const SortGrid = (props) => {
   const sortCharacteristics = window.configXML.sortCharacteristics;
   const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
 
-  // todo - clean this up - needed for reactivity on height change
+  // todo - clean this up - needed for reactivity on UI height change
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight2 = getGlobalState("cardHeight");
   let cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
