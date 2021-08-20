@@ -151,16 +151,20 @@ const SortGrid = (props) => {
   const sortCharacteristics = window.configXML.sortCharacteristics;
   const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
 
-  // calc card height
+  // todo - clean this up - needed for reactivity on height change
   const maxNumCardsInCol = Math.max(...qSortPattern);
-  let cardHeight = getGlobalState("cardHeight");
+  let cardHeight2 = getGlobalState("cardHeight");
+  let cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
+
+  console.log(cardHeight);
+
   if (cardHeight === 0) {
     cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
-    setGlobalState("cardHeight", cardHeight);
+    setGlobalState("cardHeight2", cardHeight2);
   }
   if (cardHeight < 30) {
     cardHeight = 30;
-    setGlobalState("cardHeight", cardHeight);
+    setGlobalState("cardHeight2", cardHeight2);
   }
 
   // set dynamic width on page load or reload

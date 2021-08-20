@@ -5,14 +5,21 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const increaseFontSize = () => {
-  const currentSize = getGlobalState("cardHeight");
+  // const currentSize2 = getGlobalState("cardHeight");
+  const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
   const newSize = currentSize + 2;
   setGlobalState("cardHeight", newSize);
+  console.log(newSize);
+
+  localStorage.setItem("cardHeight", JSON.stringify(newSize));
 };
 const decreaseFontSize = () => {
-  const currentSize = getGlobalState("cardHeight");
+  // const currentSize2 = getGlobalState("cardHeight");
+  const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
   const newSize = currentSize - 2;
   setGlobalState("cardHeight", newSize);
+  console.log(newSize);
+  localStorage.setItem("cardHeight", JSON.stringify(newSize));
 };
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));

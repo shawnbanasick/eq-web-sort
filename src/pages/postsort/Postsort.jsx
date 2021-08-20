@@ -54,7 +54,8 @@ class PostSort extends Component {
     // card appearance
     const cardFontSize = getGlobalState("cardFontSize");
     const columnWidth = 250;
-    const cardHeight = getGlobalState("cardHeight");
+    const cardHeight2 = getGlobalState("cardHeight");
+    const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
 
     const instructionsText = langObj.postsortHeaderText;
 
