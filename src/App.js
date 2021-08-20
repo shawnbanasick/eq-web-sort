@@ -16,19 +16,7 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import setGlobalState from "./globalState/setGlobalState";
-
 const convert = require("xml-js");
-
-// const useDelayedRender = (delay) => {
-//   const [delayed, setDelayed] = useState(true);
-//   useEffect(() => {
-//     const timeout = setTimeout(() => setDelayed(false), delay);
-//     return () => clearTimeout(timeout);
-//   }, []);
-//   return (fn) => !delayed && fn();
-// };
-
-// const history: History = createBrowserHistory({ basename: "/landing" });
 
 (async () => {
   await axios
