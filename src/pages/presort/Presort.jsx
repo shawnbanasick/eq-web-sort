@@ -6,15 +6,8 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 import PresortDND from "./PresortDND";
 
-// if (!columnStatements) {
-//   const statements = columnStatements.statementList;
-// }
-
-// console.log(JSON.stringify(statements));
-
 const PresortPage = () => {
   useEffect(() => {
-    // console.log(JSON.stringify(columnStatements.statementList, null, 2));
     setTimeout(() => {
       setGlobalState("currentPage", "presort");
       setGlobalState("progressScore", 20);
@@ -24,7 +17,6 @@ const PresortPage = () => {
 
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
   const statements = cloneDeep(columnStatements.statementList);
-
   const cardFontSize = getGlobalState("cardFontSize");
 
   return (
@@ -36,5 +28,3 @@ const PresortPage = () => {
 };
 
 export default view(PresortPage);
-
-// 250px 30px auto;
