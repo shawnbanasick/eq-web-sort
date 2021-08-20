@@ -18,21 +18,51 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 let startTime;
 
-setTimeout(function () {}, 100);
+function debounce(fn, ms) {
+  let timer;
+  return (_) => {
+    clearTimeout(timer);
+    timer = setTimeout((_) => {
+      timer = null;
+      fn.apply(this, arguments);
+    }, ms);
+  };
+}
 
 const SortGrid = (props) => {
   // force updates after dragend
   const [value, setValue] = useState(0); // integer state
 
-  // const [draggingOverColumnId, setDraggingOverColumnId] = useState("column99");
+  // force updates on window resize
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
+  // calc time on page
   useEffect(() => {
     startTime = Date.now();
-
     return () => {
       calculateTimeOnPage(startTime, "sortPage", "SortPage");
     };
   }, []);
+
+  // page resize
+
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }, 200);
+
+    window.addEventListener("resize", debouncedHandleResize);
+
+    return (_) => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  });
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
@@ -159,7 +189,7 @@ const SortGrid = (props) => {
   console.log(cardHeight);
 
   if (cardHeight === 0) {
-    cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
+    cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
     setGlobalState("cardHeight2", cardHeight2);
   }
   if (cardHeight < 30) {
@@ -169,7 +199,7 @@ const SortGrid = (props) => {
 
   // set dynamic width on page load or reload
   // todo make responsive
-  const columnWidth = (window.innerWidth - 130) / qSortPattern.length;
+  const columnWidth = (dimensions.width - 130) / qSortPattern.length;
 
   // pull data from localStorage
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));

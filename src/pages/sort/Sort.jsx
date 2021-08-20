@@ -5,44 +5,14 @@ import setGlobalState from "../../globalState/setGlobalState";
 import SortGrid from "./SortGrid";
 import styled from "styled-components";
 
-function debounce(fn, ms) {
-  let timer;
-  return (_) => {
-    clearTimeout(timer);
-    timer = setTimeout((_) => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
-
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   const langObj = JSON.parse(localStorage.getItem("langObj"));
-
-  // state
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
 
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
     }, 200);
-
-    const debouncedHandleResize = debounce(function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    }, 1000);
-
-    window.addEventListener("resize", debouncedHandleResize);
-
-    return (_) => {
-      window.removeEventListener("resize", debouncedHandleResize);
-    };
   });
 
   // useEffect(() => {
