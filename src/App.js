@@ -1,5 +1,4 @@
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-// import { createBrowserHistory, History } from "history";
 import LandingPage from "./pages/landing/Landing";
 import PostsortPage from "./pages/postsort/Postsort";
 import PresortPage from "./pages/presort/Presort";
@@ -10,7 +9,6 @@ import { view } from "@risingstack/react-easy-state";
 import StyledFooter from "./pages/footer/StyledFooter.jsx";
 import NoPageFound from "./utilities/NoPageFound";
 import axios from "axios";
-import { useEffect } from "react";
 import processConfigXMLData from "./utilities/processConfigXMLData";
 import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
@@ -39,10 +37,8 @@ const convert = require("xml-js");
     .then(function (response) {
       const options = { compact: true, ignoreComment: true, spaces: 4 };
       const languageData = convert.xml2js(response.data, options);
-      // console.log(JSON.stringify(languageData));
       let languageObject = processLanguageXMLData(languageData);
       setGlobalState("languageObject", languageObject);
-      // console.log(JSON.stringify(languageObject));
       localStorage.setItem("langObj", JSON.stringify(languageObject));
     })
     .catch(function (error) {

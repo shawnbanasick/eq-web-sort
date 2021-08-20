@@ -37,21 +37,9 @@ class PostSort extends Component {
       localStorage.getItem("columnStatements")
     );
 
-    // console.log(columnStatements);
-
-    // if (!columnStatements) {
-    //   console.log("no local storage");
-    //   columnStatements = store.getState().columnStatements;
-    // }
-
-    // console.log(
-    //   "TCL: PostSort -> render -> columnStatements",
-    //   columnStatements
-    // );
-
     const titleText = langObj.postsortHeader;
 
-    // card appearance
+    // todo - clean up reactivity - card appearance
     const cardFontSize = getGlobalState("cardFontSize");
     const columnWidth = 250;
     const cardHeight2 = getGlobalState("cardHeight");

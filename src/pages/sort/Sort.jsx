@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -14,12 +14,6 @@ const Sort = () => {
       setGlobalState("currentPage", "sort");
     }, 200);
   });
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setGlobalState("currentPage", "sort");
-  //   }, 200);
-  // }, []);
 
   return (
     <HeaderContainer>
