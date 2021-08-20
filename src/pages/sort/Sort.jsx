@@ -8,6 +8,8 @@ import styled from "styled-components";
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
 
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
@@ -17,9 +19,9 @@ const Sort = () => {
   return (
     <HeaderContainer>
       <SortTitleBar>
-        <Disagree>{window.languageXML.disagree}</Disagree>
-        <CondOfInst>{window.languageXML.condOfInst}</CondOfInst>
-        <Agree>{window.languageXML.agree}</Agree>
+        <Disagree>{langObj.btnDisagreement}</Disagree>
+        <CondOfInst>{langObj.condOfInst}</CondOfInst>
+        <Agree>{langObj.btnAgreement}</Agree>
       </SortTitleBar>
       <SortGrid cardFontSize={cardFontSize} />;
     </HeaderContainer>

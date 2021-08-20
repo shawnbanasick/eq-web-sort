@@ -52,6 +52,7 @@
         <item id="step2Head">Step 2 of 5</item>
         <item id="step2Text">Take the cards from the "AGREE"-pile and arrange them on right side of the score sheet.{br}{br}Next, take the cards from the "DISAGREE"-pile and arrange them on the left side of the score sheet. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-piles.{br}{br}Finally, take the "NEUTRAL"-cards arange them in the remaining open boxes of the score sheet.</item>
         <item id="step2CondOfInstruc">Sort the cards according to your experience with the iPads this semester</item>
+        <item id="condOfInst">Conditions of Instruction</item>
         
         <!-- step3: check sorting, only displayed if showStep3== true (see config-file; leave blank to skip popup)-->
         <item id="step3Head">Step 3 of 5</item>
