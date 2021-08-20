@@ -3,14 +3,15 @@ import setGlobalState from "../globalState/setGlobalState";
 
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
-  console.log(JSON.stringify(data, null, 2));
+  // console.log(JSON.stringify(data, null, 2));
+
+  const configObj = {};
 
   let surveyData = [];
   for (let i = 0; i < data.length; i++) {
     let value;
     let key = data[i].attributes.id;
     let tempObj = data[i];
-    const configObj = {};
 
     // get survey questions
     if (key === "survey") {
@@ -22,13 +23,17 @@ const processConfigXMLData = (dataObject) => {
       value = data[i].elements[0].text;
       if (key !== "survey") {
         configObj[key] = value;
+
+        // todo remove this one
         setGlobalState(key, value);
       }
     }
-    setGlobalState("configObj", configObj);
-    localStorage.setItem("configObj", JSON.stringify(configObj));
   }
+  console.log(JSON.stringify(configObj, null, 2));
+  setGlobalState("configObj", configObj);
+  localStorage.setItem("configObj", JSON.stringify(configObj));
 
+  // setup survey object
   if (surveyData.length > 0) {
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
@@ -73,7 +78,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
-        console.log(JSON.stringify(tempObj));
+        // console.log(JSON.stringify(tempObj));
       }
 
       // TEXTAREA question

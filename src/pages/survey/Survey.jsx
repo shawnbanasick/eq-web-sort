@@ -27,7 +27,7 @@ const SurveyPage = () => {
     localStorage.getItem("surveyQuestionObjArray")
   );
 
-  console.log(JSON.stringify(surveyQuestionObjects, null, 2));
+  // console.log(JSON.stringify(surveyQuestionObjects, null, 2));
 
   // const surveyQuestionObjects = [
   //   {
