@@ -185,9 +185,6 @@ const SortGrid = (props) => {
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight2 = getGlobalState("cardHeight");
   let cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
-
-  console.log(cardHeight);
-
   if (cardHeight === 0) {
     cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
     setGlobalState("cardHeight2", cardHeight2);
@@ -197,8 +194,7 @@ const SortGrid = (props) => {
     setGlobalState("cardHeight2", cardHeight2);
   }
 
-  // set dynamic width on page load or reload
-  // todo make responsive
+  // set dynamic width on page load on reload
   const columnWidth = (dimensions.width - 130) / qSortPattern.length;
 
   // pull data from localStorage
