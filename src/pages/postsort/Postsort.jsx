@@ -16,6 +16,10 @@ import styled from "styled-components";
 
 let startTime;
 
+const langObj = JSON.parse(localStorage.getItem("langObj"));
+
+const configObj = JSON.parse(localStorage.getItem("configObj"));
+
 class PostSort extends Component {
   componentDidMount() {
     startTime = Date.now();
@@ -45,18 +49,46 @@ class PostSort extends Component {
     //   columnStatements
     // );
 
-    const titleText = window.configXML.titleText;
+    const titleText = langObj.postsortHeader;
 
     // card appearance
     const cardFontSize = getGlobalState("cardFontSize");
     const columnWidth = 250;
     const cardHeight = getGlobalState("cardHeight");
 
-    const instructionsText = window.configXML.instructionsText;
+    const instructionsText = langObj.postsortHeaderText;
 
-    const agreeObj = window.configXML.agreeObj;
-    const disagreeObj = window.configXML.disagreeObj;
-    const neutralObj = window.configXML.neutralObj;
+    const agree = langObj.btnAgreement;
+    const disagree = langObj.btnDisagreement;
+    const neutral = langObj.btnNeutral;
+    const placeholder = langObj.placeholder;
+
+    const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
+    const postsortAgreeColDisp2 = configObj.postsortAgreeColDisp2;
+    const showSecondPosColumn = configObj.showSecondPosColumn;
+    const postsortDisagreeColDisp1 = configObj.postsortDisagreeColDisp1;
+    const postsortDisagreeColDisp2 = configObj.postsortDisagreeColDisp2;
+    const showSecondNegColumn = configObj.showSecondNegColumn;
+
+    const agreeObj = {};
+    agreeObj.agreeText = agree;
+    agreeObj.columnDisplay = [postsortAgreeColDisp1];
+    agreeObj.columnDisplay2 = [postsortAgreeColDisp2];
+    agreeObj.displaySecondColumn = showSecondPosColumn;
+    agreeObj.placeholder = placeholder;
+
+    const neutralObj = {};
+    neutralObj.neutralText = neutral;
+    neutralObj.displayNeutralObjects = configObj.displayNeutralObjects;
+    neutralObj.columnDisplay = ["column0"];
+    neutralObj.placeholder = placeholder;
+
+    const disagreeObj = {};
+    disagreeObj.disagreeText = disagree;
+    disagreeObj.columnDisplay = [postsortDisagreeColDisp1];
+    disagreeObj.columnDisplay2 = [postsortDisagreeColDisp2];
+    disagreeObj.displaySecondColumn = showSecondNegColumn;
+    disagreeObj.placeholder = placeholder;
 
     const highCards = columnStatements.vCols[agreeObj.columnDisplay];
     const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];

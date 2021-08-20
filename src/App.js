@@ -30,68 +30,66 @@ const convert = require("xml-js");
 
 // const history: History = createBrowserHistory({ basename: "/landing" });
 
+(async () => {
+  await axios
+    .get("./settings/config.xml", {
+      "Content-Type": "application/xml; charset=utf-8",
+    })
+    .then(function (response) {
+      const options = { compact: false, ignoreComment: true, spaces: 2 };
+      const configData = convert.xml2js(response.data, options);
+      processConfigXMLData(configData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  await axios
+    .get("./settings/language.xml", {
+      "Content-Type": "application/xml; charset=utf-8",
+    })
+    .then(function (response) {
+      const options = { compact: true, ignoreComment: true, spaces: 4 };
+      const languageData = convert.xml2js(response.data, options);
+      // console.log(JSON.stringify(languageData));
+      let languageObject = processLanguageXMLData(languageData);
+      setGlobalState("languageObject", languageObject);
+      // console.log(JSON.stringify(languageObject));
+      localStorage.setItem("langObj", JSON.stringify(languageObject));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  await axios
+    .get("./settings/map.xml", {
+      "Content-Type": "application/xml; charset=utf-8",
+    })
+    .then(function (response) {
+      const options = { compact: true, ignoreComment: true, spaces: 4 };
+      const mapData = convert.xml2js(response.data, options);
+      processMapXMLData(mapData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  await axios
+    .get("./settings/statements.xml", {
+      "Content-Type": "application/xml; charset=utf-8",
+    })
+    .then(function (response) {
+      const options = { compact: true, ignoreComment: true, spaces: 4 };
+      const statementsData = convert.xml2js(response.data, options);
+      processStatementsXMLData(statementsData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  setGlobalState("dataLoaded", true);
+})();
+
 function App() {
-  useEffect(() => {
-    (async () => {
-      await axios
-        .get("./settings/config.xml", {
-          "Content-Type": "application/xml; charset=utf-8",
-        })
-        .then(function (response) {
-          const options = { compact: false, ignoreComment: true, spaces: 2 };
-          const configData = convert.xml2js(response.data, options);
-          processConfigXMLData(configData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      await axios
-        .get("./settings/language.xml", {
-          "Content-Type": "application/xml; charset=utf-8",
-        })
-        .then(function (response) {
-          const options = { compact: true, ignoreComment: true, spaces: 4 };
-          const languageData = convert.xml2js(response.data, options);
-          // console.log(JSON.stringify(languageData));
-          let languageObject = processLanguageXMLData(languageData);
-          setGlobalState("languageObject", languageObject);
-          // console.log(JSON.stringify(languageObject));
-          localStorage.setItem("langObj", JSON.stringify(languageObject));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      await axios
-        .get("./settings/map.xml", {
-          "Content-Type": "application/xml; charset=utf-8",
-        })
-        .then(function (response) {
-          const options = { compact: true, ignoreComment: true, spaces: 4 };
-          const mapData = convert.xml2js(response.data, options);
-          processMapXMLData(mapData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      await axios
-        .get("./settings/statements.xml", {
-          "Content-Type": "application/xml; charset=utf-8",
-        })
-        .then(function (response) {
-          const options = { compact: true, ignoreComment: true, spaces: 4 };
-          const statementsData = convert.xml2js(response.data, options);
-          processStatementsXMLData(statementsData);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      setGlobalState("dataLoaded", true);
-    })();
-  }, []);
-
   return (
     <div className="App">
       <Router>
