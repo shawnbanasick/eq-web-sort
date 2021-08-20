@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
@@ -20,31 +20,22 @@ let startTime;
 
 setTimeout(function () {}, 100);
 
-// const getCardHeight = (maxNumCardsInCol, cardHeightSetting) => {
+const SortGrid = (props) => {
+  // force updates after dragend
+  const [value, setValue] = useState(0); // integer state
 
-// };
+  // const [draggingOverColumnId, setDraggingOverColumnId] = useState("column99");
 
-// console.log("CONFIG", window.configXML);
-
-class SortGrid extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      draggingOverColumnId: "column99",
-      windowSize: 100,
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     startTime = Date.now();
-  }
 
-  componentWillUnmount() {
-    calculateTimeOnPage(startTime, "sortPage", "SortPage");
-  }
+    return () => {
+      calculateTimeOnPage(startTime, "sortPage", "SortPage");
+    };
+  }, []);
 
   // fire move and re-order functions
-  onDragEnd = (result) => {
+  const onDragEnd = (result) => {
     /*
     example result object:
     result {"draggableId":"s1","type":"DEFAULT",
@@ -74,7 +65,10 @@ class SortGrid extends Component {
         columnStatements
       );
 
-      this.forceUpdate();
+      // forceUpdate();
+      // force component update
+      const newValue = value + 1;
+      setValue(newValue);
     } else {
       // moving to another column
 
@@ -107,9 +101,6 @@ class SortGrid extends Component {
         sortCharacteristics
       );
 
-      // store.dispatch.setDraggingOverColumnId('column99');
-      setGlobalState("draggingOverColumnId", "column99");
-
       // global state updates
       setGlobalState("setColumnStatements", columnStatements);
       localStorage.setItem(
@@ -141,135 +132,127 @@ class SortGrid extends Component {
         `${completedPercent}`
       );
 
-      this.forceUpdate();
+      // force component update
+      const newValue = value + 1;
+      setValue(newValue);
     }
   }; // end of dragEnd helper function
 
-  render() {
-    // state management
-    const isSortingCards = getGlobalState("isSortingCards");
-    if (isSortingCards === true) {
-    }
-    setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
-
-    // get user settings
-    const cardFontSize = this.props.cardFontSize;
-    const horiCardMinHeight = window.configXML.horiCardMinHeight;
-    const columnColorsArray = [...window.configXML.columnColorsArray];
-    const sortCharacteristics = window.configXML.sortCharacteristics;
-    const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
-
-    // calc card height
-    const maxNumCardsInCol = Math.max(...qSortPattern);
-    let cardHeight = getGlobalState("cardHeight");
-    if (cardHeight === 0) {
-      cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
-      setGlobalState("cardHeight", cardHeight);
-    }
-    if (cardHeight < 30) {
-      cardHeight = 30;
-      setGlobalState("cardHeight", cardHeight);
-    }
-
-    // set dynamic width on page load or reload
-    // todo make responsive
-    const columnWidth = (window.innerWidth - 130) / qSortPattern.length;
-
-    // UI updates
-    const changeColumnHeaderColor = (columnId) => {
-      this.setState({ draggingOverColumnId: columnId });
-    };
-
-    // pull data from localStorage
-    const columnStatements = JSON.parse(
-      localStorage.getItem("columnStatements")
-    );
-    const statements = columnStatements.statementList;
-
-    // MAP out SORT COLUMNS component before render
-    // code inside render so that column lists update automatically
-    const qSortHeaders = [...sortCharacteristics.qSortHeaders];
-    const qSortHeaderNumbers = [...sortCharacteristics.qSortHeaderNumbers];
-    const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
-      const columnId = `column${qSortHeaders[index]}`;
-      const sortValue = qSortHeaderNumbers[index];
-      const columnColor = columnColorsArray[index];
-
-      return (
-        <SortColumn
-          key={columnId}
-          minHeight={qSortPattern[index] * (cardHeight + 8) + 15}
-          maxCards={qSortPattern[index]}
-          columnId={columnId}
-          columnStatementsArray={columnStatements.vCols[columnId]}
-          forcedSorts={sortCharacteristics.forcedSorts}
-          columnWidth={columnWidth}
-          cardHeight={cardHeight}
-          sortValue={sortValue}
-          columnColor={columnColor}
-          cardFontSize={cardFontSize}
-          qSortHeaderNumber={qSortHeaderNumbers[index]}
-          changeColumnHeaderColor={changeColumnHeaderColor}
-        />
-      );
-    }); // end map of sort columns
-
-    // returning main content => horizontal feeder
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="rootDiv">
-          {columns}
-          <SortFooterDiv>
-            <div className="cardSlider">
-              <Droppable droppableId="statements" direction="horizontal">
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    style={getListStyleHori(
-                      snapshot.isDraggingOver,
-                      horiCardMinHeight
-                    )}
-                  >
-                    {statements.map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                        sortValue={item.sortValue}
-                        cardColor={item.cardColor}
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            className={`${item.cardColor}`}
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyleHori(
-                              snapshot.isDragging,
-                              provided.draggableProps.style,
-                              `${item.sortValue}`,
-                              `${item.cardColor}`,
-                              columnWidth,
-                              cardHeight,
-                              cardFontSize
-                            )}
-                          >
-                            {item.statement}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </div>
-          </SortFooterDiv>
-        </div>
-      </DragDropContext>
-    );
+  // state management
+  const isSortingCards = getGlobalState("isSortingCards");
+  if (isSortingCards === true) {
   }
-}
+  setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
+
+  // get user settings
+  const cardFontSize = props.cardFontSize;
+  const horiCardMinHeight = window.configXML.horiCardMinHeight;
+  const columnColorsArray = [...window.configXML.columnColorsArray];
+  const sortCharacteristics = window.configXML.sortCharacteristics;
+  const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
+
+  // calc card height
+  const maxNumCardsInCol = Math.max(...qSortPattern);
+  let cardHeight = getGlobalState("cardHeight");
+  if (cardHeight === 0) {
+    cardHeight = ((window.innerHeight - 230) / maxNumCardsInCol).toFixed();
+    setGlobalState("cardHeight", cardHeight);
+  }
+  if (cardHeight < 30) {
+    cardHeight = 30;
+    setGlobalState("cardHeight", cardHeight);
+  }
+
+  // set dynamic width on page load or reload
+  // todo make responsive
+  const columnWidth = (window.innerWidth - 130) / qSortPattern.length;
+
+  // pull data from localStorage
+  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  const statements = columnStatements.statementList;
+
+  // MAP out SORT COLUMNS component before render
+  // code inside render so that column lists update automatically
+  const qSortHeaders = [...sortCharacteristics.qSortHeaders];
+  const qSortHeaderNumbers = [...sortCharacteristics.qSortHeaderNumbers];
+  const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
+    const columnId = `column${qSortHeaders[index]}`;
+    const sortValue = qSortHeaderNumbers[index];
+    const columnColor = columnColorsArray[index];
+
+    return (
+      <SortColumn
+        key={columnId}
+        minHeight={qSortPattern[index] * (cardHeight + 8) + 15}
+        maxCards={qSortPattern[index]}
+        columnId={columnId}
+        columnStatementsArray={columnStatements.vCols[columnId]}
+        forcedSorts={sortCharacteristics.forcedSorts}
+        columnWidth={columnWidth}
+        cardHeight={cardHeight}
+        sortValue={sortValue}
+        columnColor={columnColor}
+        cardFontSize={cardFontSize}
+        qSortHeaderNumber={qSortHeaderNumbers[index]}
+      />
+    );
+  }); // end map of sort columns
+
+  // returning main content => horizontal feeder
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="rootDiv">
+        {columns}
+        <SortFooterDiv>
+          <div className="cardSlider">
+            <Droppable droppableId="statements" direction="horizontal">
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  style={getListStyleHori(
+                    snapshot.isDraggingOver,
+                    horiCardMinHeight
+                  )}
+                >
+                  {statements.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                      sortValue={item.sortValue}
+                      cardColor={item.cardColor}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          className={`${item.cardColor}`}
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyleHori(
+                            snapshot.isDragging,
+                            provided.draggableProps.style,
+                            `${item.sortValue}`,
+                            `${item.cardColor}`,
+                            columnWidth,
+                            cardHeight,
+                            cardFontSize
+                          )}
+                        >
+                          {item.statement}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        </SortFooterDiv>
+      </div>
+    </DragDropContext>
+  );
+};
 
 export default view(SortGrid);
 
@@ -283,50 +266,6 @@ const SortFooterDiv = styled.div`
   width: 100vw;
   height: ${(props) => `${+props.cardHeight + 20}px;`};
 `;
-
-// const FooterMessageBox = styled.div`
-//   position: fixed;
-//   bottom: 0;
-//   right: 0;
-//   flex-basis: 100px;
-//   padding-right: 5px;
-//   padding-left: 5px;
-//   width: 100px;
-//   height: ${(props) => `${+props.cardHeight}px`};
-//   border: 2px solid lightgray;
-//   text-align: center;
-//   border: 2px solid black;
-
-//   p {
-//     padding: 0px;
-//     margin-top: 10px;
-//     font-size: 20px;
-//     color: #3273dc;
-//   }
-// `;
-
-/*
-<div className="footerMessageBox">
-  <SortCompletedMessage
-    sortCompleteText={sortCompleteText}
-    nextButtonText={nextButtonText}
-  />
-  <ColumnOverloadMessage overloadedColumn={overloadedColumn} />
-  <NumberCardsSortedMessage totalStatements={totalStatements} />
-</div>
-
-height: 150px;
-.sortFooter {
-  display: flex;
-  flex-direction: row;
-  background: #e4e4e4;
-  position: fixed;
-  left: 0px;
-  bottom: 0;
-  width: 100%;
-  height: 150px;
-}
-*/
 
 /* DO NOT DELETE - important
 "columnColorsArray": [

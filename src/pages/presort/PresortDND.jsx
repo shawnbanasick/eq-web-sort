@@ -9,7 +9,6 @@ function PresortDND(props) {
   useEffect(() => {}, []);
 
   const langObj = JSON.parse(localStorage.getItem("langObj"));
-  console.log(langObj);
 
   // let presortSortedStatementsNum = getGlobalState("presortSortedStatementsNum");
   let presortSortedStatementsNum =
