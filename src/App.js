@@ -56,6 +56,8 @@ function App() {
           // console.log(JSON.stringify(languageData));
           let languageObject = processLanguageXMLData(languageData);
           setGlobalState("languageObject", languageObject);
+          console.log(JSON.stringify(languageObject));
+          localStorage.setItem("langObj", JSON.stringify(languageObject));
         })
         .catch(function (error) {
           console.log(error);

@@ -15,17 +15,19 @@ const decreaseFontSize = () => {
   setGlobalState("cardHeight", newSize);
 };
 
-const FooterFontSizer = () => {
+const langObj = JSON.parse(localStorage.getItem("langObj"));
+
+const CardHeightSizer = () => {
   return (
     <Container>
-      <SpanDiv>Card Height</SpanDiv>
+      <SpanDiv>{langObj.cardHeight}</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
   );
 };
 
-export default view(FooterFontSizer);
+export default view(CardHeightSizer);
 
 const SizeButton = styled.button`
   background: #337ab7;
@@ -37,6 +39,9 @@ const SizeButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.div`

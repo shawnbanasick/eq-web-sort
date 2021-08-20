@@ -43,4 +43,7 @@ const NextButton = styled.button`
   width: 100px;
   justify-self: right;
   margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

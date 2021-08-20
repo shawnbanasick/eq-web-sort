@@ -21,10 +21,12 @@ const decreaseFontSize = () => {
   setGlobalState("cardFontSize", newSize);
 };
 
+const langObj = JSON.parse(localStorage.getItem("langObj"));
+
 const FooterFontSizer = () => {
   return (
     <Container>
-      <SpanDiv>Font Size</SpanDiv>
+      <SpanDiv>{langObj.fontSize}</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
@@ -43,6 +45,9 @@ const SizeButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.div`

@@ -3,24 +3,31 @@ import setGlobalState from "../globalState/setGlobalState";
 
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
+  console.log(JSON.stringify(data, null, 2));
+
   let surveyData = [];
   for (let i = 0; i < data.length; i++) {
     let value;
     let key = data[i].attributes.id;
     let tempObj = data[i];
+    const configObj = {};
+
+    // get survey questions
     if (key === "survey") {
       surveyData.push([...data[i].elements]);
     }
+
+    // check if value in key-value pair
     if ("elements" in tempObj) {
       value = data[i].elements[0].text;
       if (key !== "survey") {
+        configObj[key] = value;
         setGlobalState(key, value);
       }
     }
+    setGlobalState("configObj", configObj);
+    localStorage.setItem("configObj", JSON.stringify(configObj));
   }
-  //   console.log(JSON.stringify(surveyData, null, 2));
-
-  //   console.log(JSON.stringify(surveyData[6], null, 2));
 
   if (surveyData.length > 0) {
     const surveyQuestionArray = [];
@@ -167,6 +174,8 @@ const processConfigXMLData = (dataObject) => {
       JSON.stringify(surveyQuestionArray)
     );
   }
+  //  console.log(JSON.stringify(surveyData, null, 2));
+
   //   console.log(JSON.stringify(globalState, null, 2));
 };
 

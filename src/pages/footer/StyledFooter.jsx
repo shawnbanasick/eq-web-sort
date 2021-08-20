@@ -80,6 +80,8 @@ const calcProgressScore = (
   }
 };
 
+const langObj = JSON.parse(localStorage.getItem("langObj"));
+
 const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
 
@@ -114,7 +116,7 @@ const StyledFooter = () => {
           baseBgColor="lightgray"
         />
       </ProgressBarDiv>
-      <NextButton to={nextPage}>{window.languageXML.nextButtonText}</NextButton>
+      <NextButton to={nextPage}>{langObj.btnNext}</NextButton>
     </StyledFooterDiv>
   );
 };

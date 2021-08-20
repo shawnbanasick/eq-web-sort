@@ -6,6 +6,7 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const LandingPage = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("progressScore", 10);
@@ -15,9 +16,10 @@ const LandingPage = () => {
   }, []);
 
   const dataLoaded = getGlobalState("dataLoaded");
-  const langObj = getGlobalState("languageObject");
-  console.log(JSON.stringify(langObj, null, 2));
-  localStorage.setItem("langObj", JSON.stringify(langObj));
+  // const langObj = getGlobalState("languageObject");
+
+  // console.log(JSON.stringify(langObj, null, 2));
+  // localStorage.setItem("langObj", JSON.stringify(langObj));
 
   const getWelcomeText = () => {
     let welcomeText1 = langObj.welcomeText;
