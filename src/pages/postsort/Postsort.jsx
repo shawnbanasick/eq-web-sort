@@ -1,9 +1,9 @@
+import React, { useEffect } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
 // import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 
-import React, { Component } from "react";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -20,138 +20,138 @@ const langObj = JSON.parse(localStorage.getItem("langObj"));
 
 const configObj = JSON.parse(localStorage.getItem("configObj"));
 
-class PostSort extends Component {
-  componentDidMount() {
+const PostSort = () => {
+  useEffect(() => {
     startTime = Date.now();
     setGlobalState("currentPage", "postsort");
     setGlobalState("progressScore", 50);
-  }
 
-  componentWillUnmount() {
-    calculateTimeOnPage(startTime, "postSortPage", "PostSortPage");
-  }
+    return () => {
+      calculateTimeOnPage(startTime, "postSortPage", "PostSortPage");
+    };
+  }, []);
 
-  render() {
-    // pull data from localStorage
-    const columnStatements = JSON.parse(
-      localStorage.getItem("columnStatements")
-    );
+  // pull data from localStorage
+  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
 
-    const titleText = langObj.postsortHeader;
+  const titleText = langObj.postsortHeader;
 
-    // todo - clean up reactivity - card appearance
-    const cardFontSize = getGlobalState("cardFontSize");
-    const columnWidth = 250;
-    const cardHeight2 = getGlobalState("cardHeight");
-    const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
+  // const [cardHeight, setCardHeight] = useState();
 
-    const instructionsText = langObj.postsortHeaderText;
+  // todo - clean up reactivity - card appearance
+  const cardFontSize = getGlobalState("cardFontSize");
+  const cardHeight2 = getGlobalState("cardHeight");
+  const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
+  console.log(cardHeight2);
 
-    const agree = langObj.btnAgreement;
-    const disagree = langObj.btnDisagreement;
-    const neutral = langObj.btnNeutral;
-    const placeholder = langObj.placeholder;
+  const columnWidth = 250;
 
-    const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
-    const postsortAgreeColDisp2 = configObj.postsortAgreeColDisp2;
-    const showSecondPosColumn = configObj.showSecondPosColumn;
-    const postsortDisagreeColDisp1 = configObj.postsortDisagreeColDisp1;
-    const postsortDisagreeColDisp2 = configObj.postsortDisagreeColDisp2;
-    const showSecondNegColumn = configObj.showSecondNegColumn;
+  const instructionsText = langObj.postsortHeaderText;
 
-    const agreeObj = {};
-    agreeObj.agreeText = agree;
-    agreeObj.columnDisplay = [postsortAgreeColDisp1];
-    agreeObj.columnDisplay2 = [postsortAgreeColDisp2];
-    agreeObj.displaySecondColumn = showSecondPosColumn;
-    agreeObj.placeholder = placeholder;
+  const agree = langObj.btnAgreement;
+  const disagree = langObj.btnDisagreement;
+  const neutral = langObj.btnNeutral;
+  const placeholder = langObj.placeholder;
 
-    const neutralObj = {};
-    neutralObj.neutralText = neutral;
-    neutralObj.displayNeutralObjects = configObj.displayNeutralObjects;
-    neutralObj.columnDisplay = ["column0"];
-    neutralObj.placeholder = placeholder;
+  const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
+  const postsortAgreeColDisp2 = configObj.postsortAgreeColDisp2;
+  const showSecondPosColumn = configObj.showSecondPosColumn;
+  const postsortDisagreeColDisp1 = configObj.postsortDisagreeColDisp1;
+  const postsortDisagreeColDisp2 = configObj.postsortDisagreeColDisp2;
+  const showSecondNegColumn = configObj.showSecondNegColumn;
 
-    const disagreeObj = {};
-    disagreeObj.disagreeText = disagree;
-    disagreeObj.columnDisplay = [postsortDisagreeColDisp1];
-    disagreeObj.columnDisplay2 = [postsortDisagreeColDisp2];
-    disagreeObj.displaySecondColumn = showSecondNegColumn;
-    disagreeObj.placeholder = placeholder;
+  const agreeObj = {};
+  agreeObj.agreeText = agree;
+  agreeObj.columnDisplay = [postsortAgreeColDisp1];
+  agreeObj.columnDisplay2 = [postsortAgreeColDisp2];
+  agreeObj.displaySecondColumn = showSecondPosColumn;
+  agreeObj.placeholder = placeholder;
 
-    const highCards = columnStatements.vCols[agreeObj.columnDisplay];
-    const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
-    const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
-    const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
-    const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
+  const neutralObj = {};
+  neutralObj.neutralText = neutral;
+  neutralObj.displayNeutralObjects = configObj.displayNeutralObjects;
+  neutralObj.columnDisplay = ["column0"];
+  neutralObj.placeholder = placeholder;
 
-    return (
-      <div>
-        <TitleDiv>
-          <h1>{titleText}</h1>
-          <h3>{instructionsText}</h3>
-        </TitleDiv>
-        <CardsContainer>
-          <HighCards
+  const disagreeObj = {};
+  disagreeObj.disagreeText = disagree;
+  disagreeObj.columnDisplay = [postsortDisagreeColDisp1];
+  disagreeObj.columnDisplay2 = [postsortDisagreeColDisp2];
+  disagreeObj.displaySecondColumn = showSecondNegColumn;
+  disagreeObj.placeholder = placeholder;
+
+  const highCards = columnStatements.vCols[agreeObj.columnDisplay];
+  const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
+  const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
+  const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
+  const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
+
+  return (
+    <div>
+      <TitleDiv>
+        <h1>{titleText}</h1>
+        <h3>{instructionsText}</h3>
+      </TitleDiv>
+      <CardsContainer>
+        <HighCards
+          agreeObj={agreeObj}
+          height={cardHeight}
+          cardFontSize={cardFontSize}
+          width={columnWidth}
+          highCards={highCards}
+          columnDisplay={agreeObj.columnDisplay}
+          columnStatements={columnStatements}
+        />
+
+        {agreeObj.displaySecondColumn && (
+          <HighCards2
             agreeObj={agreeObj}
             height={cardHeight}
             cardFontSize={cardFontSize}
             width={columnWidth}
-            highCards={highCards}
-            columnDisplay={agreeObj.columnDisplay}
+            highCards2={highCards2}
+            columnDisplay={agreeObj.columnDisplay2}
             columnStatements={columnStatements}
           />
+        )}
 
-          {agreeObj.displaySecondColumn && (
-            <HighCards2
-              agreeObj={agreeObj}
-              height={cardHeight}
-              cardFontSize={cardFontSize}
-              width={columnWidth}
-              highCards2={highCards2}
-              columnDisplay={agreeObj.columnDisplay2}
-              columnStatements={columnStatements}
-            />
-          )}
-
-          {neutralObj.displayNeutralObjects && (
-            <NeutralCards
-              neutralObj={neutralObj}
-              height={cardHeight}
-              width={columnWidth}
-              cardFontSize={cardFontSize}
-              columnDisplay={neutralObj.columnDisplay}
-              neutralCards={neutralCards}
-              columnStatements={columnStatements}
-            />
-          )}
-
-          {disagreeObj.displaySecondColumn && (
-            <LowCards2
-              disagreeObj={disagreeObj}
-              height={cardHeight}
-              width={columnWidth}
-              lowCards2={lowCards2}
-              cardFontSize={cardFontSize}
-              columnStatements={columnStatements}
-              columnDisplay={disagreeObj.columnDisplay2}
-            />
-          )}
-
-          <LowCards
-            disagreeObj={disagreeObj}
+        {neutralObj.displayNeutralObjects && (
+          <NeutralCards
+            neutralObj={neutralObj}
             height={cardHeight}
             width={columnWidth}
             cardFontSize={cardFontSize}
-            lowCards={lowCards}
+            columnDisplay={neutralObj.columnDisplay}
+            neutralCards={neutralCards}
             columnStatements={columnStatements}
-            columnDisplay={disagreeObj.columnDisplay}
           />
-        </CardsContainer>
-      </div>
-    );
-  }
-}
+        )}
+
+        {disagreeObj.displaySecondColumn && (
+          <LowCards2
+            disagreeObj={disagreeObj}
+            height={cardHeight}
+            width={columnWidth}
+            lowCards2={lowCards2}
+            cardFontSize={cardFontSize}
+            columnStatements={columnStatements}
+            columnDisplay={disagreeObj.columnDisplay2}
+          />
+        )}
+
+        <LowCards
+          disagreeObj={disagreeObj}
+          height={cardHeight}
+          width={columnWidth}
+          cardFontSize={cardFontSize}
+          lowCards={lowCards}
+          columnStatements={columnStatements}
+          columnDisplay={disagreeObj.columnDisplay}
+        />
+      </CardsContainer>
+    </div>
+  );
+};
 
 export default view(PostSort);
 

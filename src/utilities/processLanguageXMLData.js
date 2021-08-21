@@ -6,6 +6,10 @@ const processLanguageXMLData = (dataObject) => {
     for (let i = 0; i < data.length; i++) {
       languageObject[data[i]._attributes.id] = data[i]._text;
     }
+    // set default
+    console.log(languageObject.btnNext);
+    localStorage.setItem("btnNext", languageObject.btnNext);
+
     return languageObject;
   } catch (error) {
     console.log("there was a language import error");

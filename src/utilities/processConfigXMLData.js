@@ -178,6 +178,8 @@ const processConfigXMLData = (dataObject) => {
       "surveyQuestionObjArray",
       JSON.stringify(surveyQuestionArray)
     );
+    // set default
+    localStorage.setItem("cardHeight", JSON.stringify(120));
   }
   //  console.log(JSON.stringify(surveyData, null, 2));
 
