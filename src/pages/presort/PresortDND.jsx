@@ -42,7 +42,6 @@ function PresortDND(props) {
   };
 
   const onDragEnd = (result, columns, setColumns) => {
-    console.log(JSON.stringify(result));
     if (!result.destination) return;
     const { source, destination } = result;
 
@@ -80,11 +79,8 @@ function PresortDND(props) {
           statementsArray[i].greenChecked = true;
           statementsArray[i].sortValue = 333;
         }
-        console.log(statementsArray[i]);
       }
     }
-
-    // console.log(JSON.stringify(statementsArray));
 
     // set new ordering
     for (let i = 0; i < statementsArray.length; i++) {
@@ -117,12 +113,10 @@ function PresortDND(props) {
       if (sourceColumn.id === "cards") {
         presortSortedStatementsNum =
           window.statementsXML.length - sourceColumn.items.length + 1;
-        console.log("remaining: ", presortSortedStatementsNum);
         setGlobalState(
           "presortSortedStatementsNum",
           presortSortedStatementsNum
         );
-        console.log("sorted: ", presortSortedStatementsNum);
         presortSortedStatementsNum = presortSortedStatementsNum.toString();
         localStorage.setItem(
           "presortSortedStatementsNum",
@@ -133,7 +127,6 @@ function PresortDND(props) {
       // update progress bar
       const sortedStatements = getGlobalState("presortSortedStatementsNum");
       const ratio = sortedStatements / window.statementsXML.length;
-      console.log(ratio);
       const completedPercent = (ratio * 30).toFixed();
       // update Progress Bar State
       setGlobalState("progressScoreAdditional", completedPercent);
@@ -164,17 +157,12 @@ function PresortDND(props) {
         },
       });
     }
-
-    // console.log(JSON.stringify(columns, null, 2));
   }; // END DRAG-END
 
-  // const [columns, setColumns] = useState(columnsFromBackend);
   const [columns, setColumns] = useLocalStorage(
     "columnsFromBackend",
     columnsFromBackend
   );
-
-  // console.log(JSON.stringify(columns, null, 2));
 
   // RENDER COMPONENT
   return (
@@ -214,8 +202,6 @@ function PresortDND(props) {
                         }}
                       >
                         {column.items.map((item, index) => {
-                          console.log(item.backgroundColor);
-
                           return (
                             <Draggable
                               key={item.id}
@@ -223,7 +209,6 @@ function PresortDND(props) {
                               index={index}
                             >
                               {(provided, snapshot) => {
-                                // console.log(props.statements);
                                 return (
                                   <DroppableContainer
                                     ref={provided.innerRef}
@@ -239,7 +224,7 @@ function PresortDND(props) {
 
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
-                                        ? "#FFB266"
+                                        ? item.backgroundColor
                                         : item.backgroundColor,
                                       color: "black",
                                       ...provided.draggableProps.style,

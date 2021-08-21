@@ -35,9 +35,9 @@ const getItemStyle = (
     transition: `all 1s ease`,
     transitionDelay: "0.2s",
     // justifyContent: `center`,
-    // change background colour if dragging  (#e6bbad)
+    // change background colour if dragging  (#e6bbad or #FFB266)
     textAlign: `center`,
-    background: isDragging ? "#FFB266" : newCardColor,
+    background: isDragging ? newCardColor : newCardColor,
 
     // styles we need to apply on draggables
     ...draggableStyle,
