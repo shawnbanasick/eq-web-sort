@@ -4,6 +4,7 @@ import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
+// import testImage from "../../../images/testImage.png";
 
 const LandingPage = () => {
   const langObj = JSON.parse(localStorage.getItem("langObj"));
