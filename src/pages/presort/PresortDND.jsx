@@ -22,17 +22,21 @@ function PresortDND(props) {
     cards: {
       name: langObj.statements,
       items: itemsFromBackend,
+      id: "cards",
     },
     neg: {
       name: langObj.btnDisagreement,
       items: [],
+      id: "neg",
     },
     neutral: {
       name: langObj.btnNeutral,
       items: [],
+      id: "neutral",
     },
     pos: {
       name: langObj.btnAgreement,
+      id: "pos",
       items: [],
     },
   };
@@ -59,7 +63,6 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = false;
           statementsArray[i].sortValue = 111;
-          statementsArray[i].backgroundColor = "#FFCCCC";
         }
         if (destinationId === "neutral") {
           statementsArray[i].divColor = "isUncertainStatement";
@@ -68,7 +71,6 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = true;
           statementsArray[i].greenChecked = false;
           statementsArray[i].sortValue = 222;
-          statementsArray[i].backgroundColor = "#e0e0e0";
         }
         if (destinationId === "pos") {
           statementsArray[i].divColor = "isPositiveStatement";
@@ -77,7 +79,6 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = true;
           statementsArray[i].sortValue = 333;
-          statementsArray[i].backgroundColor = "#CCFFCC";
         }
         console.log(statementsArray[i]);
       }
@@ -85,9 +86,12 @@ function PresortDND(props) {
 
     // console.log(JSON.stringify(statementsArray));
 
+    // set new ordering
     for (let i = 0; i < statementsArray.length; i++) {
       statementsArray[i].listIndex = i + 1;
     }
+
+    // save to memory
     columnStatements.statementList = [...statementsArray];
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
 
@@ -98,10 +102,19 @@ function PresortDND(props) {
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
       const [removed] = sourceItems.splice(source.index, 1);
+
+      // change background color
+      if (destColumn.id === "pos") {
+        removed.backgroundColor = "#CCFFCC";
+      }
+      if (destColumn.id === "neg") {
+        removed.backgroundColor = "#FFCCCC";
+      }
+
       destItems.splice(destination.index, 0, removed);
 
       // calc remaining statements
-      if (sourceColumn.name === "Statements") {
+      if (sourceColumn.id === "cards") {
         presortSortedStatementsNum =
           window.statementsXML.length - sourceColumn.items.length + 1;
         console.log("remaining: ", presortSortedStatementsNum);
@@ -161,6 +174,8 @@ function PresortDND(props) {
     columnsFromBackend
   );
 
+  // console.log(JSON.stringify(columns, null, 2));
+
   // RENDER COMPONENT
   return (
     <PresortGrid>
@@ -199,7 +214,7 @@ function PresortDND(props) {
                         }}
                       >
                         {column.items.map((item, index) => {
-                          let itemColor = item.backgroundColor;
+                          console.log(item.backgroundColor);
 
                           return (
                             <Draggable
@@ -208,14 +223,13 @@ function PresortDND(props) {
                               index={index}
                             >
                               {(provided, snapshot) => {
-                                console.log(itemColor);
+                                // console.log(props.statements);
                                 return (
                                   <DroppableContainer
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     className="droppableCards"
-                                    backgroundColor={item.backgroundColor}
                                     style={{
                                       userSelect: "none",
                                       padding: 16,
@@ -226,7 +240,7 @@ function PresortDND(props) {
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
                                         ? "#FFB266"
-                                        : itemColor,
+                                        : item.backgroundColor,
                                       color: "black",
                                       ...provided.draggableProps.style,
                                     }}
@@ -305,5 +319,11 @@ const PresortGrid = styled.div`
 `;
 
 const DroppableContainer = styled.div`
-  background-color: ${(props) => props.backgroundColor};
+  background-color: "#83cafe";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 2px;
+  border: 1px solid #a8a8a8;
 `;

@@ -410,7 +410,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 2;
     overflow-y: auto;
-    background-color: lightpink;
+    background-color: #FFCCCC;
     min-height: 300px;
     height: 58vh;
     padding-top: 5px;
@@ -460,7 +460,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 4;
     overflow-y: auto;
-    background-color: lightgreen;
+    background-color: #CCFFCC;
     height: 58vh;
     padding-top: 5px;
     border-top-right-radius: 3px;
@@ -496,12 +496,7 @@ footer {
   }
 
   .droppableCards {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 2px;
-    border: 1px solid #a8a8a8
+   
   }
 }
 
