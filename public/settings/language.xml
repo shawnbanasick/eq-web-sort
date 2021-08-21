@@ -12,7 +12,7 @@
         <item id="btnTransfer">Submit data</item>
         <item id="btnExit">Exit</item>
         <item id="selectItem">Please select...</item>
-        <item id="btnNext">Next</item>
+        <item id="btnNext">Continue</item>
         
         <!-- ERRORS -->
         <item id="errorHead">Error!</item>

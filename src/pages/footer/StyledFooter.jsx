@@ -9,6 +9,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import calcProgressScore from "./calcProgressScore";
+import HelpButton from "./HelpButton";
 
 const configObj = JSON.parse(localStorage.getItem("configObj"));
 const logoHtml = decodeHTML(configObj.footerLogo);
@@ -40,7 +41,6 @@ const nextButtonText = localStorage.getItem("btnNext");
 
 const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
-
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
 
@@ -49,6 +49,83 @@ const StyledFooter = () => {
     additionalProgress,
     additionalProgressSort
   );
+
+  let CenterContent = (
+    <React.Fragment>
+      <HelpButton />
+      <ProgressBarDiv>
+        <ProgressBar
+          completed={totalProgressScore}
+          width={"320px"}
+          bgColor="#337ab7"
+          labelColor="#f0f0f0"
+          baseBgColor="lightgray"
+        />
+      </ProgressBarDiv>
+    </React.Fragment>
+  );
+
+  if (currentPage === "presort") {
+    CenterContent = (
+      <React.Fragment>
+        <HelpButton />
+        <AdjustmentsContainer>
+          <FooterFontSizer />
+        </AdjustmentsContainer>
+        <ProgressBarDiv>
+          <ProgressBar
+            completed={totalProgressScore}
+            width={"320px"}
+            bgColor="#337ab7"
+            labelColor="#f0f0f0"
+            baseBgColor="lightgray"
+          />
+        </ProgressBarDiv>
+      </React.Fragment>
+    );
+  }
+  if (currentPage === "sort") {
+    CenterContent = (
+      <React.Fragment>
+        <HelpButton />
+
+        <AdjustmentsContainer>
+          <FooterFontSizer />
+          <CardHeightSizer />
+        </AdjustmentsContainer>
+        <ProgressBarDiv>
+          <ProgressBar
+            completed={totalProgressScore}
+            width={"320px"}
+            bgColor="#337ab7"
+            labelColor="#f0f0f0"
+            baseBgColor="lightgray"
+          />
+        </ProgressBarDiv>
+      </React.Fragment>
+    );
+  }
+  if (currentPage === "postsort") {
+    CenterContent = (
+      <React.Fragment>
+        <HelpButton />
+
+        <AdjustmentsContainer>
+          <FooterFontSizer />
+          <CardHeightSizer />
+        </AdjustmentsContainer>
+        <ProgressBarDiv>
+          <ProgressBar
+            completed={totalProgressScore}
+            width={"320px"}
+            bgColor="#337ab7"
+            labelColor="#f0f0f0"
+            baseBgColor="lightgray"
+          />
+        </ProgressBarDiv>
+      </React.Fragment>
+    );
+  }
 
   let displayCardHeightAdj = false;
   if (currentPage === "sort" || currentPage === "postsort") {
@@ -69,21 +146,7 @@ const StyledFooter = () => {
   return (
     <StyledFooterDiv>
       <LogoContainer>{ReactHtmlParser(logoHtml)}</LogoContainer>
-      <CenterDiv>
-        <AdjustmentsContainer>
-          {displayFontSizeAdj && <FooterFontSizer />}
-          {displayCardHeightAdj && <CardHeightSizer />}
-        </AdjustmentsContainer>
-        <ProgressBarDiv>
-          <ProgressBar
-            completed={totalProgressScore}
-            width={"370px"}
-            bgColor="#337ab7"
-            labelColor="#f0f0f0"
-            baseBgColor="lightgray"
-          />
-        </ProgressBarDiv>
-      </CenterDiv>
+      <CenterDiv>{CenterContent}</CenterDiv>
       <NextButton to={nextPage}>{nextButtonText}</NextButton>
     </StyledFooterDiv>
   );
@@ -95,6 +158,7 @@ const StyledFooterDiv = styled.footer`
   position: fixed;
   bottom: 0px;
   left: 0px;
+  border-top: 1px solid gray;
 
   display: inline-grid;
   grid-template-columns: 16% 68% 16%;
@@ -108,6 +172,7 @@ const AdjustmentsContainer = styled.div`
 `;
 
 const ProgressBarDiv = styled.div`
+  padding-top: 3px;
   justify-self: center;
 `;
 
