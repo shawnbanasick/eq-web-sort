@@ -42,7 +42,7 @@ const NextButton = styled.button`
   text-decoration: none;
   width: 100px;
   justify-self: right;
-  margin-right: 15px;
+  margin-right: 30px;
   display: flex;
   align-items: center;
   justify-content: center;

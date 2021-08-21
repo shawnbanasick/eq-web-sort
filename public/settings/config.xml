@@ -9,7 +9,7 @@
      <item id="submitUrlMethod">firebase</item>
   
      <!-- FOOTER -->
-     <item id="footerLogo">{center}{img src="/images/EQ-logo.png" height="40" width="250" /}{/center}</item>
+     <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.png" height="40" width="250" /}}}{{{/center}}}</item>
 
 
 

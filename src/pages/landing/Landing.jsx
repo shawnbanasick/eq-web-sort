@@ -4,10 +4,12 @@ import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
-// import testImage from "../../../images/testImage.png";
+import decodeHTML from "../../utilities/decodeHTML";
+
+const langObj = JSON.parse(localStorage.getItem("langObj"));
+const welcomeTextHtml = decodeHTML(langObj.welcomeText);
 
 const LandingPage = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("progressScore", 10);
@@ -16,25 +18,15 @@ const LandingPage = () => {
     localStorage.setItem("progressScore", 10);
   }, []);
 
+  // check for complete
   const dataLoaded = getGlobalState("dataLoaded");
-  // const langObj = getGlobalState("languageObject");
-
-  // console.log(JSON.stringify(langObj, null, 2));
-  // localStorage.setItem("langObj", JSON.stringify(langObj));
-
-  const getWelcomeText = () => {
-    let welcomeText1 = langObj.welcomeText;
-    const charReplace = { "{": "<", "}": ">" };
-    let welcomeText = welcomeText1.replace(/{|}/g, (char) => charReplace[char]);
-    return welcomeText;
-  };
 
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
         <ContainerDiv>
           <h1>{langObj.welcomeHead}</h1>
-          <ContentDiv>{ReactHtmlParser(getWelcomeText())}</ContentDiv>
+          <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
         </ContainerDiv>
       )}
     </Suspense>

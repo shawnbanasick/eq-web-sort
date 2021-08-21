@@ -4,20 +4,13 @@ import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
 import CardHeightSizer from "./CardHeightSizer";
 import { view } from "@risingstack/react-easy-state";
-// import globalState from "../../globalState/globalState";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
-// import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const configObj = JSON.parse(localStorage.getItem("configObj"));
-
-const getLogoText = () => {
-  let logoText1 = configObj.footerLogo;
-  const charReplace = { "{": "<", "}": ">" };
-  let logoImage = logoText1.replace(/{|}/g, (char) => charReplace[char]);
-  return logoImage;
-};
+const logoHtml = decodeHTML(configObj.footerLogo);
 
 const getNextPage = (currentPage) => {
   console.log(currentPage);
@@ -122,7 +115,7 @@ const StyledFooter = () => {
 
   return (
     <StyledFooterDiv>
-      <LogoContainer>{ReactHtmlParser(getLogoText())}</LogoContainer>
+      <LogoContainer>{ReactHtmlParser(logoHtml)}</LogoContainer>
       <AdjustmentsContainer>
         {displayFontSizeAdj && <FooterFontSizer />}
         {displayCardHeightAdj && <CardHeightSizer />}
