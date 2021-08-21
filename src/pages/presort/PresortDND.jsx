@@ -10,14 +10,13 @@ function PresortDND(props) {
 
   const langObj = JSON.parse(localStorage.getItem("langObj"));
 
-  // let presortSortedStatementsNum = getGlobalState("presortSortedStatementsNum");
   let presortSortedStatementsNum =
     localStorage.getItem("presortSortedStatementsNum") || 0;
 
   const itemsFromBackend = props.statements;
-  const cardFontSize = props.cardFontSize;
-  const cardHeight = 145;
-  // const posName = ;
+  const cardFontSize = `${props.cardFontSize + 6}px`;
+
+  const cardHeight = 210;
 
   const columnsFromBackend = {
     cards: {
@@ -80,13 +79,16 @@ function PresortDND(props) {
         console.log(statementsArray[i]);
       }
     }
-    console.log(JSON.stringify(statementsArray));
+
+    // console.log(JSON.stringify(statementsArray));
+
     for (let i = 0; i < statementsArray.length; i++) {
       statementsArray[i].listIndex = i + 1;
     }
     columnStatements.statementList = [...statementsArray];
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
 
+    // when dropped on different droppable
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
@@ -119,7 +121,7 @@ function PresortDND(props) {
       const completedPercent = (ratio * 30).toFixed();
       // update Progress Bar State
       setGlobalState("progressScoreAdditional", completedPercent);
-      localStorage.setItem("progressScoreAdditional", `${completedPercent}`);
+      localStorage.setItem("progressScoreAdditional", completedPercent);
 
       // update columns
       setColumns({
@@ -148,7 +150,7 @@ function PresortDND(props) {
     }
 
     // console.log(JSON.stringify(columns, null, 2));
-  };
+  }; // END DRAG-END
 
   // const [columns, setColumns] = useState(columnsFromBackend);
   const [columns, setColumns] = useLocalStorage(
@@ -190,7 +192,7 @@ function PresortDND(props) {
                             ? "lightblue"
                             : "white",
                           padding: 4,
-                          width: 250,
+                          width: 300,
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -215,7 +217,7 @@ function PresortDND(props) {
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
-                                        ? "#e6bbad"
+                                        ? "#FFB266"
                                         : "#eeeeee",
                                       color: "black",
                                       ...provided.draggableProps.style,
@@ -287,9 +289,9 @@ const ColumnNamesDiv = styled.div`
 const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-50);
-  grid-template-rows: 200px 30px 1fr;
-  grid-template-columns: 1fr 300px 300px 300px 1fr;
+  grid-template-rows: 250px 30px 1fr;
+  grid-template-columns: 1fr 320px 320px 320px 1fr;
   row-gap: 10px;
-  column-gap: 30px;
+  column-gap: 20px;
   margin-top: 10px;
 `;

@@ -129,7 +129,7 @@ const Card = styled.div`
   height: ${(props) => `${props.height}px;`};
   max-width: ${(props) => `${props.width}px;`};
   border-radius: 5px;
-  font-size: ${(props) => props.cardFontSize};
+  font-size: ${(props) => `${props.cardFontSize}px`};
   display: flex;
   align-items: center;
   border: 2px solid black;

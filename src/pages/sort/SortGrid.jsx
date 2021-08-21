@@ -211,6 +211,8 @@ const SortGrid = (props) => {
   // code inside render so that column lists update automatically
   const qSortHeaders = [...sortCharacteristics.qSortHeaders];
   const qSortHeaderNumbers = [...sortCharacteristics.qSortHeaderNumbers];
+
+  // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
     const columnId = `column${qSortHeaders[index]}`;
     const sortValue = qSortHeaderNumbers[index];

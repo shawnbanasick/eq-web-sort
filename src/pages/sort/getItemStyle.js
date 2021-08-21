@@ -13,7 +13,7 @@ const getItemStyle = (
     newCardColor = "#CCFFCC";
   }
   if (cardColor === "yellowSortCard") {
-    newCardColor = "lightgray";
+    newCardColor = "#e0e0e0";
   }
   if (cardColor === "pinkSortCard") {
     newCardColor = "#FFCCCC";
