@@ -410,7 +410,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 2;
     overflow-y: auto;
-    background-color: #FFCCCC;
+    background-color: rgba(255,182,193,0.6);
     min-height: 300px;
     height: 58vh;
     padding-top: 5px;

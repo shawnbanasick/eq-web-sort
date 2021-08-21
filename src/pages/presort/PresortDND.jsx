@@ -108,7 +108,7 @@ function PresortDND(props) {
         removed.backgroundColor = "#CCFFCC";
       }
       if (destColumn.id === "neg") {
-        removed.backgroundColor = "#FFCCCC";
+        removed.backgroundColor = "rgba(255,182,193,0.6)";
       }
 
       destItems.splice(destination.index, 0, removed);
