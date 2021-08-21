@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
+import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
@@ -16,6 +17,14 @@ const LandingPage = () => {
     }, 100);
     setGlobalState("currentPage", "landing");
     localStorage.setItem("progressScore", 10);
+  }, []);
+
+  // calc time on page
+  useEffect(() => {
+    const startTime = Date.now();
+    return () => {
+      calculateTimeOnPage(startTime, "landingPage", "landingPage");
+    };
   }, []);
 
   // check for complete

@@ -1,13 +1,13 @@
 // import store from '../state';
-import getCumulativeDuration from './getCumulativeDuration';
-import millisecondsToTime from './millisecondsToTime';
-import getCurrentDateTime from './getCurrentDateTime';
+import getCumulativeDuration from "./getCumulativeDuration";
+import millisecondsToTime from "./millisecondsToTime";
+import getCurrentDateTime from "./getCurrentDateTime";
 
 const calculateTimeOnPage = (startTime, prefix, prefix2) => {
-  const identifier = `${prefix}DurationCumulative`;
+  const identifier = `cumulative${prefix}Duration`;
   // const identifier2 = `set${prefix2}DurationCumulative`;
-  const identifier3 = `set${prefix2}DurationFormatted`;
-  const identifier4 = `set${prefix2}LastAccess`;
+  const identifier3 = `timeOn${prefix2}(s)`;
+  const identifier4 = `lastAccess${prefix2}`;
 
   // const durationCumulative = store.getState()[identifier];
   const durationCumulative = localStorage.getItem(identifier) || 0;

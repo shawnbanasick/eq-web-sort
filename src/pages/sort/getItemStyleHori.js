@@ -26,7 +26,6 @@ const getItemStyleHori = (
     height: cardHeight,
     minWidth: columnWidth,
     maxWidth: columnWidth,
-    // padding: `15px, 2px, 2px, 0`,
     paddingRight: 2,
     paddingLeft: 2,
     borderRadius: `5px`,
@@ -37,7 +36,6 @@ const getItemStyleHori = (
     display: "flex",
     alignItems: "center",
     textAlign: `center`,
-    // border: `1px solid lightgray`,
     order: newSortValue,
     // change background color if dragging, otherwise pre-sort value color
     background: isDragging ? newCardColor : newCardColor,

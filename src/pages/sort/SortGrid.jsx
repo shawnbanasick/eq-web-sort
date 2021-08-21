@@ -16,8 +16,6 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 /* eslint react/prop-types: 0 */
 
-let startTime;
-
 function debounce(fn, ms) {
   let timer;
   return (_) => {
@@ -30,7 +28,7 @@ function debounce(fn, ms) {
 }
 
 const SortGrid = (props) => {
-  // force updates after dragend
+  // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
 
   // force updates on window resize
@@ -41,7 +39,7 @@ const SortGrid = (props) => {
 
   // calc time on page
   useEffect(() => {
-    startTime = Date.now();
+    const startTime = Date.now();
     return () => {
       calculateTimeOnPage(startTime, "sortPage", "SortPage");
     };
@@ -153,8 +151,8 @@ const SortGrid = (props) => {
       const numerator = totalStatements2 - remainingStatements;
 
       const ratio = numerator / window.statementsXML.length;
-      console.log(ratio);
       const completedPercent = (ratio * 30).toFixed();
+
       // update Progress Bar State
       setGlobalState("progressScoreAdditionalSort", completedPercent);
       localStorage.setItem(

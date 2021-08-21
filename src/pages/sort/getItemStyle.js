@@ -6,8 +6,6 @@ const getItemStyle = (
   cardFontSize,
   cardColor
 ) => {
-  console.log(cardColor);
-
   let newCardColor;
   if (cardColor === "greenSortCard") {
     newCardColor = "#CCFFCC";
@@ -34,7 +32,6 @@ const getItemStyle = (
     border: `1px solid #a8a8a8`,
     transition: `all 1s ease`,
     transitionDelay: "0.2s",
-    // justifyContent: `center`,
     // change background colour if dragging  (#e6bbad or #FFB266)
     textAlign: `center`,
     background: isDragging ? newCardColor : newCardColor,
