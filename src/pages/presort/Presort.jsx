@@ -5,6 +5,9 @@ import PresortModal from "./PresortModal";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 import PresortDND from "./PresortDND";
+import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+
+let startTime;
 
 const PresortPage = () => {
   useEffect(() => {
@@ -13,6 +16,14 @@ const PresortPage = () => {
       setGlobalState("progressScore", 20);
       localStorage.setItem("progressScore", `20`);
     }, 200);
+  }, []);
+
+  // calc time on page
+  useEffect(() => {
+    startTime = Date.now();
+    return () => {
+      calculateTimeOnPage(startTime, "presortPage", "presortPage");
+    };
   }, []);
 
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));

@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
-// import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
-
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
 import HighCards2 from "./HighCards2";
 import NeutralCards from "./NeutralCards";
-import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
+import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 /* eslint react/prop-types: 0 */
 
@@ -35,8 +33,6 @@ const PostSort = () => {
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
 
   const titleText = langObj.postsortHeader;
-
-  // const [cardHeight, setCardHeight] = useState();
 
   // todo - clean up reactivity - card appearance
   const cardFontSize = getGlobalState("cardFontSize");

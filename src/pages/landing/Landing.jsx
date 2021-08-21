@@ -9,6 +9,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
+let startTime;
 
 const LandingPage = () => {
   useEffect(() => {
@@ -21,7 +22,7 @@ const LandingPage = () => {
 
   // calc time on page
   useEffect(() => {
-    const startTime = Date.now();
+    startTime = Date.now();
     return () => {
       calculateTimeOnPage(startTime, "landingPage", "landingPage");
     };

@@ -4,6 +4,9 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import SortGrid from "./SortGrid";
 import styled from "styled-components";
+import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+
+let startTime;
 
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
@@ -14,6 +17,14 @@ const Sort = () => {
       setGlobalState("currentPage", "sort");
     }, 200);
   });
+
+  // calc time on page
+  useEffect(() => {
+    startTime = Date.now();
+    return () => {
+      calculateTimeOnPage(startTime, "sortPage", "SortPage");
+    };
+  }, []);
 
   return (
     <HeaderContainer>

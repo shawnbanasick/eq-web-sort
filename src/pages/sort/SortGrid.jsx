@@ -12,7 +12,6 @@ import getItemStyleHori from "./getItemStyleHori";
 // import SortCompletedMessage from "./SortCompletedMessage";
 // import ColumnOverloadMessage from "./ColumnOverloadMessage";
 // import NumberCardsSortedMessage from "./NumberCardsSortedMessage";
-import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 /* eslint react/prop-types: 0 */
 
@@ -37,16 +36,7 @@ const SortGrid = (props) => {
     width: window.innerWidth,
   });
 
-  // calc time on page
-  useEffect(() => {
-    const startTime = Date.now();
-    return () => {
-      calculateTimeOnPage(startTime, "sortPage", "SortPage");
-    };
-  }, []);
-
   // page resize
-
   useEffect(() => {
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({
