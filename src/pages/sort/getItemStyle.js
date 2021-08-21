@@ -10,13 +10,13 @@ const getItemStyle = (
 
   let newCardColor;
   if (cardColor === "greenSortCard") {
-    newCardColor = "lightgreen";
+    newCardColor = "#CCFFCC";
   }
   if (cardColor === "yellowSortCard") {
     newCardColor = "lightgray";
   }
   if (cardColor === "pinkSortCard") {
-    newCardColor = "rgba(255, 182, 193, 0.4)";
+    newCardColor = "#FFCCCC";
   }
 
   return {
@@ -33,9 +33,9 @@ const getItemStyle = (
     alignItems: "center",
     border: `1px solid #a8a8a8`,
     // justifyContent: `center`,
-    // change background colour if dragging
+    // change background colour if dragging  (#e6bbad)
     textAlign: `center`,
-    background: isDragging ? "#e6bbad" : newCardColor,
+    background: isDragging ? "#FFB266" : newCardColor,
 
     // styles we need to apply on draggables
     ...draggableStyle,
