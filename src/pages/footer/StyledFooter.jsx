@@ -8,6 +8,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import calcProgressScore from "./calcProgressScore";
 
 const configObj = JSON.parse(localStorage.getItem("configObj"));
 const logoHtml = decodeHTML(configObj.footerLogo);
@@ -33,54 +34,6 @@ const getNextPage = (currentPage) => {
     return `/`;
   }
   return `/nopagefound`;
-};
-
-const calcProgressScore = (
-  currentPage,
-  additionalProgress1,
-  additionalProgressSort
-) => {
-  const additionalProgressState = +localStorage.getItem(
-    "progressScoreAdditional"
-  );
-  const additionalProgressStateSort = +localStorage.getItem(
-    "progressScoreAdditionalSort"
-  );
-
-  let totalProgressScore;
-  let additionalProgress;
-  if (additionalProgress1 !== additionalProgressState) {
-    additionalProgress = additionalProgressState;
-  }
-
-  if (additionalProgressSort !== additionalProgressStateSort) {
-    additionalProgressSort = additionalProgressStateSort;
-  }
-
-  if (currentPage === "landing") {
-    totalProgressScore = 10;
-    return totalProgressScore;
-  }
-  if (currentPage === "presort") {
-    totalProgressScore = +additionalProgress + 20;
-    return totalProgressScore;
-  }
-  if (currentPage === "sort") {
-    totalProgressScore = +additionalProgressSort + 50;
-    return totalProgressScore;
-  }
-  if (currentPage === "postsort") {
-    totalProgressScore = 80;
-    return totalProgressScore;
-  }
-  if (currentPage === "survey") {
-    totalProgressScore = 90;
-    return totalProgressScore;
-  }
-  if (currentPage === "submit") {
-    totalProgressScore = 100;
-    return totalProgressScore;
-  }
 };
 
 const nextButtonText = localStorage.getItem("btnNext");
@@ -116,19 +69,21 @@ const StyledFooter = () => {
   return (
     <StyledFooterDiv>
       <LogoContainer>{ReactHtmlParser(logoHtml)}</LogoContainer>
-      <AdjustmentsContainer>
-        {displayFontSizeAdj && <FooterFontSizer />}
-        {displayCardHeightAdj && <CardHeightSizer />}
-      </AdjustmentsContainer>
-      <ProgressBarDiv>
-        <ProgressBar
-          completed={totalProgressScore}
-          width={"370px"}
-          bgColor="#337ab7"
-          labelColor="#f0f0f0"
-          baseBgColor="lightgray"
-        />
-      </ProgressBarDiv>
+      <CenterDiv>
+        <AdjustmentsContainer>
+          {displayFontSizeAdj && <FooterFontSizer />}
+          {displayCardHeightAdj && <CardHeightSizer />}
+        </AdjustmentsContainer>
+        <ProgressBarDiv>
+          <ProgressBar
+            completed={totalProgressScore}
+            width={"370px"}
+            bgColor="#337ab7"
+            labelColor="#f0f0f0"
+            baseBgColor="lightgray"
+          />
+        </ProgressBarDiv>
+      </CenterDiv>
       <NextButton to={nextPage}>{nextButtonText}</NextButton>
     </StyledFooterDiv>
   );
@@ -142,7 +97,7 @@ const StyledFooterDiv = styled.footer`
   left: 0px;
 
   display: inline-grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 16% 68% 16%;
   align-items: center;
 `;
 
@@ -160,4 +115,10 @@ const LogoContainer = styled.div`
   display: flex;
   justify-self: start;
   align-items: center;
+`;
+
+const CenterDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
