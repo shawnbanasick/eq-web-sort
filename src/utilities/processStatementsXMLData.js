@@ -20,6 +20,7 @@ const processStatementsXMLData = (dataObject) => {
       tempObj.yellowChecked = true;
       tempObj.greenChecked = false;
       tempObj.sortValue = 222;
+      tempObj.backgroundColor = "#e0e0e0";
       tempObj.statement = data[i]._text.trim();
       statementsArray.push(tempObj);
     }

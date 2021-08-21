@@ -59,6 +59,7 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = false;
           statementsArray[i].sortValue = 111;
+          statementsArray[i].backgroundColor = "#FFCCCC";
         }
         if (destinationId === "neutral") {
           statementsArray[i].divColor = "isUncertainStatement";
@@ -67,6 +68,7 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = true;
           statementsArray[i].greenChecked = false;
           statementsArray[i].sortValue = 222;
+          statementsArray[i].backgroundColor = "#e0e0e0";
         }
         if (destinationId === "pos") {
           statementsArray[i].divColor = "isPositiveStatement";
@@ -75,6 +77,7 @@ function PresortDND(props) {
           statementsArray[i].yellowChecked = false;
           statementsArray[i].greenChecked = true;
           statementsArray[i].sortValue = 333;
+          statementsArray[i].backgroundColor = "#CCFFCC";
         }
         console.log(statementsArray[i]);
       }
@@ -196,6 +199,8 @@ function PresortDND(props) {
                         }}
                       >
                         {column.items.map((item, index) => {
+                          let itemColor = item.backgroundColor;
+
                           return (
                             <Draggable
                               key={item.id}
@@ -203,28 +208,31 @@ function PresortDND(props) {
                               index={index}
                             >
                               {(provided, snapshot) => {
+                                console.log(itemColor);
                                 return (
-                                  <div
+                                  <DroppableContainer
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     className="droppableCards"
+                                    backgroundColor={item.backgroundColor}
                                     style={{
                                       userSelect: "none",
                                       padding: 16,
                                       margin: "0 0 8px 0",
                                       height: cardHeight,
                                       overflow: "hidden",
+
                                       fontSize: cardFontSize,
                                       backgroundColor: snapshot.isDragging
                                         ? "#FFB266"
-                                        : "#eeeeee",
+                                        : itemColor,
                                       color: "black",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
                                     {item.statement}
-                                  </div>
+                                  </DroppableContainer>
                                 );
                               }}
                             </Draggable>
@@ -294,4 +302,8 @@ const PresortGrid = styled.div`
   row-gap: 10px;
   column-gap: 20px;
   margin-top: 10px;
+`;
+
+const DroppableContainer = styled.div`
+  background-color: ${(props) => props.backgroundColor};
 `;

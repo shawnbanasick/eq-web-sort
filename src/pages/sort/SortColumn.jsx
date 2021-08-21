@@ -92,6 +92,7 @@ const HeaderDiv = styled.div`
   background: ${(props) => props.color};
   text-align: center;
   border-bottom: 2px solid black;
+  border-radius: 2px;
   margin-bottom: 7px;
   font-weight: bold;
   font-size: 25px;

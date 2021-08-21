@@ -16,7 +16,7 @@ const configXML = {
     "#ffcbcb",
     "#ffd8d8",
     "#ffe5e5",
-    "#f5f5f5",
+    "#e0e0e0",
     "#d6f5d6",
     "#c1f0c1",
     "#adebad",
