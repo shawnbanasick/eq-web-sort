@@ -8,6 +8,16 @@ import { view } from "@risingstack/react-easy-state";
 import ProgressBar from "@ramonak/react-progress-bar";
 import getGlobalState from "../../globalState/getGlobalState";
 // import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+
+const configObj = JSON.parse(localStorage.getItem("configObj"));
+
+const getLogoText = () => {
+  let logoText1 = configObj.footerLogo;
+  const charReplace = { "{": "<", "}": ">" };
+  let logoImage = logoText1.replace(/{|}/g, (char) => charReplace[char]);
+  return logoImage;
+};
 
 const getNextPage = (currentPage) => {
   console.log(currentPage);
@@ -112,6 +122,7 @@ const StyledFooter = () => {
 
   return (
     <StyledFooterDiv>
+      <LogoContainer>{ReactHtmlParser(getLogoText())}</LogoContainer>
       <AdjustmentsContainer>
         {displayFontSizeAdj && <FooterFontSizer />}
         {displayCardHeightAdj && <CardHeightSizer />}
@@ -138,7 +149,7 @@ const StyledFooterDiv = styled.footer`
   left: 0px;
 
   display: inline-grid;
-  grid-template-columns: 25% 1fr 25%;
+  grid-template-columns: 25% 25% 25% 25%;
   align-items: center;
 `;
 
@@ -150,4 +161,10 @@ const AdjustmentsContainer = styled.div`
 
 const ProgressBarDiv = styled.div`
   justify-self: center;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-self: start;
+  align-items: center;
 `;
