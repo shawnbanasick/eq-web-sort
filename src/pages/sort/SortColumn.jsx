@@ -20,7 +20,10 @@ class SortColumn extends React.Component {
       qSortHeaderNumber,
       columnColor,
       cardFontSize,
+      columnHeadersColor,
     } = this.props;
+
+    console.log(columnHeadersColor);
 
     // had to push column sort value to state because didn't want to edit dnd library result object
     // was't able to just pass it as a prop
@@ -31,7 +34,6 @@ class SortColumn extends React.Component {
             setGlobalState("draggingOverColumnId", columnId);
             setGlobalState("currentSortValue", sortValue);
           }
-
           return (
             <div
               ref={provided.innerRef}
@@ -43,11 +45,19 @@ class SortColumn extends React.Component {
                 columnColor
               )}
             >
-              <HeaderDiv data-react-beautiful-dnd-drag-handle="0">
+              <HeaderDiv
+                color={columnHeadersColor}
+                data-react-beautiful-dnd-drag-handle="0"
+              >
                 {qSortHeaderNumber}
               </HeaderDiv>
               {columnStatementsArray.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable
+                  key={item.id}
+                  draggableId={item.id}
+                  cardColor={item.cardColor}
+                  index={index}
+                >
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -58,7 +68,8 @@ class SortColumn extends React.Component {
                         provided.draggableProps.style,
                         columnWidth,
                         cardHeight,
-                        cardFontSize
+                        cardFontSize,
+                        `${item.cardColor}`
                       )}
                     >
                       {item.statement}
@@ -78,6 +89,7 @@ class SortColumn extends React.Component {
 export default view(SortColumn);
 
 const HeaderDiv = styled.div`
+  background: ${(props) => props.color};
   text-align: center;
   border-bottom: 2px solid black;
   margin-bottom: 7px;

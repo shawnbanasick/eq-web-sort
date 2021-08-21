@@ -177,7 +177,13 @@ const SortGrid = (props) => {
   // get user settings
   const cardFontSize = props.cardFontSize;
   const horiCardMinHeight = window.configXML.horiCardMinHeight;
+
+  // column colors
   const columnColorsArray = [...window.configXML.columnColorsArray];
+  const columnHeadersColorsArray = [
+    ...window.configXML.columnHeadersColorsArray,
+  ];
+
   const sortCharacteristics = window.configXML.sortCharacteristics;
   const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
 
@@ -224,6 +230,7 @@ const SortGrid = (props) => {
         columnColor={columnColor}
         cardFontSize={cardFontSize}
         qSortHeaderNumber={qSortHeaderNumbers[index]}
+        columnHeadersColor={columnHeadersColorsArray[index]}
       />
     );
   }); // end map of sort columns

@@ -12,7 +12,7 @@ const configXML = {
     "white",
     "white",
   ],
-  columnColorsArray: [
+  columnHeadersColorsArray: [
     "#ffcbcb",
     "#ffd8d8",
     "#ffe5e5",
@@ -21,15 +21,15 @@ const configXML = {
     "#c1f0c1",
     "#adebad",
   ],
-  // columnColorsArray: [
-  //   "white",
-  //   "white",
-  //   "white",
-  //   "white",
-  //   "white",
-  //   "white",
-  //   "white",
-  // ],
+  columnColorsArray: [
+    "whitesmoke",
+    "whitesmoke",
+    "whitesmoke",
+    "whitesmoke",
+    "whitesmoke",
+    "whitesmoke",
+    "whitesmoke",
+  ],
   sortCharacteristics: {
     qSortPattern: [3, 4, 5, 6, 5, 4, 3],
     qSortHeaders: ["N3", "N2", "N1", 0, 1, 2, 3],
