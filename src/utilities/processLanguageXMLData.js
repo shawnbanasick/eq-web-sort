@@ -9,6 +9,7 @@ const processLanguageXMLData = (dataObject) => {
     // set default
     console.log(languageObject.btnNext);
     localStorage.setItem("btnNext", languageObject.btnNext);
+    localStorage.setItem("fontSizeText", languageObject.fontSize);
 
     return languageObject;
   } catch (error) {

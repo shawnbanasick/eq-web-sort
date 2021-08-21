@@ -6,8 +6,10 @@ import SortPage from "./pages/sort/Sort";
 import SubmitPage from "./pages/submit/Submit";
 import SurveyPage from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
-import StyledFooter from "./pages/footer/StyledFooter.jsx";
 import NoPageFound from "./utilities/NoPageFound";
+import React, { Suspense } from "react";
+
+const StyledFooter = React.lazy(() => import("./pages/footer/StyledFooter"));
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route component={NoPageFound} />
         </Switch>
-        <StyledFooter />
+        <Suspense>
+          <StyledFooter />
+        </Suspense>
       </Router>
     </div>
   );

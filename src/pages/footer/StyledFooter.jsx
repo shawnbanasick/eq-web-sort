@@ -80,8 +80,7 @@ const calcProgressScore = (
   }
 };
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-const nextButtonText = langObj.btnNext || "";
+const nextButtonText = localStorage.getItem("btnNext");
 
 const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
@@ -100,12 +99,21 @@ const StyledFooter = () => {
     displayCardHeightAdj = true;
   }
 
+  let displayFontSizeAdj = false;
+  if (
+    currentPage === "sort" ||
+    currentPage === "postsort" ||
+    currentPage === "presort"
+  ) {
+    displayFontSizeAdj = true;
+  }
+
   const nextPage = getNextPage(currentPage);
 
   return (
     <StyledFooterDiv>
       <AdjustmentsContainer>
-        <FooterFontSizer />
+        {displayFontSizeAdj && <FooterFontSizer />}
         {displayCardHeightAdj && <CardHeightSizer />}
       </AdjustmentsContainer>
       <ProgressBarDiv>

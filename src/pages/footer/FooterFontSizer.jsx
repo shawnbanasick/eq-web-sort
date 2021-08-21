@@ -22,12 +22,13 @@ const decreaseFontSize = () => {
   setGlobalState("cardFontSize", newSize);
 };
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
+// const langObj = JSON.parse(localStorage.getItem("langObj"));
+const fontSizeText = localStorage.getItem("fontSizeText");
 
 const FooterFontSizer = () => {
   return (
     <Container>
-      <SpanDiv>{langObj.fontSize}</SpanDiv>
+      <SpanDiv>{fontSizeText}</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>

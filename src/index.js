@@ -14,19 +14,6 @@ const App = React.lazy(() => import("./App"));
 
 (async () => {
   await axios
-    .get("./settings/config.xml", {
-      "Content-Type": "application/xml; charset=utf-8",
-    })
-    .then(function (response) {
-      const options = { compact: false, ignoreComment: true, spaces: 2 };
-      const configData = convert.xml2js(response.data, options);
-      processConfigXMLData(configData);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  await axios
     .get("./settings/language.xml", {
       "Content-Type": "application/xml; charset=utf-8",
     })
@@ -36,6 +23,19 @@ const App = React.lazy(() => import("./App"));
       let languageObject = processLanguageXMLData(languageData);
       setGlobalState("languageObject", languageObject);
       localStorage.setItem("langObj", JSON.stringify(languageObject));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  await axios
+    .get("./settings/config.xml", {
+      "Content-Type": "application/xml; charset=utf-8",
+    })
+    .then(function (response) {
+      const options = { compact: false, ignoreComment: true, spaces: 2 };
+      const configData = convert.xml2js(response.data, options);
+      processConfigXMLData(configData);
     })
     .catch(function (error) {
       console.log(error);
