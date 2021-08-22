@@ -12,18 +12,16 @@ import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
-// const configObj = JSON.parse(localStorage.getItem("configObj"));
-const configObj = getGlobalState("configObj");
-
+const configObj = JSON.parse(localStorage.getItem("configObj"));
+// const configObj = getGlobalState("configObj");
 const headerBarColor = configObj.headerBarColor;
-// const headerBarColor = "#83cafe";
 console.log(headerBarColor);
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
 let startTime;
 
-// const initialScreen = setLandingInitialScreen();
-
 const LandingPage = () => {
+  const dataLoaded = getGlobalState("dataLoaded");
+
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("progressScore", 10);
@@ -41,7 +39,6 @@ const LandingPage = () => {
   }, []);
 
   // check for complete
-  const dataLoaded = getGlobalState("dataLoaded");
   let displayLandingContent = getGlobalState("displayLandingContent");
   let displayLogInScreen = false;
   let displayPartIdScreen = false;
