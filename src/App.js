@@ -8,28 +8,34 @@ import SurveyPage from "./pages/survey/Survey";
 import { view } from "@risingstack/react-easy-state";
 import NoPageFound from "./utilities/NoPageFound";
 import React, { Suspense } from "react";
+import getGlobalState from "./globalState/getGlobalState";
 
 const StyledFooter = React.lazy(() => import("./pages/footer/StyledFooter"));
 
 function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/presort" component={PresortPage} />
-          <Route exact path="/sort" component={SortPage} />
-          <Route exact path="/postsort" component={PostsortPage} />
-          <Route exact path="/survey" component={SurveyPage} />
-          <Route exact path="/submit" component={SubmitPage} />
-          <Route exact path="/" component={LandingPage} />
-          <Route component={NoPageFound} />
-        </Switch>
-        <Suspense>
-          <StyledFooter />
-        </Suspense>
-      </Router>
-    </div>
-  );
+  const dataLoaded = getGlobalState("dataLoaded");
+  if (dataLoaded) {
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/presort" component={PresortPage} />
+            <Route exact path="/sort" component={SortPage} />
+            <Route exact path="/postsort" component={PostsortPage} />
+            <Route exact path="/survey" component={SurveyPage} />
+            <Route exact path="/submit" component={SubmitPage} />
+            <Route exact path="/" component={LandingPage} />
+            <Route component={NoPageFound} />
+          </Switch>
+          <Suspense>
+            <StyledFooter />
+          </Suspense>
+        </Router>
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default view(App);

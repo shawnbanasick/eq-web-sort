@@ -9,7 +9,7 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import setGlobalState from "./globalState/setGlobalState";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 const convert = require("xml-js");
 const App = React.lazy(() => import("./App"));
 
@@ -76,9 +76,24 @@ const theme = {
   setGlobalState("dataLoaded", true);
 })();
 
+const StyledLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  font-style: italic;
+  font-size: 35px;
+`;
+
 ReactDOM.render(
   <React.StrictMode>
-    <React.Suspense fallback={<h1>Loading ...</h1>}>
+    <React.Suspense
+      fallback={
+        <StyledLoading>
+          <h1>Loading ...</h1>
+        </StyledLoading>
+      }
+    >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />

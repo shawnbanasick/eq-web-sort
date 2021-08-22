@@ -11,15 +11,14 @@ import LogInScreen from "./LogInScreen";
 import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-const configObj = JSON.parse(localStorage.getItem("configObj"));
-// const configObj = getGlobalState("configObj");
-const headerBarColor = configObj.headerBarColor;
-console.log(headerBarColor);
-const welcomeTextHtml = decodeHTML(langObj.welcomeText);
-let startTime;
-
 const LandingPage = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
+  console.log(headerBarColor);
+  const welcomeTextHtml = decodeHTML(langObj.welcomeText);
+  let startTime;
   const dataLoaded = getGlobalState("dataLoaded");
 
   useEffect(() => {
