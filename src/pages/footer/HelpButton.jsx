@@ -10,7 +10,7 @@ const handleOnClick = () => {
 
 const HelpButton = () => {
   return (
-    <StyledHelpButton onClick={handleOnClick}>
+    <StyledHelpButton tabindex="0" onClick={handleOnClick}>
       {langObj.btnHelp}
     </StyledHelpButton>
   );
@@ -18,7 +18,6 @@ const HelpButton = () => {
 export default view(HelpButton);
 
 const StyledHelpButton = styled.button`
-  background: #337ab7;
   border-color: #2e6da4;
   color: white;
   font-size: 0.8em;
@@ -32,6 +31,16 @@ const StyledHelpButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${({ theme, active }) =>
+    active ? theme.secondary : theme.primary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.focus};
+  }
 `;
 
 /*

@@ -22,13 +22,13 @@ const LinkButton = (props) => {
         onClick && onClick(event);
         history.push(to);
       }}
+      tabindex="0"
     />
   );
 };
 export default view(withRouter(LinkButton));
 
 const NextButton = styled.button`
-  background: #337ab7;
   border-color: #2e6da4;
   color: white;
   font-size: 0.8em;
@@ -42,4 +42,14 @@ const NextButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${({ theme, active }) =>
+    active ? theme.secondary : theme.primary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.focus};
+  }
 `;

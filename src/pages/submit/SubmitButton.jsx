@@ -10,13 +10,14 @@ const handleClick = () => {
 
 const SubmitButton = () => {
   return (
-    <StyledButton onClick={handleClick}>{langObj.btnTransfer}</StyledButton>
+    <StyledButton tabindex="0" onClick={handleClick}>
+      {langObj.btnTransfer}
+    </StyledButton>
   );
 };
 export default view(SubmitButton);
 
 const StyledButton = styled.button`
-  background: #337ab7;
   border-color: #2e6da4;
   color: white;
   font-size: 1.2em;
@@ -33,4 +34,14 @@ const StyledButton = styled.button`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 20px;
+  background-color: ${({ theme, active }) =>
+    active ? theme.secondary : theme.primary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.focus};
+  }
 `;

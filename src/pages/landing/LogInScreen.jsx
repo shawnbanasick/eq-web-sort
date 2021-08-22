@@ -97,7 +97,7 @@ const Container = styled.div`
   grid-template-rows: 23% 28% 28% 1fr;
   margin-top: 50px;
   width: 700px;
-  padding: 1.5vw;
+  padding: 20px;
   min-height: 400px;
   margin-bottom: 200px;
   border: 2px solid black;

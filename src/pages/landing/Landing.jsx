@@ -101,6 +101,7 @@ const ContainerDiv = styled.div`
   margin-bottom: 70px;
   padding-top: 50px;
   transition: 0.3s ease all;
+  margin-top: 50px;
 
   img {
     margin-top: 20px;

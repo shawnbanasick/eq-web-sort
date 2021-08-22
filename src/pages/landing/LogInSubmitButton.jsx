@@ -6,7 +6,7 @@ const langObj = JSON.parse(localStorage.getItem("langObj"));
 
 const LogInSubmitButton = (props) => {
   return (
-    <StyledSubmitButton onClick={props.onClick}>
+    <StyledSubmitButton tabindex="0" onClick={props.onClick}>
       {langObj.loginSubmitButtonText}
     </StyledSubmitButton>
   );
@@ -14,7 +14,6 @@ const LogInSubmitButton = (props) => {
 export default view(LogInSubmitButton);
 
 const StyledSubmitButton = styled.button`
-  background: #337ab7;
   border-color: #2e6da4;
   color: white;
   font-size: 1.5em;
@@ -26,8 +25,17 @@ const StyledSubmitButton = styled.button`
   height: 50px;
   justify-self: right;
   align-self: end;
-  margin-right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${({ theme, active }) =>
+    active ? theme.secondary : theme.primary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.focus};
+  }
 `;
