@@ -9,6 +9,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import LandingModal from "../landing/LandingModal";
 import LogInScreen from "./LogInScreen";
 import PartIdScreen from "./PartIdScreen";
+import AccessCodeScreen from "./AccessCodeScreen";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 const configObj = JSON.parse(localStorage.getItem("configObj"));
@@ -36,11 +37,15 @@ const LandingPage = () => {
 
   // check for complete
   const dataLoaded = getGlobalState("dataLoaded");
-  const displayLandingContent = getGlobalState("displayLandingContent");
+  let displayLandingContent = getGlobalState("displayLandingContent");
   let displayLogInScreen = false;
   let displayPartIdScreen = false;
-
+  let displayAccessCodeScreen = false;
   const initialScreenSetting = configObj.initialScreen;
+  if (initialScreenSetting === "anonymous") {
+    displayLandingContent = true;
+    setGlobalState("displayNextButton", true);
+  }
   if (
     initialScreenSetting === "partId-access" &&
     displayLandingContent === false
@@ -50,10 +55,12 @@ const LandingPage = () => {
   if (initialScreenSetting === "partId" && displayLandingContent === false) {
     displayPartIdScreen = true;
   }
-  // if ()
+  if (initialScreenSetting === "access" && displayLandingContent === false) {
+    displayAccessCodeScreen = true;
+  }
 
   return (
-    <Suspense fallback={<h2>Loading...</h2>}>
+    <Suspense fallback={<div>Loading...</div>}>
       {dataLoaded && (
         <React.Fragment>
           <SortTitleBar>{langObj.landingHead}</SortTitleBar>
@@ -61,6 +68,7 @@ const LandingPage = () => {
           <ContainerDiv>
             {displayLogInScreen && <LogInScreen />}
             {displayPartIdScreen && <PartIdScreen />}
+            {displayAccessCodeScreen && <AccessCodeScreen />}
             {displayLandingContent && (
               <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
             )}

@@ -7,31 +7,31 @@ import LogInSubmitButton from "./LogInSubmitButton";
 
 const LogInScreen = () => {
   const langObj = JSON.parse(localStorage.getItem("langObj"));
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
+  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
 
-  const handleInput = (e) => {
-    console.log(e.target.value);
-    setGlobalState("userInputPartId", e.target.value);
+  const handleAccess = (e) => {
+    setGlobalState("userInputAccessCode", e.target.value);
   };
 
   const handleSubmit = (e) => {
-    let userPartIdOK = false;
+    let userAccessOK = false;
+    const projectAccessCode = configObj.accessCode;
 
     // get user input
-    const userInputPartId = getGlobalState("userInputPartId");
+    const userInputAccessCode = getGlobalState("userInputAccessCode");
 
-    if (userInputPartId.length > 0) {
-      userPartIdOK = true;
+    if (userInputAccessCode === projectAccessCode) {
+      userAccessOK = true;
       setGlobalState("displayLandingContent", true);
-      setGlobalState("partId", userInputPartId);
       setGlobalState("displayNextButton", true);
     }
 
     // invalid input ==> display warnings
-    if (userPartIdOK === false) {
-      setGlobalState("displayPartIdWarning", true);
+    if (userAccessOK === false) {
+      setGlobalState("displayAccessCodeWarning", true);
       setTimeout(() => {
-        setGlobalState("displayPartIdWarning", false);
+        setGlobalState("displayAccessCodeWarning", false);
       }, 5000);
     }
   };
@@ -43,11 +43,11 @@ const LogInScreen = () => {
         <StyledHr />
       </div>
       <div>
-        <h3>{langObj.loginPartIdText}</h3>
+        <h3>{langObj.accessInputText}</h3>
         <StyledInputDiv>
-          <StyledInput onChange={handleInput} type="text" />
-          {displayPartIdWarning && (
-            <WarningText>{langObj.partIdWarning}</WarningText>
+          <StyledInput onChange={handleAccess} type="text" />
+          {displayAccessCodeWarning && (
+            <WarningText>{langObj.accessCodeWarning}</WarningText>
           )}
         </StyledInputDiv>
       </div>

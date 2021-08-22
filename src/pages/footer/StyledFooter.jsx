@@ -43,6 +43,7 @@ const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
+  const displayNextButton = getGlobalState("displayNextButton");
 
   const totalProgressScore = calcProgressScore(
     currentPage,
@@ -132,7 +133,9 @@ const StyledFooter = () => {
     <StyledFooterDiv>
       <LogoContainer>{ReactHtmlParser(logoHtml)}</LogoContainer>
       <CenterDiv>{CenterContent}</CenterDiv>
-      <NextButton to={nextPage}>{nextButtonText}</NextButton>
+      {displayNextButton && (
+        <NextButton to={nextPage}>{nextButtonText}</NextButton>
+      )}
     </StyledFooterDiv>
   );
 };

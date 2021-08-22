@@ -15,7 +15,8 @@ const LogInScreen = () => {
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const welcomeText = decodeHTML(langObj.loginWelcomeText);
-  const handleLogIn = (e) => {
+
+  const handleInput = (e) => {
     setGlobalState("userInputPartId", e.target.value);
   };
 
@@ -44,6 +45,8 @@ const LogInScreen = () => {
     if (userAccessOK && userPartIdOK) {
       setGlobalState("displayLandingContent", true);
       setGlobalState("displayContinueButton", true);
+      setGlobalState("partId", userInputPartId);
+      setGlobalState("displayNextButton", true);
     } else if (userAccessOK === false) {
       setGlobalState("displayAccessCodeWarning", true);
       setTimeout(() => {
@@ -68,7 +71,7 @@ const LogInScreen = () => {
         <div>
           <h3>{langObj.loginPartIdText}</h3>
           <StyledInputDiv>
-            <StyledInput onChange={handleLogIn} type="text" />
+            <StyledInput onChange={handleInput} type="text" />
             {displayPartIdWarning && (
               <WarningText>{langObj.partIdWarning}</WarningText>
             )}

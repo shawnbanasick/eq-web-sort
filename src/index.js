@@ -9,8 +9,15 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import setGlobalState from "./globalState/setGlobalState";
+import { ThemeProvider } from "styled-components";
 const convert = require("xml-js");
 const App = React.lazy(() => import("./App"));
+
+const theme = {
+  primary: "#337ab7",
+  secondary: "#285f8f",
+  focus: "#63a0d4",
+};
 
 (async () => {
   await axios
@@ -72,8 +79,10 @@ const App = React.lazy(() => import("./App"));
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={<h1>Loading ...</h1>}>
-      <GlobalStyle />
-      <App />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
     </React.Suspense>
   </React.StrictMode>,
   document.getElementById("root")
