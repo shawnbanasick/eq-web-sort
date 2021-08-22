@@ -4,34 +4,89 @@ import { view } from "@risingstack/react-easy-state";
 // import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const LogInScreen = () => {
   const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
+  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
 
-  const handleLogIn = () => {
-    console.log("log in");
+  const handleLogIn = (e) => {
+    setGlobalState("userInputPartId", e.target.value);
   };
 
-  const handleAccess = () => {
-    console.log("code");
+  const handleAccess = (e) => {
+    setGlobalState("userInputAccessCode", e.target.value);
+  };
+
+  const handleSubmit = () => {
+    let userPartIdOK = false;
+    let userAccessOK = false;
+    const projectAccessCode = configObj.accessCode;
+
+    // get user input
+    const userInputPartId = getGlobalState("userInputPartId");
+    const userInputAccessCode = getGlobalState("userInputAccessCode");
+
+    if (userInputPartId.length > 0) {
+      userPartIdOK = true;
+    } else {
+    }
+    if (userInputAccessCode === projectAccessCode) {
+      userAccessOK = true;
+    }
+
+    // invalid input ==> display warnings
+    if (userAccessOK && userPartIdOK) {
+      setGlobalState("displayLandingContent", true);
+      setGlobalState("displayContinueButton", true);
+    } else if (userAccessOK === false) {
+      setGlobalState("displayAccessCodeWarning", true);
+      setTimeout(() => {
+        setGlobalState("displayAccessCodeWarning", false);
+      }, 5000);
+    } else if (userPartIdOK === false) {
+      setGlobalState("displayPartIdWarning", true);
+      setTimeout(() => {
+        setGlobalState("displayPartIdWarning", false);
+      }, 5000);
+    }
   };
 
   return (
-    <Container>
-      <div>
-        <h2>{langObj.loginHeaderText}</h2>
-        <StyledHr />
-      </div>
-      <div>
-        <h3>{langObj.loginPartIdText}</h3>
-        <StyledInput onChange={handleLogIn} type="text" />
-      </div>
-      <div>
-        <h3>{langObj.accessInputText}</h3>
-        <StyledInput onChange={handleAccess} type="text" />
-      </div>
-      <LogInSubmitButton />
-    </Container>
+    <React.Fragment>
+      <LogInWelcomeText>{langObj.loginWelcomeText}</LogInWelcomeText>
+      <Container>
+        <div>
+          <h2>{langObj.loginHeaderText}</h2>
+          <StyledHr />
+        </div>
+        <div>
+          <h3>{langObj.loginPartIdText}</h3>
+          <StyledInputDiv>
+            <StyledInput onChange={handleLogIn} type="text" />
+            {displayPartIdWarning && (
+              <WarningText>{langObj.partIdWarning}</WarningText>
+            )}
+          </StyledInputDiv>
+        </div>
+        <div>
+          <h3>{langObj.accessInputText}</h3>
+          <StyledInputDiv>
+            <StyledInput onChange={handleAccess} type="text" />
+            {displayAccessCodeWarning && (
+              <WarningText>{langObj.accessCodeWarning}</WarningText>
+            )}
+          </StyledInputDiv>
+        </div>
+        <LogInSubmitButton onClick={handleSubmit} />
+      </Container>
+      <WarningText>{}</WarningText>
+    </React.Fragment>
   );
 };
 
@@ -41,13 +96,20 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 23% 28% 28% 1fr;
   margin-top: 50px;
-  width: 50vw;
+  width: 700px;
   padding: 1.5vw;
   min-height: 400px;
   margin-bottom: 200px;
   border: 2px solid black;
   justify-self: center;
   background-color: whitesmoke;
+`;
+
+const LogInWelcomeText = styled.div`
+  width: 900px;
+  font-size: 25px;
+  line-height: 1.3em;
+  padding-left: 10px;
 `;
 
 const StyledHr = styled.hr`
@@ -61,4 +123,17 @@ const StyledInput = styled.input`
   height: 30px;
   font-size: 1.4em;
   padding-left: 5px;
+`;
+
+const StyledInputDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const WarningText = styled.div`
+  color: red;
+  font-weight: bold;
+  font-size: 1.4em;
+  margin-left: 10px;
 `;

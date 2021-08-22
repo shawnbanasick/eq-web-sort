@@ -3,10 +3,6 @@ import React from "react";
 import { withRouter } from "react-router";
 import { view } from "@risingstack/react-easy-state";
 
-const checkForNavigation = () => {
-  console.log("permission?");
-};
-
 const LinkButton = (props) => {
   const {
     history,
@@ -23,7 +19,6 @@ const LinkButton = (props) => {
     <NextButton
       {...rest} // `children` is just another prop!
       onClick={(event) => {
-        checkForNavigation();
         onClick && onClick(event);
         history.push(to);
       }}

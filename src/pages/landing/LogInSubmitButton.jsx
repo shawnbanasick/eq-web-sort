@@ -4,20 +4,20 @@ import { view } from "@risingstack/react-easy-state";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 
-const handleOnClick = () => {
-  console.log("clicked");
-};
+// const handleOnClick = () => {
+//   console.log("clicked");
+// };
 
-const LogInSubmitButton = () => {
+const LogInSubmitButton = (props) => {
   return (
-    <StyledHelpButton onClick={handleOnClick}>
+    <StyledSubmitButton onClick={props.onClick}>
       {langObj.loginSubmitButtonText}
-    </StyledHelpButton>
+    </StyledSubmitButton>
   );
 };
 export default view(LogInSubmitButton);
 
-const StyledHelpButton = styled.button`
+const StyledSubmitButton = styled.button`
   background: #337ab7;
   border-color: #2e6da4;
   color: white;

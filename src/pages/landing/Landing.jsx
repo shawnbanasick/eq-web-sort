@@ -1,13 +1,14 @@
 import React, { useEffect, Suspense } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
-import ReactHtmlParser from "react-html-parser";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
+import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import getGlobalState from "../../globalState/getGlobalState";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import LandingModal from "../landing/LandingModal";
 import LogInScreen from "./LogInScreen";
+import PartIdScreen from "./PartIdScreen";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
@@ -40,6 +41,7 @@ const LandingPage = () => {
           <SortTitleBar>{langObj.landingHead}</SortTitleBar>
           <LandingModal />
           <ContainerDiv>
+            <PartIdScreen />
             <LogInScreen />
             <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
           </ContainerDiv>

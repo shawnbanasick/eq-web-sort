@@ -7,20 +7,19 @@
      <item id="shuffleCards">true</item>
      <item id="showPostsort">true</item>
      <item id="showSurvey">true</item>
-     <item id="submitUrlMethod">firebase</item>
-  
+     <item id="firebaseOrLocal">firebase</item>
+     <item id="studyTitle">My_Q_project</item>  
+
 
      <!-- FOOTER -->
      <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.png" height="40" width="250" /}}}{{{/center}}}</item>
 
 
      <!-- LANDING -->
-     <item id="studyTitle">My_Q_project</item>
-     <!-- LANDING - access control -->
+     <item id="accessType">accessCode</item>
      <item id="partIdRequired">true</item>
      <item id="accessCodeRequired">true</item>
      <item id="accessCode">demo</item>
-     <item id="partNameRequired">true</item>
 
 
      <!-- POSTSORT -->

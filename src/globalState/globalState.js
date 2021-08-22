@@ -14,6 +14,13 @@ const globalState = store({
   cardHeight: 100,
   dataLoaded: false,
   rating2State: {},
+  partId: "anonymous",
+  displayLandingContent: false,
+  displayContinueButton: false,
+  displayAccessCodeWarning: false,
+  displayPartIdWarning: false,
+  userInputPartId: "",
+  userInputAccessCode: "",
 });
 
 export default globalState;
