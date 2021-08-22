@@ -20,7 +20,7 @@
         <item id="btnHelp">Help me!</item>
 
         <!-- LANDING SCREEN -->
-        <item id="welcomeHead">Welcome!</item>
+        <item id="landingHead">University Research Project</item>
         <item id="welcomeText">{{{center}}}{{{img src="/images/testImage.png" height="250" width="400" /}}}{{{/center}}}This is a demo project on iPad use in the classroom.{{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible!{{{br}}}{{{br}}}If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, {{{b}}}{{{i}}}reload{{{/i}}}{{{/b}}} this web page, and click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="620" height="450"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
@@ -72,9 +72,10 @@
 
 
         <!-- SUBMIT -->
-        <item id="btnTransfer">Submit data</item>
-        <item id="transferHead">Submit Data</item>
-        <item id="transferText">You've finished the survey. Please submit your data now.</item>
+        <item id="btnTransfer">Submit Data</item>
+        <item id="transferHead">Final Step</item>
+        <item id="transferTextAbove">{{{h1}}}You've finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the button to submit your data now.{{{/h2}}}</item>
+        <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferFailed">Data submission failed. Please try again.</item>
         <item id="transferOk">Thank you for using Easy HTMLQ!{br}{br}You can now close your browser window.</item>   
    </language>

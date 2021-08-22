@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
-// import getGlobalState from "../../globalState/getGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import SurveyTextElement from "./SurveyTextElement";
@@ -67,10 +66,12 @@ const SurveyPage = () => {
   };
 
   return (
-    <Container>
-      <h1>{langObj.postsortTitle}</h1>
-      <SurveyQuestions />
-    </Container>
+    <React.Fragment>
+      <SortTitleBar>{langObj.postsortTitle}</SortTitleBar>
+      <Container>
+        <SurveyQuestions />
+      </Container>
+    </React.Fragment>
   );
 };
 
@@ -81,4 +82,19 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 150px;
+`;
+
+const SortTitleBar = styled.div`
+  width: calc(100vw-4px);
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 5px;
+  min-height: 50px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
 `;

@@ -34,10 +34,12 @@ const LandingPage = () => {
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
-        <ContainerDiv>
-          <h1>{langObj.welcomeHead}</h1>
-          <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
-        </ContainerDiv>
+        <React.Fragment>
+          <SortTitleBar>{langObj.landingHead}</SortTitleBar>
+          <ContainerDiv>
+            <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
+          </ContainerDiv>
+        </React.Fragment>
       )}
     </Suspense>
   );
@@ -51,9 +53,25 @@ const ContainerDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
+  padding-top: 50px;
 `;
 
 const ContentDiv = styled.div`
   width: 75vw;
   font-size: 1.25em;
+`;
+
+const SortTitleBar = styled.div`
+  width: calc(100vw-4px);
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 5px;
+  min-height: 50px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
 `;

@@ -180,7 +180,7 @@ const TitleDiv = styled.div`
 `;
 
 const SortTitleBar = styled.div`
-  width: 100vw;
+  width: calc(100vw-4px);
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-top: 5px;
