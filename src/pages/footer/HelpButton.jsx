@@ -1,11 +1,34 @@
 import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
+import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
+const currentPage = getGlobalState("currentPage");
+let trigger;
+
+if (currentPage === "landing") {
+  trigger = "triggerLandingModal";
+}
+if (currentPage === "presort") {
+  trigger = "triggerPresortModal";
+}
+if (currentPage === "sort") {
+  trigger = "triggerSortModal";
+}
+if (currentPage === "postsort") {
+  trigger = "triggerSortModal";
+}
+if (currentPage === "survey") {
+  trigger = "triggerSurveyModal";
+}
+if (currentPage === "submit") {
+  trigger = "triggerSubmitModal";
+}
 
 const handleOnClick = () => {
-  console.log("clicked");
+  setGlobalState(trigger, true);
 };
 
 const HelpButton = () => {

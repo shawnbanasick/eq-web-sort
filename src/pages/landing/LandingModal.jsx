@@ -4,19 +4,36 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const LandingModal = () => {
-  const [open, setOpen] = useState(false);
+  //   const [open, setOpen] = useState(false);
+
+  const triggerLandingModal = getGlobalState("triggerLandingModal");
 
   // const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
+  const onCloseModal = () => {
+    setGlobalState("triggerLandingModal", false);
+  };
 
-  useEffect(() => {
-    setOpen(false);
-  }, []);
+  //   useEffect(() => {
+  //     if (triggerLandingModal === true) {
+  //       setOpen(true);
+  //     }
+  //   }, []);
+
+  //   useEffect(() => {
+  //     setOpen(false);
+  //   }, []);
 
   return (
-    <Modal className="customModal" open={open} onClose={onCloseModal} center>
+    <Modal
+      className="customModal"
+      open={triggerLandingModal}
+      onClose={onCloseModal}
+      center
+    >
       <ModalHeader>Step 1 of 5</ModalHeader>
       <hr />
       <ModalContent>

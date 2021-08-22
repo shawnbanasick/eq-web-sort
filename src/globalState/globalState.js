@@ -22,6 +22,8 @@ const globalState = store({
   userInputPartId: "",
   userInputAccessCode: "",
   displayNextButton: false,
+  triggerLandingModal: false,
+  triggerPresortModal: false,
 });
 
 export default globalState;

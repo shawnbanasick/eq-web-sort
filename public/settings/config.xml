@@ -16,7 +16,7 @@
 
 
      <!-- LANDING -->
-     <item id="initialScreen">partId-access</item>
+     <item id="initialScreen">anonymous</item>
      <item id="partIdRequired">true</item>
      <item id="accessCodeRequired">true</item>
      <item id="accessCode">demo</item>

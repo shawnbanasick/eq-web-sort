@@ -60,7 +60,7 @@ const LandingPage = () => {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
         <React.Fragment>
           <SortTitleBar>{langObj.landingHead}</SortTitleBar>
