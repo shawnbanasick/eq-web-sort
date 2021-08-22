@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
@@ -6,26 +6,23 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const LandingModal = () => {
-  //   const [open, setOpen] = useState(false);
-
   const triggerLandingModal = getGlobalState("triggerLandingModal");
+  const langObj = getGlobalState("languageObject");
+
+  const loginHelpModalHead = ReactHtmlParser(
+    decodeHTML(langObj.loginHelpModalHead)
+  );
+  const loginHelpModalText = ReactHtmlParser(
+    decodeHTML(langObj.loginHelpModalText)
+  );
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
     setGlobalState("triggerLandingModal", false);
   };
-
-  //   useEffect(() => {
-  //     if (triggerLandingModal === true) {
-  //       setOpen(true);
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     setOpen(false);
-  //   }, []);
 
   return (
     <Modal
@@ -34,11 +31,9 @@ const LandingModal = () => {
       onClose={onCloseModal}
       center
     >
-      <ModalHeader>Step 1 of 5</ModalHeader>
+      <ModalHeader>{loginHelpModalHead}</ModalHeader>
       <hr />
-      <ModalContent>
-        {ReactHtmlParser(window.languageXML.presortModalText)}
-      </ModalContent>
+      <ModalContent>{loginHelpModalText}</ModalContent>
     </Modal>
   );
 };
