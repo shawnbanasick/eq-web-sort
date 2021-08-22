@@ -16,6 +16,11 @@ const Sort = () => {
   const langObj = JSON.parse(localStorage.getItem("langObj"));
 
   useEffect(() => {
+    /* this is to adjust the margin of the sort grid because I can't know
+     the size - it will depend on how much the researcher writes in the 
+     "conditions of instruction" section - so, I grab the height of titleBar 
+     after render and reset the margin
+    */
     const sortGridMarginTop = JSON.parse(
       localStorage.getItem("sortGridMarginTop")
     );
