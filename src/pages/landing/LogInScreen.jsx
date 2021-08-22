@@ -14,7 +14,7 @@ const LogInScreen = () => {
   const configObj = JSON.parse(localStorage.getItem("configObj"));
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
-
+  const welcomeText = decodeHTML(langObj.loginWelcomeText);
   const handleLogIn = (e) => {
     setGlobalState("userInputPartId", e.target.value);
   };
@@ -59,7 +59,7 @@ const LogInScreen = () => {
 
   return (
     <React.Fragment>
-      <LogInWelcomeText>{langObj.loginWelcomeText}</LogInWelcomeText>
+      <LogInWelcomeText>{ReactHtmlParser(welcomeText)}</LogInWelcomeText>
       <Container>
         <div>
           <h2>{langObj.loginHeaderText}</h2>
@@ -109,7 +109,7 @@ const LogInWelcomeText = styled.div`
   width: 900px;
   font-size: 25px;
   line-height: 1.3em;
-  padding-left: 10px;
+  padding-left: 35px;
 `;
 
 const StyledHr = styled.hr`
