@@ -109,7 +109,6 @@ const StyledFooter = () => {
     CenterContent = (
       <React.Fragment>
         <HelpButton />
-
         <AdjustmentsContainer>
           <FooterFontSizer />
           <CardHeightSizer />
@@ -125,20 +124,6 @@ const StyledFooter = () => {
         </ProgressBarDiv>
       </React.Fragment>
     );
-  }
-
-  let displayCardHeightAdj = false;
-  if (currentPage === "sort" || currentPage === "postsort") {
-    displayCardHeightAdj = true;
-  }
-
-  let displayFontSizeAdj = false;
-  if (
-    currentPage === "sort" ||
-    currentPage === "postsort" ||
-    currentPage === "presort"
-  ) {
-    displayFontSizeAdj = true;
   }
 
   const nextPage = getNextPage(currentPage);
@@ -177,9 +162,10 @@ const ProgressBarDiv = styled.div`
 `;
 
 const LogoContainer = styled.div`
+  padding-top: 5px;
   display: flex;
   justify-self: start;
-  align-items: center;
+  align-self: center;
 `;
 
 const CenterDiv = styled.div`

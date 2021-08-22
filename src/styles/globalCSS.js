@@ -599,4 +599,11 @@ footer {
 }
 
 
+/***********************************
+  LANDING MODAL CSS
+ *******************************************************************************/
+
+  .customModal .react-responsive-modal-modal {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
  `;

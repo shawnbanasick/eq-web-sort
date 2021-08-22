@@ -37,6 +37,7 @@ const NextButton = styled.button`
   border-color: #2e6da4;
   color: white;
   font-size: 0.8em;
+  font-weight: bold;
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;

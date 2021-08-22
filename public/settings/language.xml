@@ -21,20 +21,25 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
-        <item id="welcomeText">{{{center}}}{{{img src="/images/testImage.png" height="250" width="400" /}}}{{{/center}}}This is a demo project on iPad use in the classroom.{{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible!{{{br}}}{{{br}}}If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, {{{b}}}{{{i}}}reload{{{/i}}}{{{/b}}} this web page, and click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="620" height="450"
+        <item id="welcomeText">{{{center}}}{{{h2}}}This is a demo project on iPad use in the classroom.{{{/h2}}} {{{/center}}}{{{br}}}
+        {{{center}}}{{{img src="/images/testImage.png" height="250" width="400" /}}}{{{/center}}}
+        {{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible! If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, and then click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="620" height="450"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
         <item id="introHead">Introduction</item>
         <item id="introText">This study is about iPad use in the classroom.</item>
 
+
         <!-- LANDING - ACCESS CONTROL - only displayed if access is restricted (see config-file) -->
-        <item id="loginHead">Access Code</item>
-        <item id="loginText">Please enter the access code for this survey.</item>
-        <item id="loginFormHeader">Access Code</item>
-        <item id="loginPartIdText">Your name or survey id number</item>
-        <item id="loginNoInput">Please insert the access code.</item>
+        <item id="accessCodeText">Access Code</item>
+        <item id="accessInputText">Please enter the access code for this survey</item>
+        <item id="loginSubmitButtonText">Submit</item>
+        <item id="loginPartIdText">Please enter your name or participant ID</item>
         <item id="loginInvalidInput">Access code invalid</item>
-        <item id="loginNoConnection">Connection to server failed. Please try again.</item>
+        <item id="loginHeaderText">Log In &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  (use ID="demo" and Access Code= "demo")</item>
+
+
+
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
         <item id="presortAgreement">Close to my Feelings</item>
@@ -43,14 +48,17 @@
         <item id="step1Head">Step 1 of 5</item>
         <item id="step1Text">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest.{br}{br}You can either drag the cards into one of the three piles or {b}press 1, 2, 3{/b} on your keyboard. Changes can be made later.{br}{br}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
 
+
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="step2Head">Step 2 of 5</item>
         <item id="step2Text">Take the cards from the "AGREE"-pile and arrange them on right side of the score sheet.{br}{br}Next, take the cards from the "DISAGREE"-pile and arrange them on the left side of the score sheet. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-piles.{br}{br}Finally, take the "NEUTRAL"-cards arange them in the remaining open boxes of the score sheet.</item>
         
+
         <item id="condOfInst">Sort the cards according to your experience with the iPads this semester</item>
         <item id="sortAgreement">Agree</item>
         <item id="sortDisagreement">Disagree</item>
         
+
         <!-- POSTSORT: check sorting, only displayed if showStep3== true (see config-file; leave blank to skip popup)-->
         <item id="step3Head">Step 3 of 5</item>
         <item id="step3Text">Now you have placed all cards on the score sheet. Please go over your distribution once more and swap card positions cards if desired.</item>
@@ -74,8 +82,10 @@
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{h1}}}You've finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the button to submit your data now.{{{/h2}}}</item>
+        <item id="transferTextAbove">{{{h1}}}You've finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the submit button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferFailed">Data submission failed. Please try again.</item>
         <item id="transferOk">Thank you for using Easy HTMLQ!{br}{br}You can now close your browser window.</item>   
+        <item id="loginNoConnection">Connection to server failed. Please try again.</item>
+
    </language>

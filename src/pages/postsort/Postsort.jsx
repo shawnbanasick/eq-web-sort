@@ -42,7 +42,7 @@ const PostSort = () => {
 
   const columnWidth = 250;
 
-  const instructionsText = langObj.postsortHeaderText;
+  // const instructionsText = langObj.postsortHeaderText;
 
   const agree = langObj.postsortAgreement;
   const disagree = langObj.postsortDisagreement;
@@ -155,28 +155,6 @@ const CardsContainer = styled.div`
   align-items: center;
   width: 100%;
   padding-bottom: 150px;
-`;
-
-const TitleDiv = styled.div`
-  display: flex;
-  padding: 20px;
-  height: auto;
-  background: steelblue;
-  overflow: hidden;
-
-  h1 {
-    color: white;
-    font-size: 36px;
-    margin-left: 30px;
-  }
-
-  h3 {
-    color: white;
-    width: 80%;
-    height: 50px;
-    font-size: 22px;
-    margin-left: 30px;
-  }
 `;
 
 const SortTitleBar = styled.div`

@@ -6,6 +6,8 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import LandingModal from "../landing/LandingModal";
+import LogInScreen from "./LogInScreen";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
@@ -36,7 +38,9 @@ const LandingPage = () => {
       {dataLoaded && (
         <React.Fragment>
           <SortTitleBar>{langObj.landingHead}</SortTitleBar>
+          <LandingModal />
           <ContainerDiv>
+            <LogInScreen />
             <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
           </ContainerDiv>
         </React.Fragment>
@@ -54,6 +58,15 @@ const ContainerDiv = styled.div`
   align-items: center;
   margin-bottom: 70px;
   padding-top: 50px;
+
+  img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  iframe {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `;
 
 const ContentDiv = styled.div`

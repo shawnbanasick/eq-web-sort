@@ -2,24 +2,26 @@
 
    <config version="1.0" htmlParse="false">
 
+
      <!-- GENERAL SETTINGS -->
      <item id="shuffleCards">true</item>
      <item id="showPostsort">true</item>
      <item id="showSurvey">true</item>
      <item id="submitUrlMethod">firebase</item>
   
+
      <!-- FOOTER -->
      <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.png" height="40" width="250" /}}}{{{/center}}}</item>
 
 
-
      <!-- LANDING -->
      <item id="studyTitle">My_Q_project</item>
-     <item id="textAlign">left</item>
      <!-- LANDING - access control -->
-     <item id="accessCodeRequired">false</item>
-     <item id="accessCode"></item>
+     <item id="partIdRequired">true</item>
+     <item id="accessCodeRequired">true</item>
+     <item id="accessCode">demo</item>
      <item id="partNameRequired">true</item>
+
 
      <!-- POSTSORT -->
      <item id="showSecondPosColumn">true</item>
@@ -36,7 +38,7 @@
         <input type="information"></input>
         <note bg="goldenrod">All fields marked with an * are required.</note>
      </item>
-     
+
      <item id="survey">
         <input type="text" required="true" maxlength="10" restricted="true"></input>
         <label>Text - write something cool</label>

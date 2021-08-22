@@ -1,5 +1,5 @@
 import React from "react";
-import globalState from "../../globalState/globalState";
+// import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
@@ -21,7 +21,7 @@ const SubmitPage = () => {
       <SortTitleBar>{langObj.transferHead}</SortTitleBar>
       <ContainerDiv>
         <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
-        <SubmitButton>Submit Data</SubmitButton>
+        <SubmitButton />
         <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
       </ContainerDiv>
     </React.Fragment>
@@ -60,7 +60,7 @@ const ContentDiv = styled.div`
   justify-content: center;
   align-items: center;
   line-height: 1.2em;
-  width: 75vw;
+  width: 85vw;
   font-size: 1.35em;
   padding: 25px;
   align-self: center;
