@@ -5,23 +5,19 @@
         <!-- MISC -->
         <item id="btnContinue">Continue...</item>
         <item id="btnclose">Close</item>
-        <item id="btnHelp">Help me!</item>
-        <item id="btnAgreement">Agree</item>
-        <item id="btnNeutral">Neutral</item>
-        <item id="btnDisagreement">Disagree</item>
-        <item id="btnTransfer">Submit data</item>
+      
         <item id="btnExit">Exit</item>
         <item id="selectItem">Please select...</item>
         <item id="btnNext">Continue</item>
         
         <!-- ERRORS -->
         <item id="errorHead">Error!</item>
-        <item id="errorWindowTooSmall">Please maximize your browser for using this application.</item>
         <item id="fillInRequiredFields">Please fill in all required fields</item>
 
         <!-- FOOTER -->
         <item id="fontSize">Font Size</item>
         <item id="cardHeight">Card Height</item>
+        <item id="btnHelp">Help me!</item>
 
         <!-- LANDING SCREEN -->
         <item id="welcomeHead">Welcome!</item>
@@ -41,14 +37,19 @@
         <item id="loginNoConnection">Connection to server failed. Please try again.</item>
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
+        <item id="presortAgreement">Close to my Feelings</item>
+        <item id="presortNeutral">Neutral</item>
+        <item id="presortDisagreement">Different from my Feelings</item>
         <item id="step1Head">Step 1 of 5</item>
         <item id="step1Text">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest.{br}{br}You can either drag the cards into one of the three piles or {b}press 1, 2, 3{/b} on your keyboard. Changes can be made later.{br}{br}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="step2Head">Step 2 of 5</item>
         <item id="step2Text">Take the cards from the "AGREE"-pile and arrange them on right side of the score sheet.{br}{br}Next, take the cards from the "DISAGREE"-pile and arrange them on the left side of the score sheet. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-piles.{br}{br}Finally, take the "NEUTRAL"-cards arange them in the remaining open boxes of the score sheet.</item>
-        <item id="step2CondOfInstruc">Sort the cards according to your experience with the iPads this semester</item>
-        <item id="condOfInst">Conditions of Instruction</item>
+        
+        <item id="condOfInst">Sort the cards according to your experience with the iPads this semester</item>
+        <item id="sortAgreement">Agree</item>
+        <item id="sortDisagreement">Disagree</item>
         
         <!-- POSTSORT: check sorting, only displayed if showStep3== true (see config-file; leave blank to skip popup)-->
         <item id="step3Head">Step 3 of 5</item>
@@ -58,9 +59,10 @@
         <item id="step4Text">Please explain why you agree most or disagree most with the following statements you have placed below "+4" or "-4".</item>
         <item id="postsortHeader">Post-Sort Comments</item>
         <item id="postsortHeaderText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae tristique eros. Nullam laoreet varius massa ac finibus. Nullam eget lobortis dolor. Praesent enim risus, hendrerit at dui eu, facilisis maximus nibh. Quisque pharetra ante sit amet nulla facilisis, quis faucibus ex mollis. Morbi molestie mi id justo tincidunt dapibus.</item>
-        
         <item id="placeholder">Click here to add comment</item>
-
+        <item id="postsortAgreement">Agree</item>
+        <item id="postsortNeutral">Neutral</item>
+        <item id="postsortDisagreement">Disagree</item>
 
 
         <!-- SURVEY: Additional questions, only displayed if showStep5== true (see config-file; leave blank to skip popup)-->
@@ -70,6 +72,7 @@
 
 
         <!-- SUBMIT -->
+        <item id="btnTransfer">Submit data</item>
         <item id="transferHead">Submit Data</item>
         <item id="transferText">You've finished the survey. Please submit your data now.</item>
         <item id="transferFailed">Data submission failed. Please try again.</item>

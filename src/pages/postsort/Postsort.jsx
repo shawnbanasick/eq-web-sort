@@ -44,9 +44,9 @@ const PostSort = () => {
 
   const instructionsText = langObj.postsortHeaderText;
 
-  const agree = langObj.btnAgreement;
-  const disagree = langObj.btnDisagreement;
-  const neutral = langObj.btnNeutral;
+  const agree = langObj.postsortAgreement;
+  const disagree = langObj.postsortDisagreement;
+  const neutral = langObj.postsortNeutral;
   const placeholder = langObj.placeholder;
 
   const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
@@ -84,10 +84,7 @@ const PostSort = () => {
 
   return (
     <div>
-      <TitleDiv>
-        <h1>{titleText}</h1>
-        <h3>{instructionsText}</h3>
-      </TitleDiv>
+      <SortTitleBar>{titleText}</SortTitleBar>
       <CardsContainer>
         <HighCards
           agreeObj={agreeObj}
@@ -182,19 +179,17 @@ const TitleDiv = styled.div`
   }
 `;
 
-// const PostsortPage = () => {
-//   setTimeout(function () {
-//     setGlobalState("currentPage", "postsort");
-//   }, 100);
-//   console.log(globalState);
-
-//   const isSortComplete = getGlobalState("isSortingCards");
-
-//   return (
-//     <div>
-//       <h1>PostSort Page!</h1>
-//     </div>
-//   );
-// };
-
-// export default view(PostsortPage);
+const SortTitleBar = styled.div`
+  width: 100vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 5px;
+  min-height: 50px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+`;

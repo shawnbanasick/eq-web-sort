@@ -296,11 +296,10 @@ const ColumnNamesDiv = styled.div`
 const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-50);
-  grid-template-rows: 250px 30px 1fr;
+  grid-template-rows: 235px 25px 1fr;
   grid-template-columns: 1fr 320px 320px 320px 1fr;
   row-gap: 10px;
   column-gap: 20px;
-  margin-top: 10px;
 `;
 
 const DroppableContainer = styled.div`

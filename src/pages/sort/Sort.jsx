@@ -29,9 +29,9 @@ const Sort = () => {
   return (
     <HeaderContainer>
       <SortTitleBar>
-        <Disagree>{langObj.btnDisagreement}</Disagree>
+        <Disagree>{langObj.sortDisagreement}</Disagree>
         <CondOfInst>{langObj.condOfInst}</CondOfInst>
-        <Agree>{langObj.btnAgreement}</Agree>
+        <Agree>{langObj.sortAgreement}</Agree>
       </SortTitleBar>
       <SortGrid cardFontSize={cardFontSize} />;
     </HeaderContainer>
@@ -44,7 +44,8 @@ const SortTitleBar = styled.div`
   width: 98vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  min-height: 30px;
+  padding-bottom: 5px;
+  min-height: 50px;
   display: inline-grid;
   grid-template-columns: 15% 1fr 15%;
   color: black;
@@ -57,6 +58,7 @@ const CondOfInst = styled.div`
   padding: 5px;
   border-radius: 5px;
   text-align: center;
+  align-self: end;
 `;
 
 const Agree = styled.div`
@@ -76,5 +78,6 @@ const Disagree = styled.div`
 `;
 
 const HeaderContainer = styled.div`
+  padding-bottom: 100px;
   background-color: black;
 `;
