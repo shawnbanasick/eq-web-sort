@@ -4,10 +4,6 @@ import { view } from "@risingstack/react-easy-state";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
 
-// const handleOnClick = () => {
-//   console.log("clicked");
-// };
-
 const LogInSubmitButton = (props) => {
   return (
     <StyledSubmitButton onClick={props.onClick}>
