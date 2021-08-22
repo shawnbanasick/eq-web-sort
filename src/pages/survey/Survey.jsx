@@ -82,10 +82,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 150px;
+  margin-top: 50px;
 `;
 
 const SortTitleBar = styled.div`
-  width: calc(100vw-4px);
+  width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-top: 5px;
@@ -97,4 +98,6 @@ const SortTitleBar = styled.div`
   color: white;
   font-weight: bold;
   font-size: 28px;
+  position: fixed;
+  top: 0;
 `;
