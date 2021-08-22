@@ -294,8 +294,10 @@ const ColumnNamesDiv = styled.div`
 `;
 
 const PresortGrid = styled.div`
+  margin-top: 50px;
+  margin-bottom: 75px;
   display: grid;
-  height: calc(100vh-50);
+  height: calc(100vh-75);
   grid-template-rows: 235px 25px 1fr;
   grid-template-columns: 1fr 320px 320px 320px 1fr;
   row-gap: 10px;

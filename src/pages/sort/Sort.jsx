@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
+import { view, store } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import SortGrid from "./SortGrid";
@@ -7,16 +7,38 @@ import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 let startTime;
+const localStore = store({
+  topMargin: 50,
+});
 
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   const langObj = JSON.parse(localStorage.getItem("langObj"));
 
   useEffect(() => {
+    const sortGridMarginTop = JSON.parse(
+      localStorage.getItem("sortGridMarginTop")
+    );
+    console.log(sortGridMarginTop);
+    if (sortGridMarginTop === undefined || sortGridMarginTop === null) {
+      setTimeout(() => {
+        const height = document.getElementById("sortTitleBar").clientHeight;
+        console.log(height);
+        const height2 = height;
+        localStore["topMargin"] = height2;
+        console.log(height2);
+        localStorage.setItem("sortGridMarginTop", JSON.stringify(height2));
+      }, 300);
+    } else {
+      localStore["topMargin"] = +sortGridMarginTop;
+    }
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
     }, 200);
-  });
+  }, []);
 
   // calc time on page
   useEffect(() => {
@@ -27,21 +49,23 @@ const Sort = () => {
   }, []);
 
   return (
-    <HeaderContainer>
-      <SortTitleBar>
+    <React.Fragment>
+      <SortTitleBar id="sortTitleBar">
         <Disagree>{langObj.sortDisagreement}</Disagree>
         <CondOfInst>{langObj.condOfInst}</CondOfInst>
         <Agree>{langObj.sortAgreement}</Agree>
       </SortTitleBar>
-      <SortGrid cardFontSize={cardFontSize} />;
-    </HeaderContainer>
+      <SortGridContainer marginTop={localStore.topMargin}>
+        <SortGrid cardFontSize={cardFontSize} />;
+      </SortGridContainer>
+    </React.Fragment>
   );
 };
 
 export default view(Sort);
 
 const SortTitleBar = styled.div`
-  width: 98vw;
+  width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-bottom: 5px;
@@ -50,6 +74,9 @@ const SortTitleBar = styled.div`
   grid-template-columns: 15% 1fr 15%;
   color: black;
   font-weight: bold;
+  background-color: black;
+  position: fixed;
+  top: 0;
 `;
 
 const CondOfInst = styled.div`
@@ -77,7 +104,6 @@ const Disagree = styled.div`
   padding-bottom: 5px;
 `;
 
-const HeaderContainer = styled.div`
-  padding-bottom: 100px;
-  background-color: black;
+const SortGridContainer = styled.div`
+  margin-top: ${(props) => `${props.marginTop}px`};
 `;
