@@ -12,7 +12,12 @@ import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 
 const langObj = JSON.parse(localStorage.getItem("langObj"));
-const configObj = JSON.parse(localStorage.getItem("configObj"));
+// const configObj = JSON.parse(localStorage.getItem("configObj"));
+const configObj = getGlobalState("configObj");
+
+const headerBarColor = configObj.headerBarColor;
+// const headerBarColor = "#83cafe";
+console.log(headerBarColor);
 const welcomeTextHtml = decodeHTML(langObj.welcomeText);
 let startTime;
 
@@ -63,7 +68,9 @@ const LandingPage = () => {
     <Suspense fallback={<h2>Loading...</h2>}>
       {dataLoaded && (
         <React.Fragment>
-          <SortTitleBar>{langObj.landingHead}</SortTitleBar>
+          <SortTitleBar background={headerBarColor}>
+            {langObj.landingHead}
+          </SortTitleBar>
           <LandingModal />
           <ContainerDiv>
             {displayLogInScreen && <LogInScreen />}
@@ -133,9 +140,9 @@ const SortTitleBar = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  padding-top: 5px;
+  padding-top: 8px;
   min-height: 50px;
-  background-color: black;
+  background: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;
@@ -145,3 +152,5 @@ const SortTitleBar = styled.div`
   position: fixed;
   top: 0;
 `;
+
+// ${(props) => props.color};

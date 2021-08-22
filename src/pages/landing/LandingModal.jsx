@@ -13,10 +13,10 @@ const LandingModal = () => {
   const langObj = getGlobalState("languageObject");
 
   const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.loginHelpModalHead)
+    decodeHTML(langObj.landingHelpModalHead)
   );
   const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.loginHelpModalText)
+    decodeHTML(langObj.landingHelpModalText)
   );
 
   // const onOpenModal = () => setOpen(true);

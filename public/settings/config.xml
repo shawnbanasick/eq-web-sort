@@ -8,7 +8,9 @@
      <item id="showPostsort">true</item>
      <item id="showSurvey">true</item>
      <item id="firebaseOrLocal">firebase</item>
-     <item id="studyTitle">My_Q_project</item>  
+     <item id="studyTitle">My_Q_project</item> 
+     <item id="headerBarColor">#337ab7</item> 
+
 
 
      <!-- FOOTER -->
