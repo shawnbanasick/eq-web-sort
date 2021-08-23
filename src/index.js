@@ -3,14 +3,19 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/globalCSS";
+import styled, { ThemeProvider } from "styled-components";
+import { Waiter } from "react-wait";
 import axios from "axios";
 import processConfigXMLData from "./utilities/processConfigXMLData";
 import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
+// import getGlobalState from "./globalState/getGlobalState";
 import setGlobalState from "./globalState/setGlobalState";
-import styled, { ThemeProvider } from "styled-components";
+import globalState from "./globalState/globalState";
+
 const convert = require("xml-js");
+
 const App = React.lazy(() => import("./App"));
 
 const theme = {
@@ -18,6 +23,15 @@ const theme = {
   secondary: "#285f8f",
   focus: "#63a0d4",
 };
+
+const StyledLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  font-style: italic;
+  font-size: 35px;
+`;
 
 (async () => {
   await axios
@@ -28,7 +42,6 @@ const theme = {
       const options = { compact: true, ignoreComment: true, spaces: 4 };
       const languageData = convert.xml2js(response.data, options);
       let languageObject = processLanguageXMLData(languageData);
-      setGlobalState("languageObject", languageObject);
       localStorage.setItem("langObj", JSON.stringify(languageObject));
     })
     .catch(function (error) {
@@ -73,17 +86,10 @@ const theme = {
     .catch(function (error) {
       console.log(error);
     });
-  setGlobalState("dataLoaded", true);
-})();
 
-const StyledLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-  font-style: italic;
-  font-size: 35px;
-`;
+  setGlobalState("dataLoaded", true);
+  // console.log(JSON.stringify(globalState.languageObject));
+})();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -96,7 +102,9 @@ ReactDOM.render(
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <App />
+        <Waiter>
+          <App />
+        </Waiter>
       </ThemeProvider>
     </React.Suspense>
   </React.StrictMode>,

@@ -12,14 +12,7 @@ import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 
 const LandingPage = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
-  // const configObj = JSON.parse(localStorage.getItem("configObj"));
-  const configObj = getGlobalState("configObj");
-  const headerBarColor = configObj.headerBarColor;
-  console.log(headerBarColor);
-  const welcomeTextHtml = decodeHTML(langObj.welcomeText);
-  let startTime;
-  const dataLoaded = getGlobalState("dataLoaded");
+  console.log("landing start");
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,6 +29,16 @@ const LandingPage = () => {
       calculateTimeOnPage(startTime, "landingPage", "landingPage");
     };
   }, []);
+
+  // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const configObj = getGlobalState("configObj");
+  const langObj = getGlobalState("languageObject");
+  const headerBarColor = configObj.headerBarColor;
+  console.log(headerBarColor);
+  const welcomeTextHtml = decodeHTML(langObj.welcomeText);
+  let startTime;
+  const dataLoaded = getGlobalState("dataLoaded");
 
   // check for complete
   let displayLandingContent = getGlobalState("displayLandingContent");
@@ -61,7 +64,7 @@ const LandingPage = () => {
   }
 
   return (
-    <Suspense fallback={<h2>Loading...</h2>}>
+    <React.Fragment>
       {dataLoaded && (
         <React.Fragment>
           <SortTitleBar background={headerBarColor}>
@@ -78,7 +81,7 @@ const LandingPage = () => {
           </ContainerDiv>
         </React.Fragment>
       )}
-    </Suspense>
+    </React.Fragment>
   );
 };
 

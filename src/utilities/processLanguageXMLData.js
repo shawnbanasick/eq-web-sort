@@ -1,3 +1,5 @@
+import setGlobalState from "../globalState/setGlobalState";
+
 const processLanguageXMLData = (dataObject) => {
   try {
     const data = dataObject.language.item;
@@ -10,6 +12,7 @@ const processLanguageXMLData = (dataObject) => {
     console.log(languageObject.btnNext);
     localStorage.setItem("btnNext", languageObject.btnNext);
     localStorage.setItem("fontSizeText", languageObject.fontSize);
+    setGlobalState("languageObject", languageObject);
 
     return languageObject;
   } catch (error) {
