@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
@@ -6,24 +6,27 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const PresortModal = () => {
-  const [open, setOpen] = useState(false);
+  // trigger
+  const triggerPresortModal = getGlobalState("triggerPresortModal");
+  const onCloseModal = () => {
+    setGlobalState("triggerPresortModal", false);
+  };
 
-  // const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
-
+  // set language
   const langObj = getGlobalState("langObj");
-
   const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead));
   const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText));
 
-  useEffect(() => {
-    setOpen(true);
-  }, []);
-
   return (
-    <Modal className="customModal" open={open} onClose={onCloseModal} center>
+    <Modal
+      className="customModal"
+      open={triggerPresortModal}
+      onClose={onCloseModal}
+      center
+    >
       <ModalHeader>{header}</ModalHeader>
       <hr />
       <ModalContent>{modalText}</ModalContent>

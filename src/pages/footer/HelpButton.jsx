@@ -4,34 +4,34 @@ import { view } from "@risingstack/react-easy-state";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-const currentPage = getGlobalState("currentPage");
-let trigger;
-
-if (currentPage === "landing") {
-  trigger = "triggerLandingModal";
-}
-if (currentPage === "presort") {
-  trigger = "triggerPresortModal";
-}
-if (currentPage === "sort") {
-  trigger = "triggerSortModal";
-}
-if (currentPage === "postsort") {
-  trigger = "triggerSortModal";
-}
-if (currentPage === "survey") {
-  trigger = "triggerSurveyModal";
-}
-if (currentPage === "submit") {
-  trigger = "triggerSubmitModal";
-}
-
-const handleOnClick = () => {
-  setGlobalState(trigger, true);
-};
-
 const HelpButton = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const currentPage = getGlobalState("currentPage");
+  let trigger;
+
+  if (currentPage === "landing") {
+    trigger = "triggerLandingModal";
+  }
+  if (currentPage === "presort") {
+    trigger = "triggerPresortModal";
+  }
+  if (currentPage === "sort") {
+    trigger = "triggerSortModal";
+  }
+  if (currentPage === "postsort") {
+    trigger = "triggerSortModal";
+  }
+  if (currentPage === "survey") {
+    trigger = "triggerSurveyModal";
+  }
+  if (currentPage === "submit") {
+    trigger = "triggerSubmitModal";
+  }
+
+  const handleOnClick = () => {
+    setGlobalState(trigger, true);
+  };
+
   return (
     <StyledHelpButton tabindex="0" onClick={handleOnClick}>
       {langObj.btnHelp}
