@@ -16,6 +16,7 @@ import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import setGlobalState from "./globalState/setGlobalState";
 import styled from "styled-components";
 import LoadingScreen from "./pages/landing/LoadingScreen";
+import PromptUnload from "./utilities/PromptUnload";
 
 const convert = require("xml-js");
 
@@ -96,6 +97,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <PromptUnload />
         <Switch>
           <Route exact path="/presort" component={PresortPage} />
           <Route exact path="/sort" component={SortPage} />
