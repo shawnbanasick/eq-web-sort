@@ -10,7 +10,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 
 const LandingModal = () => {
   const triggerLandingModal = getGlobalState("triggerLandingModal");
-  const langObj = getGlobalState("languageObject");
+  const langObj = getGlobalState("langObj");
 
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.landingHelpModalHead)

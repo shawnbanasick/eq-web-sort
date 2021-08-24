@@ -4,11 +4,27 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
+import globalState from "../../globalState/globalState";
 
 function PresortDND(props) {
+  console.log(JSON.stringify(globalState, null, 2));
   useEffect(() => {}, []);
 
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const langObj2 = JSON.parse(localStorage.getItem("langObj"));
+
+  const langObj = getGlobalState("langObj");
+
+  const statementsName = langObj.presortStatements;
+  const btnDisagreement = langObj.presortDisagreement;
+  const btnAgreement = langObj.presortAgreement;
+  const btnNeutral = langObj.presortNeutral;
+  // console.log(JSON.stringify(langObj, null, 2));
+  // console.log(JSON.stringify(langObj2, null, 2));
+  console.log(statementsName);
+  console.log(btnDisagreement);
+  console.log(btnNeutral);
+  console.log(btnAgreement);
 
   let presortSortedStatementsNum =
     localStorage.getItem("presortSortedStatementsNum") || 0;
@@ -20,22 +36,22 @@ function PresortDND(props) {
 
   const columnsFromBackend = {
     cards: {
-      name: langObj.statements,
+      name: statementsName,
       items: itemsFromBackend,
       id: "cards",
     },
     neg: {
-      name: langObj.btnDisagreement,
+      name: btnDisagreement,
       items: [],
       id: "neg",
     },
     neutral: {
-      name: langObj.btnNeutral,
+      name: btnNeutral,
       items: [],
       id: "neutral",
     },
     pos: {
-      name: langObj.btnAgreement,
+      name: btnAgreement,
       id: "pos",
       items: [],
     },
@@ -294,15 +310,17 @@ export default view(PresortDND);
 const ColumnNamesDiv = styled.div`
   font-size: 20px;
   font-weight: bold;
+  padding-left: 3px;
+  padding-right: 3px;
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 50px;
+  margin-top: 70px;
   margin-bottom: 75px;
   display: grid;
   height: calc(100vh-75);
   grid-template-rows: 235px 25px 1fr;
-  grid-template-columns: 1fr 320px 320px 320px 1fr;
+  grid-template-columns: 1fr 330px 330px 330px 1fr;
   row-gap: 10px;
   column-gap: 20px;
 `;

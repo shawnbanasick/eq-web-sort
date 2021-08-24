@@ -33,7 +33,7 @@ const LandingPage = () => {
   // const langObj = JSON.parse(localStorage.getItem("langObj"));
   // const configObj = JSON.parse(localStorage.getItem("configObj"));
   const configObj = getGlobalState("configObj");
-  const langObj = getGlobalState("languageObject");
+  const langObj = getGlobalState("langObj");
   const headerBarColor = configObj.headerBarColor;
   console.log(headerBarColor);
   const welcomeTextHtml = decodeHTML(langObj.welcomeText);

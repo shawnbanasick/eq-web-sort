@@ -41,8 +41,8 @@ const StyledLoading = styled.div`
     .then(function (response) {
       const options = { compact: true, ignoreComment: true, spaces: 4 };
       const languageData = convert.xml2js(response.data, options);
-      let languageObject = processLanguageXMLData(languageData);
-      localStorage.setItem("langObj", JSON.stringify(languageObject));
+      let langObj = processLanguageXMLData(languageData);
+      localStorage.setItem("langObj", JSON.stringify(langObj));
     })
     .catch(function (error) {
       console.log(error);

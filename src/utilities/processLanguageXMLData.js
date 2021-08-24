@@ -4,17 +4,18 @@ const processLanguageXMLData = (dataObject) => {
   try {
     const data = dataObject.language.item;
 
-    const languageObject = {};
+    const langObj = {};
     for (let i = 0; i < data.length; i++) {
-      languageObject[data[i]._attributes.id] = data[i]._text;
+      langObj[data[i]._attributes.id] = data[i]._text;
+      setGlobalState([data[i]._attributes.id], data[i]._text);
     }
     // set default
-    console.log(languageObject.btnNext);
-    localStorage.setItem("btnNext", languageObject.btnNext);
-    localStorage.setItem("fontSizeText", languageObject.fontSize);
-    setGlobalState("languageObject", languageObject);
+    console.log(langObj.btnNext);
+    localStorage.setItem("btnNext", langObj.btnNext);
+    localStorage.setItem("fontSizeText", langObj.fontSize);
+    setGlobalState("langObj", langObj);
 
-    return languageObject;
+    return langObj;
   } catch (error) {
     console.log("there was a language import error");
   }

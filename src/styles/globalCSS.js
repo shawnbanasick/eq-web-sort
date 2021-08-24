@@ -483,17 +483,17 @@ footer {
   }
 
   #pos{
-    min-height: 53.5vh;
+    min-height: 52vh;
     border-radius: 3px;
   }
 
   #neutral{
-    min-height: 53.5vh;
+    min-height: 52vh;
     border-radius: 3px;
   }
 
   #neg{
-    min-height: 53.5vh;
+    min-height: 52vh;
     border-radius: 3px;
   }
 

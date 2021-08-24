@@ -1,8 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "./globalState/getGlobalState";
-// import setGlobalState from "./globalState/setGlobalState";
 import LandingPage from "./pages/landing/Landing";
 import PostsortPage from "./pages/postsort/Postsort";
 import PresortPage from "./pages/presort/Presort";
