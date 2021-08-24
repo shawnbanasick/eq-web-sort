@@ -6,12 +6,15 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SubmitButton from "./SubmitButton";
-
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-const transferTextAbove = decodeHTML(langObj.transferTextAbove);
-const transferTextBelow = decodeHTML(langObj.transferTextBelow);
+import getGlobalState from "../../globalState/getGlobalState";
 
 const SubmitPage = () => {
+  // // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
+  console.log(JSON.stringify(langObj, null, 2));
+  const transferTextAbove = decodeHTML(langObj.transferTextAbove);
+  const transferTextBelow = decodeHTML(langObj.transferTextBelow);
+
   setTimeout(function () {
     setGlobalState("currentPage", "submit");
   }, 100);
@@ -24,6 +27,7 @@ const SubmitPage = () => {
         <SubmitButton />
         <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
       </ContainerDiv>
+      {/* <h1>test</h1> */}
     </React.Fragment>
   );
 };

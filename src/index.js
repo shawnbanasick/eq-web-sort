@@ -5,8 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/globalCSS";
 import styled, { ThemeProvider } from "styled-components";
 import { Waiter } from "react-wait";
-
-const App = React.lazy(() => import("./App"));
+import App from "./App";
 
 const theme = {
   primary: "#337ab7",

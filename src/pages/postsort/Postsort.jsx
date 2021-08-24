@@ -14,11 +14,10 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 let startTime;
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-
-const configObj = JSON.parse(localStorage.getItem("configObj"));
-
 const PostSort = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const configObj = JSON.parse(localStorage.getItem("configObj"));
+
   useEffect(() => {
     startTime = Date.now();
     setGlobalState("currentPage", "postsort");

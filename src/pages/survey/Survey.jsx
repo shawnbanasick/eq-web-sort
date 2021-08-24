@@ -14,9 +14,8 @@ import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-
 const SurveyPage = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
   let surveyQuestionObjects;
   useEffect(() => {
     setTimeout(function () {

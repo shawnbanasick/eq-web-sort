@@ -37,6 +37,7 @@ function App() {
           const languageData = convert.xml2js(response.data, options);
           let langObj = processLanguageXMLData(languageData);
           localStorage.setItem("langObj", JSON.stringify(langObj));
+          setGlobalState("langObj", langObj);
         })
         .catch(function (error) {
           console.log(error);
@@ -93,6 +94,8 @@ function App() {
   if (isLoading) {
     return <div className="App">Loading...</div>;
   }
+
+  // console.log(JSON.stringify(globalState, null, 2));
 
   return (
     <div className="App">

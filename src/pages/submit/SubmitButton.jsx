@@ -2,13 +2,12 @@ import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-
 const handleClick = () => {
   console.log("clicked");
 };
 
 const SubmitButton = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
   return (
     <StyledButton tabindex="0" onClick={handleClick}>
       {langObj.btnTransfer}

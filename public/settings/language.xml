@@ -88,7 +88,7 @@
         <item id="submitModalText">Finally, please answer the following questions regarding your background.</item>
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{h1}}}You've finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the submit button to transmit your results.{{{/h2}}}</item>
+        <item id="transferTextAbove">{{{h1}}}You have finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the submit button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferFailed">Data submission failed. Please try again.</item>
         <item id="transferOk">Thank you for using Easy HTMLQ!{br}{br}You can now close your browser window.</item>   

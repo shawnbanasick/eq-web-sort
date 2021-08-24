@@ -13,7 +13,6 @@ const processLanguageXMLData = (dataObject) => {
     console.log(langObj.btnNext);
     localStorage.setItem("btnNext", langObj.btnNext);
     localStorage.setItem("fontSizeText", langObj.fontSize);
-    setGlobalState("langObj", langObj);
 
     return langObj;
   } catch (error) {
