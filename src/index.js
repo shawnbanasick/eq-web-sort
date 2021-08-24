@@ -5,16 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/globalCSS";
 import styled, { ThemeProvider } from "styled-components";
 import { Waiter } from "react-wait";
-import axios from "axios";
-import processConfigXMLData from "./utilities/processConfigXMLData";
-import processMapXMLData from "./utilities/processMapXMLData";
-import processLanguageXMLData from "./utilities/processLanguageXMLData";
-import processStatementsXMLData from "./utilities/processStatementsXMLData";
-// import getGlobalState from "./globalState/getGlobalState";
-import setGlobalState from "./globalState/setGlobalState";
-import globalState from "./globalState/globalState";
-
-const convert = require("xml-js");
 
 const App = React.lazy(() => import("./App"));
 
@@ -32,64 +22,6 @@ const StyledLoading = styled.div`
   font-style: italic;
   font-size: 35px;
 `;
-
-(async () => {
-  await axios
-    .get("./settings/language.xml", {
-      "Content-Type": "application/xml; charset=utf-8",
-    })
-    .then(function (response) {
-      const options = { compact: true, ignoreComment: true, spaces: 4 };
-      const languageData = convert.xml2js(response.data, options);
-      let langObj = processLanguageXMLData(languageData);
-      localStorage.setItem("langObj", JSON.stringify(langObj));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  await axios
-    .get("./settings/config.xml", {
-      "Content-Type": "application/xml; charset=utf-8",
-    })
-    .then(function (response) {
-      const options = { compact: false, ignoreComment: true, spaces: 2 };
-      const configData = convert.xml2js(response.data, options);
-      processConfigXMLData(configData);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  await axios
-    .get("./settings/map.xml", {
-      "Content-Type": "application/xml; charset=utf-8",
-    })
-    .then(function (response) {
-      const options = { compact: true, ignoreComment: true, spaces: 4 };
-      const mapData = convert.xml2js(response.data, options);
-      processMapXMLData(mapData);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  await axios
-    .get("./settings/statements.xml", {
-      "Content-Type": "application/xml; charset=utf-8",
-    })
-    .then(function (response) {
-      const options = { compact: true, ignoreComment: true, spaces: 4 };
-      const statementsData = convert.xml2js(response.data, options);
-      processStatementsXMLData(statementsData);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  setGlobalState("dataLoaded", true);
-  // console.log(JSON.stringify(globalState.languageObject));
-})();
 
 ReactDOM.render(
   <React.StrictMode>
