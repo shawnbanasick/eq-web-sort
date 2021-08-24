@@ -22,7 +22,7 @@ export default LoadingScreen;
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  height: 700px;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 `;

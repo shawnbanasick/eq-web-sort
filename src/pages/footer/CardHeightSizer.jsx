@@ -3,24 +3,23 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import setGlobalState from "../../globalState/setGlobalState";
 
-const increaseFontSize = () => {
-  const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
-  const newSize = currentSize + 2;
-  setGlobalState("cardHeight", newSize);
-
-  localStorage.setItem("cardHeight", JSON.stringify(newSize));
-};
-const decreaseFontSize = () => {
-  const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
-  const newSize = currentSize - 2;
-  setGlobalState("cardHeight", newSize);
-  console.log(newSize);
-  localStorage.setItem("cardHeight", JSON.stringify(newSize));
-};
-
-const langObj = JSON.parse(localStorage.getItem("langObj"));
-
 const CardHeightSizer = () => {
+  const langObj = JSON.parse(localStorage.getItem("langObj"));
+
+  const increaseFontSize = () => {
+    const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    const newSize = currentSize + 2;
+    setGlobalState("cardHeight", newSize);
+
+    localStorage.setItem("cardHeight", JSON.stringify(newSize));
+  };
+  const decreaseFontSize = () => {
+    const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    const newSize = currentSize - 2;
+    setGlobalState("cardHeight", newSize);
+    localStorage.setItem("cardHeight", JSON.stringify(newSize));
+  };
+
   return (
     <Container>
       <SpanDiv>{langObj.cardHeight}</SpanDiv>

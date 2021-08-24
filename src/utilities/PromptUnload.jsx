@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Prompt, isPrompt } from "react-router-dom";
+import { Prompt } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
 
 const PromptUnload = () => {

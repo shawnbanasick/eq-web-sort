@@ -6,7 +6,6 @@ const processStatementsXMLData = (dataObject) => {
   const data = dataObject.statements.statement;
   const statementsArray = [];
   const hasBeenLoaded = localStorage.getItem("hasBeenLoaded");
-  console.log("LOADED: ", hasBeenLoaded);
 
   if (!hasBeenLoaded) {
     console.log("called!!");

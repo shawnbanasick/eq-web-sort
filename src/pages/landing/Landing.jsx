@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect } from "react";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled, { keyframes } from "styled-components";
 import { view } from "@risingstack/react-easy-state";
@@ -12,8 +12,6 @@ import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 
 const LandingPage = () => {
-  console.log("landing start");
-
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("progressScore", 10);
@@ -24,7 +22,7 @@ const LandingPage = () => {
 
   // calc time on page
   useEffect(() => {
-    startTime = Date.now();
+    const startTime = Date.now();
     return () => {
       calculateTimeOnPage(startTime, "landingPage", "landingPage");
     };
@@ -35,9 +33,7 @@ const LandingPage = () => {
   const configObj = getGlobalState("configObj");
   const langObj = getGlobalState("langObj");
   const headerBarColor = configObj.headerBarColor;
-  console.log(headerBarColor);
   const welcomeTextHtml = decodeHTML(langObj.welcomeText);
-  let startTime;
   const dataLoaded = getGlobalState("dataLoaded");
 
   // check for complete

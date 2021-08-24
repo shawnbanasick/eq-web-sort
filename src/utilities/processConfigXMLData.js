@@ -3,8 +3,6 @@ import setGlobalState from "../globalState/setGlobalState";
 
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
-  // console.log(JSON.stringify(data, null, 2));
-
   const configObj = {};
 
   let surveyData = [];
@@ -29,7 +27,6 @@ const processConfigXMLData = (dataObject) => {
       }
     }
   }
-  console.log(JSON.stringify(configObj, null, 2));
   setGlobalState("configObj", configObj);
   localStorage.setItem("configObj", JSON.stringify(configObj));
 
@@ -78,7 +75,6 @@ const processConfigXMLData = (dataObject) => {
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
-        // console.log(JSON.stringify(tempObj));
       }
 
       // TEXTAREA question
@@ -181,9 +177,6 @@ const processConfigXMLData = (dataObject) => {
     // set default
     localStorage.setItem("cardHeight", JSON.stringify(120));
   }
-  //  console.log(JSON.stringify(surveyData, null, 2));
-
-  //   console.log(JSON.stringify(globalState, null, 2));
 };
 
 export default processConfigXMLData;

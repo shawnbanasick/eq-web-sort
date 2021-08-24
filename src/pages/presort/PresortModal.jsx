@@ -5,8 +5,8 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
-import decodeHTML from "../../utilities/decodeHTML";
 import setGlobalState from "../../globalState/setGlobalState";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const PresortModal = () => {
   // trigger

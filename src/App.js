@@ -14,17 +14,18 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import setGlobalState from "./globalState/setGlobalState";
-import styled from "styled-components";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
+import StyledFooter from "./pages/footer/StyledFooter";
 
 const convert = require("xml-js");
-
-const StyledFooter = React.lazy(() => import("./pages/footer/StyledFooter"));
 
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setLoading] = useState(true);
+
+  // to remove stupid terminal warning
+  console.log("do not delete", isDataLoaded);
 
   useEffect(() => {
     (async () => {
@@ -116,12 +117,3 @@ function App() {
 }
 
 export default view(App);
-
-const StyledLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-  font-style: italic;
-  font-size: 35px;
-`;

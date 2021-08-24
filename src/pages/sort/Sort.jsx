@@ -24,14 +24,11 @@ const Sort = () => {
     const sortGridMarginTop = JSON.parse(
       localStorage.getItem("sortGridMarginTop")
     );
-    console.log(sortGridMarginTop);
     if (sortGridMarginTop === undefined || sortGridMarginTop === null) {
       setTimeout(() => {
         const height = document.getElementById("sortTitleBar").clientHeight;
-        console.log(height);
         const height2 = height;
         localStore["topMargin"] = height2;
-        console.log(height2);
         localStorage.setItem("sortGridMarginTop", JSON.stringify(height2));
       }, 300);
     } else {

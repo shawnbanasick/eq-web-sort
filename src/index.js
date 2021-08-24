@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/globalCSS";
-import styled, { ThemeProvider } from "styled-components";
-import { Waiter } from "react-wait";
+import { ThemeProvider } from "styled-components";
 import App from "./App";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 
@@ -19,9 +18,7 @@ ReactDOM.render(
     <React.Suspense fallback={<LoadingScreen />}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Waiter>
-          <App />
-        </Waiter>
+        <App />
       </ThemeProvider>
     </React.Suspense>
   </React.StrictMode>,

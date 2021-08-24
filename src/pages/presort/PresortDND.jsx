@@ -4,7 +4,6 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
-import globalState from "../../globalState/globalState";
 
 function PresortDND(props) {
   useEffect(() => {}, []);

@@ -15,7 +15,6 @@ const configObj = JSON.parse(localStorage.getItem("configObj"));
 const logoHtml = decodeHTML(configObj.footerLogo);
 
 const getNextPage = (currentPage) => {
-  console.log(currentPage);
   if (currentPage === "landing") {
     return `/presort`;
   }

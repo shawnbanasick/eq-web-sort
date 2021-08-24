@@ -4,22 +4,21 @@ import styled from "styled-components";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
-// todo - use localstorage to persist through page reloads
-const increaseFontSize = () => {
-  const currentSize = getGlobalState("cardFontSize");
-  const newSize = currentSize + 1;
-  setGlobalState("cardFontSize", newSize);
-};
-const decreaseFontSize = () => {
-  const currentSize = getGlobalState("cardFontSize");
-  const newSize = currentSize - 1;
-  setGlobalState("cardFontSize", newSize);
-};
-
-// const langObj = JSON.parse(localStorage.getItem("langObj"));
-const fontSizeText = localStorage.getItem("fontSizeText");
-
 const FooterFontSizer = () => {
+  const fontSizeText = localStorage.getItem("fontSizeText");
+
+  // todo - use localstorage to persist through page reloads
+  const increaseFontSize = () => {
+    const currentSize = getGlobalState("cardFontSize");
+    const newSize = currentSize + 1;
+    setGlobalState("cardFontSize", newSize);
+  };
+  const decreaseFontSize = () => {
+    const currentSize = getGlobalState("cardFontSize");
+    const newSize = currentSize - 1;
+    setGlobalState("cardFontSize", newSize);
+  };
+
   return (
     <Container>
       <SpanDiv>{fontSizeText}</SpanDiv>
