@@ -13,16 +13,15 @@ import processConfigXMLData from "./utilities/processConfigXMLData";
 import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
-// import getGlobalState from "./globalState/getGlobalState";
 import setGlobalState from "./globalState/setGlobalState";
-import globalState from "./globalState/globalState";
+import styled from "styled-components";
+import LoadingScreen from "./pages/landing/LoadingScreen";
 
 const convert = require("xml-js");
 
 const StyledFooter = React.lazy(() => import("./pages/footer/StyledFooter"));
 
 function App() {
-  // const dataLoaded = getGlobalState("dataLoaded");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
@@ -86,16 +85,13 @@ function App() {
       setTimeout(() => {
         setIsDataLoaded(true);
         setLoading(false);
-      }, 1000);
-      // console.log(JSON.stringify(globalState.languageObject));
+      }, 500);
     })();
   }, []);
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <LoadingScreen />;
   }
-
-  // console.log(JSON.stringify(globalState, null, 2));
 
   return (
     <div className="App">
@@ -118,3 +114,12 @@ function App() {
 }
 
 export default view(App);
+
+const StyledLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  font-style: italic;
+  font-size: 35px;
+`;

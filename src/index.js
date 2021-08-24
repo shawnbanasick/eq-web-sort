@@ -6,6 +6,7 @@ import GlobalStyle from "./styles/globalCSS";
 import styled, { ThemeProvider } from "styled-components";
 import { Waiter } from "react-wait";
 import App from "./App";
+import LoadingScreen from "./pages/landing/LoadingScreen";
 
 const theme = {
   primary: "#337ab7",
@@ -13,24 +14,9 @@ const theme = {
   focus: "#63a0d4",
 };
 
-const StyledLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-  font-style: italic;
-  font-size: 35px;
-`;
-
 ReactDOM.render(
   <React.StrictMode>
-    <React.Suspense
-      fallback={
-        <StyledLoading>
-          <h1>Loading ...</h1>
-        </StyledLoading>
-      }
-    >
+    <React.Suspense fallback={<LoadingScreen />}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Waiter>

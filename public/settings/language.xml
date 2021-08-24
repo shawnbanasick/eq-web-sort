@@ -23,7 +23,7 @@
         <item id="landingHead">University Research Project</item>
         <item id="welcomeText">{{{center}}}{{{h2}}}This is a demo project on iPad use in the classroom.{{{/h2}}} {{{/center}}}{{{br}}}
         {{{center}}}{{{img src="/images/testImage.png" height="250" width="400" /}}}{{{/center}}}
-        {{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible! If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, and then click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="620" height="450"
+        {{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible! If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, and then click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
         <item id="introHead">Introduction</item>
@@ -40,7 +40,7 @@
         <item id="loginHeaderText">Sign In &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  (use ID="demo" and Access Code= "demo")</item>
         <item id="loginWelcomeText">{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. </item>
         <item id="landingHelpModalHead">Welcome! </item>
-        <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the "{{{strong}}}Continue{{{/strong}}}" button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width="760" height="450"
+        <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the "{{{strong}}}Continue{{{/strong}}}" button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
 

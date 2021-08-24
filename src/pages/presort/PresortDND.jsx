@@ -7,24 +7,13 @@ import styled from "styled-components";
 import globalState from "../../globalState/globalState";
 
 function PresortDND(props) {
-  console.log(JSON.stringify(globalState, null, 2));
   useEffect(() => {}, []);
 
-  // const langObj = JSON.parse(localStorage.getItem("langObj"));
-  // const langObj2 = JSON.parse(localStorage.getItem("langObj"));
-
   const langObj = getGlobalState("langObj");
-
   const statementsName = langObj.presortStatements;
   const btnDisagreement = langObj.presortDisagreement;
   const btnAgreement = langObj.presortAgreement;
   const btnNeutral = langObj.presortNeutral;
-  // console.log(JSON.stringify(langObj, null, 2));
-  // console.log(JSON.stringify(langObj2, null, 2));
-  console.log(statementsName);
-  console.log(btnDisagreement);
-  console.log(btnNeutral);
-  console.log(btnAgreement);
 
   let presortSortedStatementsNum =
     localStorage.getItem("presortSortedStatementsNum") || 0;
