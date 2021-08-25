@@ -25,6 +25,8 @@ const processMapXMLData = (dataObject) => {
   }
   setGlobalState("colInfoArray", colInfoArray);
   setGlobalState("vColsObj", vColsObj);
+  // console.log("infoArray: ", JSON.stringify(colInfoArray));
+  // console.log("vColsObj: ", JSON.stringify(vColsObj));
 };
 
 export default processMapXMLData;

@@ -37,7 +37,7 @@ const calculateTimeOnPage = (startTime, prefix, prefix2) => {
   setGlobalState("results", results);
 
   let resultsUpdated = getGlobalState("results");
-  console.log(JSON.stringify(resultsUpdated));
+  console.log(JSON.stringify(resultsUpdated, null, 2));
 };
 
 export default calculateTimeOnPage;

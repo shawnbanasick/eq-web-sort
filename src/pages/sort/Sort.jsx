@@ -12,7 +12,7 @@ const localStore = store({
 
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
 

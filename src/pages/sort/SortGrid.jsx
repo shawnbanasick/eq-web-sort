@@ -9,9 +9,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 import SortColumn from "./SortColumn";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHori from "./getItemStyleHori";
-// import SortCompletedMessage from "./SortCompletedMessage";
-// import ColumnOverloadMessage from "./ColumnOverloadMessage";
-// import NumberCardsSortedMessage from "./NumberCardsSortedMessage";
+import calculateDragResults from "./calculateDragResults";
 
 /* eslint react/prop-types: 0 */
 
@@ -54,6 +52,7 @@ const SortGrid = (props) => {
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
+    // console.log(result);
     /*
     example result object:
     result {"draggableId":"s1","type":"DEFAULT",
@@ -61,6 +60,8 @@ const SortGrid = (props) => {
     "destination":{"droppableId":"column1","index":0},
     "reason":"DROP"}
     */
+
+    calculateDragResults({ ...result });
 
     // pull data from localStorage
     const columnStatements = JSON.parse(
@@ -83,7 +84,6 @@ const SortGrid = (props) => {
         columnStatements
       );
 
-      // forceUpdate();
       // force component update
       const newValue = value + 1;
       setValue(newValue);
@@ -149,6 +149,8 @@ const SortGrid = (props) => {
         "progressScoreAdditionalSort",
         `${completedPercent}`
       );
+
+      // console.log(JSON.stringify(columnStatements.vCols.columnN3, null, 2));
 
       // force component update
       const newValue = value + 1;

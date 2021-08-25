@@ -8,26 +8,45 @@ const processConfigXMLData = (dataObject) => {
   let surveyData = [];
   for (let i = 0; i < data.length; i++) {
     let value;
-    let key = data[i].attributes.id;
+
     let tempObj = data[i];
 
-    // get survey questions
+    let key = data[i].attributes.id;
+
+    // separate out survey questions
     if (key === "survey") {
       surveyData.push([...data[i].elements]);
     }
 
-    // check if value in key-value pair
+    let splitArray = [];
+    // if it has a value in the XML file ==> no empty strings
     if ("elements" in tempObj) {
       value = data[i].elements[0].text;
-      if (key !== "survey") {
-        configObj[key] = value;
 
-        // todo remove this one
-        setGlobalState(key, value);
+      // for all non-survey keys
+      if (key !== "survey") {
+        // deal with the array values
+        if (
+          key === "columnHeadersColorsArray" ||
+          key === "columnColorsArray" ||
+          key === "qSortPattern"
+        ) {
+          // numerical array ==> convert to integer
+          if (key === "qSortPattern") {
+            splitArray = value.split(",").map((x) => +x);
+          } else {
+            splitArray = value.split(",");
+          }
+          configObj[key] = splitArray;
+        } else {
+          // string values are easy
+          configObj[key] = value;
+        }
       }
     }
   }
   setGlobalState("configObj", configObj);
+  console.log(JSON.stringify(configObj, null, 2));
   localStorage.setItem("configObj", JSON.stringify(configObj));
 
   // setup survey object

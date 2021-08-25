@@ -25,6 +25,7 @@ const globalState = store({
   userInputPartId: "",
   userInputAccessCode: "",
   results: {},
+  sortGridResults: {},
 });
 
 export default globalState;
