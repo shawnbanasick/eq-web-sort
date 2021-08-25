@@ -309,13 +309,13 @@ const ColumnNamesDiv = styled.div`
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 70px;
-  margin-bottom: 75px;
+  margin-top: 65px;
+  margin-bottom: 55px;
   display: grid;
   height: calc(100vh-75);
-  grid-template-rows: 235px 25px 1fr;
+  grid-template-rows: 230px 15px 1fr;
   grid-template-columns: 1fr 330px 330px 330px 1fr;
-  row-gap: 10px;
+  row-gap: 3px;
   column-gap: 20px;
 `;
 

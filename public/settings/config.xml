@@ -14,7 +14,7 @@
 
 
      <!-- FOOTER -->
-     <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.png" height="40" width="250" /}}}{{{/center}}}</item>
+     <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
 
 
      <!-- LANDING    anonymous, partId-access, partId, access -->
@@ -27,12 +27,12 @@
      <!-- SORT -->
      <item id="horiCardMinHeight">50</item>
      <item id="totalStatements">30</item>
-     <item id="columnHeadersColorsArray">#ffcbcb,#ffd8d8,#ffe5e5,#e0e0e0,#d6f5d6,#c1f0c1,#adebad</item>
-     <item id="columnColorsArray">whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke</item>
-     <item id="qSortPattern">3,4,5,6,5,4,3</item>
-     <item id="qSortHeaders">N3,N2,N1,0,1,2,3</item>
+     <item id="columnHeadersColorsArray">#ffbfbf,#ffcbcb,#ffd8d8,#ffe5e5,#e0e0e0,#d6f5d6,#c1f0c1,#adebad,#98E698</item>
+     <item id="columnColorsArray">whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke</item>
+     <item id="qSortPattern">2,3,4,5,5,5,4,3,2</item>
+     <item id="qSortHeaders">N4,N3,N2,N1,0,1,2,3,4</item>
      <item id="forcedSorts">true</item>
-     <item id="qSortHeaderNumbers">-3,-2,-1,0,+1,+2,+3</item>
+     <item id="qSortHeaderNumbers">-4,-3,-2,-1,0,+1,+2,+3,+4</item>
      <item id="out">true</item>
      <item id="columnWidth">200</item>
      <item id="cardHeight">150</item>

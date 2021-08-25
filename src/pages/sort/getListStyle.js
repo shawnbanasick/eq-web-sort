@@ -26,7 +26,7 @@ const getListStyle = (
       : isUnderMaxCards
       ? columnColor
       : "orange",
-    padding: `3px 5px 0px 5px`,
+    padding: `1px 2px 0px 2px`,
 
     minWidth: columnWidth + 13,
     marginTop: 0,

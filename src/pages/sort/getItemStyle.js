@@ -14,7 +14,7 @@ const getItemStyle = (
     newCardColor = "#e0e0e0";
   }
   if (cardColor === "pinkSortCard") {
-    newCardColor = "rgba(255,182,193,0.6)";
+    newCardColor = "#ffe0f0";
   }
 
   return {

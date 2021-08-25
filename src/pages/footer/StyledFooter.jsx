@@ -148,7 +148,7 @@ const StyledFooterDiv = styled.footer`
   border-top: 1px solid lightgray;
 
   display: inline-grid;
-  grid-template-columns: 16% 68% 16%;
+  grid-template-columns: 16% 1fr 16%;
   align-items: center;
 `;
 
