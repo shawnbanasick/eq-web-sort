@@ -11,34 +11,34 @@ import decodeHTML from "../../utilities/decodeHTML";
 import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
 
-const configObj = JSON.parse(localStorage.getItem("configObj"));
-const logoHtml = decodeHTML(configObj.footerLogo);
-
-const getNextPage = (currentPage) => {
-  if (currentPage === "landing") {
-    return `/presort`;
-  }
-  if (currentPage === "presort") {
-    return `/sort`;
-  }
-  if (currentPage === "sort") {
-    return `/postsort`;
-  }
-  if (currentPage === "postsort") {
-    return `/survey`;
-  }
-  if (currentPage === "survey") {
-    return `/submit`;
-  }
-  if (currentPage === "submit") {
-    return `/`;
-  }
-  return `/nopagefound`;
-};
-
-const nextButtonText = localStorage.getItem("btnNext");
-
 const StyledFooter = () => {
+  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const logoHtml = decodeHTML(configObj.footerLogo);
+
+  const getNextPage = (currentPage) => {
+    if (currentPage === "landing") {
+      return `/presort`;
+    }
+    if (currentPage === "presort") {
+      return `/sort`;
+    }
+    if (currentPage === "sort") {
+      return `/postsort`;
+    }
+    if (currentPage === "postsort") {
+      return `/survey`;
+    }
+    if (currentPage === "survey") {
+      return `/submit`;
+    }
+    if (currentPage === "submit") {
+      return `/`;
+    }
+    return `/nopagefound`;
+  };
+
+  const nextButtonText = localStorage.getItem("btnNext");
+
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");

@@ -6,8 +6,6 @@ import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 
 function PresortDND(props) {
-  useEffect(() => {}, []);
-
   const langObj = getGlobalState("langObj");
   const statementsName = langObj.presortStatements;
   const btnDisagreement = langObj.presortDisagreement;
@@ -170,6 +168,14 @@ function PresortDND(props) {
     "columnsFromBackend",
     columnsFromBackend
   );
+
+  useEffect(() => {
+    let projectResultsObj = getGlobalState("results");
+    projectResultsObj.npos = columns.pos.items.length;
+    projectResultsObj.nneu = columns.neutral.items.length;
+    projectResultsObj.nneg = columns.neg.items.length;
+    setGlobalState("results", projectResultsObj);
+  }, []);
 
   // RENDER COMPONENT
   return (
