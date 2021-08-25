@@ -25,6 +25,8 @@ function debounce(fn, ms) {
 }
 
 const SortGrid = (props) => {
+  const configObj = getGlobalState("configObj");
+
   // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
 
@@ -107,8 +109,17 @@ const SortGrid = (props) => {
       }
       const droppableSource = source;
       const droppableDestination = destination;
-      const totalStatements = window.configXML.totalStatements;
-      const sortCharacteristics = window.configXML.sortCharacteristics;
+      const totalStatements = +configObj.totalStatements;
+
+      const sortCharacterisiticsPrep = {};
+      sortCharacterisiticsPrep.qSortPattern = [...configObj.qSortPattern];
+      sortCharacterisiticsPrep.qSortHeaders = [...configObj.qSortHeaders];
+      sortCharacterisiticsPrep.forcedSorts = configObj.forcedSorts;
+      sortCharacterisiticsPrep.qSortHeaderNumbers = [
+        ...configObj.qSortHeaderNumbers,
+      ];
+      const sortCharacteristics = sortCharacterisiticsPrep;
+
       move(
         sourceListArray,
         destinationListArray,
@@ -156,26 +167,24 @@ const SortGrid = (props) => {
       const newValue = value + 1;
       setValue(newValue);
     }
+    setGlobalState("sortCharacteristics", sortCharacteristics);
   }; // end of dragEnd helper function
 
   // state management
   const isSortingCards = getGlobalState("isSortingCards");
   if (isSortingCards === true) {
   }
-  setGlobalState("sortCharacteristics", window.configXML.sortCharacteristics);
 
   // get user settings
   const cardFontSize = props.cardFontSize;
-  const horiCardMinHeight = window.configXML.horiCardMinHeight;
+  const horiCardMinHeight = +configObj.horiCardMinHeight;
+
+  const sortCharacteristics = getGlobalState("sortCharacteristics");
 
   // column colors
-  const columnColorsArray = [...window.configXML.columnColorsArray];
-  const columnHeadersColorsArray = [
-    ...window.configXML.columnHeadersColorsArray,
-  ];
-
-  const sortCharacteristics = window.configXML.sortCharacteristics;
-  const qSortPattern = [...window.configXML.sortCharacteristics.qSortPattern];
+  const columnColorsArray = [...configObj.columnColorsArray];
+  const columnHeadersColorsArray = [...configObj.columnHeadersColorsArray];
+  const qSortPattern = [...configObj.qSortPattern];
 
   // todo - clean this up - needed for reactivity on UI height change
   const maxNumCardsInCol = Math.max(...qSortPattern);
@@ -199,8 +208,8 @@ const SortGrid = (props) => {
 
   // MAP out SORT COLUMNS component before render
   // code inside render so that column lists update automatically
-  const qSortHeaders = [...sortCharacteristics.qSortHeaders];
-  const qSortHeaderNumbers = [...sortCharacteristics.qSortHeaderNumbers];
+  const qSortHeaders = [...configObj.qSortHeaders];
+  const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
 
   // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
@@ -215,7 +224,7 @@ const SortGrid = (props) => {
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
-        forcedSorts={sortCharacteristics.forcedSorts}
+        forcedSorts={configObj.forcedSorts}
         columnWidth={columnWidth}
         cardHeight={cardHeight}
         sortValue={sortValue}

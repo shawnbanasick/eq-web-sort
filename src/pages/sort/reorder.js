@@ -7,6 +7,7 @@ const reorder = (
   endIndex,
   columnStatements
 ) => {
+  console.log(columnToBeReordered);
   // no re-ordering of statements list / it's arranged by flexbox "order" css property
   if (columnToBeReordered === "statements") {
     return;

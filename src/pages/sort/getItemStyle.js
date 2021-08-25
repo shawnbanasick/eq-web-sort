@@ -31,7 +31,7 @@ const getItemStyle = (
     alignItems: "center",
     border: `1px solid #a8a8a8`,
     transition: `all 1s ease`,
-    transitionDelay: "0.2s",
+    // transitionDelay: "0.2s",
     // change background colour if dragging  (#e6bbad or #FFB266)
     textAlign: `center`,
     background: isDragging ? newCardColor : newCardColor,

@@ -6,16 +6,21 @@ const checkForColumnOverload = (
   forcedSorts,
   totalStatements
 ) => {
-  const sortCharacteristics = getGlobalState("sortCharacteristics");
-
-  const qSortPattern = [...sortCharacteristics.qSortPattern];
-
-  const { qSortHeaderNumbers } = sortCharacteristics;
+  console.log("check for overload");
+  console.log(forcedSorts);
+  const configObj = getGlobalState("configObj");
+  const qSortPattern = [...configObj.qSortPattern];
+  console.log(qSortPattern);
+  const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
+  console.log(qSortHeaderNumbers);
 
   if (forcedSorts === true) {
+    console.log("forced");
+
     const tempArray = [];
     columnLengthCheckArray.forEach(function (item, index) {
-      if (item > qSortPattern[index]) {
+      if (item > +qSortPattern[index]) {
+        console.log("over");
         tempArray.push(qSortHeaderNumbers[index]);
         setGlobalState("setSortCompleted", false);
         setGlobalState("setOverloadedColumn", qSortHeaderNumbers[index]);

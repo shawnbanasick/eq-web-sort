@@ -29,9 +29,11 @@ const processConfigXMLData = (dataObject) => {
         if (
           key === "columnHeadersColorsArray" ||
           key === "columnColorsArray" ||
+          key === "qSortHeaderNumbers" ||
+          key === "qSortHeaders" ||
           key === "qSortPattern"
         ) {
-          // numerical array ==> convert to integer
+          // numerical array ==> convert to integers
           if (key === "qSortPattern") {
             splitArray = value.split(",").map((x) => +x);
           } else {
@@ -39,7 +41,14 @@ const processConfigXMLData = (dataObject) => {
           }
           configObj[key] = splitArray;
         } else {
-          // string values are easy
+          // convert string values -  boolean or number
+          if (value === "true") {
+            value = true;
+          } else if (value === "false") {
+            value = false;
+          } else if (!isNaN(value)) {
+            value = +value;
+          }
           configObj[key] = value;
         }
       }
