@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-// import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 
-// import './highCards.css';
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
@@ -61,7 +59,7 @@ class HighCards extends Component {
 
     return highCards.map((item, index) => (
       <Container key={item.statement}>
-        <CardTag>{agreeText}</CardTag>
+        <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
         <CardAndTextHolder>
           <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
@@ -69,6 +67,7 @@ class HighCards extends Component {
           <TagContainerDiv>
             <CommentArea
               data-gramm_editor="false"
+              cardFontSize={cardFontSize}
               height={height}
               id={item.id}
               placeholder={placeholder}
@@ -96,6 +95,7 @@ const Container = styled.div`
 const CardTag = styled.div`
   width: 100%;
   background: #c7f6c7;
+  font-size: ${(props) => `${props.cardFontSize}px`};
   color: black;
   text-align: center;
 `;
@@ -113,6 +113,7 @@ const CommentArea = styled.textarea`
   margin-top: 2px;
   background-color: whitesmoke;
   height: ${(props) => `${props.height}px;`};
+  font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
 `;
 

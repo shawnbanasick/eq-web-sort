@@ -58,7 +58,7 @@ class HighCards2 extends Component {
 
     return highCards2.map((item, index) => (
       <Container key={item.statement}>
-        <CardTag>{agreeText}</CardTag>
+        <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
         <CardAndTextHolder>
           <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
@@ -67,6 +67,7 @@ class HighCards2 extends Component {
             <CommentArea
               data-gramm_editor="false"
               height={height}
+              cardFontSize={cardFontSize}
               id={item.id}
               placeholder={placeholder}
               defaultValue={item.comment}
@@ -95,6 +96,7 @@ const CardTag = styled.div`
   background: #c7f6c7;
   color: black;
   text-align: center;
+  font-size: ${(props) => `${props.cardFontSize}px`};
 `;
 
 const CardAndTextHolder = styled.div`
@@ -110,6 +112,7 @@ const CommentArea = styled.textarea`
   margin-top: 2px;
   background-color: whitesmoke;
   height: ${(props) => `${props.height}px;`};
+  font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
 `;
 

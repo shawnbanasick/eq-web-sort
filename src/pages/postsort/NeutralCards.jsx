@@ -1,34 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-// import getPostSortCardStyleHigh from './getPostSortCardStyleHigh';
 
 /* eslint react/prop-types: 0 */
-
-// const styles = {
-//   container: {
-//     width: '80%',
-//     border: `2px solid black`,
-//     marginTop: 50,
-//     marginLeft: '10%',
-//     borderRadius: `3px`,
-//   },
-//   cardAndTextHolder: {
-//     display: `flex`,
-//     alignContent: `center`,
-//     background: `#7e7e7e`,
-//   },
-//   textHolder: {
-//     marginTop: 5,
-//     flexGrow: 5,
-//   },
-//   cardTag: {
-//     width: `100%`,
-//     background: `darkgray`,
-//     color: `black`,
-//     textAlign: `center`,
-//   },
-// };
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
@@ -82,7 +56,7 @@ class NeutralCards extends Component {
 
     return neutralCards.map((item, index) => (
       <Container key={item.statement}>
-        <CardTag>{neutralText}</CardTag>
+        <CardTag cardFontSize={cardFontSize}>{neutralText}</CardTag>
         <CardAndTextHolder>
           <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
@@ -92,6 +66,7 @@ class NeutralCards extends Component {
               data-gramm_editor="false"
               id={item.id}
               height={height}
+              cardFontSize={cardFontSize}
               className="commentTextArea"
               placeholder={placeholder}
               defaultValue={item.comment}
@@ -120,6 +95,7 @@ const CardTag = styled.div`
   background: lightgray;
   color: black;
   text-align: center;
+  font-size: ${(props) => `${props.cardFontSize}px`};
 `;
 
 const CardAndTextHolder = styled.div`
@@ -134,6 +110,7 @@ const CommentArea = styled.textarea`
   padding: 10px;
   background-color: whitesmoke;
   height: ${(props) => `${props.height}px;`};
+  font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
 `;
 

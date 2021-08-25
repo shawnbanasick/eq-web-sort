@@ -28,8 +28,11 @@ const LandingPage = () => {
     };
   }, []);
 
+  // config options
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
+
+  // language options
   const langObj = getGlobalState("langObj");
   const welcomeTextHtml = decodeHTML(langObj.welcomeText);
   const dataLoaded = getGlobalState("dataLoaded");

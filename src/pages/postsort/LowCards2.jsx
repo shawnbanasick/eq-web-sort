@@ -1,8 +1,6 @@
-// import state from "../../store";
 import React, { Component } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-// import getPostSortCardStyleHigh from "./getPostSortCardStyleHigh";
 
 /* eslint react/prop-types: 0 */
 
@@ -60,7 +58,7 @@ class LowCards2 extends Component {
 
     return lowCards2.map((item, index) => (
       <Container key={item.statement}>
-        <CardTag>{disagreeText}</CardTag>
+        <CardTag cardFontSize={cardFontSize}>{disagreeText}</CardTag>
         <CardAndTextHolder>
           <Card cardFontSize={cardFontSize} width={width} height={height}>
             {item.statement}
@@ -70,6 +68,7 @@ class LowCards2 extends Component {
               data-gramm_editor="false"
               id={item.id}
               height={height}
+              cardFontSize={cardFontSize}
               className="commentTextArea"
               placeholder={placeholder}
               defaultValue={item.comment}
@@ -96,6 +95,7 @@ const Container = styled.div`
 const CardTag = styled.div`
   width: 100%;
   background: lightpink;
+  font-size: ${(props) => `${props.cardFontSize}px`};
   color: black;
   text-align: center;
 `;
@@ -112,6 +112,7 @@ const CommentArea = styled.textarea`
   padding: 10px;
   background-color: whitesmoke;
   height: ${(props) => `${props.height}px;`};
+  font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
 `;
 
