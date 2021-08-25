@@ -41,6 +41,7 @@ const processConfigXMLData = (dataObject) => {
           }
           configObj[key] = splitArray;
         } else {
+          // for all others...
           // convert string values -  boolean or number
           if (value === "true") {
             value = true;
