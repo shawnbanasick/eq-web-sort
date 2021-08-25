@@ -22,8 +22,6 @@ const PostSort = () => {
     decodeHTML(langObj.postsortInstructions)
   );
 
-  console.log(postsortInstructions);
-
   useEffect(() => {
     let startTime;
     startTime = Date.now();
@@ -37,17 +35,11 @@ const PostSort = () => {
 
   // pull data from localStorage
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
-
-  const titleText = langObj.postsortHeader;
-
-  // todo - clean up reactivity - card appearance
-  const cardFontSize = getGlobalState("cardFontSize");
-  // const cardHeight2 = getGlobalState("cardHeight");
   const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
-  // console.log(cardHeight2);
-
+  const cardFontSize = getGlobalState("cardFontSize");
   const columnWidth = 250;
 
+  const titleText = langObj.postsortHeader;
   const agree = langObj.postsortAgreement;
   const disagree = langObj.postsortDisagreement;
   const neutral = langObj.postsortNeutral;

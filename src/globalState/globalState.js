@@ -24,6 +24,7 @@ const globalState = store({
   triggerPresortModal: false,
   userInputPartId: "",
   userInputAccessCode: "",
+  results: {},
 });
 
 export default globalState;
