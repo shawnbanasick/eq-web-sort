@@ -9,6 +9,8 @@ import HighCards2 from "./HighCards2";
 import NeutralCards from "./NeutralCards";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import decodeHTML from "../../utilities/decodeHTML";
+import ReactHtmlParser from "react-html-parser";
 
 /* eslint react/prop-types: 0 */
 
@@ -16,6 +18,11 @@ const PostSort = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
+  const postsortInstructions = ReactHtmlParser(
+    decodeHTML(langObj.postsortInstructions)
+  );
+
+  console.log(postsortInstructions);
 
   useEffect(() => {
     let startTime;
@@ -35,13 +42,11 @@ const PostSort = () => {
 
   // todo - clean up reactivity - card appearance
   const cardFontSize = getGlobalState("cardFontSize");
-  const cardHeight2 = getGlobalState("cardHeight");
+  // const cardHeight2 = getGlobalState("cardHeight");
   const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
-  console.log(cardHeight2);
+  // console.log(cardHeight2);
 
   const columnWidth = 250;
-
-  // const instructionsText = langObj.postsortHeaderText;
 
   const agree = langObj.postsortAgreement;
   const disagree = langObj.postsortDisagreement;
@@ -85,6 +90,7 @@ const PostSort = () => {
     <div>
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
       <CardsContainer>
+        <PostsortInstructions>{postsortInstructions}</PostsortInstructions>
         <HighCards
           agreeObj={agreeObj}
           height={cardHeight}
@@ -172,4 +178,11 @@ const SortTitleBar = styled.div`
   font-size: 28px;
   position: fixed;
   top: 0;
+`;
+
+const PostsortInstructions = styled.div`
+  margin-top: 30px;
+  width: 90vw;
+  color: black;
+  font-size: 18px;
 `;
