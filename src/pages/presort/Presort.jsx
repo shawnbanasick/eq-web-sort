@@ -8,9 +8,9 @@ import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 
-let startTime;
-
 const PresortPage = () => {
+  let startTime;
+
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "presort");
@@ -30,11 +30,15 @@ const PresortPage = () => {
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
 
   return (
     <React.Fragment>
       <PresortModal />
-      <SortTitleBar>Preliminary Sorting</SortTitleBar>
+      <SortTitleBar background={headerBarColor}>
+        Preliminary Sorting
+      </SortTitleBar>
       <PresortDND statements={statements} cardFontSize={cardFontSize} />
     </React.Fragment>
   );
@@ -48,7 +52,7 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   padding-top: 5px;
   min-height: 50px;
-  background-color: black;
+  background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;

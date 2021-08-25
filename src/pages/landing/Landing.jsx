@@ -28,11 +28,9 @@ const LandingPage = () => {
     };
   }, []);
 
-  // const langObj = JSON.parse(localStorage.getItem("langObj"));
-  // const configObj = JSON.parse(localStorage.getItem("configObj"));
   const configObj = getGlobalState("configObj");
-  const langObj = getGlobalState("langObj");
   const headerBarColor = configObj.headerBarColor;
+  const langObj = getGlobalState("langObj");
   const welcomeTextHtml = decodeHTML(langObj.welcomeText);
   const dataLoaded = getGlobalState("dataLoaded");
 
@@ -137,7 +135,7 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   padding-top: 8px;
   min-height: 50px;
-  background: ${(props) => props.background};
+  background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;
@@ -147,5 +145,3 @@ const SortTitleBar = styled.div`
   position: fixed;
   top: 0;
 `;
-
-// ${(props) => props.color};

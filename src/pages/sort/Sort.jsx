@@ -6,7 +6,6 @@ import SortGrid from "./SortGrid";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
-let startTime;
 const localStore = store({
   topMargin: 50,
 });
@@ -14,6 +13,8 @@ const localStore = store({
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
 
   useEffect(() => {
     /* this is to adjust the margin of the sort grid because I can't know
@@ -44,6 +45,7 @@ const Sort = () => {
 
   // calc time on page
   useEffect(() => {
+    let startTime;
     startTime = Date.now();
     return () => {
       calculateTimeOnPage(startTime, "sortPage", "SortPage");
@@ -52,7 +54,7 @@ const Sort = () => {
 
   return (
     <React.Fragment>
-      <SortTitleBar id="sortTitleBar">
+      <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{langObj.sortDisagreement}</Disagree>
         <CondOfInst>{langObj.condOfInst}</CondOfInst>
         <Agree>{langObj.sortAgreement}</Agree>
@@ -76,7 +78,7 @@ const SortTitleBar = styled.div`
   grid-template-columns: 15% 1fr 15%;
   color: black;
   font-weight: bold;
-  background-color: black;
+  background-color: ${(props) => props.background};
   position: fixed;
   top: 0;
 `;

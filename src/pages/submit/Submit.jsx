@@ -9,11 +9,14 @@ import SubmitButton from "./SubmitButton";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const SubmitPage = () => {
-  // // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // language options
   const langObj = getGlobalState("langObj");
-  console.log(JSON.stringify(langObj, null, 2));
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);
   const transferTextBelow = decodeHTML(langObj.transferTextBelow);
+
+  // config options
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
 
   setTimeout(function () {
     setGlobalState("currentPage", "submit");
@@ -21,7 +24,9 @@ const SubmitPage = () => {
 
   return (
     <React.Fragment>
-      <SortTitleBar>{langObj.transferHead}</SortTitleBar>
+      <SortTitleBar background={headerBarColor}>
+        {langObj.transferHead}
+      </SortTitleBar>
       <ContainerDiv>
         <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
         <SubmitButton />
@@ -40,7 +45,7 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   padding-top: 5px;
   min-height: 50px;
-  background-color: black;
+  background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;

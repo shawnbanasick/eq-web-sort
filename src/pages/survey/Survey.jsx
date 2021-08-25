@@ -13,9 +13,13 @@ import SurveyRating10Element from "./SurveyRating10Element";
 import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
+import getGlobalState from "../../globalState/getGlobalState";
 
 const SurveyPage = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
+
   let surveyQuestionObjects;
   useEffect(() => {
     setTimeout(function () {
@@ -66,7 +70,9 @@ const SurveyPage = () => {
 
   return (
     <React.Fragment>
-      <SortTitleBar>{langObj.postsortTitle}</SortTitleBar>
+      <SortTitleBar background={headerBarColor}>
+        {langObj.postsortTitle}
+      </SortTitleBar>
       <Container>
         <SurveyQuestions />
       </Container>
@@ -90,7 +96,7 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   padding-top: 5px;
   min-height: 50px;
-  background-color: black;
+  background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;

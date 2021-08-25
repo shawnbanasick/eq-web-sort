@@ -12,13 +12,13 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 /* eslint react/prop-types: 0 */
 
-let startTime;
-
 const PostSort = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
-  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const langObj = getGlobalState("langObj");
+  const configObj = getGlobalState("configObj");
+  const headerBarColor = configObj.headerBarColor;
 
   useEffect(() => {
+    let startTime;
     startTime = Date.now();
     setGlobalState("currentPage", "postsort");
     setGlobalState("progressScore", 50);
@@ -83,7 +83,7 @@ const PostSort = () => {
 
   return (
     <div>
-      <SortTitleBar>{titleText}</SortTitleBar>
+      <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
       <CardsContainer>
         <HighCards
           agreeObj={agreeObj}
@@ -163,7 +163,7 @@ const SortTitleBar = styled.div`
   padding-right: 1.5vw;
   padding-top: 5px;
   min-height: 50px;
-  background-color: black;
+  background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
   align-content: center;
