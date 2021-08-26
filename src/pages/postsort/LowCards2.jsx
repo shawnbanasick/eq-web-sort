@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
 
 /* eslint react/prop-types: 0 */
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-class LowCards2 extends Component {
+const LowCards2 = (props) => {
+  const configObj = getGlobalState("configObj");
+  const postsortConvertObj = configObj.postsortConvertObj;
+
   // on blur, get text and add comment to card object
-  onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
     const cards = [...columnStatements.vCols[columnDisplay]];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -44,44 +48,47 @@ class LowCards2 extends Component {
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
-  render() {
-    const {
-      height,
-      width,
-      cardFontSize,
-      columnDisplay,
-      lowCards2,
-      columnStatements,
-      disagreeObj,
-    } = this.props;
-    const { disagreeText, placeholder } = disagreeObj;
+  const {
+    height,
+    width,
+    cardFontSize,
+    columnDisplay,
+    lowCards2,
+    columnStatements,
+    disagreeObj,
+  } = props;
+  const { disagreeText, placeholder } = disagreeObj;
 
-    return lowCards2.map((item, index) => (
-      <Container key={item.statement}>
-        <CardTag cardFontSize={cardFontSize}>{disagreeText}</CardTag>
-        <CardAndTextHolder>
-          <Card cardFontSize={cardFontSize} width={width} height={height}>
-            {item.statement}
-          </Card>
-          <TagContainerDiv>
-            <CommentArea
-              data-gramm_editor="false"
-              id={item.id}
-              height={height}
-              cardFontSize={cardFontSize}
-              className="commentTextArea"
-              placeholder={placeholder}
-              defaultValue={item.comment}
-              onBlur={(e) => {
-                this.onBlur(e, columnStatements, columnDisplay, index);
-              }}
-            />
-          </TagContainerDiv>
-        </CardAndTextHolder>
-      </Container>
-    ));
-  }
-}
+  const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
+
+  return lowCards2.map((item, index) => (
+    <Container key={item.statement}>
+      <CardTag cardFontSize={cardFontSize}>
+        {disagreeText}
+        {columnInfo}
+      </CardTag>
+      <CardAndTextHolder>
+        <Card cardFontSize={cardFontSize} width={width} height={height}>
+          {item.statement}
+        </Card>
+        <TagContainerDiv>
+          <CommentArea
+            data-gramm_editor="false"
+            id={item.id}
+            height={height}
+            cardFontSize={cardFontSize}
+            className="commentTextArea"
+            placeholder={placeholder}
+            defaultValue={item.comment}
+            onBlur={(e) => {
+              onBlur(e, columnStatements, columnDisplay, index);
+            }}
+          />
+        </TagContainerDiv>
+      </CardAndTextHolder>
+    </Container>
+  ));
+};
 
 export default view(LowCards2);
 

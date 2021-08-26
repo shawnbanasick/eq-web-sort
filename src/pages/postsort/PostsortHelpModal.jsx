@@ -9,14 +9,14 @@ import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const PostsortHelpModal = () => {
-  const triggerLandingModal = getGlobalState("triggerSortModal");
+  const triggerPostsortModal = getGlobalState("triggerSortModal");
   const langObj = getGlobalState("langObj");
 
-  const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.sortHelpModalHead)
+  const postsortHelpModalHead = ReactHtmlParser(
+    decodeHTML(langObj.postsortModalHead)
   );
-  const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.sortHelpModalText)
+  const postsortHelpModalText = ReactHtmlParser(
+    decodeHTML(langObj.postsortModalText)
   );
 
   // const onOpenModal = () => setOpen(true);
@@ -27,13 +27,13 @@ const PostsortHelpModal = () => {
   return (
     <Modal
       className="customModal"
-      open={triggerLandingModal}
+      open={triggerPostsortModal}
       onClose={onCloseModal}
       center
     >
-      <ModalHeader>{loginHelpModalHead}</ModalHeader>
+      <ModalHeader>{postsortHelpModalHead}</ModalHeader>
       <hr />
-      <ModalContent>{loginHelpModalText}</ModalContent>
+      <ModalContent>{postsortHelpModalText}</ModalContent>
     </Modal>
   );
 };

@@ -55,6 +55,17 @@ const processConfigXMLData = (dataObject) => {
       }
     }
   }
+
+  // create converter object for postsort
+  const postsortConvertObj = {};
+  const headerNumbers = [...configObj.qSortHeaders];
+  for (let j = 0; j < headerNumbers.length; j++) {
+    let key = `column${headerNumbers[j]}`;
+    postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
+  }
+
+  configObj.postsortConvertObj = postsortConvertObj;
+
   setGlobalState("configObj", configObj);
   console.log(JSON.stringify(configObj, null, 2));
   localStorage.setItem("configObj", JSON.stringify(configObj));

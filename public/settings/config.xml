@@ -46,10 +46,10 @@
 
      <!-- POSTSORT -->
      <item id="showSecondPosColumn">true</item>
-     <item id="postsortAgreeColDisp1">column3</item>
-     <item id="postsortAgreeColDisp2">column2</item>
-     <item id="postsortDisagreeColDisp1">columnN3</item>
-     <item id="postsortDisagreeColDisp2">columnN2</item>
+     <item id="postsortAgreeColDisp1">column4</item>
+     <item id="postsortAgreeColDisp2">column3</item>
+     <item id="postsortDisagreeColDisp1">columnN4</item>
+     <item id="postsortDisagreeColDisp2">columnN3</item>
      <item id="showSecondNegColumn">true</item>
      <item id="displayNeutralObjects">true</item>
 

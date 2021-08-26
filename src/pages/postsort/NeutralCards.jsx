@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
 
 /* eslint react/prop-types: 0 */
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-class NeutralCards extends Component {
+const NeutralCards = (props) => {
+  const configObj = getGlobalState("configObj");
+  const postsortConvertObj = configObj.postsortConvertObj;
+
   // on blur, get text and add comment to card object
-  onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -42,44 +46,47 @@ class NeutralCards extends Component {
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
-  render() {
-    const {
-      height,
-      width,
-      cardFontSize,
-      columnDisplay,
-      neutralObj,
-      neutralCards,
-      columnStatements,
-    } = this.props;
-    const { neutralText, placeholder } = neutralObj;
+  const {
+    height,
+    width,
+    cardFontSize,
+    columnDisplay,
+    neutralObj,
+    neutralCards,
+    columnStatements,
+  } = props;
+  const { neutralText, placeholder } = neutralObj;
 
-    return neutralCards.map((item, index) => (
-      <Container key={item.statement}>
-        <CardTag cardFontSize={cardFontSize}>{neutralText}</CardTag>
-        <CardAndTextHolder>
-          <Card cardFontSize={cardFontSize} width={width} height={height}>
-            {item.statement}
-          </Card>
-          <TagContainerDiv>
-            <CommentArea
-              data-gramm_editor="false"
-              id={item.id}
-              height={height}
-              cardFontSize={cardFontSize}
-              className="commentTextArea"
-              placeholder={placeholder}
-              defaultValue={item.comment}
-              onBlur={(e) => {
-                this.onBlur(e, columnStatements, columnDisplay, index);
-              }}
-            />
-          </TagContainerDiv>
-        </CardAndTextHolder>
-      </Container>
-    ));
-  }
-}
+  const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
+
+  return neutralCards.map((item, index) => (
+    <Container key={item.statement}>
+      <CardTag cardFontSize={cardFontSize}>
+        {neutralText}
+        {columnInfo}
+      </CardTag>
+      <CardAndTextHolder>
+        <Card cardFontSize={cardFontSize} width={width} height={height}>
+          {item.statement}
+        </Card>
+        <TagContainerDiv>
+          <CommentArea
+            data-gramm_editor="false"
+            id={item.id}
+            height={height}
+            cardFontSize={cardFontSize}
+            className="commentTextArea"
+            placeholder={placeholder}
+            defaultValue={item.comment}
+            onBlur={(e) => {
+              onBlur(e, columnStatements, columnDisplay, index);
+            }}
+          />
+        </TagContainerDiv>
+      </CardAndTextHolder>
+    </Container>
+  ));
+};
 
 export default view(NeutralCards);
 

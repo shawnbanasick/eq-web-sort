@@ -1,15 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
 
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-class HighCards extends Component {
+const HighCards = (props) => {
+  const configObj = getGlobalState("configObj");
+  const postsortConvertObj = configObj.postsortConvertObj;
+
   // on leaving card comment section,
-  onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
     const cards = columnStatements.vCols[columnDisplay];
+    console.log(columnDisplay);
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 
@@ -43,45 +48,48 @@ class HighCards extends Component {
     localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
-  render() {
-    const {
-      columnDisplay,
-      agreeObj,
-      highCards,
-      columnStatements,
-      cardFontSize,
-      width,
-      height,
-    } = this.props;
-    const { agreeText, placeholder } = agreeObj;
+  const {
+    columnDisplay,
+    agreeObj,
+    highCards,
+    columnStatements,
+    cardFontSize,
+    width,
+    height,
+  } = props;
+  const { agreeText, placeholder } = agreeObj;
 
-    // console.log(JSON.stringify(this.props, null, 2));
+  const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
-    return highCards.map((item, index) => (
-      <Container key={item.statement}>
-        <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
-        <CardAndTextHolder>
-          <Card cardFontSize={cardFontSize} width={width} height={height}>
-            {item.statement}
-          </Card>
-          <TagContainerDiv>
-            <CommentArea
-              data-gramm_editor="false"
-              cardFontSize={cardFontSize}
-              height={height}
-              id={item.id}
-              placeholder={placeholder}
-              defaultValue={item.comment}
-              onBlur={(e) => {
-                this.onBlur(e, columnStatements, columnDisplay, index);
-              }}
-            />
-          </TagContainerDiv>
-        </CardAndTextHolder>
-      </Container>
-    ));
-  }
-}
+  // console.log(JSON.stringify(this.props, null, 2));
+
+  return highCards.map((item, index) => (
+    <Container key={item.statement}>
+      <CardTag cardFontSize={cardFontSize}>
+        {agreeText}
+        {columnInfo}
+      </CardTag>
+      <CardAndTextHolder>
+        <Card cardFontSize={cardFontSize} width={width} height={height}>
+          {item.statement}
+        </Card>
+        <TagContainerDiv>
+          <CommentArea
+            data-gramm_editor="false"
+            cardFontSize={cardFontSize}
+            height={height}
+            id={item.id}
+            placeholder={placeholder}
+            defaultValue={item.comment}
+            onBlur={(e) => {
+              onBlur(e, columnStatements, columnDisplay, index);
+            }}
+          />
+        </TagContainerDiv>
+      </CardAndTextHolder>
+    </Container>
+  ));
+};
 
 export default view(HighCards);
 

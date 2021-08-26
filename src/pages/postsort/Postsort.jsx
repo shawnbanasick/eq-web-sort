@@ -11,6 +11,7 @@ import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import decodeHTML from "../../utilities/decodeHTML";
 import ReactHtmlParser from "react-html-parser";
+import PostsortHelpModal from "./PostsortHelpModal";
 
 /* eslint react/prop-types: 0 */
 
@@ -80,6 +81,7 @@ const PostSort = () => {
 
   return (
     <div>
+      <PostsortHelpModal />
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
       <CardsContainer>
         <PostsortInstructions>{postsortInstructions}</PostsortInstructions>
