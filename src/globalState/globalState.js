@@ -25,6 +25,7 @@ const globalState = store({
   triggerPresortModal: false,
   triggerSortModal: false,
   triggerSortingFinishedModal: false,
+  triggerPostsortModal: false,
   userInputPartId: "",
   userInputAccessCode: "",
   results: {},
