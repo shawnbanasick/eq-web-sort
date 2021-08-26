@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 function PresortDND(props) {
   const langObj = getGlobalState("langObj");
+  const configObj = getGlobalState("configObj");
   const statementsName = langObj.presortStatements;
   const btnDisagreement = langObj.presortDisagreement;
   const btnAgreement = langObj.presortAgreement;
@@ -103,13 +104,13 @@ function PresortDND(props) {
 
       // change background color
       if (destColumn.id === "pos") {
-        removed.backgroundColor = "#CCFFCC";
+        removed.backgroundColor = configObj.greenCardColor;
       }
       if (destColumn.id === "neg") {
-        removed.backgroundColor = "rgba(255,182,193,0.6)";
+        removed.backgroundColor = configObj.pinkCardColor;
       }
       if (destColumn.id === "neutral") {
-        removed.backgroundColor = "lightgray";
+        removed.backgroundColor = configObj.yellowCardColor;
       }
 
       destItems.splice(destination.index, 0, removed);

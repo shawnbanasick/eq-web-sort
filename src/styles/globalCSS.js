@@ -412,7 +412,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 2;
     overflow-y: auto;
-    background-color: rgba(255,182,193,0.6);
+    background-color: white;
     min-height: 300px;
     height: 58vh;
     padding-top: 5px;
@@ -438,7 +438,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 3;
     overflow-y: auto;
-    background-color: lightgray;
+    background-color: white;
     min-height: 300px;
     height: 58vh;
     padding-top: 5px;
@@ -462,7 +462,7 @@ footer {
     grid-row-start: 3;
     grid-column-start: 4;
     overflow-y: auto;
-    background-color: #CCFFCC;
+    background-color: white;
     height: 58vh;
     padding-top: 5px;
     border-top-right-radius: 3px;
