@@ -26,7 +26,7 @@
 
      <!-- SORT -->
      <item id="horiCardMinHeight">50</item>
-     <item id="totalStatements">30</item>
+     <item id="totalStatements">33</item>
      <item id="columnHeadersColorsArray">#ffbfbf,#ffcbcb,#ffd8d8,#ffe5e5,#e0e0e0,#d6f5d6,#c1f0c1,#adebad,#98E698</item>
      <item id="columnColorsArray">whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke</item>
      <item id="qSortPattern">2,3,4,5,5,5,4,3,2</item>
