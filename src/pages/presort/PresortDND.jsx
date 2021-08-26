@@ -176,7 +176,7 @@ function PresortDND(props) {
     projectResultsObj.nneu = columns.neutral.items.length;
     projectResultsObj.nneg = columns.neg.items.length;
     setGlobalState("results", projectResultsObj);
-  }, []);
+  }, [columns]);
 
   // RENDER COMPONENT
   return (

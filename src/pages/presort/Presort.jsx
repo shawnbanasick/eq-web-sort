@@ -9,8 +9,6 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 
 const PresortPage = () => {
-  let startTime;
-
   // set progress score and current page
   useEffect(() => {
     setTimeout(() => {
@@ -26,7 +24,7 @@ const PresortPage = () => {
 
   // calc time on page
   useEffect(() => {
-    startTime = Date.now();
+    let startTime = Date.now();
     return () => {
       calculateTimeOnPage(startTime, "presortPage", "presortPage");
     };
