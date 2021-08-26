@@ -56,7 +56,7 @@ const StyledFooter = () => {
       <ProgressBarDiv>
         <ProgressBar
           completed={totalProgressScore}
-          width={"300px"}
+          width={"200px"}
           bgColor="#337ab7"
           labelColor="#f0f0f0"
           baseBgColor="lightgray"
@@ -75,7 +75,7 @@ const StyledFooter = () => {
         <ProgressBarDiv>
           <ProgressBar
             completed={totalProgressScore}
-            width={"300px"}
+            width={"200px"}
             bgColor="#337ab7"
             labelColor="#f0f0f0"
             baseBgColor="lightgray"
@@ -96,7 +96,7 @@ const StyledFooter = () => {
         <ProgressBarDiv>
           <ProgressBar
             completed={totalProgressScore}
-            width={"300px"}
+            width={"200px"}
             bgColor="#337ab7"
             labelColor="#f0f0f0"
             baseBgColor="lightgray"
@@ -116,7 +116,7 @@ const StyledFooter = () => {
         <ProgressBarDiv>
           <ProgressBar
             completed={totalProgressScore}
-            width={"300px"}
+            width={"200px"}
             bgColor="#337ab7"
             labelColor="#f0f0f0"
             baseBgColor="lightgray"
@@ -159,7 +159,7 @@ const AdjustmentsContainer = styled.div`
 `;
 
 const ProgressBarDiv = styled.div`
-  padding-top: 3px;
+  align-self: center;
   justify-self: center;
 `;
 

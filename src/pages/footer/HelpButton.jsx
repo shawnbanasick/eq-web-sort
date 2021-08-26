@@ -48,7 +48,7 @@ const StyledHelpButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 150px;
+  width: 125px;
   justify-self: right;
   margin-right: 35px;
   display: flex;

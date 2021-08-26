@@ -23,7 +23,7 @@ const Sort = () => {
   // }, []);
 
   useEffect(() => {
-    /* this is to adjust the margin of the sort grid because I can't know
+    /* this should adjust the margin of the sort grid because I can't know
      the size - it will depend on how much the researcher writes in the 
      "conditions of instruction" section - so, I grab the height of titleBar 
      after render and reset the margin
@@ -31,12 +31,11 @@ const Sort = () => {
     const sortGridMarginTop = JSON.parse(
       localStorage.getItem("sortGridMarginTop")
     );
-    if (sortGridMarginTop === undefined || sortGridMarginTop === null) {
+    const height = document.getElementById("sortTitleBar").clientHeight;
+    if (sortGridMarginTop !== height) {
       setTimeout(() => {
-        const height = document.getElementById("sortTitleBar").clientHeight;
-        const height2 = height;
-        localStore["topMargin"] = height2;
-        localStorage.setItem("sortGridMarginTop", JSON.stringify(height2));
+        localStore["topMargin"] = height;
+        localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
       }, 300);
     } else {
       localStore["topMargin"] = +sortGridMarginTop;

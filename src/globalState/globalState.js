@@ -20,6 +20,7 @@ const globalState = store({
   presortSortedStatements: 0,
   progressScore: 10,
   rating2State: {},
+  sortFinishedModalHasBeenShown: false,
   sortGridResults: {},
   triggerLandingModal: false,
   triggerPresortModal: false,

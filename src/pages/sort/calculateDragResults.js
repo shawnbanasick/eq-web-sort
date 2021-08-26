@@ -6,6 +6,9 @@ const calculateDragResults = (result) => {
     // const sortGridResults = getGlobalState("sortGridResults");
     const configObj = getGlobalState("configObj");
     const results = getGlobalState("results");
+    const sortFinishedModalHasBeenShown = getGlobalState(
+      "sortFinishedModalHasBeenShown"
+    );
     const totalStatements = configObj.totalStatements;
     const sortGridResults =
       JSON.parse(localStorage.getItem("sortGridResults")) || {};
@@ -37,7 +40,10 @@ const calculateDragResults = (result) => {
       }
       results.sort = resultsText;
       setGlobalState("results", results);
-      setGlobalState("triggerSortingFinishedModal", true);
+      if (sortFinishedModalHasBeenShown === false) {
+        setGlobalState("triggerSortingFinishedModal", true);
+        setGlobalState("sortFinishedModalHasBeenShown", true);
+      }
       console.log(resultsText);
     }
 
