@@ -20,12 +20,14 @@ const globalState = store({
   presortSortedStatements: 0,
   progressScore: 10,
   rating2State: {},
+  sortGridResults: {},
   triggerLandingModal: false,
   triggerPresortModal: false,
+  triggerSortModal: false,
+  triggerSortingFinishedModal: false,
   userInputPartId: "",
   userInputAccessCode: "",
   results: {},
-  sortGridResults: {},
 });
 
 export default globalState;

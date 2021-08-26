@@ -37,6 +37,7 @@ const calculateDragResults = (result) => {
       }
       results.sort = resultsText;
       setGlobalState("results", results);
+      setGlobalState("triggerSortingFinishedModal", true);
       console.log(resultsText);
     }
 

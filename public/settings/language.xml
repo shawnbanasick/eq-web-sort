@@ -60,13 +60,14 @@
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="sortHelpModalHead">Step 2 of 5</item>
         <item id="sortHelpModalText">In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the right side of the grid, and statements which you most disagree with should be placed on the left side. Please watch the video for more information on how to sort the cards in this step.</item>
-        <item id="sortingCompleteMessage">You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisified with their placement, please click on the {{{strong}}}blue "Continue" button{{{/strong}}} at the bottom right-side of your screen to go to the next step.</item>
+        <item id="sortingCompleteModalHead">Sorting Complete</item>
+        <item id="sortingCompleteModalText">You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisified with their placement, please click on the {{{strong}}}blue "Continue" button{{{/strong}}} at the bottom right-side of your screen to go to the next step.</item>
         <item id="condOfInst">Sort the cards according to your experience with the iPads this semester </item>
         <item id="sortAgreement">Agree</item>
         <item id="sortDisagreement">Disagree</item>
         
 
-        <!-- POSTSORT: check sorting, only displayed if showStep3== true (see config-file; leave blank to skip popup)-->
+        <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         
         <item id="postsortInstructions">{{{h3}}}Please tell us more about your {{{strong}}}thoughts{{{/strong}}} on these cards.{{{/h3}}}</item>
         <item id="postsortModalHead">Step 4 of 5</item>

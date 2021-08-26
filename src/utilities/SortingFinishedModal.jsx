@@ -1,35 +1,57 @@
 import React from "react";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
-import decodeHTML from "../../utilities/decodeHTML";
+import getGlobalState from "../globalState/getGlobalState";
+import setGlobalState from "../globalState/setGlobalState";
+import decodeHTML from "./decodeHTML";
 
-const LoadingScreen = () => {
+const SortingFinishedModal = () => {
+  const triggerLandingModal = getGlobalState("triggerSortingFinishedModal");
   const langObj = getGlobalState("langObj");
-  const message = ReactHtmlParser(decodeHTML(langObj.sortingCompleteMessage));
+
+  const loginHelpModalHead = ReactHtmlParser(
+    decodeHTML(langObj.sortingCompleteModalHead)
+  );
+  const loginHelpModalText = ReactHtmlParser(
+    decodeHTML(langObj.sortingCompleteModalText)
+  );
+
+  // const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => {
+    setGlobalState("triggerSortingFinishedModal", false);
+  };
 
   return (
-    <Container>
-      <TextDiv>{message}</TextDiv>
-    </Container>
+    <Modal
+      className="customModal"
+      open={triggerLandingModal}
+      onClose={onCloseModal}
+      center
+    >
+      <ModalHeader>{loginHelpModalHead}</ModalHeader>
+      <hr />
+      <ModalContent>{loginHelpModalText}</ModalContent>
+    </Modal>
   );
 };
 
-export default LoadingScreen;
+export default view(SortingFinishedModal);
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+const ModalHeader = styled.div`
+  font-size: 24px;
+  line-height: 1.42;
+  padding: 10px 0px 10px 0px;
+
+  hr {
+    color: black;
+  }
 `;
 
-const TextDiv = styled.div`
-  font-size: 88px;
-  /* font-style: italic; */
-  font-weight: bold;
-  align-self: center;
-  margin-right: 70px;
-  margin-top: 40px;
+const ModalContent = styled.div`
+  margin-top: 15px;
 `;
+
+// react-responsive-modal-overlay

@@ -11,6 +11,7 @@ import styled from "styled-components";
 const PresortPage = () => {
   let startTime;
 
+  // set progress score and current page
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "presort");
@@ -18,6 +19,10 @@ const PresortPage = () => {
       localStorage.setItem("progressScore", `20`);
     }, 200);
   }, []);
+
+  // useEffect(() => {
+  //   setGlobalState("triggerPresortModal", true);
+  // }, []);
 
   // calc time on page
   useEffect(() => {

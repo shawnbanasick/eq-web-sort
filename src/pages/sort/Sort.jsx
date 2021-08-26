@@ -6,6 +6,7 @@ import SortGrid from "./SortGrid";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import SortHelpModal from "./SortHelpModal";
+import SortingFinishedModal from "../../utilities/SortingFinishedModal";
 
 const localStore = store({
   topMargin: 50,
@@ -16,6 +17,10 @@ const Sort = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
+
+  // useEffect(() => {
+  //   setGlobalState("triggerSortModal", true);
+  // }, []);
 
   useEffect(() => {
     /* this is to adjust the margin of the sort grid because I can't know
@@ -56,6 +61,7 @@ const Sort = () => {
   return (
     <React.Fragment>
       <SortHelpModal />
+      <SortingFinishedModal />
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{langObj.sortDisagreement}</Disagree>
         <CondOfInst fontSize={configObj.condOfInstFontSize}>

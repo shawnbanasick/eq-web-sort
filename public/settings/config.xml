@@ -12,7 +12,6 @@
      <item id="headerBarColor">#337ab7</item> 
 
 
-
      <!-- FOOTER -->
      <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
 
@@ -29,7 +28,6 @@
      <item id="yellowCardColor">#e0e0e0</item>
      <item id="pinkCardColor">#ffe0f0</item>
    
-
 
      <!-- SORT -->
      <item id="horiCardMinHeight">50</item>
