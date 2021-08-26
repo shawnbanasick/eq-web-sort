@@ -1,3 +1,5 @@
+import getGlobalState from "../../globalState/getGlobalState";
+
 // card styling
 const getItemStyleHori = (
   isDragging,
@@ -8,16 +10,27 @@ const getItemStyleHori = (
   cardHeight,
   cardFontSize
 ) => {
+  const configObj = getGlobalState("configObj");
+
   let newSortValue = sortValue;
   let newCardColor = cardColor;
+
   // puts un-evaluated cards at the end of the list and set default color
   if (isNaN(+newSortValue)) {
     newSortValue = 999;
   }
 
-  if (newCardColor === "undefined") {
-    newCardColor = "#eeeeee";
+  // set background color according to user passed in values
+  if (newCardColor === "undefined" || newCardColor === "yellowSortCard") {
+    newCardColor = configObj.yellowCardColor;
   }
+  if (newCardColor === "pinkSortCard") {
+    newCardColor = configObj.pinkCardColor;
+  }
+  if (newCardColor === "greenSortCard") {
+    newCardColor = configObj.greenCardColor;
+  }
+
   return {
     userSelect: "none",
     WebkitUserSelect: "none",

@@ -1,3 +1,5 @@
+import getGlobalState from "../../globalState/getGlobalState";
+
 const getItemStyle = (
   isDragging,
   draggableStyle,
@@ -6,15 +8,17 @@ const getItemStyle = (
   cardFontSize,
   cardColor
 ) => {
+  const configObj = getGlobalState("configObj");
+
   let newCardColor;
   if (cardColor === "greenSortCard") {
-    newCardColor = "#CCFFCC";
+    newCardColor = configObj.greenCardColor;
   }
   if (cardColor === "yellowSortCard") {
-    newCardColor = "#e0e0e0";
+    newCardColor = configObj.yellowCardColor;
   }
   if (cardColor === "pinkSortCard") {
-    newCardColor = "#ffe0f0";
+    newCardColor = configObj.pinkCardColor;
   }
 
   return {
