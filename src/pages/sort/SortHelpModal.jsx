@@ -4,24 +4,24 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import decodeHTML from "../../utilities/decodeHTML";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import decodeHTML from "../../utilities/decodeHTML";
 
-const LandingModal = () => {
-  const triggerLandingModal = getGlobalState("triggerLandingModal");
+const SortHelpModal = () => {
+  const triggerLandingModal = getGlobalState("triggerSortModal");
   const langObj = getGlobalState("langObj");
 
   const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.landingHelpModalHead)
+    decodeHTML(langObj.sortHelpModalHead)
   );
   const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.landingHelpModalText)
+    decodeHTML(langObj.sortHelpModalText)
   );
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerLandingModal", false);
+    setGlobalState("triggerSortModal", false);
   };
 
   return (
@@ -38,7 +38,7 @@ const LandingModal = () => {
   );
 };
 
-export default view(LandingModal);
+export default view(SortHelpModal);
 
 const ModalHeader = styled.div`
   font-size: 24px;

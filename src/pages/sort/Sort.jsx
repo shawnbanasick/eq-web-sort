@@ -5,6 +5,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 import SortGrid from "./SortGrid";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import SortHelpModal from "./SortHelpModal";
 
 const localStore = store({
   topMargin: 50,
@@ -54,6 +55,7 @@ const Sort = () => {
 
   return (
     <React.Fragment>
+      <SortHelpModal />
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{langObj.sortDisagreement}</Disagree>
         <CondOfInst fontSize={configObj.condOfInstFontSize}>
