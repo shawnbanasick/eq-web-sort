@@ -33,6 +33,7 @@
 
      <!-- SORT -->
      <item id="horiCardMinHeight">50</item>
+     <item id="condOfInstFontSize">22</item>
      <item id="totalStatements">33</item>
      <item id="columnHeadersColorsArray">#ffbfbf,#ffcbcb,#ffd8d8,#ffe5e5,#e0e0e0,#d6f5d6,#c1f0c1,#adebad,#98E698</item>
      <item id="columnColorsArray">whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke</item>

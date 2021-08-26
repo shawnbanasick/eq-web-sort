@@ -56,7 +56,9 @@ const Sort = () => {
     <React.Fragment>
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{langObj.sortDisagreement}</Disagree>
-        <CondOfInst>{langObj.condOfInst}</CondOfInst>
+        <CondOfInst fontSize={configObj.condOfInstFontSize}>
+          {langObj.condOfInst}
+        </CondOfInst>
         <Agree>{langObj.sortAgreement}</Agree>
       </SortTitleBar>
       <SortGridContainer marginTop={localStore.topMargin}>
@@ -86,6 +88,7 @@ const SortTitleBar = styled.div`
 const CondOfInst = styled.div`
   color: white;
   max-width: 80vw;
+  font-size: ${(props) => `${props.fontSize}px`};
   padding: 5px;
   border-radius: 5px;
   text-align: center;
