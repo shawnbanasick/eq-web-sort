@@ -3,6 +3,8 @@ import { store } from "@risingstack/react-easy-state";
 const globalState = store({
   cardFontSize: 15,
   cardHeight: 100,
+
+  checkRequiredQuestionsComplete: false,
   currentPage: "landing",
   dataLoaded: false,
   defaultCardFontSize: 15,
@@ -20,6 +22,7 @@ const globalState = store({
   presortSortedStatements: 0,
   progressScore: 10,
   rating2State: {},
+  requiredAnswersObj: {},
   sortFinishedModalHasBeenShown: false,
   sortGridResults: {},
   triggerLandingModal: false,

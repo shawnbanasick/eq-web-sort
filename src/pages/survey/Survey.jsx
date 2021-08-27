@@ -39,7 +39,7 @@ const SurveyPage = () => {
       if (object.type === "textRestricted") {
         return <SurveyTextRestrictedElement key={uuid()} opts={object} />;
       }
-      if (object.type === "textArea") {
+      if (object.type === "textarea") {
         return <SurveyTextAreaElement key={uuid()} opts={object} />;
       }
       if (object.type === "radio") {

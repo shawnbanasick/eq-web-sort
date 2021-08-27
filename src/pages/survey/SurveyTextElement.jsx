@@ -6,21 +6,27 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyTextElement = (props) => {
   let savedText;
-  let configObj = getGlobalState("configObj");
-  let requiredAnswersObj = configObj.requiredAnswersObj;
 
   const [userText, setUserText] = useLocalStorage("savedText", savedText);
 
   // required question answer check
-  const checkRequiredQuestionsComplete = true;
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
+
+  console.log(checkRequiredQuestionsComplete);
+
   let bgColor;
   let border;
 
   const handleOnChange = (e) => {
-    // const id = `qNum${props.opts.qNum}`;
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+
+    const id = `qNum${props.opts.qNum}`;
     let value = e.target.value;
     let valueLen = value.length;
-    console.log(valueLen);
+    console.log(requiredAnswersObj[id]);
 
     if (props.opts.restricted === "true") {
       if (value.length > +props.opts.limitLength) {
@@ -30,17 +36,16 @@ const SurveyTextElement = (props) => {
     setUserText(value);
 
     // record if answered or not
-    // if (valueLen > 0) {
-    //   requiredAnswersObj[id] = "answered";
-    // } else {
-    //   requiredAnswersObj[id] = "no response";
-    // }
-    // configObj.requiredAnswersObj = requiredAnswersObj;
-    // setGlobalState("configObj");
-
-    // console.log(JSON.stringify(configObj));
+    if (valueLen > 0) {
+      requiredAnswersObj[id] = "answered";
+    } else {
+      requiredAnswersObj[id] = "no response";
+    }
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
+    results[`qNum${props.opts.qNum}-${props.opts.type}`] = value;
+    setGlobalState("results", results);
   };
 
   // required question answer check

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-// import getGlobalState from "../../globalState/getGlobalState";
-// import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -36,6 +36,7 @@ const RadioInput = ({ label, value, checked, setter }) => {
 
 const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
+
   // const nameValue = `question${props.opts.qNum}`;
 
   // const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
@@ -52,18 +53,26 @@ const SurveyRadioElement = (props) => {
   };
 
   const handleChange = (e) => {
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+
     console.log(e);
 
+    // to set pink coloring
     setLocalStore();
-    // setHasBeenAnswered(true);
-  };
 
-  console.log(
-    `qNum${props.opts.qNum}-${props.opts.type}`,
-    selected
+    const id = `qNum${props.opts.qNum}`;
+    requiredAnswersObj[id] = "answered";
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
-    // optsArray.indexOf(e.target.value) + 1
-  );
+    results[`qNum${props.opts.qNum}-${props.opts.type}`] = +selected + 1;
+
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+
+    setGlobalState("results", results);
+  }; // end handle change
+
+  console.log(`qNum${props.opts.qNum}-${props.opts.type}`, +selected + 1);
 
   // required question answered?
   if (
@@ -83,7 +92,7 @@ const SurveyRadioElement = (props) => {
         <RadioInput
           // id={`${item}-${index}`}
           // type="radio"
-          value={item}
+          value={index}
           checked={selected}
           // name={nameValue}
           label={item}

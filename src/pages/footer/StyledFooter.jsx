@@ -42,7 +42,12 @@ const StyledFooter = () => {
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
-  const displayNextButton = getGlobalState("displayNextButton");
+  let displayNextButton = getGlobalState("displayNextButton");
+
+  // todo - fix properly so no escaping log in
+  if (currentPage !== "landing") {
+    displayNextButton = true;
+  }
 
   const totalProgressScore = calcProgressScore(
     currentPage,

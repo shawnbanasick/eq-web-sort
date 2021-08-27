@@ -2,8 +2,52 @@ import styled from "styled-components";
 import React from "react";
 import { withRouter } from "react-router";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
+
+const checkForNextPageConditions = () => {
+  const currentPage = getGlobalState("currentPage");
+  if (currentPage === "survey") {
+    // to turn on pink color for unanswered
+    setGlobalState("checkRequiredQuestionsComplete", true);
+    const requiredAnswersObj = getGlobalState("requiredAnswersObj");
+
+    const results = getGlobalState("results");
+
+    console.log(requiredAnswersObj);
+
+    const checkArray = [];
+    const keys = Object.keys(requiredAnswersObj);
+    for (let i = 0; i < keys.length; i++) {
+      if (requiredAnswersObj[keys[i]] === "no response") {
+        checkArray.push("false");
+      }
+    }
+    console.log(checkArray);
+    //   let array = Object.entries(requiredAnswersObj).map((item) => {
+    //     console.log(item);
+    //     if (item[1] === "no response") {
+    //       return "false";
+    //     }
+    //     return;
+    //   });
+    //   console.log(array);
+    console.log(JSON.stringify(results, null, 2));
+
+    if (checkArray.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // for pages without checks
+  return true;
+};
 
 const LinkButton = (props) => {
+  let goToNextPage;
+
   const {
     history,
     location,
@@ -20,7 +64,10 @@ const LinkButton = (props) => {
       {...rest} // `children` is just another prop!
       onClick={(event) => {
         onClick && onClick(event);
-        history.push(to);
+        goToNextPage = checkForNextPageConditions();
+        if (goToNextPage) {
+          history.push(to);
+        }
       }}
       tabindex="0"
     />
