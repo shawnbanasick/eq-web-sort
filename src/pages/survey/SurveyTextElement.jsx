@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyTextElement = (props) => {
   let savedText;
+  let configObj = getGlobalState("configObj");
+  let requiredAnswersObj = configObj.requiredAnswersObj;
 
   const [userText, setUserText] = useLocalStorage("savedText", savedText);
 
@@ -13,13 +17,28 @@ const SurveyTextElement = (props) => {
   let border;
 
   const handleOnChange = (e) => {
+    // const id = `qNum${props.opts.qNum}`;
     let value = e.target.value;
+    let valueLen = value.length;
+    console.log(valueLen);
+
     if (props.opts.restricted === "true") {
       if (value.length > +props.opts.limitLength) {
         value = value.substring(0, props.opts.limitLength);
       }
     }
     setUserText(value);
+
+    // record if answered or not
+    // if (valueLen > 0) {
+    //   requiredAnswersObj[id] = "answered";
+    // } else {
+    //   requiredAnswersObj[id] = "no response";
+    // }
+    // configObj.requiredAnswersObj = requiredAnswersObj;
+    // setGlobalState("configObj");
+
+    // console.log(JSON.stringify(configObj));
 
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };

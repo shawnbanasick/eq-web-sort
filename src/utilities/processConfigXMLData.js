@@ -71,6 +71,7 @@ const processConfigXMLData = (dataObject) => {
   localStorage.setItem("configObj", JSON.stringify(configObj));
 
   // setup survey object
+  const requiredAnswersObj = {};
   if (surveyData.length > 0) {
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
@@ -90,9 +91,15 @@ const processConfigXMLData = (dataObject) => {
 
       // TEXT question
       if (questionType === "text") {
+        tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "text";
-        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
+        tempObj.required = isRequired;
         tempObj.label = surveyData[j][1].elements[0].text;
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.limitLength = JSON.parse(surveyData[j][0].attributes.maxlength);
@@ -105,6 +112,11 @@ const processConfigXMLData = (dataObject) => {
       // TEXT question
       if (questionType === "textRestricted") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "textRestricted";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -120,6 +132,11 @@ const processConfigXMLData = (dataObject) => {
       // TEXTAREA question
       if (questionType === "textarea") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "textarea";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -132,6 +149,11 @@ const processConfigXMLData = (dataObject) => {
       // RADIO question
       if (questionType === "radio") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "radio";
         tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
@@ -146,6 +168,11 @@ const processConfigXMLData = (dataObject) => {
       // SELECT question
       if (questionType === "select") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "select";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -159,6 +186,11 @@ const processConfigXMLData = (dataObject) => {
       // CHECKBOX question
       if (questionType === "checkbox") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "checkbox";
         tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
@@ -172,6 +204,11 @@ const processConfigXMLData = (dataObject) => {
       // RATING2 question
       if (questionType === "rating2") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "rating2";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -186,6 +223,11 @@ const processConfigXMLData = (dataObject) => {
       // RATING5 question
       if (questionType === "rating5") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "rating5";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -199,6 +241,11 @@ const processConfigXMLData = (dataObject) => {
       // RATING10 question
       if (questionType === "rating10") {
         tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
         tempObj.qNum = j + 1;
         tempObj.type = "rating10";
         tempObj.required = surveyData[j][0].attributes.required;
@@ -209,6 +256,9 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
     }
+    // console.log(JSON.stringify(requiredAnswersObj, null, 2));
+    configObj.requiredAnswersObj = requiredAnswersObj;
+    setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
     localStorage.setItem(
       "surveyQuestionObjArray",
@@ -220,3 +270,5 @@ const processConfigXMLData = (dataObject) => {
 };
 
 export default processConfigXMLData;
+
+// https://stackoverflow.com/questions/7936480/how-to-check-if-a-javascript-object-contains-null-value-or-it-itself-is-null
