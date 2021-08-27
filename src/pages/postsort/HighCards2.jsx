@@ -2,12 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
+
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards2 = (props) => {
   const configObj = getGlobalState("configObj");
+  const results = getGlobalState("results");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on leaving card comment section,
@@ -16,7 +19,7 @@ const HighCards2 = (props) => {
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 
-    const identifier = `${columnDisplay}_Card${itemId + 1}`;
+    const identifier = `${columnDisplay}_${itemId + 1}`;
 
     // pull in state object for comments
     const statementCommentsObj =
@@ -34,9 +37,12 @@ const HighCards2 = (props) => {
 
         // assign to comments object
         statementCommentsObj[identifier] = `${el.id}>>>${comment}`;
+        results[identifier] = `${el.id}>>>${comment}`;
       }
       return el;
     });
+
+    setGlobalState("results", results);
 
     localStorage.setItem(
       "statementCommentsObj",

@@ -16,7 +16,6 @@ const HighCards = (props) => {
   // on leaving card comment section,
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
     const cards = columnStatements.vCols[columnDisplay];
-    console.log(columnDisplay);
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 
