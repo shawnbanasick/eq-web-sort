@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState.js";
 
 const SurveyTextAreaElement = (props) => {
   let savedTextAreaText;
@@ -16,8 +17,26 @@ const SurveyTextAreaElement = (props) => {
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
 
+  // required question answer check
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
+
+  let bgColor;
+  let border;
+
+  // console.log;
+
+  if (checkRequiredQuestionsComplete === true && userText.length > 0) {
+    bgColor = "whitesmoke";
+    border = "none";
+  } else {
+    bgColor = "lightpink";
+    border = "2px dashed black";
+  }
+
   return (
-    <Container>
+    <Container bgColor={bgColor} border={border}>
       <TitleBar>{props.opts.label}</TitleBar>
       <TextAreaInput value={userText || ""} onChange={handleOnChange} />
     </Container>
@@ -66,8 +85,10 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1300px;
-  background-color: whitesmoke;
   min-height: 200px;
+  background-color: whitesmoke;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
 `;
 
 const TitleBar = styled.div`

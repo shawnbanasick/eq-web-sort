@@ -27,6 +27,7 @@ const RadioInput = ({ label, value, checked, setter }) => {
           type="radio"
           checked={checked === value}
           onChange={() => setter(value)}
+          value={value}
         />
         <LabelDiv>{label}</LabelDiv>
       </InputStyleDiv>
@@ -42,7 +43,9 @@ const SurveyRadioElement = (props) => {
   // const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
   // required question answer check
   // console.log(hasBeenAnswered);
-  const checkRequiredQuestionsComplete = true;
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
   let bgColor;
   let border;
 
@@ -53,10 +56,10 @@ const SurveyRadioElement = (props) => {
   };
 
   const handleChange = (e) => {
+    let results = getGlobalState("results");
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("results");
 
-    console.log(e);
+    // console.log(e.target.value);
 
     // to set pink coloring
     setLocalStore();
@@ -65,14 +68,14 @@ const SurveyRadioElement = (props) => {
     requiredAnswersObj[id] = "answered";
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
-    results[`qNum${props.opts.qNum}-${props.opts.type}`] = +selected + 1;
-
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
+    results[`qNum${props.opts.qNum}-${props.opts.type}`] = +e.target.value + 1;
     setGlobalState("results", results);
+    results = getGlobalState("results");
+
+    // console.log(JSON.stringify(results, null, 2));
   }; // end handle change
 
-  console.log(`qNum${props.opts.qNum}-${props.opts.type}`, +selected + 1);
+  // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected + 1);
 
   // required question answered?
   if (
