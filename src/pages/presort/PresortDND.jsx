@@ -118,7 +118,7 @@ function PresortDND(props) {
       // calc remaining statements
       if (sourceColumn.id === "cards") {
         presortSortedStatementsNum =
-          window.statementsXML.length - sourceColumn.items.length + 1;
+          configObj.totalStatements - sourceColumn.items.length + 1;
         setGlobalState(
           "presortSortedStatementsNum",
           presortSortedStatementsNum
@@ -132,7 +132,7 @@ function PresortDND(props) {
 
       // update progress bar
       const sortedStatements = getGlobalState("presortSortedStatementsNum");
-      const ratio = sortedStatements / window.statementsXML.length;
+      const ratio = sortedStatements / configObj.totalStatements;
       const completedPercent = (ratio * 30).toFixed();
       // update Progress Bar State
       setGlobalState("progressScoreAdditional", completedPercent);
@@ -182,7 +182,7 @@ function PresortDND(props) {
   return (
     <PresortGrid>
       <div id="completionRatio">
-        {presortSortedStatementsNum}/{window.statementsXML.length}
+        {presortSortedStatementsNum}/{configObj.totalStatements}
       </div>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
