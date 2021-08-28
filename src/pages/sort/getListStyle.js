@@ -34,7 +34,7 @@ const getListStyle = (
     minHeight: props.minHeight - 10,
     marginBottom: 220,
     borderRadius: `2px`,
-    border: "1px solid #d8d8d8",
+    border: isUnderMaxCards ? "1px solid #d8d8d8" : "2px dashed black",
   };
 };
 
