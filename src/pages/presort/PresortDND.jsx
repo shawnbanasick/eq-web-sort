@@ -13,8 +13,11 @@ function PresortDND(props) {
   const btnAgreement = langObj.presortAgreement;
   const btnNeutral = langObj.presortNeutral;
 
+  // let presortSortedStatementsNum =
+  //   localStorage.getItem("presortSortedStatementsNum") || 0;
+
   let presortSortedStatementsNum =
-    localStorage.getItem("presortSortedStatementsNum") || 0;
+    getGlobalState("presortSortedStatementsNum") || 0;
 
   const itemsFromBackend = props.statements;
   const cardFontSize = `${props.cardFontSize + 6}px`;
@@ -49,9 +52,11 @@ function PresortDND(props) {
     const { source, destination } = result;
 
     // update statement characteristics
-    const columnStatements = JSON.parse(
-      localStorage.getItem("columnStatements")
-    );
+    const columnStatements = getGlobalState("columnStatements");
+
+    // const columnStatements = JSON.parse(
+    //   localStorage.getItem("columnStatements")
+    // );
     const statementsArray = [...columnStatements.statementList];
     const destinationId = result.destination.droppableId;
     const draggableId = result.draggableId;
@@ -92,7 +97,8 @@ function PresortDND(props) {
 
     // save to memory
     columnStatements.statementList = [...statementsArray];
-    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
+    // localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
+    setGlobalState("columnStatements", columnStatements);
 
     // when dropped on different droppable
     if (source.droppableId !== destination.droppableId) {
@@ -124,10 +130,15 @@ function PresortDND(props) {
           presortSortedStatementsNum
         );
         presortSortedStatementsNum = presortSortedStatementsNum.toString();
-        localStorage.setItem(
+
+        setGlobalState(
           "presortSortedStatementsNum",
           presortSortedStatementsNum
         );
+        // localStorage.setItem(
+        //   "presortSortedStatementsNum",
+        //   presortSortedStatementsNum
+        // );
       }
 
       // update progress bar
@@ -136,7 +147,7 @@ function PresortDND(props) {
       const completedPercent = (ratio * 30).toFixed();
       // update Progress Bar State
       setGlobalState("progressScoreAdditional", completedPercent);
-      localStorage.setItem("progressScoreAdditional", completedPercent);
+      // localStorage.setItem("progressScoreAdditional", completedPercent);
 
       // update columns
       setColumns({
@@ -165,10 +176,12 @@ function PresortDND(props) {
     }
   }; // END DRAG-END
 
-  const [columns, setColumns] = useLocalStorage(
-    "columnsFromBackend",
-    columnsFromBackend
-  );
+  // const [columns, setColumns] = useLocalStorage(
+  //   "columnsFromBackend",
+  //   columnsFromBackend
+  // );
+
+  const [columns, setColumns] = useState(columnsFromBackend);
 
   useEffect(() => {
     let projectResultsObj = getGlobalState("results");
@@ -264,40 +277,40 @@ function PresortDND(props) {
     </PresortGrid>
   );
 
-  function useLocalStorage(key, initialValue) {
-    // State to store our value
-    // Pass initial state function to useState so logic is only executed once
-    const [storedValue, setStoredValue] = useState(() => {
-      try {
-        // Get from local storage by key
-        const item = window.localStorage.getItem(key);
-        // Parse stored json or if none return initialValue
-        return item ? JSON.parse(item) : initialValue;
-      } catch (error) {
-        // If error also return initialValue
-        console.log(error);
+  // function useLocalStorage(key, initialValue) {
+  //   // State to store our value
+  //   // Pass initial state function to useState so logic is only executed once
+  //   const [storedValue, setStoredValue] = useState(() => {
+  //     try {
+  //       // Get from local storage by key
+  //       const item = window.localStorage.getItem(key);
+  //       // Parse stored json or if none return initialValue
+  //       return item ? JSON.parse(item) : initialValue;
+  //     } catch (error) {
+  //       // If error also return initialValue
+  //       console.log(error);
 
-        return initialValue;
-      }
-    });
-    // Return a wrapped version of useState's setter function that ...
-    // ... persists the new value to localStorage.
-    const setValue = (value) => {
-      try {
-        // Allow value to be a function so we have same API as useState
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
-        // Save state
-        setStoredValue(valueToStore);
-        // Save to local storage
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      } catch (error) {
-        // A more advanced implementation would handle the error case
-        console.log(error);
-      }
-    };
-    return [storedValue, setValue];
-  }
+  //       return initialValue;
+  //     }
+  //   });
+  //   // Return a wrapped version of useState's setter function that ...
+  //   // ... persists the new value to localStorage.
+  //   const setValue = (value) => {
+  //     try {
+  //       // Allow value to be a function so we have same API as useState
+  //       const valueToStore =
+  //         value instanceof Function ? value(storedValue) : value;
+  //       // Save state
+  //       setStoredValue(valueToStore);
+  //       // Save to local storage
+  //       window.localStorage.setItem(key, JSON.stringify(valueToStore));
+  //     } catch (error) {
+  //       // A more advanced implementation would handle the error case
+  //       console.log(error);
+  //     }
+  //   };
+  //   return [storedValue, setValue];
+  // }
 }
 
 export default view(PresortDND);

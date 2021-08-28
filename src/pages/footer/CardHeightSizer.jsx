@@ -2,22 +2,25 @@ import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 const CardHeightSizer = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
 
   const increaseFontSize = () => {
-    const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    // const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    const currentSize = +getGlobalState("cardHeight") || 100;
     const newSize = currentSize + 2;
     setGlobalState("cardHeight", newSize);
-
-    localStorage.setItem("cardHeight", JSON.stringify(newSize));
+    // localStorage.setItem("cardHeight", JSON.stringify(newSize));
   };
   const decreaseFontSize = () => {
-    const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    // const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
+    const currentSize = +getGlobalState("cardHeight") || 100;
     const newSize = currentSize - 2;
     setGlobalState("cardHeight", newSize);
-    localStorage.setItem("cardHeight", JSON.stringify(newSize));
+    // localStorage.setItem("cardHeight", JSON.stringify(newSize));
   };
 
   return (

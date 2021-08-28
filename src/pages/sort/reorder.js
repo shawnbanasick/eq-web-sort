@@ -28,7 +28,7 @@ const reorder = (
     columnStatements.vCols[columnToBeReordered] = [...result];
 
     setGlobalState("columnStatements", columnStatements);
-    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
+    // localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
 
     return null;
   } catch (error) {

@@ -11,8 +11,12 @@ const PromptUnload = () => {
   }, []);
 
   const alertUser = (e) => {
-    e.preventDefault();
-    e.returnValue = "";
+    // e.preventDefault();
+    // e.returnValue = "";
+    var message = "o/";
+
+    (e || window.event).returnValue = message; //Gecko + IE
+    return message;
   };
 
   return (

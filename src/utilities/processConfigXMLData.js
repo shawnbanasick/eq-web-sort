@@ -270,6 +270,7 @@ const processConfigXMLData = (dataObject) => {
 
     // set default
     localStorage.setItem("cardHeight", JSON.stringify(120));
+    setGlobalState("cardHeight", 120);
   }
 };
 

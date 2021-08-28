@@ -17,6 +17,7 @@ import setGlobalState from "./globalState/setGlobalState";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
+import getGlobalState from "./globalState/getGlobalState";
 
 const convert = require("xml-js");
 
@@ -37,7 +38,7 @@ function App() {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const languageData = convert.xml2js(response.data, options);
           let langObj = processLanguageXMLData(languageData);
-          localStorage.setItem("langObj", JSON.stringify(langObj));
+          // localStorage.setItem("langObj", JSON.stringify(langObj));
           setGlobalState("langObj", langObj);
         })
         .catch(function (error) {
@@ -77,7 +78,8 @@ function App() {
         .then(function (response) {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const statementsData = convert.xml2js(response.data, options);
-          processStatementsXMLData(statementsData);
+          const columnStatements = processStatementsXMLData(statementsData);
+          setGlobalState("columnStatements", columnStatements);
         })
         .catch(function (error) {
           console.log(error);
@@ -87,7 +89,7 @@ function App() {
       setTimeout(() => {
         setIsDataLoaded(true);
         setLoading(false);
-      }, 500);
+      }, 700);
     })();
   }, []);
 
@@ -95,12 +97,16 @@ function App() {
     return <LoadingScreen />;
   }
 
+  const columnStatements = getGlobalState("columnStatements");
+
   return (
     <div className="App">
       <Router>
         <PromptUnload />
         <Switch>
-          <Route exact path="/presort" component={PresortPage} />
+          <Route exact path="/presort">
+            <PresortPage statements={columnStatements} />
+          </Route>
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/postsort" component={PostsortPage} />
           <Route exact path="/survey" component={SurveyPage} />

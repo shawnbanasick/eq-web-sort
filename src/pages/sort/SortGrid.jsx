@@ -66,9 +66,11 @@ const SortGrid = (props) => {
     calculateDragResults({ ...result });
 
     // pull data from localStorage
-    const columnStatements = JSON.parse(
-      localStorage.getItem("columnStatements")
-    );
+    // const columnStatements = JSON.parse(
+    //   localStorage.getItem("columnStatements")
+    // );
+
+    const columnStatements = getGlobalState("columnStatements");
 
     // source and destination are objects
     const { source, destination } = result;
@@ -131,11 +133,11 @@ const SortGrid = (props) => {
       );
 
       // global state updates
-      setGlobalState("setColumnStatements", columnStatements);
-      localStorage.setItem(
-        "columnStatements",
-        JSON.stringify(columnStatements)
-      );
+      setGlobalState("columnStatements", columnStatements);
+      // localStorage.setItem(
+      //   "columnStatements",
+      //   JSON.stringify(columnStatements)
+      // );
 
       if (columnStatements.statementList.length === 0) {
         setGlobalState("isSortingCards", false);
@@ -156,10 +158,10 @@ const SortGrid = (props) => {
 
       // update Progress Bar State
       setGlobalState("progressScoreAdditionalSort", completedPercent);
-      localStorage.setItem(
-        "progressScoreAdditionalSort",
-        `${completedPercent}`
-      );
+      // localStorage.setItem(
+      //   "progressScoreAdditionalSort",
+      //   `${completedPercent}`
+      // );
 
       // console.log(JSON.stringify(columnStatements.vCols.columnN3, null, 2));
 
@@ -203,7 +205,8 @@ const SortGrid = (props) => {
   const columnWidth = (dimensions.width - 134) / qSortPattern.length;
 
   // pull data from localStorage
-  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  // const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
 
   // MAP out SORT COLUMNS component before render

@@ -12,7 +12,10 @@ import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
 
 const StyledFooter = () => {
-  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  // const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const configObj = getGlobalState("configObj");
+  const langObj = getGlobalState("langObj");
+
   const logoHtml = decodeHTML(configObj.footerLogo);
 
   const getNextPage = (currentPage) => {
@@ -37,7 +40,9 @@ const StyledFooter = () => {
     return `/nopagefound`;
   };
 
-  const nextButtonText = localStorage.getItem("btnNext");
+  // const nextButtonText = localStorage.getItem("btnNext");
+
+  const nextButtonText = langObj.btnNext;
 
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");

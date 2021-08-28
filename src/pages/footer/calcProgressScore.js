@@ -1,12 +1,13 @@
+import getGlobalState from "../../globalState/getGlobalState";
+
 const calcProgressScore = (
   currentPage,
   additionalProgress1,
   additionalProgressSort
 ) => {
-  const additionalProgressState = +localStorage.getItem(
-    "progressScoreAdditional"
-  );
-  const additionalProgressStateSort = +localStorage.getItem(
+  const additionalProgressState = +getGlobalState("progressScoreAdditional");
+
+  const additionalProgressStateSort = +getGlobalState(
     "progressScoreAdditionalSort"
   );
 

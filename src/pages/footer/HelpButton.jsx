@@ -5,7 +5,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const HelpButton = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  // const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
+  const buttonText = langObj.btnHelp || "";
   const currentPage = getGlobalState("currentPage");
   let trigger;
 
@@ -34,7 +36,7 @@ const HelpButton = () => {
 
   return (
     <StyledHelpButton tabindex="0" onClick={handleOnClick}>
-      {langObj.btnHelp}
+      {buttonText}
     </StyledHelpButton>
   );
 };

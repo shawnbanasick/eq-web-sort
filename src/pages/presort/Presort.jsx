@@ -8,13 +8,15 @@ import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 
-const PresortPage = () => {
+const PresortPage = (props) => {
+  console.log(props);
+  const columnStatements = props.statements;
   // set progress score and current page
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("currentPage", "presort");
       setGlobalState("progressScore", 20);
-      localStorage.setItem("progressScore", `20`);
+      // localStorage.setItem("progressScore", `20`);
     }, 200);
   }, []);
 
@@ -30,7 +32,7 @@ const PresortPage = () => {
     };
   }, []);
 
-  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  // const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
   const configObj = getGlobalState("configObj");

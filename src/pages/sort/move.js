@@ -51,12 +51,12 @@ const move = (
   if (forcedSorts === true) {
     if (match === true) {
       setGlobalState("sortCompleted", true);
-      localStorage.setItem("sortCompleted", "true");
+      // localStorage.setItem("sortCompleted", "true");
       setGlobalState("isSortingCards", false);
-      localStorage.setItem("isSortingCards", "false");
+      // localStorage.setItem("isSortingCards", "false");
     } else {
       setGlobalState("sortCompleted", false);
-      localStorage.setItem("sortCompleted", "false");
+      // localStorage.setItem("sortCompleted", "false");
     }
   }
   return null;
