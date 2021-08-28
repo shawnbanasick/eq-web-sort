@@ -71,7 +71,7 @@ const SortGrid = (props) => {
     // );
 
     const columnStatements = getGlobalState("columnStatements");
-
+    console.log(columnStatements);
     // source and destination are objects
     const { source, destination } = result;
 
@@ -191,7 +191,7 @@ const SortGrid = (props) => {
   // todo - clean this up - needed for reactivity on UI height change
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight2 = getGlobalState("cardHeight");
-  let cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
+  let cardHeight = +getGlobalState("cardHeight");
   if (cardHeight === 0) {
     cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
     setGlobalState("cardHeight2", cardHeight2);
