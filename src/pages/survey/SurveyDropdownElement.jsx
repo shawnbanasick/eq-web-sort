@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -29,23 +31,50 @@ const SurveyDropdownElement = (props) => {
   const [selected, setSelected] = useState([]);
   // required question answer check
   // console.log(hasBeenAnswered);
-  const checkRequiredQuestionsComplete = true;
+  // required question answer check
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
   let bgColor;
   let border;
 
-  if (selected[0] !== undefined) {
-    let selected2 = "";
-    for (let i = 0; i < selected.length; i++) {
-      let label = selected[i].label.trim();
-      let id = originalOptions.indexOf(label);
-      if (i === 0) {
-        selected2 += id + 1;
-      } else {
-        selected2 += "|" + (id + 1);
+  const handleOnChange = (e) => {
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+
+    const id = `qNum${props.opts.qNum}`;
+
+    // console.log(JSON.stringify(e));
+    setSelected(e);
+
+    if (e.length !== 0) {
+      requiredAnswersObj[id] = "answered";
+      let selected2 = "";
+      for (let i = 0; i < e.length; i++) {
+        let label = e[i].label;
+        let id = originalOptions.indexOf(label);
+        if (i === 0) {
+          selected2 += id + 1;
+        } else {
+          selected2 += "|" + (id + 1);
+        }
       }
+      // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected2);
+      results[`qNum${props.opts.qNum}-${props.opts.type}`] = selected2;
+      setGlobalState("results", results);
+    } else {
+      requiredAnswersObj[id] = "no response";
+      // console.log("no response");
+      results[`qNum${props.opts.qNum}-${props.opts.type}`] = "no response";
+      setGlobalState("results", results);
     }
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+  };
+
+  if (selected.length > 0) {
     localStore["hasBeenAnswered"] = true;
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected2);
+  } else {
+    localStore["hasBeenAnswered"] = false;
   }
 
   // required question answered?
@@ -65,7 +94,7 @@ const SurveyDropdownElement = (props) => {
         className={"multiselect"}
         options={getOptionsArray(props.opts.options)}
         labelledBy="Select"
-        onChange={setSelected}
+        onChange={handleOnChange}
         value={selected}
       />
     </Container>

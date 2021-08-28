@@ -17,7 +17,7 @@ const SurveyTextAreaElement = (props) => {
     const id = `qNum${props.opts.qNum}`;
 
     let value = e.target.value;
-    value = value.trim();
+    // value = value.trim();
     setUserText(value);
 
     // record if answered or not
