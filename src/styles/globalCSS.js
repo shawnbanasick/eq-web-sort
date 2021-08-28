@@ -596,7 +596,6 @@ footer {
   width: 100vw;
   overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 

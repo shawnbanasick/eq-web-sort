@@ -6,7 +6,6 @@ const calcProgressScore = (
   additionalProgressSort
 ) => {
   const additionalProgressState = +getGlobalState("progressScoreAdditional");
-  console.log(additionalProgressState);
   const additionalProgressStateSort = +getGlobalState(
     "progressScoreAdditionalSort"
   );
@@ -27,8 +26,6 @@ const calcProgressScore = (
   }
   if (currentPage === "presort") {
     totalProgressScore = additionalProgress + 20;
-    console.log(additionalProgress);
-    console.log(totalProgressScore);
     return totalProgressScore;
   }
   if (currentPage === "sort") {
