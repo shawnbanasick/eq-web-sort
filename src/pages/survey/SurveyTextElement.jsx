@@ -15,8 +15,6 @@ const SurveyTextElement = (props) => {
     "checkRequiredQuestionsComplete"
   );
 
-  console.log(checkRequiredQuestionsComplete);
-
   let bgColor;
   let border;
 
@@ -26,7 +24,6 @@ const SurveyTextElement = (props) => {
 
     let value = e.target.value;
     let valueLen = value.length;
-    console.log(requiredAnswersObj[id]);
 
     if (props.opts.restricted === "true") {
       if (value.length > +props.opts.limitLength) {
@@ -43,7 +40,6 @@ const SurveyTextElement = (props) => {
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
     results[`qNum${props.opts.qNum}-${props.opts.type}`] = value;
     setGlobalState("results", results);
   };

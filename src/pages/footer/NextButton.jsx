@@ -14,7 +14,7 @@ const checkForNextPageConditions = () => {
 
     const results = getGlobalState("results");
 
-    console.log(requiredAnswersObj);
+    // console.log(requiredAnswersObj);
 
     const checkArray = [];
     const keys = Object.keys(requiredAnswersObj);
@@ -23,7 +23,8 @@ const checkForNextPageConditions = () => {
         checkArray.push("false");
       }
     }
-    console.log(checkArray);
+    // console.log(checkArray);
+
     //   let array = Object.entries(requiredAnswersObj).map((item) => {
     //     console.log(item);
     //     if (item[1] === "no response") {

@@ -50,7 +50,7 @@ const calculateDragResults = (result) => {
     setGlobalState("sortGridResults", sortGridResults);
     localStorage.setItem("sortGridResults", JSON.stringify(sortGridResults));
 
-    console.log(JSON.stringify(sortGridResults));
+    // console.log(JSON.stringify(sortGridResults));
   } catch (error) {
     console.error(error);
   }

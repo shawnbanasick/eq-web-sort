@@ -27,8 +27,6 @@ const SurveyTextAreaElement = (props) => {
 
     results[`qNum${props.opts.qNum}-${props.opts.type}`] = value;
     setGlobalState("results", results);
-
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
 
   // required question answer check
@@ -38,8 +36,6 @@ const SurveyTextAreaElement = (props) => {
 
   let bgColor;
   let border;
-
-  console.log(userText.length);
 
   if (checkRequiredQuestionsComplete === true && userText.length === 0) {
     bgColor = "lightpink";

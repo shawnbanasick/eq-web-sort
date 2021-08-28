@@ -62,8 +62,6 @@ const HighCards2 = (props) => {
     cardFontSize,
   } = props;
 
-  console.log(JSON.stringify(highCards2, null, 2));
-
   const { agreeText, placeholder } = agreeObj;
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
