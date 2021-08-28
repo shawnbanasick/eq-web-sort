@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState.js";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyTextAreaElement = (props) => {
   let savedTextAreaText;
@@ -11,8 +12,24 @@ const SurveyTextAreaElement = (props) => {
   );
 
   const handleOnChange = (e) => {
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+    const id = `qNum${props.opts.qNum}`;
+
     let value = e.target.value;
+    value = value.trim();
     setUserText(value);
+
+    // record if answered or not
+    if (value.length > 0) {
+      requiredAnswersObj[id] = "answered";
+    } else {
+      requiredAnswersObj[id] = "no response";
+    }
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+
+    results[`qNum${props.opts.qNum}-${props.opts.type}`] = value;
+    setGlobalState("results", results);
 
     console.log(`qNum${props.opts.qNum}-${props.opts.type}`, value);
   };
@@ -25,14 +42,14 @@ const SurveyTextAreaElement = (props) => {
   let bgColor;
   let border;
 
-  // console.log;
+  console.log(userText.length);
 
-  if (checkRequiredQuestionsComplete === true && userText.length > 0) {
-    bgColor = "whitesmoke";
-    border = "none";
-  } else {
+  if (checkRequiredQuestionsComplete === true && userText.length === 0) {
     bgColor = "lightpink";
     border = "2px dashed black";
+  } else {
+    bgColor = "whitesmoke";
+    border = "none";
   }
 
   return (
