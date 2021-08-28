@@ -35,8 +35,8 @@ const PostSort = () => {
   }, []);
 
   // pull data from localStorage
-  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
-  const cardHeight = +JSON.parse(localStorage.getItem("cardHeight"));
+  const columnStatements = getGlobalState("columnStatements");
+  const cardHeight = getGlobalState("cardHeight");
   const cardFontSize = getGlobalState("cardFontSize");
   const columnWidth = 250;
 

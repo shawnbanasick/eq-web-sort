@@ -22,8 +22,7 @@ const LowCards = (props) => {
     const identifier = `${columnDisplay}_${itemId + 1}`;
 
     // pull in state object for comments
-    const statementCommentsObj =
-      JSON.parse(localStorage.getItem("statementCommentsObj")) || {};
+    const statementCommentsObj = getGlobalState("statementCommentsObj") || {};
 
     // to update just the card that changed
     cards.map((el) => {
@@ -46,12 +45,9 @@ const LowCards = (props) => {
 
     columnStatements.vCols[columnDisplay] = [...cards];
 
-    localStorage.setItem(
-      "statementCommentsObj",
-      JSON.stringify(statementCommentsObj)
-    );
+    setGlobalState("statementCommentsObj", statementCommentsObj);
 
-    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
+    setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const {

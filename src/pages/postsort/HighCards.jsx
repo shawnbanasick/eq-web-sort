@@ -22,8 +22,8 @@ const HighCards = (props) => {
     const identifier = `${columnDisplay}_${itemId + 1}`;
 
     // pull in state object for comments
-    const statementCommentsObj =
-      JSON.parse(localStorage.getItem("statementCommentsObj")) || {};
+    const statementCommentsObj = getGlobalState("statementCommentsObj");
+    // JSON.parse(localStorage.getItem("statementCommentsObj")) || {};
 
     // to update just the card that changed
     cards.map((el) => {
@@ -43,13 +43,15 @@ const HighCards = (props) => {
     });
 
     setGlobalState("results", results);
+    setGlobalState("statementCommentsObj", results);
 
-    localStorage.setItem(
-      "statementCommentsObj",
-      JSON.stringify(statementCommentsObj)
-    );
+    // localStorage.setItem(
+    //   "statementCommentsObj",
+    //   JSON.stringify(statementCommentsObj)
+    // );
 
-    localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
+    setGlobalState("columnStatements", columnStatements);
+    // localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
   const {
