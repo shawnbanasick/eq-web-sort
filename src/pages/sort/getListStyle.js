@@ -26,12 +26,12 @@ const getListStyle = (
       : isUnderMaxCards
       ? columnColor
       : "orange",
-    padding: `1px 2px 0px 2px`,
+    padding: `3px 2px 0px 2px`,
 
     minWidth: columnWidth + 13,
     marginTop: 0,
     marginRight: 0,
-    minHeight: props.minHeight + 24,
+    minHeight: props.minHeight - 10,
     marginBottom: 220,
     borderRadius: `2px`,
     border: "1px solid #d8d8d8",
