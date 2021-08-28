@@ -8,7 +8,6 @@ const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
   paddingRight: "20px",
   minHeight: horiCardMinHeight,
   overflowX: `scroll`,
-  direction: "rtl",
 });
 
 export default getListStyleHori;

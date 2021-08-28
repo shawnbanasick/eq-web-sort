@@ -297,7 +297,7 @@ const SortGrid = (props) => {
 export default view(SortGrid);
 
 const SortFooterDiv = styled.div`
-  flex-direction: row-reverse;
+  flex-direction: row;
   background: #e4e4e4;
   position: fixed;
   padding-right: 10px;
