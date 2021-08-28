@@ -147,11 +147,11 @@ const SortGrid = (props) => {
 
       // increment Progress Bar
       // const sortedStatements = getGlobalState("presortSortedStatementsNum");
-      const totalStatements2 = window.statementsXML.length;
+      const totalStatements2 = configObj.totalStatements;
       const remainingStatements = columnStatements.statementList.length;
       const numerator = totalStatements2 - remainingStatements;
 
-      const ratio = numerator / window.statementsXML.length;
+      const ratio = numerator / totalStatements2;
       const completedPercent = (ratio * 30).toFixed();
 
       // update Progress Bar State

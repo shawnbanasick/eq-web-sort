@@ -1,20 +1,29 @@
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import globalState from "../../globalState/globalState";
 
-const handleClick = () => {
-  console.log("clicked");
-};
-
-const SubmitButton = () => {
+const SubmitResultsButton = () => {
   const langObj = JSON.parse(localStorage.getItem("langObj"));
+  let results = getGlobalState("results");
+  console.log(results);
+  let configObj = getGlobalState("configObj");
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(JSON.stringify(results, null, 2));
+    // console.log("please help me");
+    // console.log(langObj);
+  };
+
   return (
     <StyledButton tabindex="0" onClick={handleClick}>
       {langObj.btnTransfer}
     </StyledButton>
   );
 };
-export default view(SubmitButton);
+export default view(SubmitResultsButton);
 
 const StyledButton = styled.button`
   border-color: #2e6da4;

@@ -4,8 +4,6 @@ import setGlobalState from "../globalState/setGlobalState";
 import cloneDeep from "lodash/cloneDeep";
 
 const shuffleCards = () => {
-  // setGlobalState("presortCards", window.statementsXML);
-
   const presortPosCards = getGlobalState("presortPosCards");
   const presortNeuCards = getGlobalState("presortNeuCards");
   const presortNegCards = getGlobalState("presortNegCards");
