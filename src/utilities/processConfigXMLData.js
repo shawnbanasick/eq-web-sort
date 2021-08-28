@@ -1,5 +1,5 @@
 // import globalState from "../globalState/globalState";
-import getGlobalState from "../globalState/getGlobalState";
+// import getGlobalState from "../globalState/getGlobalState";
 import setGlobalState from "../globalState/setGlobalState";
 
 const processConfigXMLData = (dataObject) => {
@@ -68,7 +68,7 @@ const processConfigXMLData = (dataObject) => {
   configObj.postsortConvertObj = postsortConvertObj;
 
   setGlobalState("configObj", configObj);
-  console.log(JSON.stringify(configObj, null, 2));
+  // console.log(JSON.stringify(configObj, null, 2));
   localStorage.setItem("configObj", JSON.stringify(configObj));
 
   // setup survey object
@@ -266,7 +266,7 @@ const processConfigXMLData = (dataObject) => {
       JSON.stringify(surveyQuestionArray)
     );
 
-    console.log(JSON.stringify(surveyQuestionArray));
+    // console.log(JSON.stringify(surveyQuestionArray));
 
     // set default
     localStorage.setItem("cardHeight", JSON.stringify(120));
