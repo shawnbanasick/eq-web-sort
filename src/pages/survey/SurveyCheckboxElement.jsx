@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const localStore = store({});
 
@@ -21,8 +23,11 @@ const getOptionsArray = (options) => {
 const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
+
   // required question answer check
-  const checkRequiredQuestionsComplete = true;
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
   let bgColor;
   let border;
 
@@ -31,6 +36,10 @@ const SurveyCheckboxElement = (props) => {
   );
 
   const handleChange = (position) => {
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+    const id = `qNum${props.opts.qNum}`;
+
     position = parseInt(position, 10);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
@@ -52,20 +61,24 @@ const SurveyCheckboxElement = (props) => {
       selected = selected.substr(0, selected.length - 1);
     }
 
-    console.log(selected.length);
     if (selected.length > 0) {
-      console.log("called");
       localStore2.hasBeenAnswered = true;
+      requiredAnswersObj[id] = "answered";
     } else {
       localStore2.hasBeenAnswered = false;
+      requiredAnswersObj[id] = "no response";
+      selected = "no response";
     }
 
-    console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
+    results[`qNum${props.opts.qNum}-${props.opts.type}`] = selected;
+    setGlobalState("results", results);
+
+    // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
   };
 
   // required question answered?
   const hasBeenAnswered = localStore2.hasBeenAnswered;
-  console.log(hasBeenAnswered);
+  // console.log(hasBeenAnswered);
   if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
     bgColor = "lightpink";
     border = "2px dashed black";
