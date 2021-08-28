@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-// import setGlobalState from "../../globalState/setGlobalState";
-// import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
+import getGlobalState from "../../globalState/getGlobalState";
 
 // filter to remove empty strings if present
 const getOptionsArray = (options) => {
@@ -26,7 +26,10 @@ const SurveyRatings2Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const scaleArray = getScaleArray(props.opts.scale);
   const rows = optsArray.length;
-  const checkRequiredQuestionsComplete = true;
+
+  const checkRequiredQuestionsComplete = getGlobalState(
+    "checkRequiredQuestionsComplete"
+  );
   let bgColor;
   let border;
 
@@ -36,13 +39,18 @@ const SurveyRatings2Element = (props) => {
   );
 
   const handleChange = (selectedRow, column, e) => {
+    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    const results = getGlobalState("results");
+
+    const id = `qNum${props.opts.qNum}`;
+
     let name = e.target.name;
     let value = e.target.value;
 
     // needed for required question check
     localStore[name] = value;
 
-    console.log(name, value);
+    // console.log(name, value);
 
     // update local state with radio selected
     const newArray = [];
@@ -63,6 +71,18 @@ const SurveyRatings2Element = (props) => {
       }
     });
     setCheckedState(newCheckedState);
+
+    // record if answered or not
+    if (newCheckedState.length > 0) {
+      requiredAnswersObj[id] = "answered";
+    } else {
+      requiredAnswersObj[id] = "no response";
+    }
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+
+    console.log(name, value);
+    results[name] = +value;
+    setGlobalState("results", results);
   };
 
   // if is a required question, check if all parts answered
