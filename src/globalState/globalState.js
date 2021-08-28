@@ -21,6 +21,7 @@ const globalState = store({
   presortCards: [],
   presortSortedStatements: 0,
   progressScore: 10,
+  progressScoreAdditional: 0,
   rating2State: {},
   requiredAnswersObj: {},
   sortFinishedModalHasBeenShown: false,

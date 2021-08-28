@@ -5,7 +5,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 // import globalState from "../../globalState/globalState";
 
 const SubmitResultsButton = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
   // console.log(results);
   // let configObj = getGlobalState("configObj");
 

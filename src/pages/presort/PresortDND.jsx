@@ -17,7 +17,7 @@ function PresortDND(props) {
   //   localStorage.getItem("presortSortedStatementsNum") || 0;
 
   let presortSortedStatementsNum =
-    getGlobalState("presortSortedStatementsNum") || 0;
+    +getGlobalState("presortSortedStatementsNum") || 0;
 
   const itemsFromBackend = props.statements;
   const cardFontSize = `${props.cardFontSize + 6}px`;
@@ -142,7 +142,7 @@ function PresortDND(props) {
       }
 
       // update progress bar
-      const sortedStatements = getGlobalState("presortSortedStatementsNum");
+      const sortedStatements = +getGlobalState("presortSortedStatementsNum");
       const ratio = sortedStatements / configObj.totalStatements;
       const completedPercent = (ratio * 30).toFixed();
       // update Progress Bar State
