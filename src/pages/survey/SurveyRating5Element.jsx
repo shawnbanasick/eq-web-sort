@@ -8,7 +8,18 @@ import getGlobalState from "../../globalState/getGlobalState";
 const SurveyRatings5Element = (props) => {
   useEffect(() => {
     const results = getGlobalState("results");
-    results[`qNum${props.opts.qNum}`] = "no response";
+
+    let array = props.opts.options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+
+    const length = array.length;
+
+    for (let i = 0; i < length; i++) {
+      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
+    }
+
     setGlobalState("results", results);
   }, [props]);
 

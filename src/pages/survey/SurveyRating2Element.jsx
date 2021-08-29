@@ -8,7 +8,18 @@ import getGlobalState from "../../globalState/getGlobalState";
 const SurveyRatings2Element = (props) => {
   useEffect(() => {
     const results = getGlobalState("results");
-    results[`qNum${props.opts.qNum}`] = "no response";
+
+    let array = props.opts.options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+
+    const length = array.length;
+
+    for (let i = 0; i < length; i++) {
+      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
+    }
+
     setGlobalState("results", results);
   }, [props]);
 
@@ -27,7 +38,7 @@ const SurveyRatings2Element = (props) => {
     return array;
   };
 
-  // to use with required check and related css formating
+  // to use with required check and related css formatting
   const localStore = store({});
 
   const optsArray = getOptionsArray(props.opts.options);
@@ -55,8 +66,6 @@ const SurveyRatings2Element = (props) => {
 
     // needed for required question check
     localStore[name] = value;
-
-    // console.log(name, value);
 
     // update local state with radio selected
     const newArray = [];
