@@ -18,25 +18,25 @@ let localStore = store({
   hasBeenAnswered: false,
 });
 
-// template
-const RadioInput = ({ label, value, checked, setter }) => {
-  return (
-    <label>
-      <InputStyleDiv>
-        <input
-          type="radio"
-          checked={checked === value}
-          onChange={() => setter(value)}
-          value={value}
-        />
-        <LabelDiv>{label}</LabelDiv>
-      </InputStyleDiv>
-    </label>
-  );
-};
-
 const SurveyRadioElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
+
+  // template
+  const RadioInput = ({ label, value, checked, setter }) => {
+    return (
+      <label>
+        <InputStyleDiv>
+          <input
+            type="radio"
+            checked={checked === value}
+            onChange={() => setter(value)}
+            value={value}
+          />
+          <LabelDiv>{label}</LabelDiv>
+        </InputStyleDiv>
+      </label>
+    );
+  };
 
   // const nameValue = `question${props.opts.qNum}`;
 

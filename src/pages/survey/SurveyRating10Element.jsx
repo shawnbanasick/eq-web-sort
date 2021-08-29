@@ -5,19 +5,19 @@ import { v4 as uuid } from "uuid";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
-// filter to remove empty strings if present
-const getOptionsArray = (options) => {
-  let array = options.split(";");
-  array = array.filter(function (e) {
-    return e;
-  });
-  return array;
-};
-
-// to use with required check and related css formating
-const localStore = store({});
-
 const SurveyRatings10Element = (props) => {
+  // filter to remove empty strings if present
+  const getOptionsArray = (options) => {
+    let array = options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+    return array;
+  };
+
+  // to use with required check and related css formating
+  const localStore = store({});
+
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
 

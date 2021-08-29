@@ -20,13 +20,13 @@ const getOptionsArray = (options) => {
   return objArray;
 };
 
-let localStore = store({
-  hasBeenAnswered: false,
-});
-
 const SurveyDropdownElement = (props) => {
   let originalOptions = props.opts.options.split(";");
   originalOptions = originalOptions.map((x) => x.trim());
+
+  let localStore = store({
+    hasBeenAnswered: false,
+  });
 
   const [selected, setSelected] = useState([]);
   // required question answer check
@@ -69,13 +69,13 @@ const SurveyDropdownElement = (props) => {
       setGlobalState("results", results);
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-  };
 
-  if (selected.length > 0) {
-    localStore["hasBeenAnswered"] = true;
-  } else {
-    localStore["hasBeenAnswered"] = false;
-  }
+    if (selected.length > 0) {
+      localStore["hasBeenAnswered"] = true;
+    } else {
+      localStore["hasBeenAnswered"] = false;
+    }
+  };
 
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;

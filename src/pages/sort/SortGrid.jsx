@@ -13,18 +13,18 @@ import calculateDragResults from "./calculateDragResults";
 
 /* eslint react/prop-types: 0 */
 
-function debounce(fn, ms) {
-  let timer;
-  return (_) => {
-    clearTimeout(timer);
-    timer = setTimeout((_) => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
-
 const SortGrid = (props) => {
+  function debounce(fn, ms) {
+    let timer;
+    return (_) => {
+      clearTimeout(timer);
+      timer = setTimeout((_) => {
+        timer = null;
+        fn.apply(this, arguments);
+      }, ms);
+    };
+  }
+
   const configObj = getGlobalState("configObj");
 
   // force updates after dragend - do not delete

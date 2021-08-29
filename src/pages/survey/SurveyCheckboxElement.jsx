@@ -5,22 +5,22 @@ import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
-const localStore = store({});
-
-const localStore2 = store({
-  hasBeenAnswered: false,
-});
-
-const getOptionsArray = (options) => {
-  let array = options.split(";");
-  array = array.filter(function (e) {
-    return e;
-  });
-  array.map((x) => (localStore[x] = false));
-  return array;
-};
-
 const SurveyCheckboxElement = (props) => {
+  const localStore = store({});
+
+  const localStore2 = store({
+    hasBeenAnswered: false,
+  });
+
+  const getOptionsArray = (options) => {
+    let array = options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+    array.map((x) => (localStore[x] = false));
+    return array;
+  };
+
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 

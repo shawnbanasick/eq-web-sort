@@ -5,33 +5,33 @@ import { v4 as uuid } from "uuid";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
-// filter to remove empty strings if present
-const getOptionsArray = (options) => {
-  let array = options.split(";");
-  array = array.filter(function (e) {
-    return e;
-  });
-  return array;
-};
-
-// to use with required check and related css formating
-const localStore = store({});
-
-const getScaleArray = (options) => {
-  let array = options.split(";");
-  return array;
-};
-
 const SurveyRatings2Element = (props) => {
-  const optsArray = getOptionsArray(props.opts.options);
-  const scaleArray = getScaleArray(props.opts.scale);
-  const rows = optsArray.length;
-
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
   let bgColor;
   let border;
+
+  // filter to remove empty strings if present
+  const getOptionsArray = (options) => {
+    let array = options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+    return array;
+  };
+
+  // to use with required check and related css formating
+  const localStore = store({});
+
+  const optsArray = getOptionsArray(props.opts.options);
+  const rows = optsArray.length;
+
+  const getScaleArray = (options) => {
+    let array = options.split(";");
+    return array;
+  };
+  const scaleArray = getScaleArray(props.opts.scale);
 
   // setup local state
   const [checkedState, setCheckedState] = useState(
