@@ -2,8 +2,7 @@ import { store } from "@risingstack/react-easy-state";
 
 const globalState = store({
   cardFontSize: 15,
-  cardHeight: 100,
-
+  cardHeight: 0,
   checkRequiredQuestionsComplete: false,
   currentPage: "landing",
   dataLoaded: false,

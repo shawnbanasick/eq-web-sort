@@ -52,6 +52,22 @@ const SortGrid = (props) => {
     };
   });
 
+  // useEffect(() => {
+  //   const maxNumCardsInCol = getGlobalState("maxCardsInCol");
+  //   // console.log(cardHeight2);
+  //   // let cardHeight = getGlobalState("cardHeight");
+  //   // if (cardHeight === 0) {
+  //   let cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
+
+  //   if (cardHeight < 30) {
+  //     cardHeight = 30;
+  //     // setGlobalState("cardHeight", cardHeight);
+  //   }
+  //   setGlobalState("cardHeight", cardHeight);
+  // }, [dimensions]);
+
+  // const cardHeight = getGlobalState("cardHeight");
+
   // fire move and re-order functions
   const onDragEnd = (result) => {
     // console.log(result);
@@ -188,17 +204,12 @@ const SortGrid = (props) => {
   const columnHeadersColorsArray = [...configObj.columnHeadersColorsArray];
   const qSortPattern = [...configObj.qSortPattern];
 
-  // todo - clean this up - needed for reactivity on UI height change
+  // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
-  let cardHeight2 = getGlobalState("cardHeight");
-  let cardHeight = +getGlobalState("cardHeight");
+  let cardHeight = getGlobalState("cardHeight");
   if (cardHeight === 0) {
-    cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
-    setGlobalState("cardHeight2", cardHeight2);
-  }
-  if (cardHeight < 30) {
-    cardHeight = 30;
-    setGlobalState("cardHeight2", cardHeight2);
+    cardHeight = ((dimensions.height - 250) / maxNumCardsInCol).toFixed();
+    setGlobalState("cardHeight", +cardHeight);
   }
 
   // set dynamic width on page load on reload
@@ -220,10 +231,12 @@ const SortGrid = (props) => {
     const sortValue = qSortHeaderNumbers[index];
     const columnColor = columnColorsArray[index];
 
+    // console.log(qSortPattern, cardHeight);
+
     return (
       <SortColumn
         key={columnId}
-        minHeight={qSortPattern[index] * (cardHeight + 8) + 15}
+        minHeight={qSortPattern[index] * (+cardHeight + 8) + 15}
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}

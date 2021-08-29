@@ -19,7 +19,7 @@
 
         <!-- FOOTER -->
         <item id="fontSize">Font Size</item>
-        <item id="cardHeight">Card Height</item>
+        <item id="cardHeightText">Card Height</item>
         <item id="btnHelp">Help me!</item>
 
         <!-- LANDING SCREEN -->

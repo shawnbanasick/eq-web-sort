@@ -69,7 +69,7 @@ const processConfigXMLData = (dataObject) => {
 
   setGlobalState("configObj", configObj);
   // console.log(JSON.stringify(configObj, null, 2));
-  localStorage.setItem("configObj", JSON.stringify(configObj));
+  // localStorage.setItem("configObj", JSON.stringify(configObj));
 
   // setup survey object
   const requiredAnswersObj = {};
@@ -261,16 +261,16 @@ const processConfigXMLData = (dataObject) => {
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
-    localStorage.setItem(
-      "surveyQuestionObjArray",
-      JSON.stringify(surveyQuestionArray)
-    );
+    // localStorage.setItem(
+    //   "surveyQuestionObjArray",
+    //   JSON.stringify(surveyQuestionArray)
+    // );
 
     // console.log(JSON.stringify(surveyQuestionArray));
 
     // set default
-    localStorage.setItem("cardHeight", JSON.stringify(120));
-    setGlobalState("cardHeight", 120);
+    // localStorage.setItem("cardHeight", JSON.stringify(120));
+    // setGlobalState("cardHeight", 120);
   }
 };
 

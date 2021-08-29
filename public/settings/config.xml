@@ -41,8 +41,7 @@
      <item id="qSortHeaderNumbers">-4,-3,-2,-1,0,+1,+2,+3,+4</item>
      <item id="out">true</item>
      <item id="columnWidth">200</item>
-     <item id="cardHeight">150</item>
-
+     <item id="cardHeight">0</item>
 
      <!-- POSTSORT -->
      <item id="showSecondPosColumn">true</item>
@@ -68,8 +67,8 @@
 
      <item id="survey">
         <input type="textRestricted" required="true" maxlength="4" restricted="true"></input>
-        <label>Restricted Age*</label>
-        <note>Please enter your year of birth (YYYY, eg. 1980).</note>
+        <label>Restricted Age* write something cool</label>
+        <note></note>
      </item>
      
      <item id="survey">

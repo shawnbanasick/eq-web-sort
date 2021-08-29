@@ -147,7 +147,7 @@ const RadioContainer = styled.div`
   align-items: left;
   padding: 20px;
   vertical-align: center;
-  margin-top: 5px;
+  margin-top: 0px;
   min-height: 120px;
   font-size: 16px;
   background-color: white;

@@ -5,27 +5,24 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const CardHeightSizer = () => {
-  // const langObj = JSON.parse(localStorage.getItem("langObj"));
   const langObj = getGlobalState("langObj");
 
   const increaseFontSize = () => {
-    // const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
-    const currentSize = +getGlobalState("cardHeight") || 100;
+    const currentSize = +getGlobalState("cardHeight");
+    console.log(currentSize);
     const newSize = currentSize + 2;
     setGlobalState("cardHeight", newSize);
-    // localStorage.setItem("cardHeight", JSON.stringify(newSize));
   };
   const decreaseFontSize = () => {
-    // const currentSize = +JSON.parse(localStorage.getItem("cardHeight")) || 100;
-    const currentSize = +getGlobalState("cardHeight") || 100;
+    const currentSize = +getGlobalState("cardHeight");
+    console.log(currentSize);
     const newSize = currentSize - 2;
     setGlobalState("cardHeight", newSize);
-    // localStorage.setItem("cardHeight", JSON.stringify(newSize));
   };
 
   return (
     <Container>
-      <SpanDiv>{langObj.cardHeight}</SpanDiv>
+      <SpanDiv>{langObj.cardHeightText}</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>
