@@ -39,12 +39,12 @@ const SurveyTextElement = (props) => {
     // record if answered or not
     if (valueLen > 0) {
       requiredAnswersObj[id] = "answered";
+      results[`qNum${props.opts.qNum}`] = value;
     } else {
+      results[`qNum${props.opts.qNum}`] = "no response";
       requiredAnswersObj[id] = "no response";
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
-    results[`qNum${props.opts.qNum}`] = value;
     setGlobalState("results", results);
   };
 
