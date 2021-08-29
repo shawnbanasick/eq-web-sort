@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState.js";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyTextAreaElement = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setGlobalState("results", results);
+  }, [props]);
+
   // let savedTextAreaText;
   const [userText, setUserText] = useState("");
 
@@ -25,7 +31,7 @@ const SurveyTextAreaElement = (props) => {
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
-    results[`qNum${props.opts.qNum}-${props.opts.type}`] = value;
+    results[`qNum${props.opts.qNum}`] = value;
     setGlobalState("results", results);
   };
 

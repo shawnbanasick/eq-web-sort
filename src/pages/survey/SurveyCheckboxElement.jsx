@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
@@ -6,6 +6,12 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyCheckboxElement = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setGlobalState("results", results);
+  }, [props]);
+
   const localStore = store({});
 
   const localStore2 = store({
@@ -71,16 +77,12 @@ const SurveyCheckboxElement = (props) => {
       selected = "no response";
     }
 
-    results[`qNum${props.opts.qNum}-${props.opts.type}`] = selected;
+    results[`qNum${props.opts.qNum}`] = selected;
     setGlobalState("results", results);
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
-    // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected);
   };
 
-  // required question answered?
   const hasBeenAnswered = localStore2.hasBeenAnswered;
-  // console.log(hasBeenAnswered);
   if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
     bgColor = "lightpink";
     border = "2px dashed black";

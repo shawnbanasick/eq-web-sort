@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
@@ -6,6 +6,12 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyDropdownElement = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setGlobalState("results", results);
+  }, [props]);
+
   const getOptionsArray = (options) => {
     let array = options.split(";");
     array = array.filter(function (e) {
@@ -59,13 +65,11 @@ const SurveyDropdownElement = (props) => {
           selected2 += "|" + (id + 1);
         }
       }
-      // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected2);
-      results[`qNum${props.opts.qNum}-${props.opts.type}`] = selected2;
+      results[`qNum${props.opts.qNum}`] = selected2;
       setGlobalState("results", results);
     } else {
       requiredAnswersObj[id] = "no response";
-      // console.log("no response");
-      results[`qNum${props.opts.qNum}-${props.opts.type}`] = "no response";
+      results[`qNum${props.opts.qNum}`] = "no response";
       setGlobalState("results", results);
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);

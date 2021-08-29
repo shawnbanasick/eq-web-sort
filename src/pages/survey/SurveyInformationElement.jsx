@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
+import getGlobalState from "../../globalState/getGlobalState";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyInformationElement = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "info. - na";
+    setGlobalState("results", results);
+  }, [props]);
+
   return (
     <Container>
       <TitleBar backgroundColor={props.opts.background}>

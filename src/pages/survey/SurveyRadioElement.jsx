@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
@@ -19,6 +19,12 @@ let localStore = store({
 });
 
 const SurveyRadioElement = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setGlobalState("results", results);
+  }, [props]);
+
   const optsArray = getOptionsArray(props.opts.options);
 
   // template
@@ -68,14 +74,10 @@ const SurveyRadioElement = (props) => {
     requiredAnswersObj[id] = "answered";
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
-    results[`qNum${props.opts.qNum}-${props.opts.type}`] = +e.target.value + 1;
+    results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
     setGlobalState("results", results);
     results = getGlobalState("results");
-
-    // console.log(JSON.stringify(results, null, 2));
   }; // end handle change
-
-  // console.log(`qNum${props.opts.qNum}-${props.opts.type}`, selected + 1);
 
   // required question answered?
   if (

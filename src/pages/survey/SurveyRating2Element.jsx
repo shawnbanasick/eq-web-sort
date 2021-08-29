@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
@@ -6,6 +6,12 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const SurveyRatings2Element = (props) => {
+  useEffect(() => {
+    const results = getGlobalState("results");
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setGlobalState("results", results);
+  }, [props]);
+
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
