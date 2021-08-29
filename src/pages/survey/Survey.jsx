@@ -19,17 +19,13 @@ const SurveyPage = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
+  const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");
 
-  let surveyQuestionObjects;
   useEffect(() => {
     setTimeout(function () {
       setGlobalState("currentPage", "survey");
     }, 100);
   }, []);
-
-  surveyQuestionObjects = JSON.parse(
-    localStorage.getItem("surveyQuestionObjArray")
-  );
 
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
