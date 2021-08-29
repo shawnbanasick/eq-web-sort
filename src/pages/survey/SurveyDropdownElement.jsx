@@ -5,22 +5,22 @@ import MultiSelect from "react-multi-select-component";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
-const getOptionsArray = (options) => {
-  let array = options.split(";");
-  array = array.filter(function (e) {
-    return e;
-  });
-  const objArray = array.map((x) => {
-    x.replace(/\s/g, "");
-    const tempObj = {};
-    tempObj.label = x;
-    tempObj.value = x;
-    return tempObj;
-  });
-  return objArray;
-};
-
 const SurveyDropdownElement = (props) => {
+  const getOptionsArray = (options) => {
+    let array = options.split(";");
+    array = array.filter(function (e) {
+      return e;
+    });
+    const objArray = array.map((x) => {
+      x.replace(/\s/g, "");
+      const tempObj = {};
+      tempObj.label = x;
+      tempObj.value = x;
+      return tempObj;
+    });
+    return objArray;
+  };
+
   let originalOptions = props.opts.options.split(";");
   originalOptions = originalOptions.map((x) => x.trim());
 
@@ -69,13 +69,13 @@ const SurveyDropdownElement = (props) => {
       setGlobalState("results", results);
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
-    if (selected.length > 0) {
-      localStore["hasBeenAnswered"] = true;
-    } else {
-      localStore["hasBeenAnswered"] = false;
-    }
   };
+
+  if (selected.length > 0) {
+    localStore["hasBeenAnswered"] = true;
+  } else {
+    localStore["hasBeenAnswered"] = false;
+  }
 
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;
