@@ -1,5 +1,3 @@
-import { dropRight } from "lodash";
-
 // horizontal column styling
 const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
   background: isDraggingOver ? "lightblue" : "#e4e4e4",

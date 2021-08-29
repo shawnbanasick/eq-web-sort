@@ -10,8 +10,7 @@ const calculateDragResults = (result) => {
       "sortFinishedModalHasBeenShown"
     );
     const totalStatements = configObj.totalStatements;
-    const sortGridResults =
-      JSON.parse(localStorage.getItem("sortGridResults")) || {};
+    const sortGridResults = getGlobalState("sortGridResults");
 
     // derive sortValue from droppableId
     const replaceColumn = /column/gi;
@@ -48,7 +47,6 @@ const calculateDragResults = (result) => {
     }
 
     setGlobalState("sortGridResults", sortGridResults);
-    localStorage.setItem("sortGridResults", JSON.stringify(sortGridResults));
 
     // console.log(JSON.stringify(sortGridResults));
   } catch (error) {

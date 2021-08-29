@@ -284,6 +284,7 @@ const SortGrid = (props) => {
                       )}
                     </Draggable>
                   ))}
+                  {provided.placeholder}
                 </div>
               )}
             </Droppable>
