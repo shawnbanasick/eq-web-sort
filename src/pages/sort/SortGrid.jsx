@@ -208,7 +208,7 @@ const SortGrid = (props) => {
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight = getGlobalState("cardHeight");
   if (cardHeight === 0) {
-    cardHeight = ((dimensions.height - 250) / maxNumCardsInCol).toFixed();
+    cardHeight = ((dimensions.height - 320) / maxNumCardsInCol).toFixed();
     setGlobalState("cardHeight", +cardHeight);
   }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
@@ -10,11 +10,12 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const HighCards = (props) => {
   const configObj = getGlobalState("configObj");
-  const results = getGlobalState("results");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on leaving card comment section,
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
+    const results = getGlobalState("results");
+
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -23,7 +24,6 @@ const HighCards = (props) => {
 
     // pull in state object for comments
     const statementCommentsObj = getGlobalState("statementCommentsObj");
-    // JSON.parse(localStorage.getItem("statementCommentsObj")) || {};
 
     // to update just the card that changed
     cards.map((el) => {
@@ -31,9 +31,13 @@ const HighCards = (props) => {
         const comment3 = userEnteredText;
         // remove new line and commas to make csv export easier
         const comment2 = comment3.replace(/\n/g, " ");
-        const comment = comment2.replace(/,/g, " ");
+        let comment = comment2.replace(/,/g, " ");
         // assign to main data object for confirmation / debugging
         el.comment = comment;
+
+        if (comment.length === 0) {
+          comment = " no response";
+        }
 
         // assign to comments object
         statementCommentsObj[identifier] = `${el.id}>>>${comment}`;
@@ -41,17 +45,11 @@ const HighCards = (props) => {
       }
       return el;
     });
-
+    console.log(JSON.stringify(results, null, 2));
     setGlobalState("results", results);
     setGlobalState("statementCommentsObj", results);
 
-    // localStorage.setItem(
-    //   "statementCommentsObj",
-    //   JSON.stringify(statementCommentsObj)
-    // );
-
     setGlobalState("columnStatements", columnStatements);
-    // localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   }; // end onBlur
 
   const {

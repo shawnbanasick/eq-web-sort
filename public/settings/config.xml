@@ -60,14 +60,14 @@
 
      <item id="survey">
         <input type="text" required="false" maxlength="10" restricted="true"></input>
-        <label>Text - write something cool</label>
-        <note>Tell us of your hometown.</note>
+        <label>Have you had classes with me before?</label>
+        <note>If yes, please list them here.</note>
      </item>
 
      <item id="survey">
         <input type="textRestricted" required="false" maxlength="4" restricted="true"></input>
-        <label>Restricted Age* write something cool</label>
-        <note>THIS IS THE PROBLEM</note>
+        <label>Birthdate* (numbers only)</label>
+        <note>Please input numbers only</note>
      </item>
      
      <item id="survey">

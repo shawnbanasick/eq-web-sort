@@ -8,10 +8,7 @@ const processStatementsXMLData = (dataObject) => {
   const shuffleCards = configObj.shuffleCards;
   const data = dataObject.statements.statement;
   let statementsArray = [];
-  // const hasBeenLoaded = localStorage.getItem("hasBeenLoaded");
 
-  // if (!hasBeenLoaded) {
-  console.log("called!!");
   for (let i = 0; i < data.length; i++) {
     let tempObj = {};
     tempObj.id = `s${data[i]._attributes.id}`;
@@ -39,10 +36,8 @@ const processStatementsXMLData = (dataObject) => {
   columnStatements.statementList = statementsArray;
 
   setGlobalState("columnStatements", columnStatements);
-  // localStorage.setItem("columnStatements", JSON.stringify(columnStatements));
   localStorage.setItem("hasBeenLoaded", true);
   return columnStatements;
-  // }
 };
 
 export default processStatementsXMLData;

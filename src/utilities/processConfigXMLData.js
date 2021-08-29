@@ -257,20 +257,9 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
     }
-    console.log(JSON.stringify(requiredAnswersObj, null, 2));
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
-    // localStorage.setItem(
-    //   "surveyQuestionObjArray",
-    //   JSON.stringify(surveyQuestionArray)
-    // );
-
-    console.log(JSON.stringify(surveyQuestionArray));
-
-    // set default
-    // localStorage.setItem("cardHeight", JSON.stringify(120));
-    // setGlobalState("cardHeight", 120);
   }
 };
 

@@ -26,6 +26,7 @@ const globalState = store({
   requiredAnswersObj: {},
   sortFinishedModalHasBeenShown: false,
   sortGridResults: {},
+  statementCommentsObj: {},
   triggerLandingModal: false,
   triggerPresortModal: false,
   triggerSortModal: false,

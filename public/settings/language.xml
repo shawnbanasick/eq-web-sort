@@ -18,7 +18,7 @@
         <item id="fillInRequiredFields">Please fill in all required fields</item>
 
         <!-- FOOTER -->
-        <item id="fontSize">Font Size</item>
+        <item id="fontSize">Text Size</item>
         <item id="cardHeightText">Card Height</item>
         <item id="btnHelp">Help me!</item>
 
