@@ -26,7 +26,9 @@ html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   overflow: -moz-scrollbars-vertical; 
-    overflow-y: scroll;
+  overflow-y: scroll;
+  -ms-touch-action: manipulation;
+touch-action: manipulation;
 }
 
 

@@ -89,6 +89,7 @@ const SortTitleBar = styled.div`
   font-weight: bold;
   background-color: ${(props) => props.background};
   position: fixed;
+  z-index: 99;
   top: 0;
 `;
 

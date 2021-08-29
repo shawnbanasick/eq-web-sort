@@ -250,6 +250,9 @@ function PresortDND(props) {
                                       overflow: "hidden",
 
                                       fontSize: cardFontSize,
+                                      filter: snapshot.isDragging
+                                        ? "brightness(0.85)"
+                                        : "brightness(1.00)",
                                       backgroundColor: snapshot.isDragging
                                         ? item.backgroundColor
                                         : item.backgroundColor,

@@ -34,7 +34,9 @@ const getItemStyle = (
     display: "flex",
     alignItems: "center",
     border: `1px solid #a8a8a8`,
-    transition: `all 1s ease`,
+    filter: isDragging ? "brightness(0.85)" : "brightness(1.00)",
+    zIndex: "-1",
+
     // transitionDelay: "0.2s",
     // change background colour if dragging  (#e6bbad or #FFB266)
     textAlign: `center`,

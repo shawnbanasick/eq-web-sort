@@ -42,6 +42,7 @@ const getItemStyleHori = (
     paddingRight: 2,
     paddingLeft: 2,
     borderRadius: `5px`,
+    touchAction: "manipulation",
     marginBottom: 5,
     marginTop: 5,
     marginRight: `2px`,
@@ -50,6 +51,7 @@ const getItemStyleHori = (
     alignItems: "center",
     textAlign: `center`,
     order: newSortValue,
+    filter: isDragging ? "brightness(0.85)" : "brightness(1.00)",
     // change background color if dragging, otherwise pre-sort value color
     background: isDragging ? newCardColor : newCardColor,
     // styles to apply on draggables
