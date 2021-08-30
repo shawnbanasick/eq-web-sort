@@ -12,7 +12,6 @@ import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
 
 const StyledFooter = () => {
-  // const configObj = JSON.parse(localStorage.getItem("configObj"));
   const configObj = getGlobalState("configObj");
   const langObj = getGlobalState("langObj");
 
