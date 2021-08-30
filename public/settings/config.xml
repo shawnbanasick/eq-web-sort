@@ -66,8 +66,9 @@
 
      <item id="survey">
         <input type="textRestricted" required="false" maxlength="4" restricted="true"></input>
-        <label>Birthdate* (numbers only)</label>
-        <note>Please input numbers only</note>
+        <label>Prefecture Code* (numbers only)</label>
+        <note>Please input your home prefecture code. (numbers only)
+        </note>
      </item>
      
      <item id="survey">

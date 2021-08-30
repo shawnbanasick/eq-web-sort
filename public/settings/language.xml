@@ -69,7 +69,7 @@
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         
-        <item id="postsortInstructions">{{{h3}}}Please tell us more about your {{{strong}}}thoughts{{{/strong}}} on these cards.{{{/h3}}}</item>
+        <item id="postsortInstructions">{{{h3}}}Please describe your {{{i}}}thoughts and feelings{{{/i}}} about the statements on these cards in more detail.{{{/h3}}}</item>
         <item id="postsortModalHead">Step 4 of 5</item>
         <item id="postsortModalText">Please explain why you agree most or disagree most with the following statements you have placed below "+4" or "-4".</item>
         <item id="postsortHeader">Post-Sort Comments</item>

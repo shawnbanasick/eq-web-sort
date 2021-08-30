@@ -14,7 +14,6 @@ import ReactHtmlParser from "react-html-parser";
 import PostsortHelpModal from "./PostsortHelpModal";
 
 /* eslint react/prop-types: 0 */
-const results = getGlobalState("results");
 
 const PostSort = () => {
   const langObj = getGlobalState("langObj");
@@ -35,31 +34,31 @@ const PostSort = () => {
     };
   }, []);
 
-  const qSortPattern = configObj.qSortPattern;
-  const qSortHeaderNumbers = configObj.qSortHeaderNumbers;
+  // const qSortPattern = configObj.qSortPattern;
+  // const qSortHeaderNumbers = configObj.qSortHeaderNumbers;
 
-  const highCardNum = +qSortPattern[qSortPattern.length - 1];
-  const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];
+  // const highCardNum = +qSortPattern[qSortPattern.length - 1];
+  // const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];
 
-  const highCard2Num = +qSortPattern[qSortPattern.length - 2];
-  const highCard2Val = +qSortHeaderNumbers[qSortHeaderNumbers.length - 2];
+  // const highCard2Num = +qSortPattern[qSortPattern.length - 2];
+  // const highCard2Val = +qSortHeaderNumbers[qSortHeaderNumbers.length - 2];
 
-  const lowCardNum = +qSortPattern[0];
-  const lowCardVal = +qSortHeaderNumbers[0];
+  // const lowCardNum = +qSortPattern[0];
+  // const lowCardVal = +qSortHeaderNumbers[0];
 
-  const lowCard2Num = +qSortPattern[1];
-  const lowCard2Val = +qSortHeaderNumbers[1];
+  // const lowCard2Num = +qSortPattern[1];
+  // const lowCard2Val = +qSortHeaderNumbers[1];
 
-  const maxValue = Math.max(...qSortPattern);
+  // const maxValue = Math.max(...qSortPattern);
 
-  const neuCardNum = maxValue;
-  const neuCardVal = 0;
+  // const neuCardNum = maxValue;
+  // const neuCardVal = 0;
 
-  const length = highCardNum;
-  for (let i = 0; i < length; i++) {
-    results[`column${highCardVal}_${i + 1}`] = "no response";
-  }
-  setGlobalState("results", results);
+  // const length = highCardNum;
+  // for (let i = 0; i < length; i++) {
+  //   results[`column${highCardVal}_${i + 1}`] = "no response";
+  // }
+  // setGlobalState("results", results);
 
   // pull data from localStorage
   const columnStatements = getGlobalState("columnStatements");
@@ -116,8 +115,6 @@ const PostSort = () => {
           agreeObj={agreeObj}
           height={cardHeight}
           cardFontSize={cardFontSize}
-          highCardNum={highCardNum}
-          highCardVal={highCardVal}
           width={columnWidth}
           highCards={highCards}
           columnDisplay={agreeObj.columnDisplay}
@@ -129,8 +126,6 @@ const PostSort = () => {
             agreeObj={agreeObj}
             height={cardHeight}
             cardFontSize={cardFontSize}
-            highCard2Num={highCard2Num}
-            highCard2Val={highCard2Val}
             width={columnWidth}
             highCards2={highCards2}
             columnDisplay={agreeObj.columnDisplay2}
@@ -143,8 +138,6 @@ const PostSort = () => {
             neutralObj={neutralObj}
             height={cardHeight}
             width={columnWidth}
-            neuCardNum={neuCardNum}
-            neuCardVal={neuCardVal}
             cardFontSize={cardFontSize}
             columnDisplay={neutralObj.columnDisplay}
             neutralCards={neutralCards}
@@ -157,8 +150,6 @@ const PostSort = () => {
             disagreeObj={disagreeObj}
             height={cardHeight}
             width={columnWidth}
-            lowCard2Num={lowCard2Num}
-            lowCard2Val={lowCard2Val}
             lowCards2={lowCards2}
             cardFontSize={cardFontSize}
             columnStatements={columnStatements}
@@ -170,8 +161,6 @@ const PostSort = () => {
           disagreeObj={disagreeObj}
           height={cardHeight}
           width={columnWidth}
-          lowCardNum={lowCardNum}
-          lowCardVal={lowCardVal}
           cardFontSize={cardFontSize}
           lowCards={lowCards}
           columnStatements={columnStatements}
@@ -212,8 +201,13 @@ const SortTitleBar = styled.div`
 `;
 
 const PostsortInstructions = styled.div`
+  display: flex;
+  justify-self: center;
+  align-self: center;
   margin-top: 30px;
-  width: 90vw;
+  text-align: center;
   color: black;
-  font-size: 18px;
+  font-size: 2vh;
+  font-weight: normal;
+  max-width: 1100px;
 `;
