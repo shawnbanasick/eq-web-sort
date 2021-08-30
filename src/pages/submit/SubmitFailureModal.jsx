@@ -8,12 +8,14 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 
-const SubmitSuccessModal = () => {
-  const triggerModalOpen = getGlobalState("triggerTransmissionOKModal");
+const SubmitFailureModal = () => {
+  const triggerModalOpen = getGlobalState("triggerTransmissionFailModal");
   const langObj = getGlobalState("langObj");
 
-  const modalHead = ReactHtmlParser(decodeHTML(langObj.transferOkModalHeader));
-  const modalText = ReactHtmlParser(decodeHTML(langObj.transferOkModalText));
+  const modalHead = ReactHtmlParser(
+    decodeHTML(langObj.transferFailModalHeader)
+  );
+  const modalText = ReactHtmlParser(decodeHTML(langObj.transferFailModalText));
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
@@ -34,7 +36,7 @@ const SubmitSuccessModal = () => {
   );
 };
 
-export default view(SubmitSuccessModal);
+export default view(SubmitFailureModal);
 
 const ModalHeader = styled.div`
   font-size: 24px;

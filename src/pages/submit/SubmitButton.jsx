@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
-// import globalState from "../../globalState/globalState";
+import setGlobalState from "../../globalState/setGlobalState";
+import SubmitSuccessModal from "./SubmitSuccessModal";
+import SubmitFailureModal from "./SubmitFailureModal";
 
 const SubmitResultsButton = (props) => {
   const langObj = getGlobalState("langObj");
-  // console.log(results);
-  // let configObj = getGlobalState("configObj");
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -22,8 +22,10 @@ const SubmitResultsButton = (props) => {
           if (error) {
             // error action -  modal
             console.log("there was an error at rootRef level!");
+            setGlobalState("triggerTransmissionFailModal", true);
           } else {
             // do success action - modal
+            setGlobalState("triggerTransmissionOKModal", true);
             console.log("success! pushed to database");
           }
         });
@@ -33,15 +35,20 @@ const SubmitResultsButton = (props) => {
         var errorMessage = error.message;
         // ...
         console.log("there was an error at firebase level!");
+        setGlobalState("triggerTransmissionFailModal", true);
         console.log(errorCode, errorMessage);
       });
-    console.log("submit processed");
+    console.log("submission processed");
   };
 
   return (
-    <StyledButton tabindex="0" onClick={handleClick}>
-      {langObj.btnTransfer}
-    </StyledButton>
+    <React.Fragment>
+      <SubmitSuccessModal />
+      <SubmitFailureModal />
+      <StyledButton tabindex="0" onClick={handleClick}>
+        {langObj.btnTransfer}
+      </StyledButton>
+    </React.Fragment>
   );
 };
 export default view(SubmitResultsButton);

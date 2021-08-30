@@ -33,8 +33,10 @@ const globalState = store({
   triggerLandingModal: false,
   triggerPresortModal: false,
   triggerSortModal: false,
-  triggerSortingFinishedModal: false,
   triggerPostsortModal: false,
+  triggerSortingFinishedModal: false,
+  triggerTransmissionOKModal: false,
+  triggerTransmissionFailModal: false,
   userInputPartId: "",
   userInputAccessCode: "",
 });
