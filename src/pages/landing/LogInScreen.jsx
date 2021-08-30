@@ -1,7 +1,5 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-// import getGlobalState from "../../globalState/getGlobalState";
-// import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
@@ -10,8 +8,8 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const LogInScreen = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
-  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const langObj = getGlobalState("langObj");
+  const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const welcomeText = decodeHTML(langObj.loginWelcomeText);
@@ -47,6 +45,7 @@ const LogInScreen = () => {
       setGlobalState("displayContinueButton", true);
       setGlobalState("partId", userInputPartId);
       setGlobalState("displayNextButton", true);
+      setGlobalState("isLoggedIn", true);
     } else if (userAccessOK === false) {
       setGlobalState("displayAccessCodeWarning", true);
       setTimeout(() => {

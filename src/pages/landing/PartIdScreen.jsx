@@ -25,6 +25,7 @@ const LogInScreen = () => {
       setGlobalState("displayLandingContent", true);
       setGlobalState("partId", userInputPartId);
       setGlobalState("displayNextButton", true);
+      setGlobalState("isLoggedIn", true);
     }
 
     // invalid input ==> display warnings

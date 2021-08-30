@@ -9,6 +9,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 import PresortPreventNavModal from "./PresortPreventNavModal";
 import PresortIsComplete from "./PresortIsComplete";
+import PleaseLogInFirst from "./PleaseLogInFirst";
 
 const PresortPage = (props) => {
   const columnStatements = props.statements;
@@ -34,7 +35,16 @@ const PresortPage = (props) => {
   const langObj = getGlobalState("langObj");
   const headerBarColor = configObj.headerBarColor;
   const presortNoReturn = getGlobalState("presortNoReturn");
+  const partIdRequired = configObj.partIdRequired;
+  const accessRequired = configObj.accesCodeRequired;
+  const isLoggedIn = getGlobalState("isLoggedIn");
 
+  // early return if log-in required and not logged in
+  if (partIdRequired === true || accessRequired === true) {
+    if (isLoggedIn === false) {
+      return <PleaseLogInFirst />;
+    }
+  }
   // early return of finished message if complete
   if (presortNoReturn) {
     return <PresortIsComplete />;

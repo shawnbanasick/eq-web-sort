@@ -12,6 +12,7 @@ const globalState = store({
   displayLandingContent: false,
   displayNextButton: false,
   displayPartIdWarning: false,
+  isLoggedIn: false,
   overloadedColumn: "",
   partId: "anonymous",
   presortPosCards: [],

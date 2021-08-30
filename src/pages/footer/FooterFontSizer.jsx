@@ -5,7 +5,8 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const FooterFontSizer = () => {
-  const fontSizeText = localStorage.getItem("fontSizeText");
+  const langObj = getGlobalState("langObj");
+  const fontSizeText = langObj.fontSizeText;
 
   // todo - use localstorage to persist through page reloads
   const increaseFontSize = () => {

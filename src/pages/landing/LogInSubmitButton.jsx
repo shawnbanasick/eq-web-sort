@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-
-const langObj = JSON.parse(localStorage.getItem("langObj"));
+import getGlobalState from "../../globalState/getGlobalState";
 
 const LogInSubmitButton = (props) => {
+  const langObj = getGlobalState("langObj");
   return (
     <StyledSubmitButton tabindex="0" onClick={props.onClick}>
       {langObj.loginSubmitButtonText}

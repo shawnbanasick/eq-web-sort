@@ -9,9 +9,6 @@ const processLanguageXMLData = (dataObject) => {
       langObj[data[i]._attributes.id] = data[i]._text;
       setGlobalState([data[i]._attributes.id], data[i]._text);
     }
-    // set default
-    localStorage.setItem("btnNext", langObj.btnNext);
-    localStorage.setItem("fontSizeText", langObj.fontSize);
 
     return langObj;
   } catch (error) {

@@ -44,9 +44,9 @@ const SubmitPage = () => {
   if (configObj.showSurvey) {
     transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
   }
-  transmissionResults["npos"] = results.npos;
-  transmissionResults["nneu"] = results.nneu;
-  transmissionResults["nneg"] = results.nneg;
+  transmissionResults["npos"] = results.npos || 0;
+  transmissionResults["nneu"] = results.nneu || 0;
+  transmissionResults["nneg"] = results.nneg || 0;
 
   // if project included POSTSORT, read in complete sorted results
   if (configObj.showPostsort) {

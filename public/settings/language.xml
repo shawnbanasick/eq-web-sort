@@ -10,10 +10,11 @@
 
         <!-- MULTI-PURPOSE MODALS -->
         <item id="stepCompleteMessage">You have completed this step. Please click on the {{{strong}}}blue "Continue" button{{{/strong}}} at the bottom right-side of your screen to go to the next step.</item>
+        <item id="logInFirst">Please complete the log-in process first.</item>
         
 
         <!-- FOOTER -->
-        <item id="fontSize">Text Size</item>
+        <item id="fontSizeText">Text Size</item>
         <item id="cardHeightText">Card Height</item>
         <item id="btnHelp">Help me!</item>
         <item id="btnNext">Continue</item>
@@ -91,7 +92,7 @@
         <item id="transferTextAbove">{{{h1}}}You have finished the survey.{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the submit button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferOkModalHeader">Success - The data have been sent to the server.</item>   
-        <item id="transferOkModalText">Thank you for using Easy HTMLQ!{br}{br}You can now close your browser tab.</item>
+        <item id="transferOkModalText">Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.</item>
         <item id="transferFailModalHeader">Connection to server failed.</item>   
         <item id="transferFailModalText">Please try again in a few moments.</item>   
 
