@@ -24,10 +24,26 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-    <!-- <script src="languageXML.js" type="text/javascript"></script>
-    <script src="statementsXML.js" type="text/javascript"></script>
-    <script src="configXML.js" type="text/javascript"></script> -->
+    <title>Easy HtmlQ</title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBTEZZfNYeQPeMA810yqw0zQaWHEsA3vdk",
+        authDomain: "configurator1-bfa99.firebaseapp.com",
+        databaseURL: "https://configurator1-bfa99-default-rtdb.firebaseio.com",
+        projectId: "configurator1-bfa99",
+        storageBucket: "configurator1-bfa99.appspot.com",
+        messagingSenderId: "218636340046",
+        appId: "1:218636340046:web:fe9e0162941b982dcfac1f",
+      };
+      firebase.initializeApp(firebaseConfig);
+      var rootRef = firebase.database().ref();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

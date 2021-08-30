@@ -11,9 +11,29 @@ const SubmitResultsButton = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(props.results, null, 2));
-    // console.log("please help me");
-    // console.log(langObj);
+
+    window.firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        // Signed in..
+        window.rootRef.push(props.results, function (error) {
+          if (error) {
+            // error action -  modal
+          } else {
+            // do success action - modal
+          }
+        });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log(errorCode, errorMessage);
+      });
+    console.log("submit processed");
+    // console.log(JSON.stringify(props.results, null, 2));
+    // submitViaFirebase(props.results);
   };
 
   return (
