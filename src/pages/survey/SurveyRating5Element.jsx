@@ -111,8 +111,8 @@ const SurveyRatings5Element = (props) => {
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
-      <ItemContainer key={uuid()}>
-        <span key={uuid()}>{item}</span>
+      <ItemContainer indexVal={index} key={uuid()}>
+        <OptionsText key={uuid()}>{item}</OptionsText>
         <RadioInput
           key={uuid()}
           id={`Q-${index}`}
@@ -233,15 +233,18 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 28vw 50px 50px 50px 50px 50px 50px;
+  grid-template-columns: minmax(30%, 900px) 50px 50px 50px 50px 50px 50px;
   margin-bottom: 17px;
+  padding-bottom: 3px;
+  height: 40px;
+  background-color: ${(props) => (props.indexVal % 2 ? "white" : "lightgray")};
   font-size: 16px;
   align-items: end;
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: 28vw 50px 50px 50px 50px 50px 50px;
+  grid-template-columns: minmax(30%, 900px) 50px 50px 50px 50px 50px 50px;
   margin-bottom: 7px;
   align-items: end;
 `;
@@ -258,4 +261,9 @@ const CircleDiv = styled.div`
   justify-self: center;
   align-self: center;
   text-align: center;
+`;
+
+const OptionsText = styled.span`
+  margin-bottom: 2px;
+  padding-left: 5px;
 `;

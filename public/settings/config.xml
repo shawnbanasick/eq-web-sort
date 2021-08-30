@@ -92,17 +92,17 @@
      </item>
      
      <item id="survey">
-        <input type="rating2" required="false" scale="Yes;No">I have used an iPad in class before.; I have used a notebook computer in class before.</input>
+        <input type="rating2" required="false" scale="Yes;No">I have used an iPad in class before.; I have used a notebook computer in class before.;I have used Moodle before.;I have used Quizlet before;</input>
         <label>Please respond to the following statements</label>
      </item>
      
      <item id="survey">
-        <input type="rating5" required="false" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;How would you rate this class overall?</input>
+        <input type="rating5" required="false" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;How would you rate this class overall?;How was your interaction with other students?;How was access to the computer lab?</input>
         <label>Please answer the following questions</label>
      </item>
      
      <item id="survey">
-        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?</input>
+        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?;How would you rate the use of Moodle in this class?;How would you rate the use of Edmodo in this class?</input>
         <label>Please answer the following questions</label>
      </item>
      

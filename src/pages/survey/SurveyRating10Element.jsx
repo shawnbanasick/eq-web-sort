@@ -285,6 +285,8 @@ const ItemContainer = styled.div`
   margin-bottom: 17px;
   font-size: 16px;
   align-items: end;
+  padding-bottom: 3px;
+  height: 40px;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "lightgray")};
   border-radius: 3px;
 `;
