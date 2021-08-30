@@ -43,6 +43,7 @@ const Sort = () => {
   }, []);
 
   useEffect(() => {
+    setGlobalState("presortNoReturn", true);
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
     }, 200);

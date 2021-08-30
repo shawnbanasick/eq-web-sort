@@ -24,28 +24,28 @@ function PresortDND(props) {
 
   const cardHeight = 210;
 
-  const columnsFromBackend = {
-    cards: {
-      name: statementsName,
-      items: itemsFromBackend,
-      id: "cards",
-    },
-    neg: {
-      name: btnDisagreement,
-      items: [],
-      id: "neg",
-    },
-    neutral: {
-      name: btnNeutral,
-      items: [],
-      id: "neutral",
-    },
-    pos: {
-      name: btnAgreement,
-      id: "pos",
-      items: [],
-    },
-  };
+  // const columnsFromBackend = {
+  //   cards: {
+  //     name: statementsName,
+  //     items: itemsFromBackend,
+  //     id: "cards",
+  //   },
+  //   neg: {
+  //     name: btnDisagreement,
+  //     items: [],
+  //     id: "neg",
+  //   },
+  //   neutral: {
+  //     name: btnNeutral,
+  //     items: [],
+  //     id: "neutral",
+  //   },
+  //   pos: {
+  //     name: btnAgreement,
+  //     id: "pos",
+  //     items: [],
+  //   },
+  // };
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -181,7 +181,28 @@ function PresortDND(props) {
   //   columnsFromBackend
   // );
 
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState({
+    cards: {
+      name: statementsName,
+      items: itemsFromBackend,
+      id: "cards",
+    },
+    neg: {
+      name: btnDisagreement,
+      items: [],
+      id: "neg",
+    },
+    neutral: {
+      name: btnNeutral,
+      items: [],
+      id: "neutral",
+    },
+    pos: {
+      name: btnAgreement,
+      id: "pos",
+      items: [],
+    },
+  });
 
   useEffect(() => {
     let projectResultsObj = getGlobalState("results");

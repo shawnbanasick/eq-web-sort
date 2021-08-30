@@ -8,6 +8,7 @@ import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 import PresortPreventNavModal from "./PresortPreventNavModal";
+import PresortIsComplete from "./PresortIsComplete";
 
 const PresortPage = (props) => {
   const columnStatements = props.statements;
@@ -30,14 +31,21 @@ const PresortPage = (props) => {
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
   const configObj = getGlobalState("configObj");
+  const langObj = getGlobalState("langObj");
   const headerBarColor = configObj.headerBarColor;
+  const presortNoReturn = getGlobalState("presortNoReturn");
+
+  // early return of finished message if complete
+  if (presortNoReturn) {
+    return <PresortIsComplete />;
+  }
 
   return (
     <React.Fragment>
       <PresortModal />
       <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>
-        Preliminary Sorting
+        {langObj.titleBarText}
       </SortTitleBar>
       <PresortDND statements={statements} cardFontSize={cardFontSize} />
     </React.Fragment>

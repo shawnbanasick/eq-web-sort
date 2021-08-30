@@ -45,6 +45,7 @@
 
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
+        <item id="titleBarText">Preliminary Sorting</item>
         <item id="presortAgreement">Close to my Feelings</item>
         <item id="presortStatements">Statements</item>
         <item id="presortNeutral">No Strong Feelings</item>
@@ -53,6 +54,8 @@
         <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
+        <item id="presortIsCompleteDisplay">The preliminary sorting is complete. Please continue with the sorting of the statements.</item>
+
 
 
         <!-- SORT: sorting (leave blank to skip popup) -->

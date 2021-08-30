@@ -20,6 +20,7 @@ const globalState = store({
   presortCards: [],
   presortSortedStatements: 0,
   presortFinished: false,
+  presortNoReturn: false,
   progressScore: 10,
   progressScoreAdditional: 0,
   progressScoreAdditionalSort: 0,
