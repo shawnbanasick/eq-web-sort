@@ -5,7 +5,6 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 
 const HelpButton = () => {
-  // const langObj = JSON.parse(localStorage.getItem("langObj"));
   const langObj = getGlobalState("langObj");
   const buttonText = langObj.btnHelp || "";
   const currentPage = getGlobalState("currentPage");

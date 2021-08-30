@@ -8,14 +8,24 @@ import setGlobalState from "../../globalState/setGlobalState";
 const checkForNextPageConditions = () => {
   const currentPage = getGlobalState("currentPage");
   if (currentPage === "presort") {
-    let isPresportFinished = getGlobalState("presortFinished");
-    if (isPresportFinished === false) {
+    let isPresortFinished = getGlobalState("presortFinished");
+    if (isPresortFinished === false) {
       setGlobalState("triggerPresortPreventNavModal", true);
       console.log("false");
       return false;
     } else {
       console.log("true");
 
+      return true;
+    }
+  }
+  if (currentPage === "sort") {
+    const sortFinishedModalHasBeenShown = getGlobalState(
+      "sortFinishedModalHasBeenShown"
+    );
+    if (sortFinishedModalHasBeenShown === false) {
+      return false;
+    } else {
       return true;
     }
   }

@@ -8,7 +8,6 @@ const FooterFontSizer = () => {
   const langObj = getGlobalState("langObj");
   const fontSizeText = langObj.fontSizeText;
 
-  // todo - use localstorage to persist through page reloads
   const increaseFontSize = () => {
     const currentSize = getGlobalState("cardFontSize");
     const newSize = currentSize + 1;
