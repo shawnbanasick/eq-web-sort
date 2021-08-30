@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
@@ -7,8 +7,17 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SubmitButton from "./SubmitButton";
 import getGlobalState from "../../globalState/getGlobalState";
+import JunkObject from "../presort/JunkObject.json";
+import JunkResultsPostsort from "../presort/JunkResultsPostsort.json";
+import JunkResultsSurvey from "../presort/JunkResultsSurvey.json";
+import calculatePostsortResults from "./calculatePostsortResults";
+import { v4 as uuid } from "uuid";
 
 const SubmitPage = () => {
+  useEffect(() => {
+    setGlobalState("currentPage", "submit");
+  }, []);
+
   // language options
   const langObj = getGlobalState("langObj");
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);
@@ -18,9 +27,50 @@ const SubmitPage = () => {
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
 
-  setTimeout(function () {
-    setGlobalState("currentPage", "submit");
-  }, 100);
+  // format results for transmisson
+  let transmissionResults = {};
+  let results = JunkObject; // getGlobalState("results");
+  let resultsPostsort = JunkResultsPostsort;
+  let resultsSurvey = JunkResultsSurvey;
+
+  // finish setup and format results object
+  transmissionResults["projectName"] = configObj.studyTitle;
+  transmissionResults["partId"] = getGlobalState("partId");
+  transmissionResults["randomId"] = uuid().substring(0, 12);
+  transmissionResults["dateTime"] = results.dateTime;
+  transmissionResults["timeLanding"] = results.timeOnlandingPage;
+  transmissionResults["timePresort"] = results.timeOnpresortPage;
+  transmissionResults["timeSort"] = results.timeOnsortPage;
+  if (configObj.showPostsort) {
+    transmissionResults["timePostsort"] = results.timeOnpostSortPage;
+  }
+  if (configObj.showSurvey) {
+    transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
+  }
+  transmissionResults["npos"] = results.npos;
+  transmissionResults["nneu"] = results.nneu;
+  transmissionResults["nneg"] = results.nneg;
+
+  // if project included POSTSORT, read in complete sorted results
+  if (configObj.showPostsort) {
+    const newPostsortObject = calculatePostsortResults(
+      resultsPostsort,
+      configObj
+    );
+    const keys = Object.keys(newPostsortObject);
+    for (let i = 0; i < keys.length; i++) {
+      transmissionResults[keys[i]] = newPostsortObject[keys[i]];
+    }
+  }
+
+  // if project included SURVEY, read in results
+  if (configObj.showSurvey) {
+    const keys2 = Object.keys(resultsSurvey);
+    for (let ii = 0; ii < keys2.length; ii++) {
+      transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
+    }
+  }
+  transmissionResults["sort"] = results.sort;
 
   return (
     <React.Fragment>
@@ -29,7 +79,7 @@ const SubmitPage = () => {
       </SortTitleBar>
       <ContainerDiv>
         <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
-        <SubmitButton />
+        <SubmitButton results={transmissionResults} />
         <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
       </ContainerDiv>
       {/* <h1>test</h1> */}

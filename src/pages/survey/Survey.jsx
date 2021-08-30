@@ -14,12 +14,21 @@ import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
+import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 
 const SurveyPage = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");
+
+  useEffect(() => {
+    let startTime;
+    startTime = Date.now();
+    return () => {
+      calculateTimeOnPage(startTime, "SurveyPage", "SurveyPage");
+    };
+  }, []);
 
   useEffect(() => {
     setTimeout(function () {

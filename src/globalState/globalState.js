@@ -24,6 +24,9 @@ const globalState = store({
   progressScoreAdditionalSort: 0,
   rating2State: {},
   requiredAnswersObj: {},
+  results: {},
+  resultsPostsort: {},
+  resultsSurvey: {},
   sortFinishedModalHasBeenShown: false,
   sortGridResults: {},
   statementCommentsObj: {},
@@ -32,9 +35,8 @@ const globalState = store({
   triggerSortModal: false,
   triggerSortingFinishedModal: false,
   triggerPostsortModal: false,
-  userInputPartId: "",
+  userInputPartId: "anonymous",
   userInputAccessCode: "",
-  results: {},
 });
 
 export default globalState;

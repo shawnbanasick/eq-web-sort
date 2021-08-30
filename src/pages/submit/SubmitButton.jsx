@@ -4,15 +4,14 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 // import globalState from "../../globalState/globalState";
 
-const SubmitResultsButton = () => {
+const SubmitResultsButton = (props) => {
   const langObj = getGlobalState("langObj");
   // console.log(results);
   // let configObj = getGlobalState("configObj");
 
   const handleClick = (e) => {
-    let results = getGlobalState("results");
     e.preventDefault();
-    console.log(JSON.stringify(results, null, 2));
+    console.log(JSON.stringify(props.results, null, 2));
     // console.log("please help me");
     // console.log(langObj);
   };

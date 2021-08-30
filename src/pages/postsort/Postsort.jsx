@@ -34,32 +34,6 @@ const PostSort = () => {
     };
   }, []);
 
-  // const qSortPattern = configObj.qSortPattern;
-  // const qSortHeaderNumbers = configObj.qSortHeaderNumbers;
-
-  // const highCardNum = +qSortPattern[qSortPattern.length - 1];
-  // const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];
-
-  // const highCard2Num = +qSortPattern[qSortPattern.length - 2];
-  // const highCard2Val = +qSortHeaderNumbers[qSortHeaderNumbers.length - 2];
-
-  // const lowCardNum = +qSortPattern[0];
-  // const lowCardVal = +qSortHeaderNumbers[0];
-
-  // const lowCard2Num = +qSortPattern[1];
-  // const lowCard2Val = +qSortHeaderNumbers[1];
-
-  // const maxValue = Math.max(...qSortPattern);
-
-  // const neuCardNum = maxValue;
-  // const neuCardVal = 0;
-
-  // const length = highCardNum;
-  // for (let i = 0; i < length; i++) {
-  //   results[`column${highCardVal}_${i + 1}`] = "no response";
-  // }
-  // setGlobalState("results", results);
-
   // pull data from localStorage
   const columnStatements = getGlobalState("columnStatements");
   const cardHeight = getGlobalState("cardHeight");
