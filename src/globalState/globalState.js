@@ -35,7 +35,7 @@ const globalState = store({
   triggerSortModal: false,
   triggerSortingFinishedModal: false,
   triggerPostsortModal: false,
-  userInputPartId: "anonymous",
+  userInputPartId: "",
   userInputAccessCode: "",
 });
 
