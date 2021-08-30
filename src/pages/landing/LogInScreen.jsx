@@ -12,7 +12,14 @@ const LogInScreen = () => {
   const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
-  const welcomeText = decodeHTML(langObj.loginWelcomeText);
+  const welcomeText = ReactHtmlParser(decodeHTML(langObj.loginWelcomeText));
+  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
+  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
+  const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
+  const accessCodeWarning = ReactHtmlParser(
+    decodeHTML(langObj.accessCodeWarning)
+  );
+  const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
 
   const handleInput = (e) => {
     setGlobalState("userInputPartId", e.target.value);
@@ -61,27 +68,25 @@ const LogInScreen = () => {
 
   return (
     <React.Fragment>
-      <LogInWelcomeText>{ReactHtmlParser(welcomeText)}</LogInWelcomeText>
+      <LogInWelcomeText>{welcomeText}</LogInWelcomeText>
       <Container>
         <div>
-          <h2>{langObj.loginHeaderText}</h2>
+          <h2>{loginHeaderText}</h2>
           <StyledHr />
         </div>
         <div>
-          <h3>{langObj.loginPartIdText}</h3>
+          <h3>{loginPartIdText}</h3>
           <StyledInputDiv>
             <StyledInput onChange={handleInput} type="text" />
-            {displayPartIdWarning && (
-              <WarningText>{langObj.partIdWarning}</WarningText>
-            )}
+            {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
           </StyledInputDiv>
         </div>
         <div>
-          <h3>{langObj.accessInputText}</h3>
+          <h3>{accessInputText}</h3>
           <StyledInputDiv>
             <StyledInput onChange={handleAccess} type="text" />
             {displayAccessCodeWarning && (
-              <WarningText>{langObj.accessCodeWarning}</WarningText>
+              <WarningText>{accessCodeWarning}</WarningText>
             )}
           </StyledInputDiv>
         </div>

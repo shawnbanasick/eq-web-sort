@@ -6,8 +6,8 @@ import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 
 const LogInScreen = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
-  const configObj = JSON.parse(localStorage.getItem("configObj"));
+  const langObj = getGlobalState("langObj");
+  const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
 
   const handleAccess = (e) => {

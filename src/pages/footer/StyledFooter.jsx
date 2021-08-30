@@ -40,8 +40,6 @@ const StyledFooter = () => {
     return `/nopagefound`;
   };
 
-  // const nextButtonText = localStorage.getItem("btnNext");
-
   const nextButtonText = langObj.btnNext;
 
   const currentPage = getGlobalState("currentPage");

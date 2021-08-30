@@ -6,7 +6,7 @@ import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 
 const LogInScreen = () => {
-  const langObj = JSON.parse(localStorage.getItem("langObj"));
+  const langObj = getGlobalState("langObj");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
 
   const handleInput = (e) => {
