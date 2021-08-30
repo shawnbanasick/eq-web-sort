@@ -191,6 +191,10 @@ function PresortDND(props) {
     setGlobalState("results", projectResultsObj);
   }, [columns]);
 
+  if (columns.cards.items.length === 0) {
+    setGlobalState("presortFinished", true);
+  }
+
   // RENDER COMPONENT
   return (
     <PresortGrid>

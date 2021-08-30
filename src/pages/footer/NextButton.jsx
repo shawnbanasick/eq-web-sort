@@ -7,6 +7,19 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const checkForNextPageConditions = () => {
   const currentPage = getGlobalState("currentPage");
+  if (currentPage === "presort") {
+    let isPresportFinished = getGlobalState("presortFinished");
+    if (isPresportFinished === false) {
+      setGlobalState("triggerPresortPreventNavModal", true);
+      console.log("false");
+      return false;
+    } else {
+      console.log("true");
+
+      return true;
+    }
+  }
+
   if (currentPage === "survey") {
     // to turn on pink color for unanswered
     setGlobalState("checkRequiredQuestionsComplete", true);

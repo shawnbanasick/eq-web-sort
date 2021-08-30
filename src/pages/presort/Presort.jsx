@@ -7,6 +7,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
+import PresortPreventNavModal from "./PresortPreventNavModal";
 
 const PresortPage = (props) => {
   const columnStatements = props.statements;
@@ -34,6 +35,7 @@ const PresortPage = (props) => {
   return (
     <React.Fragment>
       <PresortModal />
+      <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>
         Preliminary Sorting
       </SortTitleBar>
