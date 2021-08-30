@@ -7,9 +7,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyDropdownElement = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   const getOptionsArray = (options) => {
@@ -46,7 +46,7 @@ const SurveyDropdownElement = (props) => {
 
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
 
     const id = `qNum${props.opts.qNum}`;
 
@@ -66,11 +66,11 @@ const SurveyDropdownElement = (props) => {
         }
       }
       results[`qNum${props.opts.qNum}`] = selected2;
-      setGlobalState("results", results);
+      setGlobalState("resultsSurvey", results);
     } else {
       requiredAnswersObj[id] = "no response";
       results[`qNum${props.opts.qNum}`] = "no response";
-      setGlobalState("results", results);
+      setGlobalState("resultsSurvey", results);
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
   };

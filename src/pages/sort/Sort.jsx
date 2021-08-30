@@ -53,7 +53,7 @@ const Sort = () => {
     let startTime;
     startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "sortPage", "SortPage");
+      calculateTimeOnPage(startTime, "sortPage", "sortPage");
     };
   }, []);
 

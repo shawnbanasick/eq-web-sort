@@ -7,9 +7,6 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SubmitButton from "./SubmitButton";
 import getGlobalState from "../../globalState/getGlobalState";
-import JunkObject from "../presort/JunkObject.json";
-import JunkResultsPostsort from "../presort/JunkResultsPostsort.json";
-import JunkResultsSurvey from "../presort/JunkResultsSurvey.json";
 import calculatePostsortResults from "./calculatePostsortResults";
 import { v4 as uuid } from "uuid";
 
@@ -29,9 +26,9 @@ const SubmitPage = () => {
 
   // format results for transmisson
   let transmissionResults = {};
-  let results = JunkObject; // getGlobalState("results");
-  let resultsPostsort = JunkResultsPostsort;
-  let resultsSurvey = JunkResultsSurvey;
+  let results = getGlobalState("results");
+  let resultsPostsort = getGlobalState("resultsPostsort");
+  let resultsSurvey = getGlobalState("resultsSurvey");
 
   // finish setup and format results object
   transmissionResults["projectName"] = configObj.studyTitle;
@@ -42,7 +39,7 @@ const SubmitPage = () => {
   transmissionResults["timePresort"] = results.timeOnpresortPage;
   transmissionResults["timeSort"] = results.timeOnsortPage;
   if (configObj.showPostsort) {
-    transmissionResults["timePostsort"] = results.timeOnpostSortPage;
+    transmissionResults["timePostsort"] = results.timeOnpostsortPage;
   }
   if (configObj.showSurvey) {
     transmissionResults["timeSurvey"] = results.timeOnsurveyPage;

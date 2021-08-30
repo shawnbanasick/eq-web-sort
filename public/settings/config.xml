@@ -16,7 +16,8 @@
      <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
 
 
-     <!-- LANDING    anonymous, partId-access, partId, access -->
+     <!-- LANDING -->
+     <!-- options: anonymous, partId-access, partId, access -->
      <item id="initialScreen">anonymous</item>
      <item id="partIdRequired">true</item>
      <item id="accessCodeRequired">true</item>

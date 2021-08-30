@@ -6,9 +6,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyTextElement = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   const id = `qNum${props.opts.qNum}`;
@@ -24,7 +24,7 @@ const SurveyTextElement = (props) => {
 
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
 
     let value = e.target.value;
     let valueLen = value.length;
@@ -45,7 +45,7 @@ const SurveyTextElement = (props) => {
       requiredAnswersObj[id] = "no response";
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   };
 
   // required question answer check

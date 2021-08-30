@@ -6,9 +6,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyInformationElement = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "info. - na";
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   return (

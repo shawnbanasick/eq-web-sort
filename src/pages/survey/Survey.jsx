@@ -26,7 +26,7 @@ const SurveyPage = () => {
     let startTime;
     startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "SurveyPage", "SurveyPage");
+      calculateTimeOnPage(startTime, "surveyPage", "surveyPage");
     };
   }, []);
 

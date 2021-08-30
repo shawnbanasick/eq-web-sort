@@ -20,9 +20,9 @@ let localStore = store({
 
 const SurveyRadioElement = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   const optsArray = getOptionsArray(props.opts.options);
@@ -62,7 +62,7 @@ const SurveyRadioElement = (props) => {
   };
 
   const handleChange = (e) => {
-    let results = getGlobalState("results");
+    let results = getGlobalState("resultsSurvey");
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
 
     // console.log(e.target.value);
@@ -75,8 +75,8 @@ const SurveyRadioElement = (props) => {
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
 
     results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
-    setGlobalState("results", results);
-    results = getGlobalState("results");
+    setGlobalState("resultsSurvey", results);
+    results = getGlobalState("resultsSurvey");
   }; // end handle change
 
   // required question answered?

@@ -7,9 +7,9 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const SurveyCheckboxElement = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   const localStore = store({});
@@ -43,7 +43,7 @@ const SurveyCheckboxElement = (props) => {
 
   const handleChange = (position) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
     const id = `qNum${props.opts.qNum}`;
 
     position = parseInt(position, 10);
@@ -78,7 +78,7 @@ const SurveyCheckboxElement = (props) => {
     }
 
     results[`qNum${props.opts.qNum}`] = selected;
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
   };
 

@@ -30,7 +30,7 @@ const PostSort = () => {
     setGlobalState("progressScore", 50);
 
     return () => {
-      calculateTimeOnPage(startTime, "postSortPage", "PostSortPage");
+      calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
     };
   }, []);
 

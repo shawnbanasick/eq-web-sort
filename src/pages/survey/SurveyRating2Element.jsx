@@ -7,7 +7,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 
 const SurveyRatings2Element = (props) => {
   useEffect(() => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
 
     let array = props.opts.options.split(";");
     array = array.filter(function (e) {
@@ -20,7 +20,7 @@ const SurveyRatings2Element = (props) => {
       results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
     }
 
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   }, [props]);
 
   const checkRequiredQuestionsComplete = getGlobalState(
@@ -57,7 +57,7 @@ const SurveyRatings2Element = (props) => {
 
   const handleChange = (selectedRow, column, e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsSurvey");
 
     const id = `qNum${props.opts.qNum}`;
 
@@ -97,7 +97,7 @@ const SurveyRatings2Element = (props) => {
 
     console.log(name, value);
     results[name] = +value;
-    setGlobalState("results", results);
+    setGlobalState("resultsSurvey", results);
   };
 
   // if is a required question, check if all parts answered

@@ -10,7 +10,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const LowCards2 = (props) => {
   const configObj = getGlobalState("configObj");
-  const results = getGlobalState("results");
+  const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on blur, get text and add comment to card object
@@ -41,7 +41,7 @@ const LowCards2 = (props) => {
       return el;
     });
 
-    setGlobalState("results", results);
+    setGlobalState("resultsPostsort", results);
 
     columnStatements.vCols[columnDisplay] = [...cards];
 

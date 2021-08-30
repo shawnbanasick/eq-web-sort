@@ -10,7 +10,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const HighCards2 = (props) => {
   const configObj = getGlobalState("configObj");
-  const results = getGlobalState("results");
+  const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on leaving card comment section,
@@ -41,7 +41,7 @@ const HighCards2 = (props) => {
       return el;
     });
 
-    setGlobalState("results", results);
+    setGlobalState("resultsPostsort", results);
     setGlobalState("statementCommentsObj", statementCommentsObj);
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur

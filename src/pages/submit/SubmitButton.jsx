@@ -11,6 +11,7 @@ const SubmitResultsButton = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(props.results, null, 2));
 
     window.firebase
       .auth()
@@ -20,8 +21,10 @@ const SubmitResultsButton = (props) => {
         window.rootRef.push(props.results, function (error) {
           if (error) {
             // error action -  modal
+            console.log("there was an error at rootRef level!");
           } else {
             // do success action - modal
+            console.log("success! pushed to database");
           }
         });
       })
@@ -29,11 +32,10 @@ const SubmitResultsButton = (props) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        console.log("there was an error at firebase level!");
         console.log(errorCode, errorMessage);
       });
     console.log("submit processed");
-    // console.log(JSON.stringify(props.results, null, 2));
-    // submitViaFirebase(props.results);
   };
 
   return (

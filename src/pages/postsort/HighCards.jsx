@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
@@ -14,7 +14,7 @@ const HighCards = (props) => {
 
   // on leaving card comment section,
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
-    const results = getGlobalState("results");
+    const results = getGlobalState("resultsPostsort");
 
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
@@ -45,8 +45,8 @@ const HighCards = (props) => {
       }
       return el;
     });
-    console.log(JSON.stringify(results, null, 2));
-    setGlobalState("results", results);
+    // console.log(JSON.stringify(results, null, 2));
+    setGlobalState("resultsPostsort", results);
     setGlobalState("statementCommentsObj", results);
 
     setGlobalState("columnStatements", columnStatements);
