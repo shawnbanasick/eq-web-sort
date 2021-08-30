@@ -36,8 +36,8 @@ const calculateTimeOnPage = (startTime, prefix, prefix2) => {
   results[identifier3] = formattedDuration;
   setGlobalState("results", results);
 
-  let resultsUpdated = getGlobalState("results");
-  console.log(JSON.stringify(resultsUpdated, null, 2));
+  // let resultsUpdated = getGlobalState("results");
+  // console.log(JSON.stringify(resultsUpdated, null, 2));
 };
 
 export default calculateTimeOnPage;

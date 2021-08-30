@@ -11,11 +11,6 @@ const checkForNextPageConditions = () => {
     // to turn on pink color for unanswered
     setGlobalState("checkRequiredQuestionsComplete", true);
     const requiredAnswersObj = getGlobalState("requiredAnswersObj");
-
-    const results = getGlobalState("results");
-
-    // console.log(requiredAnswersObj);
-
     const checkArray = [];
     const keys = Object.keys(requiredAnswersObj);
     for (let i = 0; i < keys.length; i++) {
@@ -23,17 +18,6 @@ const checkForNextPageConditions = () => {
         checkArray.push("false");
       }
     }
-    // console.log(checkArray);
-
-    //   let array = Object.entries(requiredAnswersObj).map((item) => {
-    //     console.log(item);
-    //     if (item[1] === "no response") {
-    //       return "false";
-    //     }
-    //     return;
-    //   });
-    //   console.log(array);
-    console.log(JSON.stringify(results, null, 2));
 
     if (checkArray.length > 0) {
       return false;

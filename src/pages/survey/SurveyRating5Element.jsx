@@ -61,8 +61,6 @@ const SurveyRatings5Element = (props) => {
     // needed for required question check
     local5Store[name] = value;
 
-    // console.log(name, value);
-
     // update local state with radio selected
     const newArray = [];
     const newChecked5State = checked5State.map(function (row, index) {
@@ -90,8 +88,6 @@ const SurveyRatings5Element = (props) => {
       requiredAnswersObj[id] = "no response";
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
-    console.log(name, value);
     results[name] = +value;
     setGlobalState("resultsSurvey", results);
   };

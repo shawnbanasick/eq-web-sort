@@ -94,8 +94,6 @@ const SurveyRatings2Element = (props) => {
       requiredAnswersObj[id] = "no response";
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-
-    console.log(name, value);
     results[name] = +value;
     setGlobalState("resultsSurvey", results);
   };

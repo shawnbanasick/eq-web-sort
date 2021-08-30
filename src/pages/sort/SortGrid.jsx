@@ -52,22 +52,6 @@ const SortGrid = (props) => {
     };
   });
 
-  // useEffect(() => {
-  //   const maxNumCardsInCol = getGlobalState("maxCardsInCol");
-  //   // console.log(cardHeight2);
-  //   // let cardHeight = getGlobalState("cardHeight");
-  //   // if (cardHeight === 0) {
-  //   let cardHeight = ((dimensions.height - 230) / maxNumCardsInCol).toFixed();
-
-  //   if (cardHeight < 30) {
-  //     cardHeight = 30;
-  //     // setGlobalState("cardHeight", cardHeight);
-  //   }
-  //   setGlobalState("cardHeight", cardHeight);
-  // }, [dimensions]);
-
-  // const cardHeight = getGlobalState("cardHeight");
-
   // fire move and re-order functions
   const onDragEnd = (result) => {
     // console.log(result);
@@ -87,7 +71,6 @@ const SortGrid = (props) => {
     // );
 
     const columnStatements = getGlobalState("columnStatements");
-    console.log(columnStatements);
     // source and destination are objects
     const { source, destination } = result;
 
@@ -150,10 +133,6 @@ const SortGrid = (props) => {
 
       // global state updates
       setGlobalState("columnStatements", columnStatements);
-      // localStorage.setItem(
-      //   "columnStatements",
-      //   JSON.stringify(columnStatements)
-      // );
 
       if (columnStatements.statementList.length === 0) {
         setGlobalState("isSortingCards", false);
@@ -164,7 +143,6 @@ const SortGrid = (props) => {
       }
 
       // increment Progress Bar
-      // const sortedStatements = getGlobalState("presortSortedStatementsNum");
       const totalStatements2 = configObj.totalStatements;
       const remainingStatements = columnStatements.statementList.length;
       const numerator = totalStatements2 - remainingStatements;
@@ -174,12 +152,6 @@ const SortGrid = (props) => {
 
       // update Progress Bar State
       setGlobalState("progressScoreAdditionalSort", completedPercent);
-      // localStorage.setItem(
-      //   "progressScoreAdditionalSort",
-      //   `${completedPercent}`
-      // );
-
-      // console.log(JSON.stringify(columnStatements.vCols.columnN3, null, 2));
 
       // force component update
       const newValue = value + 1;
