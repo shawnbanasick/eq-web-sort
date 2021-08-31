@@ -7,6 +7,8 @@ import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import SortHelpModal from "./SortHelpModal";
 import SortingFinishedModal from "../../utilities/SortingFinishedModal";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const localStore = store({
   topMargin: 50,
@@ -14,13 +16,16 @@ const localStore = store({
 
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
-  const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
 
-  // useEffect(() => {
-  //   setGlobalState("triggerSortModal", true);
-  // }, []);
+  // setup language
+  const langObj = getGlobalState("langObj");
+  const sortDisagreement = ReactHtmlParser(
+    decodeHTML(langObj.sortDisagreement)
+  );
+  const sortAgreement = ReactHtmlParser(decodeHTML(langObj.sortAgreement));
+  const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst));
 
   useEffect(() => {
     /* this should adjust the margin of the sort grid because I can't know
@@ -63,11 +68,11 @@ const Sort = () => {
       <SortHelpModal />
       <SortingFinishedModal />
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
-        <Disagree>{langObj.sortDisagreement}</Disagree>
+        <Disagree>{sortDisagreement}</Disagree>
         <CondOfInst fontSize={configObj.condOfInstFontSize}>
-          {langObj.condOfInst}
+          {condOfInst}
         </CondOfInst>
-        <Agree>{langObj.sortAgreement}</Agree>
+        <Agree>{sortAgreement}</Agree>
       </SortTitleBar>
       <SortGridContainer marginTop={localStore.topMargin}>
         <SortGrid cardFontSize={cardFontSize} />;

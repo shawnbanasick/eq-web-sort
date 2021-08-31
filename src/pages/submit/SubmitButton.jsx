@@ -11,6 +11,7 @@ const SubmitResultsButton = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    e.target.disabled = true;
     console.log(JSON.stringify(props.results, null, 2));
 
     window.firebase
@@ -23,6 +24,7 @@ const SubmitResultsButton = (props) => {
             // error action -  modal
             console.log("there was an error at rootRef level!");
             setGlobalState("triggerTransmissionFailModal", true);
+            e.target.disabled = false;
           } else {
             // do success action - modal
             setGlobalState("triggerTransmissionOKModal", true);
@@ -37,6 +39,7 @@ const SubmitResultsButton = (props) => {
         console.log("there was an error at firebase level!");
         setGlobalState("triggerTransmissionFailModal", true);
         console.log(errorCode, errorMessage);
+        e.target.disabled = false;
       });
     console.log("submission processed");
   };
@@ -45,7 +48,7 @@ const SubmitResultsButton = (props) => {
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
-      <StyledButton tabindex="0" onClick={handleClick}>
+      <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
         {langObj.btnTransfer}
       </StyledButton>
     </React.Fragment>

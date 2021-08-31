@@ -22,7 +22,6 @@ const calculateDragResults = (result) => {
 
     // assign key (like "s1") and value (sortValue like "-4")
     sortGridResults[result.draggableId] = sortValue;
-    //   sortGridResults[result.draggableId] = result.destination.droppableId;
 
     // create results string
     const testForCompleteArray = Object.keys(sortGridResults);
@@ -45,10 +44,7 @@ const calculateDragResults = (result) => {
       }
       console.log(resultsText);
     }
-
     setGlobalState("sortGridResults", sortGridResults);
-
-    // console.log(JSON.stringify(sortGridResults));
   } catch (error) {
     console.error(error);
   }

@@ -1,5 +1,4 @@
 import React from "react";
-// import styled from 'styled-components';
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -15,8 +14,6 @@ const handleClick = () => {
 
 const SortCompletedMessageBox = (props) => {
   const sortCompleted = getGlobalState("sortCompleted");
-  // const sortCompleted = localStorage.getItem("sortCompleted");
-  console.log("TCL: sortCompleted", sortCompleted);
 
   if (sortCompleted === true) {
     return (
