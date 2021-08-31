@@ -34,8 +34,9 @@ const LandingPage = () => {
 
   // language options
   const langObj = getGlobalState("langObj");
-  const welcomeTextHtml = decodeHTML(langObj.welcomeText);
   const dataLoaded = getGlobalState("dataLoaded");
+  const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
+  const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
 
   // check for complete
   let displayLandingContent = getGlobalState("displayLandingContent");
@@ -64,16 +65,14 @@ const LandingPage = () => {
     <React.Fragment>
       {dataLoaded && (
         <React.Fragment>
-          <SortTitleBar background={headerBarColor}>
-            {langObj.landingHead}
-          </SortTitleBar>
+          <SortTitleBar background={headerBarColor}>{landingHead}</SortTitleBar>
           <LandingModal />
           <ContainerDiv>
             {displayLogInScreen && <LogInScreen />}
             {displayPartIdScreen && <PartIdScreen />}
             {displayAccessCodeScreen && <AccessCodeScreen />}
             {displayLandingContent && (
-              <ContentDiv>{ReactHtmlParser(welcomeTextHtml)}</ContentDiv>
+              <ContentDiv>{welcomeTextHtml}</ContentDiv>
             )}
           </ContainerDiv>
         </React.Fragment>

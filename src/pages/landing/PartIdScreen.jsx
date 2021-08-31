@@ -4,10 +4,17 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const LogInScreen = () => {
-  const langObj = getGlobalState("langObj");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
+
+  // setup language
+  const langObj = getGlobalState("langObj");
+  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
+  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
+  const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
 
   const handleInput = (e) => {
     console.log(e.target.value);
@@ -40,16 +47,14 @@ const LogInScreen = () => {
   return (
     <Container>
       <div>
-        <h2>{langObj.loginHeaderText}</h2>
+        <h2>{loginHeaderText}</h2>
         <StyledHr />
       </div>
       <div>
-        <h3>{langObj.loginPartIdText}</h3>
+        <h3>{loginPartIdText}</h3>
         <StyledInputDiv>
           <StyledInput onChange={handleInput} type="text" />
-          {displayPartIdWarning && (
-            <WarningText>{langObj.partIdWarning}</WarningText>
-          )}
+          {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
         </StyledInputDiv>
       </div>
 

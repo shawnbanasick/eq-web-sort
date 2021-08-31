@@ -40,11 +40,11 @@ const PostSort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   const columnWidth = 250;
 
-  const titleText = langObj.postsortHeader;
-  const agree = langObj.postsortAgreement;
-  const disagree = langObj.postsortDisagreement;
-  const neutral = langObj.postsortNeutral;
-  const placeholder = langObj.placeholder;
+  const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader));
+  const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement));
+  const disagree = ReactHtmlParser(decodeHTML(langObj.postsortDisagreement));
+  const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
+  const placeholder = ReactHtmlParser(decodeHTML(langObj.placeholder));
 
   const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
   const postsortAgreeColDisp2 = configObj.postsortAgreeColDisp2;

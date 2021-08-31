@@ -14,15 +14,16 @@ const PresortIsComplete = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
-  const mainText = decodeHTML(langObj.presortIsCompleteDisplay);
+  const mainText = ReactHtmlParser(
+    decodeHTML(langObj.presortIsCompleteDisplay)
+  );
+  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
   return (
     <React.Fragment>
-      <SortTitleBar background={headerBarColor}>
-        {langObj.titleBarText}
-      </SortTitleBar>
+      <SortTitleBar background={headerBarColor}>{titleBarText}</SortTitleBar>
       <ContainerDiv>
-        <ContentDiv>{ReactHtmlParser(mainText)}</ContentDiv>
+        <ContentDiv>{mainText}</ContentDiv>
       </ContainerDiv>
     </React.Fragment>
   );
