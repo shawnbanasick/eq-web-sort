@@ -56,6 +56,8 @@
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
         <item id="presortIsCompleteDisplay">The preliminary sorting is complete. Please continue with the sorting of the statements.</item>
+        <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
+        <item id="presortFinishedModalText">You have completed this step. Please click the "Continue" button in the bottom right side of the page to go to the next step.</item>
 
 
 

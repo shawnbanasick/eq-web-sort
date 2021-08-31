@@ -177,6 +177,7 @@ function PresortDND(props) {
 
   if (columns.cards.items.length === 0) {
     setGlobalState("presortFinished", true);
+    setGlobalState("triggerPresortFinishedModal", true);
   }
 
   // RENDER COMPONENT

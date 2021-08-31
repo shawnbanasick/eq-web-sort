@@ -8,6 +8,7 @@ import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 import PresortPreventNavModal from "./PresortPreventNavModal";
+import PresortFinishedModal from "./PresortFinishedModal";
 import PresortIsComplete from "./PresortIsComplete";
 import PleaseLogInFirst from "./PleaseLogInFirst";
 import ReactHtmlParser from "react-html-parser";
@@ -36,8 +37,7 @@ const PresortPage = (props) => {
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const presortNoReturn = getGlobalState("presortNoReturn");
-  const partIdRequired = configObj.partIdRequired;
-  const accessRequired = configObj.accesCodeRequired;
+  const initialScreen = configObj.initialScreen;
   const isLoggedIn = getGlobalState("isLoggedIn");
 
   // language setup
@@ -45,7 +45,7 @@ const PresortPage = (props) => {
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
   // early return if log-in required and not logged in
-  if (partIdRequired === true || accessRequired === true) {
+  if (initialScreen !== "anonymous") {
     if (isLoggedIn === false) {
       return <PleaseLogInFirst />;
     }
@@ -58,6 +58,7 @@ const PresortPage = (props) => {
   return (
     <React.Fragment>
       <PresortModal />
+      <PresortFinishedModal />
       <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleBarText}</SortTitleBar>
       <PresortDND statements={statements} cardFontSize={cardFontSize} />
