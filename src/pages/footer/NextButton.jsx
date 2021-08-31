@@ -20,10 +20,8 @@ const checkForNextPageConditions = () => {
     }
   }
   if (currentPage === "sort") {
-    const sortFinishedModalHasBeenShown = getGlobalState(
-      "sortFinishedModalHasBeenShown"
-    );
-    if (sortFinishedModalHasBeenShown === false) {
+    const isSortingFinished = getGlobalState("sortFinished");
+    if (isSortingFinished === false) {
       setGlobalState("triggerSortPreventNavModal", true);
       return false;
     } else {

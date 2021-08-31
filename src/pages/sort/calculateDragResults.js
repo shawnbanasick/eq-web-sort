@@ -25,26 +25,38 @@ const calculateDragResults = (result) => {
 
     // create results string
     const testForCompleteArray = Object.keys(sortGridResults);
+    let catchNan = false;
     if (testForCompleteArray.length === totalStatements) {
       let resultsText = "";
       for (let i = 0; i < totalStatements; i++) {
         let key = `s${i + 1}`;
         let newValue = sortGridResults[key];
+        if (isNaN(newValue)) {
+          catchNan = true;
+        }
         resultsText += `${newValue}|`;
-      }
-      // remove trailing bar
-      if (resultsText.charAt(resultsText.length - 1) === "|") {
-        resultsText = resultsText.substr(0, resultsText.length - 1);
-      }
-      results.sort = resultsText;
-      setGlobalState("results", results);
-      if (sortFinishedModalHasBeenShown === false) {
+      } // loop end
+
+      if (catchNan === true) {
+        // card in footer - sort not complete
+        setGlobalState("sortFinished", false);
+      } else {
+        // if sort is complete
+        // process string to remove trailing bar
+        if (resultsText.charAt(resultsText.length - 1) === "|") {
+          resultsText = resultsText.substr(0, resultsText.length - 1);
+        }
+
+        results.sort = resultsText;
+        setGlobalState("results", results);
+        if (sortFinishedModalHasBeenShown === false) {
+          setGlobalState("sortFinishedModalHasBeenShown", true);
+        }
         setGlobalState("triggerSortingFinishedModal", true);
-        setGlobalState("sortFinishedModalHasBeenShown", true);
+        setGlobalState("sortFinished", true);
+        setGlobalState("sortGridResults", sortGridResults);
       }
-      console.log(resultsText);
     }
-    setGlobalState("sortGridResults", sortGridResults);
   } catch (error) {
     console.error(error);
     console.log("there was an error in calculateDragResults");
