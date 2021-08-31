@@ -45,8 +45,8 @@ const StyledFooter = () => {
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
   let displayNextButton = getGlobalState("displayNextButton");
-  let showAdjustmentContainer;
-  let showCardHeightSizer;
+  let showAdjustmentContainer = true;
+  let showCardHeightSizer = true;
 
   // todo - fix properly so no escaping log in
   if (currentPage !== "landing") {
@@ -59,9 +59,27 @@ const StyledFooter = () => {
     additionalProgressSort
   );
 
+  if (currentPage === "presort") {
+    showAdjustmentContainer = true;
+    showCardHeightSizer = false;
+  }
+  if (
+    currentPage === "landing" ||
+    currentPage === "survey" ||
+    currentPage === "submit"
+  ) {
+    showAdjustmentContainer = false;
+  }
+
   let CenterContent = (
     <React.Fragment>
       <HelpButton />
+      {showAdjustmentContainer && (
+        <AdjustmentsContainer>
+          <FooterFontSizer />
+          {showCardHeightSizer && <CardHeightSizer />}
+        </AdjustmentsContainer>
+      )}
       <ProgressBarDiv>
         <ProgressBar
           completed={totalProgressScore}
@@ -73,67 +91,6 @@ const StyledFooter = () => {
       </ProgressBarDiv>
     </React.Fragment>
   );
-
-  if (currentPage === "presort") {
-    CenterContent = (
-      <React.Fragment>
-        <HelpButton />
-        <AdjustmentsContainer>
-          <FooterFontSizer />
-        </AdjustmentsContainer>
-        <ProgressBarDiv>
-          <ProgressBar
-            completed={totalProgressScore}
-            width={"200px"}
-            bgColor="#337ab7"
-            labelColor="#f0f0f0"
-            baseBgColor="lightgray"
-          />
-        </ProgressBarDiv>
-      </React.Fragment>
-    );
-  }
-  if (currentPage === "sort") {
-    CenterContent = (
-      <React.Fragment>
-        <HelpButton />
-
-        <AdjustmentsContainer>
-          <FooterFontSizer />
-          <CardHeightSizer />
-        </AdjustmentsContainer>
-        <ProgressBarDiv>
-          <ProgressBar
-            completed={totalProgressScore}
-            width={"200px"}
-            bgColor="#337ab7"
-            labelColor="#f0f0f0"
-            baseBgColor="lightgray"
-          />
-        </ProgressBarDiv>
-      </React.Fragment>
-    );
-  }
-  if (currentPage === "postsort") {
-    CenterContent = (
-      <React.Fragment>
-        <HelpButton />
-        <AdjustmentsContainer>
-          <FooterFontSizer />
-          <CardHeightSizer />
-        </AdjustmentsContainer>
-        <ProgressBarDiv>
-          <ProgressBar
-            completed={totalProgressScore}
-            width={"200px"}
-            bgColor="#337ab7"
-            labelColor="#f0f0f0"
-            baseBgColor="lightgray"
-          />
-        </ProgressBarDiv>
-      </React.Fragment>
-    );
-  }
 
   const nextPage = getNextPage(currentPage);
 
