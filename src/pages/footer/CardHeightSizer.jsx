@@ -3,9 +3,12 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const CardHeightSizer = () => {
   const langObj = getGlobalState("langObj");
+  const cardHeightText = ReactHtmlParser(decodeHTML(langObj.cardHeightText));
 
   const increaseFontSize = () => {
     const currentSize = +getGlobalState("cardHeight");
@@ -22,7 +25,7 @@ const CardHeightSizer = () => {
 
   return (
     <Container>
-      <SpanDiv>{langObj.cardHeightText}</SpanDiv>
+      <SpanDiv>{cardHeightText}</SpanDiv>
       <SizeButton onClick={decreaseFontSize}>-</SizeButton>
       <SizeButton onClick={increaseFontSize}>+</SizeButton>
     </Container>

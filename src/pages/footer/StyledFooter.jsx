@@ -13,9 +13,11 @@ import HelpButton from "./HelpButton";
 
 const StyledFooter = () => {
   const configObj = getGlobalState("configObj");
-  const langObj = getGlobalState("langObj");
 
+  // setup language
+  const langObj = getGlobalState("langObj");
   const logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
+  const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 
   const getNextPage = (currentPage) => {
     if (currentPage === "landing") {
@@ -38,8 +40,6 @@ const StyledFooter = () => {
     }
     return `/nopagefound`;
   };
-
-  const nextButtonText = langObj.btnNext;
 
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");

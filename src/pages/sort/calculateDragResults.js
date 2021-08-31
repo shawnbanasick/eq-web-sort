@@ -2,15 +2,18 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const calculateDragResults = (result) => {
+  console.log(JSON.stringify(result));
   try {
-    // const sortGridResults = getGlobalState("sortGridResults");
     const configObj = getGlobalState("configObj");
     const results = getGlobalState("results");
     const sortFinishedModalHasBeenShown = getGlobalState(
       "sortFinishedModalHasBeenShown"
     );
+
     const totalStatements = configObj.totalStatements;
     const sortGridResults = getGlobalState("sortGridResults");
+
+    console.log(sortGridResults);
 
     // derive sortValue from droppableId
     const replaceColumn = /column/gi;
@@ -37,15 +40,21 @@ const calculateDragResults = (result) => {
         resultsText += `${newValue}|`;
       } // loop end
 
+      console.log(resultsText);
       if (catchNan === true) {
         // card in footer - sort not complete
         setGlobalState("sortFinished", false);
       } else {
+        console.log("complete");
         // if sort is complete
         // process string to remove trailing bar
+        setGlobalState("sortFinished", true);
+
         if (resultsText.charAt(resultsText.length - 1) === "|") {
           resultsText = resultsText.substr(0, resultsText.length - 1);
         }
+
+        console.log(resultsText);
 
         results.sort = resultsText;
         setGlobalState("results", results);
@@ -53,10 +62,9 @@ const calculateDragResults = (result) => {
           setGlobalState("sortFinishedModalHasBeenShown", true);
         }
         setGlobalState("triggerSortingFinishedModal", true);
-        setGlobalState("sortFinished", true);
-        setGlobalState("sortGridResults", sortGridResults);
       }
     }
+    setGlobalState("sortGridResults", sortGridResults);
   } catch (error) {
     console.error(error);
     console.log("there was an error in calculateDragResults");

@@ -22,6 +22,7 @@ const checkForNextPageConditions = () => {
       setGlobalState("triggerSortPreventNavModal", true);
       return false;
     } else {
+      setGlobalState("triggerSortPreventNavModal", false);
       return true;
     }
   }

@@ -3,10 +3,12 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const FooterFontSizer = () => {
   const langObj = getGlobalState("langObj");
-  const fontSizeText = langObj.fontSizeText;
+  const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
 
   const increaseFontSize = () => {
     const currentSize = getGlobalState("cardFontSize");
