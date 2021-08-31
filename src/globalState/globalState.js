@@ -40,6 +40,7 @@ const globalState = store({
   triggerSortModal: true,
   triggerPostsortModal: false,
   triggerSortingFinishedModal: false,
+  triggerSortPreventNavModal: false,
   triggerTransmissionOKModal: false,
   triggerTransmissionFailModal: false,
   userInputPartId: "",

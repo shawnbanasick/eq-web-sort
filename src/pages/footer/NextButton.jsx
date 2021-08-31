@@ -24,6 +24,7 @@ const checkForNextPageConditions = () => {
       "sortFinishedModalHasBeenShown"
     );
     if (sortFinishedModalHasBeenShown === false) {
+      setGlobalState("triggerSortPreventNavModal", true);
       return false;
     } else {
       return true;

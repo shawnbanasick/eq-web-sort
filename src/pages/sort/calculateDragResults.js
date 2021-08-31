@@ -47,6 +47,7 @@ const calculateDragResults = (result) => {
     setGlobalState("sortGridResults", sortGridResults);
   } catch (error) {
     console.error(error);
+    console.log("there was an error in calculateDragResults");
   }
 };
 

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import SortHelpModal from "./SortHelpModal";
 import SortingFinishedModal from "../../utilities/SortingFinishedModal";
+import PreventSortNavModal from "./PreventSortNavModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
@@ -66,6 +67,7 @@ const Sort = () => {
   return (
     <React.Fragment>
       <SortHelpModal />
+      <PreventSortNavModal />
       <SortingFinishedModal />
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{sortDisagreement}</Disagree>
