@@ -15,7 +15,7 @@ const StyledFooter = () => {
   const configObj = getGlobalState("configObj");
   const langObj = getGlobalState("langObj");
 
-  const logoHtml = decodeHTML(configObj.footerLogo);
+  const logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
 
   const getNextPage = (currentPage) => {
     if (currentPage === "landing") {
@@ -45,6 +45,8 @@ const StyledFooter = () => {
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
   let displayNextButton = getGlobalState("displayNextButton");
+  let showAdjustmentContainer;
+  let showCardHeightSizer;
 
   // todo - fix properly so no escaping log in
   if (currentPage !== "landing") {
@@ -137,7 +139,7 @@ const StyledFooter = () => {
 
   return (
     <StyledFooterDiv>
-      <LogoContainer>{ReactHtmlParser(logoHtml)}</LogoContainer>
+      <LogoContainer>{logoHtml}</LogoContainer>
       <CenterDiv>{CenterContent}</CenterDiv>
       {displayNextButton && (
         <NextButton to={nextPage}>{nextButtonText}</NextButton>

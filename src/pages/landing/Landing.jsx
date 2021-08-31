@@ -15,9 +15,8 @@ const LandingPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setGlobalState("progressScore", 10);
+      setGlobalState("currentPage", "landing");
     }, 100);
-    setGlobalState("currentPage", "landing");
-    localStorage.setItem("progressScore", 10);
   }, []);
 
   // calc time on page

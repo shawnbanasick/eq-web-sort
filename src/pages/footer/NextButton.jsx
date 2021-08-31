@@ -11,11 +11,8 @@ const checkForNextPageConditions = () => {
     let isPresortFinished = getGlobalState("presortFinished");
     if (isPresortFinished === false) {
       setGlobalState("triggerPresortPreventNavModal", true);
-      console.log("false");
       return false;
     } else {
-      console.log("true");
-
       return true;
     }
   }
@@ -42,6 +39,7 @@ const checkForNextPageConditions = () => {
     }
 
     if (checkArray.length > 0) {
+      setGlobalState("triggerSurveyPreventNavModal", true);
       return false;
     } else {
       return true;

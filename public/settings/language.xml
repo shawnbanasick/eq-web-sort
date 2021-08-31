@@ -89,6 +89,8 @@
         <item id="surveyModalHead">Step 5 of 5</item>
         <item id="surveyModalText">Finally, please answer the following questions regarding your background.</item>
         <item id="postsortTitle">Post-Sorting Survey</item>
+        <item id="surveyPreventNavModalHead">Navigation Disabled</item>
+        <item id="surveyPreventNavModalText">Please answer the required questions (outlined in red) before going to the next step.</item>
 
 
         <!-- SUBMIT -->

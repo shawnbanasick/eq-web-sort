@@ -15,12 +15,18 @@ import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
+import AnswerAllSurveyQuestionsModal from "./AnswerAllSurveyQuestionsModal";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyPage = () => {
-  const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");
+
+  // setup language
+  const langObj = getGlobalState("langObj");
+  const postsortTitle = ReactHtmlParser(decodeHTML(langObj.postsortTitle));
 
   useEffect(() => {
     let startTime;
@@ -75,9 +81,8 @@ const SurveyPage = () => {
 
   return (
     <React.Fragment>
-      <SortTitleBar background={headerBarColor}>
-        {langObj.postsortTitle}
-      </SortTitleBar>
+      <AnswerAllSurveyQuestionsModal />
+      <SortTitleBar background={headerBarColor}>{postsortTitle}</SortTitleBar>
       <Container>
         <SurveyQuestions />
       </Container>
