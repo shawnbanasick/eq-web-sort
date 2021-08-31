@@ -9,7 +9,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const PostsortHelpModal = () => {
-  const triggerPostsortModal = getGlobalState("triggerSortModal");
+  const triggerPostsortModal = getGlobalState("triggerPostsortModal");
   const langObj = getGlobalState("langObj");
 
   const postsortHelpModalHead = ReactHtmlParser(
@@ -21,7 +21,7 @@ const PostsortHelpModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerSortModal", false);
+    setGlobalState("triggerPostsortModal", false);
   };
 
   return (
