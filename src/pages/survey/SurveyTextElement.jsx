@@ -54,9 +54,13 @@ const SurveyTextElement = (props) => {
     userTextLen = userText.length;
   }
 
-  if (checkRequiredQuestionsComplete === true && userTextLen < 1) {
+  if (
+    checkRequiredQuestionsComplete === true &&
+    userTextLen < 1 &&
+    props.opts.required === true
+  ) {
     bgColor = "lightpink";
-    border = "2px dashed black";
+    border = "3px dashed black";
   } else {
     bgColor = "whitesmoke";
     border = "none";

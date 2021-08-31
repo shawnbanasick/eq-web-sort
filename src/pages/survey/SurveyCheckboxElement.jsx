@@ -83,9 +83,13 @@ const SurveyCheckboxElement = (props) => {
   };
 
   const hasBeenAnswered = localStore2.hasBeenAnswered;
-  if (checkRequiredQuestionsComplete === true && hasBeenAnswered === false) {
+  if (
+    checkRequiredQuestionsComplete === true &&
+    hasBeenAnswered === false &&
+    props.opts.required === true
+  ) {
     bgColor = "lightpink";
-    border = "2px dashed black";
+    border = "3px dashed black";
   } else {
     bgColor = "whitesmoke";
     border = "none";

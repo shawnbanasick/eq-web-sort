@@ -82,10 +82,11 @@ const SurveyRadioElement = (props) => {
   // required question answered?
   if (
     checkRequiredQuestionsComplete === true &&
-    localStore.hasBeenAnswered === false
+    localStore.hasBeenAnswered === false &&
+    props.opts.required === true
   ) {
     bgColor = "lightpink";
-    border = "2px dashed black";
+    border = "3px dashed black";
   } else {
     bgColor = "whitesmoke";
     border = "none";

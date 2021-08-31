@@ -43,9 +43,13 @@ const SurveyTextAreaElement = (props) => {
   let bgColor;
   let border;
 
-  if (checkRequiredQuestionsComplete === true && userText.length === 0) {
+  if (
+    checkRequiredQuestionsComplete === true &&
+    userText.length === 0 &&
+    props.opts.required === true
+  ) {
     bgColor = "lightpink";
-    border = "2px dashed black";
+    border = "3px dashed black";
   } else {
     bgColor = "whitesmoke";
     border = "none";

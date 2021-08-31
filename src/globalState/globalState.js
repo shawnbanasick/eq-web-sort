@@ -30,6 +30,7 @@ const globalState = store({
   results: {},
   resultsPostsort: {},
   resultsSurvey: {},
+  sortFinished: false,
   sortFinishedModalHasBeenShown: false,
   sortGridResults: {},
   statementCommentsObj: {},

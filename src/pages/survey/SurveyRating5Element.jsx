@@ -97,9 +97,13 @@ const SurveyRatings5Element = (props) => {
   const testArray = Object.keys(rating5State);
   const conditionalLength = testArray.length;
   const testValue = optsArray.length - conditionalLength;
-  if (checkRequiredQuestionsComplete === true && testValue > 0) {
+  if (
+    checkRequiredQuestionsComplete === true &&
+    testValue > 0 &&
+    props.opts.required === true
+  ) {
     bgColor = "lightpink";
-    border = "2px dashed black";
+    border = "3px dashed black";
   } else {
     bgColor = "whitesmoke";
     border = "none";

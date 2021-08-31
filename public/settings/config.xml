@@ -58,7 +58,7 @@
      </item>
 
      <item id="survey">
-        <input type="text" required="false" maxlength="10" restricted="true"></input>
+        <input type="text" required="true" maxlength="10" restricted="true"></input>
         <label>Have you had classes with me before?</label>
         <note>If yes, please list them here.</note>
      </item>
@@ -87,7 +87,7 @@
      </item>
      
      <item id="survey">
-        <input type="checkbox" required="false">Lecture;Group Discussion;Active Learning</input>
+        <input type="checkbox" required="true">Lecture;Group Discussion;Active Learning</input>
         <label>What kind of class do you prefer?</label>
      </item>
      
