@@ -40,12 +40,10 @@ const calculateDragResults = (result) => {
         resultsText += `${newValue}|`;
       } // loop end
 
-      console.log(resultsText);
       if (catchNan === true) {
         // card in footer - sort not complete
         setGlobalState("sortFinished", false);
       } else {
-        console.log("complete");
         // if sort is complete
         // process string to remove trailing bar
         setGlobalState("sortFinished", true);
@@ -60,8 +58,8 @@ const calculateDragResults = (result) => {
         setGlobalState("results", results);
         if (sortFinishedModalHasBeenShown === false) {
           setGlobalState("sortFinishedModalHasBeenShown", true);
+          setGlobalState("triggerSortingFinishedModal", true);
         }
-        setGlobalState("triggerSortingFinishedModal", true);
       }
     }
     setGlobalState("sortGridResults", sortGridResults);
