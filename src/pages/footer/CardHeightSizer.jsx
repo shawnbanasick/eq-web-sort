@@ -12,13 +12,11 @@ const CardHeightSizer = () => {
 
   const increaseFontSize = () => {
     const currentSize = +getGlobalState("cardHeight");
-    console.log(currentSize);
     const newSize = currentSize + 2;
     setGlobalState("cardHeight", newSize);
   };
   const decreaseFontSize = () => {
     const currentSize = +getGlobalState("cardHeight");
-    console.log(currentSize);
     const newSize = currentSize - 2;
     setGlobalState("cardHeight", newSize);
   };

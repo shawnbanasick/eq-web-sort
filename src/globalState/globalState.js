@@ -12,6 +12,7 @@ const globalState = store({
   displayLandingContent: false,
   displayNextButton: false,
   displayPartIdWarning: false,
+  hasOverloadedColumn: false,
   isLoggedIn: false,
   overloadedColumn: "",
   partId: "anonymous",

@@ -12,7 +12,8 @@ const move = (
   droppableDestination,
   columnStatements,
   totalStatements,
-  sortCharacteristics
+  sortCharacteristics,
+  allowUnforcedSorts
 ) => {
   const { qSortPattern, qSortHeaders, forcedSorts } = sortCharacteristics;
 
@@ -48,15 +49,16 @@ const move = (
   checkForColumnOverload(overloadArrayCheck, forcedSorts, totalStatements);
 
   // to disable checking if unforced Q sorts allowed
-  if (forcedSorts === true) {
+  if (allowUnforcedSorts === false) {
     if (match === true) {
+      setGlobalState("hasOverloadedColumn", false);
       setGlobalState("sortCompleted", true);
-      // localStorage.setItem("sortCompleted", "true");
+      console.log("sorting complete");
       setGlobalState("isSortingCards", false);
-      // localStorage.setItem("isSortingCards", "false");
     } else {
       setGlobalState("sortCompleted", false);
-      // localStorage.setItem("sortCompleted", "false");
+      setGlobalState("isSortingCards", true);
+      setGlobalState("hasOverloadedColumn", true);
     }
   }
   return null;

@@ -115,12 +115,12 @@ const SortGrid = (props) => {
       const sortCharacterisiticsPrep = {};
       sortCharacterisiticsPrep.qSortPattern = [...configObj.qSortPattern];
       sortCharacterisiticsPrep.qSortHeaders = [...configObj.qSortHeaders];
-      sortCharacterisiticsPrep.forcedSorts = configObj.forcedSorts;
+      sortCharacterisiticsPrep.forcedSorts = configObj.forcedSortsDisplay;
       sortCharacterisiticsPrep.qSortHeaderNumbers = [
         ...configObj.qSortHeaderNumbers,
       ];
       const sortCharacteristics = sortCharacterisiticsPrep;
-
+      const allowUnforcedSorts = configObj.allowUnforcedSorts;
       move(
         sourceListArray,
         destinationListArray,
@@ -128,7 +128,8 @@ const SortGrid = (props) => {
         droppableDestination,
         columnStatements,
         totalStatements,
-        sortCharacteristics
+        sortCharacteristics,
+        allowUnforcedSorts
       );
 
       // global state updates
@@ -212,7 +213,7 @@ const SortGrid = (props) => {
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
-        forcedSorts={configObj.forcedSorts}
+        forcedSorts={configObj.forcedSortsDisplay}
         columnWidth={columnWidth}
         cardHeight={cardHeight}
         sortValue={sortValue}

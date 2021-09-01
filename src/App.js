@@ -22,11 +22,11 @@ import getGlobalState from "./globalState/getGlobalState";
 const convert = require("xml-js");
 
 function App() {
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  // const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
   // to remove stupid terminal warning
-  console.log("do not delete", isDataLoaded);
+  // console.log("do not delete", isDataLoaded);
 
   useEffect(() => {
     (async () => {
@@ -87,7 +87,7 @@ function App() {
 
       setGlobalState("dataLoaded", true);
       setTimeout(() => {
-        setIsDataLoaded(true);
+        // setIsDataLoaded(true);
         setLoading(false);
       }, 700);
     })();

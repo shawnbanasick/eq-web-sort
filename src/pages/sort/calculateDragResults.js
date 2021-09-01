@@ -2,7 +2,6 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
 const calculateDragResults = (result) => {
-  console.log(JSON.stringify(result));
   try {
     const configObj = getGlobalState("configObj");
     const results = getGlobalState("results");
@@ -12,8 +11,6 @@ const calculateDragResults = (result) => {
 
     const totalStatements = configObj.totalStatements;
     const sortGridResults = getGlobalState("sortGridResults");
-
-    console.log(sortGridResults);
 
     // derive sortValue from droppableId
     const replaceColumn = /column/gi;
