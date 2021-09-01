@@ -1,10 +1,16 @@
 const decodeHTML = (string) => {
   try {
-    const replaceLeft = /{{{/gi;
-    const replaceRight = /}}}/gi;
-    const stringText2 = string.replace(replaceLeft, "<");
-    const stringText3 = stringText2.replace(replaceRight, ">");
-    return stringText3;
+    let shouldDoReplace = string.includes("{{{");
+
+    if (shouldDoReplace === true) {
+      const replaceLeft = /{{{/gi;
+      const replaceRight = /}}}/gi;
+      const stringText2 = string.replace(replaceLeft, "<");
+      const stringText3 = stringText2.replace(replaceRight, ">");
+      return stringText3;
+    } else {
+      return string;
+    }
   } catch (error) {
     console.error(error);
   }

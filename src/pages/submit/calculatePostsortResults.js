@@ -22,29 +22,39 @@ const calculatePostsortResults = (resultsPostsort, configObj) => {
     if (!resultsPostsort.hasOwnProperty(`column${highCardVal}_${i + 1}`))
       resultsPostsort[`column${highCardVal}_${i + 1}`] = "no response";
   }
+
   // check for high card 2 answers
-  const length2 = highCard2Num;
-  for (let ii = 0; ii < length2; ii++) {
-    if (!resultsPostsort.hasOwnProperty(`column${highCard2Val}_${ii + 1}`))
-      resultsPostsort[`column${highCard2Val}_${ii + 1}`] = "no response";
+  if (configObj.showSecondPosColumn === true) {
+    const length2 = highCard2Num;
+    for (let ii = 0; ii < length2; ii++) {
+      if (!resultsPostsort.hasOwnProperty(`column${highCard2Val}_${ii + 1}`))
+        resultsPostsort[`column${highCard2Val}_${ii + 1}`] = "no response";
+    }
   }
+
+  // check for neu card answers
+  if (configObj.displayNeutralObjects === true) {
+    const length5 = neuCardNum;
+    for (let jjj = 0; jjj < length5; jjj++) {
+      if (!resultsPostsort.hasOwnProperty(`column${neuCardVal}_${jjj + 1}`))
+        resultsPostsort[`column${neuCardVal}_${jjj + 1}`] = "no response";
+    }
+  }
+
+  // check for low card 2 answers
+  if (configObj.showSecondNegColumn === true) {
+    const length4 = lowCard2Num;
+    for (let jj = 0; jj < length4; jj++) {
+      if (!resultsPostsort.hasOwnProperty(`column${lowCard2Val}_${jj + 1}`))
+        resultsPostsort[`column${lowCard2Val}_${jj + 1}`] = "no response";
+    }
+  }
+
   // check for low card answers
   const length3 = lowCardNum;
   for (let j = 0; j < length3; j++) {
     if (!resultsPostsort.hasOwnProperty(`column${lowCardVal}_${j + 1}`))
       resultsPostsort[`column${lowCardVal}_${j + 1}`] = "no response";
-  }
-  // check for low card 2 answers
-  const length4 = lowCard2Num;
-  for (let jj = 0; jj < length4; jj++) {
-    if (!resultsPostsort.hasOwnProperty(`column${lowCard2Val}_${jj + 1}`))
-      resultsPostsort[`column${lowCard2Val}_${jj + 1}`] = "no response";
-  }
-  // check for neu card answers
-  const length5 = neuCardNum;
-  for (let jjj = 0; jjj < length5; jjj++) {
-    if (!resultsPostsort.hasOwnProperty(`column${neuCardVal}_${jjj + 1}`))
-      resultsPostsort[`column${neuCardVal}_${jjj + 1}`] = "no response";
   }
 
   // re-arrange object properties
