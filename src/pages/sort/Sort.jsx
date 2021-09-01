@@ -8,6 +8,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import SortHelpModal from "./SortHelpModal";
 import SortingFinishedModal from "../../utilities/SortingFinishedModal";
 import PreventSortNavModal from "./PreventSortNavModal";
+import OverloadedColumnModal from "./OverloadedColumnModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
@@ -69,6 +70,7 @@ const Sort = () => {
       <SortHelpModal />
       <PreventSortNavModal />
       <SortingFinishedModal />
+      <OverloadedColumnModal />
       <SortTitleBar id="sortTitleBar" background={headerBarColor}>
         <Disagree>{sortDisagreement}</Disagree>
         <CondOfInst fontSize={configObj.condOfInstFontSize}>

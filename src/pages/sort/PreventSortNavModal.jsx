@@ -9,9 +9,7 @@ import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const PresortPreventNavModal = () => {
-  console.log("triggered");
   const triggerModalOpen = getGlobalState("triggerSortPreventNavModal");
-  //   console.log(triggerModalOpen);
   const langObj = getGlobalState("langObj");
 
   const modalHead = ReactHtmlParser(

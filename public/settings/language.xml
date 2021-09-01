@@ -73,6 +73,9 @@
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
         <item id="sortPreventNavModalHead">Navigation Disabled</item>
         <item id="sortPreventNavModalText">Please finish the sorting the cards before going to the next step.</item>
+        <item id="sortOverloadedColumnModalHead">Navigation Disabled</item>
+        <item id="sortOverloadedColumnModalText">One of the columns has too many cards (it will be outlined in orange and have a dashed border). Please adjust the placement of the cards so that all columns have the correct number.</item>
+
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         <item id="postsortHeader">Post-Sort Comments</item>

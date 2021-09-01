@@ -43,6 +43,7 @@ const globalState = store({
   triggerPostsortModal: true,
   triggerSortingFinishedModal: false,
   triggerSortPreventNavModal: false,
+  triggerSortOverloadedColumnModal: false,
   triggerSurveyModal: true,
   triggerSurveyPreventNavModal: false,
   triggerTransmissionOKModal: false,

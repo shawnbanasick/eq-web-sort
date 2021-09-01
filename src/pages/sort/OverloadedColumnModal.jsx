@@ -8,20 +8,20 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 
-const PresortPreventNavModal = () => {
-  const triggerModalOpen = getGlobalState("triggerPresortPreventNavModal");
+const OverloadedColumnModal = () => {
+  const triggerModalOpen = getGlobalState("triggerSortOverloadedColumnModal");
   const langObj = getGlobalState("langObj");
 
   const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.presortPreventNavModalHead)
+    decodeHTML(langObj.sortOverloadedColumnModalHead)
   );
   const modalText = ReactHtmlParser(
-    decodeHTML(langObj.presortPreventNavModalText)
+    decodeHTML(langObj.sortOverloadedColumnModalText)
   );
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerPresortPreventNavModal", false);
+    setGlobalState("triggerSortOverloadedColumnModal", false);
   };
 
   return (
@@ -38,7 +38,7 @@ const PresortPreventNavModal = () => {
   );
 };
 
-export default view(PresortPreventNavModal);
+export default view(OverloadedColumnModal);
 
 const ModalHeader = styled.div`
   font-size: 24px;

@@ -7,6 +7,8 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const checkForNextPageConditions = () => {
   const currentPage = getGlobalState("currentPage");
+  const configObj = getGlobalState("configObj");
+
   if (currentPage === "presort") {
     let isPresortFinished = getGlobalState("presortFinished");
     if (isPresortFinished === false) {
@@ -19,11 +21,27 @@ const checkForNextPageConditions = () => {
   if (currentPage === "sort") {
     const isSortingFinished = getGlobalState("sortFinished");
     if (isSortingFinished === false) {
+      // not finished sorting
       setGlobalState("triggerSortPreventNavModal", true);
       return false;
     } else {
-      setGlobalState("triggerSortPreventNavModal", false);
-      return true;
+      const hasOverloadedColumn = getGlobalState("hasOverloadedColumn");
+      const allowUnforcedSorts = configObj.allowUnforcedSorts;
+      // has finished sorting
+      if (allowUnforcedSorts === true) {
+        // unforced ok -> allow nav
+        setGlobalState("triggerSortPreventNavModal", false);
+        return true;
+      } else {
+        // unforced not ok -> allow nav if no overloaded columns
+        if (hasOverloadedColumn === true) {
+          setGlobalState("triggerSortOverloadedColumnModal", true);
+          return false;
+        } else {
+          setGlobalState("triggerSortPreventNavModal", false);
+          return true;
+        }
+      }
     }
   }
 
