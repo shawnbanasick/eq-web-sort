@@ -52,6 +52,7 @@ const ModalHeader = styled.div`
 
 const ModalContent = styled.div`
   margin-top: 15px;
+  font-weight: normal;
 `;
 
 // react-responsive-modal-overlay
