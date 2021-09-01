@@ -22,9 +22,9 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
-        <item id="welcomeText">{{{center}}}{{{h2}}}This is a demo project on iPad use in the classroom.{{{/h2}}} {{{/center}}}{{{br}}}
-        {{{center}}}{{{img src="/images/testImage.png" height="250" width="400" /}}}{{{/center}}}
-        {{{br}}}{{{br}}}{{{b}}}** Important Information **{{{/b}}}{{{br}}} For this survey you will need as much screen space as possible! If necessary, please {{{strong}}}MAXIMIZE{{{/strong}}} the size of your browser window, and then click on the "Continue" button to start the survey. {{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
+        <item id="welcomeText">{{{center}}}{{{h2}}}Easy HtmlQ V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br}}}
+        {{{center}}}{{{img src="/images/sortScreen3.png" height="450" width="800" /}}}{{{/center}}}
+        {{{br}}}{{{br}}}{{{b}}}Features:{{{br}}} {{{div style="margin-left: 30px" }}}   {{{ul}}}{{{li}}}Smooth drag and drop actions {{{/li}}} {{{li}}}Image and video embedding capability {{{/li}}} {{{li}}} User-adjustable text and card sizes {{{/li}}}  {{{/ul}}} {{{/div}}} {{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
         <item id="introHead">Introduction</item>
@@ -99,7 +99,7 @@
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{h1}}}Ready to Submit{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the submit button to transmit your results.{{{/h2}}}</item>
+        <item id="transferTextAbove">{{{h1}}}Ready to Submit{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the "Submit Data" button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferOkModalHeader">Success - The data have been sent to the server.</item>   
         <item id="transferOkModalText">Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.</item>
