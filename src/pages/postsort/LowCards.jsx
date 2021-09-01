@@ -35,8 +35,8 @@ const LowCards = (props) => {
         el.comment = comment;
 
         // assign to comments object
-        statementCommentsObj[identifier] = `${el.id}>>>${comment}`;
-        results[identifier] = `${el.id}>>>${comment}`;
+        statementCommentsObj[identifier] = `(${el.id}) ${comment}`;
+        results[identifier] = `(${el.id}) ${comment}`;
       }
       return el;
     });
