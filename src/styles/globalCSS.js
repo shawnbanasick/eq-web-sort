@@ -602,11 +602,34 @@ footer {
 }
 
 
+
+
 /***********************************
   LANDING MODAL CSS
  *******************************************************************************/
 /* 
-  .customModal .react-responsive-modal-modal {
+.customModal .react-responsive-modal-modal {
     background: rgba(0, 0, 0, 0.8) !important;
   } */
- `;
+
+  #loading {
+  display: inline-block;
+  width: 100px;
+  margin-top: 40px;
+  height: 100px;
+  border: 20px solid lightgray;
+  border-radius: 50%;
+  border-top-color: #337ab7;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+
+
+`;

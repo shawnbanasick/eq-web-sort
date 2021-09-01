@@ -1,5 +1,4 @@
 import React from "react";
-import { LoopCircleLoading } from "react-loadingg";
 import styled from "styled-components";
 
 const LoadingScreen = () => {
@@ -7,11 +6,7 @@ const LoadingScreen = () => {
     <Container>
       <TextDiv>Loading</TextDiv>
       <div>
-        <LoopCircleLoading
-          size="large"
-          style={{ height: "50px", width: "50px" }}
-          color="#337ab7"
-        />
+        <div id="loading" />
       </div>
     </Container>
   );

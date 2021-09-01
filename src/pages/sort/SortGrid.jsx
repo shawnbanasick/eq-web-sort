@@ -115,7 +115,7 @@ const SortGrid = (props) => {
       const sortCharacterisiticsPrep = {};
       sortCharacterisiticsPrep.qSortPattern = [...configObj.qSortPattern];
       sortCharacterisiticsPrep.qSortHeaders = [...configObj.qSortHeaders];
-      sortCharacterisiticsPrep.forcedSorts = configObj.forcedSortsDisplay;
+      sortCharacterisiticsPrep.forcedSorts = configObj.overloadedColumnDisplay;
       sortCharacterisiticsPrep.qSortHeaderNumbers = [
         ...configObj.qSortHeaderNumbers,
       ];
@@ -213,7 +213,7 @@ const SortGrid = (props) => {
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
-        forcedSorts={configObj.forcedSortsDisplay}
+        forcedSorts={configObj.overloadedColumnDisplay}
         columnWidth={columnWidth}
         cardHeight={cardHeight}
         sortValue={sortValue}
