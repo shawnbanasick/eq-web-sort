@@ -18,6 +18,7 @@ import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import AnswerAllSurveyQuestionsModal from "./AnswerAllSurveyQuestionsModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import SurveyHelpModal from "./SurveyHelpModal";
 
 const SurveyPage = () => {
   const configObj = getGlobalState("configObj");
@@ -81,6 +82,7 @@ const SurveyPage = () => {
 
   return (
     <React.Fragment>
+      <SurveyHelpModal />
       <AnswerAllSurveyQuestionsModal />
       <SortTitleBar background={headerBarColor}>{postsortTitle}</SortTitleBar>
       <Container>

@@ -51,7 +51,7 @@
         <item id="presortStatements">Statements</item>
         <item id="presortNeutral">No Strong Feelings</item>
         <item id="presortDisagreement">Different from my Feelings</item>
-        <item id="presortModalHead">Step 1 of 5</item>
+        <item id="presortModalHead">Step 1 of 4</item>
         <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
@@ -62,7 +62,7 @@
 
 
         <!-- SORT: sorting (leave blank to skip popup) -->
-        <item id="sortHelpModalHead">Step 2 of 5</item>
+        <item id="sortHelpModalHead">Step 2 of 4</item>
         <item id="sortHelpModalText">In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the right side of the grid, and statements which you most disagree with should be placed on the left side. Please watch the video for more information on how to sort the cards in this step.</item>
         <item id="sortAgreement">Agree</item>
         <item id="sortDisagreement">Disagree</item>
@@ -76,7 +76,7 @@
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         <item id="postsortInstructions">{{{h3}}}Please describe your {{{i}}}thoughts and feelings{{{/i}}} about the statements on these cards in more detail.{{{/h3}}}</item>
-        <item id="postsortModalHead">Step 4 of 5</item>
+        <item id="postsortModalHead">Step 3 of 4</item>
         <item id="postsortModalText">Please explain why you agree most or disagree most with the following statements you have placed below "+4" or "-4".</item>
         <item id="postsortHeader">Post-Sort Comments</item>
         <item id="placeholder">Click here to add comment</item>
@@ -86,12 +86,12 @@
 
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
-        <item id="surveyModalHead">Step 5 of 5</item>
-        <item id="surveyModalText">Finally, please answer the following questions regarding your background.</item>
+        <item id="surveyModalHead">Step 4 of 4</item>
+        <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an "*" in their title are required.</item>
         <item id="postsortTitle">Post-Sorting Survey</item>
         <item id="surveyPreventNavModalHead">Navigation Disabled</item>
         <item id="surveyPreventNavModalText">Please answer the required questions (outlined in red) before going to the next step.</item>
-
+       
 
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>

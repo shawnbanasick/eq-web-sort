@@ -20,7 +20,7 @@ const HelpButton = () => {
     trigger = "triggerSortModal";
   }
   if (currentPage === "postsort") {
-    trigger = "triggerSortModal";
+    trigger = "triggerPostsortModal";
   }
   if (currentPage === "survey") {
     trigger = "triggerSurveyModal";
