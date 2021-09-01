@@ -75,13 +75,14 @@
         <item id="sortPreventNavModalText">Please finish the sorting the cards before going to the next step.</item>
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
-        <item id="postsortModalHead">Step 3 of 4</item>
-        <item id="postsortModalText">{{{h3}}}Please describe your {{{i}}}thoughts and feelings{{{/i}}} about the statements on these cards in more detail.{{{/h3}}}</item>
         <item id="postsortHeader">Post-Sort Comments</item>
+        <item id="postsortInstructions">{{{h3}}}Please describe your {{{i}}}thoughts and feelings{{{/i}}} about the statements on these cards in more detail.{{{/h3}}}</item>
         <item id="placeholder">Click here to add comment</item>
         <item id="postsortAgreement">Agree</item>
         <item id="postsortNeutral">Neutral</item>
         <item id="postsortDisagreement">Disagree</item>
+        <item id="postsortModalHead">Step 3 of 4</item>
+        <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.</item>
 
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
