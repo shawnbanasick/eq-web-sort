@@ -22,11 +22,28 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
-        <item id="welcomeText">{{{center}}}{{{h2}}}Easy HtmlQ V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br}}}
-        {{{center}}}{{{img src="/images/sortScreen3.png" height="450" width="800" /}}}{{{/center}}}
-        {{{br}}}{{{br}}}{{{b}}}Features:{{{br}}} {{{div style="margin-left: 30px" }}}   {{{ul}}}{{{li}}}Smooth drag and drop actions {{{/li}}} {{{li}}}Image and video embedding capability {{{/li}}} {{{li}}} User-adjustable text and card sizes {{{/li}}}  {{{/ul}}} {{{/div}}} {{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
+        <item id="welcomeText">{{{center}}}{{{h2}}}Easy HtmlQ V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br}}}{{{br}}}
+        
+        {{{div style="display: flex; flex-direction: column; align-items: center;"}}}
+              {{{div}}}{{{h2}}}Features{{{/h2}}}
+              {{{ul style="margin-left: 20px;"}}}
+                   {{{li}}}Smooth drag and drop actions {{{/li}}} 
+                   {{{li}}}Image and video embedding capability (on the page and in help messages) {{{/li}}} 
+                   {{{li}}} Participant-adjustable text and card sizes {{{/li}}}  
+                   {{{li}}}Customizable logo in page footers {{{/li}}} 
+                   {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} 
+              {{{/ul}}}
+              {{{/div}}} 
+          {{{/div}}}
+        
+         {{{br}}}{{{br}}}
+     
+        {{{div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; width: 100%"}}}
+       {{{img src="/images/sortScreen3.png" width="640" /}}} 
+          {{{iframe width="640" height="360"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
-         {{{/iframe}}}{{{/center}}}</item>
+         {{{/iframe}}}
+         {{{/div}}}</item>
         <item id="introHead">Introduction</item>
         <item id="introText">This study is about iPad use in the classroom.</item>
 
