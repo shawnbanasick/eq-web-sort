@@ -237,7 +237,7 @@ const ItemContainer = styled.div`
   margin-bottom: 17px;
   padding-bottom: 3px;
   height: 40px;
-  background-color: ${(props) => (props.indexVal % 2 ? "white" : "lightgray")};
+  background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   font-size: 16px;
   align-items: end;
 `;

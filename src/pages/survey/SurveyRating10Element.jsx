@@ -289,7 +289,7 @@ const ItemContainer = styled.div`
   align-items: end;
   padding-bottom: 3px;
   height: 40px;
-  background-color: ${(props) => (props.indexVal % 2 ? "white" : "lightgray")};
+  background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   border-radius: 3px;
 `;
 

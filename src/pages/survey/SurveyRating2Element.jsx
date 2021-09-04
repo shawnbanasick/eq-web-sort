@@ -215,7 +215,7 @@ const ItemContainer = styled.div`
   padding-bottom: 3px;
   height: 40px;
   align-items: end;
-  background-color: ${(props) => (props.indexVal % 2 ? "white" : "lightgray")};
+  background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
 `;
 
 const RatingTitle = styled.div`
