@@ -83,7 +83,7 @@ const StyledFooter = () => {
       <ProgressBarDiv>
         <ProgressBar
           completed={totalProgressScore}
-          width={"200px"}
+          width={"150px"}
           bgColor="#337ab7"
           labelColor="#f0f0f0"
           baseBgColor="lightgray"
@@ -127,6 +127,7 @@ const AdjustmentsContainer = styled.div`
 const ProgressBarDiv = styled.div`
   align-self: center;
   justify-self: center;
+  margin-left: 25px;
 `;
 
 const LogoContainer = styled.div`
@@ -139,5 +140,5 @@ const LogoContainer = styled.div`
 const CenterDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 `;

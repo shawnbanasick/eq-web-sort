@@ -79,6 +79,8 @@ const PostSort = () => {
   const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
   const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
 
+  console.log(JSON.stringify(highCards));
+
   return (
     <div>
       <PostsortHelpModal />

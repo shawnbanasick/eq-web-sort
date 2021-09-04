@@ -27,10 +27,11 @@
         {{{div style="display: flex; flex-direction: column; align-items: center;"}}}
               {{{div}}}{{{h2}}}Features{{{/h2}}}
               {{{ul style="margin-left: 20px;"}}}
-                   {{{li}}}Smooth drag and drop actions {{{/li}}} 
-                   {{{li}}}Image and video embedding capability (on the page and in help messages) {{{/li}}} 
-                   {{{li}}} Participant-adjustable text and card sizes {{{/li}}}  
-                   {{{li}}}Customizable logo in page footers {{{/li}}} 
+                   {{{li}}}Smooth drag and drop actions for desktop and mobile (touch) devices {{{/li}}} 
+                   {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
+                   {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  
+                   {{{li}}}Simple localization into your research language {{{/li}}} 
+                   {{{li}}}Custom logo in page footers {{{/li}}} 
                    {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} 
               {{{/ul}}}
               {{{/div}}} 
@@ -39,10 +40,20 @@
          {{{br}}}{{{br}}}
      
         {{{div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; width: 100%"}}}
+       
+       {{{div style="display:flex; flex-direction:column"}}}
+       Images
        {{{img src="/images/sortScreen3.png" width="640" /}}} 
+       {{{/div}}}
+
+
+          {{{div style="display:flex; flex-direction:column"}}}
+          Video (enable subtitles / closed captions)
           {{{iframe width="640" height="360"
-         src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
+         src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}
          {{{/iframe}}}
+          {{{/div}}}
+
          {{{/div}}}</item>
         <item id="introHead">Introduction</item>
         <item id="introText">This study is about iPad use in the classroom.</item>
@@ -64,10 +75,10 @@
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
         <item id="titleBarText">Preliminary Sorting</item>
-        <item id="presortAgreement">Close to my Feelings</item>
+        <item id="presortAgreement">Agree</item>
         <item id="presortStatements">Statements</item>
         <item id="presortNeutral">No Strong Feelings</item>
-        <item id="presortDisagreement">Different from my Feelings</item>
+        <item id="presortDisagreement">Disagree</item>
         <item id="presortModalHead">Step 1 of 4</item>
         <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
@@ -96,11 +107,11 @@
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         <item id="postsortHeader">Post-Sort Comments</item>
-        <item id="postsortInstructions">{{{h3}}}Please describe your {{{i}}}thoughts and feelings{{{/i}}} about the statements on these cards in more detail.{{{/h3}}}</item>
+        <item id="postsortInstructions">{{{h3}}}Please describe your thoughts about these statements in more detail.{{{/h3}}}</item>
         <item id="placeholder">Click here to add comment</item>
-        <item id="postsortAgreement">Agree</item>
-        <item id="postsortNeutral">Neutral</item>
-        <item id="postsortDisagreement">Disagree</item>
+        <item id="postsortAgreement">Placed on Agree</item>
+        <item id="postsortNeutral">Placed on Neutral</item>
+        <item id="postsortDisagreement">Placed on Disagree</item>
         <item id="postsortModalHead">Step 3 of 4</item>
         <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.</item>
 

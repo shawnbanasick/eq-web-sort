@@ -383,7 +383,14 @@ footer {
 /***********************************
   PRESORT CSS
  *******************************************************************************/
-.react-responsive-modal-modal {
+
+  .dragObject {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+
+  .react-responsive-modal-modal {
   background: white;
   max-width: 700px;
   width: 100%;
@@ -497,10 +504,6 @@ footer {
   #neg{
     min-height: 52vh;
     border-radius: 3px;
-  }
-
-  .droppableCards {
-   
   }
 }
 

@@ -9,13 +9,13 @@ import setGlobalState from "../../globalState/setGlobalState";
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards = (props) => {
+  console.log(props);
   const configObj = getGlobalState("configObj");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on leaving card comment section,
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
     const results = getGlobalState("resultsPostsort");
-
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -48,7 +48,6 @@ const HighCards = (props) => {
     // console.log(JSON.stringify(results, null, 2));
     setGlobalState("resultsPostsort", results);
     setGlobalState("statementCommentsObj", results);
-
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
@@ -66,8 +65,6 @@ const HighCards = (props) => {
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
-  // console.log(JSON.stringify(this.props, null, 2));
-
   return highCards.map((item, index) => (
     <Container key={item.statement}>
       <CardTag cardFontSize={cardFontSize}>
@@ -75,7 +72,12 @@ const HighCards = (props) => {
         {columnInfo}
       </CardTag>
       <CardAndTextHolder>
-        <Card cardFontSize={cardFontSize} width={width} height={height}>
+        <Card
+          cardFontSize={cardFontSize}
+          width={width}
+          height={height}
+          cardColor={item.cardColor}
+        >
           {item.statement}
         </Card>
         <TagContainerDiv>
@@ -103,31 +105,38 @@ const Container = styled.div`
   max-width: 900px;
   margin-top: 50px;
   border-radius: 3px;
+  border: 1px solid darkgray;
 `;
 
 const CardTag = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   background: #c7f6c7;
   font-size: ${(props) => `${props.cardFontSize}px`};
   color: black;
   text-align: center;
+  height: 1.5em;
 `;
 
 const CardAndTextHolder = styled.div`
   display: flex;
   align-content: center;
-  background: #7e7e7e;
+  background: rgb(224, 224, 224);
   width: 90vw;
-  max-width: 900px;
+  max-width: 898px;
 `;
 
 const CommentArea = styled.textarea`
   padding: 10px;
   margin-top: 2px;
-  background-color: whitesmoke;
+  background-color: white;
   height: ${(props) => `${props.height}px;`};
   font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
+  border: 2px solid darkgray;
+  border-radius: 3px;
 `;
 
 const TagContainerDiv = styled.div`
@@ -141,12 +150,13 @@ const Card = styled.div`
   margin: 5px 5px 5px 5px;
   line-height: 1em;
   height: ${(props) => `${props.height}px;`};
+  width: 20vw;
   max-width: ${(props) => `${props.width}px;`};
   border-radius: 5px;
   font-size: ${(props) => `${props.cardFontSize}px`};
   display: flex;
   align-items: center;
-  border: 2px solid black;
+  border: 2px solid darkslategray;
   background-color: #f6f6f6;
   text-align: center;
 `;

@@ -51,7 +51,7 @@ const StyledHelpButton = styled.button`
   text-decoration: none;
   width: 125px;
   justify-self: right;
-  margin-right: 35px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

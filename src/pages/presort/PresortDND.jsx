@@ -223,6 +223,7 @@ function PresortDND(props) {
                               key={item.id}
                               draggableId={item.id}
                               index={index}
+                              className="dragObject"
                             >
                               {(provided, snapshot) => {
                                 return (
@@ -237,7 +238,6 @@ function PresortDND(props) {
                                       margin: "0 0 8px 0",
                                       height: cardHeight,
                                       overflow: "hidden",
-
                                       fontSize: cardFontSize,
                                       filter: snapshot.isDragging
                                         ? "brightness(0.85)"
@@ -285,9 +285,9 @@ const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-75);
   grid-template-rows: 230px 15px 1fr;
-  grid-template-columns: 1fr 330px 330px 330px 1fr;
+  grid-template-columns: 1fr 325px 325px 325px 1fr;
   row-gap: 3px;
-  column-gap: 20px;
+  column-gap: 18px;
 `;
 
 const DroppableContainer = styled.div`

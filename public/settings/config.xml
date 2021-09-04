@@ -47,9 +47,9 @@
      <item id="postsortAgreeColDisp2">column3</item>
      <item id="postsortDisagreeColDisp1">columnN4</item>
      <item id="postsortDisagreeColDisp2">columnN3</item>
-     <item id="showSecondPosColumn">false</item>
-     <item id="showSecondNegColumn">false</item>
-     <item id="displayNeutralObjects">false</item>
+     <item id="showSecondPosColumn">true</item>
+     <item id="showSecondNegColumn">true</item>
+     <item id="displayNeutralObjects">true</item>
 
 
      <!-- SURVEY - Survey Questions -->
