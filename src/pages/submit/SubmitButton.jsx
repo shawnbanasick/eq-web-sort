@@ -10,8 +10,9 @@ import decodeHTML from "../../utilities/decodeHTML";
 
 const SubmitResultsButton = (props) => {
   const langObj = getGlobalState("langObj");
-  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
+  let displaySubmitFallback = getGlobalState("displaySubmitFallback");
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
+  let submitFailNumber = getGlobalState("submitFailNumber");
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -25,8 +26,8 @@ const SubmitResultsButton = (props) => {
         // Signed in..
         window.rootRef.push(props.results, function (error) {
           if (error) {
-            // error action -  modal
-            console.log("there was an error at rootRef level!");
+            // data error action -  modal
+            console.log("data error - there was an error at rootRef level!");
             setGlobalState("triggerTransmissionFailModal", true);
             e.target.disabled = false;
           } else {
@@ -54,11 +55,19 @@ const SubmitResultsButton = (props) => {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        // ...
-        console.log("there was an error at firebase level!");
+        submitFailNumber = submitFailNumber + 1;
+        console.log(submitFailNumber);
+        // Firebase connection error
+        console.log("Connection error - there was an error at firebase level!");
         setGlobalState("triggerTransmissionFailModal", true);
         console.log(errorCode, errorMessage);
         e.target.disabled = false;
+
+        if (submitFailNumber > 2) {
+          console.log("display fallback set to true");
+          setGlobalState("displaySubmitFallback", true);
+          displaySubmitFallback = true;
+        }
       });
     console.log("submission processed");
   };

@@ -14,7 +14,7 @@ const handleClick = () => {
 };
 
 const SubmitFallback = (props) => {
-  const configObj = getGlobalState("configObj");
+  // const configObj = getGlobalState("configObj");
   const langObj = getGlobalState("langObj");
   const fallbackMessage = ReactHtmlParser(decodeHTML(langObj.fallbackMessage));
 
