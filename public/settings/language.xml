@@ -133,5 +133,9 @@
         <item id="transferOkModalText">Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.</item>
         <item id="transferFailModalHeader">Connection to server failed.</item>   
         <item id="transferFailModalText">Please try again in a few moments.</item>   
+        <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to kenQTools@gmail.com.  Thank you!</item>   
+        <item id="btnDownload">Download</item>   
+        <item id="btnCopy">Copy to Clipboard</item>   
+        
 
    </language>

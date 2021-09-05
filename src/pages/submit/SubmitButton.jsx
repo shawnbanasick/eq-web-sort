@@ -5,9 +5,13 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SubmitResultsButton = (props) => {
   const langObj = getGlobalState("langObj");
+  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
+  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -59,12 +63,22 @@ const SubmitResultsButton = (props) => {
     console.log("submission processed");
   };
 
+  if (displaySubmitFallback === true) {
+    return (
+      <React.Fragment>
+        <SubmitSuccessModal />
+        <SubmitFailureModal />
+        <DisabledButton tabindex="0">{btnTransferText}</DisabledButton>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
       <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
-        {langObj.btnTransfer}
+        {btnTransferText}
       </StyledButton>
     </React.Fragment>
   );
@@ -98,4 +112,24 @@ const StyledButton = styled.button`
   &:focus {
     background-color: ${({ theme }) => theme.focus};
   }
+`;
+
+const DisabledButton = styled.button`
+  border-color: lightgray;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.25em 1em;
+  border-radius: 3px;
+  text-decoration: none;
+  width: 200px;
+  height: 50px;
+  justify-self: right;
+  margin-right: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background-color: lightgray;
 `;

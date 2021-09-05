@@ -8,6 +8,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import SubmitButton from "./SubmitButton";
 import getGlobalState from "../../globalState/getGlobalState";
 import calculatePostsortResults from "./calculatePostsortResults";
+import SubmitFallback from "./SubmitFallback";
 import { v4 as uuid } from "uuid";
 
 const SubmitPage = () => {
@@ -23,6 +24,9 @@ const SubmitPage = () => {
   // config options
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
+
+  // global state
+  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
 
   // format results for transmisson
   let transmissionResults = {};
@@ -77,7 +81,12 @@ const SubmitPage = () => {
       <ContainerDiv>
         <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
         <SubmitButton results={transmissionResults} />
-        <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+
+        {displaySubmitFallback ? (
+          <SubmitFallback results={transmissionResults} />
+        ) : (
+          <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+        )}
       </ContainerDiv>
       {/* <h1>test</h1> */}
     </React.Fragment>

@@ -12,6 +12,7 @@ const globalState = store({
   displayLandingContent: false,
   displayNextButton: false,
   displayPartIdWarning: false,
+  displaySubmitFallback: true,
   hasOverloadedColumn: false,
   isLoggedIn: false,
   overloadedColumn: "",
