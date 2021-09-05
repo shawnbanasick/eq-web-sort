@@ -9,25 +9,14 @@ import { v4 as uuid } from "uuid";
 const SubmitResultsButton = (props) => {
   const langObj = getGlobalState("langObj");
   const downloadButtonText = ReactHtmlParser(decodeHTML(langObj.btnDownload));
-  const copyButtonText = ReactHtmlParser(decodeHTML(langObj.btnCopy));
-
   const randomId = uuid().substring(0, 12);
 
-  const test = {
-    answer1: "one",
-    answer2: "two",
-  };
-
   const resultsWithId = {};
-  resultsWithId[randomId] = test;
+  resultsWithId[randomId] = props.results;
 
   const finalResults = JSON.stringify(resultsWithId);
 
   const handleClick = (e) => {
-    console.log("download");
-    // const results = JSON.stringify(props.results);
-    // const results = test;
-
     function download(content, fileName, contentType) {
       var a = document.createElement("a");
       var file = new Blob([content], { type: contentType });
