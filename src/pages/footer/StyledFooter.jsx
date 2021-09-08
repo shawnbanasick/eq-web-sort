@@ -10,6 +10,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
+import getNextPage from "./getNextPage";
 
 const StyledFooter = () => {
   const configObj = getGlobalState("configObj");
@@ -18,28 +19,6 @@ const StyledFooter = () => {
   const langObj = getGlobalState("langObj");
   const logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
-
-  const getNextPage = (currentPage) => {
-    if (currentPage === "landing") {
-      return `/presort`;
-    }
-    if (currentPage === "presort") {
-      return `/sort`;
-    }
-    if (currentPage === "sort") {
-      return `/postsort`;
-    }
-    if (currentPage === "postsort") {
-      return `/survey`;
-    }
-    if (currentPage === "survey") {
-      return `/submit`;
-    }
-    if (currentPage === "submit") {
-      return `/`;
-    }
-    return `/nopagefound`;
-  };
 
   const currentPage = getGlobalState("currentPage");
   const additionalProgress = getGlobalState("progressScoreAdditional");

@@ -42,10 +42,10 @@ const SubmitPage = () => {
   transmissionResults["timeLanding"] = results.timeOnlandingPage;
   transmissionResults["timePresort"] = results.timeOnpresortPage;
   transmissionResults["timeSort"] = results.timeOnsortPage;
-  if (configObj.showPostsort) {
+  if (configObj.showPostsort === true) {
     transmissionResults["timePostsort"] = results.timeOnpostsortPage;
   }
-  if (configObj.showSurvey) {
+  if (configObj.showSurvey === true) {
     transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
   }
   transmissionResults["npos"] = results.npos || 0;

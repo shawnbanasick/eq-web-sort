@@ -6,7 +6,7 @@
      <!-- GENERAL SETTINGS -->
      <item id="shuffleCards">true</item>
      <item id="showPostsort">true</item>
-     <item id="showSurvey">true</item>
+     <item id="showSurvey">false</item>
      <item id="firebaseOrLocal">firebase</item>
      <item id="studyTitle">My_Q_project</item> 
      <item id="headerBarColor">#337ab7</item> 
