@@ -241,35 +241,38 @@ const SortGrid = (props) => {
                     horiCardMinHeight
                   )}
                 >
-                  {statements.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                      sortValue={item.sortValue}
-                      cardColor={item.cardColor}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          className={`${item.cardColor}`}
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyleHori(
-                            snapshot.isDragging,
-                            provided.draggableProps.style,
-                            `${item.sortValue}`,
-                            `${item.cardColor}`,
-                            columnWidth,
-                            cardHeight,
-                            cardFontSize
-                          )}
-                        >
-                          {item.statement}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                  {statements.map((item, index) => {
+                    const statementHtml = item.statement;
+                    return (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                        sortValue={item.sortValue}
+                        cardColor={item.cardColor}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            className={`${item.cardColor}`}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyleHori(
+                              snapshot.isDragging,
+                              provided.draggableProps.style,
+                              `${item.sortValue}`,
+                              `${item.cardColor}`,
+                              columnWidth,
+                              cardHeight,
+                              cardFontSize
+                            )}
+                          >
+                            {statementHtml}
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
                   {provided.placeholder}
                 </div>
               )}

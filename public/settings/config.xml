@@ -6,7 +6,7 @@
      <!-- GENERAL SETTINGS -->
      <item id="shuffleCards">true</item>
      <item id="showPostsort">true</item>
-     <item id="showSurvey">false</item>
+     <item id="showSurvey">true</item>
      <item id="firebaseOrLocal">firebase</item>
      <item id="studyTitle">My_Q_project</item> 
      <item id="headerBarColor">#337ab7</item> 
@@ -37,10 +37,9 @@
      <item id="qSortPattern">2,3,4,5,5,5,4,3,2</item>
      <item id="qSortHeaders">N4,N3,N2,N1,0,1,2,3,4</item>
      <item id="overloadedColumnDisplay">true</item>
-     <item id="allowUnforcedSorts">true</item>
+     <item id="allowUnforcedSorts">false</item>
+     <item id="displayUnforcedWarning">true</item>
      <item id="qSortHeaderNumbers">-4,-3,-2,-1,0,+1,+2,+3,+4</item>
-     <item id="out">true</item>
-     <item id="columnWidth">200</item>
 
      <!-- POSTSORT -->
      <item id="postsortAgreeColDisp1">column4</item>
