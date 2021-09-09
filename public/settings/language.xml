@@ -31,6 +31,7 @@
                    {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
                    {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  
                    {{{li}}}Simple localization into your research language {{{/li}}} 
+                   {{{li}}}HTML formatting for statements (bold, underline, line breaks, etc...) {{{/li}}} 
                    {{{li}}}Custom logo in page footers {{{/li}}} 
                    {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} 
               {{{/ul}}}

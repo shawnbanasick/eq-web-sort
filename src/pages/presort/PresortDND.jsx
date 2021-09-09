@@ -218,6 +218,9 @@ function PresortDND(props) {
                         }}
                       >
                         {column.items.map((item, index) => {
+                          const statementHtml = ReactHtmlParser(
+                            decodeHTML(item.statement)
+                          );
                           return (
                             <Draggable
                               key={item.id}
@@ -231,7 +234,6 @@ function PresortDND(props) {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
-                                    className="droppableCards"
                                     style={{
                                       userSelect: "none",
                                       padding: 16,
@@ -249,7 +251,7 @@ function PresortDND(props) {
                                       ...provided.draggableProps.style,
                                     }}
                                   >
-                                    {item.statement}
+                                    {statementHtml}
                                   </DroppableContainer>
                                 );
                               }}

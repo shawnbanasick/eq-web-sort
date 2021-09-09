@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 /* eslint react/prop-types: 0 */
 
@@ -63,32 +65,35 @@ const LowCards = (props) => {
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
-  return lowCards.map((item, index) => (
-    <Container key={item.statement}>
-      <CardTag cardFontSize={cardFontSize}>
-        {disagreeText}
-        {columnInfo}
-      </CardTag>
-      <CardAndTextHolder>
-        <Card cardFontSize={cardFontSize} width={width} height={height}>
-          {item.statement}
-        </Card>
-        <TagContainerDiv>
-          <CommentArea
-            data-gramm_editor="false"
-            height={height}
-            cardFontSize={cardFontSize}
-            id={item.id}
-            placeholder={placeholder}
-            defaultValue={item.comment}
-            onBlur={(e) => {
-              onBlur(e, columnStatements, columnDisplay, index);
-            }}
-          />
-        </TagContainerDiv>
-      </CardAndTextHolder>
-    </Container>
-  ));
+  return lowCards.map((item, index) => {
+    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    return (
+      <Container key={item.statement}>
+        <CardTag cardFontSize={cardFontSize}>
+          {disagreeText}
+          {columnInfo}
+        </CardTag>
+        <CardAndTextHolder>
+          <Card cardFontSize={cardFontSize} width={width} height={height}>
+            {statementHtml}
+          </Card>
+          <TagContainerDiv>
+            <CommentArea
+              data-gramm_editor="false"
+              height={height}
+              cardFontSize={cardFontSize}
+              id={item.id}
+              placeholder={placeholder}
+              defaultValue={item.comment}
+              onBlur={(e) => {
+                onBlur(e, columnStatements, columnDisplay, index);
+              }}
+            />
+          </TagContainerDiv>
+        </CardAndTextHolder>
+      </Container>
+    );
+  });
 };
 
 export default view(LowCards);

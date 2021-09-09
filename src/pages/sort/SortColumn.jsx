@@ -5,6 +5,8 @@ import styled from "styled-components";
 import getItemStyle from "./getItemStyle";
 import setGlobalState from "../../globalState/setGlobalState";
 import getListStyle from "./getListStyle";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 /* eslint react/prop-types: 0 */
 
@@ -50,32 +52,37 @@ class SortColumn extends React.Component {
                   columnColor
                 )}
               >
-                {columnStatementsArray.map((item, index) => (
-                  <Draggable
-                    key={item.id}
-                    draggableId={item.id}
-                    cardColor={item.cardColor}
-                    index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style,
-                          columnWidth,
-                          cardHeight,
-                          cardFontSize,
-                          `${item.cardColor}`
-                        )}
-                      >
-                        {item.statement}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+                {columnStatementsArray.map((item, index) => {
+                  const statementHtml = ReactHtmlParser(
+                    decodeHTML(item.statement)
+                  );
+                  return (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      cardColor={item.cardColor}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style,
+                            columnWidth,
+                            cardHeight,
+                            cardFontSize,
+                            `${item.cardColor}`
+                          )}
+                        >
+                          {statementHtml}
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
                 {provided.placeholder}
               </div>
             );

@@ -10,6 +10,8 @@ import SortColumn from "./SortColumn";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHori from "./getItemStyleHori";
 import calculateDragResults from "./calculateDragResults";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 /* eslint react/prop-types: 0 */
 
@@ -242,7 +244,9 @@ const SortGrid = (props) => {
                   )}
                 >
                   {statements.map((item, index) => {
-                    const statementHtml = item.statement;
+                    const statementHtml = ReactHtmlParser(
+                      decodeHTML(item.statement)
+                    );
                     return (
                       <Draggable
                         key={item.id}
@@ -250,6 +254,7 @@ const SortGrid = (props) => {
                         index={index}
                         sortValue={item.sortValue}
                         cardColor={item.cardColor}
+                        className="droppableCards"
                       >
                         {(provided, snapshot) => (
                           <div

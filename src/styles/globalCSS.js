@@ -32,6 +32,7 @@ touch-action: manipulation;
 }
 
 
+
 /* Sections
    ========================================================================== */
 
@@ -115,6 +116,7 @@ abbr[title] {
 b,
 strong {
   font-weight: bolder;
+  display: inline !important;
 }
 
 /**
@@ -387,7 +389,10 @@ footer {
   .dragObject {
     -webkit-user-select: none;
     user-select: none;
+    display: flex;
+    flex-direction: row;
   }
+
 
 
   .react-responsive-modal-modal {
