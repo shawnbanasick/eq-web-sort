@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyInformationElement = (props) => {
   useEffect(() => {
@@ -11,11 +13,11 @@ const SurveyInformationElement = (props) => {
     setGlobalState("resultsSurvey", results);
   }, [props]);
 
+  const infoText = ReactHtmlParser(decodeHTML(props.opts.options));
+
   return (
     <Container>
-      <TitleBar backgroundColor={props.opts.background}>
-        {props.opts.options}
-      </TitleBar>
+      <TitleBar backgroundColor={props.opts.background}>{infoText}</TitleBar>
     </Container>
   );
 };
@@ -36,9 +38,9 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  padding: 5px;
+  min-height: 50px;
   font-size: 18px;
-  font-weight: bold;
   text-align: center;
   background-color: ${(props) => props.backgroundColor || "lightgray"};
   width: 100%;

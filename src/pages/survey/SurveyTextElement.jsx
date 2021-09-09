@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyTextElement = (props) => {
   useEffect(() => {
@@ -66,10 +68,13 @@ const SurveyTextElement = (props) => {
     border = "none";
   }
 
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
+
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{props.opts.label}</TitleBar>
-      <NoteText>{props.opts.note}</NoteText>
+      <TitleBar>{labelText}</TitleBar>
+      <NoteText>{noteText}</NoteText>
       <TextInput value={userText || ""} onChange={handleOnChange} />
     </Container>
   );
@@ -92,7 +97,8 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  padding: 5px;
+  min-height: 50px;
   font-size: 18px;
   text-align: center;
   width: 100%;

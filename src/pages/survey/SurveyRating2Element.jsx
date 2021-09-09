@@ -4,12 +4,14 @@ import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyRatings2Element = (props) => {
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
 
-    let array = props.opts.options.split(";");
+    let array = props.opts.options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });
@@ -31,7 +33,7 @@ const SurveyRatings2Element = (props) => {
 
   // filter to remove empty strings if present
   const getOptionsArray = (options) => {
-    let array = options.split(";");
+    let array = options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });
@@ -116,35 +118,40 @@ const SurveyRatings2Element = (props) => {
   }
 
   const RadioItems = () => {
-    const radioList = optsArray.map((item, index) => (
-      <ItemContainer indexVal={index} key={uuid()}>
-        <OptionsText key={uuid()}>{item}</OptionsText>
-        <RadioInput
-          key={uuid()}
-          id={`Q-${index}`}
-          type="radio"
-          value={1}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 0, e)}
-          checked={checkedState[index][0]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q2-${index}`}
-          type="radio"
-          value={2}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 1, e)}
-          checked={checkedState[index][1]}
-        />
-      </ItemContainer>
-    ));
+    const radioList = optsArray.map((item, index) => {
+      const itemText = ReactHtmlParser(decodeHTML(item));
+      return (
+        <ItemContainer indexVal={index} key={uuid()}>
+          <OptionsText key={uuid()}>{itemText}</OptionsText>
+          <RadioInput
+            key={uuid()}
+            id={`Q-${index}`}
+            type="radio"
+            value={1}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 0, e)}
+            checked={checkedState[index][0]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q2-${index}`}
+            type="radio"
+            value={2}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 1, e)}
+            checked={checkedState[index][1]}
+          />
+        </ItemContainer>
+      );
+    });
     return <div>{radioList}</div>;
   };
 
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{props.opts.label}</TitleBar>
+      <TitleBar>{labelText}</TitleBar>
       <RadioContainer>
         <RatingTitle>
           <div />
@@ -174,7 +181,8 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  min-height: 50px;
+  padding: 5px;
   font-size: 18px;
   text-align: center;
   background-color: lightgray;

@@ -4,6 +4,8 @@ import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyDropdownElement = (props) => {
   useEffect(() => {
@@ -95,9 +97,11 @@ const SurveyDropdownElement = (props) => {
     border = "none";
   }
 
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{props.opts.label}</TitleBar>
+      <TitleBar>{labelText}</TitleBar>
       <MultiSelect
         className={"multiselect"}
         options={getOptionsArray(props.opts.options)}
@@ -131,7 +135,8 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  min-height: 50px;
+  padding: 5px;
   font-size: 18px;
   text-align: center;
   background-color: lightgray;

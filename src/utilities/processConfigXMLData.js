@@ -142,6 +142,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.type = "textarea";
         tempObj.required = surveyData[j][0].attributes.required;
         tempObj.label = surveyData[j][1].elements[0].text;
+        tempObj.placeholder = surveyData[j][2].elements[0].text;
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);

@@ -54,56 +54,57 @@
      <!-- SURVEY - Survey Questions -->
      <item id="survey">
         <input type="information"></input>
-        <note bg="goldenrod">All fields marked with an * are required.</note>
+        <note bg="goldenrod">{{{div}}}All fields marked with an * are {{{b}}}required.{{{/b}}}{{{/div}}}</note>
      </item>
 
      <item id="survey">
-        <input type="text" required="true" maxlength="10" restricted="true"></input>
-        <label>Have you had classes with me before?</label>
-        <note>If yes, please list them here.</note>
+        <input type="text" required="true" maxlength="100" restricted="true"></input>
+        <label>1. Have you had classes with me before?*</label>
+        <note>{{{div}}}If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters){{{/div}}}</note>
      </item>
 
      <item id="survey">
         <input type="textRestricted" required="false" maxlength="4" restricted="true"></input>
-        <label>Prefecture Code* (numbers only)</label>
-        <note>Please input your home prefecture code. (numbers only)
+        <label>2. Prefecture Code (numbers only)</label>
+        <note>{{{div}}}Please input your {{{u}}}home prefecture code{{{/u}}}. (numbers only){{{/div}}}
         </note>
      </item>
      
      <item id="survey">
         <input type="textarea" required="false"></input>
-        <label>Describe your experience using the iPads in this class*</label>
+        <label>3. Describe your experience using the iPads in this class</label>
+        <placeholder>input comment here (no html formatting possible)</placeholder>
      </item>
      
      <item id="survey">
         <input type="radio" required="false">Freshman;Sophomore;Junior;Senior</input>
-        <label>Year*</label>
+        <label>4. Year</label>
         <note>Please select your year</note>
      </item>
      
      <item id="survey">
         <input type="select" required="false">Global Studies;Linguistics;English Literature</input>
-        <label>What is your program focus?</label>
+        <label>5. What is your program focus?</label>
      </item>
      
      <item id="survey">
         <input type="checkbox" required="true">Lecture;Group Discussion;Active Learning</input>
-        <label>What kind of class do you prefer?</label>
+        <label>6. What kind of class do you prefer?*</label>
      </item>
      
      <item id="survey">
-        <input type="rating2" required="false" scale="Yes;No">I have used an iPad in class before.; I have used a notebook computer in class before.;I have used Moodle before.;I have used Quizlet before;</input>
-        <label>Please respond to the following statements</label>
+        <input type="rating2" required="false" scale="Yes;No">{{{div}}}I have used an iPad in class {{{b}}}before{{{/b}}}.{{{/div}}};;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <label>{{{div}}}7. Please respond to the following {{{u}}}statements{{{/u}}}{{{/div}}}</label>
      </item>
      
      <item id="survey">
-        <input type="rating5" required="false" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;How would you rate this class overall?;How was your interaction with other students?;How was access to the computer lab?</input>
-        <label>Please answer the following questions</label>
+        <input type="rating5" required="false" scale="1;2;3;4;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;{{{div}}}How was your interaction with {{{u}}}other students?{{{/u}}}{{{/div}}};;;How was access to the computer lab?</input>
+        <label>{{{div}}}8. {{{i}}}Please{{{/i}}} answer the following questions{{{/div}}}</label>
      </item>
      
      <item id="survey">
-        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;How would you rate the use of the Quizlet website in this class?;How would you rate the use of Moodle in this class?;How would you rate the use of Edmodo in this class?</input>
-        <label>Please answer the following questions</label>
+        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">How would you rate the use of the Socrative website in this class?;;;{{{div}}}How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?{{{/div}}};;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <label>{{{div}}}9. {{{u}}}Please{{{/u}}} answer the following questions{{{/div}}}</label>
      </item>
      
    </config>

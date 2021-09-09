@@ -4,12 +4,14 @@ import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyRatings10Element = (props) => {
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
 
-    let array = props.opts.options.split(";");
+    let array = props.opts.options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });
@@ -25,7 +27,7 @@ const SurveyRatings10Element = (props) => {
 
   // filter to remove empty strings if present
   const getOptionsArray = (options) => {
-    let array = options.split(";");
+    let array = options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });
@@ -110,107 +112,112 @@ const SurveyRatings10Element = (props) => {
   }
 
   const RadioItems = () => {
-    const radioList = optsArray.map((item, index) => (
-      <ItemContainer indexVal={index} key={uuid()}>
-        <OptionsText key={uuid()}>{item}</OptionsText>
-        <RadioInput
-          key={uuid()}
-          id={`Q-${index}`}
-          type="radio"
-          value={1}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 0, e)}
-          checked={checkedState[index][0]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q2-${index}`}
-          type="radio"
-          value={2}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 1, e)}
-          checked={checkedState[index][1]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q3-${index}`}
-          type="radio"
-          value={3}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 2, e)}
-          checked={checkedState[index][2]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q4-${index}`}
-          type="radio"
-          value={4}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 3, e)}
-          checked={checkedState[index][3]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q5-${index}`}
-          type="radio"
-          value={5}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 4, e)}
-          checked={checkedState[index][4]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q6-${index}`}
-          type="radio"
-          value={6}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 5, e)}
-          checked={checkedState[index][5]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q7-${index}`}
-          type="radio"
-          value={7}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 6, e)}
-          checked={checkedState[index][6]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q8-${index}`}
-          type="radio"
-          value={8}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 7, e)}
-          checked={checkedState[index][7]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q9-${index}`}
-          type="radio"
-          value={9}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 8, e)}
-          checked={checkedState[index][8]}
-        />
-        <RadioInput
-          key={uuid()}
-          id={`Q10-${index}`}
-          type="radio"
-          value={10}
-          name={`qNum${props.opts.qNum}-${index + 1}`}
-          onChange={(e) => handleChange(index, 9, e)}
-          checked={checkedState[index][9]}
-        />
-      </ItemContainer>
-    ));
+    const radioList = optsArray.map((item, index) => {
+      const itemText = ReactHtmlParser(decodeHTML(item));
+      return (
+        <ItemContainer indexVal={index} key={uuid()}>
+          <OptionsText key={uuid()}>{itemText}</OptionsText>
+          <RadioInput
+            key={uuid()}
+            id={`Q-${index}`}
+            type="radio"
+            value={1}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 0, e)}
+            checked={checkedState[index][0]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q2-${index}`}
+            type="radio"
+            value={2}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 1, e)}
+            checked={checkedState[index][1]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q3-${index}`}
+            type="radio"
+            value={3}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 2, e)}
+            checked={checkedState[index][2]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q4-${index}`}
+            type="radio"
+            value={4}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 3, e)}
+            checked={checkedState[index][3]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q5-${index}`}
+            type="radio"
+            value={5}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 4, e)}
+            checked={checkedState[index][4]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q6-${index}`}
+            type="radio"
+            value={6}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 5, e)}
+            checked={checkedState[index][5]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q7-${index}`}
+            type="radio"
+            value={7}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 6, e)}
+            checked={checkedState[index][6]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q8-${index}`}
+            type="radio"
+            value={8}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 7, e)}
+            checked={checkedState[index][7]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q9-${index}`}
+            type="radio"
+            value={9}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 8, e)}
+            checked={checkedState[index][8]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q10-${index}`}
+            type="radio"
+            value={10}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 9, e)}
+            checked={checkedState[index][9]}
+          />
+        </ItemContainer>
+      );
+    });
     return <div>{radioList}</div>;
   };
 
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{props.opts.label}</TitleBar>
+      <TitleBar>{labelText}</TitleBar>
       <RadioContainer>
         <RatingTitle>
           <div />
@@ -248,7 +255,8 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  min-height: 50px;
+  padding: 5px;
   font-size: 18px;
   text-align: center;
   background-color: lightgray;

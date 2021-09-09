@@ -4,6 +4,8 @@ import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const getOptionsArray = (options) => {
   let array = options.split(";");
@@ -109,9 +111,11 @@ const SurveyRadioElement = (props) => {
     return <div>{radioList}</div>;
   };
 
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{props.opts.label}</TitleBar>
+      <TitleBar>{labelText}</TitleBar>
       <RadioContainer onChange={(e) => handleChange(e)}>
         <RadioItems />
       </RadioContainer>
@@ -136,7 +140,8 @@ const TitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  min-height: 50px;
+  padding: 5px;
   font-size: 18px;
   text-align: center;
   background-color: lightgray;
