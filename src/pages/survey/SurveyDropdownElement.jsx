@@ -15,7 +15,7 @@ const SurveyDropdownElement = (props) => {
   }, [props]);
 
   const getOptionsArray = (options) => {
-    let array = options.split(";");
+    let array = options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });

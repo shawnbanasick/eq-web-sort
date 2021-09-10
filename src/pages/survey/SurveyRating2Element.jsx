@@ -47,7 +47,7 @@ const SurveyRatings2Element = (props) => {
   const rows = optsArray.length;
 
   const getScaleArray = (options) => {
-    let array = options.split(";");
+    let array = options.split(";;;");
     return array;
   };
   const scaleArray = getScaleArray(props.opts.scale);

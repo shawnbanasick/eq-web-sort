@@ -78,23 +78,23 @@
      </item>
      
      <item id="survey">
-        <input type="radio" required="false">Freshman;Sophomore;Junior;Senior</input>
+        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
         <label>4. Year</label>
         <note>Please select your year</note>
      </item>
      
      <item id="survey">
-        <input type="select" required="false">Global Studies;Linguistics;English Literature</input>
+        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
         <label>5. What is your program focus?</label>
      </item>
      
      <item id="survey">
-        <input type="checkbox" required="true">Lecture;Group Discussion;Active Learning</input>
+        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
         <label>6. What kind of class do you prefer?*</label>
      </item>
      
      <item id="survey">
-        <input type="rating2" required="false" scale="Yes;No">{{{div}}}I have used an iPad in class {{{b}}}before{{{/b}}}.{{{/div}}};;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <input type="rating2" required="false" scale="Yes;;;No">{{{div}}}I have used an iPad in class {{{b}}}before{{{/b}}}.{{{/div}}};;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
         <label>{{{div}}}7. Please respond to the following {{{u}}}statements{{{/u}}}{{{/div}}}</label>
      </item>
      
