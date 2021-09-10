@@ -36,10 +36,10 @@
      <item id="columnColorsArray">whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke,whitesmoke</item>
      <item id="qSortPattern">2,3,4,5,5,5,4,3,2</item>
      <item id="qSortHeaders">N4,N3,N2,N1,0,1,2,3,4</item>
-     <item id="overloadedColumnDisplay">true</item>
+     <item id="warnOverloadedColumn">true</item>
      <item id="allowUnforcedSorts">false</item>
-     <item id="displayUnforcedWarning">true</item>
      <item id="qSortHeaderNumbers">-4,-3,-2,-1,0,+1,+2,+3,+4</item>
+
 
      <!-- POSTSORT -->
      <item id="postsortAgreeColDisp1">column4</item>
@@ -49,6 +49,7 @@
      <item id="showSecondPosColumn">true</item>
      <item id="showSecondNegColumn">true</item>
      <item id="displayNeutralObjects">true</item>
+
 
 
      <!-- SURVEY - Survey Questions -->

@@ -8,6 +8,7 @@ const getListStyle = (
   columnWidth,
   columnColor
 ) => {
+  // forcedSorts is "warnOverloadedColumn" in configObj
   let isUnderMaxCards;
   if (forcedSorts === true) {
     isUnderMaxCards = props.columnStatementsArray.length <= props.maxCards;
