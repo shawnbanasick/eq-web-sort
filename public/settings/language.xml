@@ -30,8 +30,8 @@
                    {{{li}}}Smooth drag and drop actions for desktop and mobile (touch) devices {{{/li}}} 
                    {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
                    {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  
-                   {{{li}}}Simple localization into your research language {{{/li}}} 
-                   {{{li}}}HTML formatting for statements (bold, underline, line breaks, etc...) {{{/li}}} 
+                   {{{li}}}Simple localization into the research language {{{/li}}} 
+                   {{{li}}}HTML formatting for statements and User Interface text (including bold font, italics, underlines, line breaks) {{{/li}}} 
                    {{{li}}}Custom logo in page footers {{{/li}}} 
                    {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} 
               {{{/ul}}}
@@ -118,9 +118,9 @@
 
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
+        <item id="surveyHeader">Post-Sorting Survey</item>
         <item id="surveyModalHead">Step 4 of 4</item>
         <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an "*" in their title are required.</item>
-        <item id="postsortTitle">Post-Sorting Survey</item>
         <item id="surveyPreventNavModalHead">Navigation Disabled</item>
         <item id="surveyPreventNavModalText">Please answer the required questions (outlined in red) before going to the next step.</item>
        

@@ -27,7 +27,7 @@ const SurveyPage = () => {
 
   // setup language
   const langObj = getGlobalState("langObj");
-  const postsortTitle = ReactHtmlParser(decodeHTML(langObj.postsortTitle));
+  const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
   useEffect(() => {
     let startTime;
@@ -84,7 +84,7 @@ const SurveyPage = () => {
     <React.Fragment>
       <SurveyHelpModal />
       <AnswerAllSurveyQuestionsModal />
-      <SortTitleBar background={headerBarColor}>{postsortTitle}</SortTitleBar>
+      <SortTitleBar background={headerBarColor}>{surveyHeader}</SortTitleBar>
       <Container>
         <SurveyQuestions />
       </Container>
