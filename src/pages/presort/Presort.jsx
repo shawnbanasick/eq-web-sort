@@ -15,8 +15,6 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const PresortPage = (props) => {
-  const columnStatements = getGlobalState("columnStatements");
-
   // set progress score and current page
   useEffect(() => {
     setTimeout(() => {
@@ -33,6 +31,7 @@ const PresortPage = (props) => {
     };
   }, []);
 
+  const columnStatements = getGlobalState("columnStatements");
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
   const configObj = getGlobalState("configObj");
