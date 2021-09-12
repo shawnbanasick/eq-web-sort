@@ -45,7 +45,7 @@ const LandingPage = () => {
   const initialScreenSetting = configObj.initialScreen;
   if (initialScreenSetting === "anonymous") {
     displayLandingContent = true;
-    setGlobalState("displayNextButton", true);
+    // setGlobalState("displayNextButton", true);
   }
   if (
     initialScreenSetting === "partId-access" &&

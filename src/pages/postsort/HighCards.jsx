@@ -12,7 +12,6 @@ import sanitizeString from "../../utilities/sanitizeString";
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards = (props) => {
-  console.log(props);
   const configObj = getGlobalState("configObj");
   const postsortConvertObj = configObj.postsortConvertObj;
 

@@ -13,22 +13,26 @@ import HelpButton from "./HelpButton";
 import getNextPage from "./getNextPage";
 
 const StyledFooter = () => {
+  // setup configs
   const configObj = getGlobalState("configObj");
+  const initialScreenSetting = configObj.initialScreen;
+  let displayNextButton = getGlobalState("displayNextButton");
+  const currentPage = getGlobalState("currentPage");
+  const additionalProgress = getGlobalState("progressScoreAdditional");
+  const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
+  let showAdjustmentContainer = true;
+  let showCardHeightSizer = true;
 
   // setup language
   const langObj = getGlobalState("langObj");
   const logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 
-  const currentPage = getGlobalState("currentPage");
-  const additionalProgress = getGlobalState("progressScoreAdditional");
-  const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
-  let displayNextButton = getGlobalState("displayNextButton");
-  let showAdjustmentContainer = true;
-  let showCardHeightSizer = true;
-
   // todo - fix properly so no escaping log in
   if (currentPage !== "landing") {
+    displayNextButton = true;
+  }
+  if (initialScreenSetting === "anonymous") {
     displayNextButton = true;
   }
 
