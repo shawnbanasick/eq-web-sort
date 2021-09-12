@@ -15,7 +15,8 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const PresortPage = (props) => {
-  const columnStatements = props.statements;
+  const columnStatements = getGlobalState("columnStatements");
+
   // set progress score and current page
   useEffect(() => {
     setTimeout(() => {

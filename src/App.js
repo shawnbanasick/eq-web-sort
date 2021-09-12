@@ -97,16 +97,12 @@ function App() {
     return <LoadingScreen />;
   }
 
-  const columnStatements = getGlobalState("columnStatements");
-
   return (
     <div className="App">
       <Router>
         <PromptUnload />
         <Switch>
-          <Route exact path="/presort">
-            <PresortPage statements={columnStatements} />
-          </Route>
+          <Route exact path="/presort" component={PresortPage} />
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/postsort" component={PostsortPage} />
           <Route exact path="/survey" component={SurveyPage} />
