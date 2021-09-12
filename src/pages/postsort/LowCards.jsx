@@ -15,6 +15,7 @@ const LowCards = (props) => {
   const configObj = getGlobalState("configObj");
   const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
+  const columnStatements = getGlobalState("columnStatements");
 
   // on blur, get text and add comment to card object
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
@@ -53,15 +54,8 @@ const LowCards = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const {
-    height,
-    width,
-    cardFontSize,
-    columnDisplay,
-    disagreeObj,
-    lowCards,
-    columnStatements,
-  } = props;
+  const { height, width, cardFontSize, columnDisplay, disagreeObj, lowCards } =
+    props;
   const { disagreeText, placeholder } = disagreeObj;
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;

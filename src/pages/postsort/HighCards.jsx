@@ -14,6 +14,7 @@ import sanitizeString from "../../utilities/sanitizeString";
 const HighCards = (props) => {
   const configObj = getGlobalState("configObj");
   const postsortConvertObj = configObj.postsortConvertObj;
+  const columnStatements = getGlobalState("columnStatements");
 
   // on leaving card comment section,
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
@@ -53,15 +54,8 @@ const HighCards = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const {
-    columnDisplay,
-    agreeObj,
-    highCards,
-    columnStatements,
-    cardFontSize,
-    width,
-    height,
-  } = props;
+  const { columnDisplay, agreeObj, highCards, cardFontSize, width, height } =
+    props;
 
   const { agreeText, placeholder } = agreeObj;
 

@@ -92,7 +92,6 @@ const PostSort = () => {
           width={columnWidth}
           highCards={highCards}
           columnDisplay={agreeObj.columnDisplay}
-          columnStatements={columnStatements}
         />
 
         {agreeObj.displaySecondColumn && (
@@ -103,7 +102,6 @@ const PostSort = () => {
             width={columnWidth}
             highCards2={highCards2}
             columnDisplay={agreeObj.columnDisplay2}
-            columnStatements={columnStatements}
           />
         )}
 
@@ -115,7 +113,6 @@ const PostSort = () => {
             cardFontSize={cardFontSize}
             columnDisplay={neutralObj.columnDisplay}
             neutralCards={neutralCards}
-            columnStatements={columnStatements}
           />
         )}
 
@@ -126,7 +123,6 @@ const PostSort = () => {
             width={columnWidth}
             lowCards2={lowCards2}
             cardFontSize={cardFontSize}
-            columnStatements={columnStatements}
             columnDisplay={disagreeObj.columnDisplay2}
           />
         )}
@@ -137,7 +133,6 @@ const PostSort = () => {
           width={columnWidth}
           cardFontSize={cardFontSize}
           lowCards={lowCards}
-          columnStatements={columnStatements}
           columnDisplay={disagreeObj.columnDisplay}
         />
       </CardsContainer>

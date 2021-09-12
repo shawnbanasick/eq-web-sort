@@ -12,6 +12,7 @@ import sanitizeString from "../../utilities/sanitizeString";
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards2 = (props) => {
+  const columnStatements = getGlobalState("columnStatements");
   const configObj = getGlobalState("configObj");
   const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
@@ -49,15 +50,8 @@ const HighCards2 = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const {
-    height,
-    width,
-    columnDisplay,
-    agreeObj,
-    highCards2,
-    columnStatements,
-    cardFontSize,
-  } = props;
+  const { height, width, columnDisplay, agreeObj, highCards2, cardFontSize } =
+    props;
 
   const { agreeText, placeholder } = agreeObj;
 

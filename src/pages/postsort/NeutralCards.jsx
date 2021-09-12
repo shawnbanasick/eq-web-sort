@@ -15,6 +15,7 @@ const NeutralCards = (props) => {
   const configObj = getGlobalState("configObj");
   const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
+  const columnStatements = getGlobalState("columnStatements");
 
   // on blur, get text and add comment to card object
   const onBlur = (event, columnStatements, columnDisplay, itemId) => {
@@ -55,7 +56,6 @@ const NeutralCards = (props) => {
     columnDisplay,
     neutralObj,
     neutralCards,
-    columnStatements,
   } = props;
   const { neutralText, placeholder } = neutralObj;
 
