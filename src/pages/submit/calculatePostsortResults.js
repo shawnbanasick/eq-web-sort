@@ -3,15 +3,15 @@ const calculatePostsortResults = (resultsPostsort, configObj) => {
 
   // check for missing responses
   const qSortPattern = configObj.qSortPattern;
-  const qSortHeaderNumbers = configObj.qSortHeaderNumbers;
+  const qSortHeaderNumbers = configObj.qSortHeaders;
   const highCardNum = +qSortPattern[qSortPattern.length - 1];
   const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];
   const highCard2Num = +qSortPattern[qSortPattern.length - 2];
   const highCard2Val = +qSortHeaderNumbers[qSortHeaderNumbers.length - 2];
   const lowCardNum = +qSortPattern[0];
-  const lowCardVal = +qSortHeaderNumbers[0];
+  const lowCardVal = qSortHeaderNumbers[0];
   const lowCard2Num = +qSortPattern[1];
-  const lowCard2Val = +qSortHeaderNumbers[1];
+  const lowCard2Val = qSortHeaderNumbers[1];
   const maxValue = Math.max(...qSortPattern);
   const neuCardNum = maxValue;
   const neuCardVal = 0;
@@ -64,7 +64,6 @@ const calculatePostsortResults = (resultsPostsort, configObj) => {
   for (let i = 0; i < keys.length; i++) {
     newObject[keys[i]] = resultsPostsort[keys[i]];
   }
-
   return newObject;
 };
 

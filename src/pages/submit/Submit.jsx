@@ -48,9 +48,23 @@ const SubmitPage = () => {
   if (configObj.showSurvey === true) {
     transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
   }
-  transmissionResults["npos"] = results.npos || 0;
-  transmissionResults["nneu"] = results.nneu || 0;
-  transmissionResults["nneg"] = results.nneg || 0;
+
+  let numPos = results.npos;
+  if (isNaN(numPos)) {
+    numPos = 0;
+  }
+  let numNeu = results.nneu;
+  if (isNaN(numNeu)) {
+    numNeu = 0;
+  }
+  let numNeg = results.nneg;
+  if (isNaN(numNeg)) {
+    numNeg = 0;
+  }
+
+  transmissionResults["npos"] = numPos;
+  transmissionResults["nneu"] = numNeu;
+  transmissionResults["nneg"] = numNeg;
 
   // if project included POSTSORT, read in complete sorted results
   if (configObj.showPostsort) {

@@ -38,10 +38,10 @@ const HighCards = (props) => {
         // assign to main data object for confirmation / debugging
         el.comment = sanitizeString(comment);
 
-        if (comment.length === 0) {
+        /*   if (comment.length === 0) {
           comment = " no response";
         }
-
+ */
         // assign to comments object
         statementCommentsObj[identifier] = `(${el.id}) ${comment}`;
         results[identifier] = `(${el.id}) ${comment}`;
