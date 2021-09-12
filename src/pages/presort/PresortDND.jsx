@@ -175,10 +175,12 @@ function PresortDND(props) {
     setGlobalState("results", projectResultsObj);
   }, [columns]);
 
-  if (columns.cards.items.length === 0) {
-    setGlobalState("presortFinished", true);
-    setGlobalState("triggerPresortFinishedModal", true);
-  }
+  useEffect(() => {
+    if (columns.cards.items.length === 0) {
+      setGlobalState("presortFinished", true);
+      setGlobalState("triggerPresortFinishedModal", true);
+    }
+  }, [columns.cards.items.length]);
 
   // RENDER COMPONENT
   return (
