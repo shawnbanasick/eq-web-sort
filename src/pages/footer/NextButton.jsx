@@ -46,8 +46,6 @@ const checkForNextPageConditions = () => {
   }
 
   if (currentPage === "survey") {
-    // to turn on pink color for unanswered
-    setGlobalState("checkRequiredQuestionsComplete", true);
     const requiredAnswersObj = getGlobalState("requiredAnswersObj");
     const checkArray = [];
     const keys = Object.keys(requiredAnswersObj);
@@ -58,6 +56,8 @@ const checkForNextPageConditions = () => {
     }
 
     if (checkArray.length > 0) {
+      // to turn on pink color for unanswered
+      setGlobalState("checkRequiredQuestionsComplete", true);
       setGlobalState("triggerSurveyPreventNavModal", true);
       return false;
     } else {
