@@ -14,10 +14,10 @@ import sanitizeString from "../../utilities/sanitizeString";
 const HighCards = (props) => {
   const configObj = getGlobalState("configObj");
   const postsortConvertObj = configObj.postsortConvertObj;
-  const columnStatements = getGlobalState("columnStatements");
 
   // on leaving card comment section,
-  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnDisplay, itemId) => {
+    const columnStatements = getGlobalState("columnStatements");
     const results = getGlobalState("resultsPostsort");
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
@@ -54,10 +54,11 @@ const HighCards = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const { columnDisplay, agreeObj, highCards, cardFontSize, width, height } =
-    props;
+  const { agreeObj, highCards, cardFontSize, width, height } = props;
 
   const { agreeText, placeholder } = agreeObj;
+
+  let columnDisplay = agreeObj.columnDisplay;
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
@@ -87,7 +88,7 @@ const HighCards = (props) => {
               placeholder={placeholder}
               defaultValue={item.comment}
               onBlur={(e) => {
-                onBlur(e, columnStatements, columnDisplay, index);
+                onBlur(e, columnDisplay, index);
               }}
             />
           </TagContainerDiv>

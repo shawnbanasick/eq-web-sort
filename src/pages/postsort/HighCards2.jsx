@@ -12,13 +12,13 @@ import sanitizeString from "../../utilities/sanitizeString";
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards2 = (props) => {
-  const columnStatements = getGlobalState("columnStatements");
   const configObj = getGlobalState("configObj");
-  const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on leaving card comment section,
-  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnDisplay, itemId) => {
+    const columnStatements = getGlobalState("columnStatements");
+    const results = getGlobalState("resultsPostsort");
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -50,10 +50,11 @@ const HighCards2 = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const { height, width, columnDisplay, agreeObj, highCards2, cardFontSize } =
-    props;
+  const { height, width, agreeObj, highCards2, cardFontSize } = props;
 
   const { agreeText, placeholder } = agreeObj;
+
+  const columnDisplay = agreeObj.columnDisplay2;
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
@@ -79,7 +80,7 @@ const HighCards2 = (props) => {
               placeholder={placeholder}
               defaultValue={item.comment}
               onBlur={(e) => {
-                onBlur(e, columnStatements, columnDisplay, index);
+                onBlur(e, columnDisplay, index);
               }}
             />
           </TagContainerDiv>

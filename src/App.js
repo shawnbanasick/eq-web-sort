@@ -17,16 +17,11 @@ import setGlobalState from "./globalState/setGlobalState";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
-import getGlobalState from "./globalState/getGlobalState";
 
 const convert = require("xml-js");
 
 function App() {
-  // const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setLoading] = useState(true);
-
-  // to remove stupid terminal warning
-  // console.log("do not delete", isDataLoaded);
 
   useEffect(() => {
     (async () => {

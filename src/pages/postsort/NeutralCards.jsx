@@ -13,12 +13,12 @@ import sanitizeString from "../../utilities/sanitizeString";
 
 const NeutralCards = (props) => {
   const configObj = getGlobalState("configObj");
-  const results = getGlobalState("resultsPostsort");
   const postsortConvertObj = configObj.postsortConvertObj;
-  const columnStatements = getGlobalState("columnStatements");
 
   // on blur, get text and add comment to card object
-  const onBlur = (event, columnStatements, columnDisplay, itemId) => {
+  const onBlur = (event, columnDisplay, itemId) => {
+    const columnStatements = getGlobalState("columnStatements");
+    const results = getGlobalState("resultsPostsort");
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -49,15 +49,10 @@ const NeutralCards = (props) => {
     setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
-  const {
-    height,
-    width,
-    cardFontSize,
-    columnDisplay,
-    neutralObj,
-    neutralCards,
-  } = props;
+  const { height, width, cardFontSize, neutralObj, neutralCards } = props;
   const { neutralText, placeholder } = neutralObj;
+
+  const columnDisplay = neutralObj.columnDisplay;
 
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
@@ -83,7 +78,7 @@ const NeutralCards = (props) => {
               placeholder={placeholder}
               defaultValue={item.comment}
               onBlur={(e) => {
-                onBlur(e, columnStatements, columnDisplay, index);
+                onBlur(e, columnDisplay, index);
               }}
             />
           </TagContainerDiv>
