@@ -3,7 +3,6 @@ import setGlobalState from "../../globalState/setGlobalState";
 
 const calculateDragResults = (result) => {
   try {
-    console.log(JSON.stringify(result));
     if (result.destination !== null) {
       const configObj = getGlobalState("configObj");
       const results = getGlobalState("results");
