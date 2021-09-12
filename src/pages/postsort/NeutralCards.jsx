@@ -5,6 +5,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import sanitizeString from "../../utilities/sanitizeString";
 
 /* eslint react/prop-types: 0 */
 
@@ -33,7 +34,7 @@ const NeutralCards = (props) => {
         const comment2 = comment3.replace(/\n/g, " ");
         const comment = comment2.replace(/,/g, " ");
         // assign to main data object for confirmation / debugging
-        el.comment = comment;
+        el.comment = sanitizeString(comment);
 
         // assign to comments object
         statementCommentsObj[identifier] = `(${el.id}) ${comment}`;

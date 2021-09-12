@@ -5,6 +5,7 @@ import getGlobalState from "../../globalState/getGlobalState.js";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import sanitizeString from "../../utilities/sanitizeString.js";
 
 const SurveyTextAreaElement = (props) => {
   useEffect(() => {
@@ -28,7 +29,8 @@ const SurveyTextAreaElement = (props) => {
     // record if answered or not
     if (value.length > 0) {
       requiredAnswersObj[id] = "answered";
-      results[`qNum${props.opts.qNum}`] = value;
+      let sanitizedText = sanitizeString(value);
+      results[`qNum${props.opts.qNum}`] = sanitizedText;
     } else {
       requiredAnswersObj[id] = "no response";
       results[`qNum${props.opts.qNum}`] = "no response";

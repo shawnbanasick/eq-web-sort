@@ -5,6 +5,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import sanitizeString from "../../utilities/sanitizeString";
 
 const SurveyTextElement = (props) => {
   useEffect(() => {
@@ -41,7 +42,8 @@ const SurveyTextElement = (props) => {
     // record if answered or not
     if (valueLen > 0) {
       requiredAnswersObj[id] = "answered";
-      results[`qNum${props.opts.qNum}`] = value;
+      let sanitizedText = sanitizeString(value);
+      results[`qNum${props.opts.qNum}`] = sanitizedText;
     } else {
       results[`qNum${props.opts.qNum}`] = "no response";
       requiredAnswersObj[id] = "no response";

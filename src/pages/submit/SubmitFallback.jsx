@@ -9,9 +9,9 @@ import FallbackButtons from "./FallbackButtons";
 // eslint-disable-next-line react/button-has-type
 /* eslint react/prop-types: 0 */
 
-const handleClick = () => {
+/* const handleClick = () => {
   console.log("clicked");
-};
+}; */
 
 const SubmitFallback = (props) => {
   // const configObj = getGlobalState("configObj");

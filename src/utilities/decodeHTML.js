@@ -12,6 +12,7 @@ const decodeHTML = (string) => {
       return string;
     }
   } catch (error) {
+    console.log("There was an error decoding into HTML");
     console.error(error);
   }
 };
