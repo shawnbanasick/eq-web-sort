@@ -73,7 +73,7 @@ const PostSort = () => {
   disagreeObj.displaySecondColumn = showSecondNegColumn;
   disagreeObj.placeholder = placeholder;
 
-  const highCards = columnStatements.vCols[agreeObj.columnDisplay];
+  // const highCards = columnStatements.vCols[agreeObj.columnDisplay];
   const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
   const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
   const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
@@ -90,7 +90,6 @@ const PostSort = () => {
           height={cardHeight}
           cardFontSize={cardFontSize}
           width={columnWidth}
-          highCards={highCards}
         />
 
         {agreeObj.displaySecondColumn && (
