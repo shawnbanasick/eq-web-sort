@@ -46,8 +46,8 @@ const HighCards2 = (props) => {
     });
 
     setGlobalState("resultsPostsort", results);
-    setGlobalState("statementCommentsObj", statementCommentsObj);
-    setGlobalState("columnStatements", columnStatements);
+    // setGlobalState("statementCommentsObj", statementCommentsObj);
+    // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const { height, width, agreeObj, highCards2, cardFontSize } = props;

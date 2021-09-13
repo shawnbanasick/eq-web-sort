@@ -48,12 +48,9 @@ const LowCards = (props) => {
     });
 
     setGlobalState("resultsPostsort", results);
-
-    columnStatements.vCols[columnDisplay] = [...cards];
-
+    /*     columnStatements.vCols[columnDisplay] = [...cards];
     setGlobalState("statementCommentsObj", statementCommentsObj);
-
-    setGlobalState("columnStatements", columnStatements);
+    setGlobalState("columnStatements", columnStatements); */
   }; // end onBlur
 
   const { height, width, cardFontSize, disagreeObj, lowCards } = props;

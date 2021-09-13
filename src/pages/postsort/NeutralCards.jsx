@@ -45,8 +45,8 @@ const NeutralCards = (props) => {
     });
 
     setGlobalState("resultsPostsort", results);
-    setGlobalState("statementCommentsObj", statementCommentsObj);
-    setGlobalState("columnStatements", columnStatements);
+    // setGlobalState("statementCommentsObj", statementCommentsObj);
+    // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const { height, width, cardFontSize, neutralObj, neutralCards } = props;

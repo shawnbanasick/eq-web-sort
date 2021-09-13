@@ -47,11 +47,9 @@ const LowCards2 = (props) => {
 
     setGlobalState("resultsPostsort", results);
 
-    columnStatements.vCols[columnDisplay] = [...cards];
-
-    setGlobalState("statementCommentsObj", statementCommentsObj);
-
-    setGlobalState("columnStatements", columnStatements);
+    // columnStatements.vCols[columnDisplay] = [...cards];
+    // setGlobalState("statementCommentsObj", statementCommentsObj);
+    // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const { height, width, cardFontSize, lowCards2, disagreeObj } = props;
