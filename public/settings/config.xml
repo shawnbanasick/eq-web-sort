@@ -9,7 +9,8 @@
      <item id="showSurvey">true</item>
      <item id="firebaseOrLocal">firebase</item>
      <item id="studyTitle">My_Q_project</item> 
-     <item id="headerBarColor">#337ab7</item> 
+     <item id="headerBarColor">#337ab7</item>
+     <item id="devMode">false</item>
 
 
      <!-- FOOTER -->
@@ -23,6 +24,7 @@
 
 
      <!-- PRESORT -->
+     <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
      <item id="greenCardColor">#ccffcc</item>
      <item id="yellowCardColor">#e0e0e0</item>
      <item id="pinkCardColor">#ffe0f0</item>

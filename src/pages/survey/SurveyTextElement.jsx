@@ -16,14 +16,15 @@ const SurveyTextElement = (props) => {
 
   const id = `qNum${props.opts.qNum}`;
   const [userText, setUserText] = useState("");
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
   // required question answer check
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-
-  let bgColor;
-  let border;
 
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
@@ -58,23 +59,29 @@ const SurveyTextElement = (props) => {
     userTextLen = userText.length;
   }
 
-  if (
-    checkRequiredQuestionsComplete === true &&
-    userTextLen < 1 &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  }
+  useEffect(() => {
+    if (
+      checkRequiredQuestionsComplete === true &&
+      userTextLen < 1 &&
+      props.opts.required === true
+    ) {
+      setFormatOptions({
+        bgColor: "lightpink",
+        border: "3px dashed black",
+      });
+    } else {
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, userTextLen, props]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <NoteText>{noteText}</NoteText>
       <TextInput value={userText || ""} onChange={handleOnChange} />
