@@ -30,6 +30,16 @@ const SurveyPage = () => {
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
   useEffect(() => {
+    // reset required questions if page return
+    const requiredAnswersObj = getGlobalState("requiredAnswersObj");
+    let keys = Object.keys(requiredAnswersObj);
+    for (let i = 0; i < keys.length; i++) {
+      requiredAnswersObj[keys[i]] = "no response";
+    }
+    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+  }, []);
+
+  useEffect(() => {
     let startTime;
     startTime = Date.now();
     return () => {
