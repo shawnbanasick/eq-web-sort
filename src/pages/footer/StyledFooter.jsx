@@ -42,6 +42,10 @@ const StyledFooter = () => {
     additionalProgressSort
   );
 
+  if (currentPage === "submit") {
+    displayNextButton = false;
+  }
+
   if (currentPage === "presort") {
     showAdjustmentContainer = true;
     showCardHeightSizer = false;

@@ -47,7 +47,6 @@ const checkForNextPageConditions = () => {
 
   if (currentPage === "survey") {
     const requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    console.log(requiredAnswersObj);
     const checkArray = [];
     const keys = Object.keys(requiredAnswersObj);
     for (let i = 0; i < keys.length; i++) {
