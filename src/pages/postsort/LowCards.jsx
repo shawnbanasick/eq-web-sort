@@ -16,9 +16,7 @@ const LowCards = (props) => {
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on blur, get text and add comment to card object
-  const handleOnBlur = (event) => {
-    const itemId = event.target.indexVal;
-    const columnDisplay = props.disagreeObj.columnDisplay;
+  const onBlur = (event, columnDisplay, itemId) => {
     const columnStatements = getGlobalState("columnStatements");
     const results = getGlobalState("resultsPostsort");
     const cards = [...columnStatements.vCols[columnDisplay]];
@@ -79,7 +77,9 @@ const LowCards = (props) => {
               id={item.id}
               placeholder={placeholder}
               defaultValue={item.comment}
-              onBlur={handleOnBlur}
+              onBlur={(e) => {
+                onBlur(e, columnDisplay, index);
+              }}
             />
           </TagContainerDiv>
         </CardAndTextHolder>
