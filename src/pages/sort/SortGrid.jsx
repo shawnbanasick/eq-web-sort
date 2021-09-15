@@ -170,7 +170,10 @@ const SortGrid = (props) => {
 
   // get user settings
   const cardFontSize = props.cardFontSize;
-  const horiCardMinHeight = +configObj.horiCardMinHeight;
+
+  // todo - reset to researcher specified in next version
+  // const horiCardMinHeight = +configObj.horiCardMinHeight;
+  const horiCardMinHeight = 50;
 
   const sortCharacteristics = getGlobalState("sortCharacteristics");
 

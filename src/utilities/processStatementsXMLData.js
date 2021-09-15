@@ -29,6 +29,9 @@ const processStatementsXMLData = (dataObject) => {
     statementsArray = [...shuffledCards];
   }
 
+  configObj.totalStatements = statementsArray.length;
+  setGlobalState("configObj", configObj);
+
   const columnStatements = {};
   const vColsObj = getGlobalState("vColsObj");
 
