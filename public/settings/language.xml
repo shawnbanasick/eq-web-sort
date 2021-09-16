@@ -52,7 +52,7 @@
 
          {{{/div}}}</item>
 
-        <!-- LANDING - ACCESS CONTROL - only displayed if access is restricted -->
+        <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
         <item id="accessCodeText">Access Code</item>
         <item id="accessInputText">Please enter the access code for this survey</item>
         <item id="loginSubmitButtonText">Submit</item>
