@@ -2,11 +2,6 @@
 
    <language version="1.0" htmlParse="true">
 
-        <!-- MISC -->
-        <item id="btnContinue">Continue...</item>
-        <item id="btnclose">Close</item>
-        <item id="btnExit">Exit</item>
-
 
         <!-- MULTI-PURPOSE MODALS -->
         <item id="stepCompleteMessage">You have completed this step. Please click on the {{{strong}}}blue "Continue" button{{{/strong}}} at the bottom right-side of your screen to go to the next step.</item>
@@ -56,8 +51,6 @@
           {{{/div}}}
 
          {{{/div}}}</item>
-        <item id="introHead">Introduction</item>
-        <item id="introText">This study is about iPad use in the classroom.</item>
 
         <!-- LANDING - ACCESS CONTROL - only displayed if access is restricted -->
         <item id="accessCodeText">Access Code</item>
@@ -136,7 +129,5 @@
         <item id="transferFailModalText">Please try again in a few moments.</item>   
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com.  Thank you!</item>   
         <item id="btnDownload">Download</item>   
-        <item id="btnCopy">Copy to Clipboard</item>   
         
-
    </language>

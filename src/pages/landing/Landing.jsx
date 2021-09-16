@@ -29,6 +29,14 @@ const LandingPage = () => {
 
   // config options
   const configObj = getGlobalState("configObj");
+  const mapObj = getGlobalState("mapObj");
+  const vColsObj = getGlobalState("vColsObj");
+  const colInfoArray = getGlobalState("colInfoArray");
+
+  console.log(JSON.stringify(mapObj, null, 2));
+  console.log(JSON.stringify(vColsObj, null, 2));
+  console.log(JSON.stringify(colInfoArray, null, 2));
+
   const headerBarColor = configObj.headerBarColor;
 
   // language options

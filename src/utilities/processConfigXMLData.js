@@ -19,7 +19,8 @@ const processConfigXMLData = (dataObject) => {
       surveyData.push([...data[i].elements]);
     }
 
-    let splitArray = [];
+    // let splitArray = [];
+
     // if it has a value in the XML file ==> no empty strings
     if ("elements" in tempObj) {
       value = data[i].elements[0].text;
@@ -34,13 +35,13 @@ const processConfigXMLData = (dataObject) => {
           key === "qSortHeaders" ||
           key === "qSortPattern"
         ) {
-          // numerical array ==> convert to integers
-          if (key === "qSortPattern") {
-            splitArray = value.split(",").map((x) => +x);
-          } else {
-            splitArray = value.split(",");
-          }
-          configObj[key] = splitArray;
+          // // numerical array ==> convert to integers
+          // if (key === "qSortPattern") {
+          //   splitArray = value.split(",").map((x) => +x);
+          // } else {
+          //   splitArray = value.split(",");
+          // }
+          // configObj[key] = splitArray;
         } else {
           // for all others...
           // convert string values -  boolean or number
@@ -58,14 +59,14 @@ const processConfigXMLData = (dataObject) => {
   }
 
   // create converter object for postsort
-  const postsortConvertObj = {};
-  const headerNumbers = [...configObj.qSortHeaders];
-  for (let j = 0; j < headerNumbers.length; j++) {
-    let key = `column${headerNumbers[j]}`;
-    postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
-  }
+  // const postsortConvertObj = {};
+  // const headerNumbers = [...configObj.qSortHeaders];
+  // for (let j = 0; j < headerNumbers.length; j++) {
+  //   let key = `column${headerNumbers[j]}`;
+  //   postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
+  // }
 
-  configObj.postsortConvertObj = postsortConvertObj;
+  // configObj.postsortConvertObj = postsortConvertObj;
 
   setGlobalState("configObj", configObj);
   // console.log(JSON.stringify(configObj, null, 2));
