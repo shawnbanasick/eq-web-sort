@@ -84,7 +84,7 @@ function App() {
       setTimeout(() => {
         // setIsDataLoaded(true);
         setLoading(false);
-      }, 1000);
+      }, 700);
     })();
   }, []);
 
