@@ -108,7 +108,7 @@
 
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
-        <item id="surveyHeader">Post-Sorting Survey</item>
+        <item id="surveyHeader">Post-Sort Questionnaire</item>
         <item id="surveyModalHead">Step 4 of 4</item>
         <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an "*" in their title are required.</item>
         <item id="surveyPreventNavModalHead">Navigation Disabled</item>
