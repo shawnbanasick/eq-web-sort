@@ -61,7 +61,7 @@
         <item id="partIdWarning">Invalid name or ID</item>
         <item id="loginHeaderText">Sign In &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  (use ID="demo" and Access Code= "demo")</item>
         <item id="loginWelcomeText">{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. </item>
-        <item id="landingHelpModalHead">Welcome! </item>
+        <item id="landingHelpModalHead">Welcome!</item>
         <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the "{{{strong}}}Continue{{{/strong}}}" button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
          src="https://www.youtube.com/embed/tgbNymZ7vqY"}}}
          {{{/iframe}}}{{{/center}}}</item>
@@ -74,10 +74,9 @@
         <item id="presortNeutral">No Strong Feelings</item>
         <item id="presortDisagreement">Disagree</item>
         <item id="presortModalHead">Step 1 of 4</item>
-        <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, press the help-button at the bottom left corner.</item>
+        <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.</item>
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
-        <item id="presortIsCompleteDisplay">The preliminary sorting is complete. Please continue with the sorting of the statements.</item>
         <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
         <item id="presortFinishedModalText">You have completed this step. Please click the "Continue" button in the bottom right side of the page to go to the next step.</item>
 
