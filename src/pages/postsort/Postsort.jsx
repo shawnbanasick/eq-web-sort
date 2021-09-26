@@ -43,7 +43,7 @@ const PostSort = () => {
   const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader));
   const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement));
   const disagree = ReactHtmlParser(decodeHTML(langObj.postsortDisagreement));
-  const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
+  // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
   const placeholder = ReactHtmlParser(decodeHTML(langObj.placeholder));
 
   const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
@@ -60,12 +60,12 @@ const PostSort = () => {
   agreeObj.displaySecondColumn = showSecondPosColumn;
   agreeObj.placeholder = placeholder;
 
-  const neutralObj = {};
+  /*  const neutralObj = {};
   neutralObj.neutralText = neutral;
   neutralObj.displayNeutralObjects = configObj.displayNeutralObjects;
   neutralObj.columnDisplay = ["column0"];
   neutralObj.placeholder = placeholder;
-
+ */
   const disagreeObj = {};
   disagreeObj.disagreeText = disagree;
   disagreeObj.columnDisplay = [postsortDisagreeColDisp1];
@@ -75,7 +75,7 @@ const PostSort = () => {
 
   // const highCards = columnStatements.vCols[agreeObj.columnDisplay];
   const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
-  const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
+  // const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
   const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
   const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
 
@@ -102,7 +102,7 @@ const PostSort = () => {
           />
         )}
 
-        {neutralObj.displayNeutralObjects && (
+        {/*  {neutralObj.displayNeutralObjects && (
           <NeutralCards
             neutralObj={neutralObj}
             height={cardHeight}
@@ -110,7 +110,7 @@ const PostSort = () => {
             cardFontSize={cardFontSize}
             neutralCards={neutralCards}
           />
-        )}
+        )} */}
 
         {disagreeObj.displaySecondColumn && (
           <LowCards2
