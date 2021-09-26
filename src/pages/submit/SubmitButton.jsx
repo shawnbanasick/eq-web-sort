@@ -9,8 +9,6 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const SubmitResultsButton = (props) => {
-  var rootRef = window.firebase.database().ref();
-
   const langObj = getGlobalState("langObj");
   let displaySubmitFallback = getGlobalState("displaySubmitFallback");
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
@@ -53,20 +51,20 @@ const SubmitResultsButton = (props) => {
     "qNum10-3": "no response",
     "qNum10-4": "no response",
     sort: "1|0|-1|0|-1|-2|0|-1|3|-2|-3|3|1|-4|-4|1|2|2|2|3|1|2|4|-3|4|-2|-1|0|-2|-1|1|0|-3",
-  }; */
-
+  };
+ */
   const handleClick = (e) => {
     e.preventDefault();
     e.target.disabled = true;
     console.log(JSON.stringify(props.results, null, 2));
+    console.log(window.firebase.apps.length);
 
     window.firebase
       .auth()
       .signInAnonymously()
       .then(() => {
         // Signed in..
-        // rootRef.push(demoData, function (error) {
-        rootRef.push(props.results, function (error) {
+        window.rootRef.push(props.results, function (error) {
           if (error) {
             // data error action -  modal
             console.log("data error - there was an error at rootRef level!");
