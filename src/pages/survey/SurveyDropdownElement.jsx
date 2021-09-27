@@ -8,11 +8,21 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyDropdownElement = (props) => {
+  let isRequired = props.opts.required;
+  if (isRequired === "true") {
+    isRequired = true;
+  }
+
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
     setGlobalState("resultsSurvey", results);
   }, [props]);
+
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -43,8 +53,6 @@ const SurveyDropdownElement = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-  let bgColor;
-  let border;
 
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
@@ -85,7 +93,8 @@ const SurveyDropdownElement = (props) => {
 
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;
-  if (
+
+  /* if (
     checkRequiredQuestionsComplete === true &&
     hasBeenAnswered === false &&
     props.opts.required === true
@@ -95,12 +104,33 @@ const SurveyDropdownElement = (props) => {
   } else {
     bgColor = "whitesmoke";
     border = "none";
-  }
+  } */
+
+  useEffect(() => {
+    console.log("entered useEffect");
+    if (
+      checkRequiredQuestionsComplete === true &&
+      isRequired === true &&
+      hasBeenAnswered === false
+    ) {
+      console.log("set pink");
+      setFormatOptions({
+        bgColor: "lightpink",
+        border: "3px dashed black",
+      });
+    } else {
+      console.log("set white");
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, hasBeenAnswered, isRequired]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <MultiSelect
         className={"multiselect"}
