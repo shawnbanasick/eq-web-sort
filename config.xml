@@ -2,76 +2,107 @@
 
    <config version="1.0" htmlParse="false">
 
-     <!-- title of the study -->
-     <item id="studyTitle">My_Q_project</item>
+   <!-- GENERAL SETTINGS -->
+   <item id="studyTitle">my Q study</item> 
+   <item id="setupTarget">online</item>
+   <item id="firebaseOrLocal">firebase</item>
+   <item id="shuffleCards">true</item>
+   <item id="headerBarColor">#337ab7</item>
+   <item id="devMode">false</item>
+   
 
-     <!-- text-align property(left|right) -->
-     <item id="textAlign">left</item>
+   <!-- ACCESS -->
+   <!-- options: anonymous, partId-access, partId, access -->
+   <item id="initialScreen">anonymous</item>
+   <item id="accessCode">demo</item>
 
-     <!-- shuffle cards (true|false)  -->
-     <item id="shuffleCards">true</item>
 
-     <!-- login required (true|false) -->
-     <item id="loginrequired">false</item>
-     <!-- login with common password (leave blank if not required) -->
-     <item id="loginPassword"></item>
-    <item id="partNameRequired">true</item>
-      <!-- URL to individual login script(leave blank if not required) -->
-     <item id="loginUrl"></item>
-     <!-- request mode (post|get) -->
-     <item id="loginUrlMethod"></item>
+   <!-- FOOTER -->
+   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
 
-     <item id="setConstantCardHeight">false</item>
-     <item id="constantCardHeight">150</item>
-     <item id="setConstantCardWidth">false</item>
-     <item id="constantCardWidth">200</item>
-     <!-- activate/deactivate optional steps (true|false) -->
-     <item id="showStep3">true</item>
-     <item id="showStep4">true</item>
-     <item id="showStep5">true</item>
 
-     <!-- HtmlQ only: disable the in-window back button -->
-     <item id="disableBackButton">true</item>
+   <!-- PRESORT -->
+   <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="greenCardColor">#ccffcc</item>
+   <item id="yellowCardColor">#e0e0e0</item>
+   <item id="pinkCardColor">#ffe0e0</item>
+ 
 
-     <!-- define form elements for step5; only displayed if showStep5 is true (delete tags if not required) -->
-     <!-- add label: <label>[STRING]</label> -->
-     <!-- add note: <note>[STRING]</note> -->
-     <!-- add input-field: <input type="[text|textarea|radio|select|checkbox|rating2|rating5|rating10]">[VALUE]</input> -->
-     <!-- optional attributes: bg, id, maxlength, restricted, required, scale  -->
-     <item id="form">
-        <label>my text area lable</label>
-        <note>why a text question - for birthdays</note>
-        <input type="text" required="true" maxlength="1000" ></input>
+   <!-- SORT -->
+   <item id="condOfInstFontSize">20</item>
+   <item id="allowUnforcedSorts">false</item>
+   <item id="warnOverloadedColumn">true</item>
 
-        <label>A text area for comments</label>
+
+   <!-- POSTSORT -->
+   <item id="showPostsort">true</item>
+   <item id="showSecondPosColumn">false</item>
+   <item id="showSecondNegColumn">false</item>
+   <item id="postsortAgreeColDisp1">column4</item>
+   <item id="postsortAgreeColDisp2">column3</item>
+   <item id="postsortDisagreeColDisp1">columnN4</item>
+   <item id="postsortDisagreeColDisp2">columnN3</item>
+   
+   <item id="displayNeutralObjects">false</item>
+
+
+   <!-- SURVEY - Survey Questions -->
+   <item id="showSurvey">true</item>
+
+   <item id="survey">
+       <input type="information"></input>
+       <note bg="#e7b8b8">{{{div}}}All {{{b}}}fields{{{/b}}} marked with an * are mandatory{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" required="true" maxlength="4" ></input>
+        <label>{{{div}}}{{{u}}}Age{{{/u}}}{{{/div}}}*</label>
+        <note>{{{div}}}Please {{{b}}}enter{{{/b}}} your year of birth.{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" required="true" maxlength="4" ></input>
+        <label>{{{div}}}{{{b}}}Age{{{/b}}} 2{{{/div}}}*</label>
+        <note>{{{div}}}Please enter your year of {{{b}}}birth{{{/b}}}{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
         <input type="textarea" required="true"></input>
+        <label>{{{div}}}{{{b}}}Comments ok?{{{/b}}}{{{/div}}}</label>
+        <placeholder>input comments here</placeholder>
+   </item>
 
-        <label>A radio qustion</label>
-        <note>Why use a radio question</note>
-        <input type="radio" required="false">choice 1; choice 2; choice 3</input>
+   <item id="survey">
+        <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <label>{{{div}}}{{{b}}}Year{{{/b}}}{{{/div}}}</label>
+        <note>{{{div}}}Please {{{b}}}select{{{/b}}} your year{{{/div}}}</note>
+   </item>
 
-        <label>A select question</label>
-        <input type="select" required="false">choice 1; choice 2; choice 3</input>
+   <item id="survey">
+        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
+        <label>{{{div}}}What is your program {{{b}}}focus{{{/b}}}{{{/div}}}</label>
+   </item>
 
-        <label>checkbox questions here</label>
-        <input type="checkbox" required="false">one; two; three</input>
+   <item id="survey">
+        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
+        <label>{{{div}}}What kind of {{{b}}}class{{{/b}}} do you prefer?{{{/div}}}</label>
+   </item>
 
-        <label>rating 2</label>
-        <input type="rating2" required="false" scale="yes; no">I have used an ipad before; i have used a notebook before</input>
+   <item id="survey">
+        <input type="rating2" required="true" scale="Yes;;;No">{{{div}}}I {{{b}}}have{{{/b}}} used an iPad;;;I have used a notebook{{{/div}}}</input>
+        <label>{{{div}}}Please {{{b}}}answer{{{/b}}} the following questions{{{/div}}}</label>
+   </item>
 
-        <label>rating 5 questions</label>
-        <input type="rating5" required="false">how would you rate this class; how would you rate this teacher?</input>
+   <item id="survey">
+        <input type="rating5" required="true" scale="1;2;3;4;5">{{{div}}}How would {{{b}}}you{{{/b}}} rate the use of the iPads?;;;How would you rate this class overall?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following {{{b}}}questions{{{/b}}}{{{/div}}}</label>
+   </item>
 
-        <note bg="true">all fields; marked</note>
+   <item id="survey">
+        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{div}}}How would you {{{b}}}rate{{{/b}}} Socrative?;;;How would you rate Quizlet?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following {{{u}}}questions{{{/u}}}{{{/div}}}</label>
+   </item>
 
-     </item>
 
-     <!-- URL for data transmission via POST/GET (leave blank if not required) -->
-     <item id="submitUrl">exe.php?do=save</item>
-  
-     <!-- request mode (post|get|firebase) -->
-     <item id="submitUrlMethod">firebase</item>
-  
-     <!-- data transmission via email, user must have an e-mail programm like Outlook (leave blank if not required) -->
-     <item id="submitMail">yourdomain.com</item>
-   </config>
+       
+  </config>

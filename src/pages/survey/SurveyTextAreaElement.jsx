@@ -8,6 +8,12 @@ import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
 
 const SurveyTextAreaElement = (props) => {
+  let isRequired = props.opts.required;
+  if (isRequired === "true") {
+    isRequired = true;
+  }
+  console.log("isRequired", isRequired);
+
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
@@ -16,6 +22,10 @@ const SurveyTextAreaElement = (props) => {
 
   // let savedTextAreaText;
   const [userText, setUserText] = useState("");
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
@@ -43,14 +53,19 @@ const SurveyTextAreaElement = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-
+  /* 
   let bgColor;
-  let border;
+  let border; */
 
+  console.log(checkRequiredQuestionsComplete);
+  console.log(userText.length);
+  console.log(props.opts.required);
+
+  /*
   if (
     checkRequiredQuestionsComplete === true &&
     userText.length === 0 &&
-    props.opts.required === true
+    isRequired === true
   ) {
     bgColor = "lightpink";
     border = "3px dashed black";
@@ -58,12 +73,37 @@ const SurveyTextAreaElement = (props) => {
     bgColor = "whitesmoke";
     border = "none";
   }
+  */
+
+  useEffect(() => {
+    console.log("entered useEffect");
+    if (
+      checkRequiredQuestionsComplete === true &&
+      isRequired === true &&
+      userText.length < 1
+    ) {
+      console.log("set pink");
+      setFormatOptions({
+        bgColor: "lightpink",
+        border: "3px dashed black",
+      });
+    } else {
+      console.log("set white");
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, userText, isRequired]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder));
+  const placeholder = props.opts.placeholder;
+  console.log(formatOptions.bgColor);
+  console.log(formatOptions.border);
+  console.log(userText);
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <TextAreaInput
         value={userText || ""}

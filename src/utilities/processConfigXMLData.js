@@ -14,6 +14,8 @@ const processConfigXMLData = (dataObject) => {
 
     let key = data[i].attributes.id;
 
+    // console.log(JSON.stringify(data[i], null, 2));
+
     // separate out survey questions
     if (key === "survey") {
       surveyData.push([...data[i].elements]);
@@ -75,6 +77,8 @@ const processConfigXMLData = (dataObject) => {
   // setup survey object
   const requiredAnswersObj = {};
   if (surveyData.length > 0) {
+    // console.log(JSON.stringify(surveyData, null, 2));
+
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
       let tempObj = {};
@@ -257,8 +261,10 @@ const processConfigXMLData = (dataObject) => {
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
+        // console.log(JSON.stringify(surveyQuestionArray));
       }
     }
+    // console.log(JSON.stringify(surveyQuestionArray));
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);

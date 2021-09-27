@@ -53,6 +53,8 @@ const SurveyPage = () => {
     }, 100);
   }, []);
 
+  // console.log(JSON.stringify(surveyQuestionObjects));
+
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
       if (object.type === "text") {
