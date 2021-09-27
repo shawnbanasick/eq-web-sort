@@ -8,6 +8,12 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyRatings2Element = (props) => {
+  let isRequired = props.opts.required;
+  if (isRequired === "true") {
+    isRequired = true;
+  }
+
+  // setup default results if no input
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
 
@@ -28,8 +34,6 @@ const SurveyRatings2Element = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-  let bgColor;
-  let border;
 
   // filter to remove empty strings if present
   const getOptionsArray = (options) => {
@@ -105,6 +109,7 @@ const SurveyRatings2Element = (props) => {
   const testArray = Object.keys(rating2State);
   const conditionalLength = testArray.length;
   const testValue = optsArray.length - conditionalLength;
+
   if (
     checkRequiredQuestionsComplete === true &&
     testValue > 0 &&
