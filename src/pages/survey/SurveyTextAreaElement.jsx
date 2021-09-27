@@ -12,7 +12,6 @@ const SurveyTextAreaElement = (props) => {
   if (isRequired === "true") {
     isRequired = true;
   }
-  console.log("isRequired", isRequired);
 
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
@@ -53,27 +52,6 @@ const SurveyTextAreaElement = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-  /* 
-  let bgColor;
-  let border; */
-
-  console.log(checkRequiredQuestionsComplete);
-  console.log(userText.length);
-  console.log(props.opts.required);
-
-  /*
-  if (
-    checkRequiredQuestionsComplete === true &&
-    userText.length === 0 &&
-    isRequired === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  }
-  */
 
   useEffect(() => {
     console.log("entered useEffect");
