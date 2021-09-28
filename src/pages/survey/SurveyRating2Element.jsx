@@ -13,6 +13,13 @@ const SurveyRatings2Element = (props) => {
     isRequired = true;
   }
 
+  // let savedTextAreaText;
+  const [testValue, setTestValue] = useState(5);
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
+
   // setup default results if no input
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
@@ -102,25 +109,33 @@ const SurveyRatings2Element = (props) => {
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     results[name] = +value;
     setGlobalState("resultsSurvey", results);
+    console.log(localStore);
+
+    const rating2State = localStore;
+    const testArray = Object.keys(rating2State);
+    const conditionalLength = testArray.length;
+    console.log(conditionalLength);
+    console.log(optsArray.length - conditionalLength);
+    setTestValue(optsArray.length - conditionalLength);
   };
 
-  // if is a required question, check if all parts answered
-  const rating2State = localStore || {};
-  const testArray = Object.keys(rating2State);
-  const conditionalLength = testArray.length;
-  const testValue = optsArray.length - conditionalLength;
+  console.log(checkRequiredQuestionsComplete, testValue, isRequired);
 
-  if (
-    checkRequiredQuestionsComplete === true &&
-    testValue > 0 &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  }
+  useEffect(() => {
+    // if is a required question, check if all parts answered
+    if (
+      checkRequiredQuestionsComplete === true &&
+      testValue > 0 &&
+      isRequired === true
+    ) {
+      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+    } else {
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, testValue, isRequired]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
@@ -155,7 +170,7 @@ const SurveyRatings2Element = (props) => {
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <RadioContainer>
         <RatingTitle>
