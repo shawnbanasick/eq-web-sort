@@ -8,6 +8,18 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyRatings5Element = (props) => {
+  let isRequired = props.opts.required;
+  if (isRequired === "true") {
+    isRequired = true;
+  }
+
+  // let savedTextAreaText;
+  const [testValue, setTestValue] = useState(5);
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
+
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
 
@@ -92,24 +104,29 @@ const SurveyRatings5Element = (props) => {
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     results[name] = +value;
     setGlobalState("resultsSurvey", results);
+
+    // if is a required question, check if all parts answered
+    const rating5State = local5Store;
+    const testArray = Object.keys(rating5State);
+    const conditionalLength = testArray.length;
+    setTestValue(optsArray.length - conditionalLength);
   };
 
-  // if is a required question, check if all parts answered
-  const rating5State = local5Store || {};
-  const testArray = Object.keys(rating5State);
-  const conditionalLength = testArray.length;
-  const testValue = optsArray.length - conditionalLength;
-  if (
-    checkRequiredQuestionsComplete === true &&
-    testValue > 0 &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  }
+  useEffect(() => {
+    // if is a required question, check if all parts answered
+    if (
+      checkRequiredQuestionsComplete === true &&
+      testValue > 0 &&
+      isRequired === true
+    ) {
+      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+    } else {
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, testValue, isRequired]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
@@ -171,7 +188,7 @@ const SurveyRatings5Element = (props) => {
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <RadioContainer>
         <RatingTitle>
