@@ -87,6 +87,16 @@ const SubmitPage = () => {
   }
   transmissionResults["sort"] = results.sort;
 
+  // remove null values to prevent errors
+  for (const property in transmissionResults) {
+    if (
+      transmissionResults[property] === null ||
+      transmissionResults[property] === undefined
+    ) {
+      transmissionResults[property] = "";
+    }
+  }
+
   return (
     <React.Fragment>
       <SortTitleBar background={headerBarColor}>
