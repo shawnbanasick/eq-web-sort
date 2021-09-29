@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import globalState from "../../globalState/globalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
@@ -93,7 +92,7 @@ const SubmitPage = () => {
       transmissionResults[property] === null ||
       transmissionResults[property] === undefined
     ) {
-      transmissionResults[property] = "";
+      transmissionResults[property] = "no data";
     }
   }
 

@@ -109,9 +109,9 @@
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{div}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the "Submit Data" button to transmit your results.{{{/h2}}}{{{/div}}}</item>
+        <item id="transferTextAbove">{{{div}}}{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the "Submit Data" button to transmit your results.{{{/h2}}}{{{/div}}}</item>
         <item id="transferTextBelow">{{{div}}}If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.{{{/div}}}</item>
-        <item id="transferOkModalHeader">Success - The data have been sent to the server.</item>   
+        <item id="transferOkModalHeader">Success - The data have been sent to the server</item>   
         <item id="transferOkModalText">{{{div}}}Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.{{{/div}}}</item>
         <item id="transferFailModalHeader">Connection to server failed</item>   
         <item id="transferFailModalText">Please try again in a few moments.</item>   
