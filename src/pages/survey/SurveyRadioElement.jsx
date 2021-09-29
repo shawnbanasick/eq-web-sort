@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
+import { view } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
-const getOptionsArray = (options) => {
-  let array = options.split(";;;");
-  array = array.filter(function (e) {
-    return e;
-  });
-  array = array.map((x) => x.replace(/\s/g, ""));
-  return array;
-};
-
-let localStore = store({
-  hasBeenAnswered: false,
-});
-
 const SurveyRadioElement = (props) => {
+  let isRequired = props.opts.required;
+  if (isRequired === "true") {
+    isRequired = true;
+  }
+
+  // local state for required question warning
+  const [testValue, setTestValue] = useState(false);
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
+
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
     setGlobalState("resultsSurvey", results);
   }, [props]);
+
+  const getOptionsArray = (options) => {
+    let array = options.split(";;;");
+    array = array.filter(function (e) {
+      return e;
+    });
+    array = array.map((x) => x.replace(/\s/g, ""));
+    return array;
+  };
 
   const optsArray = getOptionsArray(props.opts.options);
 
@@ -54,23 +62,12 @@ const SurveyRadioElement = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-  let bgColor;
-  let border;
 
   const [selected, setSelected] = useState();
-
-  const setLocalStore = () => {
-    localStore.hasBeenAnswered = true;
-  };
 
   const handleChange = (e) => {
     let results = getGlobalState("resultsSurvey");
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-
-    // console.log(e.target.value);
-
-    // to set pink coloring
-    setLocalStore();
 
     const id = `qNum${props.opts.qNum}`;
     requiredAnswersObj[id] = "answered";
@@ -79,20 +76,24 @@ const SurveyRadioElement = (props) => {
     results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
     setGlobalState("resultsSurvey", results);
     results = getGlobalState("resultsSurvey");
+    setTestValue(true);
   }; // end handle change
 
-  // required question answered?
-  if (
-    checkRequiredQuestionsComplete === true &&
-    localStore.hasBeenAnswered === false &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  }
+  useEffect(() => {
+    // if is a required question, check if all parts answered
+    if (
+      checkRequiredQuestionsComplete === true &&
+      testValue === false &&
+      isRequired === true
+    ) {
+      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+    } else {
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, testValue, isRequired]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
@@ -114,7 +115,7 @@ const SurveyRadioElement = (props) => {
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>{labelText}</TitleBar>
       <RadioContainer onChange={(e) => handleChange(e)}>
         <RadioItems />

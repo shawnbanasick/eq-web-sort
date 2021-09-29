@@ -54,19 +54,16 @@ const SurveyTextAreaElement = (props) => {
   );
 
   useEffect(() => {
-    console.log("entered useEffect");
     if (
       checkRequiredQuestionsComplete === true &&
       isRequired === true &&
       userText.length < 1
     ) {
-      console.log("set pink");
       setFormatOptions({
         bgColor: "lightpink",
         border: "3px dashed black",
       });
     } else {
-      console.log("set white");
       setFormatOptions({
         bgColor: "whitesmoke",
         border: "none",
@@ -76,9 +73,6 @@ const SurveyTextAreaElement = (props) => {
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const placeholder = props.opts.placeholder;
-  console.log(formatOptions.bgColor);
-  console.log(formatOptions.border);
-  console.log(userText);
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

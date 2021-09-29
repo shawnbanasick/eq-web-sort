@@ -13,7 +13,7 @@ const SurveyRatings2Element = (props) => {
     isRequired = true;
   }
 
-  // let savedTextAreaText;
+  // local state for required question warning
   const [testValue, setTestValue] = useState(5);
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -109,17 +109,12 @@ const SurveyRatings2Element = (props) => {
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     results[name] = +value;
     setGlobalState("resultsSurvey", results);
-    console.log(localStore);
 
     const rating2State = localStore;
     const testArray = Object.keys(rating2State);
     const conditionalLength = testArray.length;
-    console.log(conditionalLength);
-    console.log(optsArray.length - conditionalLength);
     setTestValue(optsArray.length - conditionalLength);
   };
-
-  console.log(checkRequiredQuestionsComplete, testValue, isRequired);
 
   useEffect(() => {
     // if is a required question, check if all parts answered
