@@ -94,32 +94,17 @@ const SurveyDropdownElement = (props) => {
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;
 
-  /* if (
-    checkRequiredQuestionsComplete === true &&
-    hasBeenAnswered === false &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
-  } */
-
   useEffect(() => {
-    console.log("entered useEffect");
     if (
       checkRequiredQuestionsComplete === true &&
       isRequired === true &&
       hasBeenAnswered === false
     ) {
-      console.log("set pink");
       setFormatOptions({
         bgColor: "lightpink",
         border: "3px dashed black",
       });
     } else {
-      console.log("set white");
       setFormatOptions({
         bgColor: "whitesmoke",
         border: "none",

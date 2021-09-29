@@ -55,8 +55,6 @@ const SurveyRatings10Element = (props) => {
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
-  let bgColor;
-  let border;
 
   // setup local state
   const [checkedState, setCheckedState] = useState(
