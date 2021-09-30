@@ -191,7 +191,7 @@ const SortGrid = (props) => {
   }
 
   // set dynamic width on page load on reload
-  const columnWidth = (dimensions.width - 134) / qSortPattern.length;
+  const columnWidth = (dimensions.width - 174) / qSortPattern.length;
 
   // pull data from localStorage
   // const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
