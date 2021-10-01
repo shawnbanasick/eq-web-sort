@@ -38,7 +38,7 @@ const SortTitleBar = styled.div`
   background-color: ${(props) => props.background};
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   color: white;
   font-weight: bold;
   font-size: 28px;

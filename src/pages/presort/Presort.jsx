@@ -69,15 +69,14 @@ const PresortPage = (props) => {
 export default view(PresortPage);
 
 const SortTitleBar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  padding-top: 5px;
   min-height: 50px;
   background-color: ${(props) => props.background};
-  display: flex;
-  justify-content: center;
-  align-content: center;
   color: white;
   font-weight: bold;
   font-size: 28px;

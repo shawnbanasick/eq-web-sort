@@ -1,18 +1,25 @@
 {
-    "langLoginWelcomeText": `<center><h3>Welcome!</h3></center><br>このQメソドロジー研究プロジェクトに参加していただきありがとうございます。<br>以下のフォームで<strong>サインイン</strong>して、プロセスを開始してください。`,
-    "langLoginHeaderText": `サインイン`,
-    langLoginPartIdText: `お名前または参加者IDを入力してください`,
-    langAccessInputText: `このアンケートのアクセスコードを入力してください。`,
-    langPartIdWarning: `名前またはIDが無効`,
-    langAccessCodeWarning: `アクセスコードが無効です`,
-    loginSubmitButtonText: `提出`,
+    /*
+     ******** LANDING  ****************** */
     langLandingHelpModalHead: `Welcome!`,
     langLandingHelpModalText: `このたびは、本学の研究プロジェクトにご参加いただきありがとうございます。サインインして、プロセスを開始してください。参加者IDやプロジェクトアクセスコードを送信すると、アンケートの説明が表示されます。よくお読みいただき、画面右下の「<strong>続ける</strong>」ボタンをクリックして次のステップにお進みください。<br><br> <center><iframe width="640" height="360"
     src="https://www.youtube.com/embed/aHpeu5M7Rlo">
     </iframe></center>`,
 
 
+    /*
+     ******** ACCESS SCREEN  ****************** */
+    langLoginWelcomeText: `<center><h3>Welcome!</h3></center><br>このQメソドロジー研究プロジェクトに参加していただきありがとうございます。<br>以下のフォームで<strong>サインイン</strong>して、プロセスを開始してください。`,
+    langLoginHeaderText: `サインイン`,
+    langLoginPartIdText: `お名前または参加者IDを入力してください`,
+    langAccessInputText: `このアンケートのアクセスコードを入力してください。`,
+    langPartIdWarning: `名前またはIDが無効`,
+    langAccessCodeWarning: `アクセスコードが無効です`,
+    loginSubmitButtonText: `提出`,
 
+
+    /*
+     ******** PRESORT  ****************** */
     langtitleBarText: `予備的なソーティング`,
     langPresortAgreement: `同意`,
     langPresortStatements: `ステートメント`,
