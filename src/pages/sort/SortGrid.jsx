@@ -35,7 +35,7 @@ const SortGrid = (props) => {
   // force updates on window resize
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
-    width: window.innerWidth,
+    width: document.body.clientWidth,
   });
 
   // page resize
@@ -43,7 +43,7 @@ const SortGrid = (props) => {
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({
         height: window.innerHeight,
-        width: window.innerWidth,
+        width: document.body.clientWidth,
       });
     }, 200);
 
@@ -190,8 +190,30 @@ const SortGrid = (props) => {
     setGlobalState("cardHeight", +cardHeight);
   }
 
+  console.log(qSortPattern.length);
+  // adjust width by q sort design
+  // todo - find better adjustment process
+  let visibleWidthAdjust;
+  // -3 to +3
+  if (qSortPattern.length > 6) {
+    visibleWidthAdjust = 96;
+  }
+  // -4 to +4
+  if (qSortPattern.length > 8) {
+    visibleWidthAdjust = 120;
+  }
+  // -5 to +5
+  if (qSortPattern.length > 10) {
+    visibleWidthAdjust = 145;
+  }
+  // -6 to +6
+  if (qSortPattern.length > 12) {
+    visibleWidthAdjust = 170;
+  }
+
   // set dynamic width on page load on reload
-  const columnWidth = (dimensions.width - 174) / qSortPattern.length;
+  const columnWidth =
+    (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
   // pull data from localStorage
   // const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));

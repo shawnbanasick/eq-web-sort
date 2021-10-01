@@ -70,7 +70,7 @@ const StyledFooter = () => {
       <ProgressBarDiv>
         <ProgressBar
           completed={totalProgressScore}
-          width={"150px"}
+          width={"100px"}
           bgColor="#337ab7"
           labelColor="#f0f0f0"
           baseBgColor="lightgray"

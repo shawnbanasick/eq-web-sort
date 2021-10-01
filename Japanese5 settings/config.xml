@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+   <config version="1.0" htmlParse="false">
+
+   <!-- GENERAL SETTINGS -->
+   <item id="studyTitle">my Q study</item> 
+   <item id="setupTarget">online</item>
+   <item id="firebaseOrLocal">firebase</item>
+   <item id="shuffleCards">true</item>
+   <item id="headerBarColor">#337ab7</item>
+   <item id="devMode">false</item>
+   
+
+   <!-- ACCESS -->
+   <!-- options: anonymous, partId-access, partId, access -->
+   <item id="initialScreen">anonymous</item>
+   <item id="accessCode">demo</item>
+
+
+   <!-- FOOTER -->
+   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
+
+
+   <!-- PRESORT -->
+   <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="greenCardColor">#ccffcc</item>
+   <item id="yellowCardColor">#e0e0e0</item>
+   <item id="pinkCardColor">#ffe0e0</item>
+ 
+
+   <!-- SORT -->
+   <item id="condOfInstFontSize">20</item>
+   <item id="allowUnforcedSorts">false</item>
+   <item id="warnOverloadedColumn">true</item>
+
+
+   <!-- POSTSORT -->
+   <item id="showPostsort">true</item>
+   <item id="showSecondPosColumn">false</item>
+   <item id="showSecondNegColumn">false</item>
+   <item id="postsortAgreeColDisp1">column4</item>
+   <item id="postsortAgreeColDisp2">column3</item>
+   <item id="postsortDisagreeColDisp1">columnN4</item>
+   <item id="postsortDisagreeColDisp2">columnN3</item>
+   
+   <item id="displayNeutralObjects">false</item>
+
+
+   <!-- SURVEY - Survey Questions -->
+   <item id="showSurvey">true</item>
+
+   <item id="survey">
+       <input type="information"></input>
+       <note bg="#e7b8b8">{{{div}}}All {{{b}}}fields{{{/b}}} marked with an * are mandatory{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" required="true" maxlength="4" ></input>
+        <label>{{{div}}}{{{u}}}Age{{{/u}}}{{{/div}}}*</label>
+        <note>{{{div}}}Please {{{b}}}enter{{{/b}}} your year of birth.{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" required="true" maxlength="4" ></input>
+        <label>{{{div}}}{{{b}}}Age{{{/b}}} 2{{{/div}}}*</label>
+        <note>{{{div}}}Please enter your year of {{{b}}}birth{{{/b}}}{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="textarea" required="true"></input>
+        <label>{{{div}}}{{{b}}}Comments ok?{{{/b}}}{{{/div}}}</label>
+        <placeholder>input comments here</placeholder>
+   </item>
+
+   <item id="survey">
+        <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <label>{{{div}}}{{{b}}}Year{{{/b}}}{{{/div}}}</label>
+        <note>{{{div}}}Please {{{b}}}select{{{/b}}} your year{{{/div}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
+        <label>{{{div}}}What is your program {{{b}}}focus{{{/b}}}{{{/div}}}</label>
+   </item>
+
+   <item id="survey">
+        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
+        <label>{{{div}}}What kind of {{{b}}}class{{{/b}}} do you prefer?{{{/div}}}</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating2" required="true" scale="Yes;;;No">{{{div}}}I {{{b}}}have{{{/b}}} used an iPad;;;I have used a notebook{{{/div}}}</input>
+        <label>{{{div}}}Please {{{b}}}answer{{{/b}}} the following questions{{{/div}}}</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating5" required="true" scale="1;2;3;4;5">{{{div}}}How would {{{b}}}you{{{/b}}} rate the use of the iPads?;;;How would you rate this class overall?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following {{{b}}}questions{{{/b}}}{{{/div}}}</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{div}}}How would you {{{b}}}rate{{{/b}}} Socrative?;;;How would you rate Quizlet?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following {{{u}}}questions{{{/u}}}{{{/div}}}</label>
+   </item>
+
+
+       
+  </config>

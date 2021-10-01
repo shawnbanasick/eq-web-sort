@@ -49,7 +49,7 @@ const StyledHelpButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 125px;
+  width: auto;
   justify-self: right;
   margin-right: 10px;
   display: flex;

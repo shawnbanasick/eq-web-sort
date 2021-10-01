@@ -107,7 +107,7 @@ const NextButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 100px;
+  width: auto;
   justify-self: right;
   margin-right: 35px;
   display: flex;

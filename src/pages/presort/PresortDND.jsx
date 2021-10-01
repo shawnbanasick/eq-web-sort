@@ -291,7 +291,7 @@ const PresortGrid = styled.div`
   grid-template-rows: 230px 15px 1fr;
   grid-template-columns: 1fr 325px 325px 325px 1fr;
   row-gap: 3px;
-  column-gap: 18px;
+  column-gap: 15px;
 `;
 
 const DroppableContainer = styled.div`
