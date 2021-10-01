@@ -17,7 +17,8 @@ const SubmitSuccessModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerTransmissionOKModal", true);
+    setGlobalState("triggerTransmissionOKModal", false);
+    setGlobalState("displayGoodbyeMessage", true);
   };
 
   return (

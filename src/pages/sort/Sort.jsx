@@ -119,6 +119,7 @@ const Agree = styled.div`
   justify-self: end;
   color: white;
   padding-bottom: 5px;
+  margin-right: 20px;
 `;
 
 const Disagree = styled.div`

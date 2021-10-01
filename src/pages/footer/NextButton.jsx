@@ -112,6 +112,7 @@ const NextButton = styled.button`
   margin-right: 35px;
   display: flex;
   align-items: center;
+  user-select: none;
   justify-content: center;
   background-color: ${({ theme, active }) =>
     active ? theme.secondary : theme.primary};

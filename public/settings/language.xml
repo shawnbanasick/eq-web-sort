@@ -47,7 +47,7 @@
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="sortHelpModalHead">ステップ2-4</item>
         <item id="sortHelpModalText">このステップでは、ステートメントをグリッドパターンでソートしてください。あなたが最も同意するステートメントはグリッドの右端に、あなたが最も同意しないステートメントは左端に配置してください。このステップでのカードの並べ方については、ビデオをご覧ください。</item>
-        <item id="sortAgreement">同意しない</item>
+        <item id="sortAgreement">同意</item>
         <item id="sortDisagreement">同意しない</item>
         <item id="condOfInst">今学期にiPadを使った経験に応じて、カードを分類してください。</item>
         <item id="sortingCompleteModalHead">ソート完了</item>

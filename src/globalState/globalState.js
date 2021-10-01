@@ -13,6 +13,7 @@ const globalState = store({
   displayNextButton: false,
   displayPartIdWarning: false,
   displaySubmitFallback: false,
+  displayGoodbyeMessage: false,
   hasOverloadedColumn: false,
   isLoggedIn: false,
   overloadedColumn: "",

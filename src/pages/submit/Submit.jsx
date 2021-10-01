@@ -96,6 +96,20 @@ const SubmitPage = () => {
     }
   }
 
+  // early return if data submit success event
+  const displayGoodbyeMessage = getGlobalState("displayGoodbyeMessage");
+  if (displayGoodbyeMessage === true) {
+    return (
+      <React.Fragment>
+        <GoodbyeDiv>
+          <div>Thank you!</div>
+          <br />
+          <div> You can now close the browser tab.</div>
+        </GoodbyeDiv>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <SortTitleBar background={headerBarColor}>
@@ -152,4 +166,14 @@ const ContentDiv = styled.div`
   font-size: 1.35em;
   padding: 25px;
   align-self: center;
+`;
+
+const GoodbyeDiv = styled.div`
+  display: flex;
+  width: calc(100vw -20px);
+  height: calc(100vh - 50px);
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;

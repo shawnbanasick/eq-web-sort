@@ -81,5 +81,6 @@ const SortTitleBar = styled.div`
   font-weight: bold;
   font-size: 28px;
   position: fixed;
+  z-index: 999;
   top: 0;
 `;
