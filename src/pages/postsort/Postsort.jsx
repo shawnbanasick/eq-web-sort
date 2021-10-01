@@ -46,11 +46,17 @@ const PostSort = () => {
   // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
   const placeholder = ReactHtmlParser(decodeHTML(langObj.placeholder));
 
-  const postsortAgreeColDisp1 = configObj.postsortAgreeColDisp1;
-  const postsortAgreeColDisp2 = configObj.postsortAgreeColDisp2;
+  const keys = Object.keys(configObj.postsortConvertObj);
+  const agreeColDisp1 = keys.pop();
+  const agreeColDisp2 = keys.pop();
+  const disagreeColDisp1 = keys.shift();
+  const disagreeColDisp2 = keys.shift();
+
+  const postsortAgreeColDisp1 = agreeColDisp1;
+  const postsortAgreeColDisp2 = agreeColDisp2;
   const showSecondPosColumn = configObj.showSecondPosColumn;
-  const postsortDisagreeColDisp1 = configObj.postsortDisagreeColDisp1;
-  const postsortDisagreeColDisp2 = configObj.postsortDisagreeColDisp2;
+  const postsortDisagreeColDisp1 = disagreeColDisp1;
+  const postsortDisagreeColDisp2 = disagreeColDisp2;
   const showSecondNegColumn = configObj.showSecondNegColumn;
 
   const agreeObj = {};

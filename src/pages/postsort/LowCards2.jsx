@@ -56,16 +56,12 @@ const LowCards2 = (props) => {
   const { disagreeText, placeholder } = disagreeObj;
 
   const columnDisplay = disagreeObj.columnDisplay2;
-  const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
   return lowCards2.map((item, index) => {
     const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
     return (
       <Container key={item.statement}>
-        <CardTag cardFontSize={cardFontSize}>
-          {disagreeText}
-          {columnInfo}
-        </CardTag>
+        <CardTag cardFontSize={cardFontSize}>{disagreeText}</CardTag>
         <CardAndTextHolder>
           <Card cardFontSize={cardFontSize} width={width} height={height}>
             {statementHtml}

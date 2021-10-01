@@ -284,7 +284,7 @@ const ColumnNamesDiv = styled.div`
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 65px;
+  margin-top: 75px;
   margin-bottom: 55px;
   display: grid;
   height: calc(100vh-75);

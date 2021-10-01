@@ -58,16 +58,11 @@ const HighCards = (props) => {
 
   let columnDisplay = agreeObj.columnDisplay;
 
-  const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
-
   return highCards.map((item, index) => {
     const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
     return (
       <Container key={item.statement}>
-        <CardTag cardFontSize={cardFontSize}>
-          {agreeText}
-          {columnInfo}
-        </CardTag>
+        <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
         <CardAndTextHolder>
           <Card
             cardFontSize={cardFontSize}
