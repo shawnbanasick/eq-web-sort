@@ -14,9 +14,7 @@ const PresortIsComplete = () => {
   const langObj = getGlobalState("langObj");
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
-  const mainText = ReactHtmlParser(
-    decodeHTML(langObj.presortIsCompleteDisplay)
-  );
+  const mainText = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
   return (

@@ -67,11 +67,6 @@ const SortGrid = (props) => {
 
     calculateDragResults({ ...result });
 
-    // pull data from localStorage
-    // const columnStatements = JSON.parse(
-    //   localStorage.getItem("columnStatements")
-    // );
-
     const columnStatements = getGlobalState("columnStatements");
     // source and destination are objects
     const { source, destination } = result;
@@ -172,7 +167,6 @@ const SortGrid = (props) => {
   const cardFontSize = props.cardFontSize;
 
   // todo - reset to researcher specified in next version
-  // const horiCardMinHeight = +configObj.horiCardMinHeight;
   const horiCardMinHeight = 50;
 
   const sortCharacteristics = getGlobalState("sortCharacteristics");
@@ -190,7 +184,6 @@ const SortGrid = (props) => {
     setGlobalState("cardHeight", +cardHeight);
   }
 
-  console.log(qSortPattern.length);
   // adjust width by q sort design
   // todo - find better adjustment process
   let visibleWidthAdjust;
@@ -216,7 +209,6 @@ const SortGrid = (props) => {
     (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
   // pull data from localStorage
-  // const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
   const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
 

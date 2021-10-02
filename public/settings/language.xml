@@ -3,7 +3,7 @@
    <language version="1.0" htmlParse="true">
 ;
 
-        <!-- MULTI-PURPOSE MODALS -->
+        <!-- MULTI-PURPOSE MESSAGES -->
         <item id="stepCompleteMessage">{{{div}}}このステップを完了しました。画面右下の青い「Continue」ボタンをクリックして次のステップに進んでください。{{{/div}}}</item>
         <item id="logInFirst">最初にログインの手続きを行ってください。</item>
 
