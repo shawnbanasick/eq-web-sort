@@ -4,13 +4,13 @@
 ;
 
         <!-- MULTI-PURPOSE MODALS -->
-        <item id="stepCompleteMessage">{{{div}}}You have completed this step. Please click on the {{{strong}}} blue "Continue" button {{{/strong}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
-        <item id="logInFirst">Please complete the log-in process first.</item>
+        <item id="stepCompleteMessage">{{{div}}}このステップを完了しました。画面右下の青い「Continue」ボタンをクリックして次のステップに進んでください。{{{/div}}}</item>
+        <item id="logInFirst">最初にログインの手続きを行ってください。</item>
 
         <!-- FOOTER -->
         <item id="fontSizeText">文字の大きさ</item>
         <item id="cardHeightText">カードのサイズ</item>
-        <item id="btnHelp">助けて</item>
+        <item id="btnHelp">助けて!</item>
         <item id="btnNext">続ける</item>
 
         <!-- LANDING SCREEN -->
@@ -18,7 +18,6 @@
         <item id="welcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}}{{{center}}}このQメソドロジー研究プロジェクトに参加していただきありがとうございます。{{{br}}}{{{br}}}画面右下の「続ける」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360" src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}{{{/iframe}}}{{{/center}}}{{{/center}}}{{{/div}}}</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
-        <item id="accessCodeText">Access Code</item>
         <item id="accessInputText">このアンケートのアクセスコードを入力してください</item>
         <item id="loginSubmitButtonText">提出</item>
         <item id="loginPartIdText">お名前または参加者IDを入力してください</item>
