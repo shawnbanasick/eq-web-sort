@@ -24,8 +24,12 @@ const CardHeightSizer = () => {
   return (
     <Container>
       <SpanDiv>{cardHeightText}</SpanDiv>
-      <SizeButton onClick={decreaseFontSize}>-</SizeButton>
-      <SizeButton onClick={increaseFontSize}>+</SizeButton>
+      <SizeButton padBottom={"0.4em"} onClick={decreaseFontSize}>
+        -
+      </SizeButton>
+      <SizeButton padBottom={"0.25em"} onClick={increaseFontSize}>
+        +
+      </SizeButton>
     </Container>
   );
 };
@@ -36,12 +40,16 @@ const SizeButton = styled.button`
   background: #337ab7;
   border-color: #2e6da4;
   color: white;
-  font-size: 0.8em;
+  font-size: 1.4em;
   font-weight: bold;
   margin: 0 3px 0 3px;
-  padding: 0.25em 1em;
+  padding: 0.25em 0.5em;
+  padding-bottom: ${(props) => props.padBottom};
+  height: 30px;
+  width: 35px;
   border-radius: 3px;
   text-decoration: none;
+  user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;

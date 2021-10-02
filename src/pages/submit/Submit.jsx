@@ -19,6 +19,7 @@ const SubmitPage = () => {
   const langObj = getGlobalState("langObj");
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);
   const transferTextBelow = decodeHTML(langObj.transferTextBelow);
+  const goodbyeMessage = decodeHTML(langObj.goodbyeMessage);
 
   // config options
   const configObj = getGlobalState("configObj");
@@ -101,11 +102,7 @@ const SubmitPage = () => {
   if (displayGoodbyeMessage === true) {
     return (
       <React.Fragment>
-        <GoodbyeDiv>
-          <div>Thank you!</div>
-          <br />
-          <div> You can now close the browser tab.</div>
-        </GoodbyeDiv>
+        <GoodbyeDiv>{ReactHtmlParser(goodbyeMessage)}</GoodbyeDiv>
       </React.Fragment>
     );
   }

@@ -10,7 +10,7 @@
         <!-- FOOTER -->
         <item id="fontSizeText">文字の大きさ</item>
         <item id="cardHeightText">カードのサイズ</item>
-        <item id="btnHelp">助けて！</item>
+        <item id="btnHelp">助けて</item>
         <item id="btnNext">続ける</item>
 
         <!-- LANDING SCREEN -->
@@ -74,7 +74,7 @@
         <item id="surveyPreventNavModalText">次のステップに進む前に、必要な質問（赤枠の部分）にお答えください。</item>
        
         <!-- SUBMIT -->
-        <item id="btnTransfer">データ提出 </item>
+        <item id="btnTransfer">データ提出</item>
         <item id="transferHead">ファイナルステップ</item>
         <item id="transferTextAbove">{{{div}}}{{{h1}}}提出準備完了{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}「データ送信」ボタンを押して、結果を送信してください。{{{/h2}}}{{{/div}}}</item>
         <item id="transferTextBelow">{{{div}}}送信確認メッセージが表示されない場合は、{{{br}}}数分待ってから再度送信ボタンをクリックしてください。{{{/div}}}</item>
@@ -84,5 +84,6 @@
         <item id="transferFailModalText">しばらくしてからもう一度お試しください。</item>   
         <item id="fallbackMessage">データ送信に失敗しました。結果をダウンロードして、添付ファイルとして ken.q.tools@gmail.com に送信してください。 ありがとうございました。</item>   
         <item id="btnDownload">ダウンロード</item>   
+        <item id="goodbyeMessage">{{{div}}}Thank you!{{{/div}}} {{{br}}}{{{div}}}You can now close the browser tab{{{/div}}}</item>   
 
    </language>
