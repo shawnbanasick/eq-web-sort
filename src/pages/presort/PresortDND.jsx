@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
@@ -25,7 +25,7 @@ function PresortDND(props) {
 
   const cardHeight = 210;
 
-  const onDragEnd = (result, columns, setColumns) => {
+  const onDragEnd = useCallback((result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
 
@@ -142,7 +142,7 @@ function PresortDND(props) {
         },
       });
     }
-  }; // END DRAG-END
+  }); // END DRAG-END
 
   const [columns, setColumns] = useState({
     cards: {
@@ -167,6 +167,49 @@ function PresortDND(props) {
     },
   });
 
+  const handleKeyUp = useCallback(
+    (event) => {
+      let target;
+      if (event.key === "1") {
+        target = "neg";
+      }
+      if (event.key === "2") {
+        target = "neutral";
+      }
+      if (event.key === "3") {
+        target = "pos";
+      }
+
+      if (columns.cards.items.length > 0) {
+        let source = columns.cards.items[0].id;
+        const results = {
+          draggableId: source,
+          type: "DEFAULT",
+          source: {
+            index: 0,
+            droppableId: "cards",
+          },
+          reason: "DROP",
+          mode: "FLUID",
+          destination: {
+            droppableId: target,
+            index: 0,
+          },
+          combine: null,
+        };
+
+        onDragEnd(results, columns, setColumns);
+      }
+    },
+    [onDragEnd, columns, setColumns]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  }, [handleKeyUp]);
+
   useEffect(() => {
     let projectResultsObj = getGlobalState("results");
     projectResultsObj.npos = columns.pos.items.length;
@@ -181,6 +224,13 @@ function PresortDND(props) {
       setGlobalState("triggerPresortFinishedModal", true);
     }
   }, [columns.cards.items.length]);
+
+  /* document.addEventListener("keyup", logKey);
+  function logKey(e) {
+    //log.textContent += ` ${e.code}`;
+    console.log(e.code);
+  }
+ */
 
   // RENDER COMPONENT
   return (

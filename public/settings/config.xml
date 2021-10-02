@@ -13,7 +13,7 @@
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->
-   <item id="initialScreen">partId</item>
+   <item id="initialScreen">anonymous</item>
    <item id="accessCode">demo</item>
 
 
