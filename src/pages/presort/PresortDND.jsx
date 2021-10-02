@@ -177,8 +177,8 @@ function PresortDND(props) {
     [presortSortedStatementsNum]
   ); // END DRAG-END
 
-  const handleKeyUp = useCallback(
-    (event) => {
+  useEffect(() => {
+    const handleKeyUp = (event) => {
       let target;
       if (event.key === "1") {
         target = "neg";
@@ -210,15 +210,12 @@ function PresortDND(props) {
 
         onDragEnd(results, columns, setColumns);
       }
-    },
-    [onDragEnd, columns, setColumns]
-  );
+    }; // end keyup
 
-  useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp]);
+  }, [onDragEnd, columns]);
 
   useEffect(() => {
     let projectResultsObj = getGlobalState("results");

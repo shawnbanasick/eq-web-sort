@@ -43,7 +43,7 @@
 
 
    <!-- SURVEY - Survey Questions -->
-   <item id="showSurvey">false</item>
+   <item id="showSurvey">true</item>
 
    <item id="survey">
        <input type="information"></input>
