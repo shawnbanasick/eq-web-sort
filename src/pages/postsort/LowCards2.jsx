@@ -12,9 +12,6 @@ import sanitizeString from "../../utilities/sanitizeString";
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const LowCards2 = (props) => {
-  const configObj = getGlobalState("configObj");
-  const postsortConvertObj = configObj.postsortConvertObj;
-
   // on blur, get text and add comment to card object
   const onBlur = (event, columnDisplay, itemId) => {
     const columnStatements = getGlobalState("columnStatements");
@@ -46,10 +43,6 @@ const LowCards2 = (props) => {
     });
 
     setGlobalState("resultsPostsort", results);
-
-    // columnStatements.vCols[columnDisplay] = [...cards];
-    // setGlobalState("statementCommentsObj", statementCommentsObj);
-    // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const { height, width, cardFontSize, lowCards2, disagreeObj } = props;

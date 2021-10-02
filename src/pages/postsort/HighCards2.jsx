@@ -12,9 +12,6 @@ import sanitizeString from "../../utilities/sanitizeString";
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const HighCards2 = (props) => {
-  const configObj = getGlobalState("configObj");
-  const postsortConvertObj = configObj.postsortConvertObj;
-
   // on leaving card comment section,
   const onBlur = (event, columnDisplay, itemId) => {
     const columnStatements = getGlobalState("columnStatements");
@@ -46,8 +43,6 @@ const HighCards2 = (props) => {
     });
 
     setGlobalState("resultsPostsort", results);
-    // setGlobalState("statementCommentsObj", statementCommentsObj);
-    // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur
 
   const { height, width, agreeObj, highCards2, cardFontSize } = props;
