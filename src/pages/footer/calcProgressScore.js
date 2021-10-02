@@ -9,6 +9,24 @@ const calcProgressScore = (
   const additionalProgressStateSort = +getGlobalState(
     "progressScoreAdditionalSort"
   );
+  const configObj = getGlobalState("configObj");
+
+  let adjustmentValue1 = 20;
+  let adjustmentValue2 = 50;
+  let adjustmentValue3 = 80;
+  if (configObj.showPostsort === false && configObj.showSurvey === true) {
+    adjustmentValue1 = 30;
+    adjustmentValue2 = 60;
+  }
+  if (configObj.showPostsort === true && configObj.showSurvey === false) {
+    adjustmentValue1 = 30;
+    adjustmentValue2 = 60;
+    adjustmentValue3 = 90;
+  }
+  if (configObj.showPostsort === false && configObj.showSurvey === false) {
+    adjustmentValue1 = 30;
+    adjustmentValue2 = 60;
+  }
 
   let totalProgressScore;
   let additionalProgress = 0;
@@ -25,15 +43,15 @@ const calcProgressScore = (
     return totalProgressScore;
   }
   if (currentPage === "presort") {
-    totalProgressScore = additionalProgress + 20;
+    totalProgressScore = additionalProgress + adjustmentValue1;
     return totalProgressScore;
   }
   if (currentPage === "sort") {
-    totalProgressScore = +additionalProgressSort + 50;
+    totalProgressScore = +additionalProgressSort + adjustmentValue2;
     return totalProgressScore;
   }
   if (currentPage === "postsort") {
-    totalProgressScore = 80;
+    totalProgressScore = adjustmentValue3;
     return totalProgressScore;
   }
   if (currentPage === "survey") {

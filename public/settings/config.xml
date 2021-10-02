@@ -13,7 +13,7 @@
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->
-   <item id="initialScreen">anonymous</item>
+   <item id="initialScreen">partId</item>
    <item id="accessCode">demo</item>
 
 
@@ -38,16 +38,12 @@
    <item id="showPostsort">true</item>
    <item id="showSecondPosColumn">true</item>
    <item id="showSecondNegColumn">true</item>
-   <item id="postsortAgreeColDisp1">column4</item>
-   <item id="postsortAgreeColDisp2">column3</item>
-   <item id="postsortDisagreeColDisp1">columnN4</item>
-   <item id="postsortDisagreeColDisp2">columnN3</item>
    
    <item id="displayNeutralObjects">false</item>
 
 
    <!-- SURVEY - Survey Questions -->
-   <item id="showSurvey">true</item>
+   <item id="showSurvey">false</item>
 
    <item id="survey">
        <input type="information"></input>

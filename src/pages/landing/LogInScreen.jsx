@@ -103,7 +103,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 23% 28% 28% 1fr;
   margin-top: 50px;
-  width: 700px;
+  width: 800px;
   padding: 20px;
   min-height: 400px;
   margin-bottom: 200px;
