@@ -17,8 +17,12 @@ function PresortDND(props) {
   const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
 
-  let presortSortedStatementsNum =
+  let presortSortedStatementsNumInitial =
     +getGlobalState("presortSortedStatementsNum") || 0;
+
+  let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
+    presortSortedStatementsNumInitial
+  );
 
   const itemsFromBackend = props.statements;
   const cardFontSize = `${props.cardFontSize + 6}px`;
@@ -122,17 +126,18 @@ function PresortDND(props) {
 
           // calc remaining statements
           if (sourceColumn.id === "cards") {
-            presortSortedStatementsNum =
-              configObj.totalStatements - sourceColumn.items.length + 1;
+            setPresortSortedStatementsNum(
+              configObj.totalStatements - sourceColumn.items.length + 1
+            );
             setGlobalState(
               "presortSortedStatementsNum",
               presortSortedStatementsNum
             );
-            presortSortedStatementsNum = presortSortedStatementsNum.toString();
+            // presortSortedStatementsNum = presortSortedStatementsNum.toString();
 
             setGlobalState(
               "presortSortedStatementsNum",
-              presortSortedStatementsNum
+              presortSortedStatementsNum.toString()
             );
           }
 
@@ -174,7 +179,7 @@ function PresortDND(props) {
         console.log(error);
       }
     },
-    [presortSortedStatementsNum]
+    [presortSortedStatementsNum, configObj]
   ); // END DRAG-END
 
   useEffect(() => {
