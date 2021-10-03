@@ -15,7 +15,7 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">大学の研究プロジェクト</item>
-        <item id="welcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}}{{{center}}}このQメソドロジー研究プロジェクトに参加していただきありがとうございます。{{{br}}}{{{br}}}画面右下の「続ける」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360" src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}{{{/iframe}}}{{{/center}}}{{{/center}}}{{{/div}}}</item>
+        <item id="welcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}}{{{center}}}このQメソドロジー研究プロジェクトに参加していただき。ありがとうございます。{{{br}}}{{{br}}}画面右下の「続ける」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360" src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}{{{/iframe}}}{{{/center}}}{{{/center}}}{{{/div}}}</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
         <item id="accessInputText">このアンケートのアクセスコードを入力してください</item>
@@ -31,45 +31,46 @@
     {{{/iframe}}}{{{/center}}}{{{/div}}}</item>
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
-        <item id="titleBarText">予備的なソーティング</item>
-        <item id="presortAgreement">同意</item>
+        <item id="titleBarText">予備的な仕分け</item>
+        <item id="presortAgreement">同意　（３）</item>
         <item id="presortStatements">ステートメント</item>
-        <item id="presortNeutral">思い入れがない</item>
-        <item id="presortDisagreement">同意しない</item>
+        <item id="presortNeutral">思い入れがない　（２）</item>
+        <item id="presortDisagreement">同意しない　（１）</item>
         <item id="presortModalHead">ステップ1/4</item>
-        <item id="presortModalText">{{{div}}}以下の文章をよく読んで、3つの山に分けてください。反対しがちな文章の山、賛成しがちなカードの山、残りの山です。{{{br}}}{{{br}}}この説明書をもう一度読みたい場合は、左下にあるヘルプボタンをクリックしてください。{{{/div}}}</item>
-        <item id="presortPreventNavModalHead">ナビゲーションの無効化</item>
-        <item id="presortPreventNavModalText">予備的な仕分けを終えてから次のステップに進んでください。</item>
+        <item id="presortModalText">{{{div}}}以下の文章をよく読んで、自分の感想によって、3つの箱に仕分けてください。「同意しない」の箱、「同意」の箱、「思い入れがない」の箱です。
+        カードを移動させるには、クリックしてドラッグするか、キーボードの1、2、3を押します。{{{br}}}{{{br}}}この説明文をもう一度読みたい場合は、左下にあるヘルプボタンをクリックしてください。{{{/div}}}</item>
+        <item id="presortPreventNavModalHead">次に進めません</item>
+        <item id="presortPreventNavModalText">この予備的な仕分けを終えてから次のステップに進んでください。</item>
         <item id="presortFinishedModalHead">予備選別完了</item>
         <item id="presortFinishedModalText">このステップは完了しました。ページ右下の「続ける」ボタンをクリックして次のステップにお進みください。</item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
-        <item id="sortHelpModalHead">ステップ2-4</item>
-        <item id="sortHelpModalText">このステップでは、ステートメントをグリッドパターンでソートしてください。あなたが最も同意するステートメントはグリッドの右端に、あなたが最も同意しないステートメントは左端に配置してください。このステップでのカードの並べ方については、ビデオをご覧ください。</item>
+        <item id="sortHelpModalHead">ステップ2/4</item>
+        <item id="sortHelpModalText">このステップでは、カードをグリッドパターンで仕分けしてください。最も同意するステートメントはグリッドの右端に、最も同意しないステートメントは左端に配置してください。ページ下部の「ー」「＋」ボタンで、文字サイズとカードのサイズを変更することができます。</item>
         <item id="sortAgreement">同意</item>
         <item id="sortDisagreement">同意しない</item>
-        <item id="condOfInst">今学期にiPadを使った経験に応じて、カードを分類してください。</item>
-        <item id="sortingCompleteModalHead">ソート完了</item>
-        <item id="sortingCompleteModalText">{{{div}}}最初のソートが完了しました。{{{br}}}{{{br}}}カードの配置を確認してください。{{{br}}}{{{br}}}配置に問題がなければ、画面右下の{{{b}}}青色の「続行」ボタン{{{/b}}}をクリックして次のステップに進んでください。{{{/div}}}</item>
-        <item id="sortPreventNavModalHead">ナビゲーションの無効化</item>
-        <item id="sortPreventNavModalText">グリッドソートを終えてから次のステップに進んでください。</item>
-        <item id="sortOverloadedColumnModalHead">ナビゲーションの無効化</item>
-        <item id="sortOverloadedColumnModalText">1つの列のカード枚数が多すぎます（オレンジ色の輪郭と破線の境界線が表示されます）。すべての列が正しい数になるように、カードの配置を調整してください。</item>
+        <item id="condOfInst">今学期の授業でiPadを使った感想について、下のカードを全て分類してください。</item>
+        <item id="sortingCompleteModalHead">仕分け完了</item>
+        <item id="sortingCompleteModalText">{{{div}}}分類がが完了しました。{{{br}}}{{{br}}}カードの配置を確認してください。{{{br}}}{{{br}}}配置に問題がなければ、画面右下の{{{b}}}青色の「続行」ボタン{{{/b}}}をクリックして次のステップに進んでください。{{{/div}}}</item>
+        <item id="sortPreventNavModalHead">次に進めません</item>
+        <item id="sortPreventNavModalText">グリッド仕分けを終えてから次のステップに進んでください。</item>
+        <item id="sortOverloadedColumnModalHead">次に進めません</item>
+        <item id="sortOverloadedColumnModalText">ひとつの列のカード枚数が多すぎます（オレンジ色の輪郭と破線の境界線が表示されます）。すべての列が正しい数になるように、カードの配置を調整してください。</item>
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
-        <item id="postsortHeader">ソート後のコメント</item>
+        <item id="postsortHeader">分類後のコメント</item>
         <item id="postsortInstructions">{{{div}}}{{{h3}}}これらの記述について、あなたの考えをより詳しく述べてください。{{{/h3}}}{{{/div}}}</item>
         <item id="placeholder">コメントを追加するにはここをクリック</item>
-        <item id="postsortAgreement">掲載されました: 同意</item>
-        <item id="postsortDisagreement">掲載されました: 同意しない</item>
-        <item id="postsortModalHead">ステップ3-4</item>
-        <item id="postsortModalText">ページ下部のボタンで、文字サイズやカードの高さを変更することができます</item>
+        <item id="postsortAgreement">「同意」に分類されたカード</item>
+        <item id="postsortDisagreement">「同意しない」に分類されたカード</item>
+        <item id="postsortModalHead">ステップ3/4</item>
+        <item id="postsortModalText">ページ下部の「ー」「＋」ボタンで、文字サイズとカードのサイズを変更することができます。</item>
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
         <item id="surveyHeader">選別後のアンケート</item>
-        <item id="surveyModalHead">ステップ4-4</item>
+        <item id="surveyModalHead">ステップ4/4</item>
         <item id="surveyModalText">最後に、あなたの経歴に関する以下の質問にお答えください。タイトルに「*」がついている質問は必須です。</item>
-        <item id="surveyPreventNavModalHead">ナビゲーションの無効化</item>
+        <item id="surveyPreventNavModalHead">次に進めません</item>
         <item id="surveyPreventNavModalText">次のステップに進む前に、必要な質問（赤枠の部分）にお答えください。</item>
        
         <!-- SUBMIT -->
@@ -77,7 +78,7 @@
         <item id="transferHead">ファイナルステップ</item>
         <item id="transferTextAbove">{{{div}}}{{{center}}}{{{h1}}}提出準備完了{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}「データ送信」ボタンを押して、結果を送信してください。{{{/h2}}}{{{/div}}}</item>
         <item id="transferTextBelow">{{{div}}}送信確認メッセージが表示されない場合は、{{{br}}}数分待ってから再度送信ボタンをクリックしてください。{{{/div}}}</item>
-        <item id="transferOkModalHeader">成功 - データがサーバーに送信されました。</item>   
+        <item id="transferOkModalHeader">成功</item>   
         <item id="transferOkModalText">{{{div}}}Easy HTMLQをご利用いただきありがとうございます！{{{br}}}{{{br}}}これでブラウザのタブを閉じることができます。{{{/div}}}</item>
         <item id="transferFailModalHeader">サーバーへの接続に失敗</item>   
         <item id="transferFailModalText">しばらくしてからもう一度お試しください。</item>   

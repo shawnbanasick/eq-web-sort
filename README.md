@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) .
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
 
-## Available Scripts
+## Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project. It includes step-by-step visual guides showing how to link to an (free) online database and how to upload the files to a (free) web host.
 
-In the project directory, you can run:
+## For a preview, try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
 
-### `yarn start`
+Pre-Sorting
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-presort.png" width="500" />
+<p>
+  
+Responsive Sorting Grid
+<p align="center">
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/eq-soring.png" width="500" />
+<p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+Card Comments
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center">
+<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-card-comments.png" width="500" />
+<p>
+  
+Survey Questions  
+<p align="center">
+<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-survey.png" width="500" />
+<p>
 
-### `yarn build`
+## Project Access
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Starting with version 2.0.2 there are now four project access options.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Open and anonymous - anyone with the url for the project can access it, no participant id information is collected
+- Open with participant ids - If you send out unique url links Easy HtmlQ will automatically register a user name or code. Use this format: [www.yourdomain.com/?userCode=USERCODE]() &nbsp;&nbsp;In the results file, the name or code given for USERCODE will be listed in the "urlUserCode" column of the results.
+- Restricted and anonymous - only those with the project access code can do the Q sort. The access code is the same for all participants
+- Restricted and participant name input required - participants requred to enter the access code and their name before they can start the Q sort.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Click [Here](Analysis.md) to View Information on the Analysis and Interpretation of Easy HtmlQ Data
 
-### `yarn eject`
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Easy HtmlQ is released under the [MIT License](http://www.opensource.org/licenses/MIT).
