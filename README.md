@@ -1,6 +1,6 @@
-If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) .
+If you need the Version 2 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq) .
 
-# Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
+# Easy HtmlQ Version 3 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
 
 ## Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project. It includes step-by-step visual guides showing how to link to an (free) online database and how to upload the files to a (free) web host.
 
@@ -16,7 +16,6 @@ Responsive Sorting Grid
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/eq-soring.png" width="500" />
 <p>
-
 
 Card Comments
 
