@@ -3,12 +3,15 @@ import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const HelpButton = () => {
   const langObj = getGlobalState("langObj");
-  const buttonText = langObj.btnHelp || "";
   const currentPage = getGlobalState("currentPage");
   let trigger;
+
+  const buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
 
   if (currentPage === "landing") {
     trigger = "triggerLandingModal";

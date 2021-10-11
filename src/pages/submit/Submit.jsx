@@ -21,6 +21,8 @@ const SubmitPage = () => {
   const transferTextBelow = decodeHTML(langObj.transferTextBelow);
   const goodbyeMessage = decodeHTML(langObj.goodbyeMessage);
 
+  const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
+
   // config options
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
@@ -109,9 +111,7 @@ const SubmitPage = () => {
 
   return (
     <React.Fragment>
-      <SortTitleBar background={headerBarColor}>
-        {langObj.transferHead}
-      </SortTitleBar>
+      <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
       <ContainerDiv>
         <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
         <SubmitButton results={transmissionResults} />
