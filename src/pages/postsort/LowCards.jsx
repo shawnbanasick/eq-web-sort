@@ -135,6 +135,7 @@ const Card = styled.div`
   font-size: ${(props) => `${props.cardFontSize}px`};
   display: flex;
   align-items: center;
+  justify-content: center;
   border: 2px solid black;
   background-color: #f6f6f6;
   text-align: center;
