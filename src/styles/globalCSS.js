@@ -548,16 +548,22 @@ footer {
 }
 
 .greenSortCard {
+  display: flex;
+  justify-content: center;
   background: lightgreen;
   border: 2px solid gray;
 }
 
 .pinkSortCard {
+  display: flex;
+  justify-content: center;
   background-color: rgba(255, 182, 193, 0.4);
   border: 2px solid gray;
 }
 
 .yellowSortCard {
+  display: flex;
+  justify-content: center;
   background-color: lightgray;
   border: 2px solid gray;
 }

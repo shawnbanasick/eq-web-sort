@@ -32,6 +32,7 @@ const getItemStyle = (
     width: cardWidth,
     borderRadius: `5px`,
     display: "flex",
+    justifyContent: "center",
     alignItems: "center",
     border: `1px solid #a8a8a8`,
     filter: isDragging ? "brightness(0.85)" : "brightness(1.00)",

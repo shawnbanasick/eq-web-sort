@@ -44,7 +44,7 @@ const PostSort = () => {
   const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement));
   const disagree = ReactHtmlParser(decodeHTML(langObj.postsortDisagreement));
   // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
-  const placeholder = ReactHtmlParser(decodeHTML(langObj.placeholder));
+  const placeholder = langObj.placeholder;
 
   const keys = Object.keys(configObj.postsortConvertObj);
   const agreeColDisp1 = keys.pop();
