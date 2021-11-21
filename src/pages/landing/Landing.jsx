@@ -10,6 +10,8 @@ import LandingModal from "../landing/LandingModal";
 import LogInScreen from "./LogInScreen";
 import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
+import checkForIeBrowser from "./checkForIeBrowser";
+import InternetExplorerWarning from "./InternetExplorerWarning";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -61,6 +63,15 @@ const LandingPage = () => {
     displayAccessCodeScreen = true;
   }
 
+  // if isIE, hide all content except warning.
+  let isIeBrowser = checkForIeBrowser();
+  if (isIeBrowser) {
+    displayLandingContent = false;
+    displayLogInScreen = false;
+    displayAccessCodeScreen = false;
+    displayPartIdScreen = false;
+  }
+
   return (
     <React.Fragment>
       {dataLoaded && (
@@ -68,6 +79,7 @@ const LandingPage = () => {
           <SortTitleBar background={headerBarColor}>{landingHead}</SortTitleBar>
           <LandingModal />
           <ContainerDiv>
+            {isIeBrowser && <InternetExplorerWarning />}
             {displayLogInScreen && <LogInScreen />}
             {displayPartIdScreen && <PartIdScreen />}
             {displayAccessCodeScreen && <AccessCodeScreen />}
