@@ -29,6 +29,9 @@
         <item id="landingHelpModalText">{{{div}}}このたびは、本学の研究プロジェクトにご参加いただきありがとうございます。サインインして、プロセスを開始してください。参加者IDやプロジェクトアクセスコードを送信すると、アンケートの説明が表示されます。よくお読みいただき、画面右下の「{{{b}}}続ける{{{/b}}}」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
     src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}
     {{{/iframe}}}{{{/center}}}{{{/div}}}</item>
+        <item id="ieWarningHeaderText">Error - Internet Explorer Detected</item>
+        <item id="ieWarningText">{{{div}}}Microsoft Internet Explorer cannot be used with this site. {{{br /}}}{{{br /}}}Please use Microsoft Edge, Google Chrome, or Mozilla Firefox{{{/div}}}</item>
+
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
         <item id="titleBarText">予備的なソーティング</item>

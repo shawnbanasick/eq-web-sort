@@ -12,6 +12,7 @@ import PartIdScreen from "./PartIdScreen";
 import AccessCodeScreen from "./AccessCodeScreen";
 import checkForIeBrowser from "./checkForIeBrowser";
 import InternetExplorerWarning from "./InternetExplorerWarning";
+import parseParams from "./parseParams";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -19,6 +20,14 @@ const LandingPage = () => {
       setGlobalState("progressScore", 10);
       setGlobalState("currentPage", "landing");
     }, 100);
+  }, []);
+
+  useEffect(() => {
+    let urlName = parseParams(window.location.href);
+    if (urlName !== undefined) {
+      console.log(urlName.usercode);
+      setGlobalState("usercode", urlName.usercode);
+    }
   }, []);
 
   // calc time on page

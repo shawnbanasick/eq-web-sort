@@ -8,26 +8,24 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const LogInScreen = () => {
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
-
   // setup language
   const langObj = getGlobalState("langObj");
-  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
-  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
-  const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
+  const ieWarningHeaderText = ReactHtmlParser(
+    decodeHTML(langObj.ieWarningHeaderText)
+  );
+  const ieWarningText = ReactHtmlParser(decodeHTML(langObj.ieWarningText));
 
   return (
     <Container>
       <div>
         <center>
-          <h2>Error - Internet Explorer Detected</h2>
+          <h2>{ieWarningHeaderText}</h2>
           <StyledHr />
         </center>
       </div>
       <div>
-        <h3>Internet Explorer cannot be used to access this survey</h3>
         <StyledInputDiv>
-          <h3>Please use Microsoft Edge, Google Chrome, or Mozilla Firefox</h3>
+          <h3>{ieWarningText}</h3>
         </StyledInputDiv>
       </div>
     </Container>
@@ -37,12 +35,12 @@ const LogInScreen = () => {
 export default view(LogInScreen);
 
 const Container = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  //  display: grid;
+  //   grid-template-rows: 1fr 1fr 1fr;
   margin-top: 50px;
   width: 50vw;
-  padding: 1.5vw;
-  min-height: 300px;
+  padding: 2vw;
+  min-height: 250px;
   margin-bottom: 20px;
   border: 2px solid black;
   justify-self: center;
