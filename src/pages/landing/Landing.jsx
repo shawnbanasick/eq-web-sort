@@ -26,7 +26,8 @@ const LandingPage = () => {
     let urlName = parseParams(window.location.href);
     if (urlName !== undefined) {
       console.log(urlName.usercode);
-      setGlobalState("usercode", urlName.usercode);
+      const codeName = urlName.usercode;
+      setGlobalState("usercode", codeName);
     }
   }, []);
 
