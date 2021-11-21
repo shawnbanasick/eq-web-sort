@@ -40,6 +40,7 @@ const SubmitPage = () => {
   transmissionResults["projectName"] = configObj.studyTitle;
   transmissionResults["partId"] = getGlobalState("partId");
   transmissionResults["randomId"] = uuid().substring(0, 12);
+  transmissionResults["usercode"] = getGlobalState("usercode");
   transmissionResults["dateTime"] = results.dateTime;
   transmissionResults["timeLanding"] = results.timeOnlandingPage;
   transmissionResults["timePresort"] = results.timeOnpresortPage;

@@ -51,6 +51,7 @@ const globalState = store({
   triggerSurveyPreventNavModal: false,
   triggerTransmissionOKModal: false,
   triggerTransmissionFailModal: false,
+  usercode: "no usercode set",
   userInputPartId: "",
   userInputAccessCode: "",
 });
