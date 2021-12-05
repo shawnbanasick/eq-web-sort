@@ -3,89 +3,92 @@
    <language version="1.0" htmlParse="true">
 ;
 
-        <!-- MULTI-PURPOSE MESSAGES -->
-        <item id="stepCompleteMessage">{{{div}}}このステップを完了しました。画面右下の青い「Continue」ボタンをクリックして次のステップに進んでください。{{{/div}}}</item>
-        <item id="logInFirst">最初にログインの手続きを行ってください。</item>
+        <!-- MULTI-PURPOSE MODALS -->
+        <item id="stepCompleteMessage">{{{div}}}You have completed this step. Please click on the {{{b}}} blue &quot;Continue&quot; button {{{/b}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
+        <item id="logInFirst">{{{div}}}Please complete the log-in process first.{{{/div}}}</item>
 
         <!-- FOOTER -->
-        <item id="fontSizeText">文字の大きさ</item>
-        <item id="cardHeightText">カードのサイズ</item>
-        <item id="btnHelp">助けて!</item>
-        <item id="btnNext">続ける</item>
+        <item id="fontSizeText">{{{div}}}Text Size{{{/div}}}</item>
+        <item id="cardHeightText">{{{div}}}Card Height{{{/div}}}</item>
+        <item id="btnHelp">{{{div}}}Help me!{{{/div}}}</item>
+        <item id="btnNext">{{{div}}}Continue{{{/div}}}</item>
 
         <!-- LANDING SCREEN -->
-        <item id="landingHead">大学の研究プロジェクト</item>
-        <item id="welcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}}{{{center}}}このQメソドロジー研究プロジェクトに参加していただきありがとうございます。{{{br}}}{{{br}}}画面右下の「続ける」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360" src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}{{{/iframe}}}{{{/center}}}{{{/center}}}{{{/div}}}</item>
+        <item id="landingHead">{{{div}}}University Research Project{{{/div}}}</item>
+        <item id="welcomeText">{{{div}}}{{{center}}}{{{h2}}}EQ Web Sort V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br/}}}{{{br}}} {{{div style=&quot;display: flex; flex-direction: column; align-items: center;&quot;}}} {{{div}}}{{{h2}}}Features{{{/h2}}}
+    {{{ul style=&quot;margin-left: 20px;&quot;}}} {{{li}}}Smooth drag and drop actions for desktop and mobile (touch) devices {{{/li}}} {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
+    {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  {{{li}}}Simple localization into the research language {{{/li}}} {{{li}}}HTML formatting for statements and User Interface text (including bold font, italics, underlines, line breaks) {{{/li}}} {{{li}}}Custom logo in page footers {{{/li}}} {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} {{{/ul}}}{{{a href=&quot;https://qmethod.org/&quot; target=&quot;_blank&quot;}}} {{{u}}}qmethod.org{{{/u}}} {{{/a}}}{{{/div}}}{{{/div}}}
+    {{{br}}}{{{br}}}
+    {{{div style=&quot;display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; width: 100%&quot;}}} {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Images{{{img src=&quot;/images/sortScreen3.png&quot; width=&quot;640&quot; /}}} {{{/div}}}
+    {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Video (enable subtitles / closed captions) {{{iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/aHpeu5M7Rlo&quot;}}} {{{/iframe}}} {{{/div}}} {{{/div}}}{{{/div}}}</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
-        <item id="accessInputText">このアンケートのアクセスコードを入力してください</item>
-        <item id="loginSubmitButtonText">提出</item>
-        <item id="loginPartIdText">お名前または参加者IDを入力してください</item>
-        <item id="accessCodeWarning">アクセスコードが無効です</item>
-        <item id="partIdWarning">名前またはIDが無効</item>
-        <item id="loginHeaderText">サインイン</item>
-        <item id="loginWelcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}}このQメソドロジー研究プロジェクトに参加していただきありがとうございます。{{{br}}}以下のフォームで{{{b}}}サインイン{{{/b}}}して、プロセスを開始してください。{{{/div}}}</item>
-        <item id="landingHelpModalHead">ようこそ</item>
-        <item id="landingHelpModalText">{{{div}}}このたびは、本学の研究プロジェクトにご参加いただきありがとうございます。サインインして、プロセスを開始してください。参加者IDやプロジェクトアクセスコードを送信すると、アンケートの説明が表示されます。よくお読みいただき、画面右下の「{{{b}}}続ける{{{/b}}}」ボタンをクリックして次のステップにお進みください。{{{br}}}{{{br}}} {{{center}}}{{{iframe width="640" height="360"
-    src="https://www.youtube.com/embed/aHpeu5M7Rlo"}}}
+        <item id="accessCodeText">{{{div}}}Access Code{{{/div}}}</item>
+        <item id="accessInputText">{{{div}}}Please enter the access code for this survey.{{{/div}}}</item>
+        <item id="loginSubmitButtonText">{{{div}}}Submit{{{/div}}}</item>
+        <item id="loginPartIdText">{{{div}}}Please enter your name or participant ID{{{/div}}}</item>
+        <item id="accessCodeWarning">{{{div}}}Access code invalid{{{/div}}}</item>
+        <item id="partIdWarning">{{{div}}}Invalid name or ID{{{/div}}}</item>
+        <item id="loginHeaderText">{{{div}}}Sign In{{{/div}}}</item>
+        <item id="loginWelcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{b}}}sign in{{{/b}}} using the form below to begin the process. {{{/div}}}</item>
+        <item id="landingHelpModalHead">{{{div}}}Welcome!{{{/div}}}</item>
+        <item id="landingHelpModalText">{{{div}}}Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width=&quot;640&quot; height=&quot;360&quot;
+    src=&quot;https://www.youtube.com/embed/aHpeu5M7Rlo&quot;}}}
     {{{/iframe}}}{{{/center}}}{{{/div}}}</item>
-        <item id="ieWarningHeaderText">Error - Internet Explorer Detected</item>
-        <item id="ieWarningText">{{{div}}}Microsoft Internet Explorer cannot be used with this site. {{{br /}}}{{{br /}}}Please use Microsoft Edge, Google Chrome, or Mozilla Firefox{{{/div}}}</item>
-
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
-        <item id="titleBarText">予備的なソーティング</item>
-        <item id="presortAgreement">同意</item>
-        <item id="presortStatements">ステートメント</item>
-        <item id="presortNeutral">思い入れがない</item>
-        <item id="presortDisagreement">同意しない</item>
-        <item id="presortModalHead">ステップ1/4</item>
-        <item id="presortModalText">{{{div}}}以下の文章をよく読んで、3つの山に分けてください。反対しがちな文章の山、賛成しがちなカードの山、残りの山です。{{{br}}}{{{br}}}この説明書をもう一度読みたい場合は、左下にあるヘルプボタンをクリックしてください。{{{/div}}}</item>
-        <item id="presortPreventNavModalHead">ナビゲーションの無効化</item>
-        <item id="presortPreventNavModalText">予備的な仕分けを終えてから次のステップに進んでください。</item>
-        <item id="presortFinishedModalHead">予備選別完了</item>
-        <item id="presortFinishedModalText">このステップは完了しました。ページ右下の「続ける」ボタンをクリックして次のステップにお進みください。</item>
+        <item id="titleBarText">{{{div}}}Preliminary Sorting{{{/div}}}</item>
+        <item id="presortAgreement">{{{div}}}Agree{{{/div}}}</item>
+        <item id="presortStatements">{{{div}}}Statements{{{/div}}}</item>
+        <item id="presortNeutral">{{{div}}}No Strong Feelings{{{/div}}}</item>
+        <item id="presortDisagreement">{{{div}}}Disagree{{{/div}}}</item>
+        <item id="presortModalHead">{{{div}}}Step 1 of 4{{{/div}}}</item>
+        <item id="presortModalText">{{{div}}}Read the following statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.{{{/div}}}</item>
+        <item id="presortPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
+        <item id="presortPreventNavModalText">{{{div}}}Please finish the preliminary sorting before going to the next step.{{{/div}}}</item>
+        <item id="presortFinishedModalHead">{{{div}}}Preliminary Sorting Complete{{{/div}}}</item>
+        <item id="presortFinishedModalText">{{{div}}}You have completed this step. Please click the &quot;Continue&quot; button in the bottom right side of the page to go to the next step.{{{/div}}}</item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
-        <item id="sortHelpModalHead">ステップ2-4</item>
-        <item id="sortHelpModalText">このステップでは、ステートメントをグリッドパターンでソートしてください。あなたが最も同意するステートメントはグリッドの右端に、あなたが最も同意しないステートメントは左端に配置してください。このステップでのカードの並べ方については、ビデオをご覧ください。</item>
-        <item id="sortAgreement">同意</item>
-        <item id="sortDisagreement">同意しない</item>
-        <item id="condOfInst">今学期にiPadを使った経験に応じて、カードを分類してください。</item>
-        <item id="sortingCompleteModalHead">ソート完了</item>
-        <item id="sortingCompleteModalText">{{{div}}}最初のソートが完了しました。{{{br}}}{{{br}}}カードの配置を確認してください。{{{br}}}{{{br}}}配置に問題がなければ、画面右下の{{{b}}}青色の「続行」ボタン{{{/b}}}をクリックして次のステップに進んでください。{{{/div}}}</item>
-        <item id="sortPreventNavModalHead">ナビゲーションの無効化</item>
-        <item id="sortPreventNavModalText">グリッドソートを終えてから次のステップに進んでください。</item>
-        <item id="sortOverloadedColumnModalHead">ナビゲーションの無効化</item>
-        <item id="sortOverloadedColumnModalText">1つの列のカード枚数が多すぎます（オレンジ色の輪郭と破線の境界線が表示されます）。すべての列が正しい数になるように、カードの配置を調整してください。</item>
+        <item id="sortHelpModalHead">{{{div}}}Step 2 of 4{{{/div}}}</item>
+        <item id="sortHelpModalText">{{{div}}}In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the far right side of the grid, and statements which you most disagree with should be placed on the far left side. Please watch the video for more information on how to sort the cards in this step.{{{/div}}}</item>
+        <item id="sortAgreement">{{{div}}}Agree{{{/div}}}</item>
+        <item id="sortDisagreement">{{{div}}}Disagree{{{/div}}}</item>
+        <item id="condOfInst">{{{div}}}Sort the cards according to your experience with the iPads this semester{{{/div}}}</item>
+        <item id="sortingCompleteModalHead">{{{div}}}Sorting Complete{{{/div}}}</item>
+        <item id="sortingCompleteModalText">{{{div}}}You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
+        <item id="sortPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
+        <item id="sortPreventNavModalText">{{{div}}}Please finish the grid sorting before going to the next step.{{{/div}}}</item>
+        <item id="sortOverloadedColumnModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
+        <item id="sortOverloadedColumnModalText">{{{div}}}One of the columns has too many cards (it will be outlined in orange and have a dashed border). Please adjust the placement of the cards so that all columns have the correct number.{{{/div}}}</item>
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
-        <item id="postsortHeader">ソート後のコメント</item>
-        <item id="postsortInstructions">{{{div}}}{{{h3}}}これらの記述について、あなたの考えをより詳しく述べてください。{{{/h3}}}{{{/div}}}</item>
-        <item id="placeholder">コメントを追加するにはここをクリック</item>
-        <item id="postsortAgreement">掲載されました: 同意</item>
-        <item id="postsortDisagreement">掲載されました: 同意しない</item>
-        <item id="postsortModalHead">ステップ3-4</item>
-        <item id="postsortModalText">ページ下部のボタンで、文字サイズやカードの高さを変更することができます</item>
+        <item id="postsortHeader">{{{div}}}Post-Sort Comments{{{/div}}}</item>
+        <item id="postsortInstructions">{{{div}}}{{{h3}}}Please describe your thoughts about these statements in more detail.{{{/h3}}}{{{/div}}}</item>
+        <item id="placeholder">Click here to add comment</item>
+        <item id="postsortAgreement">{{{div}}}Placed on Agree{{{/div}}}</item>
+        <item id="postsortDisagreement">{{{div}}}Placed on Disagree{{{/div}}}</item>
+        <item id="postsortModalHead">{{{div}}}Step 3 of 4{{{/div}}}</item>
+        <item id="postsortModalText">{{{div}}}You can use the buttons at the bottom of the page to change the font size or card height.{{{/div}}}</item>
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
-        <item id="surveyHeader">選別後のアンケート</item>
-        <item id="surveyModalHead">ステップ4-4</item>
-        <item id="surveyModalText">最後に、あなたの経歴に関する以下の質問にお答えください。タイトルに「*」がついている質問は必須です。</item>
-        <item id="surveyPreventNavModalHead">ナビゲーションの無効化</item>
-        <item id="surveyPreventNavModalText">次のステップに進む前に、必要な質問（赤枠の部分）にお答えください。</item>
+        <item id="surveyHeader">{{{div}}}Post-Sort Questionnaire{{{/div}}}</item>
+        <item id="surveyModalHead">{{{div}}}Step 4 of 4{{{/div}}}</item>
+        <item id="surveyModalText">{{{div}}}Finally, please answer the following questions regarding your background. The questions marked with an &quot;*&quot; in their title are required.{{{/div}}}</item>
+        <item id="surveyPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
+        <item id="surveyPreventNavModalText">{{{div}}}Please answer the required questions (outlined in red) before going to the next step.{{{/div}}}</item>
        
         <!-- SUBMIT -->
-        <item id="btnTransfer">データ提出</item>
-        <item id="transferHead">ファイナルステップ</item>
-        <item id="transferTextAbove">{{{div}}}{{{center}}}{{{h1}}}提出準備完了{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}「データ送信」ボタンを押して、結果を送信してください。{{{/h2}}}{{{/div}}}</item>
-        <item id="transferTextBelow">{{{div}}}送信確認メッセージが表示されない場合は、{{{br}}}数分待ってから再度送信ボタンをクリックしてください。{{{/div}}}</item>
-        <item id="transferOkModalHeader">成功 - データがサーバーに送信されました。</item>   
-        <item id="transferOkModalText">{{{div}}}Easy HTMLQをご利用いただきありがとうございます！{{{br}}}{{{br}}}これでブラウザのタブを閉じることができます。{{{/div}}}</item>
-        <item id="transferFailModalHeader">サーバーへの接続に失敗</item>   
-        <item id="transferFailModalText">しばらくしてからもう一度お試しください。</item>   
-        <item id="fallbackMessage">データ送信に失敗しました。結果をダウンロードして、添付ファイルとして ken.q.tools@gmail.com に送信してください。 ありがとうございました。</item>   
-        <item id="btnDownload">ダウンロード</item>   
-        <item id="goodbyeMessage">{{{div}}}ありがとうございます！{{{/div}}} {{{br}}}{{{div}}}これでブラウザのタブを閉じることができます。{{{/div}}}</item>   
+        <item id="btnTransfer">{{{div}}}Submit Data{{{/div}}}</item>
+        <item id="transferHead">{{{div}}}Final Step{{{/div}}}</item>
+        <item id="transferTextAbove">{{{div}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}{{{/div}}}</item>
+        <item id="transferTextBelow">{{{div}}}If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.{{{/div}}}</item>
+        <item id="transferOkModalHeader">{{{div}}}Success - The data have been sent to the server.{{{/div}}}</item>   
+        <item id="transferOkModalText">{{{div}}}Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.{{{/div}}}</item>
+        <item id="transferFailModalHeader">{{{div}}}Connection to server failed{{{/div}}}</item>   
+        <item id="transferFailModalText">{{{div}}}Please try again in a few moments.{{{/div}}}</item>   
+        <item id="fallbackMessage">{{{div}}}Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com.  Thank you!{{{/div}}}</item>   
+        <item id="btnDownload">{{{div}}}Download{{{/div}}}</item>   
+        <item id="goodbyeMessage">{{{div}}}{{{div}}}Thank You!{{{/div}}} {{{br /}}}{{{div}}}You can now close the browser tab{{{/div}}}{{{/div}}}</item>   
 
    </language>

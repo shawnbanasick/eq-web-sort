@@ -18,7 +18,7 @@
 
 
    <!-- FOOTER -->
-   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ-logo.svg" height="40" width="250" /}}}{{{/center}}}</item>
+   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ_default.svg" height="40" width="250" /}}}{{{/center}}}</item>
 
 
    <!-- PRESORT -->
@@ -36,8 +36,8 @@
 
    <!-- POSTSORT -->
    <item id="showPostsort">true</item>
-   <item id="showSecondPosColumn">true</item>
-   <item id="showSecondNegColumn">true</item>
+   <item id="showSecondPosColumn">false</item>
+   <item id="showSecondNegColumn">false</item>
    
    <item id="displayNeutralObjects">false</item>
 
@@ -76,27 +76,27 @@
 
    <item id="survey">
         <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
-        <label>{{{div}}}What is your program {{{b}}}focus{{{/b}}}{{{/div}}}</label>
+        <label>{{{div}}}What is your program focus{{{/div}}}</label>
    </item>
 
    <item id="survey">
         <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
-        <label>{{{div}}}What kind of {{{b}}}class{{{/b}}} do you prefer?{{{/div}}}</label>
+        <label>{{{div}}}What kind of class do you prefer?{{{/div}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="true" scale="Yes;;;No">{{{div}}}I {{{b}}}have{{{/b}}} used an iPad;;;I have used a notebook{{{/div}}}</input>
-        <label>{{{div}}}Please {{{b}}}answer{{{/b}}} the following questions{{{/div}}}</label>
+        <input type="rating2" required="true" scale="Yes;;;No">{{{div}}}I have used an iPad;;;I have used a notebook{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="true" scale="1;2;3;4;5">{{{div}}}How would {{{b}}}you{{{/b}}} rate the use of the iPads?;;;How would you rate this class overall?{{{/div}}}</input>
-        <label>{{{div}}}Please answer the following {{{b}}}questions{{{/b}}}{{{/div}}}</label>
+        <input type="rating5" required="true" scale="1;2;3;4;5">{{{div}}}How would you rate the use of the iPads?;;;How would you rate this class overall?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{div}}}How would you {{{b}}}rate{{{/b}}} Socrative?;;;How would you rate Quizlet?{{{/div}}}</input>
-        <label>{{{div}}}Please answer the following {{{u}}}questions{{{/u}}}{{{/div}}}</label>
+        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{div}}}How would you rate Socrative?;;;How would you rate Quizlet?{{{/div}}}</input>
+        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
    </item>
 
 
