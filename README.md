@@ -9,7 +9,7 @@ If you need the Version 2 files for compatibility reasons, the files are here: [
 Pre-Sorting
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presortScreen.png" width="500" />
+<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presortScreen.png?raw=true" width="500" />
 <p>
   
 Responsive Sorting Grid
