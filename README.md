@@ -9,23 +9,23 @@ If you need the Version 2 files for compatibility reasons, the files are here: [
 Pre-Sorting
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presort.png?raw=true" width="500" />
+<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presort.png?raw=true" width="700" />
 <p>
   
 Responsive Sorting Grid
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/eq-soring.png" width="500" />
+<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/sortScreen.png?raw=true" width="700" />
 <p>
 
 Card Comments
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-card-comments.png" width="500" />
+<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/postsortScreen.png?raw=true" width="700" />
 <p>
   
 Survey Questions  
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-survey.png" width="500" />
+<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/surveyScreen.png?raw=true" width="700" />
 <p>
 
 ## Project Access
