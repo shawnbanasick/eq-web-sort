@@ -184,14 +184,15 @@ function PresortDND(props) {
 
   useEffect(() => {
     const handleKeyUp = (event) => {
+      console.log(event);
       let target;
-      if (event.key === "1") {
+      if (event.key === "1" || event.key === 1) {
         target = "neg";
       }
-      if (event.key === "2") {
+      if (event.key === "2" || event.key === 2) {
         target = "neutral";
       }
-      if (event.key === "3") {
+      if (event.key === "3" || event.key === 3) {
         target = "pos";
       }
 
