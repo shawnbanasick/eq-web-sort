@@ -11,6 +11,7 @@ import PreventSortNavModal from "./PreventSortNavModal";
 import OverloadedColumnModal from "./OverloadedColumnModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import SortColGuides from "./SortColGuides";
 
 const localStore = store({
   topMargin: 50,
@@ -35,16 +36,27 @@ const Sort = () => {
      "conditions of instruction" section - so, I grab the height of titleBar 
      after render and reset the margin
     */
-    const sortGridMarginTop = JSON.parse(
+    const sortGridMarginTop = +JSON.parse(
       localStorage.getItem("sortGridMarginTop")
     );
-    const height = document.getElementById("sortTitleBar").clientHeight;
+    let height = document.getElementById("sortTitleBarContainer").clientHeight;
+    let height2 = document.getElementById("sortTitleBar").clientHeight;
+    // let height3 = document.getElementById("colorBarDivContainer").clientHeight;
+
+    console.log(height2);
+    // console.log({ height3 });
+
+    height = +JSON.stringify(height);
+
+    console.log(height);
+    console.log(sortGridMarginTop);
+
     if (sortGridMarginTop !== height) {
-      setTimeout(() => {
-        localStore["topMargin"] = height;
-        localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
-      }, 300);
+      console.log("not equal");
+      localStore["topMargin"] = height;
+      localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
     } else {
+      console.log("equal");
       localStore["topMargin"] = +sortGridMarginTop;
     }
   }, []);
@@ -53,7 +65,7 @@ const Sort = () => {
     setGlobalState("presortNoReturn", true);
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
-    }, 200);
+    }, 300);
   }, []);
 
   // calc time on page
@@ -65,19 +77,24 @@ const Sort = () => {
     };
   }, []);
 
+  let columnWidth = getGlobalState("columnWidth");
+
   return (
     <React.Fragment>
       <SortHelpModal />
       <PreventSortNavModal />
       <SortingFinishedModal />
       <OverloadedColumnModal />
-      <SortTitleBar id="sortTitleBar" background={headerBarColor}>
-        <Disagree>{sortDisagreement}</Disagree>
-        <CondOfInst fontSize={configObj.condOfInstFontSize}>
-          {condOfInst}
-        </CondOfInst>
-        <Agree>{sortAgreement}</Agree>
-      </SortTitleBar>
+      <SortTitleBarContainer id="sortTitleBarContainer">
+        <SortTitleBar id="sortTitleBar" background={headerBarColor}>
+          <Disagree>{sortDisagreement}</Disagree>
+          <CondOfInst fontSize={configObj.condOfInstFontSize}>
+            {condOfInst}
+          </CondOfInst>
+          <Agree>{sortAgreement}</Agree>
+        </SortTitleBar>
+        <SortColGuides columnWidth={columnWidth} />
+      </SortTitleBarContainer>
       <SortGridContainer marginTop={localStore.topMargin}>
         <SortGrid cardFontSize={cardFontSize} />;
       </SortGridContainer>
@@ -87,20 +104,25 @@ const Sort = () => {
 
 export default view(Sort);
 
+const SortTitleBarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+`;
+
 const SortTitleBar = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-bottom: 5px;
-  min-height: 50px;
   display: inline-grid;
   grid-template-columns: 15% 1fr 15%;
   color: black;
   font-weight: bold;
   background-color: ${(props) => props.background};
-  position: fixed;
-  z-index: 99;
-  top: 0;
 `;
 
 const CondOfInst = styled.div`

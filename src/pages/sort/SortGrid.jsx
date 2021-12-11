@@ -208,6 +208,9 @@ const SortGrid = (props) => {
   const columnWidth =
     (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
+  // send column width to global state
+  setGlobalState("columnWidth", columnWidth);
+
   // pull data from localStorage
   const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
@@ -222,8 +225,6 @@ const SortGrid = (props) => {
     const columnId = `column${qSortHeaders[index]}`;
     const sortValue = qSortHeaderNumbers[index];
     const columnColor = columnColorsArray[index];
-
-    // console.log(qSortPattern, cardHeight);
 
     return (
       <SortColumn

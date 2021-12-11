@@ -19,22 +19,14 @@ class SortColumn extends React.Component {
       columnId,
       sortValue,
       columnStatementsArray,
-      qSortHeaderNumber,
       columnColor,
       cardFontSize,
-      columnHeadersColor,
     } = this.props;
 
     // had to push column sort value to state because didn't want to edit dnd library result object
     // was't able to just pass it as a prop
     return (
       <ContainerDiv>
-        <HeaderDiv
-          color={columnHeadersColor}
-          data-react-beautiful-dnd-drag-handle="0"
-        >
-          {qSortHeaderNumber}
-        </HeaderDiv>
         <Droppable droppableId={columnId} direction="vertical">
           {(provided, snapshot) => {
             if (snapshot.isDraggingOver) {
@@ -49,7 +41,8 @@ class SortColumn extends React.Component {
                   this.props,
                   forcedSorts,
                   columnWidth,
-                  columnColor
+                  columnColor,
+                  cardHeight
                 )}
               >
                 {columnStatementsArray.map((item, index) => {
@@ -95,6 +88,7 @@ class SortColumn extends React.Component {
 
 export default view(SortColumn);
 
+/*
 const HeaderDiv = styled.div`
   background: ${(props) => props.color};
   text-align: center;
@@ -107,6 +101,7 @@ const HeaderDiv = styled.div`
   border-right: 1px solid #d8d8d8;
   border-left: 1px solid #d8d8d8;
 `;
+*/
 
 const ContainerDiv = styled.div`
   display: flex;
