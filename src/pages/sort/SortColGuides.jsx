@@ -47,6 +47,6 @@ const ColorBarDivContainer = styled.div`
   padding-left: 2px;
   flex-direction: row;
   background-color: #d8d8d8;
-  margin-bottom: 1px;
+  margin-bottom: 0px;
   height: 30px;
 `;

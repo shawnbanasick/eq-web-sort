@@ -78,11 +78,9 @@ const Sort = () => {
 
     setTimeout(() => {
       if (sortGridMarginTop !== height) {
-        console.log("not equal");
         localStore["topMargin"] = height;
         localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
       } else {
-        console.log("equal");
         localStore["topMargin"] = +sortGridMarginTop;
       }
     }, 200);
