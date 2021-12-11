@@ -15,44 +15,11 @@ import decodeHTML from "../../utilities/decodeHTML";
 
 /* eslint react/prop-types: 0 */
 
-function debounce(fn, ms) {
-  let timer;
-  return (_) => {
-    clearTimeout(timer);
-    timer = setTimeout((_) => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
-
 const SortGrid = (props) => {
   const configObj = getGlobalState("configObj");
 
   // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
-
-  // force updates on window resize
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: document.body.clientWidth,
-  });
-
-  // page resize
-  useEffect(() => {
-    const debouncedHandleResize = debounce(function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: document.body.clientWidth,
-      });
-    }, 200);
-
-    window.addEventListener("resize", debouncedHandleResize);
-
-    return (_) => {
-      window.removeEventListener("resize", debouncedHandleResize);
-    };
-  });
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
@@ -180,7 +147,7 @@ const SortGrid = (props) => {
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight = getGlobalState("cardHeight");
   if (cardHeight === 0) {
-    cardHeight = ((dimensions.height - 320) / maxNumCardsInCol).toFixed();
+    cardHeight = ((props.dimensions.height - 320) / maxNumCardsInCol).toFixed();
     setGlobalState("cardHeight", +cardHeight);
   }
 
@@ -206,7 +173,7 @@ const SortGrid = (props) => {
 
   // set dynamic width on page load on reload
   const columnWidth =
-    (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
+    (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
   // send column width to global state
   setGlobalState("columnWidth", columnWidth);

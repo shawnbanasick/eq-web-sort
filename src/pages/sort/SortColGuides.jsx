@@ -6,7 +6,6 @@ import { v4 as uuid } from "uuid";
 // import setGlobalState from "../../globalState/setGlobalState";
 
 const SortColGuides = (props) => {
-  console.log(props);
   const configObj = getGlobalState("configObj");
   const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
   const columnHeadersColorsArray = [...configObj.columnHeadersColorsArray];

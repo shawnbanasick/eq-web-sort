@@ -4,6 +4,7 @@ const globalState = store({
   cardFontSize: 15,
   cardHeight: 0,
   checkRequiredQuestionsComplete: false,
+  columnWidth: 100,
   currentPage: "landing",
   dataLoaded: false,
   defaultCardFontSize: 15,

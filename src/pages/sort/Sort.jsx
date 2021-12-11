@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { view, store } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -17,6 +17,17 @@ const localStore = store({
   topMargin: 50,
 });
 
+function debounce(fn, ms) {
+  let timer;
+  return (_) => {
+    clearTimeout(timer);
+    timer = setTimeout((_) => {
+      timer = null;
+      fn.apply(this, arguments);
+    }, ms);
+  };
+}
+
 const Sort = () => {
   const cardFontSize = getGlobalState("cardFontSize");
   const configObj = getGlobalState("configObj");
@@ -30,6 +41,28 @@ const Sort = () => {
   const sortAgreement = ReactHtmlParser(decodeHTML(langObj.sortAgreement));
   const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst));
 
+  // force updates on window resize
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: document.body.clientWidth,
+  });
+
+  // page resize
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: document.body.clientWidth,
+      });
+    }, 200);
+
+    window.addEventListener("resize", debouncedHandleResize);
+
+    return (_) => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  });
+
   useEffect(() => {
     /* this should adjust the margin of the sort grid because I can't know
      the size - it will depend on how much the researcher writes in the 
@@ -40,26 +73,20 @@ const Sort = () => {
       localStorage.getItem("sortGridMarginTop")
     );
     let height = document.getElementById("sortTitleBarContainer").clientHeight;
-    let height2 = document.getElementById("sortTitleBar").clientHeight;
-    // let height3 = document.getElementById("colorBarDivContainer").clientHeight;
-
-    console.log(height2);
-    // console.log({ height3 });
 
     height = +JSON.stringify(height);
 
-    console.log(height);
-    console.log(sortGridMarginTop);
-
-    if (sortGridMarginTop !== height) {
-      console.log("not equal");
-      localStore["topMargin"] = height;
-      localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
-    } else {
-      console.log("equal");
-      localStore["topMargin"] = +sortGridMarginTop;
-    }
-  }, []);
+    setTimeout(() => {
+      if (sortGridMarginTop !== height) {
+        console.log("not equal");
+        localStore["topMargin"] = height;
+        localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
+      } else {
+        console.log("equal");
+        localStore["topMargin"] = +sortGridMarginTop;
+      }
+    }, 500);
+  });
 
   useEffect(() => {
     setGlobalState("presortNoReturn", true);
@@ -96,7 +123,7 @@ const Sort = () => {
         <SortColGuides columnWidth={columnWidth} />
       </SortTitleBarContainer>
       <SortGridContainer marginTop={localStore.topMargin}>
-        <SortGrid cardFontSize={cardFontSize} />;
+        <SortGrid dimensions={dimensions} cardFontSize={cardFontSize} />;
       </SortGridContainer>
     </React.Fragment>
   );
