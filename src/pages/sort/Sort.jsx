@@ -85,7 +85,7 @@ const Sort = () => {
         console.log("equal");
         localStore["topMargin"] = +sortGridMarginTop;
       }
-    }, 500);
+    }, 200);
   });
 
   useEffect(() => {

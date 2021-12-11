@@ -176,7 +176,7 @@ const SortGrid = (props) => {
     (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
   // send column width to global state
-  setGlobalState("columnWidth", columnWidth);
+  setTimeout(() => setGlobalState("columnWidth", columnWidth), 0);
 
   // pull data from localStorage
   const columnStatements = getGlobalState("columnStatements");
