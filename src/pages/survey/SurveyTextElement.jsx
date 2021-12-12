@@ -8,6 +8,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 
 const SurveyTextElement = (props) => {
+  // preload no response to state
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
@@ -15,6 +16,7 @@ const SurveyTextElement = (props) => {
   }, [props]);
 
   const id = `qNum${props.opts.qNum}`;
+
   const [userText, setUserText] = useState("");
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -26,6 +28,7 @@ const SurveyTextElement = (props) => {
     "checkRequiredQuestionsComplete"
   );
 
+  // event handler
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
     const results = getGlobalState("resultsSurvey");

@@ -7,6 +7,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 
 const SurveyTextElement = (props) => {
+  // preload no response to state
   useEffect(() => {
     const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
@@ -15,6 +16,8 @@ const SurveyTextElement = (props) => {
 
   // let savedRestrictedText;
   const [number, setNumber] = useState("");
+
+  // event handler
   const handleOnChange = (e) => {
     let requiredAnswersObj = getGlobalState("requiredAnswersObj");
     const results = getGlobalState("resultsSurvey");
