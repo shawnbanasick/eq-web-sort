@@ -166,12 +166,18 @@ const SurveyRatings2Element = (props) => {
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
       <RadioContainer>
         <RatingTitle>
           <div />
-          <ScaleDiv>{scaleArray[0]}</ScaleDiv>
-          <ScaleDiv>{scaleArray[1]}</ScaleDiv>
+          <ScaleDiv>
+            <div>{ReactHtmlParser(decodeHTML(scaleArray[0]))}</div>
+          </ScaleDiv>
+          <ScaleDiv>
+            <div>{ReactHtmlParser(decodeHTML(scaleArray[1]))}</div>
+          </ScaleDiv>
         </RatingTitle>
         <RadioItems />
       </RadioContainer>

@@ -187,7 +187,9 @@ const SurveyRatings5Element = (props) => {
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
       <RadioContainer>
         <RatingTitle>
           <div />

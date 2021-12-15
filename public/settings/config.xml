@@ -71,12 +71,12 @@
    <item id="survey">
         <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
         <label>{{{b}}}Year{{{/b}}}</label>
-        <note>{{{div}}}Please {{{b}}}select{{{/b}}} your year{{{/div}}}</note>
+        <note>Please {{{b}}}select{{{/b}}} your year</note>
    </item>
 
    <item id="survey">
         <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
-        <label>{{{div}}}What is your {{{b}}}program{{{/b}}} focus{{{/div}}}</label>
+        <label>What is your {{{b}}}program{{{/b}}} focus?</label>
    </item>
 
    <item id="survey">
@@ -85,18 +85,18 @@
    </item>
 
    <item id="survey">
-        <input type="rating2" required="true" scale="Yes;;;No">{{{div}}}I have used an iPad;;;I have used a notebook{{{/div}}}</input>
-        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
+        <input type="rating2" required="true" scale="{{{b}}}Yes{{{/b}}};;;{{{b}}}No{{{/b}}}">I have {{{u}}}used{{{/u}}} an iPad;;;I have used a notebook</input>
+        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="true" scale="1;2;3;4;5">{{{div}}}How would you rate the use of the iPads?;;;How would you rate this class overall?{{{/div}}}</input>
-        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
+        <input type="rating5" required="true" scale="1;2;3;4;5">{{{u}}}How{{{/u}}} would you rate the use of the iPads?;;;How would you rate this class overall?</input>
+        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{div}}}How would you rate Socrative?;;;How would you rate Quizlet?{{{/div}}}</input>
-        <label>{{{div}}}Please answer the following questions{{{/div}}}</label>
+        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{u}}}How{{{/u}}} would you rate Socrative?;;;How would you rate Quizlet?</input>
+        <label>{{{b}}}Please{{{/b}}}  answer the following questions</label>
    </item>
 
 

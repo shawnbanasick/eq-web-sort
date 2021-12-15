@@ -115,10 +115,16 @@ const SurveyRadioElement = (props) => {
   };
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
+      <NoteText>
+        <div>{noteText}</div>
+      </NoteText>
       <RadioContainer onChange={(e) => handleChange(e)}>
         <RadioItems />
       </RadioContainer>
@@ -184,4 +190,18 @@ const InputStyleDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;
