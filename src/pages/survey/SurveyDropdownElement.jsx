@@ -116,7 +116,9 @@ const SurveyDropdownElement = (props) => {
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
       <MultiSelect
         className={"multiselect"}
         options={getOptionsArray(props.opts.options)}

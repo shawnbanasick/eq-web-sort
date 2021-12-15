@@ -85,8 +85,12 @@ const SurveyTextElement = (props) => {
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
-      <NoteText>{noteText}</NoteText>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
+      <NoteText>
+        <div>{noteText}</div>
+      </NoteText>
       <TextInput value={userText || ""} onChange={handleOnChange} />
     </Container>
   );

@@ -47,41 +47,41 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="#e7b8b8">{{{div}}}All {{{b}}}fields{{{/b}}} marked with an * are mandatory{{{/div}}}</note>
+       <note bg="#e7b8b8">All {{{b}}}fields{{{/b}}} marked with an * are mandatory</note>
    </item>
 
    <item id="survey">
         <input type="text" required="true" maxlength="4" ></input>
-        <label>{{{div}}}{{{u}}}Age{{{/u}}}{{{/div}}}*</label>
-        <note>{{{div}}}Please {{{b}}}enter{{{/b}}} your year of birth.{{{/div}}}</note>
+        <label>{{{u}}}Age{{{/u}}}*</label>
+        <note>Please {{{b}}}enter{{{/b}}} your year of birth.</note>
    </item>
 
    <item id="survey">
         <input type="text" restricted="true" required="true" maxlength="4" ></input>
-        <label>{{{div}}}{{{b}}}Age{{{/b}}} - Restricted{{{/div}}}*</label>
-        <note>{{{div}}}Please enter your year of {{{b}}}birth{{{/b}}}{{{/div}}}</note>
+        <label>{{{b}}}Age{{{/b}}} - Restricted*</label>
+        <note>Please enter your year of {{{b}}}birth{{{/b}}}</note>
    </item>
 
    <item id="survey">
         <input type="textarea" required="true"></input>
-        <label>{{{div}}}{{{b}}}Comments ok?{{{/b}}}{{{/div}}}</label>
+        <label>{{{b}}}Comments ok?{{{/b}}}</label>
         <placeholder>input comments here</placeholder>
    </item>
 
    <item id="survey">
         <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
-        <label>{{{div}}}{{{b}}}Year{{{/b}}}{{{/div}}}</label>
+        <label>{{{b}}}Year{{{/b}}}</label>
         <note>{{{div}}}Please {{{b}}}select{{{/b}}} your year{{{/div}}}</note>
    </item>
 
    <item id="survey">
         <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
-        <label>{{{div}}}What is your program focus{{{/div}}}</label>
+        <label>{{{div}}}What is your {{{b}}}program{{{/b}}} focus{{{/div}}}</label>
    </item>
 
    <item id="survey">
         <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
-        <label>{{{div}}}What kind of class do you prefer?{{{/div}}}</label>
+        <label>What kind of {{{u}}}class{{{/u}}} do you prefer?</label>
    </item>
 
    <item id="survey">

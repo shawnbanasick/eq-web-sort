@@ -76,7 +76,9 @@ const SurveyTextAreaElement = (props) => {
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
       <TextAreaInput
         value={userText || ""}
         placeholder={placeholder}

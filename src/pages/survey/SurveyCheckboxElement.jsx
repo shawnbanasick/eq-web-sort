@@ -101,7 +101,9 @@ const SurveyCheckboxElement = (props) => {
 
   return (
     <Container bgColor={bgColor} border={border}>
-      <TitleBar>{labelText}</TitleBar>
+      <TitleBar>
+        <div>{labelText}</div>
+      </TitleBar>
       <RadioContainer>
         {optsArray.map((item, index) => {
           return (

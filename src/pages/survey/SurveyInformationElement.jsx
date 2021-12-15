@@ -17,7 +17,9 @@ const SurveyInformationElement = (props) => {
 
   return (
     <Container>
-      <TitleBar backgroundColor={props.opts.background}>{infoText}</TitleBar>
+      <TitleBar backgroundColor={props.opts.background}>
+        <div>{infoText}</div>
+      </TitleBar>
     </Container>
   );
 };

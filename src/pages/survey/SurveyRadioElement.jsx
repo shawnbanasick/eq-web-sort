@@ -48,7 +48,9 @@ const SurveyRadioElement = (props) => {
             onChange={() => setter(value)}
             value={value}
           />
-          <LabelDiv>{label}</LabelDiv>
+          <LabelDiv>
+            <div>{label}</div>
+          </LabelDiv>
         </InputStyleDiv>
       </label>
     );
