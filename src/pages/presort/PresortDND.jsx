@@ -237,13 +237,6 @@ function PresortDND(props) {
     }
   }, [columns.cards.items.length]);
 
-  /* document.addEventListener("keyup", logKey);
-  function logKey(e) {
-    //log.textContent += ` ${e.code}`;
-    console.log(e.code);
-  }
- */
-
   // RENDER COMPONENT
   return (
     <PresortGrid>

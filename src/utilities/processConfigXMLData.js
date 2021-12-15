@@ -70,8 +70,6 @@ const processConfigXMLData = (dataObject) => {
 
       // TEXT question
       if (questionType === "text") {
-        console.log(surveyData[j]);
-
         tempObj.id = `qNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
