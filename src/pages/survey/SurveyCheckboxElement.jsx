@@ -69,7 +69,6 @@ const SurveyCheckboxElement = (props) => {
       selected = selected.substr(0, selected.length - 1);
     }
 
-    console.log();
     if (selected.length > 0) {
       localStore2.hasBeenAnswered = true;
       requiredAnswersObj[id] = "answered";

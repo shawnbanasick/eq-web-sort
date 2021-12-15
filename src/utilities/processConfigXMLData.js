@@ -1,5 +1,3 @@
-// import globalState from "../globalState/globalState";
-// import getGlobalState from "../globalState/getGlobalState";
 import setGlobalState from "../globalState/setGlobalState";
 
 const processConfigXMLData = (dataObject) => {
@@ -14,14 +12,10 @@ const processConfigXMLData = (dataObject) => {
 
     let key = data[i].attributes.id;
 
-    // console.log(JSON.stringify(data[i], null, 2));
-
     // separate out survey questions
     if (key === "survey") {
       surveyData.push([...data[i].elements]);
     }
-
-    // let splitArray = [];
 
     // if it has a value in the XML file ==> no empty strings
     if ("elements" in tempObj) {
@@ -37,13 +31,6 @@ const processConfigXMLData = (dataObject) => {
           key === "qSortHeaders" ||
           key === "qSortPattern"
         ) {
-          // // numerical array ==> convert to integers
-          // if (key === "qSortPattern") {
-          //   splitArray = value.split(",").map((x) => +x);
-          // } else {
-          //   splitArray = value.split(",");
-          // }
-          // configObj[key] = splitArray;
         } else {
           // for all others...
           // convert string values -  boolean or number
@@ -60,25 +47,11 @@ const processConfigXMLData = (dataObject) => {
     }
   }
 
-  // create converter object for postsort
-  // const postsortConvertObj = {};
-  // const headerNumbers = [...configObj.qSortHeaders];
-  // for (let j = 0; j < headerNumbers.length; j++) {
-  //   let key = `column${headerNumbers[j]}`;
-  //   postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
-  // }
-
-  // configObj.postsortConvertObj = postsortConvertObj;
-
   setGlobalState("configObj", configObj);
-  // console.log(JSON.stringify(configObj, null, 2));
-  // localStorage.setItem("configObj", JSON.stringify(configObj));
 
   // setup survey object
   const requiredAnswersObj = {};
   if (surveyData.length > 0) {
-    // console.log(JSON.stringify(surveyData, null, 2));
-
     const surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
       let tempObj = {};
@@ -97,6 +70,8 @@ const processConfigXMLData = (dataObject) => {
 
       // TEXT question
       if (questionType === "text") {
+        console.log(surveyData[j]);
+
         tempObj.id = `qNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
@@ -110,6 +85,7 @@ const processConfigXMLData = (dataObject) => {
         tempObj.note = surveyData[j][2].elements[0].text;
         tempObj.limitLength = JSON.parse(surveyData[j][0].attributes.maxlength);
         tempObj.restricted = surveyData[j][0].attributes.restricted;
+        tempObj.limited = surveyData[j][0].attributes.limited;
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -261,10 +237,8 @@ const processConfigXMLData = (dataObject) => {
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
-        // console.log(JSON.stringify(surveyQuestionArray));
       }
     }
-    // console.log(JSON.stringify(surveyQuestionArray));
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
     setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);

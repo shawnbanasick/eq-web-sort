@@ -57,7 +57,7 @@
    </item>
 
    <item id="survey">
-        <input type="text" restricted="true" required="true" maxlength="4" ></input>
+        <input type="text" restricted="true" limited="true" required="true" maxlength="4" ></input>
         <label>{{{b}}}Age{{{/b}}} - Restricted*</label>
         <note>Please enter your year of {{{b}}}birth{{{/b}}}</note>
    </item>

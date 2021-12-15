@@ -47,8 +47,7 @@ const SurveyDropdownElement = (props) => {
   });
 
   const [selected, setSelected] = useState([]);
-  // required question answer check
-  // console.log(hasBeenAnswered);
+
   // required question answer check
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
@@ -60,7 +59,6 @@ const SurveyDropdownElement = (props) => {
 
     const id = `qNum${props.opts.qNum}`;
 
-    // console.log(JSON.stringify(e));
     setSelected(e);
 
     if (e.length !== 0) {

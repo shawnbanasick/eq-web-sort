@@ -56,11 +56,6 @@ const SurveyRadioElement = (props) => {
     );
   };
 
-  // const nameValue = `question${props.opts.qNum}`;
-
-  // const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
-  // required question answer check
-  // console.log(hasBeenAnswered);
   const checkRequiredQuestionsComplete = getGlobalState(
     "checkRequiredQuestionsComplete"
   );
@@ -101,11 +96,8 @@ const SurveyRadioElement = (props) => {
     const radioList = optsArray.map((item, index) => (
       <div key={uuid()}>
         <RadioInput
-          // id={`${item}-${index}`}
-          // type="radio"
           value={index}
           checked={selected}
-          // name={nameValue}
           label={item}
           setter={setSelected}
         />

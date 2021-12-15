@@ -36,9 +36,15 @@ const SurveyTextElement = (props) => {
     let value = e.target.value;
     let valueLen = value.length;
 
-    if (props.opts.restricted === "true") {
+    // restrict to numbers
+    if (props.opts.restricted === "true" || props.opts.restricted === true) {
+      value = value.replace(/\D/g, "");
+    }
+
+    // limit length
+    if (props.opts.limited === "true" || props.opts.limited === true) {
       if (value.length > +props.opts.limitLength) {
-        value = value.substring(0, props.opts.limitLength);
+        value = value.substring(0, +props.opts.limitLength);
       }
     }
     setUserText(value);
