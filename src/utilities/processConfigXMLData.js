@@ -89,26 +89,6 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
 
-      // TEXT question
-      if (questionType === "textRestricted") {
-        tempObj.id = `qNum${j + 1}`;
-        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
-        if (isRequired === "true" || isRequired === true) {
-          isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
-        }
-        tempObj.qNum = j + 1;
-        tempObj.type = "textRestricted";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.note = surveyData[j][2].elements[0].text;
-        tempObj.limitLength = surveyData[j][0].attributes.maxlength;
-        tempObj.restricted = surveyData[j][0].attributes.restricted;
-        tempObj.hasBeenAnswered = false;
-
-        surveyQuestionArray.push(tempObj);
-      }
-
       // TEXTAREA question
       if (questionType === "textarea") {
         tempObj.id = `qNum${j + 1}`;

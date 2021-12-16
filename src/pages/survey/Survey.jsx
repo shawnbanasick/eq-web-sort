@@ -10,7 +10,6 @@ import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
-import SurveyTextRestrictedElement from "./SurveyTextRestrictedElement";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 import getGlobalState from "../../globalState/getGlobalState";
@@ -59,9 +58,6 @@ const SurveyPage = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
       if (object.type === "text") {
         return <SurveyTextElement key={uuid()} opts={object} />;
-      }
-      if (object.type === "textRestricted") {
-        return <SurveyTextRestrictedElement key={uuid()} opts={object} />;
       }
       if (object.type === "textarea") {
         return <SurveyTextAreaElement key={uuid()} opts={object} />;
