@@ -7,13 +7,13 @@ import decodeHTML from "../../utilities/decodeHTML";
 
 const LogInSubmitButton = (props) => {
   const langObj = getGlobalState("langObj");
-  const loginSubmitButtonText = ReactHtmlParser(
-    decodeHTML(langObj.loginSubmitButtonText)
+  const localDeleteButtonText = ReactHtmlParser(
+    decodeHTML(langObj.localDeleteButtonText)
   );
 
   return (
     <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>
-      {loginSubmitButtonText}
+      {localDeleteButtonText}
     </StyledSubmitButton>
   );
 };

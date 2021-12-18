@@ -13,6 +13,19 @@
         <item id="btnHelp">{{{div}}}Help me!{{{/div}}}</item>
         <item id="btnNext">{{{div}}}Continue{{{/div}}}</item>
 
+
+        <!-- LOCAL DATA COLLECTION -->
+        <item id="localHeader">{{{div}}}Offline Q-sort Control Panel{{{/div}}}</item>
+        <item id="partIdText">{{{div}}}Participant Name{{{/div}}}</item>
+        <item id="usercodeText">{{{div}}}Usercode{{{/div}}}</item>
+        <item id="localStartButtonText">{{{div}}}Start Q-sort{{{/div}}}</item>
+        <item id="localDeleteButtonText">{{{div}}}Delete{{{/div}}}</item>
+        <item id="localDownloadButtonText">{{{div}}}Download Q-sort Data{{{/div}}}</item>
+        <item id="storedQsortsHeaderText">Stored Q-sorts</item>
+
+
+
+
         <!-- LANDING SCREEN -->
         <item id="landingHead">{{{div}}}University Research Project{{{/div}}}</item>
         <item id="welcomeText">{{{div}}}{{{center}}}{{{h2}}}EQ Web Sort V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br/}}}{{{br}}} {{{div style=&quot;display: flex; flex-direction: column; align-items: center;&quot;}}} {{{div}}}{{{h2}}}Features{{{/h2}}}

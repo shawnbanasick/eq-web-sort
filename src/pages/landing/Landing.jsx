@@ -13,6 +13,7 @@ import AccessCodeScreen from "./AccessCodeScreen";
 import checkForIeBrowser from "./checkForIeBrowser";
 import InternetExplorerWarning from "./InternetExplorerWarning";
 import parseParams from "./parseParams";
+import LocalStart from "./LocalStart";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -55,52 +56,66 @@ const LandingPage = () => {
   let displayPartIdScreen = false;
   let displayAccessCodeScreen = false;
 
-  // determine access mode
-  const initialScreenSetting = configObj.initialScreen;
-  if (initialScreenSetting === "anonymous") {
-    displayLandingContent = true;
-  }
-  if (
-    initialScreenSetting === "partId-access" &&
-    displayLandingContent === false
-  ) {
-    displayLogInScreen = true;
-  }
-  if (initialScreenSetting === "partId" && displayLandingContent === false) {
-    displayPartIdScreen = true;
-  }
-  if (initialScreenSetting === "access" && displayLandingContent === false) {
-    displayAccessCodeScreen = true;
-  }
-
-  // if isIE, hide all content except warning.
-  let isIeBrowser = checkForIeBrowser();
-  if (isIeBrowser) {
-    displayLandingContent = false;
-    displayLogInScreen = false;
-    displayAccessCodeScreen = false;
-    displayPartIdScreen = false;
-  }
-
-  return (
-    <React.Fragment>
-      {dataLoaded && (
-        <React.Fragment>
-          <SortTitleBar background={headerBarColor}>{landingHead}</SortTitleBar>
-          <LandingModal />
+  if (configObj.firebaseOrLocal === "local") {
+    return (
+      <>
+        {dataLoaded && (
           <ContainerDiv>
-            {isIeBrowser && <InternetExplorerWarning />}
-            {displayLogInScreen && <LogInScreen />}
-            {displayPartIdScreen && <PartIdScreen />}
-            {displayAccessCodeScreen && <AccessCodeScreen />}
-            {displayLandingContent && (
-              <ContentDiv>{welcomeTextHtml}</ContentDiv>
-            )}
+            <LocalStart />
           </ContainerDiv>
-        </React.Fragment>
-      )}
-    </React.Fragment>
-  );
+        )}
+      </>
+    );
+  } else {
+    // determine access mode
+    const initialScreenSetting = configObj.initialScreen;
+    if (initialScreenSetting === "anonymous") {
+      displayLandingContent = true;
+    }
+    if (
+      initialScreenSetting === "partId-access" &&
+      displayLandingContent === false
+    ) {
+      displayLogInScreen = true;
+    }
+    if (initialScreenSetting === "partId" && displayLandingContent === false) {
+      displayPartIdScreen = true;
+    }
+    if (initialScreenSetting === "access" && displayLandingContent === false) {
+      displayAccessCodeScreen = true;
+    }
+
+    // if isIE, hide all content except warning.
+    let isIeBrowser = checkForIeBrowser();
+    if (isIeBrowser) {
+      displayLandingContent = false;
+      displayLogInScreen = false;
+      displayAccessCodeScreen = false;
+      displayPartIdScreen = false;
+    }
+
+    return (
+      <React.Fragment>
+        {dataLoaded && (
+          <React.Fragment>
+            <SortTitleBar background={headerBarColor}>
+              {landingHead}
+            </SortTitleBar>
+            <LandingModal />
+            <ContainerDiv>
+              {isIeBrowser && <InternetExplorerWarning />}
+              {displayLogInScreen && <LogInScreen />}
+              {displayPartIdScreen && <PartIdScreen />}
+              {displayAccessCodeScreen && <AccessCodeScreen />}
+              {displayLandingContent && (
+                <ContentDiv>{welcomeTextHtml}</ContentDiv>
+              )}
+            </ContainerDiv>
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }
 };
 
 export default view(LandingPage);

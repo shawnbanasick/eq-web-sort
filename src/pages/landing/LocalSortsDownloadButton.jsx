@@ -7,13 +7,13 @@ import decodeHTML from "../../utilities/decodeHTML";
 
 const LogInSubmitButton = (props) => {
   const langObj = getGlobalState("langObj");
-  const loginSubmitButtonText = ReactHtmlParser(
-    decodeHTML(langObj.loginSubmitButtonText)
+  const localDownloadButtonText = ReactHtmlParser(
+    decodeHTML(langObj.localDownloadButtonText)
   );
 
   return (
     <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>
-      {loginSubmitButtonText}
+      {localDownloadButtonText}
     </StyledSubmitButton>
   );
 };
@@ -27,7 +27,7 @@ const StyledSubmitButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 200px;
+  width: auto;
   height: 50px;
   justify-self: right;
   align-self: end;
