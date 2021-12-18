@@ -52,7 +52,9 @@ const HighCards2 = (props) => {
   const columnDisplay = agreeObj.columnDisplay2;
 
   return highCards2.map((item, index) => {
-    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    const statementHtml = ReactHtmlParser(
+      `<div>${decodeHTML(item.statement)}</div>`
+    );
 
     return (
       <Container key={item.statement}>

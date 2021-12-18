@@ -49,7 +49,9 @@ const LowCards = (props) => {
   const { disagreeText, placeholder, columnDisplay } = disagreeObj;
 
   return lowCards.map((item, index) => {
-    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    const statementHtml = ReactHtmlParser(
+      `<div>${decodeHTML(item.statement)}</div>`
+    );
     item.indexVal = index;
     return (
       <Container key={item.statement}>

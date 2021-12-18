@@ -51,7 +51,9 @@ const LowCards2 = (props) => {
   const columnDisplay = disagreeObj.columnDisplay2;
 
   return lowCards2.map((item, index) => {
-    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    const statementHtml = ReactHtmlParser(
+      `<div>${decodeHTML(item.statement)}</div>`
+    );
     return (
       <Container key={item.statement}>
         <CardTag cardFontSize={cardFontSize}>{disagreeText}</CardTag>

@@ -54,7 +54,9 @@ const HighCards = (props) => {
   let columnDisplay = agreeObj.columnDisplay;
 
   return highCards.map((item, index) => {
-    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    const statementHtml = ReactHtmlParser(
+      `<div>${decodeHTML(item.statement)}</div>`
+    );
     return (
       <Container key={item.statement}>
         <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
