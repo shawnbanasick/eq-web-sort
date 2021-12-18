@@ -276,7 +276,7 @@ function PresortDND(props) {
                       >
                         {column.items.map((item, index) => {
                           const statementHtml = ReactHtmlParser(
-                            decodeHTML(item.statement)
+                            `<div>${decodeHTML(item.statement)}</div>`
                           );
                           return (
                             <Draggable
