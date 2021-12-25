@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -10,6 +10,22 @@ import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 
 const LogInScreen = () => {
+  useEffect(() => {
+    console.log("test");
+    const handleKeyUpStart = (event) => {
+      console.log(event.key);
+      // let target;
+      if (event.key === "Enter") {
+        console.log("enter pressed");
+        //        target = "neg";
+      }
+    }; // end keyup
+
+    window.addEventListener("keyup", handleKeyUpStart);
+
+    return () => window.removeEventListener("keyup", handleKeyUpStart);
+  }, []);
+
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
 
   // setup language
@@ -35,7 +51,7 @@ const LogInScreen = () => {
   };
 
   const handleStart = (e) => {
-    console.log("clicked");
+    console.log("start clicked");
 
     /*
     let userPartIdOK = false;
@@ -59,6 +75,13 @@ const LogInScreen = () => {
       }, 5000);
     }
     */
+  };
+
+  const handleDeleteLocal = (e) => {
+    console.log("delete clicked");
+  };
+  const handleDownloadLocal = (e) => {
+    console.log("download clicked");
   };
 
   return (
@@ -89,8 +112,12 @@ const LogInScreen = () => {
       <Container2>
         <StoredHeader>{headerText}</StoredHeader>
         <ButtonContainer>
-          <LocalDeleteButton>Delete</LocalDeleteButton>
-          <LocalSortsDownloadButton>Download</LocalSortsDownloadButton>
+          <LocalDeleteButton onClick={handleDeleteLocal}>
+            Delete
+          </LocalDeleteButton>
+          <LocalSortsDownloadButton onClick={handleDownloadLocal}>
+            Download
+          </LocalSortsDownloadButton>
         </ButtonContainer>
       </Container2>
     </>
