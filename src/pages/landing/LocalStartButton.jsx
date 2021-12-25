@@ -5,6 +5,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
+import setGlobalState from "../../globalState/setGlobalState";
 
 const LogInSubmitButton = (props) => {
   const langObj = getGlobalState("langObj");
@@ -13,7 +14,38 @@ const LogInSubmitButton = (props) => {
   );
 
   const checkForNextPageConditions = () => {
-    return true;
+    let returnValue;
+    let returnValue1;
+    let returnValue2;
+
+    let localParticipantName = getGlobalState("localParticipantName");
+    console.log(localParticipantName.length);
+    let localUsercode = getGlobalState("localUsercode");
+    console.log(localUsercode.length);
+
+    if (localParticipantName.length === 0) {
+      returnValue1 = false;
+      setGlobalState("displayLocalPartIdWarning1", true);
+    } else {
+      setGlobalState("displayLocalPartIdWarning1", false);
+      returnValue1 = true;
+    }
+
+    if (localUsercode.length === 0) {
+      returnValue2 = false;
+      setGlobalState("displayLocalPartIdWarning2", true);
+    } else {
+      setGlobalState("displayLocalPartIdWarning2", false);
+      returnValue2 = true;
+    }
+
+    if (returnValue1 === true && returnValue2 === true) {
+      returnValue = true;
+    } else {
+      returnValue = false;
+    }
+
+    return returnValue;
   };
   let goToNextPage;
 
@@ -29,19 +61,24 @@ const LogInSubmitButton = (props) => {
   } = props;
 
   useEffect(() => {
-    console.log("test");
+    // clear local fields on load
+    setGlobalState("localParticipantName", "");
+    setGlobalState("localUsercode", "");
+
     const handleKeyUpStart = (event) => {
-      console.log(event.key);
       // let target;
       if (event.key === "Enter") {
-        history.push(`/presort`);
+        goToNextPage = checkForNextPageConditions();
+        if (goToNextPage) {
+          history.push(`/presort`);
+        }
       }
     }; // end keyup
 
     window.addEventListener("keyup", handleKeyUpStart);
 
     return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, []);
+  }, [history]);
 
   return (
     <StyledSubmitButton

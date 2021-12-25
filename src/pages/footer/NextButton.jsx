@@ -70,7 +70,6 @@ const checkForNextPageConditions = () => {
 };
 
 const LinkButton = (props) => {
-  console.log(props);
   let goToNextPage;
 
   const {

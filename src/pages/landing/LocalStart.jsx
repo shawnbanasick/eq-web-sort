@@ -10,7 +10,8 @@ import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 
 const LogInScreen = () => {
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
+  const displayPartIdWarning1 = getGlobalState("displayLocalPartIdWarning1");
+  const displayPartIdWarning2 = getGlobalState("displayLocalPartIdWarning2");
 
   // setup language
   const langObj = getGlobalState("langObj");
@@ -26,39 +27,12 @@ const LogInScreen = () => {
 
   const handleInput = (e) => {
     console.log(e.target.value);
-    setGlobalState("userInputPartId", e.target.value);
+    setGlobalState("localParticipantName", e.target.value);
   };
 
   const handleUsercodeInput = (e) => {
     console.log(e.target.value);
-    setGlobalState("usercodeText", e.target.value);
-  };
-
-  const handleStart = (e) => {
-    console.log("start clicked");
-
-    /*
-    let userPartIdOK = false;
-
-    // get user input
-    const userInputPartId = getGlobalState("userInputPartId");
-
-    if (userInputPartId.length > 0) {
-      userPartIdOK = true;
-      setGlobalState("displayLandingContent", true);
-      setGlobalState("partId", userInputPartId);
-      setGlobalState("displayNextButton", true);
-      setGlobalState("isLoggedIn", true);
-    }
-
-    // invalid input ==> display warnings
-    if (userPartIdOK === false) {
-      setGlobalState("displayPartIdWarning", true);
-      setTimeout(() => {
-        setGlobalState("displayPartIdWarning", false);
-      }, 5000);
-    }
-    */
+    setGlobalState("localUsercode", e.target.value);
   };
 
   const handleDeleteLocal = (e) => {
@@ -80,16 +54,20 @@ const LogInScreen = () => {
           <h3>{loginPartIdText}</h3>
           <StyledInputDiv>
             <StyledInput onChange={handleInput} type="text" />
-            {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
+            {displayPartIdWarning1 && (
+              <WarningText>{partIdWarning}</WarningText>
+            )}
           </StyledInputDiv>
         </div>
-        <LocalStartButton onClick={handleStart} to={`/presort`} />
+        <LocalStartButton to={`/presort`} />
         <div>
           {" "}
           <h3>{usercodeText}</h3>
           <StyledInputDiv>
             <StyledInput onChange={handleUsercodeInput} type="text" />
-            {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
+            {displayPartIdWarning2 && (
+              <WarningText>{partIdWarning}</WarningText>
+            )}
           </StyledInputDiv>
         </div>
       </Container>
