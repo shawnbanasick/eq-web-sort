@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
@@ -13,41 +13,42 @@ const LogInSubmitButton = (props) => {
     decodeHTML(langObj.localStartButtonText)
   );
 
-  const checkForNextPageConditions = () => {
-    let returnValue;
-    let returnValue1;
-    let returnValue2;
+  const [returnValue, setReturnValue] = useState(false);
 
+  const checkForNextPageConditions = () => {
+    let value0;
+    let value1;
+    let value2;
     let localParticipantName = getGlobalState("localParticipantName");
-    console.log(localParticipantName.length);
+    console.log(localParticipantName);
     let localUsercode = getGlobalState("localUsercode");
-    console.log(localUsercode.length);
+    console.log(localUsercode);
 
     if (localParticipantName.length === 0) {
-      returnValue1 = false;
+      value1 = false;
       setGlobalState("displayLocalPartIdWarning1", true);
     } else {
       setGlobalState("displayLocalPartIdWarning1", false);
-      returnValue1 = true;
+      value1 = true;
     }
 
     if (localUsercode.length === 0) {
-      returnValue2 = false;
+      value2 = false;
       setGlobalState("displayLocalPartIdWarning2", true);
     } else {
       setGlobalState("displayLocalPartIdWarning2", false);
-      returnValue2 = true;
+      value2 = true;
     }
 
-    if (returnValue1 === true && returnValue2 === true) {
-      returnValue = true;
+    if (value1 === true && value2 === true) {
+      value0 = true;
     } else {
-      returnValue = false;
+      value0 = false;
     }
 
-    return returnValue;
+    setReturnValue(value0);
+    return;
   };
-  let goToNextPage;
 
   const {
     history,
@@ -62,14 +63,14 @@ const LogInSubmitButton = (props) => {
 
   useEffect(() => {
     // clear local fields on load
-    setGlobalState("localParticipantName", "");
-    setGlobalState("localUsercode", "");
+    // setGlobalState("localParticipantName", "");
+    // setGlobalState("localUsercode", "");
 
     const handleKeyUpStart = (event) => {
       // let target;
+      checkForNextPageConditions();
       if (event.key === "Enter") {
-        goToNextPage = checkForNextPageConditions();
-        if (goToNextPage) {
+        if (returnValue) {
           history.push(`/presort`);
         }
       }
@@ -78,15 +79,22 @@ const LogInSubmitButton = (props) => {
     window.addEventListener("keyup", handleKeyUpStart);
 
     return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, [history]);
+  }, [history, returnValue]);
+
+  useEffect(() => {
+    setGlobalState("localParticipantName", "");
+    setGlobalState("localUsercode", "");
+    setGlobalState("displayLocalPartIdWarning1", false);
+    setGlobalState("displayLocalPartIdWarning2", false);
+  }, []);
 
   return (
     <StyledSubmitButton
       {...rest} // `children` is just another prop!
       onClick={(event) => {
         onClick && onClick(event);
-        goToNextPage = checkForNextPageConditions();
-        if (goToNextPage) {
+        checkForNextPageConditions();
+        if (returnValue) {
           history.push(to);
         }
       }}

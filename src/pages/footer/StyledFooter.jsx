@@ -46,6 +46,10 @@ const StyledFooter = () => {
     displayNextButton = false;
   }
 
+  if (configObj.firebaseOrLocal === "local") {
+    displayNextButton = false;
+  }
+
   if (currentPage === "presort") {
     showAdjustmentContainer = true;
     showCardHeightSizer = false;

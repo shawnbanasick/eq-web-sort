@@ -26,12 +26,10 @@ const LogInScreen = () => {
   const headerText = `${storedQsortsHeaderText}: 17 participants`;
 
   const handleInput = (e) => {
-    console.log(e.target.value);
     setGlobalState("localParticipantName", e.target.value);
   };
 
   const handleUsercodeInput = (e) => {
-    console.log(e.target.value);
     setGlobalState("localUsercode", e.target.value);
   };
 
