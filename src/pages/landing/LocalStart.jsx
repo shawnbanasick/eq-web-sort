@@ -51,18 +51,22 @@ const LogInScreen = () => {
         <div>
           <h3>{loginPartIdText}</h3>
           <StyledInputDiv>
-            <StyledInput onChange={handleInput} type="text" />
+            <StyledInput tabindex="0" onChange={handleInput} type="text" />
             {displayPartIdWarning1 && (
               <WarningText>{partIdWarning}</WarningText>
             )}
           </StyledInputDiv>
         </div>
-        <LocalStartButton to={`/presort`} />
+        <LocalStartButton tabindex="3" to={`/presort`} />
         <div>
           {" "}
           <h3>{usercodeText}</h3>
           <StyledInputDiv>
-            <StyledInput onChange={handleUsercodeInput} type="text" />
+            <StyledInput
+              tabindex="1"
+              onChange={handleUsercodeInput}
+              type="text"
+            />
             {displayPartIdWarning2 && (
               <WarningText>{partIdWarning}</WarningText>
             )}

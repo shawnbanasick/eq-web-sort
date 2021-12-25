@@ -98,7 +98,7 @@ const LogInSubmitButton = (props) => {
           history.push(to);
         }
       }}
-      tabindex="0"
+      tabindex="3"
     >
       {localStartButtonText}
     </StyledSubmitButton>
