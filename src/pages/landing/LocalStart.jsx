@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -10,22 +10,6 @@ import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 
 const LogInScreen = () => {
-  useEffect(() => {
-    console.log("test");
-    const handleKeyUpStart = (event) => {
-      console.log(event.key);
-      // let target;
-      if (event.key === "Enter") {
-        console.log("enter pressed");
-        //        target = "neg";
-      }
-    }; // end keyup
-
-    window.addEventListener("keyup", handleKeyUpStart);
-
-    return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, []);
-
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
 
   // setup language
@@ -99,7 +83,7 @@ const LogInScreen = () => {
             {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
           </StyledInputDiv>
         </div>
-        <LocalStartButton onClick={handleStart} />
+        <LocalStartButton onClick={handleStart} to={`/presort`} />
         <div>
           {" "}
           <h3>{usercodeText}</h3>

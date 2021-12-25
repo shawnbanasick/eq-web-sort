@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import { withRouter } from "react-router";
 
 const LogInSubmitButton = (props) => {
   const langObj = getGlobalState("langObj");
@@ -11,13 +12,54 @@ const LogInSubmitButton = (props) => {
     decodeHTML(langObj.localStartButtonText)
   );
 
+  const checkForNextPageConditions = () => {
+    return true;
+  };
+  let goToNextPage;
+
+  const {
+    history,
+    location,
+    match,
+    staticContext,
+    to,
+    onClick,
+    // ⬆ filtering out props that `button` doesn’t know what to do with.
+    ...rest
+  } = props;
+
+  useEffect(() => {
+    console.log("test");
+    const handleKeyUpStart = (event) => {
+      console.log(event.key);
+      // let target;
+      if (event.key === "Enter") {
+        history.push(`/presort`);
+      }
+    }; // end keyup
+
+    window.addEventListener("keyup", handleKeyUpStart);
+
+    return () => window.removeEventListener("keyup", handleKeyUpStart);
+  }, []);
+
   return (
-    <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>
+    <StyledSubmitButton
+      {...rest} // `children` is just another prop!
+      onClick={(event) => {
+        onClick && onClick(event);
+        goToNextPage = checkForNextPageConditions();
+        if (goToNextPage) {
+          history.push(to);
+        }
+      }}
+      tabindex="0"
+    >
       {localStartButtonText}
     </StyledSubmitButton>
   );
 };
-export default view(LogInSubmitButton);
+export default view(withRouter(LogInSubmitButton));
 
 const StyledSubmitButton = styled.button`
   border-color: #2e6da4;

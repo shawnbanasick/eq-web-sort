@@ -20,7 +20,7 @@
         <item id="usercodeText">{{{div}}}Usercode{{{/div}}}</item>
         <item id="localStartButtonText">{{{div}}}Start Q-sort{{{/div}}}</item>
         <item id="localDeleteButtonText">{{{div}}}Delete{{{/div}}}</item>
-        <item id="localDownloadButtonText">{{{div}}}Download Q-sort Data{{{/div}}}</item>
+        <item id="localDownloadButtonText">{{{div}}}Save Q-sort Data to Disk{{{/div}}}</item>
         <item id="storedQsortsHeaderText">Stored Q-sorts</item>
 
 
