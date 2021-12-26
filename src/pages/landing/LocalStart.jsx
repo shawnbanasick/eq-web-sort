@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
@@ -8,6 +8,19 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
+import LocalDeleteModal from "./LocalDeleteModal";
+
+function downloadObjectAsJson(exportObj, exportName) {
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement("a");
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", exportName + ".json");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
 
 const LogInScreen = () => {
   const displayPartIdWarning1 = getGlobalState("displayLocalPartIdWarning1");
@@ -19,11 +32,30 @@ const LogInScreen = () => {
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
   const usercodeText = ReactHtmlParser(decodeHTML(langObj.usercodeText));
+  const localParticipantsText = ReactHtmlParser(
+    decodeHTML(langObj.localParticipantsText)
+  );
   const storedQsortsHeaderText = ReactHtmlParser(
     decodeHTML(langObj.storedQsortsHeaderText)
   );
 
-  const headerText = `${storedQsortsHeaderText}: 17 participants`;
+  let localStoredQsortsFromLocalStorage;
+
+  useEffect(() => {
+    localStoredQsortsFromLocalStorage = JSON.parse(
+      localStorage.getItem("localStoredQsorts")
+    );
+    if (!localStoredQsortsFromLocalStorage) {
+      localStoredQsortsFromLocalStorage = [];
+    }
+    setGlobalState("localStoredQsorts", localStoredQsortsFromLocalStorage);
+  }, [localStoredQsortsFromLocalStorage]);
+
+  console.log(localStoredQsortsFromLocalStorage);
+
+  const localStoredQsorts = getGlobalState("localStoredQsorts");
+
+  const headerText = `${storedQsortsHeaderText}: ${localStoredQsorts.length} ${localParticipantsText}`;
 
   const handleInput = (e) => {
     setGlobalState("localParticipantName", e.target.value);
@@ -35,14 +67,21 @@ const LogInScreen = () => {
 
   const handleDeleteLocal = (e) => {
     console.log("delete clicked");
+    setGlobalState("triggerLocalDeleteModal", true);
   };
   const handleDownloadLocal = (e) => {
+    const exportObj = JSON.parse(localStorage.getItem("localStoredQsorts"));
+    const exportName = "Qsorts";
+    if (exportObj.length > 0) {
+      downloadObjectAsJson(exportObj, exportName);
+    }
     console.log("download clicked");
   };
 
   return (
     <>
       <Container>
+        <LocalDeleteModal />
         <div>
           <h2>{loginHeaderText}</h2>
           <StyledHr />
@@ -74,7 +113,9 @@ const LogInScreen = () => {
         </div>
       </Container>
       <Container2>
-        <StoredHeader>{headerText}</StoredHeader>
+        <StoredHeader>
+          <div>{headerText}</div>
+        </StoredHeader>
         <ButtonContainer>
           <LocalDeleteButton onClick={handleDeleteLocal}>
             Delete
