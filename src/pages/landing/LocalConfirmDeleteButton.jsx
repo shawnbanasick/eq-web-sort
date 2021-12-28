@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import setGlobalState from "../../globalState/setGlobalState";
 import useStore from "../../globalState/useStore";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LogInSubmitButton = (props) => {
   // State
   const setDisplayLocalDeleteModal = useStore(
     (state) => state.setLocalDeleteModal
   );
+  const langObj = useSettingsStore((state) => state.langObj);
 
-  const langObj = getGlobalState("langObj");
   const localDeleteButtonText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteButtonText)
   );

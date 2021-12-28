@@ -5,13 +5,13 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import LocalConfirmDeleteButton from "./LocalConfirmDeleteButton";
 import useStore from "../../globalState/useStore";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LocalDeleteModal = () => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
 
   const localDeleteModalHead = ReactHtmlParser(
     decodeHTML(langObj.localDeleteModalHead)

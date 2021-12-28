@@ -7,9 +7,12 @@ import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import setGlobalState from "../../globalState/setGlobalState";
 import useStore from "../../globalState/useStore";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LogInSubmitButton = (props) => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const localStartButtonText = ReactHtmlParser(
     decodeHTML(langObj.localStartButtonText)
   );
