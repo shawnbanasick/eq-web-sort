@@ -20,6 +20,10 @@ const SortGrid = (props) => {
   const configObj = useSettingsStore((state) => state.configObj);
   const mapObj = useSettingsStore((state) => state.mapObj);
 
+  const greenCardColor = configObj.greenCardColor;
+  const yellowCardColor = configObj.yellowCardColor;
+  const pinkCardColor = configObj.pinkCardColor;
+
   // MAP out SORT COLUMNS component before render
   // code inside render so that column lists update automatically
   const qSortHeaders = [...mapObj.qSortHeaders];
@@ -213,6 +217,9 @@ const SortGrid = (props) => {
         cardFontSize={cardFontSize}
         qSortHeaderNumber={qSortHeaderNumbers[index]}
         columnHeadersColor={columnHeadersColorsArray[index]}
+        greenCardColor={greenCardColor}
+        yellowCardColor={yellowCardColor}
+        pinkCardColor={pinkCardColor}
       />
     );
   }); // end map of sort columns

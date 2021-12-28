@@ -6,19 +6,20 @@ const getItemStyle = (
   cardWidth,
   cardHeight,
   cardFontSize,
-  cardColor
+  cardColor,
+  greenCardColor,
+  yellowCardColor,
+  pinkCardColor
 ) => {
-  const configObj = getGlobalState("configObj");
-
   let newCardColor;
   if (cardColor === "greenSortCard") {
-    newCardColor = configObj.greenCardColor;
+    newCardColor = greenCardColor;
   }
   if (cardColor === "yellowSortCard") {
-    newCardColor = configObj.yellowCardColor;
+    newCardColor = yellowCardColor;
   }
   if (cardColor === "pinkSortCard") {
-    newCardColor = configObj.pinkCardColor;
+    newCardColor = pinkCardColor;
   }
 
   return {
