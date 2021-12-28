@@ -7,6 +7,7 @@ import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PresortModal = () => {
   // trigger
@@ -15,8 +16,9 @@ const PresortModal = () => {
     setGlobalState("triggerPresortModal", false);
   };
 
-  // set language
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead));
   const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText));
 

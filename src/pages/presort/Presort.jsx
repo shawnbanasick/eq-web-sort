@@ -13,6 +13,7 @@ import PresortIsComplete from "./PresortIsComplete";
 import PleaseLogInFirst from "./PleaseLogInFirst";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PresortPage = (props) => {
   // set progress score and current page
@@ -31,17 +32,18 @@ const PresortPage = (props) => {
     };
   }, []);
 
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = getGlobalState("configObj");
+
   const columnStatements = getGlobalState("columnStatements");
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
-  const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const presortNoReturn = getGlobalState("presortNoReturn");
   const initialScreen = configObj.initialScreen;
   const isLoggedIn = getGlobalState("isLoggedIn");
 
-  // language setup
-  const langObj = getGlobalState("langObj");
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
   // early return if log-in required and not logged in

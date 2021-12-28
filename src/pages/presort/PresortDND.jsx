@@ -6,10 +6,13 @@ import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 function PresortDND(props) {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const configObj = getGlobalState("configObj");
+
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
   const btnDisagreement = ReactHtmlParser(
     decodeHTML(langObj.presortDisagreement)

@@ -7,10 +7,13 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PostsortHelpModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const triggerPostsortModal = getGlobalState("triggerPostsortModal");
-  const langObj = getGlobalState("langObj");
 
   const postsortHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.postsortModalHead)

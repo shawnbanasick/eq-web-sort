@@ -7,10 +7,13 @@ import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PresortPreventNavModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const triggerModalOpen = getGlobalState("triggerPresortPreventNavModal");
-  const langObj = getGlobalState("langObj");
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.presortPreventNavModalHead)

@@ -5,14 +5,17 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import getGlobalState from "../../globalState/getGlobalState";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PresortIsComplete = () => {
   useEffect(() => {
     setGlobalState("currentPage", "presort");
   }, []);
 
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const configObj = getGlobalState("configObj");
+
   const headerBarColor = configObj.headerBarColor;
   const mainText = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
