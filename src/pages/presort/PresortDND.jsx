@@ -187,12 +187,12 @@ function PresortDND(props) {
       let target;
       if (event.key === "1" || event.key === 1) {
         target = "neg";
-      }
-      if (event.key === "2" || event.key === 2) {
+      } else if (event.key === "2" || event.key === 2) {
         target = "neutral";
-      }
-      if (event.key === "3" || event.key === 3) {
+      } else if (event.key === "3" || event.key === 3) {
         target = "pos";
+      } else {
+        return;
       }
 
       if (columns.cards.items.length > 0) {

@@ -13,16 +13,12 @@ const LogInSubmitButton = (props) => {
     decodeHTML(langObj.localStartButtonText)
   );
 
-  const [returnValue, setReturnValue] = useState(false);
-
   const checkForNextPageConditions = () => {
-    let value0;
+    let value0 = false;
     let value1;
     let value2;
     let localParticipantName = getGlobalState("localParticipantName");
-    console.log(localParticipantName);
     let localUsercode = getGlobalState("localUsercode");
-    console.log(localUsercode);
 
     if (localParticipantName.length === 0) {
       value1 = false;
@@ -46,8 +42,7 @@ const LogInSubmitButton = (props) => {
       value0 = false;
     }
 
-    setReturnValue(value0);
-    return;
+    return value0;
   };
 
   const {
@@ -68,9 +63,9 @@ const LogInSubmitButton = (props) => {
 
     const handleKeyUpStart = (event) => {
       // let target;
-      checkForNextPageConditions();
       if (event.key === "Enter") {
-        if (returnValue) {
+        let isInputComplete = checkForNextPageConditions();
+        if (isInputComplete) {
           history.push(`/presort`);
         }
       }
@@ -79,7 +74,7 @@ const LogInSubmitButton = (props) => {
     window.addEventListener("keyup", handleKeyUpStart);
 
     return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, [history, returnValue]);
+  }, [history]);
 
   useEffect(() => {
     setGlobalState("localParticipantName", "");
@@ -93,8 +88,8 @@ const LogInSubmitButton = (props) => {
       {...rest} // `children` is just another prop!
       onClick={(event) => {
         onClick && onClick(event);
-        checkForNextPageConditions();
-        if (returnValue) {
+        let isInputComplete = checkForNextPageConditions();
+        if (isInputComplete) {
           history.push(to);
         }
       }}

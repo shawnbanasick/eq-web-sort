@@ -25,8 +25,25 @@ const StyledFooter = () => {
 
   // setup language
   const langObj = getGlobalState("langObj");
-  const logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
+  let logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
+
+  if (currentPage === "sort" && configObj.firebaseOrLocal === "local") {
+    const usercode = getGlobalState("localUsercode");
+    const projectName = configObj.studyTitle;
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    const time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + " " + time;
+
+    logoHtml = `${usercode} - ${projectName} - ${dateTime}`;
+  }
 
   // todo - fix properly so no escaping log in
   if (currentPage !== "landing") {
@@ -46,8 +63,10 @@ const StyledFooter = () => {
     displayNextButton = false;
   }
 
-  if (configObj.firebaseOrLocal === "local") {
+  if (configObj.firebaseOrLocal === "local" && currentPage === "landing") {
     displayNextButton = false;
+  } else {
+    displayNextButton = true;
   }
 
   if (currentPage === "presort") {
@@ -123,9 +142,11 @@ const ProgressBarDiv = styled.div`
 
 const LogoContainer = styled.div`
   padding-top: 5px;
+  padding-left: 5px;
   display: flex;
   justify-self: start;
   align-self: center;
+  text-align: center;
 `;
 
 const CenterDiv = styled.div`

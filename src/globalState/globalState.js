@@ -21,7 +21,7 @@ const globalState = store({
   isLoggedIn: false,
   localParticipantName: "",
   localUsercode: "",
-  localStoredQsorts: [],
+  localStoredQsorts: {},
   overloadedColumn: "",
   partId: "anonymous",
   presortPosCards: [],

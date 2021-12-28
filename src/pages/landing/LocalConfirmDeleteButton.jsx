@@ -14,8 +14,8 @@ const LogInSubmitButton = (props) => {
 
   const clearLocalStorage = () => {
     console.log("deleted localStorage");
-    localStorage.setItem("localStoredQsorts", JSON.stringify([]));
-    setGlobalState("localStoredQsorts", []);
+    localStorage.setItem("localStoredQsorts", JSON.stringify({}));
+    setGlobalState("localStoredQsorts", {});
   };
 
   return (

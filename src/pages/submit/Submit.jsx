@@ -9,6 +9,7 @@ import getGlobalState from "../../globalState/getGlobalState";
 import calculatePostsortResults from "./calculatePostsortResults";
 import SubmitFallback from "./SubmitFallback";
 import { v4 as uuid } from "uuid";
+import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButton";
 
 const SubmitPage = () => {
   useEffect(() => {
@@ -110,22 +111,33 @@ const SubmitPage = () => {
     );
   }
 
-  return (
-    <React.Fragment>
-      <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
-      <ContainerDiv>
-        <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
-        <SubmitButton results={transmissionResults} />
+  if (configObj.firebaseOrLocal === "local") {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <SaveLocalDataToLocalStorageButton results={transmissionResults} />
+        </ContainerDiv>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <SubmitButton results={transmissionResults} />
 
-        {displaySubmitFallback ? (
-          <SubmitFallback results={transmissionResults} />
-        ) : (
-          <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
-        )}
-      </ContainerDiv>
-      {/* <h1>test</h1> */}
-    </React.Fragment>
-  );
+          {displaySubmitFallback ? (
+            <SubmitFallback results={transmissionResults} />
+          ) : (
+            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+          )}
+        </ContainerDiv>
+        {/* <h1>test</h1> */}
+      </React.Fragment>
+    );
+  }
 };
 
 export default view(SubmitPage);
@@ -175,3 +187,29 @@ const GoodbyeDiv = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+
+/*
+--- Example results object ---
+
+{
+  "projectName": "my Q study",
+  "partId": "anonymous",
+  "randomId": "367eee86-f28",
+  "usercode": "no usercode set",
+  "dateTime": "no data",
+  "timeLanding": "no data",
+  "timePresort": "no data",
+  "timeSort": "no data",
+  "timePostsort": "no data",
+  "timeSurvey": "no data",
+  "npos": 0,
+  "nneu": 0,
+  "nneg": 0,
+  "column4_1": "no response",
+  "column4_2": "no response",
+  "columnN4_1": "no response",
+  "columnN4_2": "no response",
+  "sort": "no data"
+}
+SubmitButton.jsx:60 
+*/

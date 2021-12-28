@@ -46,23 +46,26 @@ const LogInScreen = () => {
       localStorage.getItem("localStoredQsorts")
     );
     if (!localStoredQsortsFromLocalStorage) {
-      localStoredQsortsFromLocalStorage = [];
+      localStoredQsortsFromLocalStorage = {};
     }
     setGlobalState("localStoredQsorts", localStoredQsortsFromLocalStorage);
   }, [localStoredQsortsFromLocalStorage]);
-
   console.log(localStoredQsortsFromLocalStorage);
 
   const localStoredQsorts = getGlobalState("localStoredQsorts");
 
-  const headerText = `${storedQsortsHeaderText}: ${localStoredQsorts.length} ${localParticipantsText}`;
+  const headerText = `${storedQsortsHeaderText}: ${
+    Object.keys(localStoredQsorts).length
+  } ${localParticipantsText}`;
 
   const handleInput = (e) => {
     setGlobalState("localParticipantName", e.target.value);
+    setGlobalState("displayLocalPartIdWarning1", false);
   };
 
   const handleUsercodeInput = (e) => {
     setGlobalState("localUsercode", e.target.value);
+    setGlobalState("displayLocalPartIdWarning2", false);
   };
 
   const handleDeleteLocal = (e) => {
