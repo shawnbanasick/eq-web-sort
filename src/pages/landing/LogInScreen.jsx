@@ -6,9 +6,12 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LogInScreen = () => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");

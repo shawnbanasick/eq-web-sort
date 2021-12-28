@@ -4,9 +4,12 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LogInScreen = () => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
 

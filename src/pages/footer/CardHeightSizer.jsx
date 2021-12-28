@@ -5,9 +5,11 @@ import setGlobalState from "../../globalState/setGlobalState";
 import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const CardHeightSizer = () => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const cardHeightText = ReactHtmlParser(decodeHTML(langObj.cardHeightText));
 
   const increaseFontSize = () => {

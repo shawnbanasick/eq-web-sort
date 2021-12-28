@@ -6,12 +6,13 @@ import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LogInScreen = () => {
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
 
-  // setup language
-  const langObj = getGlobalState("langObj");
+  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));

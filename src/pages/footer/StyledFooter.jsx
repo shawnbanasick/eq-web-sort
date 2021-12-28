@@ -11,10 +11,13 @@ import decodeHTML from "../../utilities/decodeHTML";
 import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
 import getNextPage from "./getNextPage";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const StyledFooter = () => {
-  // setup configs
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const configObj = getGlobalState("configObj");
+
   const initialScreenSetting = configObj.initialScreen;
   let displayNextButton = getGlobalState("displayNextButton");
   const currentPage = getGlobalState("currentPage");
@@ -23,8 +26,6 @@ const StyledFooter = () => {
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
 
-  // setup language
-  const langObj = getGlobalState("langObj");
   let logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 

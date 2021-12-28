@@ -45,9 +45,6 @@ const LogInScreen = () => {
   const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
   const langObj = useSettingsStore((state) => state.langObj);
 
-  // setup language
-  // const langObj = getGlobalState("langObj");
-
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));

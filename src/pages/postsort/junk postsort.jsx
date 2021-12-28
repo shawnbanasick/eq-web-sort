@@ -1,5 +1,4 @@
 import setGlobalState from "../../globalState/setGlobalState";
-// import globalState from "../../globalState/globalState";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 

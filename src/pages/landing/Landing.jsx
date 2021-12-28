@@ -14,6 +14,7 @@ import checkForIeBrowser from "./checkForIeBrowser";
 import InternetExplorerWarning from "./InternetExplorerWarning";
 import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -40,12 +41,12 @@ const LandingPage = () => {
     };
   }, []);
 
-  // config options
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
 
-  // language options
-  const langObj = getGlobalState("langObj");
   const dataLoaded = getGlobalState("dataLoaded");
   const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));

@@ -6,17 +6,19 @@ import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
 import HighCards2 from "./HighCards2";
-// import NeutralCards from "./NeutralCards";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import decodeHTML from "../../utilities/decodeHTML";
 import ReactHtmlParser from "react-html-parser";
 import PostsortHelpModal from "./PostsortHelpModal";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 /* eslint react/prop-types: 0 */
 
 const PostSort = () => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const postsortInstructions = ReactHtmlParser(

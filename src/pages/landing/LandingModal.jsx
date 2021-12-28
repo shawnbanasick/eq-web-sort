@@ -7,10 +7,12 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const LandingModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const triggerLandingModal = getGlobalState("triggerLandingModal");
-  const langObj = getGlobalState("langObj");
 
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.landingHelpModalHead)
