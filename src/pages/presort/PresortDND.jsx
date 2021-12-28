@@ -7,6 +7,7 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 function PresortDND(props) {
   // STATE
@@ -14,6 +15,9 @@ function PresortDND(props) {
   const configObj = useSettingsStore((state) => state.configObj);
   const statementsObj = useSettingsStore((state) => state.statementsObj);
   const columnStatements = useSettingsStore((state) => state.columnStatements);
+  const presortSortedStatementsNumInitial = useStore(
+    (state) => state.presortSortedStatementsNumInitial
+  );
 
   const setColumnStatements = useSettingsStore(
     (state) => state.setColumnStatements
@@ -26,9 +30,7 @@ function PresortDND(props) {
   const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
 
-  let presortSortedStatementsNumInitial =
-    +getGlobalState("presortSortedStatementsNum") || 0;
-
+  // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
     presortSortedStatementsNumInitial
   );
@@ -132,11 +134,18 @@ function PresortDND(props) {
 
           destItems.splice(destination.index, 0, removed);
 
+          let sortedStatements;
           // calc remaining statements
           if (sourceColumn.id === "cards") {
+            sortedStatements =
+              statementsObj.totalStatements - sourceColumn.items.length + 1;
+
+            setPresortSortedStatementsNum(sortedStatements);
+            /*
             setPresortSortedStatementsNum(
-              configObj.totalStatements - sourceColumn.items.length + 1
+              statementsObj.totalStatements - sourceColumn.items.length + 1
             );
+
             setGlobalState(
               "presortSortedStatementsNum",
               presortSortedStatementsNum
@@ -147,13 +156,17 @@ function PresortDND(props) {
               "presortSortedStatementsNum",
               presortSortedStatementsNum.toString()
             );
+            */
           }
 
           // update progress bar
-          const sortedStatements = +getGlobalState(
+          /*  const sortedStatements = +getGlobalState(
             "presortSortedStatementsNum"
           );
+          */
+
           const ratio = sortedStatements / statementsObj.totalStatements;
+
           const completedPercent = (ratio * 30).toFixed();
           // update Progress Bar State
           setGlobalState("progressScoreAdditional", completedPercent);
@@ -249,7 +262,7 @@ function PresortDND(props) {
   return (
     <PresortGrid>
       <div id="completionRatio">
-        {presortSortedStatementsNum}/{configObj.totalStatements}
+        {presortSortedStatementsNum}/{statementsObj.totalStatements}
       </div>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
