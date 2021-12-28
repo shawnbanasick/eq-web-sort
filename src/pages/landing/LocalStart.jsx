@@ -10,6 +10,7 @@ import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 import LocalDeleteModal from "./LocalDeleteModal";
 import useStore from "../../globalState/useStore";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 function downloadObjectAsJson(exportObj, exportName) {
   var dataStr =
@@ -42,9 +43,11 @@ const LogInScreen = () => {
     (state) => state.setLocalPartIdWarning2
   );
   const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
+  const langObj = useSettingsStore((state) => state.langObj);
 
   // setup language
-  const langObj = getGlobalState("langObj");
+  // const langObj = getGlobalState("langObj");
+
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));

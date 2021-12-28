@@ -3,6 +3,7 @@ import setGlobalState from "../globalState/setGlobalState";
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
   const configObj = {};
+  let surveyQuestionArray;
 
   let surveyData = [];
   for (let i = 0; i < data.length; i++) {
@@ -52,7 +53,7 @@ const processConfigXMLData = (dataObject) => {
   // setup survey object
   const requiredAnswersObj = {};
   if (surveyData.length > 0) {
-    const surveyQuestionArray = [];
+    surveyQuestionArray = [];
     for (let j = 0; j < surveyData.length; j++) {
       let tempObj = {};
       // let tempObj2 = {};
@@ -221,6 +222,11 @@ const processConfigXMLData = (dataObject) => {
     setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
   }
+  let returnObj = {};
+  returnObj.requiredAnswersObj = requiredAnswersObj;
+  returnObj.configObj = configObj;
+  returnObj.surveyQuestionObjArray = surveyQuestionArray;
+  return returnObj;
 };
 
 export default processConfigXMLData;

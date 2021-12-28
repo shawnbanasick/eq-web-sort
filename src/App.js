@@ -17,11 +17,15 @@ import setGlobalState from "./globalState/setGlobalState";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
+import useSettingsStore from "./globalState/useSettingsStore";
 
 const convert = require("xml-js");
 
 function App() {
+  // STATE
   const [isLoading, setLoading] = useState(true);
+  const setConfigObj = useSettingsStore((state) => state.setConfigObj);
+  const setLangObj = useSettingsStore((state) => state.setLangObj);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +39,7 @@ function App() {
           let langObj = processLanguageXMLData(languageData);
           // localStorage.setItem("langObj", JSON.stringify(langObj));
           setGlobalState("langObj", langObj);
+          setLangObj(langObj);
         })
         .catch(function (error) {
           console.log(error);
@@ -47,7 +52,8 @@ function App() {
         .then(function (response) {
           const options = { compact: false, ignoreComment: true, spaces: 2 };
           const configData = convert.xml2js(response.data, options);
-          processConfigXMLData(configData);
+          let info = processConfigXMLData(configData);
+          setConfigObj(info.configObj);
         })
         .catch(function (error) {
           console.log(error);
