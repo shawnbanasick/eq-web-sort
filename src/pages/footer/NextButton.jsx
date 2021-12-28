@@ -5,73 +5,17 @@ import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import useSettingsStore from "../../globalState/useSettingsStore";
-
-const checkForNextPageConditions = (allowUnforcedSorts) => {
-  const currentPage = getGlobalState("currentPage");
-
-  if (currentPage === "presort") {
-    let isPresortFinished = getGlobalState("presortFinished");
-    if (isPresortFinished === false) {
-      setGlobalState("triggerPresortPreventNavModal", true);
-      return false;
-    } else {
-      return true;
-    }
-  }
-  if (currentPage === "sort") {
-    const isSortingFinished = getGlobalState("sortFinished");
-    if (isSortingFinished === false) {
-      // not finished sorting
-      setGlobalState("triggerSortPreventNavModal", true);
-      return false;
-    } else {
-      const hasOverloadedColumn = getGlobalState("hasOverloadedColumn");
-      // has finished sorting
-      if (allowUnforcedSorts === true) {
-        // unforced ok -> allow nav
-        setGlobalState("triggerSortPreventNavModal", false);
-        return true;
-      } else {
-        // unforced not ok -> allow nav if no overloaded columns
-        if (hasOverloadedColumn === true) {
-          setGlobalState("triggerSortOverloadedColumnModal", true);
-          return false;
-        } else {
-          setGlobalState("triggerSortPreventNavModal", false);
-          return true;
-        }
-      }
-    }
-  }
-
-  if (currentPage === "survey") {
-    const requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const checkArray = [];
-    const keys = Object.keys(requiredAnswersObj);
-    for (let i = 0; i < keys.length; i++) {
-      if (requiredAnswersObj[keys[i]] === "no response") {
-        checkArray.push("false");
-      }
-    }
-
-    if (checkArray.length > 0) {
-      // to turn on pink color for unanswered
-      setGlobalState("checkRequiredQuestionsComplete", true);
-      setGlobalState("triggerSurveyPreventNavModal", true);
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  // for pages without checks
-  return true;
-};
+import useStore from "../../globalState/useStore";
 
 const LinkButton = (props) => {
   let goToNextPage;
 
   const configObj = useSettingsStore((state) => state.configObj);
+  const presortFinished = useStore((state) => state.presortFinished);
+  const setTriggerPresortPreventNavModal = useStore(
+    (state) => state.setTriggerPresortPreventNavModal
+  );
+
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
   const {
@@ -85,12 +29,79 @@ const LinkButton = (props) => {
     ...rest
   } = props;
 
+  const checkForNextPageConditions = (
+    allowUnforcedSorts,
+    isPresortFinished
+  ) => {
+    const currentPage = getGlobalState("currentPage");
+
+    if (currentPage === "presort") {
+      if (isPresortFinished === false) {
+        setTriggerPresortPreventNavModal(true);
+        return false;
+      } else {
+        return true;
+      }
+    }
+    if (currentPage === "sort") {
+      const isSortingFinished = getGlobalState("sortFinished");
+      if (isSortingFinished === false) {
+        // not finished sorting
+        setGlobalState("triggerSortPreventNavModal", true);
+        return false;
+      } else {
+        const hasOverloadedColumn = getGlobalState("hasOverloadedColumn");
+        // has finished sorting
+        if (allowUnforcedSorts === true) {
+          // unforced ok -> allow nav
+          setGlobalState("triggerSortPreventNavModal", false);
+          return true;
+        } else {
+          // unforced not ok -> allow nav if no overloaded columns
+          if (hasOverloadedColumn === true) {
+            setGlobalState("triggerSortOverloadedColumnModal", true);
+            return false;
+          } else {
+            setGlobalState("triggerSortPreventNavModal", false);
+            return true;
+          }
+        }
+      }
+    }
+
+    if (currentPage === "survey") {
+      const requiredAnswersObj = getGlobalState("requiredAnswersObj");
+      const checkArray = [];
+      const keys = Object.keys(requiredAnswersObj);
+      for (let i = 0; i < keys.length; i++) {
+        if (requiredAnswersObj[keys[i]] === "no response") {
+          checkArray.push("false");
+        }
+      }
+
+      if (checkArray.length > 0) {
+        // to turn on pink color for unanswered
+        setGlobalState("checkRequiredQuestionsComplete", true);
+        setGlobalState("triggerSurveyPreventNavModal", true);
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    // for pages without checks
+    return true;
+  };
+
   return (
     <NextButton
       {...rest} // `children` is just another prop!
       onClick={(event) => {
         onClick && onClick(event);
-        goToNextPage = checkForNextPageConditions(allowUnforcedSorts);
+        goToNextPage = checkForNextPageConditions(
+          allowUnforcedSorts,
+          presortFinished
+        );
         if (goToNextPage) {
           history.push(to);
         }

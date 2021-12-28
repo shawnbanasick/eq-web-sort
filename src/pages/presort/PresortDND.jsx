@@ -18,9 +18,13 @@ function PresortDND(props) {
   const presortSortedStatementsNumInitial = useStore(
     (state) => state.presortSortedStatementsNumInitial
   );
-
   const setColumnStatements = useSettingsStore(
     (state) => state.setColumnStatements
+  );
+
+  const setPresortFinished = useStore((state) => state.setPresortFinished);
+  const setTriggerPresortFinishedModal = useStore(
+    (state) => state.setTriggerPresortFinishedModal
   );
 
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
@@ -253,10 +257,14 @@ function PresortDND(props) {
 
   useEffect(() => {
     if (columns.cards.items.length === 0) {
-      setGlobalState("presortFinished", true);
-      setGlobalState("triggerPresortFinishedModal", true);
+      setPresortFinished(true);
+      setTriggerPresortFinishedModal(true);
     }
-  }, [columns.cards.items.length]);
+  }, [
+    columns.cards.items.length,
+    setPresortFinished,
+    setTriggerPresortFinishedModal,
+  ]);
 
   // RENDER COMPONENT
   return (

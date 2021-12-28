@@ -8,12 +8,17 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortPreventNavModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerModalOpen = getGlobalState("triggerPresortPreventNavModal");
+  const triggerModalOpen = useStore(
+    (state) => state.triggerPresortPreventNavModal
+  );
+  const setTriggerPresortPreventNavModal = useStore(
+    (state) => state.setTriggerPresortPreventNavModal
+  );
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.presortPreventNavModalHead)
@@ -24,7 +29,7 @@ const PresortPreventNavModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerPresortPreventNavModal", false);
+    setTriggerPresortPreventNavModal(false);
   };
 
   return (

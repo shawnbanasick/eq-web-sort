@@ -8,6 +8,7 @@ const createPresortSlice = (set, get) => ({
   presortSortedStatementsNumInitial: 0,
   presortFinished: false,
   triggerPresortFinishedModal: false,
+  triggerPresortPreventNavModal: false,
 
   setCardFontSize: (inputValue) => {
     set(() => ({ cardFontSize: inputValue }));
@@ -35,6 +36,9 @@ const createPresortSlice = (set, get) => ({
   },
   setTriggerPresortFinishedModal: (bool) => {
     set(() => ({ triggerPresortFinishedModal: bool }));
+  },
+  setTriggerPresortPreventNavModal: (bool) => {
+    set(() => ({ triggerPresortPreventNavModal: bool }));
   },
 });
 
