@@ -24,11 +24,15 @@ const convert = require("xml-js");
 function App() {
   // STATE
   const [isLoading, setLoading] = useState(true);
+
   const setConfigObj = useSettingsStore((state) => state.setConfigObj);
   const setLangObj = useSettingsStore((state) => state.setLangObj);
   const setMapObj = useSettingsStore((state) => state.setMapObj);
+  const setStatementsObj = useSettingsStore((state) => state.setStatementsObj);
 
   useEffect(() => {
+    let shuffleCards;
+
     (async () => {
       await axios
         .get("./settings/language.xml", {
@@ -54,6 +58,7 @@ function App() {
           const options = { compact: false, ignoreComment: true, spaces: 2 };
           const configData = convert.xml2js(response.data, options);
           let info = processConfigXMLData(configData);
+          shuffleCards = info.shuffleCards;
           setConfigObj(info.configObj);
         })
         .catch(function (error) {
@@ -81,8 +86,12 @@ function App() {
         .then(function (response) {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const statementsData = convert.xml2js(response.data, options);
-          const columnStatements = processStatementsXMLData(statementsData);
-          setGlobalState("columnStatements", columnStatements);
+          const statementsObj = processStatementsXMLData(
+            statementsData,
+            shuffleCards
+          );
+          setGlobalState("columnStatements", statementsObj.columnStatements);
+          setStatementsObj(statementsObj);
         })
         .catch(function (error) {
           console.log(error);
@@ -94,7 +103,7 @@ function App() {
         setLoading(false);
       }, 700);
     })();
-  }, []);
+  }, [setConfigObj, setLangObj, setStatementsObj, setMapObj]);
 
   if (isLoading) {
     return <LoadingScreen />;

@@ -12,6 +12,12 @@ function PresortDND(props) {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const statementsObj = useSettingsStore((state) => state.statementsObj);
+  const columnStatements = useSettingsStore((state) => state.columnStatements);
+
+  const setColumnStatements = useSettingsStore(
+    (state) => state.setColumnStatements
+  );
 
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
   const btnDisagreement = ReactHtmlParser(
@@ -104,7 +110,8 @@ function PresortDND(props) {
 
         // save to memory
         columnStatements.statementList = [...statementsArray];
-        setGlobalState("columnStatements", columnStatements);
+        console.log(JSON.stringify(columnStatements));
+        setColumnStatements(columnStatements);
 
         // when dropped on different droppable
         if (source.droppableId !== destination.droppableId) {
@@ -148,7 +155,7 @@ function PresortDND(props) {
           const sortedStatements = +getGlobalState(
             "presortSortedStatementsNum"
           );
-          const ratio = sortedStatements / configObj.totalStatements;
+          const ratio = sortedStatements / statementsObj.totalStatements;
           const completedPercent = (ratio * 30).toFixed();
           // update Progress Bar State
           setGlobalState("progressScoreAdditional", completedPercent);

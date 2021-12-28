@@ -19,7 +19,8 @@ const SubmitPage = () => {
 
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
+
   const displaySubmitFallback = getGlobalState("displaySubmitFallback");
 
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);

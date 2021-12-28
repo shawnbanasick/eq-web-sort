@@ -1,5 +1,3 @@
-import getGlobalState from "../../globalState/getGlobalState";
-
 const getItemStyle = (
   isDragging,
   draggableStyle,

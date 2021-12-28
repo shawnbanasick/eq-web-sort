@@ -32,7 +32,7 @@ function debounce(fn, ms) {
 const Sort = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
 
   const cardFontSize = getGlobalState("cardFontSize");
   const headerBarColor = configObj.headerBarColor;

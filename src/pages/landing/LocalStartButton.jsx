@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
@@ -91,7 +91,7 @@ const LogInSubmitButton = (props) => {
     window.addEventListener("keyup", handleKeyUpStart);
 
     return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, [history]);
+  }, [history, checkForNextPageConditions]);
 
   useEffect(() => {
     setGlobalState("localParticipantName", "");

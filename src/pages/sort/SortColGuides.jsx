@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 import { v4 as uuid } from "uuid";
-// import setGlobalState from "../../globalState/setGlobalState";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SortColGuides = (props) => {
-  const configObj = getGlobalState("configObj");
-  const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
-  const columnHeadersColorsArray = [...configObj.columnHeadersColorsArray];
+  // STATE
+  const mapObj = useSettingsStore((state) => state.mapObj);
+
+  const qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
+  const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   let columnWidth = +props.columnWidth + 11;
 
   return (

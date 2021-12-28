@@ -23,7 +23,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const SurveyPage = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");

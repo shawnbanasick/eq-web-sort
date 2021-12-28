@@ -1,9 +1,6 @@
 import setGlobalState from "../globalState/setGlobalState";
-import getGlobalState from "../globalState/getGlobalState";
 
 const processMapXMLData = (dataObject) => {
-  const configObj = getGlobalState("configObj");
-
   const mapObj = {};
   const data = dataObject.map;
   const vColsObj = {};
@@ -41,21 +38,18 @@ const processMapXMLData = (dataObject) => {
       splitArray = value.split(",");
     }
     mapObj[key] = splitArray;
-    configObj[key] = splitArray;
   }
 
   // create converter object for postsort
   const postsortConvertObj = {};
-  const headerNumbers = [...configObj.qSortHeaders];
+  const headerNumbers = [...mapObj.qSortHeaders];
   for (let j = 0; j < headerNumbers.length; j++) {
     let key = `column${headerNumbers[j]}`;
-    postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
+    postsortConvertObj[key] = mapObj.qSortHeaderNumbers[j];
   }
-  configObj.postsortConvertObj = postsortConvertObj;
   mapObj.postsortConvertObj = postsortConvertObj;
 
   setGlobalState("vColsObj", vColsObj);
-  setGlobalState("configObj", configObj);
   const returnObj = {};
   returnObj.vColsObj = vColsObj;
   returnObj.mapObj = mapObj;

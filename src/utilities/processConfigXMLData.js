@@ -48,7 +48,7 @@ const processConfigXMLData = (dataObject) => {
     }
   }
 
-  setGlobalState("configObj", configObj);
+  // setGlobalState("configObj", configObj);
 
   // setup survey object
   const requiredAnswersObj = {};
@@ -219,13 +219,15 @@ const processConfigXMLData = (dataObject) => {
       }
     }
     setGlobalState("requiredAnswersObj", requiredAnswersObj);
-    setGlobalState("configObj", configObj);
+    // setGlobalState("configObj", configObj);
     setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
   }
   let returnObj = {};
+  let shuffleCards = configObj?.shuffleCards;
   returnObj.requiredAnswersObj = requiredAnswersObj;
   returnObj.configObj = configObj;
   returnObj.surveyQuestionObjArray = surveyQuestionArray;
+  returnObj.shuffleCards = shuffleCards;
   return returnObj;
 };
 

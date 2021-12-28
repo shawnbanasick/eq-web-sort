@@ -4,7 +4,6 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import getGlobalState from "../../globalState/getGlobalState";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
 const PresortIsComplete = () => {

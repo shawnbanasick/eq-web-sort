@@ -19,6 +19,10 @@ const PostSort = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const mapObj = useSettingsStore((state) => state.mapObj);
+
+  console.log("conf: ", JSON.stringify(configObj, null, 2));
+  console.log("map: ", JSON.stringify(mapObj, null, 2));
 
   const headerBarColor = configObj.headerBarColor;
   const postsortInstructions = ReactHtmlParser(
@@ -48,7 +52,7 @@ const PostSort = () => {
   // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
   const placeholder = langObj.placeholder;
 
-  const keys = Object.keys(configObj.postsortConvertObj);
+  const keys = Object.keys(mapObj.postsortConvertObj);
   const agreeColDisp1 = keys.pop();
   const agreeColDisp2 = keys.pop();
   const disagreeColDisp1 = keys.shift();
@@ -81,11 +85,11 @@ const PostSort = () => {
   disagreeObj.displaySecondColumn = showSecondNegColumn;
   disagreeObj.placeholder = placeholder;
 
-  // const highCards = columnStatements.vCols[agreeObj.columnDisplay];
-  const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
+  const highCards = columnStatements?.vCols[agreeObj.columnDisplay];
+  const highCards2 = columnStatements?.vCols[agreeObj.columnDisplay2];
   // const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
-  const lowCards = columnStatements.vCols[disagreeObj.columnDisplay];
-  const lowCards2 = columnStatements.vCols[disagreeObj.columnDisplay2];
+  const lowCards = columnStatements?.vCols[disagreeObj.columnDisplay];
+  const lowCards2 = columnStatements?.vCols[disagreeObj.columnDisplay2];
 
   return (
     <div>

@@ -1,5 +1,3 @@
-import getGlobalState from "../../globalState/getGlobalState";
-
 const getNextPage = (currentPage, showPostsort, showSurvey) => {
   if (showPostsort === true && showSurvey === true) {
     if (currentPage === "landing") {

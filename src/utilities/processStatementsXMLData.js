@@ -3,9 +3,7 @@ import getGlobalState from "../globalState/getGlobalState";
 import shuffle from "lodash/shuffle";
 
 // prep column setup array
-const processStatementsXMLData = (dataObject) => {
-  const configObj = getGlobalState("configObj");
-  const shuffleCards = configObj.shuffleCards;
+const processStatementsXMLData = (dataObject, shuffleCards) => {
   const data = dataObject.statements.statement;
   let statementsArray = [];
 
@@ -29,8 +27,8 @@ const processStatementsXMLData = (dataObject) => {
     statementsArray = [...shuffledCards];
   }
 
-  configObj.totalStatements = statementsArray.length;
-  setGlobalState("configObj", configObj);
+  let totalStatements = statementsArray.length;
+  // setGlobalState("configObj", configObj);
 
   const columnStatements = {};
   const vColsObj = getGlobalState("vColsObj");
@@ -40,7 +38,10 @@ const processStatementsXMLData = (dataObject) => {
 
   setGlobalState("columnStatements", columnStatements);
   localStorage.setItem("hasBeenLoaded", true);
-  return columnStatements;
+  const returnObj = {};
+  returnObj.columnStatements = columnStatements;
+  returnObj.totalStatements = totalStatements;
+  return returnObj;
 };
 
 export default processStatementsXMLData;

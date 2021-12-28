@@ -35,8 +35,10 @@ const PresortPage = (props) => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const statementsObj = useSettingsStore((state) => state.statementsObj);
 
-  const columnStatements = getGlobalState("columnStatements");
+  // const columnStatements = getGlobalState("columnStatements");
+  const columnStatements = statementsObj.columnStatements;
   const statements = cloneDeep(columnStatements.statementList);
   const cardFontSize = getGlobalState("cardFontSize");
   const headerBarColor = configObj.headerBarColor;
