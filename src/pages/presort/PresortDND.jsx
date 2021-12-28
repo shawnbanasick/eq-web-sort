@@ -11,7 +11,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 function PresortDND(props) {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
 
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
   const btnDisagreement = ReactHtmlParser(

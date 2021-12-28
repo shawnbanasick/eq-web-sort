@@ -34,7 +34,7 @@ const PresortPage = (props) => {
 
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
 
   const columnStatements = getGlobalState("columnStatements");
   const statements = cloneDeep(columnStatements.statementList);

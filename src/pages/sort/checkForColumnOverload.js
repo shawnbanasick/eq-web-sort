@@ -4,12 +4,10 @@ import getGlobalState from "../../globalState/getGlobalState";
 const checkForColumnOverload = (
   columnLengthCheckArray,
   forcedSorts,
-  totalStatements
+  totalStatements,
+  qSortPattern,
+  qSortHeaderNumbers
 ) => {
-  const configObj = getGlobalState("configObj");
-  const qSortPattern = [...configObj.qSortPattern];
-  const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
-
   if (forcedSorts === true) {
     const tempArray = [];
     columnLengthCheckArray.forEach(function (item, index) {

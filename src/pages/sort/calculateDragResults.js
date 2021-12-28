@@ -1,16 +1,17 @@
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 
-const calculateDragResults = (result) => {
+const calculateDragResults = (result, totalStatements) => {
   try {
     if (result.destination !== null) {
-      const configObj = getGlobalState("configObj");
+      // STATE
+
       const results = getGlobalState("results");
       const sortFinishedModalHasBeenShown = getGlobalState(
         "sortFinishedModalHasBeenShown"
       );
 
-      const totalStatements = configObj.totalStatements;
+      // const totalStatements = configObj.totalStatements;
       const sortGridResults = getGlobalState("sortGridResults");
 
       // derive sortValue from droppableId

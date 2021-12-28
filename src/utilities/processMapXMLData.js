@@ -3,6 +3,8 @@ import getGlobalState from "../globalState/getGlobalState";
 
 const processMapXMLData = (dataObject) => {
   const configObj = getGlobalState("configObj");
+
+  const mapObj = {};
   const data = dataObject.map;
   const vColsObj = {};
   const colInfoArray = [];
@@ -38,6 +40,7 @@ const processMapXMLData = (dataObject) => {
     } else {
       splitArray = value.split(",");
     }
+    mapObj[key] = splitArray;
     configObj[key] = splitArray;
   }
 
@@ -49,9 +52,14 @@ const processMapXMLData = (dataObject) => {
     postsortConvertObj[key] = configObj.qSortHeaderNumbers[j];
   }
   configObj.postsortConvertObj = postsortConvertObj;
+  mapObj.postsortConvertObj = postsortConvertObj;
 
   setGlobalState("vColsObj", vColsObj);
   setGlobalState("configObj", configObj);
+  const returnObj = {};
+  returnObj.vColsObj = vColsObj;
+  returnObj.mapObj = mapObj;
+  return returnObj;
 };
 
 export default processMapXMLData;

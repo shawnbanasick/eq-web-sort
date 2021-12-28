@@ -12,11 +12,23 @@ import getItemStyleHori from "./getItemStyleHori";
 import calculateDragResults from "./calculateDragResults";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-
+import useSettingsStore from "../../globalState/useSettingsStore";
 /* eslint react/prop-types: 0 */
 
 const SortGrid = (props) => {
-  const configObj = getGlobalState("configObj");
+  // STATE
+  const configObj = useSettingsStore((state) => state.configObj);
+  const mapObj = useSettingsStore((state) => state.mapObj);
+
+  // MAP out SORT COLUMNS component before render
+  // code inside render so that column lists update automatically
+  const qSortHeaders = [...mapObj.qSortHeaders];
+  const qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
+
+  // column colors
+  const columnColorsArray = [...mapObj.columnColorsArray];
+  const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
+  const qSortPattern = [...mapObj.qSortPattern];
 
   // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
@@ -32,7 +44,9 @@ const SortGrid = (props) => {
     "reason":"DROP"}
     */
 
-    calculateDragResults({ ...result });
+    const totalStatements = configObj.totalStatements;
+
+    calculateDragResults({ ...result }, totalStatements);
 
     const columnStatements = getGlobalState("columnStatements");
     // source and destination are objects
@@ -77,11 +91,11 @@ const SortGrid = (props) => {
       const totalStatements = +configObj.totalStatements;
 
       const sortCharacterisiticsPrep = {};
-      sortCharacterisiticsPrep.qSortPattern = [...configObj.qSortPattern];
-      sortCharacterisiticsPrep.qSortHeaders = [...configObj.qSortHeaders];
+      sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
+      sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
       sortCharacterisiticsPrep.forcedSorts = configObj.warnOverloadedColumn;
       sortCharacterisiticsPrep.qSortHeaderNumbers = [
-        ...configObj.qSortHeaderNumbers,
+        ...mapObj.qSortHeaderNumbers,
       ];
       const sortCharacteristics = sortCharacterisiticsPrep;
       const allowUnforcedSorts = configObj.allowUnforcedSorts;
@@ -93,7 +107,8 @@ const SortGrid = (props) => {
         columnStatements,
         totalStatements,
         sortCharacteristics,
-        allowUnforcedSorts
+        allowUnforcedSorts,
+        qSortHeaderNumbers
       );
 
       // global state updates
@@ -138,11 +153,6 @@ const SortGrid = (props) => {
 
   const sortCharacteristics = getGlobalState("sortCharacteristics");
 
-  // column colors
-  const columnColorsArray = [...configObj.columnColorsArray];
-  const columnHeadersColorsArray = [...configObj.columnHeadersColorsArray];
-  const qSortPattern = [...configObj.qSortPattern];
-
   // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
   let cardHeight = getGlobalState("cardHeight");
@@ -181,11 +191,6 @@ const SortGrid = (props) => {
   // pull data from localStorage
   const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
-
-  // MAP out SORT COLUMNS component before render
-  // code inside render so that column lists update automatically
-  const qSortHeaders = [...configObj.qSortHeaders];
-  const qSortHeaderNumbers = [...configObj.qSortHeaderNumbers];
 
   // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {

@@ -26,6 +26,7 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const setConfigObj = useSettingsStore((state) => state.setConfigObj);
   const setLangObj = useSettingsStore((state) => state.setLangObj);
+  const setMapObj = useSettingsStore((state) => state.setMapObj);
 
   useEffect(() => {
     (async () => {
@@ -66,7 +67,8 @@ function App() {
         .then(function (response) {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const mapData = convert.xml2js(response.data, options);
-          processMapXMLData(mapData);
+          let data = processMapXMLData(mapData);
+          setMapObj(data.mapObj);
         })
         .catch(function (error) {
           console.log(error);

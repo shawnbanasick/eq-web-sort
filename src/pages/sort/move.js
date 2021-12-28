@@ -13,7 +13,8 @@ const move = (
   columnStatements,
   totalStatements,
   sortCharacteristics,
-  allowUnforcedSorts
+  allowUnforcedSorts,
+  qSortHeaderNumbers
 ) => {
   const { qSortPattern, qSortHeaders, forcedSorts } = sortCharacteristics;
 
@@ -46,7 +47,13 @@ const move = (
   const overloadArrayCheck = [...columnLengthCheckArray];
   const match = isEqual(columnLengthCheckArray, qSortPatternClone);
 
-  checkForColumnOverload(overloadArrayCheck, forcedSorts, totalStatements);
+  checkForColumnOverload(
+    overloadArrayCheck,
+    forcedSorts,
+    totalStatements,
+    qSortPattern,
+    qSortHeaderNumbers
+  );
 
   // to disable checking if unforced Q sorts allowed
   if (allowUnforcedSorts === false) {

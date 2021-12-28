@@ -18,8 +18,8 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const PostSort = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = useSettingsStore((state) => state.configObj);
 
-  const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
   const postsortInstructions = ReactHtmlParser(
     decodeHTML(langObj.postsortInstructions)
