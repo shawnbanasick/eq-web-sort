@@ -8,10 +8,11 @@ const getItemStyleHori = (
   cardColor,
   columnWidth,
   cardHeight,
-  cardFontSize
+  cardFontSize,
+  greenCardColor,
+  yellowCardColor,
+  pinkCardColor
 ) => {
-  const configObj = getGlobalState("configObj");
-
   let newSortValue = sortValue;
   let newCardColor = cardColor;
 
@@ -22,13 +23,13 @@ const getItemStyleHori = (
 
   // set background color according to user passed in values
   if (newCardColor === "undefined" || newCardColor === "yellowSortCard") {
-    newCardColor = configObj.yellowCardColor;
+    newCardColor = yellowCardColor;
   }
   if (newCardColor === "pinkSortCard") {
-    newCardColor = configObj.pinkCardColor;
+    newCardColor = pinkCardColor;
   }
   if (newCardColor === "greenSortCard") {
-    newCardColor = configObj.greenCardColor;
+    newCardColor = greenCardColor;
   }
 
   return {

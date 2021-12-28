@@ -266,7 +266,10 @@ const SortGrid = (props) => {
                               `${item.cardColor}`,
                               columnWidth,
                               cardHeight,
-                              cardFontSize
+                              cardFontSize,
+                              greenCardColor,
+                              yellowCardColor,
+                              pinkCardColor
                             )}
                           >
                             {statementHtml}
