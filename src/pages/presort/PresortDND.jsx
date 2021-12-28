@@ -69,7 +69,6 @@ function PresortDND(props) {
         const { source, destination } = result;
 
         // update statement characteristics
-        const columnStatements = getGlobalState("columnStatements");
         const statementsArray = [...columnStatements.statementList];
         const destinationId = result.destination.droppableId;
         const draggableId = result.draggableId;
@@ -110,7 +109,6 @@ function PresortDND(props) {
 
         // save to memory
         columnStatements.statementList = [...statementsArray];
-        console.log(JSON.stringify(columnStatements));
         setColumnStatements(columnStatements);
 
         // when dropped on different droppable

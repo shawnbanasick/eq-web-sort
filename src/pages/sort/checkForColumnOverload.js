@@ -1,5 +1,4 @@
 import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
 
 const checkForColumnOverload = (
   columnLengthCheckArray,

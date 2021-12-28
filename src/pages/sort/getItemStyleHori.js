@@ -1,5 +1,3 @@
-import getGlobalState from "../../globalState/getGlobalState";
-
 // card styling
 const getItemStyleHori = (
   isDragging,

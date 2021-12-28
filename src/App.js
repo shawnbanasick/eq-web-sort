@@ -29,6 +29,9 @@ function App() {
   const setLangObj = useSettingsStore((state) => state.setLangObj);
   const setMapObj = useSettingsStore((state) => state.setMapObj);
   const setStatementsObj = useSettingsStore((state) => state.setStatementsObj);
+  const setColumnStatements = useSettingsStore(
+    (state) => state.setColumnStatements
+  );
 
   useEffect(() => {
     let shuffleCards;
@@ -90,7 +93,8 @@ function App() {
             statementsData,
             shuffleCards
           );
-          setGlobalState("columnStatements", statementsObj.columnStatements);
+          // setGlobalState("columnStatements", statementsObj.columnStatements);
+          setColumnStatements(statementsObj.columnStatements);
           setStatementsObj(statementsObj);
         })
         .catch(function (error) {

@@ -36,15 +36,15 @@ const PresortPage = (props) => {
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
   const statementsObj = useSettingsStore((state) => state.statementsObj);
+  const cardFontSize = useSettingsStore((state) => state.cardFontSize);
+  const presortNoReturn = useSettingsStore((state) => state.presortNoReturn);
+  const isLoggedIn = useSettingsStore((state) => state.isLoggedIn);
 
   // const columnStatements = getGlobalState("columnStatements");
   const columnStatements = statementsObj.columnStatements;
-  const statements = cloneDeep(columnStatements.statementList);
-  const cardFontSize = getGlobalState("cardFontSize");
   const headerBarColor = configObj.headerBarColor;
-  const presortNoReturn = getGlobalState("presortNoReturn");
   const initialScreen = configObj.initialScreen;
-  const isLoggedIn = getGlobalState("isLoggedIn");
+  const statements = cloneDeep(columnStatements.statementList);
 
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 

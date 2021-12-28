@@ -1,7 +1,6 @@
 import { store } from "@risingstack/react-easy-state";
 
 const globalState = store({
-  cardFontSize: 15,
   cardHeight: 0,
   checkRequiredQuestionsComplete: false,
   columnWidth: 100,
@@ -30,7 +29,6 @@ const globalState = store({
   presortCards: [],
   presortSortedStatements: 0,
   presortFinished: false,
-  presortNoReturn: false,
   progressScore: 10,
   progressScoreAdditional: 0,
   progressScoreAdditionalSort: 0,

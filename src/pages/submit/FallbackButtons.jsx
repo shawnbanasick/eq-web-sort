@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { v4 as uuid } from "uuid";
