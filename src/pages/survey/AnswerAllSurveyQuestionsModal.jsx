@@ -7,10 +7,13 @@ import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const AnswerAllSurveyQeustionsModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const triggerModalOpen = getGlobalState("triggerSurveyPreventNavModal");
-  const langObj = getGlobalState("langObj");
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.surveyPreventNavModalHead)

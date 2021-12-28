@@ -6,13 +6,16 @@ import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 /* eslint react/prop-types: 0 */
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const NeutralCards = (props) => {
-  const configObj = getGlobalState("configObj");
+  // STATE
+  const configObj = useSettingsStore((state) => state.configObj);
+
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on blur, get text and add comment to card object

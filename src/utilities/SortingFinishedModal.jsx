@@ -7,10 +7,13 @@ import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../globalState/getGlobalState";
 import setGlobalState from "../globalState/setGlobalState";
 import decodeHTML from "./decodeHTML";
+import useSettingsStore from "../globalState/useSettingsStore";
 
 const SortingFinishedModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const triggerLandingModal = getGlobalState("triggerSortingFinishedModal");
-  const langObj = getGlobalState("langObj");
 
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.sortingCompleteModalHead)

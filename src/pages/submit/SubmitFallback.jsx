@@ -1,10 +1,10 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import FallbackButtons from "./FallbackButtons";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 // eslint-disable-next-line react/button-has-type
 /* eslint react/prop-types: 0 */
@@ -14,8 +14,9 @@ import FallbackButtons from "./FallbackButtons";
 }; */
 
 const SubmitFallback = (props) => {
-  // const configObj = getGlobalState("configObj");
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const fallbackMessage = ReactHtmlParser(decodeHTML(langObj.fallbackMessage));
 
   return (

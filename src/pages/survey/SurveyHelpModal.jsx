@@ -7,10 +7,13 @@ import ReactHtmlParser from "react-html-parser";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SurveyHelpModal = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const triggerPostsortModal = getGlobalState("triggerSurveyModal");
-  const langObj = getGlobalState("langObj");
 
   const postsortHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.surveyModalHead)

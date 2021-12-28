@@ -7,9 +7,12 @@ import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SubmitResultsButton = (props) => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   let displaySubmitFallback = getGlobalState("displaySubmitFallback");
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
   let submitFailNumber = getGlobalState("submitFailNumber");

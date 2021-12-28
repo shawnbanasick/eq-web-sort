@@ -18,14 +18,17 @@ import AnswerAllSurveyQuestionsModal from "./AnswerAllSurveyQuestionsModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SurveyHelpModal from "./SurveyHelpModal";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SurveyPage = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const configObj = getGlobalState("configObj");
+
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");
 
   // setup language
-  const langObj = getGlobalState("langObj");
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
   useEffect(() => {

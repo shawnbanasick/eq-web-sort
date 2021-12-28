@@ -10,14 +10,18 @@ import calculatePostsortResults from "./calculatePostsortResults";
 import SubmitFallback from "./SubmitFallback";
 import { v4 as uuid } from "uuid";
 import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButton";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SubmitPage = () => {
   useEffect(() => {
     setGlobalState("currentPage", "submit");
   }, []);
 
-  // language options
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = getGlobalState("configObj");
+  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
+
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);
   const transferTextBelow = decodeHTML(langObj.transferTextBelow);
   const goodbyeMessage = decodeHTML(langObj.goodbyeMessage);
@@ -25,13 +29,9 @@ const SubmitPage = () => {
   const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
 
   // config options
-  const configObj = getGlobalState("configObj");
   const headerBarColor = configObj.headerBarColor;
 
-  // global state
-  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
-
-  // format results for transmisson
+  // format results for transmission
   let transmissionResults = {};
   let results = getGlobalState("results");
   let resultsPostsort = getGlobalState("resultsPostsort");

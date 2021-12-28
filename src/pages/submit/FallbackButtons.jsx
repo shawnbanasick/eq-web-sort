@@ -5,9 +5,12 @@ import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { v4 as uuid } from "uuid";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SubmitResultsButton = (props) => {
-  const langObj = getGlobalState("langObj");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+
   const downloadButtonText = ReactHtmlParser(decodeHTML(langObj.btnDownload));
   const randomId = uuid().substring(0, 12);
 

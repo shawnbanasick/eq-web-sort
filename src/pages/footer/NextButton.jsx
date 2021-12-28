@@ -4,10 +4,10 @@ import { withRouter } from "react-router";
 import { view } from "@risingstack/react-easy-state";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
-const checkForNextPageConditions = () => {
+const checkForNextPageConditions = (allowUnforcedSorts) => {
   const currentPage = getGlobalState("currentPage");
-  const configObj = getGlobalState("configObj");
 
   if (currentPage === "presort") {
     let isPresortFinished = getGlobalState("presortFinished");
@@ -26,7 +26,6 @@ const checkForNextPageConditions = () => {
       return false;
     } else {
       const hasOverloadedColumn = getGlobalState("hasOverloadedColumn");
-      const allowUnforcedSorts = configObj.allowUnforcedSorts;
       // has finished sorting
       if (allowUnforcedSorts === true) {
         // unforced ok -> allow nav
@@ -72,6 +71,9 @@ const checkForNextPageConditions = () => {
 const LinkButton = (props) => {
   let goToNextPage;
 
+  const configObj = useSettingsStore((state) => state.configObj);
+  const allowUnforcedSorts = configObj.allowUnforcedSorts;
+
   const {
     history,
     location,
@@ -88,7 +90,7 @@ const LinkButton = (props) => {
       {...rest} // `children` is just another prop!
       onClick={(event) => {
         onClick && onClick(event);
-        goToNextPage = checkForNextPageConditions();
+        goToNextPage = checkForNextPageConditions(allowUnforcedSorts);
         if (goToNextPage) {
           history.push(to);
         }

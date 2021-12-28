@@ -1,10 +1,6 @@
 import getGlobalState from "../../globalState/getGlobalState";
 
-const getNextPage = (currentPage) => {
-  const configObj = getGlobalState("configObj");
-  const showPostsort = configObj.showPostsort;
-  const showSurvey = configObj.showSurvey;
-
+const getNextPage = (currentPage, showPostsort, showSurvey) => {
   if (showPostsort === true && showSurvey === true) {
     if (currentPage === "landing") {
       return `/presort`;

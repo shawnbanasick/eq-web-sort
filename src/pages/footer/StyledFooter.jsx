@@ -16,7 +16,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const StyledFooter = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = getGlobalState("configObj");
+  const configObj = useSettingsStore((state) => state.configObj);
 
   const initialScreenSetting = configObj.initialScreen;
   let displayNextButton = getGlobalState("displayNextButton");
@@ -54,10 +54,15 @@ const StyledFooter = () => {
     displayNextButton = true;
   }
 
+  const showPostsort = configObj.showPostsort;
+  const showSurvey = configObj.showSurvey;
+
   const totalProgressScore = calcProgressScore(
     currentPage,
     additionalProgress,
-    additionalProgressSort
+    additionalProgressSort,
+    showPostsort,
+    showSurvey
   );
 
   if (currentPage === "submit") {
@@ -103,7 +108,7 @@ const StyledFooter = () => {
     </React.Fragment>
   );
 
-  const nextPage = getNextPage(currentPage);
+  const nextPage = getNextPage(currentPage, showPostsort, showSurvey);
 
   return (
     <StyledFooterDiv>

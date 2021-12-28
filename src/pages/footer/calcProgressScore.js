@@ -3,27 +3,28 @@ import getGlobalState from "../../globalState/getGlobalState";
 const calcProgressScore = (
   currentPage,
   additionalProgress1,
-  additionalProgressSort
+  additionalProgressSort,
+  showPostsort,
+  showSurvey
 ) => {
   const additionalProgressState = +getGlobalState("progressScoreAdditional");
   const additionalProgressStateSort = +getGlobalState(
     "progressScoreAdditionalSort"
   );
-  const configObj = getGlobalState("configObj");
 
   let adjustmentValue1 = 20;
   let adjustmentValue2 = 50;
   let adjustmentValue3 = 80;
-  if (configObj.showPostsort === false && configObj.showSurvey === true) {
+  if (showPostsort === false && showSurvey === true) {
     adjustmentValue1 = 30;
     adjustmentValue2 = 60;
   }
-  if (configObj.showPostsort === true && configObj.showSurvey === false) {
+  if (showPostsort === true && showSurvey === false) {
     adjustmentValue1 = 30;
     adjustmentValue2 = 60;
     adjustmentValue3 = 90;
   }
-  if (configObj.showPostsort === false && configObj.showSurvey === false) {
+  if (showPostsort === false && showSurvey === false) {
     adjustmentValue1 = 30;
     adjustmentValue2 = 60;
   }

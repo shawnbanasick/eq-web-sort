@@ -12,6 +12,7 @@ import OverloadedColumnModal from "./OverloadedColumnModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SortColGuides from "./SortColGuides";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 const localStore = store({
   topMargin: 50,
@@ -29,12 +30,13 @@ function debounce(fn, ms) {
 }
 
 const Sort = () => {
-  const cardFontSize = getGlobalState("cardFontSize");
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
   const configObj = getGlobalState("configObj");
+
+  const cardFontSize = getGlobalState("cardFontSize");
   const headerBarColor = configObj.headerBarColor;
 
-  // setup language
-  const langObj = getGlobalState("langObj");
   const sortDisagreement = ReactHtmlParser(
     decodeHTML(langObj.sortDisagreement)
   );

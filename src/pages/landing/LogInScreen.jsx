@@ -11,8 +11,8 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = useSettingsStore((state) => state.configObj);
 
-  const configObj = getGlobalState("configObj");
   const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
   const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const welcomeText = ReactHtmlParser(decodeHTML(langObj.loginWelcomeText));
