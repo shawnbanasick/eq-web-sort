@@ -8,9 +8,9 @@ import decodeHTML from "../../utilities/decodeHTML";
 import getGlobalState from "../../globalState/getGlobalState";
 import setGlobalState from "../../globalState/setGlobalState";
 import LocalConfirmDeleteButton from "./LocalConfirmDeleteButton";
+import useStore from "../../globalState/useStore";
 
 const LocalDeleteModal = () => {
-  const triggerLocalDeleteModal = getGlobalState("triggerLocalDeleteModal");
   const langObj = getGlobalState("langObj");
 
   const localDeleteModalHead = ReactHtmlParser(
@@ -20,9 +20,17 @@ const LocalDeleteModal = () => {
     decodeHTML(langObj.localDeleteModalText)
   );
 
+  // STATE
+  // const triggerLocalDeleteModal = getGlobalState("triggerLocalDeleteModal");
+  const triggerLocalDeleteModal = useStore(
+    (state) => state.triggerLocalDeleteModal
+  );
+  const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
+
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerLocalDeleteModal", false);
+    // setGlobalState("triggerLocalDeleteModal", false);
+    setLocalDeleteModal(false);
   };
 
   return (

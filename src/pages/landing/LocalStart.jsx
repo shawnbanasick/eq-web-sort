@@ -9,6 +9,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import LocalDeleteButton from "./LocalDeleteButton";
 import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 import LocalDeleteModal from "./LocalDeleteModal";
+import useStore from "../../globalState/useStore";
 
 function downloadObjectAsJson(exportObj, exportName) {
   var dataStr =
@@ -23,8 +24,24 @@ function downloadObjectAsJson(exportObj, exportName) {
 }
 
 const LogInScreen = () => {
-  const displayPartIdWarning1 = getGlobalState("displayLocalPartIdWarning1");
-  const displayPartIdWarning2 = getGlobalState("displayLocalPartIdWarning2");
+  // const displayPartIdWarning1 = getGlobalState("displayLocalPartIdWarning1");
+  // const displayPartIdWarning2 = getGlobalState("displayLocalPartIdWarning2");
+
+  // STATE
+  const displayPartIdWarning1 = useStore(
+    (state) => state.displayLocalPartIdWarning1
+  );
+  const setLocalPartIdWarning1 = useStore(
+    (state) => state.setLocalPartIdWarning1
+  );
+
+  const displayPartIdWarning2 = useStore(
+    (state) => state.displayLocalPartIdWarning2
+  );
+  const setLocalPartIdWarning2 = useStore(
+    (state) => state.setLocalPartIdWarning2
+  );
+  const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
 
   // setup language
   const langObj = getGlobalState("langObj");
@@ -60,18 +77,22 @@ const LogInScreen = () => {
 
   const handleInput = (e) => {
     setGlobalState("localParticipantName", e.target.value);
-    setGlobalState("displayLocalPartIdWarning1", false);
+    // setGlobalState("displayLocalPartIdWarning1", false);
+    setLocalPartIdWarning1(false);
   };
 
   const handleUsercodeInput = (e) => {
     setGlobalState("localUsercode", e.target.value);
-    setGlobalState("displayLocalPartIdWarning2", false);
+    // setGlobalState("displayLocalPartIdWarning2", false);
+    setLocalPartIdWarning2(false);
   };
 
   const handleDeleteLocal = (e) => {
     console.log("delete clicked");
-    setGlobalState("triggerLocalDeleteModal", true);
+    // setGlobalState("triggerLocalDeleteModal", true);
+    setLocalDeleteModal(true);
   };
+
   const handleDownloadLocal = (e) => {
     const exportObj = JSON.parse(localStorage.getItem("localStoredQsorts"));
     const exportName = "Qsorts";

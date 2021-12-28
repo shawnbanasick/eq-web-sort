@@ -5,8 +5,14 @@ import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import setGlobalState from "../../globalState/setGlobalState";
+import useStore from "../../globalState/useStore";
 
 const LogInSubmitButton = (props) => {
+  // State
+  const setDisplayLocalDeleteModal = useStore(
+    (state) => state.setLocalDeleteModal
+  );
+
   const langObj = getGlobalState("langObj");
   const localDeleteButtonText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteButtonText)
@@ -16,6 +22,7 @@ const LogInSubmitButton = (props) => {
     console.log("deleted localStorage");
     localStorage.setItem("localStoredQsorts", JSON.stringify({}));
     setGlobalState("localStoredQsorts", {});
+    setDisplayLocalDeleteModal(false);
   };
 
   return (

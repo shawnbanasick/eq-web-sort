@@ -6,11 +6,20 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import setGlobalState from "../../globalState/setGlobalState";
+import useStore from "../../globalState/useStore";
 
 const LogInSubmitButton = (props) => {
   const langObj = getGlobalState("langObj");
   const localStartButtonText = ReactHtmlParser(
     decodeHTML(langObj.localStartButtonText)
+  );
+
+  let setLocalPartIdWarning1 = useStore(
+    (state) => state.setLocalPartIdWarning1
+  );
+
+  let setLocalPartIdWarning2 = useStore(
+    (state) => state.setLocalPartIdWarning2
   );
 
   const checkForNextPageConditions = () => {
@@ -22,17 +31,22 @@ const LogInSubmitButton = (props) => {
 
     if (localParticipantName.length === 0) {
       value1 = false;
-      setGlobalState("displayLocalPartIdWarning1", true);
+      // setGlobalState("displayLocalPartIdWarning1", true);
+      setLocalPartIdWarning1(true);
     } else {
-      setGlobalState("displayLocalPartIdWarning1", false);
+      // setGlobalState("displayLocalPartIdWarning1", false);
+      setLocalPartIdWarning1(false);
       value1 = true;
     }
 
     if (localUsercode.length === 0) {
       value2 = false;
-      setGlobalState("displayLocalPartIdWarning2", true);
+      // setGlobalState("displayLocalPartIdWarning2", true);
+      setLocalPartIdWarning2(true);
     } else {
-      setGlobalState("displayLocalPartIdWarning2", false);
+      // setGlobalState("displayLocalPartIdWarning2", false);
+      setLocalPartIdWarning2(false);
+
       value2 = true;
     }
 
@@ -79,9 +93,11 @@ const LogInSubmitButton = (props) => {
   useEffect(() => {
     setGlobalState("localParticipantName", "");
     setGlobalState("localUsercode", "");
-    setGlobalState("displayLocalPartIdWarning1", false);
-    setGlobalState("displayLocalPartIdWarning2", false);
-  }, []);
+    // setGlobalState("displayLocalPartIdWarning1", false);
+    setLocalPartIdWarning1(false);
+    // setGlobalState("displayLocalPartIdWarning2", false);
+    setLocalPartIdWarning2(false);
+  }, [setLocalPartIdWarning1, setLocalPartIdWarning2]);
 
   return (
     <StyledSubmitButton
