@@ -15,9 +15,15 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const PresortPage = (props) => {
-  // set progress score and current page
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = useSettingsStore((state) => state.configObj);
+  const statementsObj = useSettingsStore((state) => state.statementsObj);
+  const cardFontSize = useStore((state) => state.cardFontSize);
+  const isLoggedIn = useSettingsStore((state) => state.isLoggedIn);
   const setCurrentPage = useStore((state) => state.setCurrentPage);
   const setProgressScore = useStore((state) => state.setProgressScore);
+  const presortNoReturn = useStore((state) => state.presortNoReturn);
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,14 +40,6 @@ const PresortPage = (props) => {
     };
   }, []);
 
-  // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const statementsObj = useSettingsStore((state) => state.statementsObj);
-  const cardFontSize = useStore((state) => state.cardFontSize);
-  const presortNoReturn = useSettingsStore((state) => state.presortNoReturn);
-  const isLoggedIn = useSettingsStore((state) => state.isLoggedIn);
-
   // const columnStatements = getGlobalState("columnStatements");
   const columnStatements = statementsObj.columnStatements;
   const headerBarColor = configObj.headerBarColor;
@@ -57,6 +55,7 @@ const PresortPage = (props) => {
     }
   }
   // early return of presort finished message if complete
+  console.log(presortNoReturn);
   if (presortNoReturn) {
     return <PresortIsComplete />;
   }

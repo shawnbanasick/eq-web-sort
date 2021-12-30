@@ -13,6 +13,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SortColGuides from "./SortColGuides";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const localStore = store({
   topMargin: 50,
@@ -33,8 +34,10 @@ const Sort = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const setPresortNoReturn = useStore((state) => state.setPresortNoReturn);
 
   const cardFontSize = getGlobalState("cardFontSize");
+
   const headerBarColor = configObj.headerBarColor;
 
   const sortDisagreement = ReactHtmlParser(
@@ -89,11 +92,11 @@ const Sort = () => {
   });
 
   useEffect(() => {
-    setGlobalState("presortNoReturn", true);
+    setPresortNoReturn(true);
     setTimeout(() => {
       setGlobalState("currentPage", "sort");
     }, 300);
-  }, []);
+  }, [setPresortNoReturn]);
 
   // calc time on page
   useEffect(() => {
