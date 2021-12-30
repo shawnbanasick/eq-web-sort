@@ -14,6 +14,7 @@ import PleaseLogInFirst from "./PleaseLogInFirst";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortPage = (props) => {
   // set progress score and current page
@@ -36,7 +37,7 @@ const PresortPage = (props) => {
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
   const statementsObj = useSettingsStore((state) => state.statementsObj);
-  const cardFontSize = useSettingsStore((state) => state.cardFontSize);
+  const cardFontSize = useStore((state) => state.cardFontSize);
   const presortNoReturn = useSettingsStore((state) => state.presortNoReturn);
   const isLoggedIn = useSettingsStore((state) => state.isLoggedIn);
 

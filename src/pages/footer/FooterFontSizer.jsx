@@ -1,27 +1,28 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const FooterFontSizer = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const cardFontSize = useStore((state) => state.cardFontSize);
+  const setCardFontSize = useStore((state) => state.setCardFontSize);
 
   const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
 
   const increaseFontSize = () => {
-    const currentSize = getGlobalState("cardFontSize");
+    const currentSize = cardFontSize;
     const newSize = currentSize + 1;
-    setGlobalState("cardFontSize", newSize);
+    setCardFontSize(newSize);
   };
   const decreaseFontSize = () => {
-    const currentSize = getGlobalState("cardFontSize");
+    const currentSize = cardFontSize;
     const newSize = currentSize - 1;
-    setGlobalState("cardFontSize", newSize);
+    setCardFontSize(newSize);
   };
 
   return (
