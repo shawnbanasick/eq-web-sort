@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { view, store } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
+import { view } from "@risingstack/react-easy-state";
 import SortGrid from "./SortGrid";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -15,9 +13,9 @@ import SortColGuides from "./SortColGuides";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
-const localStore = store({
-  topMargin: 50,
-});
+// const localStore = store({
+//   topMargin: 50,
+// });
 
 function debounce(fn, ms) {
   let timer;
@@ -34,9 +32,12 @@ const Sort = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const cardFontSize = useStore((state) => state.cardFontSize);
+  const columnWidth = useStore((state) => state.columnWidth);
+  const topMargin = useStore((state) => state.topMargin);
   const setPresortNoReturn = useStore((state) => state.setPresortNoReturn);
-
-  const cardFontSize = getGlobalState("cardFontSize");
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const setTopMargin = useStore((state) => state.setTopMargin);
 
   const headerBarColor = configObj.headerBarColor;
 
@@ -83,10 +84,10 @@ const Sort = () => {
 
     setTimeout(() => {
       if (sortGridMarginTop !== height) {
-        localStore["topMargin"] = height;
+        setTopMargin(height);
         localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
       } else {
-        localStore["topMargin"] = +sortGridMarginTop;
+        setTopMargin(+sortGridMarginTop);
       }
     }, 200);
   });
@@ -94,9 +95,9 @@ const Sort = () => {
   useEffect(() => {
     setPresortNoReturn(true);
     setTimeout(() => {
-      setGlobalState("currentPage", "sort");
+      setCurrentPage("sort");
     }, 300);
-  }, [setPresortNoReturn]);
+  }, [setPresortNoReturn, setCurrentPage]);
 
   // calc time on page
   useEffect(() => {
@@ -106,8 +107,6 @@ const Sort = () => {
       calculateTimeOnPage(startTime, "sortPage", "sortPage");
     };
   }, []);
-
-  let columnWidth = getGlobalState("columnWidth");
 
   return (
     <React.Fragment>
@@ -125,7 +124,7 @@ const Sort = () => {
         </SortTitleBar>
         <SortColGuides columnWidth={columnWidth} />
       </SortTitleBarContainer>
-      <SortGridContainer marginTop={localStore.topMargin}>
+      <SortGridContainer marginTop={topMargin}>
         <SortGrid dimensions={dimensions} cardFontSize={cardFontSize} />;
       </SortGridContainer>
     </React.Fragment>
