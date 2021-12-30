@@ -12,10 +12,6 @@ const createFooterSlice = (set, get) => ({
   setProgressScore: (inputValue) => {
     set(() => ({ progressScore: inputValue }));
   },
-  /*
-  setTriggerPresortFinishedModal: (bool) => {
-    set(() => ({ triggerPresortFinishedModal: bool }));
-  },*/
 });
 
 export default createFooterSlice;

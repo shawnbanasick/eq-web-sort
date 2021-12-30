@@ -56,7 +56,7 @@ const PresortPage = (props) => {
       return <PleaseLogInFirst />;
     }
   }
-  // early return of finished message if complete
+  // early return of presort finished message if complete
   if (presortNoReturn) {
     return <PresortIsComplete />;
   }

@@ -4,17 +4,17 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortFinishedModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerLandingModal = getGlobalState("triggerPresortFinishedModal");
-
+  const triggerModal = useStore((state) => state.triggerPresortFinishedModal);
+  const setTriggerModal = useStore(
+    (state) => state.setTriggerPresortFinishedModal
+  );
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.presortFinishedModalHead)
   );
@@ -24,13 +24,13 @@ const PresortFinishedModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerPresortFinishedModal", false);
+    setTriggerModal(false);
   };
 
   return (
     <Modal
       className="customModal"
-      open={triggerLandingModal}
+      open={triggerModal}
       onClose={onCloseModal}
       center
     >

@@ -2,16 +2,16 @@ import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const HelpButton = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const currentPage = useStore((state) => state.currentPage);
 
-  const currentPage = getGlobalState("currentPage");
   let trigger;
 
   const buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
