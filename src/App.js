@@ -32,6 +32,12 @@ function App() {
   const setColumnStatements = useSettingsStore(
     (state) => state.setColumnStatements
   );
+  const setSurveyQuestionObjArray = useSettingsStore(
+    (state) => state.setSurveyQuestionObjArray
+  );
+  const setRequiredAnswersObj = useSettingsStore(
+    (state) => state.setRequiredAnswersObj
+  );
 
   useEffect(() => {
     let shuffleCards;
@@ -63,6 +69,8 @@ function App() {
           let info = processConfigXMLData(configData);
           shuffleCards = info.shuffleCards;
           setConfigObj(info.configObj);
+          setSurveyQuestionObjArray(info.surveyQuestionObjArray);
+          setRequiredAnswersObj(info.requiredAnswersObj);
         })
         .catch(function (error) {
           console.log(error);

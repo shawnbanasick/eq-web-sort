@@ -26,8 +26,6 @@ const PostSort = () => {
   const cardFontSize = useStore((state) => state.cardFontSize);
   const setCurrentPage = useStore((state) => state.setCurrentPage);
 
-  console.log(cardFontSize);
-
   console.log("conf: ", JSON.stringify(configObj, null, 2));
   console.log("map: ", JSON.stringify(mapObj, null, 2));
 

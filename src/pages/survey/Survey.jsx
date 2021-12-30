@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import SurveyTextElement from "./SurveyTextElement";
@@ -12,34 +11,43 @@ import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
-import getGlobalState from "../../globalState/getGlobalState";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import AnswerAllSurveyQuestionsModal from "./AnswerAllSurveyQuestionsModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SurveyHelpModal from "./SurveyHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const SurveyPage = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const surveyQuestionObjArray = useSettingsStore(
+    (state) => state.surveyQuestionObjArray
+  );
+  const requiredAnswersObj = useSettingsStore(
+    (state) => state.requiredAnswersObj
+  );
+  const setRequiredAnswersObj = useSettingsStore(
+    (state) => state.setRequiredAnswersObj
+  );
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
 
   const headerBarColor = configObj.headerBarColor;
-  const surveyQuestionObjects = getGlobalState("surveyQuestionObjArray");
+  const surveyQuestionObjects = surveyQuestionObjArray;
 
   // setup language
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
   useEffect(() => {
     // reset required questions if page return
-    const requiredAnswersObj = getGlobalState("requiredAnswersObj");
     let keys = Object.keys(requiredAnswersObj);
     for (let i = 0; i < keys.length; i++) {
       requiredAnswersObj[keys[i]] = "no response";
     }
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
-  }, []);
+    setRequiredAnswersObj(requiredAnswersObj);
+  }, [setRequiredAnswersObj, requiredAnswersObj]);
 
   useEffect(() => {
     let startTime;
@@ -51,11 +59,9 @@ const SurveyPage = () => {
 
   useEffect(() => {
     setTimeout(function () {
-      setGlobalState("currentPage", "survey");
+      setCurrentPage("survey");
     }, 100);
-  }, []);
-
-  // console.log(JSON.stringify(surveyQuestionObjects));
+  }, [setCurrentPage]);
 
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
