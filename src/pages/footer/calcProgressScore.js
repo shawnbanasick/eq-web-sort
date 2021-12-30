@@ -1,17 +1,12 @@
-import getGlobalState from "../../globalState/getGlobalState";
-
 const calcProgressScore = (
   currentPage,
   additionalProgress1,
   additionalProgressSort,
   showPostsort,
-  showSurvey
+  showSurvey,
+  additionalProgressState,
+  additionalProgressStateSort
 ) => {
-  const additionalProgressState = +getGlobalState("progressScoreAdditional");
-  const additionalProgressStateSort = +getGlobalState(
-    "progressScoreAdditionalSort"
-  );
-
   let adjustmentValue1 = 20;
   let adjustmentValue2 = 50;
   let adjustmentValue3 = 80;
@@ -31,12 +26,12 @@ const calcProgressScore = (
 
   let totalProgressScore;
   let additionalProgress = 0;
-  if (additionalProgress1 !== additionalProgressState) {
-    additionalProgress = additionalProgressState;
+  if (additionalProgress1 !== +additionalProgressState) {
+    additionalProgress = +additionalProgressState;
   }
 
-  if (additionalProgressSort !== additionalProgressStateSort) {
-    additionalProgressSort = additionalProgressStateSort;
+  if (additionalProgressSort !== +additionalProgressStateSort) {
+    additionalProgressSort = +additionalProgressStateSort;
   }
 
   if (currentPage === "landing") {
@@ -44,7 +39,7 @@ const calcProgressScore = (
     return totalProgressScore;
   }
   if (currentPage === "presort") {
-    totalProgressScore = additionalProgress + adjustmentValue1;
+    totalProgressScore = +additionalProgress + adjustmentValue1;
     return totalProgressScore;
   }
   if (currentPage === "sort") {

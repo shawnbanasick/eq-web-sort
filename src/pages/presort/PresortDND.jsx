@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -21,10 +19,14 @@ function PresortDND(props) {
   const setColumnStatements = useSettingsStore(
     (state) => state.setColumnStatements
   );
-
   const setPresortFinished = useStore((state) => state.setPresortFinished);
   const setTriggerPresortFinishedModal = useStore(
     (state) => state.setTriggerPresortFinishedModal
+  );
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
+  const setProgressScoreAdditional = useStore(
+    (state) => state.setProgressScoreAdditional
   );
 
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
@@ -173,7 +175,7 @@ function PresortDND(props) {
 
           const completedPercent = (ratio * 30).toFixed();
           // update Progress Bar State
-          setGlobalState("progressScoreAdditional", completedPercent);
+          setProgressScoreAdditional(completedPercent);
 
           // update columns
           setColumns({
@@ -204,7 +206,13 @@ function PresortDND(props) {
         console.log(error);
       }
     },
-    [presortSortedStatementsNum, configObj]
+    [
+      configObj,
+      columnStatements,
+      setColumnStatements,
+      statementsObj,
+      setProgressScoreAdditional,
+    ]
   ); // END DRAG-END
 
   useEffect(() => {
@@ -248,12 +256,12 @@ function PresortDND(props) {
   }, [onDragEnd, columns]);
 
   useEffect(() => {
-    let projectResultsObj = getGlobalState("results");
+    let projectResultsObj = results;
     projectResultsObj.npos = columns.pos.items.length;
     projectResultsObj.nneu = columns.neutral.items.length;
     projectResultsObj.nneg = columns.neg.items.length;
-    setGlobalState("results", projectResultsObj);
-  }, [columns]);
+    setResults(projectResultsObj);
+  }, [columns, results, setResults]);
 
   useEffect(() => {
     if (columns.cards.items.length === 0) {

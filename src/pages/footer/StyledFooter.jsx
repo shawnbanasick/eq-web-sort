@@ -22,8 +22,10 @@ const StyledFooter = () => {
   const initialScreenSetting = configObj.initialScreen;
   let displayNextButton = getGlobalState("displayNextButton");
   const currentPage = useStore((state) => state.currentPage);
-  const additionalProgress = getGlobalState("progressScoreAdditional");
-  const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
+  const additionalProgress = useStore((state) => state.progressScoreAdditional);
+  const additionalProgressSort = useStore(
+    (state) => state.progressScoreAdditionalSort
+  );
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
 
@@ -63,7 +65,9 @@ const StyledFooter = () => {
     additionalProgress,
     additionalProgressSort,
     showPostsort,
-    showSurvey
+    showSurvey,
+    additionalProgress,
+    additionalProgressSort
   );
 
   if (currentPage === "submit") {

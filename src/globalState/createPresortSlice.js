@@ -9,6 +9,7 @@ const createPresortSlice = (set, get) => ({
   presortFinished: false,
   triggerPresortFinishedModal: false,
   triggerPresortPreventNavModal: false,
+  results: {},
 
   setCardFontSize: (inputValue) => {
     set(() => ({ cardFontSize: inputValue }));
@@ -39,6 +40,9 @@ const createPresortSlice = (set, get) => ({
   },
   setTriggerPresortPreventNavModal: (bool) => {
     set(() => ({ triggerPresortPreventNavModal: bool }));
+  },
+  setResults: (inputValue) => {
+    set(() => ({ results: inputValue }));
   },
 });
 

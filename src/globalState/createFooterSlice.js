@@ -2,6 +2,8 @@ const createFooterSlice = (set, get) => ({
   cardFontSize: 15,
   currentPage: "landing",
   progressScore: 10,
+  progressScoreAdditional: 0,
+  progressScoreAdditionalSort: 0,
 
   setCardFontSize: (inputValue) => {
     set(() => ({ cardFontSize: inputValue }));
@@ -11,6 +13,12 @@ const createFooterSlice = (set, get) => ({
   },
   setProgressScore: (inputValue) => {
     set(() => ({ progressScore: inputValue }));
+  },
+  setProgressScoreAdditional: (inputValue) => {
+    set(() => ({ progressScoreAdditional: inputValue }));
+  },
+  setProgressScoreAdditionalSort: (inputValue) => {
+    set(() => ({ progressScoreAdditionalSort: inputValue }));
   },
 });
 
