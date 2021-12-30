@@ -1,4 +1,4 @@
-const createFooterSlice = (set, get) => ({
+const createSortSlice = (set, get) => ({
   columnWidth: 100,
   topMargin: 50,
   isSortingCards: true,
@@ -26,4 +26,4 @@ const createFooterSlice = (set, get) => ({
   },
 });
 
-export default createFooterSlice;
+export default createSortSlice;

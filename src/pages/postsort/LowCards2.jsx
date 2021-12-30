@@ -6,24 +6,27 @@ import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
+import useStore from "../../globalState/useStore";
+import useSettingsStore from "../../globalState/useSettingsStore";
 
 /* eslint react/prop-types: 0 */
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
 const LowCards2 = (props) => {
+  const columnStatements = useSettingsStore((state) => state.columnStatements);
+  const resultsPostsort = useStore((state) => state.resultsPostsort);
+  const setResultsPostsort = useStore((state) => state.setResultsPostsort);
+  const statementCommentsObj = useStore((state) => state.statementCommentsObj);
+
   // on blur, get text and add comment to card object
   const onBlur = (event, columnDisplay, itemId) => {
-    const columnStatements = getGlobalState("columnStatements");
-    const results = getGlobalState("resultsPostsort");
+    const results = resultsPostsort;
     const cards = [...columnStatements.vCols[columnDisplay]];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 
     const identifier = `${columnDisplay}_${itemId + 1}`;
-
-    // pull in state object for comments
-    const statementCommentsObj = getGlobalState("statementCommentsObj") || {};
 
     // to update just the card that changed
     cards.map((el) => {
@@ -42,7 +45,7 @@ const LowCards2 = (props) => {
       return el;
     });
 
-    setGlobalState("resultsPostsort", results);
+    setResultsPostsort(results);
   }; // end onBlur
 
   const { height, width, cardFontSize, lowCards2, disagreeObj } = props;

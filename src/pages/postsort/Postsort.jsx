@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -12,6 +10,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import ReactHtmlParser from "react-html-parser";
 import PostsortHelpModal from "./PostsortHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
@@ -20,6 +19,14 @@ const PostSort = () => {
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
   const mapObj = useSettingsStore((state) => state.mapObj);
+  // const setCardFontSize = useStore((state) => state.setCardFontSize);
+  const setProgressScore = useStore((state) => state.setProgressScore);
+  const columnStatements = useSettingsStore((state) => state.columnStatements);
+  const cardHeight = useStore((state) => state.cardHeight);
+  const cardFontSize = useStore((state) => state.cardFontSize);
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+
+  console.log(cardFontSize);
 
   console.log("conf: ", JSON.stringify(configObj, null, 2));
   console.log("map: ", JSON.stringify(mapObj, null, 2));
@@ -32,8 +39,8 @@ const PostSort = () => {
   useEffect(() => {
     let startTime;
     startTime = Date.now();
-    setGlobalState("currentPage", "postsort");
-    setGlobalState("progressScore", 50);
+    setCurrentPage("postsort");
+    setProgressScore(50);
 
     return () => {
       calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
@@ -41,9 +48,6 @@ const PostSort = () => {
   }, []);
 
   // pull data from localStorage
-  const columnStatements = getGlobalState("columnStatements");
-  const cardHeight = getGlobalState("cardHeight");
-  const cardFontSize = getGlobalState("cardFontSize");
   const columnWidth = 250;
 
   const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader));

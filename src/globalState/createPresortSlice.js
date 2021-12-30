@@ -1,5 +1,4 @@
 const createPresortSlice = (set, get) => ({
-  cardFontSize: 15,
   presortNoReturn: false,
   presortPosCards: [],
   presortNeuCards: [],
@@ -11,9 +10,6 @@ const createPresortSlice = (set, get) => ({
   triggerPresortPreventNavModal: false,
   results: {},
 
-  setCardFontSize: (inputValue) => {
-    set(() => ({ cardFontSize: inputValue }));
-  },
   setPresortNoReturn: (inputValue) => {
     set(() => ({ presortNoReturn: inputValue }));
   },

@@ -43,6 +43,7 @@ touch-action: manipulation;
 body {
   margin: 0;
   height:calc(100vh-50px);
+  overscroll-behavior: none;
 }
 
 /**
