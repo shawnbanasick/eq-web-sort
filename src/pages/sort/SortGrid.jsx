@@ -4,8 +4,6 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import move from "./move";
 import reorder from "./reorder";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import SortColumn from "./SortColumn";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHori from "./getItemStyleHori";
@@ -13,12 +11,31 @@ import calculateDragResults from "./calculateDragResults";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
+
 /* eslint react/prop-types: 0 */
 
 const SortGrid = (props) => {
   // STATE
   const configObj = useSettingsStore((state) => state.configObj);
   const mapObj = useSettingsStore((state) => state.mapObj);
+  const statementsObj = useSettingsStore((state) => state.statementsObj);
+  const columnStatements = useSettingsStore((state) => state.columnStatements);
+  const setColumnStatements = useSettingsStore(
+    (state) => state.setColumnStatements
+  );
+  const setIsSortingCards = useStore((state) => state.setIsSortingCards);
+  const setSortCompleted = useStore((state) => state.setSortCompleted);
+  const setProgressScoreAdditionalSort = useStore(
+    (state) => state.setProgressScoreAdditionalSort
+  );
+  const sortCharacteristics = useStore((state) => state.sortCharacteristics);
+  const setSortCharacteristics = useStore(
+    (state) => state.setSortCharacteristics
+  );
+  let cardHeight = useStore((state) => state.cardHeight);
+  const setCardHeight = useStore((state) => state.setCardHeight);
+  const setColumnWidth = useStore((state) => state.setColumnWidth);
 
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;
@@ -39,7 +56,6 @@ const SortGrid = (props) => {
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
-    // console.log(result);
     /*
     example result object:
     result {"draggableId":"s1","type":"DEFAULT",
@@ -48,11 +64,10 @@ const SortGrid = (props) => {
     "reason":"DROP"}
     */
 
-    const totalStatements = configObj.totalStatements;
+    const totalStatements = statementsObj.totalStatements;
 
     calculateDragResults({ ...result }, totalStatements);
 
-    const columnStatements = getGlobalState("columnStatements");
     // source and destination are objects
     const { source, destination } = result;
 
@@ -116,18 +131,18 @@ const SortGrid = (props) => {
       );
 
       // global state updates
-      setGlobalState("columnStatements", columnStatements);
+      setColumnStatements(columnStatements);
 
       if (columnStatements.statementList.length === 0) {
-        setGlobalState("isSortingCards", false);
-        setGlobalState("sortCompleted", true);
+        setIsSortingCards(false);
+        setSortCompleted(true);
       } else {
-        setGlobalState("isSortingCards", true);
-        setGlobalState("sortCompleted", false);
+        setIsSortingCards(true);
+        setSortCompleted(false);
       }
 
       // increment Progress Bar
-      const totalStatements2 = configObj.totalStatements;
+      const totalStatements2 = statementsObj.totalStatements;
       const remainingStatements = columnStatements.statementList.length;
       const numerator = totalStatements2 - remainingStatements;
 
@@ -135,19 +150,14 @@ const SortGrid = (props) => {
       const completedPercent = (ratio * 30).toFixed();
 
       // update Progress Bar State
-      setGlobalState("progressScoreAdditionalSort", completedPercent);
+      setProgressScoreAdditionalSort(completedPercent);
 
       // force component update
       const newValue = value + 1;
       setValue(newValue);
     }
-    setGlobalState("sortCharacteristics", sortCharacteristics);
+    setSortCharacteristics(sortCharacteristics);
   }; // end of dragEnd helper function
-
-  // state management
-  const isSortingCards = getGlobalState("isSortingCards");
-  if (isSortingCards === true) {
-  }
 
   // get user settings
   const cardFontSize = props.cardFontSize;
@@ -155,14 +165,14 @@ const SortGrid = (props) => {
   // todo - reset to researcher specified in next version
   const horiCardMinHeight = 50;
 
-  const sortCharacteristics = getGlobalState("sortCharacteristics");
-
   // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
-  let cardHeight = getGlobalState("cardHeight");
-  if (cardHeight === 0) {
-    cardHeight = ((props.dimensions.height - 320) / maxNumCardsInCol).toFixed();
-    setGlobalState("cardHeight", +cardHeight);
+  if (+cardHeight === 0) {
+    cardHeight = +(
+      (props.dimensions.height - 320) /
+      maxNumCardsInCol
+    ).toFixed();
+    setCardHeight(+cardHeight);
   }
 
   // adjust width by q sort design
@@ -190,10 +200,10 @@ const SortGrid = (props) => {
     (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
 
   // send column width to global state
-  setTimeout(() => setGlobalState("columnWidth", columnWidth), 0);
+  setTimeout(() => setColumnWidth(columnWidth), 0);
 
   // pull data from localStorage
-  const columnStatements = getGlobalState("columnStatements");
+  // const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
 
   // setup grid columns
@@ -211,7 +221,7 @@ const SortGrid = (props) => {
         columnStatementsArray={columnStatements.vCols[columnId]}
         forcedSorts={configObj.warnOverloadedColumn}
         columnWidth={columnWidth}
-        cardHeight={cardHeight}
+        cardHeight={+cardHeight}
         sortValue={sortValue}
         columnColor={columnColor}
         cardFontSize={cardFontSize}

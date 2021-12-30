@@ -1,35 +1,37 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const CardHeightSizer = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const cardHeight = useStore((state) => state.cardHeight);
+  const setCardHeight = useStore((state) => state.setCardHeight);
+
   const cardHeightText = ReactHtmlParser(decodeHTML(langObj.cardHeightText));
 
-  const increaseFontSize = () => {
-    const currentSize = +getGlobalState("cardHeight");
+  const increaseHeight = () => {
+    const currentSize = +cardHeight;
     const newSize = currentSize + 2;
-    setGlobalState("cardHeight", newSize);
+    setCardHeight(newSize);
   };
-  const decreaseFontSize = () => {
-    const currentSize = +getGlobalState("cardHeight");
+  const decreaseHeight = () => {
+    const currentSize = +cardHeight;
     const newSize = currentSize - 2;
-    setGlobalState("cardHeight", newSize);
+    setCardHeight(newSize);
   };
 
   return (
     <Container>
       <SpanDiv>{cardHeightText}</SpanDiv>
-      <SizeButton padBottom={"0.4em"} onClick={decreaseFontSize}>
+      <SizeButton padBottom={"0.4em"} onClick={decreaseHeight}>
         -
       </SizeButton>
-      <SizeButton padBottom={"0.25em"} onClick={increaseFontSize}>
+      <SizeButton padBottom={"0.25em"} onClick={increaseHeight}>
         +
       </SizeButton>
     </Container>

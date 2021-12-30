@@ -13,10 +13,6 @@ import SortColGuides from "./SortColGuides";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
-// const localStore = store({
-//   topMargin: 50,
-// });
-
 function debounce(fn, ms) {
   let timer;
   return (_) => {
