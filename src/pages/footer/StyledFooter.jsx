@@ -12,6 +12,7 @@ import calcProgressScore from "./calcProgressScore";
 import HelpButton from "./HelpButton";
 import getNextPage from "./getNextPage";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const StyledFooter = () => {
   // STATE
@@ -20,7 +21,7 @@ const StyledFooter = () => {
 
   const initialScreenSetting = configObj.initialScreen;
   let displayNextButton = getGlobalState("displayNextButton");
-  const currentPage = getGlobalState("currentPage");
+  const currentPage = useStore((state) => state.currentPage);
   const additionalProgress = getGlobalState("progressScoreAdditional");
   const additionalProgressSort = getGlobalState("progressScoreAdditionalSort");
   let showAdjustmentContainer = true;

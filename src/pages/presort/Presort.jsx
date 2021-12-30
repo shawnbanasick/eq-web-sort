@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
 import cloneDeep from "lodash/cloneDeep";
 import PresortModal from "./PresortModal";
-import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
 import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
@@ -18,12 +16,15 @@ import useStore from "../../globalState/useStore";
 
 const PresortPage = (props) => {
   // set progress score and current page
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const setProgressScore = useStore((state) => state.setProgressScore);
+
   useEffect(() => {
     setTimeout(() => {
-      setGlobalState("currentPage", "presort");
-      setGlobalState("progressScore", 20);
+      setCurrentPage("presort");
+      setProgressScore(20);
     }, 200);
-  }, []);
+  }, [setCurrentPage, setProgressScore]);
 
   // calc time on page
   useEffect(() => {

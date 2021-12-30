@@ -15,6 +15,7 @@ const LinkButton = (props) => {
   const setTriggerPresortPreventNavModal = useStore(
     (state) => state.setTriggerPresortPreventNavModal
   );
+  const currentPage = useStore((state) => state.currentPage);
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
@@ -33,8 +34,6 @@ const LinkButton = (props) => {
     allowUnforcedSorts,
     isPresortFinished
   ) => {
-    const currentPage = getGlobalState("currentPage");
-
     if (currentPage === "presort") {
       if (isPresortFinished === false) {
         setTriggerPresortPreventNavModal(true);
