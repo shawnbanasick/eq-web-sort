@@ -1,4 +1,5 @@
 const createSortSlice = (set, get) => ({
+  triggerSortModal: false,
   columnWidth: 100,
   topMargin: 50,
   isSortingCards: true,
@@ -23,6 +24,9 @@ const createSortSlice = (set, get) => ({
   },
   setCardHeight: (inputValue) => {
     set(() => ({ cardHeight: inputValue }));
+  },
+  setTriggerSortModal: (inputValue) => {
+    set(() => ({ triggerSortModal: inputValue }));
   },
 });
 
