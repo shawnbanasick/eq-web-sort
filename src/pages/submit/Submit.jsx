@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import SubmitButton from "./SubmitButton";
-import getGlobalState from "../../globalState/getGlobalState";
 import calculatePostsortResults from "./calculatePostsortResults";
 import SubmitFallback from "./SubmitFallback";
 import { v4 as uuid } from "uuid";
@@ -14,17 +12,26 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const SubmitPage = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = useSettingsStore((state) => state.configObj);
+  const mapObj = useSettingsStore((state) => state.mapObj);
   const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const displaySubmitFallback = useStore(
+    (state) => state.displaySubmitFallback
+  );
+  const results = useStore((state) => state.results);
+  const resultsPostsort = useStore((state) => state.resultsPostsort);
+  const resultsSurvey = useStore((state) => state.resultsSurvey);
+  const partId = useStore((state) => state.partId);
+  const usercode = useStore((state) => state.usercode);
+  const displayGoodbyeMessage = useStore(
+    (state) => state.displayGoodbyeMessage
+  );
 
   useEffect(() => {
     setCurrentPage("submit");
   }, [setCurrentPage]);
-
-  // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-
-  const displaySubmitFallback = getGlobalState("displaySubmitFallback");
 
   const transferTextAbove = decodeHTML(langObj.transferTextAbove);
   const transferTextBelow = decodeHTML(langObj.transferTextBelow);
@@ -37,15 +44,12 @@ const SubmitPage = () => {
 
   // format results for transmission
   let transmissionResults = {};
-  let results = getGlobalState("results");
-  let resultsPostsort = getGlobalState("resultsPostsort");
-  let resultsSurvey = getGlobalState("resultsSurvey");
 
   // finish setup and format results object
   transmissionResults["projectName"] = configObj.studyTitle;
-  transmissionResults["partId"] = getGlobalState("partId");
+  transmissionResults["partId"] = partId;
   transmissionResults["randomId"] = uuid().substring(0, 12);
-  transmissionResults["usercode"] = getGlobalState("usercode");
+  transmissionResults["usercode"] = usercode;
   transmissionResults["dateTime"] = results.dateTime;
   transmissionResults["timeLanding"] = results.timeOnlandingPage;
   transmissionResults["timePresort"] = results.timeOnpresortPage;
@@ -78,6 +82,7 @@ const SubmitPage = () => {
   if (configObj.showPostsort) {
     const newPostsortObject = calculatePostsortResults(
       resultsPostsort,
+      mapObj,
       configObj
     );
     const keys = Object.keys(newPostsortObject);
@@ -106,7 +111,6 @@ const SubmitPage = () => {
   }
 
   // early return if data submit success event
-  const displayGoodbyeMessage = getGlobalState("displayGoodbyeMessage");
   if (displayGoodbyeMessage === true) {
     return (
       <React.Fragment>

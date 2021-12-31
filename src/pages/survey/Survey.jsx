@@ -29,6 +29,7 @@ const SurveyPage = () => {
   const requiredAnswersObj = useSettingsStore(
     (state) => state.requiredAnswersObj
   );
+  console.log(JSON.stringify(requiredAnswersObj, null, 2));
   const setRequiredAnswersObj = useSettingsStore(
     (state) => state.setRequiredAnswersObj
   );

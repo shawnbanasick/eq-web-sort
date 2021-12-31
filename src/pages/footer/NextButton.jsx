@@ -10,12 +10,20 @@ import useStore from "../../globalState/useStore";
 const LinkButton = (props) => {
   let goToNextPage;
 
+  // STATE
   const configObj = useSettingsStore((state) => state.configObj);
   const presortFinished = useStore((state) => state.presortFinished);
   const setTriggerPresortPreventNavModal = useStore(
     (state) => state.setTriggerPresortPreventNavModal
   );
   const currentPage = useStore((state) => state.currentPage);
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  const setCheckRequiredQuestionsComplete = useStore(
+    (state) => state.setCheckRequiredQuestionsComplete
+  );
+  const setTriggerSurveyPreventNavModal = useStore(
+    (state) => state.setTriggerSurveyPreventNavModal
+  );
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
@@ -69,7 +77,6 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "survey") {
-      const requiredAnswersObj = getGlobalState("requiredAnswersObj");
       const checkArray = [];
       const keys = Object.keys(requiredAnswersObj);
       for (let i = 0; i < keys.length; i++) {
@@ -80,8 +87,8 @@ const LinkButton = (props) => {
 
       if (checkArray.length > 0) {
         // to turn on pink color for unanswered
-        setGlobalState("checkRequiredQuestionsComplete", true);
-        setGlobalState("triggerSurveyPreventNavModal", true);
+        setCheckRequiredQuestionsComplete(true);
+        setTriggerSurveyPreventNavModal(true);
         return false;
       } else {
         return true;

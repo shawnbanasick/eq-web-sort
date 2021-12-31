@@ -2,12 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-import setGlobalState from "../../globalState/setGlobalState";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 const SurveyRatings10Element = (props) => {
+  // STATE
+  const results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  // const resultsSurvey = useStore((state) => state.resultsSurvey);
+  const setRequiredAnswersObj = useStore(
+    (state) => state.setRequiredAnswersObj
+  );
+
   let isRequired = props.opts.required;
   if (isRequired === "true") {
     isRequired = true;
@@ -21,8 +32,6 @@ const SurveyRatings10Element = (props) => {
   });
 
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
-
     let array = props.opts.options.split(";;;");
     array = array.filter(function (e) {
       return e;
@@ -34,8 +43,8 @@ const SurveyRatings10Element = (props) => {
       results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
     }
 
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   // filter to remove empty strings if present
   const getOptionsArray = (options) => {
@@ -52,19 +61,12 @@ const SurveyRatings10Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
 
-  const checkRequiredQuestionsComplete = getGlobalState(
-    "checkRequiredQuestionsComplete"
-  );
-
   // setup local state
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: rows }, () => Array.from({ length: 10 }, () => false))
   );
 
   const handleChange = (selectedRow, column, e) => {
-    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("resultsSurvey");
-
     const id = `qNum${props.opts.qNum}`;
 
     let name = e.target.name;
@@ -99,9 +101,9 @@ const SurveyRatings10Element = (props) => {
     } else {
       requiredAnswersObj[id] = "no response";
     }
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+    setRequiredAnswersObj(requiredAnswersObj);
     results[name] = +value;
-    setGlobalState("resultsSurvey", results);
+    setResultsSurvey(results);
 
     // if is a required question, check if all parts answered
     const ratingState = localStore;

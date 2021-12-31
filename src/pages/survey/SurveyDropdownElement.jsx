@@ -2,22 +2,32 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 const SurveyDropdownElement = (props) => {
+  // STATE
+  const results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  // const resultsSurvey = useStore((state) => state.resultsSurvey);
+  const setRequiredAnswersObj = useStore(
+    (state) => state.setRequiredAnswersObj
+  );
+
   let isRequired = props.opts.required;
   if (isRequired === "true") {
     isRequired = true;
   }
 
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -48,15 +58,7 @@ const SurveyDropdownElement = (props) => {
 
   const [selected, setSelected] = useState([]);
 
-  // required question answer check
-  const checkRequiredQuestionsComplete = getGlobalState(
-    "checkRequiredQuestionsComplete"
-  );
-
   const handleOnChange = (e) => {
-    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("resultsSurvey");
-
     const id = `qNum${props.opts.qNum}`;
 
     setSelected(e);
@@ -74,13 +76,13 @@ const SurveyDropdownElement = (props) => {
         }
       }
       results[`qNum${props.opts.qNum}`] = selected2;
-      setGlobalState("resultsSurvey", results);
+      setResultsSurvey(results);
     } else {
       requiredAnswersObj[id] = "no response";
       results[`qNum${props.opts.qNum}`] = "no response";
-      setGlobalState("resultsSurvey", results);
+      setResultsSurvey(results);
     }
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+    setRequiredAnswersObj(requiredAnswersObj);
   };
 
   if (selected.length > 0) {

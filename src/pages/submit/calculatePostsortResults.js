@@ -1,9 +1,10 @@
-const calculatePostsortResults = (resultsPostsort, configObj) => {
+const calculatePostsortResults = (resultsPostsort, mapObj, configObj) => {
   const newObject = {};
 
   // check for missing responses
-  const qSortPattern = configObj.qSortPattern;
-  const qSortHeaderNumbers = configObj.qSortHeaders;
+  const qSortPattern = mapObj.qSortPattern;
+  console.log({ mapObj });
+  const qSortHeaderNumbers = mapObj.qSortHeaders;
   const highCardNum = +qSortPattern[qSortPattern.length - 1];
   const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];
   const highCard2Num = +qSortPattern[qSortPattern.length - 2];

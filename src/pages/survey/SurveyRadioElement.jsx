@@ -2,12 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 const SurveyRadioElement = (props) => {
+  // STATE
+  let results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  const setRequiredAnswersObj = useStore(
+    (state) => state.setRequiredAnswersObj
+  );
+  // const resultsSurvey = useStore((state) => state.resultsSurvey);
+
   let isRequired = props.opts.required;
   if (isRequired === "true") {
     isRequired = true;
@@ -21,10 +32,9 @@ const SurveyRadioElement = (props) => {
   });
 
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -56,23 +66,16 @@ const SurveyRadioElement = (props) => {
     );
   };
 
-  const checkRequiredQuestionsComplete = getGlobalState(
-    "checkRequiredQuestionsComplete"
-  );
-
   const [selected, setSelected] = useState();
 
   const handleChange = (e) => {
-    let results = getGlobalState("resultsSurvey");
-    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-
     const id = `qNum${props.opts.qNum}`;
     requiredAnswersObj[id] = "answered";
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+    setRequiredAnswersObj(requiredAnswersObj);
 
     results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
-    setGlobalState("resultsSurvey", results);
-    results = getGlobalState("resultsSurvey");
+    setResultsSurvey(results);
+    // results = resultsSurvey;
     setTestValue(true);
   }; // end handle change
 

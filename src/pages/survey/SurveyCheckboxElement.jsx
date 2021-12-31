@@ -2,17 +2,27 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 const SurveyCheckboxElement = (props) => {
+  // STATE
+  const results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  // const resultsSurvey = useStore((state) => state.resultsSurvey);
+  const setRequiredAnswersObj = useStore(
+    (state) => state.setRequiredAnswersObj
+  );
+
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   const localStore = store({});
 
@@ -32,10 +42,6 @@ const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 
-  // required question answer check
-  const checkRequiredQuestionsComplete = getGlobalState(
-    "checkRequiredQuestionsComplete"
-  );
   let bgColor;
   let border;
 
@@ -44,8 +50,6 @@ const SurveyCheckboxElement = (props) => {
   );
 
   const handleChange = (position) => {
-    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("resultsSurvey");
     const id = `qNum${props.opts.qNum}`;
 
     position = parseInt(position, 10);
@@ -79,8 +83,8 @@ const SurveyCheckboxElement = (props) => {
     }
 
     results[`qNum${props.opts.qNum}`] = selected;
-    setGlobalState("resultsSurvey", results);
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
+    setResultsSurvey(results);
+    setRequiredAnswersObj(requiredAnswersObj);
   };
 
   const hasBeenAnswered = localStore2.hasBeenAnswered;

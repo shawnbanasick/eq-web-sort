@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState.js";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
+import useStore from "../../globalState/useStore.js";
 
 const SurveyTextAreaElement = (props) => {
+  // STATE
+  const results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
+  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
+  const setRequiredAnswersObj = useStore(
+    (state) => state.setRequiredAnswersObj
+  );
+
   let isRequired = props.opts.required;
   if (isRequired === "true") {
     isRequired = true;
   }
 
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "no response";
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   // let savedTextAreaText;
   const [userText, setUserText] = useState("");
@@ -27,8 +36,6 @@ const SurveyTextAreaElement = (props) => {
   });
 
   const handleOnChange = (e) => {
-    let requiredAnswersObj = getGlobalState("requiredAnswersObj");
-    const results = getGlobalState("resultsSurvey");
     const id = `qNum${props.opts.qNum}`;
 
     let value = e.target.value;
@@ -44,14 +51,9 @@ const SurveyTextAreaElement = (props) => {
       requiredAnswersObj[id] = "no response";
       results[`qNum${props.opts.qNum}`] = "no response";
     }
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
-    setGlobalState("resultsSurvey", results);
+    setRequiredAnswersObj(requiredAnswersObj);
+    setResultsSurvey(results);
   };
-
-  // required question answer check
-  const checkRequiredQuestionsComplete = getGlobalState(
-    "checkRequiredQuestionsComplete"
-  );
 
   useEffect(() => {
     if (
