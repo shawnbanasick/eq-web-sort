@@ -3,17 +3,18 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PostsortHelpModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerPostsortModal = getGlobalState("triggerPostsortModal");
+  const triggerPostsortModal = useStore((state) => state.triggerPostsortModal);
+  const setTriggerPostsortModal = useStore(
+    (state) => state.setTriggerPostsortModal
+  );
 
   const postsortHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.postsortModalHead)
@@ -24,7 +25,7 @@ const PostsortHelpModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerPostsortModal", false);
+    setTriggerPostsortModal(false);
   };
 
   return (

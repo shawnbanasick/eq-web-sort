@@ -1,6 +1,7 @@
 const createPostsortSlice = (set, get) => ({
   resultsPostsort: {},
   statementCommentsObj: {},
+  triggerPostsortModal: false,
 
   setResultsPostsort: (inputValue) => {
     set(() => ({ resultsPostsort: inputValue }));
@@ -8,22 +9,9 @@ const createPostsortSlice = (set, get) => ({
   setStatementCommentsObj: (inputValue) => {
     set(() => ({ statementCommentsObj: inputValue }));
   },
-
-  //   setTopMargin: (inputValue) => {
-  //     set(() => ({ topMargin: inputValue }));
-  //   },
-  //   setIsSortingCards: (inputValue) => {
-  //     set(() => ({ isSortingCards: inputValue }));
-  //   },
-  //   setSortCompleted: (inputValue) => {
-  //     set(() => ({ sortCompleted: inputValue }));
-  //   },
-  //   setSortCharacteristics: (inputValue) => {
-  //     set(() => ({ sortCharacteristics: inputValue }));
-  //   },
-  //   setCardHeight: (inputValue) => {
-  //     set(() => ({ cardHeight: inputValue }));
-  //   },
+  setTriggerPostsortModal: (inputValue) => {
+    set(() => ({ triggerPostsortModal: inputValue }));
+  },
 });
 
 export default createPostsortSlice;

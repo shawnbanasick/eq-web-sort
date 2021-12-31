@@ -43,7 +43,7 @@ const PostSort = () => {
     return () => {
       calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
     };
-  }, []);
+  }, [setCurrentPage, setProgressScore]);
 
   // pull data from localStorage
   const columnWidth = 250;
@@ -104,6 +104,7 @@ const PostSort = () => {
           height={cardHeight}
           cardFontSize={cardFontSize}
           width={columnWidth}
+          highCards={highCards}
         />
 
         {agreeObj.displaySecondColumn && (
