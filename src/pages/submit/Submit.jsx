@@ -11,11 +11,14 @@ import SubmitFallback from "./SubmitFallback";
 import { v4 as uuid } from "uuid";
 import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const SubmitPage = () => {
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+
   useEffect(() => {
-    setGlobalState("currentPage", "submit");
-  }, []);
+    setCurrentPage("submit");
+  }, [setCurrentPage]);
 
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);

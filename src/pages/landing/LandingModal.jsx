@@ -5,14 +5,17 @@ import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LandingModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const triggerLandingModal = getGlobalState("triggerLandingModal");
+  const triggerLandingModal = useStore((state) => state.triggerLandingModal);
+  console.log({ triggerLandingModal });
+  const setTriggerLandingModal = useStore(
+    (state) => state.setTriggerLandingModal
+  );
 
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.landingHelpModalHead)
@@ -21,9 +24,8 @@ const LandingModal = () => {
     decodeHTML(langObj.landingHelpModalText)
   );
 
-  // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerLandingModal", false);
+    setTriggerLandingModal(false);
   };
 
   return (

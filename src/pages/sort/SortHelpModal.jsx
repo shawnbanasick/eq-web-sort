@@ -12,14 +12,10 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const SortHelpModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const triggerLandingModal = getGlobalState("triggerSortModal");
+  const triggerSortModal = getGlobalState("triggerSortModal");
 
-  const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.sortHelpModalHead)
-  );
-  const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.sortHelpModalText)
-  );
+  const helpModalHead = ReactHtmlParser(decodeHTML(langObj.sortHelpModalHead));
+  const helpModalText = ReactHtmlParser(decodeHTML(langObj.sortHelpModalText));
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
@@ -29,13 +25,13 @@ const SortHelpModal = () => {
   return (
     <Modal
       className="customModal"
-      open={triggerLandingModal}
+      open={triggerSortModal}
       onClose={onCloseModal}
       center
     >
-      <ModalHeader>{loginHelpModalHead}</ModalHeader>
+      <ModalHeader>{helpModalHead}</ModalHeader>
       <hr />
-      <ModalContent>{loginHelpModalText}</ModalContent>
+      <ModalContent>{helpModalText}</ModalContent>
     </Modal>
   );
 };

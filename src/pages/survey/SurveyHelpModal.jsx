@@ -4,39 +4,36 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const SurveyHelpModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerPostsortModal = getGlobalState("triggerSurveyModal");
-
-  const postsortHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.surveyModalHead)
+  const triggerSurveyModal = useStore((state) => state.triggerSurveyModal);
+  const setTriggerSurveyModal = useStore(
+    (state) => state.setTriggerSurveyModal
   );
-  const postsortHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.surveyModalText)
-  );
+
+  const helpModalHead = ReactHtmlParser(decodeHTML(langObj.surveyModalHead));
+  const helpModalText = ReactHtmlParser(decodeHTML(langObj.surveyModalText));
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerSurveyModal", false);
+    setTriggerSurveyModal(false);
   };
 
   return (
     <Modal
       className="customModal"
-      open={triggerPostsortModal}
+      open={triggerSurveyModal}
       onClose={onCloseModal}
       center
     >
-      <ModalHeader>{postsortHelpModalHead}</ModalHeader>
+      <ModalHeader>{helpModalHead}</ModalHeader>
       <hr />
-      <ModalContent>{postsortHelpModalText}</ModalContent>
+      <ModalContent>{helpModalText}</ModalContent>
     </Modal>
   );
 };

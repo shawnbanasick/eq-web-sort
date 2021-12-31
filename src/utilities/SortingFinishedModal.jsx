@@ -13,12 +13,14 @@ const SortingFinishedModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
 
-  const triggerLandingModal = getGlobalState("triggerSortingFinishedModal");
+  const triggerSortingFinishedModal = getGlobalState(
+    "triggerSortingFinishedModal"
+  );
 
-  const loginHelpModalHead = ReactHtmlParser(
+  const helpModalHead = ReactHtmlParser(
     decodeHTML(langObj.sortingCompleteModalHead)
   );
-  const loginHelpModalText = ReactHtmlParser(
+  const helpModalText = ReactHtmlParser(
     decodeHTML(langObj.sortingCompleteModalText)
   );
 
@@ -30,13 +32,13 @@ const SortingFinishedModal = () => {
   return (
     <Modal
       className="customModal"
-      open={triggerLandingModal}
+      open={triggerSortingFinishedModal}
       onClose={onCloseModal}
       center
     >
-      <ModalHeader>{loginHelpModalHead}</ModalHeader>
+      <ModalHeader>{helpModalHead}</ModalHeader>
       <hr />
-      <ModalContent>{loginHelpModalText}</ModalContent>
+      <ModalContent>{helpModalText}</ModalContent>
     </Modal>
   );
 };

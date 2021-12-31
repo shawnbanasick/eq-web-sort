@@ -15,14 +15,18 @@ import InternetExplorerWarning from "./InternetExplorerWarning";
 import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LandingPage = () => {
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const setProgressScore = useStore((state) => state.setProgressScore);
+
   useEffect(() => {
     setTimeout(() => {
-      setGlobalState("progressScore", 10);
-      setGlobalState("currentPage", "landing");
+      setProgressScore(10);
+      setCurrentPage("landing");
     }, 100);
-  }, []);
+  }, [setProgressScore, setCurrentPage]);
 
   useEffect(() => {
     let urlName = parseParams(window.location.href);

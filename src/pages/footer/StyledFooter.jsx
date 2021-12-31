@@ -28,6 +28,7 @@ const StyledFooter = () => {
   );
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
+  let displayHelpButton = true;
 
   let logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
@@ -76,8 +77,10 @@ const StyledFooter = () => {
 
   if (configObj.firebaseOrLocal === "local" && currentPage === "landing") {
     displayNextButton = false;
+    displayHelpButton = false;
   } else {
     displayNextButton = true;
+    displayHelpButton = true;
   }
 
   if (currentPage === "presort") {
@@ -94,7 +97,7 @@ const StyledFooter = () => {
 
   let CenterContent = (
     <React.Fragment>
-      <HelpButton />
+      {displayHelpButton && <HelpButton />}
       {showAdjustmentContainer && (
         <AdjustmentsContainer>
           <FooterFontSizer />

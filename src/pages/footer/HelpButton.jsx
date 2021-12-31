@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
@@ -11,32 +10,44 @@ const HelpButton = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const currentPage = useStore((state) => state.currentPage);
-
-  let trigger;
+  const setTriggerLandingModal = useStore(
+    (state) => state.setTriggerLandingModal
+  );
+  const setTriggerPresortModal = useStore(
+    (state) => state.setTriggerPresortModal
+  );
+  const setTriggerSortModal = useStore((state) => state.setTriggerSortModal);
+  const setTriggerPostsortModal = useStore(
+    (state) => state.setTriggerPostsortModal
+  );
+  const setTriggerSurveyModal = useStore(
+    (state) => state.setTriggerSurveyModal
+  );
+  const setTriggerSubmitModal = useStore(
+    (state) => state.setTriggerSubmitModal
+  );
 
   const buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
 
-  if (currentPage === "landing") {
-    trigger = "triggerLandingModal";
-  }
-  if (currentPage === "presort") {
-    trigger = "triggerPresortModal";
-  }
-  if (currentPage === "sort") {
-    trigger = "triggerSortModal";
-  }
-  if (currentPage === "postsort") {
-    trigger = "triggerPostsortModal";
-  }
-  if (currentPage === "survey") {
-    trigger = "triggerSurveyModal";
-  }
-  if (currentPage === "submit") {
-    trigger = "triggerSubmitModal";
-  }
-
   const handleOnClick = () => {
-    setGlobalState(trigger, true);
+    if (currentPage === "landing") {
+      setTriggerLandingModal(true);
+    }
+    if (currentPage === "presort") {
+      setTriggerPresortModal(true);
+    }
+    if (currentPage === "sort") {
+      setTriggerSortModal(true);
+    }
+    if (currentPage === "postsort") {
+      setTriggerPostsortModal(true);
+    }
+    if (currentPage === "survey") {
+      setTriggerSurveyModal(true);
+    }
+    if (currentPage === "submit") {
+      setTriggerSubmitModal(true);
+    }
   };
 
   return (
