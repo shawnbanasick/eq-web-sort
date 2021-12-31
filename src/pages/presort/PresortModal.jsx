@@ -4,20 +4,21 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortModal = () => {
-  // trigger
-  const triggerPresortModal = getGlobalState("triggerPresortModal");
-  const onCloseModal = () => {
-    setGlobalState("triggerPresortModal", false);
-  };
-
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const triggerPresortModal = useStore((state) => state.triggerPresortModal);
+  const setTriggerPresortModal = useStore(
+    (state) => state.setTriggerPresortModal
+  );
+
+  const onCloseModal = () => {
+    setTriggerPresortModal(false);
+  };
 
   const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead));
   const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText));
