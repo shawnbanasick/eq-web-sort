@@ -4,17 +4,18 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../globalState/getGlobalState";
-import setGlobalState from "../globalState/setGlobalState";
 import decodeHTML from "./decodeHTML";
 import useSettingsStore from "../globalState/useSettingsStore";
+import useStore from "../globalState/useStore";
 
 const SortingFinishedModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerSortingFinishedModal = getGlobalState(
-    "triggerSortingFinishedModal"
+  const triggerSortingFinishedModal = useStore(
+    (state) => state.triggerSortingFinishedModal
+  );
+  const setTriggerSortingFinishedModal = useStore(
+    (state) => state.setTriggerSortingFinishedModal
   );
 
   const helpModalHead = ReactHtmlParser(
@@ -26,7 +27,7 @@ const SortingFinishedModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerSortingFinishedModal", false);
+    setTriggerSortingFinishedModal(false);
   };
 
   return (

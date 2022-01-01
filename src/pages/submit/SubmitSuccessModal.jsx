@@ -4,24 +4,30 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const SubmitSuccessModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerModalOpen = getGlobalState("triggerTransmissionOKModal");
+  const triggerModalOpen = useStore(
+    (state) => state.triggerTransmissionOKModal
+  );
+  const setTriggerTransmissionOKModal = useStore(
+    (state) => state.setTriggerTransmissionOKModal
+  );
+  const setDisplayGoodbyeMessage = useStore(
+    (state) => state.setDisplayGoodbyeMessage
+  );
 
   const modalHead = ReactHtmlParser(decodeHTML(langObj.transferOkModalHeader));
   const modalText = ReactHtmlParser(decodeHTML(langObj.transferOkModalText));
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerTransmissionOKModal", false);
-    setGlobalState("displayGoodbyeMessage", true);
+    setTriggerTransmissionOKModal(false);
+    setDisplayGoodbyeMessage(true);
   };
 
   return (

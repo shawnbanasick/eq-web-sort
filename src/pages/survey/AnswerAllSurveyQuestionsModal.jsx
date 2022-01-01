@@ -3,17 +3,20 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
-const AnswerAllSurveyQeustionsModal = () => {
+const AnswerAllSurveyQuestionsModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerModalOpen = getGlobalState("triggerSurveyPreventNavModal");
+  const triggerModalOpen = useStore(
+    (state) => state.triggerSurveyPreventNavModal
+  );
+  const setTriggerSurveyPreventNavModal = useStore(
+    (state) => state.setTriggerSurveyPreventNavModal
+  );
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.surveyPreventNavModalHead)
@@ -24,7 +27,7 @@ const AnswerAllSurveyQeustionsModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerSurveyPreventNavModal", false);
+    setTriggerSurveyPreventNavModal(false);
   };
 
   return (
@@ -41,7 +44,7 @@ const AnswerAllSurveyQeustionsModal = () => {
   );
 };
 
-export default view(AnswerAllSurveyQeustionsModal);
+export default view(AnswerAllSurveyQuestionsModal);
 
 const ModalHeader = styled.div`
   font-size: 24px;

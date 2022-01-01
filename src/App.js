@@ -41,6 +41,7 @@ function App() {
 
   useEffect(() => {
     let shuffleCards;
+    let vColsObj;
 
     (async () => {
       await axios
@@ -84,6 +85,7 @@ function App() {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const mapData = convert.xml2js(response.data, options);
           let data = processMapXMLData(mapData);
+          vColsObj = data.vColsObj;
           setMapObj(data.mapObj);
         })
         .catch(function (error) {
@@ -99,7 +101,8 @@ function App() {
           const statementsData = convert.xml2js(response.data, options);
           const statementsObj = processStatementsXMLData(
             statementsData,
-            shuffleCards
+            shuffleCards,
+            vColsObj
           );
           // setGlobalState("columnStatements", statementsObj.columnStatements);
           setColumnStatements(statementsObj.columnStatements);

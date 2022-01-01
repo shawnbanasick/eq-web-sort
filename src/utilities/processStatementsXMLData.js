@@ -1,9 +1,7 @@
-import setGlobalState from "../globalState/setGlobalState";
-import getGlobalState from "../globalState/getGlobalState";
 import shuffle from "lodash/shuffle";
 
 // prep column setup array
-const processStatementsXMLData = (dataObject, shuffleCards) => {
+const processStatementsXMLData = (dataObject, shuffleCards, vColsObj) => {
   const data = dataObject.statements.statement;
   let statementsArray = [];
 
@@ -28,15 +26,12 @@ const processStatementsXMLData = (dataObject, shuffleCards) => {
   }
 
   let totalStatements = statementsArray.length;
-  // setGlobalState("configObj", configObj);
 
   const columnStatements = {};
-  const vColsObj = getGlobalState("vColsObj");
 
   columnStatements.vCols = vColsObj;
   columnStatements.statementList = statementsArray;
 
-  setGlobalState("columnStatements", columnStatements);
   localStorage.setItem("hasBeenLoaded", true);
   const returnObj = {};
   returnObj.columnStatements = columnStatements;

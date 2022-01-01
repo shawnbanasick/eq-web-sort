@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 const SurveyInformationElement = (props) => {
+  const results = useStore((state) => state.resultsSurvey);
+  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+
   useEffect(() => {
-    const results = getGlobalState("resultsSurvey");
     results[`qNum${props.opts.qNum}`] = "info. - na";
-    setGlobalState("resultsSurvey", results);
-  }, [props]);
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   const infoText = ReactHtmlParser(decodeHTML(props.opts.options));
 

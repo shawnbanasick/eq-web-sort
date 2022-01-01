@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import getGlobalState from "../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../globalState/useSettingsStore";
@@ -8,7 +7,6 @@ import useSettingsStore from "../globalState/useSettingsStore";
 const LoadingScreen = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
   const message = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
 
   return (
