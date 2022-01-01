@@ -1,4 +1,5 @@
 const createMapSettingsSlice = (set, get) => ({
+  // includes qSortPattern, qSortHeaderNumbers, etc...
   mapObj: {},
 
   setMapObj: (mapObjInput) => {

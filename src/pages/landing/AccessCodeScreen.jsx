@@ -1,20 +1,33 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const displayAccessCodeWarning = useStore(
+    (state) => state.displayAccessCodeWarning
+  );
+  const userInputAccessCode = useStore((state) => state.userInputAccessCode);
 
-  const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
+  const setDisplayLandingContent = useStore(
+    (state) => state.setDisplayLandingContent
+  );
+  const setDisplayNextButton = useStore((state) => state.setDisplayNextButton);
+  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
+  const setUserInputAccessCode = useStore(
+    (state) => state.setUserInputAccessCode
+  );
+  const setDisplayAccessCodeWarning = useStore(
+    (state) => state.setDisplayAccessCodeWarning
+  );
 
   const handleAccess = (e) => {
-    setGlobalState("userInputAccessCode", e.target.value);
+    setUserInputAccessCode(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -22,20 +35,19 @@ const LogInScreen = () => {
     const projectAccessCode = configObj.accessCode;
 
     // get user input
-    const userInputAccessCode = getGlobalState("userInputAccessCode");
 
     if (userInputAccessCode === projectAccessCode) {
       userAccessOK = true;
-      setGlobalState("displayLandingContent", true);
-      setGlobalState("displayNextButton", true);
-      setGlobalState("isLoggedIn", true);
+      setDisplayLandingContent(true);
+      setDisplayNextButton(true);
+      setIsLoggedIn(true);
     }
 
     // invalid input ==> display warnings
     if (userAccessOK === false) {
-      setGlobalState("displayAccessCodeWarning", true);
+      setDisplayAccessCodeWarning(true);
       setTimeout(() => {
-        setGlobalState("displayAccessCodeWarning", false);
+        setDisplayAccessCodeWarning(false);
       }, 5000);
     }
   };

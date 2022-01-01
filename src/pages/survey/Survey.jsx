@@ -34,6 +34,9 @@ const SurveyPage = () => {
     (state) => state.setRequiredAnswersObj
   );
   const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const checkRequiredQuestionsComplete = useStore(
+    (state) => state.checkRequiredQuestionsComplete
+  );
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
@@ -67,7 +70,13 @@ const SurveyPage = () => {
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {
       if (object.type === "text") {
-        return <SurveyTextElement key={uuid()} opts={object} />;
+        return (
+          <SurveyTextElement
+            key={uuid()}
+            check={checkRequiredQuestionsComplete}
+            opts={object}
+          />
+        );
       }
       if (object.type === "textarea") {
         return <SurveyTextAreaElement key={uuid()} opts={object} />;

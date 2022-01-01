@@ -2,8 +2,6 @@ import styled from "styled-components";
 import React from "react";
 import { withRouter } from "react-router";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
@@ -23,6 +21,14 @@ const LinkButton = (props) => {
   );
   const setTriggerSurveyPreventNavModal = useStore(
     (state) => state.setTriggerSurveyPreventNavModal
+  );
+  const isSortingFinished = useStore((state) => state.isSortingFinished);
+  const hasOverloadedColumn = useStore((state) => state.hasOverloadedColumn);
+  const setTriggerSortPreventNavModal = useStore(
+    (state) => state.setTriggerSortPreventNavModal
+  );
+  const setTriggerSortOverloadedColumnModal = useStore(
+    (state) => state.setTriggerSortOverloadedColumnModal
   );
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
@@ -51,25 +57,23 @@ const LinkButton = (props) => {
       }
     }
     if (currentPage === "sort") {
-      const isSortingFinished = getGlobalState("sortFinished");
       if (isSortingFinished === false) {
         // not finished sorting
-        setGlobalState("triggerSortPreventNavModal", true);
+        setTriggerSortPreventNavModal(true);
         return false;
       } else {
-        const hasOverloadedColumn = getGlobalState("hasOverloadedColumn");
         // has finished sorting
         if (allowUnforcedSorts === true) {
           // unforced ok -> allow nav
-          setGlobalState("triggerSortPreventNavModal", false);
+          setTriggerSortPreventNavModal(false);
           return true;
         } else {
           // unforced not ok -> allow nav if no overloaded columns
           if (hasOverloadedColumn === true) {
-            setGlobalState("triggerSortOverloadedColumnModal", true);
+            setTriggerSortOverloadedColumnModal(true);
             return false;
           } else {
-            setGlobalState("triggerSortPreventNavModal", false);
+            setTriggerSortPreventNavModal(false);
             return true;
           }
         }

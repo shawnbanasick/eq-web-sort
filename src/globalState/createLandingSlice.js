@@ -3,6 +3,10 @@ const createLandingSlice = (set, get) => ({
   triggerLandingModal: false,
   usercode: "",
   partId: "",
+  localUsercode: "",
+  displayAccessCodeWarning: false,
+  userInputAccessCode: "",
+  displayLandingContent: false,
 
   setIsLoggedIn: (inputValue) => {
     set(() => ({ isLoggedIn: inputValue }));
@@ -15,6 +19,18 @@ const createLandingSlice = (set, get) => ({
   },
   setPartId: (inputValue) => {
     set(() => ({ partId: inputValue }));
+  },
+  setLocalUsercode: (input) => {
+    set(() => ({ localUsercode: input }));
+  },
+  setDisplayAccessCodeWarning: (input) => {
+    set(() => ({ displayAccessCodeWarning: input }));
+  },
+  setUserInputAccessCode: (input) => {
+    set(() => ({ userInputAccessCode: input }));
+  },
+  setDisplayLandingContent: (input) => {
+    set(() => ({ displayLandingContent: input }));
   },
 });
 

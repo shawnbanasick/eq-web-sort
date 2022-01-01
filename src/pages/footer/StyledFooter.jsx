@@ -5,7 +5,6 @@ import FooterFontSizer from "./FooterFontSizer";
 import CardHeightSizer from "./CardHeightSizer";
 import { view } from "@risingstack/react-easy-state";
 import ProgressBar from "@ramonak/react-progress-bar";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import calcProgressScore from "./calcProgressScore";
@@ -18,14 +17,15 @@ const StyledFooter = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
-
   const initialScreenSetting = configObj.initialScreen;
-  let displayNextButton = getGlobalState("displayNextButton");
+  let displayNextButton = useStore((state) => state.displayNextButton);
   const currentPage = useStore((state) => state.currentPage);
   const additionalProgress = useStore((state) => state.progressScoreAdditional);
   const additionalProgressSort = useStore(
     (state) => state.progressScoreAdditionalSort
   );
+  const localUsercode = useStore((state) => state.localUserCode);
+
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
   let displayHelpButton = true;
@@ -34,7 +34,7 @@ const StyledFooter = () => {
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 
   if (currentPage === "sort" && configObj.firebaseOrLocal === "local") {
-    const usercode = getGlobalState("localUsercode");
+    const usercode = localUsercode;
     const projectName = configObj.studyTitle;
     const today = new Date();
     const date =

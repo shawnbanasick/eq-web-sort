@@ -10,9 +10,12 @@ const SurveyTextElement = (props) => {
   // STATE
   const results = useStore((state) => state.resultsSurvey);
   const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
+  const checkRequiredQuestionsComplete = props.check;
+
+  // useStore(
+  //   (state) => state.checkRequiredQuestionsComplete
+  // );
+
   const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
   // const resultsSurvey = useStore((state) => state.resultsSurvey);
   const setRequiredAnswersObj = useStore(
@@ -71,6 +74,7 @@ const SurveyTextElement = (props) => {
   }
 
   useEffect(() => {
+    console.log({ checkRequiredQuestionsComplete });
     if (
       checkRequiredQuestionsComplete === true &&
       userTextLen < 1 &&

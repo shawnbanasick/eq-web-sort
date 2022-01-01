@@ -6,6 +6,10 @@ const createSortSlice = (set, get) => ({
   sortCompleted: false,
   sortCharacteristics: {},
   cardHeight: 0,
+  isSortingFinished: false,
+  hasOverloadedColumn: false,
+  triggerSortPreventNavModal: false,
+  triggerSortOverloadedColumnModal: false,
 
   setColumnWidth: (inputValue) => {
     set(() => ({ columnWidth: inputValue }));
@@ -27,6 +31,18 @@ const createSortSlice = (set, get) => ({
   },
   setTriggerSortModal: (inputValue) => {
     set(() => ({ triggerSortModal: inputValue }));
+  },
+  setIsSortingFinished: (inputValue) => {
+    set(() => ({ isSortingFinished: inputValue }));
+  },
+  setHasOverloadedColumn: (inputValue) => {
+    set(() => ({ hasOverloadedColumn: inputValue }));
+  },
+  setTriggerSortPreventNavModal: (inputValue) => {
+    set(() => ({ triggerSortPreventNavModal: inputValue }));
+  },
+  setTriggerSortOverloadedColumnModal: (inputValue) => {
+    set(() => ({ triggerSortOverloadedColumnModal: inputValue }));
   },
 });
 

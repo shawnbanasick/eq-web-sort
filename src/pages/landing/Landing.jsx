@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import styled, { keyframes } from "styled-components";
 import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import getGlobalState from "../../globalState/getGlobalState";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import LandingModal from "../landing/LandingModal";
 import LogInScreen from "./LogInScreen";
@@ -18,8 +16,18 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const LandingPage = () => {
+  // STATE
+  const langObj = useSettingsStore((state) => state.langObj);
+  const configObj = useSettingsStore((state) => state.configObj);
+  const dataLoaded = useStore((state) => state.dataLoaded);
+  const headerBarColor = configObj.headerBarColor;
   const setCurrentPage = useStore((state) => state.setCurrentPage);
   const setProgressScore = useStore((state) => state.setProgressScore);
+  const setUsercode = useStore((state) => state.setUsercode);
+  let displayLandingContent = useStore((state) => state.displayLandingContent);
+
+  const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
+  const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,9 +41,9 @@ const LandingPage = () => {
     if (urlName !== undefined) {
       console.log(urlName.usercode);
       const codeName = urlName.usercode;
-      setGlobalState("usercode", codeName);
+      setUsercode(codeName);
     }
-  }, []);
+  }, [setUsercode]);
 
   // calc time on page
   useEffect(() => {
@@ -45,18 +53,7 @@ const LandingPage = () => {
     };
   }, []);
 
-  // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-
-  const headerBarColor = configObj.headerBarColor;
-
-  const dataLoaded = getGlobalState("dataLoaded");
-  const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
-  const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
-
   // check for complete
-  let displayLandingContent = getGlobalState("displayLandingContent");
   let displayLogInScreen = false;
   let displayPartIdScreen = false;
   let displayAccessCodeScreen = false;
