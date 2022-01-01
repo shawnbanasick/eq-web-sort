@@ -1,21 +1,23 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
-import setGlobalState from "../../globalState/setGlobalState";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LogInSubmitButton = (props) => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const localParticipantName = useStore((state) => state.localParticipantName);
+  const localUsercode = useStore((state) => state.localUsercode);
 
-  const localStartButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localStartButtonText)
+  const setLocalParticipantName = useStore(
+    (state) => state.setLocalParticipantName
   );
+  const setLocalUsercode = useStore((state) => state.setLocalUsercode);
 
   let setLocalPartIdWarning1 = useStore(
     (state) => state.setLocalPartIdWarning1
@@ -25,29 +27,27 @@ const LogInSubmitButton = (props) => {
     (state) => state.setLocalPartIdWarning2
   );
 
-  const checkForNextPageConditions = () => {
+  const localStartButtonText = ReactHtmlParser(
+    decodeHTML(langObj.localStartButtonText)
+  );
+
+  const checkForNextPageConditions = useCallback(() => {
     let value0 = false;
     let value1;
     let value2;
-    let localParticipantName = getGlobalState("localParticipantName");
-    let localUsercode = getGlobalState("localUsercode");
 
     if (localParticipantName.length === 0) {
       value1 = false;
-      // setGlobalState("displayLocalPartIdWarning1", true);
       setLocalPartIdWarning1(true);
     } else {
-      // setGlobalState("displayLocalPartIdWarning1", false);
       setLocalPartIdWarning1(false);
       value1 = true;
     }
 
     if (localUsercode.length === 0) {
       value2 = false;
-      // setGlobalState("displayLocalPartIdWarning2", true);
       setLocalPartIdWarning2(true);
     } else {
-      // setGlobalState("displayLocalPartIdWarning2", false);
       setLocalPartIdWarning2(false);
 
       value2 = true;
@@ -60,7 +60,7 @@ const LogInSubmitButton = (props) => {
     }
 
     return value0;
-  };
+  }, [setLocalPartIdWarning1, setLocalPartIdWarning2]);
 
   const {
     history,
@@ -74,10 +74,6 @@ const LogInSubmitButton = (props) => {
   } = props;
 
   useEffect(() => {
-    // clear local fields on load
-    // setGlobalState("localParticipantName", "");
-    // setGlobalState("localUsercode", "");
-
     const handleKeyUpStart = (event) => {
       // let target;
       if (event.key === "Enter") {
@@ -94,13 +90,16 @@ const LogInSubmitButton = (props) => {
   }, [history, checkForNextPageConditions]);
 
   useEffect(() => {
-    setGlobalState("localParticipantName", "");
-    setGlobalState("localUsercode", "");
-    // setGlobalState("displayLocalPartIdWarning1", false);
+    setLocalParticipantName("");
+    setLocalUsercode("");
     setLocalPartIdWarning1(false);
-    // setGlobalState("displayLocalPartIdWarning2", false);
     setLocalPartIdWarning2(false);
-  }, [setLocalPartIdWarning1, setLocalPartIdWarning2]);
+  }, [
+    setLocalPartIdWarning1,
+    setLocalPartIdWarning2,
+    setLocalParticipantName,
+    setLocalUsercode,
+  ]);
 
   return (
     <StyledSubmitButton

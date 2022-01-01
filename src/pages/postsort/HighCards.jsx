@@ -26,9 +26,6 @@ const HighCards = (props) => {
 
     const identifier = `${columnDisplay}_${itemId + 1}`;
 
-    // pull in state object for comments
-    // const statementCommentsObj = getGlobalState("statementCommentsObj");
-
     // to update just the card that changed
     cards.map((el) => {
       if (el.id === targetCard) {

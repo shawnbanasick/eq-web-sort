@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LocalStartButton from "./LocalStartButton";
 import ReactHtmlParser from "react-html-parser";
@@ -25,9 +23,6 @@ function downloadObjectAsJson(exportObj, exportName) {
 }
 
 const LogInScreen = () => {
-  // const displayPartIdWarning1 = getGlobalState("displayLocalPartIdWarning1");
-  // const displayPartIdWarning2 = getGlobalState("displayLocalPartIdWarning2");
-
   // STATE
   const displayPartIdWarning1 = useStore(
     (state) => state.displayLocalPartIdWarning1
@@ -44,6 +39,12 @@ const LogInScreen = () => {
   );
   const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
   const langObj = useSettingsStore((state) => state.langObj);
+  const localStoredQsorts = useStore((state) => state.localStoredQsorts);
+  const setLocalParticipantName = useStore(
+    (state) => state.setLocalParticipantName
+  );
+  const setLocalStoredQsorts = useStore((state) => state.setLocalStoredQsorts);
+  const setLocalUsercode = useStore((state) => state.setLocalUsercode);
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
@@ -65,31 +66,25 @@ const LogInScreen = () => {
     if (!localStoredQsortsFromLocalStorage) {
       localStoredQsortsFromLocalStorage = {};
     }
-    setGlobalState("localStoredQsorts", localStoredQsortsFromLocalStorage);
+    setLocalStoredQsorts(localStoredQsortsFromLocalStorage);
   }, [localStoredQsortsFromLocalStorage]);
-  console.log(localStoredQsortsFromLocalStorage);
-
-  const localStoredQsorts = getGlobalState("localStoredQsorts");
 
   const headerText = `${storedQsortsHeaderText}: ${
     Object.keys(localStoredQsorts).length
   } ${localParticipantsText}`;
 
   const handleInput = (e) => {
-    setGlobalState("localParticipantName", e.target.value);
-    // setGlobalState("displayLocalPartIdWarning1", false);
+    setLocalParticipantName(e.target.value);
     setLocalPartIdWarning1(false);
   };
 
   const handleUsercodeInput = (e) => {
-    setGlobalState("localUsercode", e.target.value);
-    // setGlobalState("displayLocalPartIdWarning2", false);
+    setLocalUsercode(e.target.value);
     setLocalPartIdWarning2(false);
   };
 
   const handleDeleteLocal = (e) => {
     console.log("delete clicked");
-    // setGlobalState("triggerLocalDeleteModal", true);
     setLocalDeleteModal(true);
   };
 
@@ -99,7 +94,6 @@ const LogInScreen = () => {
     if (exportObj.length > 0) {
       downloadObjectAsJson(exportObj, exportName);
     }
-    console.log("download clicked");
   };
 
   return (

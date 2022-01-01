@@ -147,60 +147,38 @@ function PresortDND(props) {
               statementsObj.totalStatements - sourceColumn.items.length + 1;
 
             setPresortSortedStatementsNum(sortedStatements);
-            /*
-            setPresortSortedStatementsNum(
-              statementsObj.totalStatements - sourceColumn.items.length + 1
-            );
 
-            setGlobalState(
-              "presortSortedStatementsNum",
-              presortSortedStatementsNum
-            );
-            // presortSortedStatementsNum = presortSortedStatementsNum.toString();
+            const ratio = sortedStatements / statementsObj.totalStatements;
 
-            setGlobalState(
-              "presortSortedStatementsNum",
-              presortSortedStatementsNum.toString()
-            );
-            */
+            const completedPercent = (ratio * 30).toFixed();
+            // update Progress Bar State
+            setProgressScoreAdditional(completedPercent);
+
+            // update columns
+            setColumns({
+              ...columns,
+              [source.droppableId]: {
+                ...sourceColumn,
+                items: sourceItems,
+              },
+              [destination.droppableId]: {
+                ...destColumn,
+                items: destItems,
+              },
+            });
+          } else {
+            const column = columns[source.droppableId];
+            const copiedItems = [...column.items];
+            const [removed] = copiedItems.splice(source.index, 1);
+            copiedItems.splice(destination.index, 0, removed);
+            setColumns({
+              ...columns,
+              [source.droppableId]: {
+                ...column,
+                items: copiedItems,
+              },
+            });
           }
-
-          // update progress bar
-          /*  const sortedStatements = +getGlobalState(
-            "presortSortedStatementsNum"
-          );
-          */
-
-          const ratio = sortedStatements / statementsObj.totalStatements;
-
-          const completedPercent = (ratio * 30).toFixed();
-          // update Progress Bar State
-          setProgressScoreAdditional(completedPercent);
-
-          // update columns
-          setColumns({
-            ...columns,
-            [source.droppableId]: {
-              ...sourceColumn,
-              items: sourceItems,
-            },
-            [destination.droppableId]: {
-              ...destColumn,
-              items: destItems,
-            },
-          });
-        } else {
-          const column = columns[source.droppableId];
-          const copiedItems = [...column.items];
-          const [removed] = copiedItems.splice(source.index, 1);
-          copiedItems.splice(destination.index, 0, removed);
-          setColumns({
-            ...columns,
-            [source.droppableId]: {
-              ...column,
-              items: copiedItems,
-            },
-          });
         }
       } catch (error) {
         console.log(error);

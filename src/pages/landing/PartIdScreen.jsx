@@ -1,46 +1,54 @@
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  const displayPartIdWarning = useStore((state) => state.displayPartIdWarning);
+  const setUserInputPartId = useStore((state) => state.setUserInputPartId);
+  const userInputPartId = useStore((state) => state.userInputPartId);
+  const setDisplayLandingContent = useStore(
+    (state) => state.setDisplayLandingContent
+  );
+  const setPartId = useStore((state) => state.setPartId);
+  const setDisplayNextButton = useStore((state) => state.setDisplayNextButton);
+  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
+  const setDisplayPartIdWarning = useStore(
+    (state) => state.setDisplayPartIdWarning
+  );
 
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
 
   const handleInput = (e) => {
     console.log(e.target.value);
-    setGlobalState("userInputPartId", e.target.value);
+    setUserInputPartId(e.target.value);
   };
 
   const handleSubmit = (e) => {
     let userPartIdOK = false;
 
     // get user input
-    const userInputPartId = getGlobalState("userInputPartId");
-
     if (userInputPartId.length > 0) {
       userPartIdOK = true;
-      setGlobalState("displayLandingContent", true);
-      setGlobalState("partId", userInputPartId);
-      setGlobalState("displayNextButton", true);
-      setGlobalState("isLoggedIn", true);
+      setDisplayLandingContent(true);
+      setPartId(userInputPartId);
+      setDisplayNextButton(true);
+      setIsLoggedIn(true);
     }
 
     // invalid input ==> display warnings
     if (userPartIdOK === false) {
-      setGlobalState("displayPartIdWarning", true);
+      setDisplayPartIdWarning(true);
       setTimeout(() => {
-        setGlobalState("displayPartIdWarning", false);
+        setDisplayPartIdWarning(false);
       }, 5000);
     }
   };

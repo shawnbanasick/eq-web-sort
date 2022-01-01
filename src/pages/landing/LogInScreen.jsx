@@ -4,17 +4,39 @@ import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const displayAccessCodeWarning = useStore(
+    (state) => state.displayAccessCodeWarning
+  );
+  const displayPartIdWarning = useStore((state) => state.displayPartIdWarning);
+  const setUserInputPartId = useStore((state) => state.setUserInputPartId);
+  const setUserInputAccessCode = useStore(
+    (state) => state.setUserInputAccessCode
+  );
+  const userInputPartId = useStore((state) => state.userInputPartId);
+  const userInputAccessCode = useStore((state) => state.userInputAccessCode);
+  const setDisplayLandingContent = useStore(
+    (state) => state.setDisplayLandingContent
+  );
+  const setDisplayContinueButton = useStore(
+    (state) => state.setDisplayContinueButton
+  );
+  const setPartId = useStore((state) => state.setPartId);
+  const setDisplayNextButton = useStore((state) => state.setDisplayNextButton);
+  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
+  const setDisplayAccessCodeWarning = useStore(
+    (state) => state.setDisplayAccessCodeWarning
+  );
+  const setDisplayPartIdWarning = useStore(
+    (state) => state.setDisplayPartIdWarning
+  );
 
-  const displayAccessCodeWarning = getGlobalState("displayAccessCodeWarning");
-  const displayPartIdWarning = getGlobalState("displayPartIdWarning");
   const welcomeText = ReactHtmlParser(decodeHTML(langObj.loginWelcomeText));
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
@@ -25,11 +47,11 @@ const LogInScreen = () => {
   const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
 
   const handleInput = (e) => {
-    setGlobalState("userInputPartId", e.target.value);
+    setUserInputPartId(e.target.value);
   };
 
   const handleAccess = (e) => {
-    setGlobalState("userInputAccessCode", e.target.value);
+    setUserInputAccessCode(e.target.value);
   };
 
   const handleSubmit = () => {
@@ -38,8 +60,6 @@ const LogInScreen = () => {
     const projectAccessCode = configObj.accessCode;
 
     // get user input
-    const userInputPartId = getGlobalState("userInputPartId");
-    const userInputAccessCode = getGlobalState("userInputAccessCode");
 
     if (userInputPartId.length > 0) {
       userPartIdOK = true;
@@ -51,20 +71,20 @@ const LogInScreen = () => {
 
     // invalid input ==> display warnings
     if (userAccessOK && userPartIdOK) {
-      setGlobalState("displayLandingContent", true);
-      setGlobalState("displayContinueButton", true);
-      setGlobalState("partId", userInputPartId);
-      setGlobalState("displayNextButton", true);
-      setGlobalState("isLoggedIn", true);
+      setDisplayLandingContent(true);
+      setDisplayContinueButton(true);
+      setPartId(userInputPartId);
+      setDisplayNextButton(true);
+      setIsLoggedIn(true);
     } else if (userAccessOK === false) {
-      setGlobalState("displayAccessCodeWarning", true);
+      setDisplayAccessCodeWarning(true);
       setTimeout(() => {
-        setGlobalState("displayAccessCodeWarning", false);
+        setDisplayAccessCodeWarning(false);
       }, 5000);
     } else if (userPartIdOK === false) {
-      setGlobalState("displayPartIdWarning", true);
+      setDisplayPartIdWarning(true);
       setTimeout(() => {
-        setGlobalState("displayPartIdWarning", false);
+        setDisplayPartIdWarning(false);
       }, 5000);
     }
   };

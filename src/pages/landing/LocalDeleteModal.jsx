@@ -21,15 +21,12 @@ const LocalDeleteModal = () => {
   );
 
   // STATE
-  // const triggerLocalDeleteModal = getGlobalState("triggerLocalDeleteModal");
   const triggerLocalDeleteModal = useStore(
     (state) => state.triggerLocalDeleteModal
   );
   const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
 
-  // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    // setGlobalState("triggerLocalDeleteModal", false);
     setLocalDeleteModal(false);
   };
 

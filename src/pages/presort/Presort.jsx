@@ -40,7 +40,6 @@ const PresortPage = (props) => {
     };
   }, []);
 
-  // const columnStatements = getGlobalState("columnStatements");
   const columnStatements = statementsObj.columnStatements;
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
