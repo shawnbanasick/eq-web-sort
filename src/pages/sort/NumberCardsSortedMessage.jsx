@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
+import useStore from "../../globalState/useStore";
+
 /* eslint react/prop-types: 0 */
 
 const NumberCardsSortedMessage = (props) => {
-  const numSortedStatements = getGlobalState("numSortedStatements");
-  const isSortingCards = getGlobalState("isSortingCards");
+  const numSortedStatements = useStore((state) => state.numSortedStatements);
+  const isSortingCards = useStore((state) => state.isSortingCards);
 
   if (isSortingCards === true) {
     return (

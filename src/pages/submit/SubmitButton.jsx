@@ -1,61 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const SubmitResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
+  let displaySubmitFallback = useStore((state) => state.displaySubmitFallback);
+  let submitFailNumber = useStore((state) => state.submitFailNumber);
+  const setTriggerTransmissionFailModal = useStore(
+    (state) => state.setTriggerTransmissionFailModal
+  );
+  const setTriggerTransmissionOKModal = useStore(
+    (state) => state.setTriggerTransmissionOKModal
+  );
+  const setDisplaySubmitFallback = useStore(
+    (state) => state.setDisplaySubmitFallback
+  );
 
-  let displaySubmitFallback = getGlobalState("displaySubmitFallback");
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
-  let submitFailNumber = getGlobalState("submitFailNumber");
-  /* 
-  const demoData = {
-    projectName: "My_Q_project",
-    partId: "jimbo-wilbur",
-    randomId: "8ea8f130-b1e",
-    dateTime: "26/9/2021 @ 7:28:33",
-    timeLanding: "00:02:15",
-    timePresort: "00:05:06",
-    timeSort: "00:06:28",
-    timePostsort: "00:01:01",
-    timeSurvey: "00:01:36",
-    npos: 3,
-    nneu: 27,
-    nneg: 3,
-    column4_1: "no response",
-    column4_2: "no response",
-    columnN4_1: "no response",
-    columnN4_2: "no response",
-    qNum1: "info. - na",
-    qNum2: "hjkhjkhk",
-    qNum3: "no response",
-    qNum4: "no response",
-    qNum5: "no response",
-    qNum6: "no response",
-    qNum7: "1",
-    "qNum8-1": "no response",
-    "qNum8-2": "no response",
-    "qNum8-3": "no response",
-    "qNum8-4": "no response",
-    "qNum9-1": "no response",
-    "qNum9-2": "no response",
-    "qNum9-3": "no response",
-    "qNum9-4": "no response",
-    "qNum10-1": "no response",
-    "qNum10-2": "no response",
-    "qNum10-3": "no response",
-    "qNum10-4": "no response",
-    sort: "1|0|-1|0|-1|-2|0|-1|3|-2|-3|3|1|-4|-4|1|2|2|2|3|1|2|4|-3|4|-2|-1|0|-2|-1|1|0|-3",
-  };
- */
+
   const handleClick = (e) => {
     e.preventDefault();
     e.target.disabled = true;
@@ -71,11 +40,11 @@ const SubmitResultsButton = (props) => {
           if (error) {
             // data error action -  modal
             console.log("data error - there was an error at rootRef level!");
-            setGlobalState("triggerTransmissionFailModal", true);
+            setTriggerTransmissionFailModal(true);
             e.target.disabled = false;
           } else {
             // do success action - modal
-            setGlobalState("triggerTransmissionOKModal", true);
+            setTriggerTransmissionOKModal(true);
             console.log("success! pushed to database");
             localStorage.removeItem("cumulativelandingPageDuration");
             localStorage.removeItem("cumulativepresortPageDuration");
@@ -102,13 +71,13 @@ const SubmitResultsButton = (props) => {
         console.log(submitFailNumber);
         // Firebase connection error
         console.log("Connection error - there was an error at firebase level!");
-        setGlobalState("triggerTransmissionFailModal", true);
+        setTriggerTransmissionFailModal(true);
         console.log(errorCode, errorMessage);
         e.target.disabled = false;
 
         if (submitFailNumber > 2) {
           console.log("display fallback set to true");
-          setGlobalState("displaySubmitFallback", true);
+          setDisplaySubmitFallback(true);
           displaySubmitFallback = true;
         }
       });
@@ -185,3 +154,44 @@ const DisabledButton = styled.button`
   margin-bottom: 20px;
   background-color: lightgray;
 `;
+
+/* 
+  const demoData = {
+    projectName: "My_Q_project",
+    partId: "jimbo-wilbur",
+    randomId: "8ea8f130-b1e",
+    dateTime: "26/9/2021 @ 7:28:33",
+    timeLanding: "00:02:15",
+    timePresort: "00:05:06",
+    timeSort: "00:06:28",
+    timePostsort: "00:01:01",
+    timeSurvey: "00:01:36",
+    npos: 3,
+    nneu: 27,
+    nneg: 3,
+    column4_1: "no response",
+    column4_2: "no response",
+    columnN4_1: "no response",
+    columnN4_2: "no response",
+    qNum1: "info. - na",
+    qNum2: "hjkhjkhk",
+    qNum3: "no response",
+    qNum4: "no response",
+    qNum5: "no response",
+    qNum6: "no response",
+    qNum7: "1",
+    "qNum8-1": "no response",
+    "qNum8-2": "no response",
+    "qNum8-3": "no response",
+    "qNum8-4": "no response",
+    "qNum9-1": "no response",
+    "qNum9-2": "no response",
+    "qNum9-3": "no response",
+    "qNum9-4": "no response",
+    "qNum10-1": "no response",
+    "qNum10-2": "no response",
+    "qNum10-3": "no response",
+    "qNum10-4": "no response",
+    sort: "1|0|-1|0|-1|-2|0|-1|3|-2|-3|3|1|-4|-4|1|2|2|2|3|1|2|4|-3|4|-2|-1|0|-2|-1|1|0|-3",
+  };
+ */

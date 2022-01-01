@@ -4,16 +4,19 @@ import { Modal } from "react-responsive-modal";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortPreventNavModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-
-  const triggerModalOpen = getGlobalState("triggerSortPreventNavModal");
+  const triggerModalOpen = useStore(
+    (state) => state.triggerSortPreventNavModal
+  );
+  const setTriggerSortPreventNavModal = useStore(
+    (state) => state.setTriggerSortPreventNavModal
+  );
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.sortPreventNavModalHead)
@@ -24,7 +27,7 @@ const PresortPreventNavModal = () => {
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
-    setGlobalState("triggerSortPreventNavModal", false);
+    setTriggerSortPreventNavModal(false);
   };
 
   return (
