@@ -1,16 +1,26 @@
 const createSortSlice = (set, get) => ({
-  triggerSortModal: false,
-  columnWidth: 100,
-  topMargin: 50,
-  isSortingCards: true,
-  sortCompleted: false,
-  sortCharacteristics: {},
   cardHeight: 0,
-  isSortingFinished: false,
+  columnWidth: 100,
   hasOverloadedColumn: false,
+  isSortingCards: true,
+  isSortingFinished: false,
+  sortCompleted: false,
+  sortFinished: false,
+  sortFinishedModalHasBeenShown: false,
+  sortCharacteristics: {},
+  topMargin: 50,
+  triggerSortModal: false,
   triggerSortPreventNavModal: false,
   triggerSortOverloadedColumnModal: false,
+  triggerSortingFinishedModal: false,
+  sortGridResults: [],
 
+  setTriggerSortingFinishedModal: (inputValue) => {
+    set(() => ({ triggerSortingFinishedModal: inputValue }));
+  },
+  setSortGridResults: (inputValue) => {
+    set(() => ({ sortGridResults: inputValue }));
+  },
   setColumnWidth: (inputValue) => {
     set(() => ({ columnWidth: inputValue }));
   },
@@ -22,6 +32,12 @@ const createSortSlice = (set, get) => ({
   },
   setSortCompleted: (inputValue) => {
     set(() => ({ sortCompleted: inputValue }));
+  },
+  setSortFinished: (inputValue) => {
+    set(() => ({ sortFinished: inputValue }));
+  },
+  setSortFinishedModalHasBeenShown: (inputValue) => {
+    set(() => ({ sortFinishedModalHasBeenShown: inputValue }));
   },
   setSortCharacteristics: (inputValue) => {
     set(() => ({ sortCharacteristics: inputValue }));

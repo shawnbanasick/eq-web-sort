@@ -6,7 +6,6 @@ import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
-import useStore from "../../globalState/useStore";
 
 const LogInSubmitButton = (props) => {
   // STATE
@@ -60,7 +59,12 @@ const LogInSubmitButton = (props) => {
     }
 
     return value0;
-  }, [setLocalPartIdWarning1, setLocalPartIdWarning2]);
+  }, [
+    setLocalPartIdWarning1,
+    setLocalPartIdWarning2,
+    localParticipantName,
+    localUsercode,
+  ]);
 
   const {
     history,

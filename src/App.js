@@ -18,6 +18,7 @@ import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
+import useStore from "./globalState/useStore";
 
 const convert = require("xml-js");
 
@@ -38,6 +39,7 @@ function App() {
   const setRequiredAnswersObj = useSettingsStore(
     (state) => state.setRequiredAnswersObj
   );
+  const setDataLoaded = useStore((state) => state.setDataLoaded);
 
   useEffect(() => {
     let shuffleCards;
@@ -53,7 +55,7 @@ function App() {
           const languageData = convert.xml2js(response.data, options);
           let langObj = processLanguageXMLData(languageData);
           // localStorage.setItem("langObj", JSON.stringify(langObj));
-          setGlobalState("langObj", langObj);
+          // setGlobalState("langObj", langObj);
           setLangObj(langObj);
         })
         .catch(function (error) {
@@ -112,13 +114,22 @@ function App() {
           console.log(error);
         });
 
-      setGlobalState("dataLoaded", true);
+      setDataLoaded(true);
+
       setTimeout(() => {
         // setIsDataLoaded(true);
         setLoading(false);
       }, 700);
     })();
-  }, [setConfigObj, setLangObj, setStatementsObj, setMapObj]);
+  }, [
+    setConfigObj,
+    setLangObj,
+    setStatementsObj,
+    setColumnStatements,
+    setRequiredAnswersObj,
+    setSurveyQuestionObjArray,
+    setMapObj,
+  ]);
 
   if (isLoading) {
     return <LoadingScreen />;

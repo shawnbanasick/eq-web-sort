@@ -110,7 +110,7 @@ const Sort = () => {
       );
       setResults(updatedResults);
     };
-  }, []);
+  }, [results, setResults]);
 
   return (
     <React.Fragment>

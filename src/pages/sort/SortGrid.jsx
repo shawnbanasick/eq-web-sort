@@ -43,8 +43,13 @@ const SortGrid = (props) => {
   const sortGridResults = useStore((state) => state.sortGridResults);
   const setSortFinished = useStore((state) => state.setSortFinished);
   const setResults = useStore((state) => state.setResults);
-  const setSortFinishedModalHasBeenShown = useStore((state) => state.setSortFinishedModalHasBeenShown);
-  const setTrigger
+  const setSortFinishedModalHasBeenShown = useStore(
+    (state) => state.setSortFinishedModalHasBeenShown
+  );
+  const setTriggerSortingFinishedModal = useStore(
+    (state) => state.setTriggerSortingFinishedModal
+  );
+  const setSortGridResults = useStore((state) => state.setSortGridResults);
 
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;
@@ -75,8 +80,7 @@ const SortGrid = (props) => {
 
     const totalStatements = statementsObj.totalStatements;
 
-
-    const manageDrageResults = calculateDragResults(
+    const manageDragResults = calculateDragResults(
       { ...result },
       totalStatements,
       results,
@@ -84,7 +88,17 @@ const SortGrid = (props) => {
       sortGridResults
     );
 
+    console.log(JSON.stringify(manageDragResults));
 
+    setSortFinished(manageDragResults.sortFinished);
+    setResults(manageDragResults.results);
+    setSortFinishedModalHasBeenShown(
+      manageDragResults.sortFinishedModalHasBeenShown
+    );
+    setTriggerSortingFinishedModal(
+      manageDragResults.setTriggerSortingFinishedModal
+    );
+    setSortGridResults(manageDragResults.sortGridResults);
 
     // source and destination are objects
     const { source, destination } = result;

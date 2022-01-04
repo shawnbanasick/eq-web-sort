@@ -43,7 +43,7 @@ const LogInScreen = () => {
   const setLocalParticipantName = useStore(
     (state) => state.setLocalParticipantName
   );
-  const setLocalStoredQsorts = useStore((state) => state.setLocalStoredQsorts);
+  // const setLocalStoredQsorts = useStore((state) => state.setLocalStoredQsorts);
   const setLocalUsercode = useStore((state) => state.setLocalUsercode);
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
@@ -57,8 +57,9 @@ const LogInScreen = () => {
     decodeHTML(langObj.storedQsortsHeaderText)
   );
 
-  let localStoredQsortsFromLocalStorage;
+  // let localStoredQsortsFromLocalStorage;
 
+  /*
   useEffect(() => {
     localStoredQsortsFromLocalStorage = JSON.parse(
       localStorage.getItem("localStoredQsorts")
@@ -67,7 +68,8 @@ const LogInScreen = () => {
       localStoredQsortsFromLocalStorage = {};
     }
     setLocalStoredQsorts(localStoredQsortsFromLocalStorage);
-  }, [localStoredQsortsFromLocalStorage]);
+  }, [setLocalStoredQsorts]);
+  */
 
   const headerText = `${storedQsortsHeaderText}: ${
     Object.keys(localStoredQsorts).length

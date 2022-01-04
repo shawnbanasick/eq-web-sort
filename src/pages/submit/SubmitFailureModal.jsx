@@ -11,12 +11,17 @@ import useStore from "../../globalState/useStore";
 const SubmitFailureModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModalOpen = useStore((state) => state.triggerTransmissionFailModal;
-  const setTriggerTransmissionFailModal = useStore((state) => state.setTriggerTransmissionFailModal);
+  const triggerModalOpen = useStore(
+    (state) => state.triggerTransmissionFailModal
+  );
+  const setTriggerTransmissionFailModal = useStore(
+    (state) => state.setTriggerTransmissionFailModal
+  );
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.transferFailModalHeader)
   );
+
   const modalText = ReactHtmlParser(decodeHTML(langObj.transferFailModalText));
 
   // const onOpenModal = () => setOpen(true);

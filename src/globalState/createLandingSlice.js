@@ -1,4 +1,5 @@
 const createLandingSlice = (set, get) => ({
+  dataLoaded: false,
   isLoggedIn: false,
   triggerLandingModal: false,
   usercode: "",
@@ -8,6 +9,9 @@ const createLandingSlice = (set, get) => ({
   userInputAccessCode: "",
   displayLandingContent: false,
 
+  setDataLoaded: (inputValue) => {
+    set(() => ({ dataLoaded: inputValue }));
+  },
   setIsLoggedIn: (inputValue) => {
     set(() => ({ isLoggedIn: inputValue }));
   },
