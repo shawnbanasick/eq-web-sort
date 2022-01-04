@@ -37,6 +37,8 @@ const SurveyPage = () => {
   const checkRequiredQuestionsComplete = useStore(
     (state) => state.checkRequiredQuestionsComplete
   );
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
@@ -57,9 +59,15 @@ const SurveyPage = () => {
     let startTime;
     startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "surveyPage", "surveyPage");
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "surveyPage",
+        "surveyPage",
+        results
+      );
+      setResults(updatedResults);
     };
-  }, []);
+  }, [results, setResults]);
 
   useEffect(() => {
     setTimeout(function () {

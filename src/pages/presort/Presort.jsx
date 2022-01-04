@@ -24,6 +24,8 @@ const PresortPage = (props) => {
   const setCurrentPage = useStore((state) => state.setCurrentPage);
   const setProgressScore = useStore((state) => state.setProgressScore);
   const presortNoReturn = useStore((state) => state.presortNoReturn);
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,9 +38,15 @@ const PresortPage = (props) => {
   useEffect(() => {
     let startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "presortPage", "presortPage");
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "presortPage",
+        "presortPage",
+        results
+      );
+      setResults(updatedResults);
     };
-  }, []);
+  }, [results, setResults]);
 
   const columnStatements = statementsObj.columnStatements;
   const headerBarColor = configObj.headerBarColor;

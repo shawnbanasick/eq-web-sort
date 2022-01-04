@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
@@ -15,20 +14,21 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const NeutralCards = (props) => {
   // STATE
   const configObj = useSettingsStore((state) => state.configObj);
+  const columnStatements = useSettingsStore((state) => state.columnStatements);
+  const results = useStore((state) => state.resultsPostsort);
+  const setResultsPostsort = useStore((state) => state.setResultsPostsort);
+  const statementCommentsObj = useStore((state) => state.statementCommentsObj);
 
   const postsortConvertObj = configObj.postsortConvertObj;
 
   // on blur, get text and add comment to card object
   const onBlur = (event, columnDisplay, itemId) => {
-    const columnStatements = getGlobalState("columnStatements");
-    const results = getGlobalState("resultsPostsort");
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
     const identifier = `${columnDisplay}_${itemId + 1}`;
 
     // pull in state object for comments
-    const statementCommentsObj = getGlobalState("statementCommentsObj") || {};
 
     // to update just the card that changed
     cards.map((el) => {
@@ -47,7 +47,7 @@ const NeutralCards = (props) => {
       return el;
     });
 
-    setGlobalState("resultsPostsort", results);
+    setResultsPostsort(results);
     // setGlobalState("statementCommentsObj", statementCommentsObj);
     // setGlobalState("columnStatements", columnStatements);
   }; // end onBlur

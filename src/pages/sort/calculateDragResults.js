@@ -1,33 +1,31 @@
-import getGlobalState from "../../globalState/getGlobalState";
-import setGlobalState from "../../globalState/setGlobalState";
-
-const calculateDragResults = (result, totalStatements) => {
+const calculateDragResults = (
+  outcome,
+  totalStatements,
+  results,
+  sortFinishedModalHasBeenShown,
+  sortGridResults
+) => {
   try {
-    if (result.destination !== null) {
-      // STATE
+    let sortFinished = false;
+    let triggerSortingFinishedModal = false;
 
-      const results = getGlobalState("results");
-      const sortFinishedModalHasBeenShown = getGlobalState(
-        "sortFinishedModalHasBeenShown"
-      );
-
-      // const totalStatements = configObj.totalStatements;
-      const sortGridResults = getGlobalState("sortGridResults");
-
+    if (outcome.destination !== null) {
       // derive sortValue from droppableId
       const replaceColumn = /column/gi;
       const replaceN = /N/gi;
-      let sortValue1 = result.destination.droppableId;
+      let sortValue1 = outcome.destination.droppableId;
       sortValue1 = sortValue1.replace(replaceColumn, "");
       sortValue1 = sortValue1.replace(replaceN, "-");
       const sortValue = parseInt(sortValue1, 10);
 
       // assign key (like "s1") and value (sortValue like "-4")
-      sortGridResults[result.draggableId] = sortValue;
+      sortGridResults[outcome.draggableId] = sortValue;
 
       // create results string
       const testForCompleteArray = Object.keys(sortGridResults);
       let catchNan = false;
+
+      // test if finished
       if (testForCompleteArray.length === totalStatements) {
         let resultsText = "";
         for (let i = 0; i < totalStatements; i++) {
@@ -41,11 +39,11 @@ const calculateDragResults = (result, totalStatements) => {
 
         if (catchNan === true) {
           // card in footer - sort not complete
-          setGlobalState("sortFinished", false);
+          sortFinished = false;
         } else {
           // if sort is complete
           // process string to remove trailing bar
-          setGlobalState("sortFinished", true);
+          sortFinished = true;
 
           if (resultsText.charAt(resultsText.length - 1) === "|") {
             resultsText = resultsText.substr(0, resultsText.length - 1);
@@ -54,14 +52,22 @@ const calculateDragResults = (result, totalStatements) => {
           console.log(resultsText);
 
           results.sort = resultsText;
-          setGlobalState("results", results);
+
           if (sortFinishedModalHasBeenShown === false) {
-            setGlobalState("sortFinishedModalHasBeenShown", true);
-            setGlobalState("triggerSortingFinishedModal", true);
+            sortFinishedModalHasBeenShown = true;
+            triggerSortingFinishedModal = true;
           }
         }
       }
-      setGlobalState("sortGridResults", sortGridResults);
+
+      const returnObj = {};
+      returnObj.sortFinished = sortFinished;
+      returnObj.results = results;
+      returnObj.sortFinishedModalHasBeenShown = sortFinishedModalHasBeenShown;
+      returnObj.triggerSortingFinishedModal = triggerSortingFinishedModal;
+      returnObj.sortGridResults = sortGridResults;
+
+      return returnObj;
     }
   } catch (error) {
     console.error(error);

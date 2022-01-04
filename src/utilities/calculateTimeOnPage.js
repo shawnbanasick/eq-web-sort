@@ -1,13 +1,8 @@
-// import store from '../state';
 import getCumulativeDuration from "./getCumulativeDuration";
 import millisecondsToTime from "./millisecondsToTime";
 import getCurrentDateTime from "./getCurrentDateTime";
-import setGlobalState from "../globalState/setGlobalState";
-import getGlobalState from "../globalState/getGlobalState";
 
-const calculateTimeOnPage = (startTime, prefix, prefix2) => {
-  const results = getGlobalState("results");
-
+const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
   const identifier = `cumulative${prefix}Duration`;
   // const identifier2 = `set${prefix2}DurationCumulative`;
   const identifier3 = `timeOn${prefix2}`;
@@ -34,10 +29,7 @@ const calculateTimeOnPage = (startTime, prefix, prefix2) => {
   const formattedDuration = millisecondsToTime(newDurationCumulative);
   localStorage.setItem(identifier3, formattedDuration);
   results[identifier3] = formattedDuration;
-  setGlobalState("results", results);
-
-  // let resultsUpdated = getGlobalState("results");
-  // console.log(JSON.stringify(resultsUpdated, null, 2));
+  return results;
 };
 
 export default calculateTimeOnPage;

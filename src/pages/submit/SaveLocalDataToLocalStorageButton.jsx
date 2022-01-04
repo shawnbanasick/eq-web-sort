@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { view } from "@risingstack/react-easy-state";
-// import getGlobalState from "../../globalState/getGlobalState";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
@@ -13,9 +12,7 @@ const SubmitLocalResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
 
-  // let displaySubmitFallback = getGlobalState("displaySubmitFallback");
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
-  // let submitFailNumber = getGlobalState("submitFailNumber");
   // let identifier = uuid();
   /* 
   const demoData = {

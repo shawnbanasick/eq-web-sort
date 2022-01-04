@@ -24,6 +24,9 @@ const LandingPage = () => {
   const setCurrentPage = useStore((state) => state.setCurrentPage);
   const setProgressScore = useStore((state) => state.setProgressScore);
   const setUsercode = useStore((state) => state.setUsercode);
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
+
   let displayLandingContent = useStore((state) => state.displayLandingContent);
 
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
@@ -49,9 +52,15 @@ const LandingPage = () => {
   useEffect(() => {
     const startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "landingPage", "landingPage");
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "landingPage",
+        "landingPage",
+        results
+      );
+      setResults(updatedResults);
     };
-  }, []);
+  }, [setResults, results]);
 
   // check for complete
   let displayLogInScreen = false;

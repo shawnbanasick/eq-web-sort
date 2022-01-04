@@ -25,6 +25,8 @@ const PostSort = () => {
   const cardHeight = useStore((state) => state.cardHeight);
   const cardFontSize = useStore((state) => state.cardFontSize);
   const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
 
   console.log("conf: ", JSON.stringify(configObj, null, 2));
   console.log("map: ", JSON.stringify(mapObj, null, 2));
@@ -41,9 +43,15 @@ const PostSort = () => {
     setProgressScore(50);
 
     return () => {
-      calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "postsortPage",
+        "postsortPage",
+        results
+      );
+      setResults(updatedResults);
     };
-  }, [setCurrentPage, setProgressScore]);
+  }, [setCurrentPage, setProgressScore, results, setResults]);
 
   // pull data from localStorage
   const columnWidth = 250;

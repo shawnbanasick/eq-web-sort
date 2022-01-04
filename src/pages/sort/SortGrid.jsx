@@ -36,6 +36,15 @@ const SortGrid = (props) => {
   let cardHeight = useStore((state) => state.cardHeight);
   const setCardHeight = useStore((state) => state.setCardHeight);
   const setColumnWidth = useStore((state) => state.setColumnWidth);
+  const results = useStore((state) => state.results);
+  const sortFinishedModalHasBeenShown = useStore(
+    (state) => state.sortFinishedModalHasBeenShown
+  );
+  const sortGridResults = useStore((state) => state.sortGridResults);
+  const setSortFinished = useStore((state) => state.setSortFinished);
+  const setResults = useStore((state) => state.setResults);
+  const setSortFinishedModalHasBeenShown = useStore((state) => state.setSortFinishedModalHasBeenShown);
+  const setTrigger
 
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;
@@ -66,7 +75,16 @@ const SortGrid = (props) => {
 
     const totalStatements = statementsObj.totalStatements;
 
-    calculateDragResults({ ...result }, totalStatements);
+
+    const manageDrageResults = calculateDragResults(
+      { ...result },
+      totalStatements,
+      results,
+      sortFinishedModalHasBeenShown,
+      sortGridResults
+    );
+
+
 
     // source and destination are objects
     const { source, destination } = result;
@@ -203,7 +221,6 @@ const SortGrid = (props) => {
   setTimeout(() => setColumnWidth(columnWidth), 0);
 
   // pull data from localStorage
-  // const columnStatements = getGlobalState("columnStatements");
   const statements = columnStatements.statementList;
 
   // setup grid columns

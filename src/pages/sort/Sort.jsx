@@ -34,6 +34,8 @@ const Sort = () => {
   const setPresortNoReturn = useStore((state) => state.setPresortNoReturn);
   const setCurrentPage = useStore((state) => state.setCurrentPage);
   const setTopMargin = useStore((state) => state.setTopMargin);
+  const results = useStore((state) => state.results);
+  const setResults = useStore((state) => state.setResults);
 
   const headerBarColor = configObj.headerBarColor;
 
@@ -100,7 +102,13 @@ const Sort = () => {
     let startTime;
     startTime = Date.now();
     return () => {
-      calculateTimeOnPage(startTime, "sortPage", "sortPage");
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "sortPage",
+        "sortPage",
+        results
+      );
+      setResults(updatedResults);
     };
   }, []);
 
