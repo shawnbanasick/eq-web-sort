@@ -13,7 +13,7 @@ const createSortSlice = (set, get) => ({
   triggerSortPreventNavModal: false,
   triggerSortOverloadedColumnModal: false,
   triggerSortingFinishedModal: false,
-  sortGridResults: [],
+  sortGridResults: {},
 
   setTriggerSortingFinishedModal: (inputValue) => {
     set(() => ({ triggerSortingFinishedModal: inputValue }));
