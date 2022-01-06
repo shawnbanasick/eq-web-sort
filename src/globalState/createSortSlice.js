@@ -1,6 +1,7 @@
 const createSortSlice = (set, get) => ({
   cardHeight: 0,
   columnWidth: 100,
+  draggingOverColumnId: "",
   hasOverloadedColumn: false,
   isSortingCards: true,
   isSortingFinished: false,
@@ -16,6 +17,9 @@ const createSortSlice = (set, get) => ({
   triggerSortingFinishedModal: false,
   sortGridResults: {},
 
+  setDraggingOverColumnId: (inputValue) => {
+    set(() => ({ draggingOverColumnId: inputValue }));
+  },
   setOverloadedColumn: (inputValue) => {
     set(() => ({ overloadedColumn: inputValue }));
   },

@@ -5,14 +5,11 @@ const calculateDragResults = (
   sortFinishedModalHasBeenShown,
   sortGridResults
 ) => {
-  console.log(outcome);
-
   try {
     let isSortingFinished = false;
     let triggerSortingFinishedModal = false;
 
     if (outcome.destination !== null) {
-      console.log("not null");
       // derive sortValue from droppableId
       const replaceColumn = /column/gi;
       const replaceN = /N/gi;
@@ -23,8 +20,6 @@ const calculateDragResults = (
 
       // assign key (like "s1") and value (sortValue like "-4")
       sortGridResults[outcome.draggableId] = sortValue;
-
-      console.log(JSON.stringify(sortGridResults));
 
       // create results string
       const testForCompleteArray = Object.keys(sortGridResults);
@@ -53,8 +48,6 @@ const calculateDragResults = (
           if (resultsText.charAt(resultsText.length - 1) === "|") {
             resultsText = resultsText.substring(0, resultsText.length - 1);
           }
-
-          console.log(resultsText);
 
           results.sort = resultsText;
 

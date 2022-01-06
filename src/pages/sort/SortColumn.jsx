@@ -3,10 +3,10 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import getItemStyle from "./getItemStyle";
-import setGlobalState from "../../globalState/setGlobalState";
 import getListStyle from "./getListStyle";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
+import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
@@ -33,8 +33,8 @@ class SortColumn extends React.Component {
         <Droppable droppableId={columnId} direction="vertical">
           {(provided, snapshot) => {
             if (snapshot.isDraggingOver) {
-              setGlobalState("draggingOverColumnId", columnId);
-              setGlobalState("currentSortValue", sortValue);
+              useStore.setState({ draggingOverColumnId: columnId });
+              useStore.setState({ currentSortValue: sortValue });
             }
             return (
               <div

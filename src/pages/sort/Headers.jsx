@@ -2,15 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { view } from "react-easy-state";
 import headersDivStyle from "./headersDivStyle";
-import state from "../state";
+import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
+
+const getColumnId = (state) => state.draggingOverColumnId;
 
 const Headers = (props) => {
   const { qSortHeaders, qSortHeaderNumbers, headerColorsArray, columnWidth } =
     props;
 
-  const highlightedColHeader = state.getState("draggingOverColumnId");
+  const highlightedColHeader = useStore(getColumnId);
 
   return (
     <div className="headersContainer">

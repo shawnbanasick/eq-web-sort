@@ -1,4 +1,4 @@
-import setGlobalState from "../../globalState/setGlobalState";
+import useStore from "../../globalState/useStore";
 
 // card and column styling
 const getListStyle = (
@@ -19,7 +19,7 @@ const getListStyle = (
 
   // to set highlighting for column headers
   if (isDraggingOver) {
-    setGlobalState("draggingOverColumnId", props.columnId);
+    useStore.setState({ draggingOverColumnId: props.columnId });
   }
 
   return {

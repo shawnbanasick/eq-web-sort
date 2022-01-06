@@ -8,7 +8,6 @@ const checkForColumnOverload = (
   qSortHeaderNumbers
 ) => {
   if (forcedSorts === true) {
-    console.log("forced check");
     const tempArray = [];
     columnLengthCheckArray.forEach(function (item, index) {
       if (item > +qSortPattern[index]) {
