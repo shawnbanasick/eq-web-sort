@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PleaseLogInFirst = () => {
-  useEffect(() => {
-    setGlobalState("currentPage", "presort");
-  }, []);
-
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
-
   const headerBarColor = configObj.headerBarColor;
   const mainText = ReactHtmlParser(decodeHTML(langObj.logInFirst));
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
+
+  useEffect(() => {
+    setCurrentPage("presort");
+  }, [setCurrentPage]);
 
   return (
     <React.Fragment>

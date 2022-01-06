@@ -4,6 +4,7 @@ const createSortSlice = (set, get) => ({
   hasOverloadedColumn: false,
   isSortingCards: true,
   isSortingFinished: false,
+  overloadedColumn: "",
   sortCompleted: false,
   sortFinished: false,
   sortFinishedModalHasBeenShown: false,
@@ -15,6 +16,9 @@ const createSortSlice = (set, get) => ({
   triggerSortingFinishedModal: false,
   sortGridResults: {},
 
+  setOverloadedColumn: (inputValue) => {
+    set(() => ({ overloadedColumn: inputValue }));
+  },
   setTriggerSortingFinishedModal: (inputValue) => {
     set(() => ({ triggerSortingFinishedModal: inputValue }));
   },

@@ -1,4 +1,4 @@
-import setGlobalState from "../../globalState/setGlobalState";
+import useStore from "../../globalState/useStore";
 
 const checkForColumnOverload = (
   columnLengthCheckArray,
@@ -8,21 +8,21 @@ const checkForColumnOverload = (
   qSortHeaderNumbers
 ) => {
   if (forcedSorts === true) {
+    console.log("forced check");
     const tempArray = [];
     columnLengthCheckArray.forEach(function (item, index) {
       if (item > +qSortPattern[index]) {
         tempArray.push(qSortHeaderNumbers[index]);
-        setGlobalState("setSortCompleted", false);
-        setGlobalState("setOverloadedColumn", qSortHeaderNumbers[index]);
-        setGlobalState("setColumnOverload", true);
-        setGlobalState("setIsSortingCards", false);
-
+        useStore.setState({ sortCompleted: false });
+        useStore.setState({ overloadedColumn: qSortHeaderNumbers[index] });
+        useStore.setState({ hasOverloadedColumn: true });
+        useStore.setState({ isSortingCards: false });
         return null;
       }
     });
     if (tempArray.length === 0) {
-      setGlobalState("setColumnOverload", false);
-      setGlobalState("setIsSortingCards", true);
+      useStore.setState({ hasOverloadedColumn: false });
+      useStore.setState({ isSortingCards: true });
     }
   }
 
@@ -33,15 +33,15 @@ const checkForColumnOverload = (
     return acc + val;
   });
 
-  setGlobalState("numSortedStatements", numSortedStatements);
+  useStore.setState({ numSortedStatements: numSortedStatements });
 
   if (forcedSorts === false) {
     if (numSortedStatements === totalStatements) {
-      setGlobalState("setSortCompleted", true);
-      setGlobalState("setIsSortingCards", false);
+      useStore.setState({ sortCompleted: true });
+      useStore.setState({ isSortingCards: false });
     } else {
-      setGlobalState("setSortCompleted", false);
-      setGlobalState("setIsSortingCards", true);
+      useStore.setState({ sortCompleted: false });
+      useStore.setState({ isSortingCards: true });
     }
   }
 };

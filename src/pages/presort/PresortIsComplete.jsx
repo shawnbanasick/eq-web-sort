@@ -1,23 +1,24 @@
 import React, { useEffect } from "react";
-import setGlobalState from "../../globalState/setGlobalState";
 import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
 
 const PresortIsComplete = () => {
-  useEffect(() => {
-    setGlobalState("currentPage", "presort");
-  }, []);
-
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
   const configObj = useSettingsStore((state) => state.configObj);
+  const setCurrentPage = useStore((state) => state.setCurrentPage);
 
   const headerBarColor = configObj.headerBarColor;
   const mainText = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
+
+  useEffect(() => {
+    setCurrentPage("presort");
+  }, [setCurrentPage]);
 
   return (
     <React.Fragment>
