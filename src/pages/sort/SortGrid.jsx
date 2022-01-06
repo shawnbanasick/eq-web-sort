@@ -96,7 +96,7 @@ const SortGrid = (props) => {
       manageDragResults.sortFinishedModalHasBeenShown
     );
     setTriggerSortingFinishedModal(
-      manageDragResults.setTriggerSortingFinishedModal
+      manageDragResults.triggerSortingFinishedModal
     );
     setSortGridResults(manageDragResults.sortGridResults);
 

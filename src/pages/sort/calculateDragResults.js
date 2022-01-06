@@ -51,7 +51,7 @@ const calculateDragResults = (
           sortFinished = true;
 
           if (resultsText.charAt(resultsText.length - 1) === "|") {
-            resultsText = resultsText.substr(0, resultsText.length - 1);
+            resultsText = resultsText.substring(0, resultsText.length - 1);
           }
 
           console.log(resultsText);
