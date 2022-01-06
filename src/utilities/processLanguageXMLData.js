@@ -1,4 +1,4 @@
-import setGlobalState from "../globalState/setGlobalState";
+import useStore from "../globalState/useStore";
 
 const processLanguageXMLData = (dataObject) => {
   try {
@@ -7,7 +7,7 @@ const processLanguageXMLData = (dataObject) => {
     const langObj = {};
     for (let i = 0; i < data.length; i++) {
       langObj[data[i]._attributes.id] = data[i]._text;
-      setGlobalState([data[i]._attributes.id], data[i]._text);
+      useStore.setState({ [data[i]._attributes.id]: data[i]._text });
     }
 
     return langObj;

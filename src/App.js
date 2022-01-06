@@ -13,7 +13,6 @@ import processConfigXMLData from "./utilities/processConfigXMLData";
 import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
-import setGlobalState from "./globalState/setGlobalState";
 import LoadingScreen from "./pages/landing/LoadingScreen";
 import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
@@ -54,8 +53,6 @@ function App() {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const languageData = convert.xml2js(response.data, options);
           let langObj = processLanguageXMLData(languageData);
-          // localStorage.setItem("langObj", JSON.stringify(langObj));
-          // setGlobalState("langObj", langObj);
           setLangObj(langObj);
         })
         .catch(function (error) {
@@ -106,7 +103,6 @@ function App() {
             shuffleCards,
             vColsObj
           );
-          // setGlobalState("columnStatements", statementsObj.columnStatements);
           setColumnStatements(statementsObj.columnStatements);
           setStatementsObj(statementsObj);
         })
@@ -129,6 +125,7 @@ function App() {
     setRequiredAnswersObj,
     setSurveyQuestionObjArray,
     setMapObj,
+    setDataLoaded,
   ]);
 
   if (isLoading) {

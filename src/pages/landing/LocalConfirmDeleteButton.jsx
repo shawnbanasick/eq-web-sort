@@ -3,16 +3,20 @@ import React from "react";
 import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import setGlobalState from "../../globalState/setGlobalState";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+
+const getSetterLocalQsorts = (state) => state.setLocalStoredQsorts;
+const getLangObj = (state) => state.langObj;
 
 const LogInSubmitButton = (props) => {
   // State
   const setDisplayLocalDeleteModal = useStore(
     (state) => state.setLocalDeleteModal
   );
-  const langObj = useSettingsStore((state) => state.langObj);
+  const setLocalStoredQsorts = useStore(getSetterLocalQsorts);
+
+  const langObj = useSettingsStore(getLangObj);
 
   const localDeleteButtonText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteButtonText)
@@ -21,7 +25,7 @@ const LogInSubmitButton = (props) => {
   const clearLocalStorage = () => {
     console.log("deleted localStorage");
     localStorage.setItem("localStoredQsorts", JSON.stringify({}));
-    setGlobalState("localStoredQsorts", {});
+    setLocalStoredQsorts({});
     setDisplayLocalDeleteModal(false);
   };
 

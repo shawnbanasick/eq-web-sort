@@ -1,4 +1,4 @@
-import setGlobalState from "../../globalState/setGlobalState";
+import useStore from "../../globalState/useStore";
 
 // to reorder within the same column
 const reorder = (
@@ -20,7 +20,7 @@ const reorder = (
 
     columnStatements.vCols[columnToBeReordered] = [...result];
 
-    setGlobalState("columnStatements", columnStatements);
+    useStore.setState({ columnStatements: columnStatements });
 
     return null;
   } catch (error) {

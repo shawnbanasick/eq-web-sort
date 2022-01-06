@@ -1,4 +1,4 @@
-import setGlobalState from "../globalState/setGlobalState";
+import useStore from "../globalState/useStore";
 
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
@@ -47,8 +47,6 @@ const processConfigXMLData = (dataObject) => {
       }
     }
   }
-
-  // setGlobalState("configObj", configObj);
 
   // setup survey object
   const requiredAnswersObj = {};
@@ -218,9 +216,8 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
     }
-    setGlobalState("requiredAnswersObj", requiredAnswersObj);
-    // setGlobalState("configObj", configObj);
-    setGlobalState("surveyQuestionObjArray", surveyQuestionArray);
+    useStore.setState({ requiredAnswersObj: requiredAnswersObj });
+    useStore.setState({ surveyQuestionObjArray: surveyQuestionArray });
   }
   let returnObj = {};
   let shuffleCards = configObj?.shuffleCards;

@@ -1,4 +1,4 @@
-import setGlobalState from "../globalState/setGlobalState";
+import useStore from "../globalState/useStore";
 
 const processMapXMLData = (dataObject) => {
   const mapObj = {};
@@ -49,7 +49,7 @@ const processMapXMLData = (dataObject) => {
   }
   mapObj.postsortConvertObj = postsortConvertObj;
 
-  setGlobalState("vColsObj", vColsObj);
+  useStore.setState({ vColsObj: vColsObj });
   const returnObj = {};
   returnObj.vColsObj = vColsObj;
   returnObj.mapObj = mapObj;
