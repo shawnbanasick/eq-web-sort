@@ -41,7 +41,7 @@ const SortGrid = (props) => {
     (state) => state.sortFinishedModalHasBeenShown
   );
   const sortGridResults = useStore((state) => state.sortGridResults);
-  const setSortFinished = useStore((state) => state.setSortFinished);
+  const setIsSortingFinished = useStore((state) => state.setIsSortingFinished);
   const setResults = useStore((state) => state.setResults);
   const setSortFinishedModalHasBeenShown = useStore(
     (state) => state.setSortFinishedModalHasBeenShown
@@ -90,7 +90,7 @@ const SortGrid = (props) => {
 
     console.log(JSON.stringify(manageDragResults));
 
-    setSortFinished(manageDragResults.sortFinished);
+    setIsSortingFinished(manageDragResults.sortFinished);
     setResults(manageDragResults.results);
     setSortFinishedModalHasBeenShown(
       manageDragResults.sortFinishedModalHasBeenShown

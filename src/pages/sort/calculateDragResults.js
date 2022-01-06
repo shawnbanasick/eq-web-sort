@@ -8,7 +8,7 @@ const calculateDragResults = (
   console.log(outcome);
 
   try {
-    let sortFinished = false;
+    let isSortingFinished = false;
     let triggerSortingFinishedModal = false;
 
     if (outcome.destination !== null) {
@@ -44,11 +44,11 @@ const calculateDragResults = (
 
         if (catchNan === true) {
           // card in footer - sort not complete
-          sortFinished = false;
+          isSortingFinished = false;
         } else {
           // if sort is complete
           // process string to remove trailing bar
-          sortFinished = true;
+          isSortingFinished = true;
 
           if (resultsText.charAt(resultsText.length - 1) === "|") {
             resultsText = resultsText.substring(0, resultsText.length - 1);
@@ -66,7 +66,7 @@ const calculateDragResults = (
       }
 
       const returnObj = {};
-      returnObj.sortFinished = sortFinished;
+      returnObj.isSortingFinished = isSortingFinished;
       returnObj.results = results;
       returnObj.sortFinishedModalHasBeenShown = sortFinishedModalHasBeenShown;
       returnObj.triggerSortingFinishedModal = triggerSortingFinishedModal;
