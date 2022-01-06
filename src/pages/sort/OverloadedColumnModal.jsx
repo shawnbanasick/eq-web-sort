@@ -11,7 +11,9 @@ import useStore from "../../globalState/useStore";
 const OverloadedColumnModal = () => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModalOpen = useStore((state) => state.triggerModalOpen);
+  const triggerModalOpen = useStore(
+    (state) => state.triggerSortOverloadedColumnModal
+  );
   const setTriggerSortOverloadedColumnModal = useStore(
     (state) => state.setTriggerSortOverloadedColumnModal
   );
