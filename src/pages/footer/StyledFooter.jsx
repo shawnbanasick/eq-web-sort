@@ -3,7 +3,6 @@ import styled from "styled-components";
 import NextButton from "./NextButton";
 import FooterFontSizer from "./FooterFontSizer";
 import CardHeightSizer from "./CardHeightSizer";
-import { view } from "@risingstack/react-easy-state";
 import ProgressBar from "@ramonak/react-progress-bar";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -13,18 +12,25 @@ import getNextPage from "./getNextPage";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getDisplayNextButton = (state) => state.displayNextButton;
+const getCurrentPage = (state) => state.currentPage;
+const getAdditionalProgress = (state) => state.progressScoreAdditional;
+const getAdditionalProgressSort = (state) => state.progressScoreAdditionalSort;
+const getLocalUsercode = (state) => state.localUsercode;
+
 const StyledFooter = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  let displayNextButton = useStore(getDisplayNextButton);
+  const currentPage = useStore(getCurrentPage);
+  const additionalProgress = useStore(getAdditionalProgress);
+  const additionalProgressSort = useStore(getAdditionalProgressSort);
+  const localUsercode = useStore(getLocalUsercode);
+
   const initialScreenSetting = configObj.initialScreen;
-  let displayNextButton = useStore((state) => state.displayNextButton);
-  const currentPage = useStore((state) => state.currentPage);
-  const additionalProgress = useStore((state) => state.progressScoreAdditional);
-  const additionalProgressSort = useStore(
-    (state) => state.progressScoreAdditionalSort
-  );
-  const localUsercode = useStore((state) => state.localUserCode);
 
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
@@ -129,7 +135,7 @@ const StyledFooter = () => {
   );
 };
 
-export default view(StyledFooter);
+export default StyledFooter;
 
 const StyledFooterDiv = styled.footer`
   position: fixed;

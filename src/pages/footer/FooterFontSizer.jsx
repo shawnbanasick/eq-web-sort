@@ -1,16 +1,19 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getCardFontSize = (state) => state.cardFontSize;
+const getSetCardFontSize = (state) => state.setCardFontSize;
+
 const FooterFontSizer = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const cardFontSize = useStore((state) => state.cardFontSize);
-  const setCardFontSize = useStore((state) => state.setCardFontSize);
+  const langObj = useSettingsStore(getLangObj);
+  const cardFontSize = useStore(getCardFontSize);
+  const setCardFontSize = useStore(getSetCardFontSize);
 
   const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
 
@@ -38,7 +41,7 @@ const FooterFontSizer = () => {
   );
 };
 
-export default view(FooterFontSizer);
+export default FooterFontSizer;
 
 const SizeButton = styled.button`
   background: #337ab7;

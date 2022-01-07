@@ -1,31 +1,29 @@
 import styled from "styled-components";
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getCurrentPage = (state) => state.currentPage;
+const getSetTriggerLandingModal = (state) => state.setTriggerLandingModal;
+const getSetTriggerPresortModal = (state) => state.setTriggerPresortModal;
+const getSetTriggerSortModal = (state) => state.setTriggerSortModal;
+const getSetTriggerPostsortModal = (state) => state.setTriggerPostsortModal;
+const getSetTriggerSurveyModal = (state) => state.setTriggerSurveyModal;
+const getSetTriggerSubmitModal = (state) => state.setTriggerSubmitModal;
+
 const HelpButton = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const currentPage = useStore((state) => state.currentPage);
-  const setTriggerLandingModal = useStore(
-    (state) => state.setTriggerLandingModal
-  );
-  const setTriggerPresortModal = useStore(
-    (state) => state.setTriggerPresortModal
-  );
-  const setTriggerSortModal = useStore((state) => state.setTriggerSortModal);
-  const setTriggerPostsortModal = useStore(
-    (state) => state.setTriggerPostsortModal
-  );
-  const setTriggerSurveyModal = useStore(
-    (state) => state.setTriggerSurveyModal
-  );
-  const setTriggerSubmitModal = useStore(
-    (state) => state.setTriggerSubmitModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const currentPage = useStore(getCurrentPage);
+  const setTriggerLandingModal = useStore(getSetTriggerLandingModal);
+  const setTriggerPresortModal = useStore(getSetTriggerPresortModal);
+  const setTriggerSortModal = useStore(getSetTriggerSortModal);
+  const setTriggerPostsortModal = useStore(getSetTriggerPostsortModal);
+  const setTriggerSurveyModal = useStore(getSetTriggerSurveyModal);
+  const setTriggerSubmitModal = useStore(getSetTriggerSubmitModal);
 
   const buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
 
@@ -56,7 +54,7 @@ const HelpButton = () => {
     </StyledHelpButton>
   );
 };
-export default view(HelpButton);
+export default HelpButton;
 
 const StyledHelpButton = styled.button`
   border-color: #2e6da4;

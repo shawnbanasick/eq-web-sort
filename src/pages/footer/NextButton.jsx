@@ -1,35 +1,41 @@
 import styled from "styled-components";
 import React from "react";
 import { withRouter } from "react-router";
-import { view } from "@risingstack/react-easy-state";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+
+const getConfigObj = (state) => state.configObj;
+const getPresortFinished = (state) => state.presortFinished;
+const getSetTrigPrePrevNavModal = (state) =>
+  state.setTriggerPresortPreventNavModal;
+const getCurrentPage = (state) => state.currentPage;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetCheckReqQuesCompl = (state) =>
+  state.setCheckRequiredQuestionsComplete;
+const getSetTrigSurvPrevNavModal = (state) =>
+  state.setTriggerSurveyPreventNavModal;
+const getIsSortingFinished = (state) => state.isSortingFinished;
+const getHasOverloadedColumn = (state) => state.hasOverloadedColumn;
+const getSetTrigSortPrevNavModal = (state) =>
+  state.setTriggerSortPreventNavModal;
+const getSetTrigSortOverColMod = (state) =>
+  state.setTriggerSortOverloadedColumnModal;
 
 const LinkButton = (props) => {
   let goToNextPage;
 
   // STATE
-  const configObj = useSettingsStore((state) => state.configObj);
-  const presortFinished = useStore((state) => state.presortFinished);
-  const setTriggerPresortPreventNavModal = useStore(
-    (state) => state.setTriggerPresortPreventNavModal
-  );
-  const currentPage = useStore((state) => state.currentPage);
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  const setCheckRequiredQuestionsComplete = useStore(
-    (state) => state.setCheckRequiredQuestionsComplete
-  );
-  const setTriggerSurveyPreventNavModal = useStore(
-    (state) => state.setTriggerSurveyPreventNavModal
-  );
-  const isSortingFinished = useStore((state) => state.isSortingFinished);
-  const hasOverloadedColumn = useStore((state) => state.hasOverloadedColumn);
-  const setTriggerSortPreventNavModal = useStore(
-    (state) => state.setTriggerSortPreventNavModal
-  );
-  const setTriggerSortOverloadedColumnModal = useStore(
-    (state) => state.setTriggerSortOverloadedColumnModal
-  );
+  const configObj = useSettingsStore(getConfigObj);
+  const presortFinished = useStore(getPresortFinished);
+  const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
+  const currentPage = useStore(getCurrentPage);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setCheckRequiredQuestionsComplete = useStore(getSetCheckReqQuesCompl);
+  const setTriggerSurveyPreventNavModal = useStore(getSetTrigSurvPrevNavModal);
+  const isSortingFinished = useStore(getIsSortingFinished);
+  const hasOverloadedColumn = useStore(getHasOverloadedColumn);
+  const setTriggerSortPreventNavModal = useStore(getSetTrigSortPrevNavModal);
+  const setTriggerSortOverloadedColModal = useStore(getSetTrigSortOverColMod);
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
@@ -70,7 +76,7 @@ const LinkButton = (props) => {
         } else {
           // unforced not ok -> allow nav if no overloaded columns
           if (hasOverloadedColumn === true) {
-            setTriggerSortOverloadedColumnModal(true);
+            setTriggerSortOverloadedColModal(true);
             return false;
           } else {
             setTriggerSortPreventNavModal(false);
@@ -120,7 +126,7 @@ const LinkButton = (props) => {
     />
   );
 };
-export default view(withRouter(LinkButton));
+export default withRouter(LinkButton);
 
 const NextButton = styled.button`
   border-color: #2e6da4;
