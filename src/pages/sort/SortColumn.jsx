@@ -1,6 +1,5 @@
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import getItemStyle from "./getItemStyle";
 import getListStyle from "./getListStyle";
@@ -92,7 +91,7 @@ class SortColumn extends React.Component {
   }
 }
 
-export default view(SortColumn);
+export default SortColumn;
 
 /*
 const HeaderDiv = styled.div`

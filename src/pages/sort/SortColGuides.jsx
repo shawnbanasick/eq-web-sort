@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getMapObj = (state) => state.mapObj;
+
 const SortColGuides = (props) => {
   // STATE
-  const mapObj = useSettingsStore((state) => state.mapObj);
+  const mapObj = useSettingsStore(getMapObj);
 
   const qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
@@ -29,7 +30,7 @@ const SortColGuides = (props) => {
   );
 };
 
-export default view(SortColGuides);
+export default SortColGuides;
 
 const ColorBarDiv = styled.div`
   background-color: ${(props) => props.color};

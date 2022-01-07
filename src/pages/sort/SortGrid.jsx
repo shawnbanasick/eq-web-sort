@@ -15,41 +15,53 @@ import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
+const getConfigObj = (state) => state.configObj;
+const getMapObj = (state) => state.mapObj;
+const getStatementsObj = (state) => state.statementsObj;
+const getColumnStatements = (state) => state.columnStatements;
+const getSetColState = (state) => state.setColumnStatements;
+const getSetIsSortingCards = (state) => state.setIsSortingCards;
+const getSetSortCompleted = (state) => state.setSortCompleted;
+const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
+const getSortCharacteristics = (state) => state.sortCharacteristics;
+const getSetSortCharacteristics = (state) => state.setSortCharacteristics;
+let getCardHeight = (state) => state.cardHeight;
+const getSetCardHeight = (state) => state.setCardHeight;
+const getSetColumnWidth = (state) => state.setColumnWidth;
+const getResults = (state) => state.results;
+const getSortFinModalHasBeenShown = (state) =>
+  state.sortFinishedModalHasBeenShown;
+const getSortGridResults = (state) => state.sortGridResults;
+const getSetIsSortingFinished = (state) => state.setIsSortingFinished;
+const getSetResults = (state) => state.setResults;
+const getSetSortFinModal = (state) => state.setSortFinishedModalHasBeenShown;
+const getSetTriggerSortingFinModal = (state) =>
+  state.setTriggerSortingFinishedModal;
+const getSetSortGridResults = (state) => state.setSortGridResults;
+
 const SortGrid = (props) => {
   // STATE
-  const configObj = useSettingsStore((state) => state.configObj);
-  const mapObj = useSettingsStore((state) => state.mapObj);
-  const statementsObj = useSettingsStore((state) => state.statementsObj);
-  const columnStatements = useSettingsStore((state) => state.columnStatements);
-  const setColumnStatements = useSettingsStore(
-    (state) => state.setColumnStatements
-  );
-  const setIsSortingCards = useStore((state) => state.setIsSortingCards);
-  const setSortCompleted = useStore((state) => state.setSortCompleted);
-  const setProgressScoreAdditionalSort = useStore(
-    (state) => state.setProgressScoreAdditionalSort
-  );
-  const sortCharacteristics = useStore((state) => state.sortCharacteristics);
-  const setSortCharacteristics = useStore(
-    (state) => state.setSortCharacteristics
-  );
-  let cardHeight = useStore((state) => state.cardHeight);
-  const setCardHeight = useStore((state) => state.setCardHeight);
-  const setColumnWidth = useStore((state) => state.setColumnWidth);
-  const results = useStore((state) => state.results);
-  const sortFinishedModalHasBeenShown = useStore(
-    (state) => state.sortFinishedModalHasBeenShown
-  );
-  const sortGridResults = useStore((state) => state.sortGridResults);
-  const setIsSortingFinished = useStore((state) => state.setIsSortingFinished);
-  const setResults = useStore((state) => state.setResults);
-  const setSortFinishedModalHasBeenShown = useStore(
-    (state) => state.setSortFinishedModalHasBeenShown
-  );
-  const setTriggerSortingFinishedModal = useStore(
-    (state) => state.setTriggerSortingFinishedModal
-  );
-  const setSortGridResults = useStore((state) => state.setSortGridResults);
+  const configObj = useSettingsStore(getConfigObj);
+  const mapObj = useSettingsStore(getMapObj);
+  const statementsObj = useSettingsStore(getStatementsObj);
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const setColumnStatements = useSettingsStore(getSetColState);
+  const setIsSortingCards = useStore(getSetIsSortingCards);
+  const setSortCompleted = useStore(getSetSortCompleted);
+  const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
+  const sortCharacteristics = useStore(getSortCharacteristics);
+  const setSortCharacteristics = useStore(getSetSortCharacteristics);
+  let cardHeight = useStore(getCardHeight);
+  const setCardHeight = useStore(getSetCardHeight);
+  const setColumnWidth = useStore(getSetColumnWidth);
+  const results = useStore(getResults);
+  const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
+  const sortGridResults = useStore(getSortGridResults);
+  const setIsSortingFinished = useStore(getSetIsSortingFinished);
+  const setResults = useStore(getSetResults);
+  const setSortFinishedModalHasBeenShown = useStore(getSetSortFinModal);
+  const setTriggerSortingFinishedModal = useStore(getSetTriggerSortingFinModal);
+  const setSortGridResults = useStore(getSetSortGridResults);
 
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;

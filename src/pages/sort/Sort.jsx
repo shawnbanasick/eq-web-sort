@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import SortGrid from "./SortGrid";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -24,18 +23,29 @@ function debounce(fn, ms) {
   };
 }
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getCardFontSize = (state) => state.cardFontSize;
+const getColumnWidth = (state) => state.columnWidth;
+const getTopMargin = (state) => state.topMargin;
+const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getSetTopMargin = (state) => state.setTopMargin;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+
 const Sort = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const cardFontSize = useStore((state) => state.cardFontSize);
-  const columnWidth = useStore((state) => state.columnWidth);
-  const topMargin = useStore((state) => state.topMargin);
-  const setPresortNoReturn = useStore((state) => state.setPresortNoReturn);
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const setTopMargin = useStore((state) => state.setTopMargin);
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const cardFontSize = useStore(getCardFontSize);
+  const columnWidth = useStore(getColumnWidth);
+  const topMargin = useStore(getTopMargin);
+  const results = useStore(getResults);
+  const setPresortNoReturn = useStore(getSetPresortNoReturn);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const setTopMargin = useStore(getSetTopMargin);
+  const setResults = useStore(getSetResults);
 
   const headerBarColor = configObj.headerBarColor;
 
@@ -135,7 +145,7 @@ const Sort = () => {
   );
 };
 
-export default view(Sort);
+export default Sort;
 
 const SortTitleBarContainer = styled.div`
   display: flex;

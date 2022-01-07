@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
+const getNumSortedStatements = (state) => state.numSortedStatements;
+const getIsSortingCards = (state) => state.isSortingCards;
+
 const NumberCardsSortedMessage = (props) => {
-  const numSortedStatements = useStore((state) => state.numSortedStatements);
-  const isSortingCards = useStore((state) => state.isSortingCards);
+  // STATE
+  const numSortedStatements = useStore(getNumSortedStatements);
+  const isSortingCards = useStore(getIsSortingCards);
 
   if (isSortingCards === true) {
     return (
@@ -22,6 +25,6 @@ const NumberCardsSortedMessage = (props) => {
   return null;
 };
 
-export default view(NumberCardsSortedMessage);
+export default NumberCardsSortedMessage;
 
 const CardsSortedDiv = styled.div``;
