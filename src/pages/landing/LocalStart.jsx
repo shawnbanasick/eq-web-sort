@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import LocalStartButton from "./LocalStartButton";
 import ReactHtmlParser from "react-html-parser";
@@ -22,29 +21,29 @@ function downloadObjectAsJson(exportObj, exportName) {
   downloadAnchorNode.remove();
 }
 
+const getDisplayLocalPartIdWarning1 = (state) =>
+  state.displayLocalPartIdWarning1;
+const getSetLocalPartIdWarning1 = (state) => state.setLocalPartIdWarning1;
+const getDisplayLocalPartIdWarning2 = (state) =>
+  state.displayLocalPartIdWarning2;
+const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
+const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
+const getLangObj = (state) => state.langObj;
+const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
+const getSetLocalUsercode = (state) => state.setLocalUsercode;
+
 const LogInScreen = () => {
   // STATE
-  const displayPartIdWarning1 = useStore(
-    (state) => state.displayLocalPartIdWarning1
-  );
-  const setLocalPartIdWarning1 = useStore(
-    (state) => state.setLocalPartIdWarning1
-  );
-
-  const displayPartIdWarning2 = useStore(
-    (state) => state.displayLocalPartIdWarning2
-  );
-  const setLocalPartIdWarning2 = useStore(
-    (state) => state.setLocalPartIdWarning2
-  );
-  const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
-  const langObj = useSettingsStore((state) => state.langObj);
-  const localStoredQsorts = useStore((state) => state.localStoredQsorts);
-  const setLocalParticipantName = useStore(
-    (state) => state.setLocalParticipantName
-  );
-  // const setLocalStoredQsorts = useStore((state) => state.setLocalStoredQsorts);
-  const setLocalUsercode = useStore((state) => state.setLocalUsercode);
+  const langObj = useSettingsStore(getLangObj);
+  const displayPartIdWarning1 = useStore(getDisplayLocalPartIdWarning1);
+  const setLocalPartIdWarning1 = useStore(getSetLocalPartIdWarning1);
+  const displayPartIdWarning2 = useStore(getDisplayLocalPartIdWarning2);
+  const setLocalPartIdWarning2 = useStore(getSetLocalPartIdWarning2);
+  const setLocalDeleteModal = useStore(getSetLocalDeleteModal);
+  const localStoredQsorts = useStore(getLocalStoredQsorts);
+  const setLocalParticipantName = useStore(getSetLocalParticipantName);
+  const setLocalUsercode = useStore(getSetLocalUsercode);
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
@@ -149,7 +148,7 @@ const LogInScreen = () => {
   );
 };
 
-export default view(LogInScreen);
+export default LogInScreen;
 
 const Container = styled.div`
   display: grid;

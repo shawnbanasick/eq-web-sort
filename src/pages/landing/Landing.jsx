@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -15,20 +14,29 @@ import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getDataLoaded = (state) => state.dataLoaded;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getSetProgressScore = (state) => state.setProgressScore;
+const getSetUsercode = (state) => state.setUsercode;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+const getDisplayLandingContent = (state) => state.displayLandingContent;
+
 const LandingPage = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const dataLoaded = useStore((state) => state.dataLoaded);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const dataLoaded = useStore(getDataLoaded);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const setProgressScore = useStore(getSetProgressScore);
+  const setUsercode = useStore(getSetUsercode);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
+  let displayLandingContent = useStore(getDisplayLandingContent);
+
   const headerBarColor = configObj.headerBarColor;
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const setProgressScore = useStore((state) => state.setProgressScore);
-  const setUsercode = useStore((state) => state.setUsercode);
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
-
-  let displayLandingContent = useStore((state) => state.displayLandingContent);
-
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
   const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
 
@@ -129,7 +137,7 @@ const LandingPage = () => {
   }
 };
 
-export default view(LandingPage);
+export default LandingPage;
 
 const fadeIn = keyframes`
   from {

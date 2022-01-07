@@ -1,21 +1,21 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerLandingModal = (state) => state.triggerLandingModal;
+const getSetTriggerLandingModal = (state) => state.setTriggerLandingModal;
+
 const LandingModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerLandingModal = useStore((state) => state.triggerLandingModal);
-  console.log({ triggerLandingModal });
-  const setTriggerLandingModal = useStore(
-    (state) => state.setTriggerLandingModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerLandingModal = useStore(getTriggerLandingModal);
+  const setTriggerLandingModal = useStore(getSetTriggerLandingModal);
 
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.landingHelpModalHead)
@@ -42,7 +42,7 @@ const LandingModal = () => {
   );
 };
 
-export default view(LandingModal);
+export default LandingModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

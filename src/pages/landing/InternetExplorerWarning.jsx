@@ -1,13 +1,15 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+
 const LogInScreen = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
+
   const ieWarningHeaderText = ReactHtmlParser(
     decodeHTML(langObj.ieWarningHeaderText)
   );
@@ -30,7 +32,7 @@ const LogInScreen = () => {
   );
 };
 
-export default view(LogInScreen);
+export default LogInScreen;
 
 const Container = styled.div`
   //  display: grid;

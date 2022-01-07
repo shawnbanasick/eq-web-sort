@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
@@ -8,14 +7,12 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 
 const getSetterLocalQsorts = (state) => state.setLocalStoredQsorts;
 const getLangObj = (state) => state.langObj;
+const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
 
 const LogInSubmitButton = (props) => {
   // State
-  const setDisplayLocalDeleteModal = useStore(
-    (state) => state.setLocalDeleteModal
-  );
+  const setDisplayLocalDeleteModal = useStore(getSetLocalDeleteModal);
   const setLocalStoredQsorts = useStore(getSetterLocalQsorts);
-
   const langObj = useSettingsStore(getLangObj);
 
   const localDeleteButtonText = ReactHtmlParser(
@@ -35,7 +32,7 @@ const LogInSubmitButton = (props) => {
     </StyledSubmitButton>
   );
 };
-export default view(LogInSubmitButton);
+export default LogInSubmitButton;
 
 const StyledSubmitButton = styled.button`
   border-color: #2e6da4;

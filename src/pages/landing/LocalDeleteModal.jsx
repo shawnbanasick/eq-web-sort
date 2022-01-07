@@ -1,7 +1,6 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -9,9 +8,15 @@ import LocalConfirmDeleteButton from "./LocalConfirmDeleteButton";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerLocalDeleteModal = (state) => state.triggerLocalDeleteModal;
+const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
+
 const LocalDeleteModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
+  const triggerLocalDeleteModal = useStore(getTriggerLocalDeleteModal);
+  const setLocalDeleteModal = useStore(getSetLocalDeleteModal);
 
   const localDeleteModalHead = ReactHtmlParser(
     decodeHTML(langObj.localDeleteModalHead)
@@ -19,12 +24,6 @@ const LocalDeleteModal = () => {
   const localDeleteModalText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteModalText)
   );
-
-  // STATE
-  const triggerLocalDeleteModal = useStore(
-    (state) => state.triggerLocalDeleteModal
-  );
-  const setLocalDeleteModal = useStore((state) => state.setLocalDeleteModal);
 
   const onCloseModal = () => {
     setLocalDeleteModal(false);
@@ -47,7 +46,7 @@ const LocalDeleteModal = () => {
   );
 };
 
-export default view(LocalDeleteModal);
+export default LocalDeleteModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+
 const LogInSubmitButton = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
 
   const loginSubmitButtonText = ReactHtmlParser(
     decodeHTML(langObj.loginSubmitButtonText)
@@ -19,7 +20,7 @@ const LogInSubmitButton = (props) => {
     </StyledSubmitButton>
   );
 };
-export default view(LogInSubmitButton);
+export default LogInSubmitButton;
 
 const StyledSubmitButton = styled.button`
   border-color: #2e6da4;

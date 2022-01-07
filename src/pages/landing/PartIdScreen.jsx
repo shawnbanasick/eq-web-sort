@@ -1,5 +1,4 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
@@ -7,21 +6,27 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getDisplayPartIdWarning = (state) => state.displayPartIdWarning;
+const getSetUserInputPartId = (state) => state.setUserInputPartId;
+const getUserInputPartId = (state) => state.userInputPartId;
+const getSetDisplayLandingContent = (state) => state.setDisplayLandingContent;
+const getSetPartId = (state) => state.setPartId;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
+const getSetIsLoggedIn = (state) => state.setIsLoggedIn;
+const getSetDisplayPartIdWarning = (state) => state.setDisplayPartIdWarning;
+
 const LogInScreen = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const displayPartIdWarning = useStore((state) => state.displayPartIdWarning);
-  const setUserInputPartId = useStore((state) => state.setUserInputPartId);
-  const userInputPartId = useStore((state) => state.userInputPartId);
-  const setDisplayLandingContent = useStore(
-    (state) => state.setDisplayLandingContent
-  );
-  const setPartId = useStore((state) => state.setPartId);
-  const setDisplayNextButton = useStore((state) => state.setDisplayNextButton);
-  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
-  const setDisplayPartIdWarning = useStore(
-    (state) => state.setDisplayPartIdWarning
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const displayPartIdWarning = useStore(getDisplayPartIdWarning);
+  const setUserInputPartId = useStore(getSetUserInputPartId);
+  const userInputPartId = useStore(getUserInputPartId);
+  const setDisplayLandingContent = useStore(getSetDisplayLandingContent);
+  const setPartId = useStore(getSetPartId);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
+  const setIsLoggedIn = useStore(getSetIsLoggedIn);
+  const setDisplayPartIdWarning = useStore(getSetDisplayPartIdWarning);
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
@@ -72,7 +77,7 @@ const LogInScreen = () => {
   );
 };
 
-export default view(LogInScreen);
+export default LogInScreen;
 
 const Container = styled.div`
   display: grid;

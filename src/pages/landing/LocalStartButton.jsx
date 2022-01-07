@@ -1,30 +1,28 @@
 import styled from "styled-components";
 import React, { useEffect, useCallback } from "react";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+const getLocalParticipantName = (state) => state.localParticipantName;
+const getLocalUsercode = (state) => state.localUsercode;
+const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
+const getSetLocalUsercode = (state) => state.setLocalUsercode;
+const getSetLocalPartIdWarning1 = (state) => state.setLocalPartIdWarning1;
+const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
+
 const LogInSubmitButton = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const localParticipantName = useStore((state) => state.localParticipantName);
-  const localUsercode = useStore((state) => state.localUsercode);
-
-  const setLocalParticipantName = useStore(
-    (state) => state.setLocalParticipantName
-  );
-  const setLocalUsercode = useStore((state) => state.setLocalUsercode);
-
-  let setLocalPartIdWarning1 = useStore(
-    (state) => state.setLocalPartIdWarning1
-  );
-
-  let setLocalPartIdWarning2 = useStore(
-    (state) => state.setLocalPartIdWarning2
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const localParticipantName = useStore(getLocalParticipantName);
+  const localUsercode = useStore(getLocalUsercode);
+  const setLocalParticipantName = useStore(getSetLocalParticipantName);
+  const setLocalUsercode = useStore(getSetLocalUsercode);
+  let setLocalPartIdWarning1 = useStore(getSetLocalPartIdWarning1);
+  let setLocalPartIdWarning2 = useStore(getSetLocalPartIdWarning2);
 
   const localStartButtonText = ReactHtmlParser(
     decodeHTML(langObj.localStartButtonText)
@@ -121,7 +119,7 @@ const LogInSubmitButton = (props) => {
     </StyledSubmitButton>
   );
 };
-export default view(withRouter(LogInSubmitButton));
+export default withRouter(LogInSubmitButton);
 
 const StyledSubmitButton = styled.button`
   border-color: #2e6da4;

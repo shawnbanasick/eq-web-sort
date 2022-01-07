@@ -1,30 +1,31 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getDisplayAccessCodeWarning = (state) => state.displayAccessCodeWarning;
+const getUserInputAccessCode = (state) => state.userInputAccessCode;
+const getSetDisplayLandingContent = (state) => state.setDisplayLandingContent;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
+const getSetIsLoggedIn = (state) => state.setIsLoggedIn;
+const getSetUserInputAccessCode = (state) => state.setUserInputAccessCode;
+const getSetDisplayAccessCodeWarning = (state) =>
+  state.setDisplayAccessCodeWarning;
+
 const LogInScreen = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const displayAccessCodeWarning = useStore(
-    (state) => state.displayAccessCodeWarning
-  );
-  const userInputAccessCode = useStore((state) => state.userInputAccessCode);
-
-  const setDisplayLandingContent = useStore(
-    (state) => state.setDisplayLandingContent
-  );
-  const setDisplayNextButton = useStore((state) => state.setDisplayNextButton);
-  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
-  const setUserInputAccessCode = useStore(
-    (state) => state.setUserInputAccessCode
-  );
-  const setDisplayAccessCodeWarning = useStore(
-    (state) => state.setDisplayAccessCodeWarning
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const displayAccessCodeWarning = useStore(getDisplayAccessCodeWarning);
+  const userInputAccessCode = useStore(getUserInputAccessCode);
+  const setDisplayLandingContent = useStore(getSetDisplayLandingContent);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
+  const setIsLoggedIn = useStore(getSetIsLoggedIn);
+  const setUserInputAccessCode = useStore(getSetUserInputAccessCode);
+  const setDisplayAccessCodeWarning = useStore(getSetDisplayAccessCodeWarning);
 
   const handleAccess = (e) => {
     setUserInputAccessCode(e.target.value);
@@ -73,7 +74,7 @@ const LogInScreen = () => {
   );
 };
 
-export default view(LogInScreen);
+export default LogInScreen;
 
 const Container = styled.div`
   display: grid;
