@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+
 const PresortIsComplete = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const setCurrentPage = useStore(getSetCurrentPage);
 
   const headerBarColor = configObj.headerBarColor;
   const mainText = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
@@ -30,7 +33,7 @@ const PresortIsComplete = () => {
   );
 };
 
-export default view(PresortIsComplete);
+export default PresortIsComplete;
 
 const SortTitleBar = styled.div`
   width: calc(100vw-4px);

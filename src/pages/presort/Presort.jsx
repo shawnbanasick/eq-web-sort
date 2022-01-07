@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import cloneDeep from "lodash/cloneDeep";
 import PresortModal from "./PresortModal";
 import PresortDND from "./PresortDND";
@@ -14,18 +13,29 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getStatementsObj = (state) => state.statementsObj;
+const getCardFontSize = (state) => state.cardFontSize;
+const getIsLoggedIn = (state) => state.isLoggedIn;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getSetProgressScore = (state) => state.setProgressScore;
+const getPresortNoReturn = (state) => state.presortNoReturn;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+
 const PresortPage = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const statementsObj = useSettingsStore((state) => state.statementsObj);
-  const cardFontSize = useStore((state) => state.cardFontSize);
-  const isLoggedIn = useSettingsStore((state) => state.isLoggedIn);
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const setProgressScore = useStore((state) => state.setProgressScore);
-  const presortNoReturn = useStore((state) => state.presortNoReturn);
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const statementsObj = useSettingsStore(getStatementsObj);
+  const cardFontSize = useStore(getCardFontSize);
+  const isLoggedIn = useSettingsStore(getIsLoggedIn);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const setProgressScore = useStore(getSetProgressScore);
+  const presortNoReturn = useStore(getPresortNoReturn);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
 
   useEffect(() => {
     setTimeout(() => {
@@ -78,7 +88,7 @@ const PresortPage = (props) => {
   );
 };
 
-export default view(PresortPage);
+export default PresortPage;
 
 const SortTitleBar = styled.div`
   display: flex;

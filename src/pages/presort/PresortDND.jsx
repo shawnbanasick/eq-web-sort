@@ -1,33 +1,39 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getStatementsObj = (state) => state.statementsObj;
+const getColumnStatements = (state) => state.columnStatements;
+const getPreSortedStateNumInit = (state) =>
+  state.presortSortedStatementsNumInitial;
+const getSetColumnStatements = (state) => state.setColumnStatements;
+const getSetPresortFinished = (state) => state.setPresortFinished;
+const getSetTrigPresortFinModal = (state) =>
+  state.setTriggerPresortFinishedModal;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+const getSetProgressScoreAdditional = (state) =>
+  state.setProgressScoreAdditional;
+
 function PresortDND(props) {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const statementsObj = useSettingsStore((state) => state.statementsObj);
-  const columnStatements = useSettingsStore((state) => state.columnStatements);
-  const presortSortedStatementsNumInitial = useStore(
-    (state) => state.presortSortedStatementsNumInitial
-  );
-  const setColumnStatements = useSettingsStore(
-    (state) => state.setColumnStatements
-  );
-  const setPresortFinished = useStore((state) => state.setPresortFinished);
-  const setTriggerPresortFinishedModal = useStore(
-    (state) => state.setTriggerPresortFinishedModal
-  );
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
-  const setProgressScoreAdditional = useStore(
-    (state) => state.setProgressScoreAdditional
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const statementsObj = useSettingsStore(getStatementsObj);
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
+  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  const setPresortFinished = useStore(getSetPresortFinished);
+  const setTriggerPresortFinishedModal = useStore(getSetTrigPresortFinModal);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
+  const setProgressScoreAdditional = useStore(getSetProgressScoreAdditional);
 
   const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
   const btnDisagreement = ReactHtmlParser(
@@ -344,7 +350,7 @@ function PresortDND(props) {
   );
 }
 
-export default view(PresortDND);
+export default PresortDND;
 
 const ColumnNamesDiv = styled.div`
   font-size: 20px;

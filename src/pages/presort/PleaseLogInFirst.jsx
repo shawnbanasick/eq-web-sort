@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+
 const PleaseLogInFirst = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const setCurrentPage = useStore(getSetCurrentPage);
+
   const headerBarColor = configObj.headerBarColor;
   const mainText = ReactHtmlParser(decodeHTML(langObj.logInFirst));
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
 
   useEffect(() => {
     setCurrentPage("presort");
@@ -29,7 +33,7 @@ const PleaseLogInFirst = () => {
   );
 };
 
-export default view(PleaseLogInFirst);
+export default PleaseLogInFirst;
 
 const SortTitleBar = styled.div`
   width: calc(100vw-4px);

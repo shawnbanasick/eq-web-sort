@@ -1,20 +1,22 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerModal = (state) => state.triggerPresortFinishedModal;
+const getSetTriggerModal = (state) => state.setTriggerPresortFinishedModal;
+
 const PresortFinishedModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModal = useStore((state) => state.triggerPresortFinishedModal);
-  const setTriggerModal = useStore(
-    (state) => state.setTriggerPresortFinishedModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerModal = useStore(getTriggerModal);
+  const setTriggerModal = useStore(getSetTriggerModal);
+
   const loginHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.presortFinishedModalHead)
   );
@@ -41,7 +43,7 @@ const PresortFinishedModal = () => {
   );
 };
 
-export default view(PresortFinishedModal);
+export default PresortFinishedModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

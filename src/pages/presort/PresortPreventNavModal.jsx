@@ -1,22 +1,22 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerModalOpen = (state) => state.triggerPresortPreventNavModal;
+const getSetTrigPrePrevNavModal = (state) =>
+  state.setTriggerPresortPreventNavModal;
+
 const PresortPreventNavModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModalOpen = useStore(
-    (state) => state.triggerPresortPreventNavModal
-  );
-  const setTriggerPresortPreventNavModal = useStore(
-    (state) => state.setTriggerPresortPreventNavModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerModalOpen = useStore(getTriggerModalOpen);
+  const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.presortPreventNavModalHead)
@@ -44,7 +44,7 @@ const PresortPreventNavModal = () => {
   );
 };
 
-export default view(PresortPreventNavModal);
+export default PresortPreventNavModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;
