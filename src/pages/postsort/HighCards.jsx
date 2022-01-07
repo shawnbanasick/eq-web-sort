@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
@@ -11,11 +10,17 @@ import useStore from "../../globalState/useStore";
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
+const getColumnStatements = (state) => state.columnStatements;
+const getResultsPostsort = (state) => state.resultsPostsort;
+const getSetResultsPostsort = (state) => state.setResultsPostsort;
+const getStatementCommentsObj = (state) => state.statementCommentsObj;
+
 const HighCards = (props) => {
-  const columnStatements = useSettingsStore((state) => state.columnStatements);
-  const resultsPostsort = useStore((state) => state.resultsPostsort);
-  const setResultsPostsort = useStore((state) => state.setResultsPostsort);
-  const statementCommentsObj = useStore((state) => state.statementCommentsObj);
+  // STATE
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const resultsPostsort = useStore(getResultsPostsort);
+  const setResultsPostsort = useStore(getSetResultsPostsort);
+  const statementCommentsObj = useStore(getStatementCommentsObj);
 
   // on leaving card comment section,
   const onBlur = (event, columnDisplay, itemId) => {
@@ -90,7 +95,7 @@ const HighCards = (props) => {
   });
 };
 
-export default view(HighCards);
+export default HighCards;
 
 const Container = styled.div`
   width: 90vw;

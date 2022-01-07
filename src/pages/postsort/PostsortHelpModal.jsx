@@ -1,20 +1,21 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerPostsortModal = (state) => state.triggerPostsortModal;
+const getSetTriggerPostsortModal = (state) => state.setTriggerPostsortModal;
+
 const PostsortHelpModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerPostsortModal = useStore((state) => state.triggerPostsortModal);
-  const setTriggerPostsortModal = useStore(
-    (state) => state.setTriggerPostsortModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerPostsortModal = useStore(getTriggerPostsortModal);
+  const setTriggerPostsortModal = useStore(getSetTriggerPostsortModal);
 
   const postsortHelpModalHead = ReactHtmlParser(
     decodeHTML(langObj.postsortModalHead)
@@ -42,7 +43,7 @@ const PostsortHelpModal = () => {
   );
 };
 
-export default view(PostsortHelpModal);
+export default PostsortHelpModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

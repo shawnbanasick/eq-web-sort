@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -14,22 +13,32 @@ import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getMapObj = (state) => state.mapObj;
+const getSetProgressScore = (state) => state.setProgressScore;
+const getColumnStatements = (state) => state.columnStatements;
+const getCardHeight = (state) => state.cardHeight;
+const getCardFontSize = (state) => state.cardFontSize;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+
 const PostSort = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const mapObj = useSettingsStore((state) => state.mapObj);
-  // const setCardFontSize = useStore((state) => state.setCardFontSize);
-  const setProgressScore = useStore((state) => state.setProgressScore);
-  const columnStatements = useSettingsStore((state) => state.columnStatements);
-  const cardHeight = useStore((state) => state.cardHeight);
-  const cardFontSize = useStore((state) => state.cardFontSize);
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const mapObj = useSettingsStore(getMapObj);
+  const setProgressScore = useStore(getSetProgressScore);
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const cardHeight = useStore(getCardHeight);
+  const cardFontSize = useStore(getCardFontSize);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
 
-  console.log("conf: ", JSON.stringify(configObj, null, 2));
-  console.log("map: ", JSON.stringify(mapObj, null, 2));
+  // console.log("conf: ", JSON.stringify(configObj, null, 2));
+  //  console.log("map: ", JSON.stringify(mapObj, null, 2));
 
   const headerBarColor = configObj.headerBarColor;
   const postsortInstructions = ReactHtmlParser(
@@ -82,12 +91,6 @@ const PostSort = () => {
   agreeObj.displaySecondColumn = showSecondPosColumn;
   agreeObj.placeholder = placeholder;
 
-  /*  const neutralObj = {};
-  neutralObj.neutralText = neutral;
-  neutralObj.displayNeutralObjects = configObj.displayNeutralObjects;
-  neutralObj.columnDisplay = ["column0"];
-  neutralObj.placeholder = placeholder;
- */
   const disagreeObj = {};
   disagreeObj.disagreeText = disagree;
   disagreeObj.columnDisplay = [postsortDisagreeColDisp1];
@@ -124,17 +127,6 @@ const PostSort = () => {
             highCards2={highCards2}
           />
         )}
-
-        {/*  {neutralObj.displayNeutralObjects && (
-          <NeutralCards
-            neutralObj={neutralObj}
-            height={cardHeight}
-            width={columnWidth}
-            cardFontSize={cardFontSize}
-            neutralCards={neutralCards}
-          />
-        )} */}
-
         {disagreeObj.displaySecondColumn && (
           <LowCards2
             disagreeObj={disagreeObj}
@@ -157,7 +149,7 @@ const PostSort = () => {
   );
 };
 
-export default view(PostSort);
+export default PostSort;
 
 const CardsContainer = styled.div`
   display: flex;

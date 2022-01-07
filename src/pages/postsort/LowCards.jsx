@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
@@ -11,13 +10,19 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 
 // LowCards example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-const LowCards = (props) => {
-  // on blur, get text and add comment to card object
-  const columnStatements = useSettingsStore((state) => state.columnStatements);
-  const resultsPostsort = useStore((state) => state.resultsPostsort);
-  const setResultsPostsort = useStore((state) => state.setResultsPostsort);
-  const statementCommentsObj = useStore((state) => state.statementCommentsObj);
+const getColumnStatements = (state) => state.columnStatements;
+const getResultsPostsort = (state) => state.resultsPostsort;
+const getSetResultsPostsort = (state) => state.setResultsPostsort;
+const getStatementCommentsObj = (state) => state.statementCommentsObj;
 
+const LowCards = (props) => {
+  // STATE
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const resultsPostsort = useStore(getResultsPostsort);
+  const setResultsPostsort = useStore(getSetResultsPostsort);
+  const statementCommentsObj = useStore(getStatementCommentsObj);
+
+  // on blur, get text and add comment to card object
   const onBlur = (event, columnDisplay, itemId) => {
     const results = resultsPostsort;
     const cards = [...columnStatements.vCols[columnDisplay]];
@@ -80,7 +85,7 @@ const LowCards = (props) => {
   });
 };
 
-export default view(LowCards);
+export default LowCards;
 
 const Container = styled.div`
   width: 90vw;

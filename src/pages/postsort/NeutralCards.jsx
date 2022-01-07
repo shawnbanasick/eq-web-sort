@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
@@ -91,7 +90,7 @@ const NeutralCards = (props) => {
   });
 };
 
-export default view(NeutralCards);
+export default NeutralCards;
 
 const Container = styled.div`
   width: 90vw;
