@@ -1,16 +1,19 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getCardHeight = (state) => state.cardHeight;
+const getSetCardHeight = (state) => state.setCardHeight;
+
 const CardHeightSizer = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const cardHeight = useStore((state) => state.cardHeight);
-  const setCardHeight = useStore((state) => state.setCardHeight);
+  const langObj = useSettingsStore(getLangObj);
+  const cardHeight = useStore(getCardHeight);
+  const setCardHeight = useStore(getSetCardHeight);
 
   const cardHeightText = ReactHtmlParser(decodeHTML(langObj.cardHeightText));
 
@@ -38,7 +41,7 @@ const CardHeightSizer = () => {
   );
 };
 
-export default view(CardHeightSizer);
+export default CardHeightSizer;
 
 const SizeButton = styled.button`
   background: #337ab7;

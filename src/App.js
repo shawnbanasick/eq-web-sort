@@ -1,6 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import { view } from "@risingstack/react-easy-state";
 import LandingPage from "./pages/landing/Landing";
 import PostsortPage from "./pages/postsort/Postsort";
 import PresortPage from "./pages/presort/Presort";
@@ -21,24 +20,27 @@ import useStore from "./globalState/useStore";
 
 const convert = require("xml-js");
 
+const getSetConfigObj = (state) => state.setConfigObj;
+const getSetLangObj = (state) => state.setLangObj;
+const getSetMapObj = (state) => state.setMapObj;
+const getSetStatementsObj = (state) => state.setStatementsObj;
+const getSetColumnStatements = (state) => state.setColumnStatements;
+const getSetSurveyQuesObjArray = (state) => state.setSurveyQuestionObjArray;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getSetDataLoaded = (state) => state.setDataLoaded;
+
 function App() {
   // STATE
   const [isLoading, setLoading] = useState(true);
 
-  const setConfigObj = useSettingsStore((state) => state.setConfigObj);
-  const setLangObj = useSettingsStore((state) => state.setLangObj);
-  const setMapObj = useSettingsStore((state) => state.setMapObj);
-  const setStatementsObj = useSettingsStore((state) => state.setStatementsObj);
-  const setColumnStatements = useSettingsStore(
-    (state) => state.setColumnStatements
-  );
-  const setSurveyQuestionObjArray = useSettingsStore(
-    (state) => state.setSurveyQuestionObjArray
-  );
-  const setRequiredAnswersObj = useSettingsStore(
-    (state) => state.setRequiredAnswersObj
-  );
-  const setDataLoaded = useStore((state) => state.setDataLoaded);
+  const setConfigObj = useSettingsStore(getSetConfigObj);
+  const setLangObj = useSettingsStore(getSetLangObj);
+  const setMapObj = useSettingsStore(getSetMapObj);
+  const setStatementsObj = useSettingsStore(getSetStatementsObj);
+  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  const setSurveyQuestionObjArray = useSettingsStore(getSetSurveyQuesObjArray);
+  const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
+  const setDataLoaded = useStore(getSetDataLoaded);
 
   useEffect(() => {
     let shuffleCards;
@@ -153,4 +155,4 @@ function App() {
   );
 }
 
-export default view(App);
+export default App;
