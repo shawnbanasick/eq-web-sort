@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+
 const SurveyInformationElement = (props) => {
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
+  // STATE
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
 
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "info. - na";
@@ -25,7 +28,7 @@ const SurveyInformationElement = (props) => {
   );
 };
 
-export default view(SurveyInformationElement);
+export default SurveyInformationElement;
 
 const Container = styled.div`
   width: 90vw;

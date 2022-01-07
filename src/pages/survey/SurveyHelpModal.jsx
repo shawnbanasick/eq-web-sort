@@ -1,20 +1,21 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerSurveyModal = (state) => state.triggerSurveyModal;
+const getSetTriggerSurveyModal = (state) => state.setTriggerSurveyModal;
+
 const SurveyHelpModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerSurveyModal = useStore((state) => state.triggerSurveyModal);
-  const setTriggerSurveyModal = useStore(
-    (state) => state.setTriggerSurveyModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerSurveyModal = useStore(getTriggerSurveyModal);
+  const setTriggerSurveyModal = useStore(getSetTriggerSurveyModal);
 
   const helpModalHead = ReactHtmlParser(decodeHTML(langObj.surveyModalHead));
   const helpModalText = ReactHtmlParser(decodeHTML(langObj.surveyModalText));
@@ -38,7 +39,7 @@ const SurveyHelpModal = () => {
   );
 };
 
-export default view(SurveyHelpModal);
+export default SurveyHelpModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

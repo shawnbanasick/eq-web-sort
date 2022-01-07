@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import SurveyTextElement from "./SurveyTextElement";
 import SurveyTextAreaElement from "./SurveyTextAreaElement";
@@ -19,26 +18,27 @@ import SurveyHelpModal from "./SurveyHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getSurveyQuestionObjArray = (state) => state.surveyQuestionObjArray;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getCheckReqQuesComplete = (state) => state.checkRequiredQuestionsComplete;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+
 const SurveyPage = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const surveyQuestionObjArray = useSettingsStore(
-    (state) => state.surveyQuestionObjArray
-  );
-  const requiredAnswersObj = useSettingsStore(
-    (state) => state.requiredAnswersObj
-  );
-  console.log(JSON.stringify(requiredAnswersObj, null, 2));
-  const setRequiredAnswersObj = useSettingsStore(
-    (state) => state.setRequiredAnswersObj
-  );
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const results = useStore((state) => state.results);
-  const setResults = useStore((state) => state.setResults);
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray);
+  const requiredAnswersObj = useSettingsStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQuesComplete);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
@@ -127,7 +127,7 @@ const SurveyPage = () => {
   );
 };
 
-export default view(SurveyPage);
+export default SurveyPage;
 
 const Container = styled.div`
   display: flex;

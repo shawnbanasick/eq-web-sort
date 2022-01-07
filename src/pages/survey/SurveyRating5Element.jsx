@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+
 const SurveyRatings5Element = (props) => {
   // STATE
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  // const resultsSurvey = useStore((state) => state.resultsSurvey);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
 
   let isRequired = props.opts.required;
   if (isRequired === "true") {
@@ -53,7 +53,7 @@ const SurveyRatings5Element = (props) => {
   };
 
   // to use with required check and related css formating
-  const local5Store = store({});
+  const [local5Store, setLocal5Store] = useState({});
 
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
@@ -63,6 +63,7 @@ const SurveyRatings5Element = (props) => {
     Array.from({ length: rows }, () => Array.from({ length: 5 }, () => false))
   );
 
+  // HANDLE CHANGE
   const handleChange = (selectedRow, column, e) => {
     const id = `qNum${props.opts.qNum}`;
 
@@ -70,10 +71,13 @@ const SurveyRatings5Element = (props) => {
     let value = e.target.value;
 
     // needed for required question check
-    local5Store[name] = value;
+    const newObj = local5Store;
+    newObj[name] = value;
+    setLocal5Store(newObj);
 
     // update local state with radio selected
     const newArray = [];
+    console.log(JSON.stringify(checked5State));
     const newChecked5State = checked5State.map(function (row, index) {
       if (selectedRow === index) {
         row.map(function (item, index) {
@@ -90,6 +94,7 @@ const SurveyRatings5Element = (props) => {
         return row;
       }
     });
+    console.log(JSON.stringify(newChecked5State));
     setChecked5State(newChecked5State);
 
     // record if answered or not
@@ -100,12 +105,15 @@ const SurveyRatings5Element = (props) => {
     }
     setRequiredAnswersObj(requiredAnswersObj);
     results[name] = +value;
+
+    console.log(JSON.stringify(results));
     setResultsSurvey(results);
 
     // if is a required question, check if all parts answered
-    const rating5State = local5Store;
-    const testArray = Object.keys(rating5State);
+    // const rating5State = local5Store;
+    const testArray = Object.keys(local5Store);
     const conditionalLength = testArray.length;
+    console.log(optsArray.length, conditionalLength);
     setTestValue(optsArray.length - conditionalLength);
   };
 
@@ -204,7 +212,7 @@ const SurveyRatings5Element = (props) => {
   );
 };
 
-export default view(SurveyRatings5Element);
+export default SurveyRatings5Element;
 
 const Container = styled.div`
   width: 90vw;

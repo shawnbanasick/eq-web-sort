@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+
 const SurveyRatings2Element = (props) => {
   // STATE
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
 
   let isRequired = props.opts.required;
   if (isRequired === "true") {
@@ -56,7 +57,7 @@ const SurveyRatings2Element = (props) => {
   };
 
   // to use with required check and related css formatting
-  const localStore = store({});
+  const [localStore, setLocalStore] = useState({});
 
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
@@ -79,7 +80,9 @@ const SurveyRatings2Element = (props) => {
     let value = e.target.value;
 
     // needed for required question check
-    localStore[name] = value;
+    const newObj = localStore;
+    newObj[name] = value;
+    setLocalStore(newObj);
 
     // update local state with radio selected
     const newArray = [];
@@ -186,7 +189,7 @@ const SurveyRatings2Element = (props) => {
   );
 };
 
-export default view(SurveyRatings2Element);
+export default SurveyRatings2Element;
 
 const Container = styled.div`
   width: 90vw;

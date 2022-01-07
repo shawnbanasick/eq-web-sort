@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -56,7 +55,7 @@ const SurveyRatings10Element = (props) => {
   };
 
   // to use with required check and related css formating
-  const localStore = store({});
+  const [localStore, setLocalStore] = useState({});
 
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
@@ -73,7 +72,9 @@ const SurveyRatings10Element = (props) => {
     let value = e.target.value;
 
     // needed for required question check
-    localStore[name] = value;
+    const newObj = localStore;
+    newObj[name] = value;
+    setLocalStore(newObj);
 
     // update local state with radio selected
     const newArray = [];
@@ -257,7 +258,7 @@ const SurveyRatings10Element = (props) => {
   );
 };
 
-export default view(SurveyRatings10Element);
+export default SurveyRatings10Element;
 
 const Container = styled.div`
   width: 90vw;

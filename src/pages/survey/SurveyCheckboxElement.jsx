@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+
 const SurveyCheckboxElement = (props) => {
   // STATE
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  // const resultsSurvey = useStore((state) => state.resultsSurvey);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
 
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
     setResultsSurvey(results);
   }, [props, results, setResultsSurvey]);
 
-  const localStore = store({});
+  const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
 
-  const localStore2 = store({
-    hasBeenAnswered: false,
-  });
+  let localStore = {};
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -74,10 +72,11 @@ const SurveyCheckboxElement = (props) => {
     }
 
     if (selected.length > 0) {
-      localStore2.hasBeenAnswered = true;
+      setHasBeenAnswered(true);
       requiredAnswersObj[id] = "answered";
     } else {
-      localStore2.hasBeenAnswered = false;
+      setHasBeenAnswered(false);
+
       requiredAnswersObj[id] = "no response";
       selected = "no response";
     }
@@ -87,7 +86,6 @@ const SurveyCheckboxElement = (props) => {
     setRequiredAnswersObj(requiredAnswersObj);
   };
 
-  const hasBeenAnswered = localStore2.hasBeenAnswered;
   if (
     checkRequiredQuestionsComplete === true &&
     hasBeenAnswered === false &&
@@ -128,7 +126,7 @@ const SurveyCheckboxElement = (props) => {
   );
 };
 
-export default view(SurveyCheckboxElement);
+export default SurveyCheckboxElement;
 
 const Container = styled.div`
   width: 90vw;

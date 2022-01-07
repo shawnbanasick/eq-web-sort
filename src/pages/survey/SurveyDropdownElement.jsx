@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view, store } from "@risingstack/react-easy-state";
 import MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+
 const SurveyDropdownElement = (props) => {
   // STATE
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  // const resultsSurvey = useStore((state) => state.resultsSurvey);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
 
   let isRequired = props.opts.required;
   if (isRequired === "true") {
@@ -49,12 +49,12 @@ const SurveyDropdownElement = (props) => {
     return objArray;
   };
 
-  let originalOptions = props.opts.options.split(";");
+  let originalOptions = props.opts.options.split(";;;");
   originalOptions = originalOptions.map((x) => x.trim());
 
-  let localStore = store({
+  let localStore = {
     hasBeenAnswered: false,
-  });
+  };
 
   const [selected, setSelected] = useState([]);
 
@@ -130,7 +130,7 @@ const SurveyDropdownElement = (props) => {
   );
 };
 
-export default view(SurveyDropdownElement);
+export default SurveyDropdownElement;
 
 const Container = styled.div`
   width: 90vw;

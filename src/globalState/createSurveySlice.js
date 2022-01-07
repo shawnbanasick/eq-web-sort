@@ -4,7 +4,11 @@ const createSurveySlice = (set, get) => ({
   triggerSurveyPreventNavModal: false,
   checkRequiredQuestionsComplete: false,
   requiredAnswersObj: {},
+  answersStorage: {},
 
+  setAnswersStorage: (inputValue) => {
+    set(() => ({ answersStorage: inputValue }));
+  },
   setTriggerSurveyModal: (inputValue) => {
     set(() => ({ triggerSurveyModal: inputValue }));
   },

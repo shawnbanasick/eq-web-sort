@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
 import useStore from "../../globalState/useStore.js";
 
+const getResults = (state) => state.resultsSurvey;
+const getSetResultsSurvey = (state) => state.setResultsSurvey;
+const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
+const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
+const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+
 const SurveyTextAreaElement = (props) => {
   // STATE
-  const results = useStore((state) => state.resultsSurvey);
-  const setResultsSurvey = useStore((state) => state.setResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(
-    (state) => state.checkRequiredQuestionsComplete
-  );
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
 
   let isRequired = props.opts.required;
   if (isRequired === "true") {
@@ -90,7 +91,7 @@ const SurveyTextAreaElement = (props) => {
   );
 };
 
-export default view(SurveyTextAreaElement);
+export default SurveyTextAreaElement;
 
 const Container = styled.div`
   width: 90vw;
