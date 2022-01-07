@@ -10,6 +10,8 @@ const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getAnswersStorage = (state) => state.answersStorage;
+const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyTextAreaElement = (props) => {
   // STATE
@@ -18,6 +20,10 @@ const SurveyTextAreaElement = (props) => {
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  const answersStorage = useStore(getAnswersStorage);
+  const setAnswersStorage = useStore(getSetAnswersStorage);
+
+  console.log(answersStorage);
 
   let isRequired = props.opts.required;
   if (isRequired === "true") {
@@ -36,12 +42,15 @@ const SurveyTextAreaElement = (props) => {
     border: "none",
   });
 
-  const handleOnChange = (e) => {
-    const id = `qNum${props.opts.qNum}`;
+  const id = `qNum${props.opts.qNum}`;
 
+  // ON CHANGE
+  const handleOnChange = (e) => {
     let value = e.target.value;
     // value = value.trim();
     setUserText(value);
+    answersStorage[id] = value;
+    setAnswersStorage(answersStorage);
 
     // record if answered or not
     if (value.length > 0) {
@@ -56,11 +65,18 @@ const SurveyTextAreaElement = (props) => {
     setResultsSurvey(results);
   };
 
+  // required question answer check
+  let userTextLen = false;
+  if (id in answersStorage) {
+    let userTextLen1 = answersStorage[id];
+    userTextLen = userTextLen1.length;
+  }
+
   useEffect(() => {
     if (
+      (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      isRequired === true &&
-      userText.length < 1
+      userTextLen < 1
     ) {
       setFormatOptions({
         bgColor: "lightpink",
@@ -77,13 +93,21 @@ const SurveyTextAreaElement = (props) => {
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const placeholder = props.opts.placeholder;
 
+  let inputValue;
+  console.log(answersStorage[id]);
+  if (id in answersStorage) {
+    inputValue = answersStorage[id];
+  } else {
+    inputValue = "";
+  }
+
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>
         <div>{labelText}</div>
       </TitleBar>
       <TextAreaInput
-        value={userText || ""}
+        value={inputValue}
         placeholder={placeholder}
         onChange={handleOnChange}
       />
@@ -102,7 +126,8 @@ const Container = styled.div`
   min-height: 200px;
   background-color: whitesmoke;
   background-color: ${(props) => props.bgColor};
-  border: ${(props) => props.border};
+  outline: ${(props) => props.border};
+  outline-offset: -3px;
 `;
 
 const TitleBar = styled.div`

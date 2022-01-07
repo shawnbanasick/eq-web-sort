@@ -140,7 +140,8 @@ const Container = styled.div`
   max-width: 1300px;
   min-height: 125px;
   background-color: ${(props) => props.bgColor};
-  border: ${(props) => props.border};
+  outline: ${(props) => props.border};
+  outline-offset: -3px;
 
   .multiselect {
     font-size: 16px;

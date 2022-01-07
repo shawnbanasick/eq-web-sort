@@ -222,7 +222,8 @@ const Container = styled.div`
   max-width: 1300px;
   min-height: 200px;
   background-color: ${(props) => props.bgColor};
-  border: ${(props) => props.border};
+  outline: ${(props) => props.border};
+  outline-offset: -3px;
 `;
 
 const TitleBar = styled.div`

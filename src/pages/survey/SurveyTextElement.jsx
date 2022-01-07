@@ -38,7 +38,10 @@ const SurveyTextElement = (props) => {
 
   const id = `qNum${props.opts.qNum}`;
 
+  // to force component update
   const [userText, setUserText] = useState("");
+
+  // for required question check
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
@@ -137,7 +140,8 @@ const Container = styled.div`
   max-width: 1300px;
   min-height: 200px;
   background-color: ${(props) => props.bgColor};
-  border: ${(props) => props.border};
+  outline: ${(props) => props.border};
+  outline-offset: -3px;
 `;
 
 const TitleBar = styled.div`
