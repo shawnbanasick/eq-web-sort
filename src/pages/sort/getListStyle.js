@@ -36,7 +36,8 @@ const getListStyle = (
     minHeight: props.minHeight - 10,
     marginBottom: cardHeight + 80,
     borderRadius: `2px`,
-    border: isUnderMaxCards ? "1px solid #d8d8d8" : "2px dashed black",
+    outline: isUnderMaxCards ? "1px solid #d8d8d8" : "2px dashed black",
+    outlineOffset: "-2px",
   };
 };
 

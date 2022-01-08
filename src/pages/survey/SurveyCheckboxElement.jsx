@@ -44,9 +44,6 @@ const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
 
-  let bgColor;
-  let border;
-
   let [checkedState, setCheckedState] = useState(
     new Array(optsArray.length).fill(false)
   );
