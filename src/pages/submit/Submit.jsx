@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -11,23 +10,31 @@ import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButt
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getMapObj = (state) => state.mapObj;
+const getSetCurrentPage = (state) => state.setCurrentPage;
+const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
+const getResults = (state) => state.results;
+const getResultsPostsort = (state) => state.resultsPostsort;
+const getResultsSurvey = (state) => state.resultsSurvey;
+const getPartId = (state) => state.partId;
+const getUsercode = (state) => state.usercode;
+const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
+
 const SubmitPage = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const configObj = useSettingsStore((state) => state.configObj);
-  const mapObj = useSettingsStore((state) => state.mapObj);
-  const setCurrentPage = useStore((state) => state.setCurrentPage);
-  const displaySubmitFallback = useStore(
-    (state) => state.displaySubmitFallback
-  );
-  const results = useStore((state) => state.results);
-  const resultsPostsort = useStore((state) => state.resultsPostsort);
-  const resultsSurvey = useStore((state) => state.resultsSurvey);
-  const partId = useStore((state) => state.partId);
-  const usercode = useStore((state) => state.usercode);
-  const displayGoodbyeMessage = useStore(
-    (state) => state.displayGoodbyeMessage
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const mapObj = useSettingsStore(getMapObj);
+  const setCurrentPage = useStore(getSetCurrentPage);
+  const displaySubmitFallback = useStore(getDisplaySubmitFallback);
+  const results = useStore(getResults);
+  const resultsPostsort = useStore(getResultsPostsort);
+  const resultsSurvey = useStore(getResultsSurvey);
+  const partId = useStore(getPartId);
+  const usercode = useStore(getUsercode);
+  const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
 
   useEffect(() => {
     setCurrentPage("submit");
@@ -148,7 +155,7 @@ const SubmitPage = () => {
   }
 };
 
-export default view(SubmitPage);
+export default SubmitPage;
 
 const SortTitleBar = styled.div`
   width: calc(100vw-4px);

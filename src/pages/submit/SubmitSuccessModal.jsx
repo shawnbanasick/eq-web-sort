@@ -1,25 +1,23 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerModalOpen = (state) => state.triggerTransmissionOKModal;
+const getSetTriggerTransOKMod = (state) => state.setTriggerTransmissionOKModal;
+const getSetDisplayGoodbyeMessage = (state) => state.setDisplayGoodbyeMessage;
+
 const SubmitSuccessModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModalOpen = useStore(
-    (state) => state.triggerTransmissionOKModal
-  );
-  const setTriggerTransmissionOKModal = useStore(
-    (state) => state.setTriggerTransmissionOKModal
-  );
-  const setDisplayGoodbyeMessage = useStore(
-    (state) => state.setDisplayGoodbyeMessage
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerModalOpen = useStore(getTriggerModalOpen);
+  const setTriggerTransmissionOKModal = useStore(getSetTriggerTransOKMod);
+  const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
 
   const modalHead = ReactHtmlParser(decodeHTML(langObj.transferOkModalHeader));
   const modalText = ReactHtmlParser(decodeHTML(langObj.transferOkModalText));
@@ -44,7 +42,7 @@ const SubmitSuccessModal = () => {
   );
 };
 
-export default view(SubmitSuccessModal);
+export default SubmitSuccessModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

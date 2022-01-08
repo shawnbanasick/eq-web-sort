@@ -1,22 +1,21 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerModalOpen = (state) => state.triggerTransmissionFailModal;
+const getSetTrigTransFailMod = (state) => state.setTriggerTransmissionFailModal;
+
 const SubmitFailureModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerModalOpen = useStore(
-    (state) => state.triggerTransmissionFailModal
-  );
-  const setTriggerTransmissionFailModal = useStore(
-    (state) => state.setTriggerTransmissionFailModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerModalOpen = useStore(getTriggerModalOpen);
+  const setTriggerTransmissionFailModal = useStore(getSetTrigTransFailMod);
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.transferFailModalHeader)
@@ -43,7 +42,7 @@ const SubmitFailureModal = () => {
   );
 };
 
-export default view(SubmitFailureModal);
+export default SubmitFailureModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

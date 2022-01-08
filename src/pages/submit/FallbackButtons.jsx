@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { v4 as uuid } from "uuid";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+
 const SubmitResultsButton = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
 
   const downloadButtonText = ReactHtmlParser(decodeHTML(langObj.btnDownload));
   const randomId = uuid().substring(0, 12);
@@ -39,7 +40,7 @@ const SubmitResultsButton = (props) => {
     </ButtonContainer>
   );
 };
-export default view(SubmitResultsButton);
+export default SubmitResultsButton;
 
 const StyledButton = styled.button`
   border-color: #2e6da4;

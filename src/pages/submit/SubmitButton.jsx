@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
@@ -8,20 +7,21 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
+const getSubmitFailNumber = (state) => state.submitFailNumber;
+const getSetTrigTranFailMod = (state) => state.setTriggerTransmissionFailModal;
+const getSetTrigTransOKModal = (state) => state.setTriggerTransmissionOKModal;
+const getSetDisplaySubmitFallback = (state) => state.setDisplaySubmitFallback;
+
 const SubmitResultsButton = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  let displaySubmitFallback = useStore((state) => state.displaySubmitFallback);
-  let submitFailNumber = useStore((state) => state.submitFailNumber);
-  const setTriggerTransmissionFailModal = useStore(
-    (state) => state.setTriggerTransmissionFailModal
-  );
-  const setTriggerTransmissionOKModal = useStore(
-    (state) => state.setTriggerTransmissionOKModal
-  );
-  const setDisplaySubmitFallback = useStore(
-    (state) => state.setDisplaySubmitFallback
-  );
+  const langObj = useSettingsStore(getLangObj);
+  let displaySubmitFallback = useStore(getDisplaySubmitFallback);
+  let submitFailNumber = useStore(getSubmitFailNumber);
+  const setTriggerTransmissionFailModal = useStore(getSetTrigTranFailMod);
+  const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
+  const setDisplaySubmitFallback = useStore(getSetDisplaySubmitFallback);
 
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
 
@@ -104,7 +104,7 @@ const SubmitResultsButton = (props) => {
     </React.Fragment>
   );
 };
-export default view(SubmitResultsButton);
+export default SubmitResultsButton;
 
 const StyledButton = styled.button`
   border-color: #2e6da4;

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { view } from "@risingstack/react-easy-state";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
@@ -131,7 +130,7 @@ const SubmitLocalResultsButton = (props) => {
     </React.Fragment>
   );
 };
-export default view(SubmitLocalResultsButton);
+export default SubmitLocalResultsButton;
 
 const StyledButton = styled.button`
   border-color: #2e6da4;

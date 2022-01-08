@@ -1,5 +1,4 @@
 import React from "react";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -13,9 +12,11 @@ import useSettingsStore from "../../globalState/useSettingsStore";
   console.log("clicked");
 }; */
 
+const getLangObj = (state) => state.langObj;
+
 const SubmitFallback = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
 
   const fallbackMessage = ReactHtmlParser(decodeHTML(langObj.fallbackMessage));
 
@@ -27,7 +28,7 @@ const SubmitFallback = (props) => {
   );
 };
 
-export default view(SubmitFallback);
+export default SubmitFallback;
 
 const StyledMessage = styled.div`
   width: 50vw;
