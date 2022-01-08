@@ -21,6 +21,8 @@ const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
 const getUsercode = (state) => state.usercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
+const getParticipantName = (state) => state.localParticipantName;
+const getLocalUsercode = (state) => state.localUsercode;
 
 const SubmitPage = () => {
   // STATE
@@ -35,6 +37,8 @@ const SubmitPage = () => {
   const partId = useStore(getPartId);
   const usercode = useStore(getUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
+  const localParticipantName = useStore(getParticipantName);
+  const localUsercode = useStore(getLocalUsercode);
 
   useEffect(() => {
     setCurrentPage("submit");
@@ -61,6 +65,12 @@ const SubmitPage = () => {
   transmissionResults["timeLanding"] = results.timeOnlandingPage;
   transmissionResults["timePresort"] = results.timeOnpresortPage;
   transmissionResults["timeSort"] = results.timeOnsortPage;
+
+  if (configObj.firebaseOrLocal === "local") {
+    transmissionResults["partId"] = localParticipantName;
+    transmissionResults["usercode"] = localUsercode;
+  }
+
   if (configObj.showPostsort === true) {
     transmissionResults["timePostsort"] = results.timeOnpostsortPage;
   }
