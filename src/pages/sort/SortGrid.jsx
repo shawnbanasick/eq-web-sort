@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import move from "./move";
 import reorder from "./reorder";
@@ -342,7 +341,7 @@ const SortGrid = (props) => {
   );
 };
 
-export default view(SortGrid);
+export default SortGrid;
 
 const SortFooterDiv = styled.div`
   flex-direction: row;

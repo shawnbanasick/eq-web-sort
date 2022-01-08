@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Prompt } from "react-router-dom";
-import { view } from "@risingstack/react-easy-state";
 
 const PromptUnload = () => {
   useEffect(() => {
@@ -29,4 +28,4 @@ const PromptUnload = () => {
   );
 };
 
-export default view(PromptUnload);
+export default PromptUnload;

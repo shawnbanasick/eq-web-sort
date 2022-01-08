@@ -1,22 +1,21 @@
 import React from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { view } from "@risingstack/react-easy-state";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "./decodeHTML";
 import useSettingsStore from "../globalState/useSettingsStore";
 import useStore from "../globalState/useStore";
 
+const getLangObj = (state) => state.langObj;
+const getTriggerSortFinishedMod = (state) => state.triggerSortingFinishedModal;
+const getSetTrigSortFinishMod = (state) => state.setTriggerSortingFinishedModal;
+
 const SortingFinishedModal = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
-  const triggerSortingFinishedModal = useStore(
-    (state) => state.triggerSortingFinishedModal
-  );
-  const setTriggerSortingFinishedModal = useStore(
-    (state) => state.setTriggerSortingFinishedModal
-  );
+  const langObj = useSettingsStore(getLangObj);
+  const triggerSortingFinishedModal = useStore(getTriggerSortFinishedMod);
+  const setTriggerSortingFinishedModal = useStore(getSetTrigSortFinishMod);
 
   const helpModalHead = ReactHtmlParser(
     decodeHTML(langObj.sortingCompleteModalHead)
@@ -44,7 +43,7 @@ const SortingFinishedModal = () => {
   );
 };
 
-export default view(SortingFinishedModal);
+export default SortingFinishedModal;
 
 const ModalHeader = styled.div`
   font-size: 24px;

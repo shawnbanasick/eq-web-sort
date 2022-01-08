@@ -4,9 +4,11 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../globalState/useSettingsStore";
 
+const getLangObj = (state) => state.langObj;
+
 const LoadingScreen = () => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
   const message = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
 
   return (
