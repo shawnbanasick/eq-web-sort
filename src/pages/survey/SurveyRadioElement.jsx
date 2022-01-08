@@ -10,6 +10,8 @@ const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getAnswersStorage = (state) => state.answersStorage;
+const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyRadioElement = (props) => {
   // STATE
@@ -18,14 +20,13 @@ const SurveyRadioElement = (props) => {
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  const answersStorage = useStore(getAnswersStorage);
+  const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  let isRequired = props.opts.required;
-  if (isRequired === "true") {
-    isRequired = true;
-  }
+  console.log(answersStorage);
 
   // local state for required question warning
-  const [testValue, setTestValue] = useState(false);
+  let [testValue, setTestValue] = useState(false);
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
@@ -66,25 +67,36 @@ const SurveyRadioElement = (props) => {
     );
   };
 
-  const [selected, setSelected] = useState();
+  const id = `qNum${props.opts.qNum}`;
+
+  let [selected, setSelected] = useState();
 
   const handleChange = (e) => {
-    const id = `qNum${props.opts.qNum}`;
     requiredAnswersObj[id] = "answered";
     setRequiredAnswersObj(requiredAnswersObj);
 
     results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
+
+    answersStorage[`qNum${props.opts.qNum}`] = +e.target.value;
+    setAnswersStorage(answersStorage);
     setResultsSurvey(results);
     // results = resultsSurvey;
     setTestValue(true);
+    console.log(answersStorage);
+    console.log(selected);
   }; // end handle change
+
+  if (id in answersStorage) {
+    selected = answersStorage[id];
+    testValue = true;
+  }
 
   useEffect(() => {
     // if is a required question, check if all parts answered
     if (
+      (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      testValue === false &&
-      isRequired === true
+      testValue === false
     ) {
       setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
     } else {
@@ -93,7 +105,10 @@ const SurveyRadioElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, testValue, isRequired]);
+  }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
+
+  console.log(answersStorage);
+  console.log(selected);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (

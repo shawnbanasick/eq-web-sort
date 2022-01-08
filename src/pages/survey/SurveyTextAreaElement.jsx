@@ -25,11 +25,6 @@ const SurveyTextAreaElement = (props) => {
 
   console.log(answersStorage);
 
-  let isRequired = props.opts.required;
-  if (isRequired === "true") {
-    isRequired = true;
-  }
-
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
     setResultsSurvey(results);
@@ -88,7 +83,12 @@ const SurveyTextAreaElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, userText, isRequired]);
+  }, [
+    checkRequiredQuestionsComplete,
+    userText,
+    userTextLen,
+    props.opts.required,
+  ]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const placeholder = props.opts.placeholder;
