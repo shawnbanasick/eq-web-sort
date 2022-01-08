@@ -10,6 +10,8 @@ const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getAnswersStorage = (state) => state.answersStorage;
+const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyDropdownElement = (props) => {
   // STATE
@@ -18,11 +20,8 @@ const SurveyDropdownElement = (props) => {
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-
-  let isRequired = props.opts.required;
-  if (isRequired === "true") {
-    isRequired = true;
-  }
+  const answersStorage = useStore(getAnswersStorage);
+  const setAnswersStorage = useStore(getSetAnswersStorage);
 
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
@@ -56,12 +55,15 @@ const SurveyDropdownElement = (props) => {
     hasBeenAnswered: false,
   };
 
-  const [selected, setSelected] = useState([]);
+  let [selected, setSelected] = useState([]);
 
+  const id = `qNum${props.opts.qNum}`;
+
+  // HANDLE ON CHANGE
   const handleOnChange = (e) => {
-    const id = `qNum${props.opts.qNum}`;
-
     setSelected(e);
+    answersStorage[id] = e;
+    setAnswersStorage(answersStorage);
 
     if (e.length !== 0) {
       requiredAnswersObj[id] = "answered";
@@ -94,10 +96,31 @@ const SurveyDropdownElement = (props) => {
   // required question answered?
   let hasBeenAnswered = localStore.hasBeenAnswered;
 
+  // check if response in global state and inject into results
+  if (id in answersStorage) {
+    let response = answersStorage[id];
+    selected = response;
+    hasBeenAnswered = true;
+
+    requiredAnswersObj[id] = "answered";
+    let selected2 = "";
+    for (let i = 0; i < response.length; i++) {
+      let label = response[i].label;
+      let id = originalOptions.indexOf(label);
+      if (i === 0) {
+        selected2 += id + 1;
+      } else {
+        selected2 += "|" + (id + 1);
+      }
+    }
+    results[`qNum${props.opts.qNum}`] = selected2;
+    setResultsSurvey(results);
+  }
+
   useEffect(() => {
     if (
+      (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      isRequired === true &&
       hasBeenAnswered === false
     ) {
       setFormatOptions({
@@ -110,9 +133,12 @@ const SurveyDropdownElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, hasBeenAnswered, isRequired]);
+  }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
+  console.log(JSON.stringify(answersStorage));
+  console.log(JSON.stringify(selected));
+  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

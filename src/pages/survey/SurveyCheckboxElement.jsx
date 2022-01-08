@@ -10,6 +10,8 @@ const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+const getAnswersStorage = (state) => state.answersStorage;
+const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyCheckboxElement = (props) => {
   // STATE
@@ -18,13 +20,15 @@ const SurveyCheckboxElement = (props) => {
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  const answersStorage = useStore(getAnswersStorage);
+  const setAnswersStorage = useStore(getSetAnswersStorage);
 
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
     setResultsSurvey(results);
   }, [props, results, setResultsSurvey]);
 
-  const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
+  let [hasBeenAnswered, setHasBeenAnswered] = useState(false);
 
   let localStore = {};
 
@@ -43,19 +47,28 @@ const SurveyCheckboxElement = (props) => {
   let bgColor;
   let border;
 
-  const [checkedState, setCheckedState] = useState(
+  let [checkedState, setCheckedState] = useState(
     new Array(optsArray.length).fill(false)
   );
 
-  const handleChange = (position) => {
-    const id = `qNum${props.opts.qNum}`;
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
+  const id = `qNum${props.opts.qNum}`;
+
+  // HANDLE CHANGE
+  const handleChange = (position) => {
     position = parseInt(position, 10);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
+    answersStorage[id] = updatedCheckedState;
+    setAnswersStorage(answersStorage);
+    console.log(JSON.stringify(answersStorage));
 
     let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
@@ -86,22 +99,57 @@ const SurveyCheckboxElement = (props) => {
     setRequiredAnswersObj(requiredAnswersObj);
   };
 
-  if (
-    checkRequiredQuestionsComplete === true &&
-    hasBeenAnswered === false &&
-    props.opts.required === true
-  ) {
-    bgColor = "lightpink";
-    border = "3px dashed black";
-  } else {
-    bgColor = "whitesmoke";
-    border = "none";
+  if (id in answersStorage) {
+    let response = answersStorage[id];
+
+    console.log(JSON.stringify(response));
+
+    checkedState = response;
+    hasBeenAnswered = true;
+
+    let selected = response.reduce((text = "", currentState, index) => {
+      if (currentState === true) {
+        return text + (index + 1).toString() + "|";
+      }
+      return text;
+    }, "");
+
+    if (selected.charAt(selected.length - 1) === "|") {
+      selected = selected.substring(0, selected.length - 1);
+    }
+
+    requiredAnswersObj[id] = "answered";
+
+    console.log(JSON.stringify(selected));
+
+    results[`qNum${props.opts.qNum}`] = selected;
+    console.log(JSON.stringify(results));
+
+    setResultsSurvey(results);
+    setRequiredAnswersObj(requiredAnswersObj);
   }
+
+  useEffect(() => {
+    if (
+      (props.opts.required === true || props.opts.required === "true") &&
+      checkRequiredQuestionsComplete === true &&
+      hasBeenAnswered === false
+    ) {
+      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+    } else {
+      setFormatOptions({
+        bgColor: "whitesmoke",
+        border: "none",
+      });
+    }
+  }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
+  console.log(JSON.stringify(results));
+
   return (
-    <Container bgColor={bgColor} border={border}>
+    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
       <TitleBar>
         <div>{labelText}</div>
       </TitleBar>

@@ -86,9 +86,18 @@ const SurveyRadioElement = (props) => {
     console.log(selected);
   }; // end handle change
 
+  // check if response is in global state and inject into results
   if (id in answersStorage) {
-    selected = answersStorage[id];
+    let response = answersStorage[id];
+    selected = response;
     testValue = true;
+
+    requiredAnswersObj[id] = "answered";
+    setRequiredAnswersObj(requiredAnswersObj);
+
+    results[`qNum${props.opts.qNum}`] = +response + 1;
+
+    setResultsSurvey(results);
   }
 
   useEffect(() => {
@@ -126,6 +135,8 @@ const SurveyRadioElement = (props) => {
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
+
+  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

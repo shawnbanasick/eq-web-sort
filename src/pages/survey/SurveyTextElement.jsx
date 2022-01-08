@@ -113,9 +113,17 @@ const SurveyTextElement = (props) => {
   console.log(answersStorage[id]);
   if (id in answersStorage) {
     inputValue = answersStorage[id];
+
+    requiredAnswersObj[id] = "answered";
+    results[`qNum${props.opts.qNum}`] = inputValue;
+
+    setRequiredAnswersObj(requiredAnswersObj);
+    setResultsSurvey(results);
   } else {
     inputValue = "";
   }
+
+  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

@@ -93,13 +93,23 @@ const SurveyTextAreaElement = (props) => {
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const placeholder = props.opts.placeholder;
 
+  // to check for response in global state and inject into results if present
   let inputValue;
   console.log(answersStorage[id]);
   if (id in answersStorage) {
     inputValue = answersStorage[id];
+
+    // record if answered or not
+    requiredAnswersObj[id] = "answered";
+    results[`qNum${props.opts.qNum}`] = inputValue;
+
+    setRequiredAnswersObj(requiredAnswersObj);
+    setResultsSurvey(results);
   } else {
     inputValue = "";
   }
+
+  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
