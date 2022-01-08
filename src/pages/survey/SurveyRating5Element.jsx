@@ -77,7 +77,6 @@ const SurveyRatings5Element = (props) => {
 
     // update local state with radio selected
     const newArray = [];
-    console.log(JSON.stringify(checked5State));
     const newChecked5State = checked5State.map(function (row, index) {
       if (selectedRow === index) {
         row.map(function (item, index) {
@@ -94,7 +93,6 @@ const SurveyRatings5Element = (props) => {
         return row;
       }
     });
-    console.log(JSON.stringify(newChecked5State));
     setChecked5State(newChecked5State);
 
     answersStorage[id]["checkedState"] = [...newChecked5State];
@@ -109,24 +107,17 @@ const SurveyRatings5Element = (props) => {
     setRequiredAnswersObj(requiredAnswersObj);
     results[name] = +value;
 
-    console.log(JSON.stringify(results));
     setResultsSurvey(results);
 
     // if is a required question, check if all parts answered
     // const rating5State = local5Store;
     const testArray = Object.keys(local5Store);
     const conditionalLength = testArray.length;
-    console.log(optsArray.length, conditionalLength);
     setTestValue(optsArray.length - conditionalLength);
   };
 
   if (id in answersStorage) {
-    // let response = answersStorage[id];
-    console.log(JSON.stringify(requiredAnswersObj));
-
     const keys2 = Object.keys(answersStorage[id]);
-    console.log(keys2);
-
     let objLen = keys2.length - 1;
 
     if (objLen >= rows) {
@@ -145,13 +136,7 @@ const SurveyRatings5Element = (props) => {
       }
     });
 
-    console.log(rows);
-
-    console.log(answersStorage[id]["checkedState"]);
-
     checked5State = [...answersStorage[id]["checkedState"]];
-
-    console.log(JSON.stringify(results));
   }
 
   useEffect(() => {

@@ -23,8 +23,6 @@ const SurveyTextAreaElement = (props) => {
   const answersStorage = useStore(getAnswersStorage);
   const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  console.log(answersStorage);
-
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
     setResultsSurvey(results);
@@ -95,7 +93,6 @@ const SurveyTextAreaElement = (props) => {
 
   // to check for response in global state and inject into results if present
   let inputValue;
-  console.log(answersStorage[id]);
   if (id in answersStorage) {
     inputValue = answersStorage[id];
 
@@ -108,8 +105,6 @@ const SurveyTextAreaElement = (props) => {
   } else {
     inputValue = "";
   }
-
-  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

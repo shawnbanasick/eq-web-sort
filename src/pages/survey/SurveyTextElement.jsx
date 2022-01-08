@@ -17,8 +17,6 @@ const SurveyTextElement = (props) => {
   const answersStorage = useStore(getAnswersStorage);
   const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  console.log(answersStorage);
-
   const checkRequiredQuestionsComplete = props.check;
   // useStore(
   //   (state) => state.checkRequiredQuestionsComplete
@@ -88,7 +86,6 @@ const SurveyTextElement = (props) => {
   }
 
   useEffect(() => {
-    console.log({ checkRequiredQuestionsComplete });
     if (
       checkRequiredQuestionsComplete === true &&
       userTextLen < 1 &&
@@ -110,7 +107,6 @@ const SurveyTextElement = (props) => {
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
 
   let inputValue;
-  console.log(answersStorage[id]);
   if (id in answersStorage) {
     inputValue = answersStorage[id];
 
@@ -122,8 +118,6 @@ const SurveyTextElement = (props) => {
   } else {
     inputValue = "";
   }
-
-  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

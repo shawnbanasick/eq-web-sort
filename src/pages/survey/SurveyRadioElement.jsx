@@ -23,8 +23,6 @@ const SurveyRadioElement = (props) => {
   const answersStorage = useStore(getAnswersStorage);
   const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  console.log(answersStorage);
-
   // local state for required question warning
   let [testValue, setTestValue] = useState(false);
   const [formatOptions, setFormatOptions] = useState({
@@ -80,10 +78,7 @@ const SurveyRadioElement = (props) => {
     answersStorage[`qNum${props.opts.qNum}`] = +e.target.value;
     setAnswersStorage(answersStorage);
     setResultsSurvey(results);
-    // results = resultsSurvey;
     setTestValue(true);
-    console.log(answersStorage);
-    console.log(selected);
   }; // end handle change
 
   // check if response is in global state and inject into results
@@ -116,9 +111,6 @@ const SurveyRadioElement = (props) => {
     }
   }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
 
-  console.log(answersStorage);
-  console.log(selected);
-
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
       <div key={uuid()}>
@@ -135,8 +127,6 @@ const SurveyRadioElement = (props) => {
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
-
-  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

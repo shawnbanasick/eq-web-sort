@@ -136,9 +136,6 @@ const SurveyDropdownElement = (props) => {
   }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  console.log(JSON.stringify(answersStorage));
-  console.log(JSON.stringify(selected));
-  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

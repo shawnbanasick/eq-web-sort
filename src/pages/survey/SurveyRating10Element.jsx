@@ -118,12 +118,7 @@ const SurveyRatings10Element = (props) => {
   };
 
   if (id in answersStorage) {
-    // let response = answersStorage[id];
-    console.log(JSON.stringify(requiredAnswersObj));
-
     const keys2 = Object.keys(answersStorage[id]);
-    console.log(keys2);
-
     let objLen = keys2.length - 1;
 
     if (objLen >= rows) {
@@ -142,13 +137,7 @@ const SurveyRatings10Element = (props) => {
       }
     });
 
-    console.log(rows);
-
-    console.log(answersStorage[id]["checkedState"]);
-
     checkedState = [...answersStorage[id]["checkedState"]];
-
-    console.log(JSON.stringify(results));
   }
 
   useEffect(() => {

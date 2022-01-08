@@ -68,7 +68,6 @@ const SurveyCheckboxElement = (props) => {
     setCheckedState(updatedCheckedState);
     answersStorage[id] = updatedCheckedState;
     setAnswersStorage(answersStorage);
-    console.log(JSON.stringify(answersStorage));
 
     let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
@@ -102,8 +101,6 @@ const SurveyCheckboxElement = (props) => {
   if (id in answersStorage) {
     let response = answersStorage[id];
 
-    console.log(JSON.stringify(response));
-
     checkedState = response;
     hasBeenAnswered = true;
 
@@ -120,10 +117,7 @@ const SurveyCheckboxElement = (props) => {
 
     requiredAnswersObj[id] = "answered";
 
-    console.log(JSON.stringify(selected));
-
     results[`qNum${props.opts.qNum}`] = selected;
-    console.log(JSON.stringify(results));
 
     setResultsSurvey(results);
     setRequiredAnswersObj(requiredAnswersObj);
@@ -145,8 +139,6 @@ const SurveyCheckboxElement = (props) => {
   }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  console.log(JSON.stringify(results));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
