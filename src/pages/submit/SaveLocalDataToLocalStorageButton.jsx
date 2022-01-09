@@ -4,14 +4,16 @@ import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-// import { v4 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
 const SubmitLocalResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore((state) => state.langObj);
 
-  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
+  const btnTransferText = ReactHtmlParser(
+    decodeHTML(langObj.localSaveDataButton)
+  );
   // let identifier = uuid();
   /* 
   const demoData = {
@@ -54,12 +56,17 @@ const SubmitLocalResultsButton = (props) => {
   };
  */
   const handleClick = (e) => {
-    // e.preventDefault();
-    // e.target.disabled = true;
-    console.log(JSON.stringify(props.results, null, 2));
-    const results = props.results;
+    e.preventDefault();
+    e.target.disabled = true;
 
     try {
+      console.log(JSON.stringify(props.results, null, 2));
+      const participantDesignation1 = uuid();
+      const participantDesignation = participantDesignation1.substring(0, 8);
+      console.log(participantDesignation);
+
+      const results = props.results;
+
       /*
         if (errorMessage) {
             // data error action -  modal
@@ -87,6 +94,8 @@ const SubmitLocalResultsButton = (props) => {
             localStorage.removeItem("timeOnsurveyPage");
           } */
     } catch (error) {
+      e.target.disabled = false;
+
       /*
         ((error) => {
         var errorCode = error.code;
@@ -140,7 +149,7 @@ const StyledButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 200px;
+  width: auto;
   height: 50px;
   justify-self: right;
   margin-right: 35px;

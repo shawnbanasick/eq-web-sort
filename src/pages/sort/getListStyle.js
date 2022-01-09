@@ -37,7 +37,7 @@ const getListStyle = (
     marginBottom: cardHeight + 80,
     borderRadius: `2px`,
     outline: isUnderMaxCards ? "1px solid #d8d8d8" : "2px dashed black",
-    outlineOffset: "-2px",
+    outlineOffset: "-1px",
   };
 };
 

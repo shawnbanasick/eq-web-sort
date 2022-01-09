@@ -99,8 +99,6 @@ const SortGrid = (props) => {
       sortGridResults
     );
 
-    console.log(JSON.stringify(manageDragResults));
-
     setIsSortingFinished(manageDragResults.sortFinished);
     setResults(manageDragResults.results);
     setSortFinishedModalHasBeenShown(

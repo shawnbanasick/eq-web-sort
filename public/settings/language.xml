@@ -25,6 +25,7 @@
         <item id="localDeleteModalText">{{{div}}}This will delete the particpant Q-sort data that is currently stored in the browser. You would usually only do this when you are starting a new project.{{{br}}}{{{br}}}{{{b}}}CAUTION - Deleted data cannot be recovered.{{{/b}}} {{{br}}}{{{br}}} {{{center}}}{{{/center}}}{{{/div}}}</item>
         <item id="localDeleteModalHead">{{{div}}}Delete Data Stored in Browser?{{{/div}}}</item>
         <item id="localParticipantsText">Participants</item>
+        <item id="localSaveDataButton">Save Participant Data to Browser Memory</item>
 
 
 
