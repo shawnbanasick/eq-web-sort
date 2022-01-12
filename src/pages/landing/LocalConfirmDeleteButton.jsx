@@ -4,16 +4,21 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useLocalPersist from "../../globalState/useLocalPersist";
 
 const getSetterLocalQsorts = (state) => state.setLocalStoredQsorts;
 const getLangObj = (state) => state.langObj;
 const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
+// const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
 
 const LogInSubmitButton = (props) => {
   // State
   const setDisplayLocalDeleteModal = useStore(getSetLocalDeleteModal);
-  const setLocalStoredQsorts = useStore(getSetterLocalQsorts);
+  // const setLocalStoredQsorts = useStore(getSetterLocalQsorts);
   const langObj = useSettingsStore(getLangObj);
+  const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
+  // let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
 
   const localDeleteButtonText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteButtonText)
@@ -21,7 +26,8 @@ const LogInSubmitButton = (props) => {
 
   const clearLocalStorage = () => {
     console.log("deleted localStorage");
-    localStorage.setItem("localStoredQsorts", JSON.stringify({}));
+    // localStorage.setItem("localStoredQsorts", JSON.stringify({}));
+    // setLocalStoredQsorts({});
     setLocalStoredQsorts({});
     setDisplayLocalDeleteModal(false);
   };

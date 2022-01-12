@@ -6,10 +6,18 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import { v4 as uuid } from "uuid";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useLocalPersist from "../../globalState/useLocalPersist";
+
+const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
+const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+
+const getLangObj = (state) => state.langObj;
 
 const SubmitLocalResultsButton = (props) => {
   // STATE
-  const langObj = useSettingsStore((state) => state.langObj);
+  const langObj = useSettingsStore(getLangObj);
+  const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
+  let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
 
   const btnTransferText = ReactHtmlParser(
     decodeHTML(langObj.localSaveDataButton)
@@ -61,11 +69,17 @@ const SubmitLocalResultsButton = (props) => {
 
     try {
       console.log(JSON.stringify(props.results, null, 2));
+
+      // setLocalStoredQsorts(props.results);
+
       const participantDesignation1 = uuid();
       const participantDesignation = participantDesignation1.substring(0, 8);
       console.log(participantDesignation);
 
-      const results = props.results;
+      localStoredQsorts[participantDesignation] = props.results;
+      setLocalStoredQsorts(localStoredQsorts);
+
+      // const results = props.results;
 
       /*
         if (errorMessage) {

@@ -8,6 +8,7 @@ import LocalSortsDownloadButton from "./LocalSortsDownloadButton";
 import LocalDeleteModal from "./LocalDeleteModal";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import useLocalPersist from "../../globalState/useLocalPersist";
 
 function downloadObjectAsJson(exportObj, exportName) {
   var dataStr =
@@ -21,29 +22,27 @@ function downloadObjectAsJson(exportObj, exportName) {
   downloadAnchorNode.remove();
 }
 
-const getDisplayLocalPartIdWarning1 = (state) =>
-  state.displayLocalPartIdWarning1;
+const getDisplayLocalPartIdWarn1 = (state) => state.displayLocalPartIdWarning1;
 const getSetLocalPartIdWarning1 = (state) => state.setLocalPartIdWarning1;
-const getDisplayLocalPartIdWarning2 = (state) =>
-  state.displayLocalPartIdWarning2;
+const getDisplayLocalPartIdWarn2 = (state) => state.displayLocalPartIdWarning2;
 const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
 const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
 const getLangObj = (state) => state.langObj;
-const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
 const getSetLocalUsercode = (state) => state.setLocalUsercode;
+const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
-  const displayPartIdWarning1 = useStore(getDisplayLocalPartIdWarning1);
+  const displayPartIdWarning1 = useStore(getDisplayLocalPartIdWarn1);
   const setLocalPartIdWarning1 = useStore(getSetLocalPartIdWarning1);
-  const displayPartIdWarning2 = useStore(getDisplayLocalPartIdWarning2);
+  const displayPartIdWarning2 = useStore(getDisplayLocalPartIdWarn2);
   const setLocalPartIdWarning2 = useStore(getSetLocalPartIdWarning2);
   const setLocalDeleteModal = useStore(getSetLocalDeleteModal);
-  const localStoredQsorts = useStore(getLocalStoredQsorts);
   const setLocalParticipantName = useStore(getSetLocalParticipantName);
   const setLocalUsercode = useStore(getSetLocalUsercode);
+  const localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
@@ -115,7 +114,6 @@ const LogInScreen = () => {
             )}
           </StyledInputDiv>
         </div>
-        <LocalStartButton tabindex="3" to={`/presort`} />
         <div>
           {" "}
           <h3>{usercodeText}</h3>
@@ -130,6 +128,7 @@ const LogInScreen = () => {
             )}
           </StyledInputDiv>
         </div>
+        <LocalStartButton tabindex="3" to={`/presort`} />
       </Container>
       <Container2>
         <StoredHeader>
