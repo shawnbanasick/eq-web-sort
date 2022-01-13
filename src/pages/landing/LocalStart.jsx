@@ -11,6 +11,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useLocalPersist from "../../globalState/useLocalPersist";
 
 function downloadObjectAsJson(exportObj, exportName) {
+  console.log("download called");
   var dataStr =
     "data:text/json;charset=utf-8," +
     encodeURIComponent(JSON.stringify(exportObj));
@@ -89,10 +90,11 @@ const LogInScreen = () => {
   };
 
   const handleDownloadLocal = (e) => {
-    const exportObj = JSON.parse(localStorage.getItem("localStoredQsorts"));
+    console.log("button clicked");
+    console.log(JSON.stringify(localStoredQsorts));
     const exportName = "Qsorts";
-    if (exportObj.length > 0) {
-      downloadObjectAsJson(exportObj, exportName);
+    if (Object.keys(localStoredQsorts).length > 0) {
+      downloadObjectAsJson(localStoredQsorts, exportName);
     }
   };
 
