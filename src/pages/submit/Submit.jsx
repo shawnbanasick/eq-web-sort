@@ -9,6 +9,7 @@ import { v4 as uuid } from "uuid";
 import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import LocalSubmitSuccessModal from "./LocalSubmitSuccessModal";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -140,6 +141,7 @@ const SubmitPage = () => {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <LocalSubmitSuccessModal />
         <ContainerDiv>
           <SaveLocalDataToLocalStorageButton results={transmissionResults} />
         </ContainerDiv>

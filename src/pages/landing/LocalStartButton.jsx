@@ -13,6 +13,8 @@ const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
 const getSetLocalUsercode = (state) => state.setLocalUsercode;
 const getSetLocalPartIdWarning1 = (state) => state.setLocalPartIdWarning1;
 const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
+const getSetTriggerLocalSubmitSuccessModal = (state) =>
+  state.setTriggerLocalSubmitSuccessModal;
 
 const LogInSubmitButton = (props) => {
   // STATE
@@ -23,6 +25,9 @@ const LogInSubmitButton = (props) => {
   const setLocalUsercode = useStore(getSetLocalUsercode);
   let setLocalPartIdWarning1 = useStore(getSetLocalPartIdWarning1);
   let setLocalPartIdWarning2 = useStore(getSetLocalPartIdWarning2);
+  const setTriggerLocalSubmitSuccessModal = useStore(
+    getSetTriggerLocalSubmitSuccessModal
+  );
 
   const localStartButtonText = ReactHtmlParser(
     decodeHTML(langObj.localStartButtonText)
@@ -112,6 +117,7 @@ const LogInSubmitButton = (props) => {
         if (isInputComplete) {
           history.push(to);
         }
+        setTriggerLocalSubmitSuccessModal(false);
       }}
       tabindex="3"
     >

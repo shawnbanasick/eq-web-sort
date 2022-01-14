@@ -26,6 +26,9 @@
         <item id="localDeleteModalHead">{{{div}}}Delete Data Stored in Browser?{{{/div}}}</item>
         <item id="localParticipantsText">Participants</item>
         <item id="localSaveDataButton">Save Participant Data to Browser Memory</item>
+        <item id="localSubmitSuccessModalHeader">Success</item>
+        <item id="localSubmitSuccessModalText">Participant Q sort data have been succesfully saved to browser memory</item>
+        <item id="returnToLocalPanelButtonText">Return to Control Panel</item>
 
 
 

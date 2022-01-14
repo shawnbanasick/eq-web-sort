@@ -7,9 +7,12 @@ import decodeHTML from "../../utilities/decodeHTML";
 import { v4 as uuid } from "uuid";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useLocalPersist from "../../globalState/useLocalPersist";
+import useStore from "../../globalState/useStore";
 
 const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
 const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getSetTriggerLocalSubmitSuccessModal = (state) =>
+  state.setTriggerLocalSubmitSuccessModal;
 
 const getLangObj = (state) => state.langObj;
 
@@ -18,6 +21,9 @@ const SubmitLocalResultsButton = (props) => {
   const langObj = useSettingsStore(getLangObj);
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
   let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
+  const setTriggerLocalSubmitSuccessModal = useStore(
+    getSetTriggerLocalSubmitSuccessModal
+  );
 
   const btnTransferText = ReactHtmlParser(
     decodeHTML(langObj.localSaveDataButton)
@@ -79,6 +85,24 @@ const SubmitLocalResultsButton = (props) => {
       localStoredQsorts[participantDesignation] = props.results;
       setLocalStoredQsorts(localStoredQsorts);
 
+      localStorage.removeItem("cumulativelandingPageDuration");
+      localStorage.removeItem("cumulativepresortPageDuration");
+      localStorage.removeItem("cumulativesortPageDuration");
+      localStorage.removeItem("cumulativepostsortPageDuration");
+      localStorage.removeItem("cumulativesurveyPageDuration");
+      localStorage.removeItem("lastAccesslandingPage");
+      localStorage.removeItem("lastAccesspresortPage");
+      localStorage.removeItem("lastAccesssortPage");
+      localStorage.removeItem("lastAccesspostsortPage");
+      localStorage.removeItem("lastAccesssurveyPage");
+      localStorage.removeItem("timeOnlandingPage");
+      localStorage.removeItem("timeOnpresortPage");
+      localStorage.removeItem("timeOnsortPage");
+      localStorage.removeItem("timeOnpostsortPage");
+      localStorage.removeItem("timeOnsurveyPage");
+
+      setTriggerLocalSubmitSuccessModal(true);
+
       // const results = props.results;
 
       /*
@@ -91,21 +115,6 @@ const SubmitLocalResultsButton = (props) => {
             // do success action - modal
             setGlobalState("triggerTransmissionOKModal", true);
             console.log("success! pushed to database");
-            localStorage.removeItem("cumulativelandingPageDuration");
-            localStorage.removeItem("cumulativepresortPageDuration");
-            localStorage.removeItem("cumulativesortPageDuration");
-            localStorage.removeItem("cumulativepostsortPageDuration");
-            localStorage.removeItem("cumulativesurveyPageDuration");
-            localStorage.removeItem("lastAccesslandingPage");
-            localStorage.removeItem("lastAccesspresortPage");
-            localStorage.removeItem("lastAccesssortPage");
-            localStorage.removeItem("lastAccesspostsortPage");
-            localStorage.removeItem("lastAccesssurveyPage");
-            localStorage.removeItem("timeOnlandingPage");
-            localStorage.removeItem("timeOnpresortPage");
-            localStorage.removeItem("timeOnsortPage");
-            localStorage.removeItem("timeOnpostsortPage");
-            localStorage.removeItem("timeOnsurveyPage");
           } */
     } catch (error) {
       e.target.disabled = false;
