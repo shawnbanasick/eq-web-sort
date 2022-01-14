@@ -23,6 +23,8 @@ const LocalDeleteModal = () => {
     getSetTriggerSaveBeforeDeleteModal
   );
 
+  console.log(triggerSaveBeforeDeleteModal);
+
   const localDeleteModalHead = ReactHtmlParser(
     decodeHTML(langObj.LocalSaveBeforeDeleteModalHeader)
   );

@@ -32,7 +32,6 @@ const ReturnToLocalPanelButton = (props) => {
   return (
     <React.Fragment>
       <StyledButton
-        tabindex="0"
         onClick={(event) => {
           onClick && onClick(event);
           history.push("/");

@@ -6,10 +6,10 @@ import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useLocalPersist from "../../globalState/useLocalPersist";
 
-const getSetterLocalQsorts = (state) => state.setLocalStoredQsorts;
+// const getSetterLocalQsorts = (state) => state.setLocalStoredQsorts;
 const getLangObj = (state) => state.langObj;
 const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
-// const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
 
 const LogInSubmitButton = (props) => {
@@ -18,7 +18,7 @@ const LogInSubmitButton = (props) => {
   // const setLocalStoredQsorts = useStore(getSetterLocalQsorts);
   const langObj = useSettingsStore(getLangObj);
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
-  // let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
+  const localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
 
   const localDeleteButtonText = ReactHtmlParser(
     decodeHTML(langObj.localDeleteButtonText)
@@ -28,6 +28,8 @@ const LogInSubmitButton = (props) => {
     console.log("deleted localStorage");
     // localStorage.setItem("localStoredQsorts", JSON.stringify({}));
     // setLocalStoredQsorts({});
+    const dateTime = `${new Date().getTime()}`;
+    localStorage.setItem(dateTime, JSON.stringify(localStoredQsorts));
     setLocalStoredQsorts({});
     setDisplayLocalDeleteModal(false);
   };

@@ -9,6 +9,7 @@ import LocalDeleteModal from "./LocalDeleteModal";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useLocalPersist from "../../globalState/useLocalPersist";
+import LocalSaveBeforeDeleteModal from "./LocalSaveBeforeDeleteModal";
 
 function downloadObjectAsJson(exportObj, exportName) {
   console.log("download called");
@@ -70,20 +71,6 @@ const LogInScreen = () => {
     decodeHTML(langObj.storedQsortsHeaderText)
   );
 
-  // let localStoredQsortsFromLocalStorage;
-
-  /*
-  useEffect(() => {
-    localStoredQsortsFromLocalStorage = JSON.parse(
-      localStorage.getItem("localStoredQsorts")
-    );
-    if (!localStoredQsortsFromLocalStorage) {
-      localStoredQsortsFromLocalStorage = {};
-    }
-    setLocalStoredQsorts(localStoredQsortsFromLocalStorage);
-  }, [setLocalStoredQsorts]);
-  */
-
   const headerText = `${storedQsortsHeaderText}: ${
     Object.keys(localStoredQsorts).length
   } ${localParticipantsText}`;
@@ -103,6 +90,7 @@ const LogInScreen = () => {
     if (hasDownloadedQsorts) {
       setLocalDeleteModal(true);
     } else {
+      console.log("false branch");
       setTriggerSaveBeforeDeleteModal(true);
     }
   };
@@ -121,6 +109,7 @@ const LogInScreen = () => {
     <>
       <Container>
         <LocalDeleteModal />
+        <LocalSaveBeforeDeleteModal />
         <div>
           <h2>{loginHeaderText}</h2>
           <StyledHr />
