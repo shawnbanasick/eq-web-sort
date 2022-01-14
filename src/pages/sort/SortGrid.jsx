@@ -81,7 +81,8 @@ const SortGrid = (props) => {
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
-    /*
+    try {
+      /*
     example result object:
     result {"draggableId":"s1","type":"DEFAULT",
     "source":{"droppableId":"statements","index":0},
@@ -89,115 +90,119 @@ const SortGrid = (props) => {
     "reason":"DROP"}
     */
 
-    const totalStatements = statementsObj.totalStatements;
+      const totalStatements = statementsObj.totalStatements;
 
-    const manageDragResults = calculateDragResults(
-      { ...result },
-      totalStatements,
-      results,
-      sortFinishedModalHasBeenShown,
-      sortGridResults
-    );
-
-    setIsSortingFinished(manageDragResults.sortFinished);
-    setResults(manageDragResults.results);
-    setSortFinishedModalHasBeenShown(
-      manageDragResults.sortFinishedModalHasBeenShown
-    );
-    setTriggerSortingFinishedModal(
-      manageDragResults.triggerSortingFinishedModal
-    );
-    setSortGridResults(manageDragResults.sortGridResults);
-
-    // source and destination are objects
-    const { source, destination } = result;
-
-    // dropped outside the list
-    if (!destination) {
-      return;
-    }
-    // if moving inside the same column
-    if (source.droppableId === destination.droppableId) {
-      reorder(
-        source.droppableId,
-        source.index,
-        destination.index,
-        columnStatements
-      );
-
-      // force component update
-      const newValue = value + 1;
-      setValue(newValue);
-    } else {
-      // moving to another column
-
-      // source.droppableId give orgin id => "statements" or "columnN1"
-      // sourceList is cards in that origin
-      // gather data to send to move function
-      let sourceListArray;
-      let destinationListArray;
-      if (source.droppableId === "statements") {
-        sourceListArray = columnStatements.statementList;
-      } else {
-        sourceListArray = columnStatements.vCols[source.droppableId];
-      }
-      if (destination.droppableId === "statements") {
-        destinationListArray = columnStatements.statementList;
-      } else {
-        destinationListArray = columnStatements.vCols[destination.droppableId];
-      }
-      const droppableSource = source;
-      const droppableDestination = destination;
-      const totalStatements = +configObj.totalStatements;
-
-      const sortCharacterisiticsPrep = {};
-      sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
-      sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
-      sortCharacterisiticsPrep.forcedSorts = configObj.warnOverloadedColumn;
-      sortCharacterisiticsPrep.qSortHeaderNumbers = [
-        ...mapObj.qSortHeaderNumbers,
-      ];
-      const sortCharacteristics = sortCharacterisiticsPrep;
-      const allowUnforcedSorts = configObj.allowUnforcedSorts;
-      move(
-        sourceListArray,
-        destinationListArray,
-        droppableSource,
-        droppableDestination,
-        columnStatements,
+      const manageDragResults = calculateDragResults(
+        { ...result },
         totalStatements,
-        sortCharacteristics,
-        allowUnforcedSorts,
-        qSortHeaderNumbers
+        results,
+        sortFinishedModalHasBeenShown,
+        sortGridResults
       );
 
-      // global state updates
-      setColumnStatements(columnStatements);
+      setIsSortingFinished(manageDragResults.sortFinished);
+      setResults(manageDragResults.results);
+      setSortFinishedModalHasBeenShown(
+        manageDragResults.sortFinishedModalHasBeenShown
+      );
+      setTriggerSortingFinishedModal(
+        manageDragResults.triggerSortingFinishedModal
+      );
+      setSortGridResults(manageDragResults.sortGridResults);
 
-      if (columnStatements.statementList.length === 0) {
-        setIsSortingCards(false);
-        setSortCompleted(true);
-      } else {
-        setIsSortingCards(true);
-        setSortCompleted(false);
+      // source and destination are objects
+      const { source, destination } = result;
+
+      // dropped outside the list
+      if (!destination) {
+        return;
       }
+      // if moving inside the same column
+      if (source.droppableId === destination.droppableId) {
+        reorder(
+          source.droppableId,
+          source.index,
+          destination.index,
+          columnStatements
+        );
 
-      // increment Progress Bar
-      const totalStatements2 = statementsObj.totalStatements;
-      const remainingStatements = columnStatements.statementList.length;
-      const numerator = totalStatements2 - remainingStatements;
+        // force component update
+        const newValue = value + 1;
+        setValue(newValue);
+      } else {
+        // moving to another column
 
-      const ratio = numerator / totalStatements2;
-      const completedPercent = (ratio * 30).toFixed();
+        // source.droppableId give orgin id => "statements" or "columnN1"
+        // sourceList is cards in that origin
+        // gather data to send to move function
+        let sourceListArray;
+        let destinationListArray;
+        if (source.droppableId === "statements") {
+          sourceListArray = columnStatements.statementList;
+        } else {
+          sourceListArray = columnStatements.vCols[source.droppableId];
+        }
+        if (destination.droppableId === "statements") {
+          destinationListArray = columnStatements.statementList;
+        } else {
+          destinationListArray =
+            columnStatements.vCols[destination.droppableId];
+        }
+        const droppableSource = source;
+        const droppableDestination = destination;
+        const totalStatements = +configObj.totalStatements;
 
-      // update Progress Bar State
-      setProgressScoreAdditionalSort(completedPercent);
+        const sortCharacterisiticsPrep = {};
+        sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
+        sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
+        sortCharacterisiticsPrep.forcedSorts = configObj.warnOverloadedColumn;
+        sortCharacterisiticsPrep.qSortHeaderNumbers = [
+          ...mapObj.qSortHeaderNumbers,
+        ];
+        const sortCharacteristics = sortCharacterisiticsPrep;
+        const allowUnforcedSorts = configObj.allowUnforcedSorts;
+        move(
+          sourceListArray,
+          destinationListArray,
+          droppableSource,
+          droppableDestination,
+          columnStatements,
+          totalStatements,
+          sortCharacteristics,
+          allowUnforcedSorts,
+          qSortHeaderNumbers
+        );
 
-      // force component update
-      const newValue = value + 1;
-      setValue(newValue);
+        // global state updates
+        setColumnStatements(columnStatements);
+
+        if (columnStatements.statementList.length === 0) {
+          setIsSortingCards(false);
+          setSortCompleted(true);
+        } else {
+          setIsSortingCards(true);
+          setSortCompleted(false);
+        }
+
+        // increment Progress Bar
+        const totalStatements2 = statementsObj.totalStatements;
+        const remainingStatements = columnStatements.statementList.length;
+        const numerator = totalStatements2 - remainingStatements;
+
+        const ratio = numerator / totalStatements2;
+        const completedPercent = (ratio * 30).toFixed();
+
+        // update Progress Bar State
+        setProgressScoreAdditionalSort(completedPercent);
+
+        // force component update
+        const newValue = value + 1;
+        setValue(newValue);
+      }
+      setSortCharacteristics(sortCharacteristics);
+    } catch (error) {
+      console.log(error);
     }
-    setSortCharacteristics(sortCharacteristics);
   }; // end of dragEnd helper function
 
   // get user settings

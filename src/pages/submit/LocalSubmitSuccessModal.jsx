@@ -10,18 +10,11 @@ import ReturnToLocalPanelButton from "./ReturnToLocalPanelButton";
 
 const getLangObj = (state) => state.langObj;
 const getTrigLclSubmitSucMdl = (state) => state.triggerLocalSubmitSuccessModal;
-const getSetTrigLclSubSucMdl = (state) =>
-  state.setTriggerLocalSubmitSuccessModal;
 
 const LocalSubmitSuccessModal = () => {
-  console.log("called");
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const triggerModalOpen = useStore(getTrigLclSubmitSucMdl);
-  const setTriggerLocalSubmitSuccess = useStore(getSetTrigLclSubSucMdl);
-  //const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
-
-  console.log({ triggerModalOpen });
 
   const modalHead = ReactHtmlParser(
     decodeHTML(langObj.localSubmitSuccessModalHeader)
@@ -30,11 +23,7 @@ const LocalSubmitSuccessModal = () => {
     decodeHTML(langObj.localSubmitSuccessModalText)
   );
 
-  // const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => {
-    // setTriggerLocalSubmitSuccess(false);
-    // setDisplayGoodbyeMessage(true);
-  };
+  const onCloseModal = () => {};
 
   return (
     <Modal

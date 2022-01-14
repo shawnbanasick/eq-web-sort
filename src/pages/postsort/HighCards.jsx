@@ -52,8 +52,6 @@ const HighCards = (props) => {
 
   const { agreeObj, cardFontSize, width, height } = props;
 
-  console.log({ cardFontSize });
-
   const highCards = columnStatements.vCols[agreeObj.columnDisplay];
 
   const { agreeText, placeholder } = agreeObj;

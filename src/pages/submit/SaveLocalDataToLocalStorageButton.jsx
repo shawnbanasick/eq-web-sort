@@ -82,7 +82,6 @@ const SubmitLocalResultsButton = (props) => {
 
       const participantDesignation1 = uuid();
       const participantDesignation = participantDesignation1.substring(0, 8);
-      console.log(participantDesignation);
 
       localStoredQsorts[participantDesignation] = props.results;
       setLocalStoredQsorts(localStoredQsorts);
@@ -194,24 +193,4 @@ const StyledButton = styled.button`
   &:focus {
     background-color: ${({ theme }) => theme.focus};
   }
-`;
-
-const DisabledButton = styled.button`
-  border-color: lightgray;
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 0.25em 1em;
-  border-radius: 3px;
-  text-decoration: none;
-  width: 200px;
-  height: 50px;
-  justify-self: right;
-  margin-right: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  background-color: lightgray;
 `;

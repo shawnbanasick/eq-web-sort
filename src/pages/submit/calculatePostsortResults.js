@@ -3,7 +3,6 @@ const calculatePostsortResults = (resultsPostsort, mapObj, configObj) => {
 
   // check for missing responses
   const qSortPattern = mapObj.qSortPattern;
-  console.log({ mapObj });
   const qSortHeaderNumbers = mapObj.qSortHeaders;
   const highCardNum = +qSortPattern[qSortPattern.length - 1];
   const highCardVal = +qSortHeaderNumbers[qSortHeaderNumbers.length - 1];

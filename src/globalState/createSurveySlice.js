@@ -14,7 +14,6 @@ const createSurveySlice = (set, get) => ({
   },
   setResultsSurvey: (inputValue) => {
     set(() => ({ resultsSurvey: inputValue }));
-    console.log(JSON.stringify(inputValue));
   },
 
   setTriggerSurveyPreventNavModal: (inputValue) => {
@@ -22,7 +21,6 @@ const createSurveySlice = (set, get) => ({
   },
   setCheckRequiredQuestionsComplete: (inputValue) => {
     set(() => ({ checkRequiredQuestionsComplete: inputValue }));
-    console.log(JSON.stringify(inputValue));
   },
   setRequiredAnswersObj: (inputValue) => {
     set(() => ({ requiredAnswersObj: inputValue }));

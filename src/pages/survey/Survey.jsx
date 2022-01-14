@@ -65,6 +65,7 @@ const SurveyPage = () => {
         "surveyPage",
         results
       );
+      console.log(updatedResults);
       setResults(updatedResults);
     };
   }, [results, setResults]);
@@ -74,6 +75,20 @@ const SurveyPage = () => {
       setCurrentPage("survey");
     }, 100);
   }, [setCurrentPage]);
+
+  // calc time on page
+  useEffect(() => {
+    const startTime = Date.now();
+    return () => {
+      const updatedResults = calculateTimeOnPage(
+        startTime,
+        "surveyPage",
+        "surveyPage",
+        results
+      );
+      setResults(updatedResults);
+    };
+  }, [setResults, results]);
 
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {

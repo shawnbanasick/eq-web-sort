@@ -23,8 +23,6 @@ const LocalDeleteModal = () => {
     getSetTriggerSaveBeforeDeleteModal
   );
 
-  console.log(triggerSaveBeforeDeleteModal);
-
   const localDeleteModalHead = ReactHtmlParser(
     decodeHTML(langObj.LocalSaveBeforeDeleteModalHeader)
   );
@@ -64,13 +62,6 @@ const ModalHeader = styled.div`
 
 const ModalContent = styled.div`
   margin-top: 15px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: flex-end;
 `;
 
 // react-responsive-modal-overlay

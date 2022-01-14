@@ -38,7 +38,6 @@ const SurveyTextElement = (props) => {
 
   // to force component update
   const [userText, setUserText] = useState("");
-  console.log(userText);
 
   // for required question check
   const [formatOptions, setFormatOptions] = useState({
