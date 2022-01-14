@@ -30,19 +30,19 @@ const getDisplayLocalPartIdWarn2 = (state) => state.displayLocalPartIdWarning2;
 const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
 const getSetLocalDeleteModal = (state) => state.setLocalDeleteModal;
 const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
 const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
 const getSetLocalUsercode = (state) => state.setLocalUsercode;
 const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 const getSetHasDownloadedQsorts = (state) => state.setHasDownloadedQsorts;
 const getHasDownloadedQsorts = (state) => state.hasDownloadedQsorts;
-// const gettriggerSaveBeforeDeleteModal = (state) =>
-//   state.triggerSaveBeforeDeleteModal;
 const getSetTriggerSaveBeforeDeleteModal = (state) =>
   state.setTriggerSaveBeforeDeleteModal;
 
 const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
   const displayPartIdWarning1 = useStore(getDisplayLocalPartIdWarn1);
   const setLocalPartIdWarning1 = useStore(getSetLocalPartIdWarning1);
   const displayPartIdWarning2 = useStore(getDisplayLocalPartIdWarn2);
@@ -53,9 +53,6 @@ const LogInScreen = () => {
   const localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
   const hasDownloadedQsorts = useLocalPersist(getHasDownloadedQsorts);
   const setHasDownloadedQsorts = useLocalPersist(getSetHasDownloadedQsorts);
-  // const triggerSaveBeforeDeleteModal = useStore(
-  //   gettriggerSaveBeforeDeleteModal
-  // );
   const setTriggerSaveBeforeDeleteModal = useStore(
     getSetTriggerSaveBeforeDeleteModal
   );
@@ -96,9 +93,23 @@ const LogInScreen = () => {
   };
 
   const handleDownloadLocal = (e) => {
-    console.log("button clicked");
     console.log(JSON.stringify(localStoredQsorts));
-    const exportName = "Qsorts";
+    const studyTitle = configObj.studyTitle;
+    const myDate = new Date();
+    const myDateString =
+      ("0" + myDate.getFullYear()).slice(-2) +
+      "-" +
+      ("0" + (myDate.getMonth() + 1)).slice(-2) +
+      "-" +
+      myDate.getDate() +
+      "_" +
+      ("0" + myDate.getHours()).slice(-2) +
+      "-" +
+      ("0" + myDate.getMinutes()).slice(-2) +
+      "-" +
+      ("0" + myDate.getSeconds()).slice(-2);
+
+    const exportName = studyTitle + "_" + myDateString;
     if (Object.keys(localStoredQsorts).length > 0) {
       downloadObjectAsJson(localStoredQsorts, exportName);
     }
