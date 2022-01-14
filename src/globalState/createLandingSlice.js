@@ -8,7 +8,11 @@ const createLandingSlice = (set, get) => ({
   displayAccessCodeWarning: false,
   userInputAccessCode: "",
   displayLandingContent: false,
+  triggerSaveBeforeDeleteModal: false,
 
+  setTriggerSaveBeforeDeleteModal: (inputValue) => {
+    set(() => ({ triggerSaveBeforeDeleteModal: inputValue }));
+  },
   setDataLoaded: (inputValue) => {
     set(() => ({ dataLoaded: inputValue }));
   },

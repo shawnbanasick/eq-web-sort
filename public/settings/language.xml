@@ -29,6 +29,8 @@
         <item id="localSubmitSuccessModalHeader">Success</item>
         <item id="localSubmitSuccessModalText">Participant Q sort data have been succesfully saved to browser memory</item>
         <item id="returnToLocalPanelButtonText">Return to Control Panel</item>
+        <item id="LocalSaveBeforeDeleteModalHeader">Delete Disabled</item>
+        <item id="LocalSaveBeforeDeleteModalText">Save Q sort Data to Disk before deleting.</item>
 
 
 

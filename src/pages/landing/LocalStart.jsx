@@ -32,6 +32,12 @@ const getLangObj = (state) => state.langObj;
 const getSetLocalParticipantName = (state) => state.setLocalParticipantName;
 const getSetLocalUsercode = (state) => state.setLocalUsercode;
 const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getSetHasDownloadedQsorts = (state) => state.setHasDownloadedQsorts;
+const getHasDownloadedQsorts = (state) => state.hasDownloadedQsorts;
+// const gettriggerSaveBeforeDeleteModal = (state) =>
+//   state.triggerSaveBeforeDeleteModal;
+const getSetTriggerSaveBeforeDeleteModal = (state) =>
+  state.setTriggerSaveBeforeDeleteModal;
 
 const LogInScreen = () => {
   // STATE
@@ -44,6 +50,14 @@ const LogInScreen = () => {
   const setLocalParticipantName = useStore(getSetLocalParticipantName);
   const setLocalUsercode = useStore(getSetLocalUsercode);
   const localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
+  const hasDownloadedQsorts = useLocalPersist(getHasDownloadedQsorts);
+  const setHasDownloadedQsorts = useLocalPersist(getSetHasDownloadedQsorts);
+  // const triggerSaveBeforeDeleteModal = useStore(
+  //   gettriggerSaveBeforeDeleteModal
+  // );
+  const setTriggerSaveBeforeDeleteModal = useStore(
+    getSetTriggerSaveBeforeDeleteModal
+  );
 
   const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
   const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
@@ -85,8 +99,12 @@ const LogInScreen = () => {
   };
 
   const handleDeleteLocal = (e) => {
-    console.log("delete clicked");
-    setLocalDeleteModal(true);
+    console.log(hasDownloadedQsorts);
+    if (hasDownloadedQsorts) {
+      setLocalDeleteModal(true);
+    } else {
+      setTriggerSaveBeforeDeleteModal(true);
+    }
   };
 
   const handleDownloadLocal = (e) => {
@@ -96,6 +114,7 @@ const LogInScreen = () => {
     if (Object.keys(localStoredQsorts).length > 0) {
       downloadObjectAsJson(localStoredQsorts, exportName);
     }
+    setHasDownloadedQsorts(true);
   };
 
   return (

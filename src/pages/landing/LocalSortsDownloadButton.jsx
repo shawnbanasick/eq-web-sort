@@ -6,7 +6,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 
 const getLangObj = (state) => state.langObj;
 
-const LogInSubmitButton = (props) => {
+const LocalSortsDownloadButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
@@ -20,7 +20,7 @@ const LogInSubmitButton = (props) => {
     </StyledSubmitButton>
   );
 };
-export default LogInSubmitButton;
+export default LocalSortsDownloadButton;
 
 const StyledSubmitButton = styled.button`
   border-color: #2e6da4;

@@ -11,6 +11,7 @@ import useStore from "../../globalState/useStore";
 
 const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
 const getLocalStoredQsorts = (state) => state.localStoredQsorts;
+const getSetHasDownloadedQsorts = (state) => state.setHasDownloadedQsorts;
 const getSetTriggerLocalSubmitSuccessModal = (state) =>
   state.setTriggerLocalSubmitSuccessModal;
 
@@ -21,6 +22,7 @@ const SubmitLocalResultsButton = (props) => {
   const langObj = useSettingsStore(getLangObj);
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
   let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
+  const setHasDownloadedQsorts = useLocalPersist(getSetHasDownloadedQsorts);
   const setTriggerLocalSubmitSuccessModal = useStore(
     getSetTriggerLocalSubmitSuccessModal
   );
@@ -102,6 +104,7 @@ const SubmitLocalResultsButton = (props) => {
       localStorage.removeItem("timeOnsurveyPage");
 
       setTriggerLocalSubmitSuccessModal(true);
+      setHasDownloadedQsorts(false);
 
       // const results = props.results;
 
