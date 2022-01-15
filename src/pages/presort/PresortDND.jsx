@@ -77,56 +77,58 @@ function PresortDND(props) {
 
   const onDragEnd = useCallback(
     (result, columns, setColumns) => {
-      if (!result.destination) return;
+      if (!result.destination || result.destination.droppableId === "cards") {
+        return;
+      }
+      const { source, destination } = result;
 
-      try {
-        const { source, destination } = result;
+      // update statement characteristics
+      const statementsArray = [...columnStatements.statementList];
+      const destinationId = result.destination.droppableId;
+      const draggableId = result.draggableId;
 
-        // update statement characteristics
-        const statementsArray = [...columnStatements.statementList];
-        const destinationId = result.destination.droppableId;
-        const draggableId = result.draggableId;
-
-        for (let i = 0; i < statementsArray.length; i++) {
-          if (statementsArray[i].id === draggableId) {
-            if (destinationId === "neg") {
-              statementsArray[i].divColor = "isNegativeStatement";
-              statementsArray[i].cardColor = "pinkSortCard";
-              statementsArray[i].pinkChecked = true;
-              statementsArray[i].yellowChecked = false;
-              statementsArray[i].greenChecked = false;
-              statementsArray[i].sortValue = 111;
-            }
-            if (destinationId === "neutral") {
-              statementsArray[i].divColor = "isUncertainStatement";
-              statementsArray[i].cardColor = "yellowSortCard";
-              statementsArray[i].pinkChecked = false;
-              statementsArray[i].yellowChecked = true;
-              statementsArray[i].greenChecked = false;
-              statementsArray[i].sortValue = 222;
-            }
-            if (destinationId === "pos") {
-              statementsArray[i].divColor = "isPositiveStatement";
-              statementsArray[i].cardColor = "greenSortCard";
-              statementsArray[i].pinkChecked = false;
-              statementsArray[i].yellowChecked = false;
-              statementsArray[i].greenChecked = true;
-              statementsArray[i].sortValue = 333;
-            }
+      // set METADATA FOR SORTING
+      for (let i = 0; i < statementsArray.length; i++) {
+        if (statementsArray[i].id === draggableId) {
+          if (destinationId === "neg") {
+            statementsArray[i].divColor = "isNegativeStatement";
+            statementsArray[i].cardColor = "pinkSortCard";
+            statementsArray[i].pinkChecked = true;
+            statementsArray[i].yellowChecked = false;
+            statementsArray[i].greenChecked = false;
+            statementsArray[i].sortValue = 111;
+          }
+          if (destinationId === "neutral") {
+            statementsArray[i].divColor = "isUncertainStatement";
+            statementsArray[i].cardColor = "yellowSortCard";
+            statementsArray[i].pinkChecked = false;
+            statementsArray[i].yellowChecked = true;
+            statementsArray[i].greenChecked = false;
+            statementsArray[i].sortValue = 222;
+          }
+          if (destinationId === "pos") {
+            statementsArray[i].divColor = "isPositiveStatement";
+            statementsArray[i].cardColor = "greenSortCard";
+            statementsArray[i].pinkChecked = false;
+            statementsArray[i].yellowChecked = false;
+            statementsArray[i].greenChecked = true;
+            statementsArray[i].sortValue = 333;
           }
         }
+      }
 
-        // set new ordering
-        for (let i = 0; i < statementsArray.length; i++) {
-          statementsArray[i].listIndex = i + 1;
-        }
+      // set new ordering
+      for (let i = 0; i < statementsArray.length; i++) {
+        statementsArray[i].listIndex = i + 1;
+      }
 
-        // save to memory
-        columnStatements.statementList = [...statementsArray];
-        setColumnStatements(columnStatements);
+      // save to memory
+      columnStatements.statementList = [...statementsArray];
+      setColumnStatements(columnStatements);
 
-        // when dropped on different droppable
-        if (source.droppableId !== destination.droppableId) {
+      // when dropped on different droppable
+      if (source.droppableId !== destination.droppableId) {
+        try {
           const sourceColumn = columns[source.droppableId];
           const destColumn = columns[destination.droppableId];
           const sourceItems = [...sourceColumn.items];
@@ -146,48 +148,51 @@ function PresortDND(props) {
 
           destItems.splice(destination.index, 0, removed);
 
-          let sortedStatements;
+          // update columns
+          setColumns({
+            ...columns,
+            [source.droppableId]: {
+              ...sourceColumn,
+              items: sourceItems,
+            },
+            [destination.droppableId]: {
+              ...destColumn,
+              items: destItems,
+            },
+          });
+
           // calc remaining statements
+          let sortedStatements;
           if (sourceColumn.id === "cards") {
             sortedStatements =
               statementsObj.totalStatements - sourceColumn.items.length + 1;
-
             setPresortSortedStatementsNum(sortedStatements);
-
             const ratio = sortedStatements / statementsObj.totalStatements;
-
             const completedPercent = (ratio * 30).toFixed();
+
             // update Progress Bar State
             setProgressScoreAdditional(completedPercent);
-
-            // update columns
-            setColumns({
-              ...columns,
-              [source.droppableId]: {
-                ...sourceColumn,
-                items: sourceItems,
-              },
-              [destination.droppableId]: {
-                ...destColumn,
-                items: destItems,
-              },
-            });
-          } else {
-            const column = columns[source.droppableId];
-            const copiedItems = [...column.items];
-            const [removed] = copiedItems.splice(source.index, 1);
-            copiedItems.splice(destination.index, 0, removed);
-            setColumns({
-              ...columns,
-              [source.droppableId]: {
-                ...column,
-                items: copiedItems,
-              },
-            });
           }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
+      } else {
+        try {
+          // MOVING BETWEEN COLUMNS
+          const sourceCol = columns[source.droppableId];
+          const copiedItems = [...sourceCol.items];
+          const [removed] = copiedItems.splice(source.index, 1);
+          copiedItems.splice(destination.index, 0, removed);
+          setColumns({
+            ...columns,
+            [source.droppableId]: {
+              ...sourceCol,
+              items: copiedItems,
+            },
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     [
@@ -259,6 +264,7 @@ function PresortDND(props) {
   ]);
 
   // RENDER COMPONENT
+
   return (
     <PresortGrid>
       <div id="completionRatio">

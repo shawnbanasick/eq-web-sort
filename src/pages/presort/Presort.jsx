@@ -72,7 +72,6 @@ const PresortPage = (props) => {
     }
   }
   // early return of presort finished message if complete
-  console.log(presortNoReturn);
   if (presortNoReturn) {
     return <PresortIsComplete />;
   }
