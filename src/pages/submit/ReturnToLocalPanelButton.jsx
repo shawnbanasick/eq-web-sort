@@ -5,14 +5,22 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import { withRouter } from "react-router";
 import useStore from "../../globalState/useStore";
+import cloneDeep from "lodash/cloneDeep";
 
 const getLangObj = (state) => state.langObj;
 const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
+const getSetColumnStatements = (state) => state.setColumnStatements;
+const getResetColumnStatements = (state) => state.resetColumnStatements;
 
 const ReturnToLocalPanelButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
+  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  const resetColumnStatements = useSettingsStore(getResetColumnStatements);
+  console.log(resetColumnStatements);
+
+  const newColumnStatements = cloneDeep(resetColumnStatements);
 
   const btnTransferText = ReactHtmlParser(
     decodeHTML(langObj.returnToLocalPanelButtonText)
@@ -31,6 +39,7 @@ const ReturnToLocalPanelButton = (props) => {
           onClick && onClick(event);
           history.push("/");
           setPresortNoReturn(false);
+          setColumnStatements(newColumnStatements);
         }}
       >
         {btnTransferText}

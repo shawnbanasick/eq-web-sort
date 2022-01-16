@@ -51,51 +51,51 @@
    </item>
 
    <item id="survey">
-        <input type="text" required="true" maxlength="4" ></input>
+        <input type="text" required="false" maxlength="4" ></input>
         <label>{{{u}}}Age{{{/u}}}*</label>
         <note>Please {{{b}}}enter{{{/b}}} your year of birth.</note>
    </item>
 
    <item id="survey">
-        <input type="text" restricted="true" limited="true" required="true" maxlength="4" ></input>
+        <input type="text" restricted="true" limited="true" required="false" maxlength="4" ></input>
         <label>{{{b}}}Age{{{/b}}} - Restricted*</label>
         <note>Please enter your year of {{{b}}}birth{{{/b}}}</note>
    </item>
 
    <item id="survey">
-        <input type="textarea" required="true"></input>
+        <input type="textarea" required="false"></input>
         <label>{{{b}}}Comments ok?{{{/b}}}</label>
         <placeholder>input comments here</placeholder>
    </item>
 
    <item id="survey">
-        <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
         <label>{{{b}}}Year{{{/b}}}</label>
         <note>Please {{{b}}}select{{{/b}}} your year</note>
    </item>
 
    <item id="survey">
-        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
+        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
         <label>What is your {{{b}}}program{{{/b}}} focus?</label>
    </item>
 
    <item id="survey">
-        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
+        <input type="checkbox" required="false">Lecture;;;Group Discussion;;;Active Learning</input>
         <label>What kind of {{{u}}}class{{{/u}}} do you prefer?</label>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="true" scale="{{{b}}}Yes{{{/b}}};;;{{{b}}}No{{{/b}}}">I have {{{u}}}used{{{/u}}} an iPad;;;I have used a notebook</input>
+        <input type="rating2" required="false" scale="{{{b}}}Yes{{{/b}}};;;{{{b}}}No{{{/b}}}">I have {{{u}}}used{{{/u}}} an iPad;;;I have used a notebook</input>
         <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="true" scale="1;2;3;4;5">{{{u}}}How{{{/u}}} would you rate the use of the iPads?;;;How would you rate this class overall?</input>
+        <input type="rating5" required="false" scale="1;2;3;4;5">{{{u}}}How{{{/u}}} would you rate the use of the iPads?;;;How would you rate this class overall?</input>
         <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="true" scale="1;2;3;4;5;6;7;8;9;10">{{{u}}}How{{{/u}}} would you rate Socrative?;;;How would you rate Quizlet?</input>
+        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">{{{u}}}How{{{/u}}} would you rate Socrative?;;;How would you rate Quizlet?</input>
         <label>{{{b}}}Please{{{/b}}}  answer the following questions</label>
    </item>
 

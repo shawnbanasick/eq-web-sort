@@ -23,6 +23,7 @@ const getSetProgressScore = (state) => state.setProgressScore;
 const getPresortNoReturn = (state) => state.presortNoReturn;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
+const getResetColumnStatements = (state) => state.resetColumnStatements;
 
 const PresortPage = (props) => {
   // STATE
@@ -36,6 +37,7 @@ const PresortPage = (props) => {
   const presortNoReturn = useStore(getPresortNoReturn);
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
+  const resetColumnStatements = useSettingsStore(getResetColumnStatements);
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,7 +60,12 @@ const PresortPage = (props) => {
     };
   }, [results, setResults]);
 
-  const columnStatements = statementsObj.columnStatements;
+  let columnStatements = statementsObj.columnStatements;
+
+  if (configObj.firebaseOrLocal === "local") {
+    columnStatements = JSON.parse(JSON.stringify(resetColumnStatements));
+  }
+
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
   const statements = cloneDeep(columnStatements.statementList);

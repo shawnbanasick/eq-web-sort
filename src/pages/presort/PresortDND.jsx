@@ -27,6 +27,7 @@ function PresortDND(props) {
   const configObj = useSettingsStore(getConfigObj);
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
+  console.log(columnStatements);
   const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
   const setColumnStatements = useSettingsStore(getSetColumnStatements);
   const setPresortFinished = useStore(getSetPresortFinished);
@@ -41,6 +42,8 @@ function PresortDND(props) {
   );
   const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
+
+  console.log(JSON.stringify(columnStatements));
 
   // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(

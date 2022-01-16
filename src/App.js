@@ -17,6 +17,7 @@ import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
+import cloneDeep from "lodash/cloneDeep";
 
 const convert = require("xml-js");
 
@@ -25,6 +26,7 @@ const getSetLangObj = (state) => state.setLangObj;
 const getSetMapObj = (state) => state.setMapObj;
 const getSetStatementsObj = (state) => state.setStatementsObj;
 const getSetColumnStatements = (state) => state.setColumnStatements;
+const getSetResetColumnStatements = (state) => state.setResetColumnStatements;
 const getSetSurveyQuesObjArray = (state) => state.setSurveyQuestionObjArray;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetDataLoaded = (state) => state.setDataLoaded;
@@ -38,6 +40,9 @@ function App() {
   const setMapObj = useSettingsStore(getSetMapObj);
   const setStatementsObj = useSettingsStore(getSetStatementsObj);
   const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  const setResetColumnStatements = useSettingsStore(
+    getSetResetColumnStatements
+  );
   const setSurveyQuestionObjArray = useSettingsStore(getSetSurveyQuesObjArray);
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setDataLoaded = useStore(getSetDataLoaded);
@@ -105,7 +110,12 @@ function App() {
             shuffleCards,
             vColsObj
           );
+          console.log(JSON.stringify(statementsObj.columnStatements));
           setColumnStatements(statementsObj.columnStatements);
+          const resetColumnStatements = cloneDeep(
+            statementsObj.columnStatements
+          );
+          setResetColumnStatements(resetColumnStatements);
           setStatementsObj(statementsObj);
         })
         .catch(function (error) {
