@@ -85,6 +85,9 @@ const StyledFooter = () => {
     displayNextButton = false;
     displayHelpButton = false;
   }
+  if (currentPage === "submit") {
+    displayHelpButton = false;
+  }
 
   if (currentPage === "presort") {
     showAdjustmentContainer = true;
