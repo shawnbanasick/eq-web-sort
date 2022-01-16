@@ -4,24 +4,19 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import { withRouter } from "react-router";
+import useStore from "../../globalState/useStore";
 
 const getLangObj = (state) => state.langObj;
+const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
 
 const ReturnToLocalPanelButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
+  const setPresortNoReturn = useStore(getSetPresortNoReturn);
 
   const btnTransferText = ReactHtmlParser(
     decodeHTML(langObj.returnToLocalPanelButtonText)
   );
-  //   const handleClick = (e) => {
-  //     e.preventDefault();
-
-  //     try {
-  //     } catch (error) {}
-  //   };
-
-  // const closeModal = () => {};
 
   const {
     history,
@@ -35,6 +30,7 @@ const ReturnToLocalPanelButton = (props) => {
         onClick={(event) => {
           onClick && onClick(event);
           history.push("/");
+          setPresortNoReturn(false);
         }}
       >
         {btnTransferText}

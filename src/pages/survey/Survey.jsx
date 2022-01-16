@@ -58,6 +58,8 @@ const SurveyPage = () => {
   useEffect(() => {
     let startTime;
     startTime = Date.now();
+    setCurrentPage("survey");
+
     return () => {
       const updatedResults = calculateTimeOnPage(
         startTime,
@@ -68,27 +70,7 @@ const SurveyPage = () => {
       console.log(updatedResults);
       setResults(updatedResults);
     };
-  }, [results, setResults]);
-
-  useEffect(() => {
-    setTimeout(function () {
-      setCurrentPage("survey");
-    }, 100);
-  }, [setCurrentPage]);
-
-  // calc time on page
-  useEffect(() => {
-    const startTime = Date.now();
-    return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "surveyPage",
-        "surveyPage",
-        results
-      );
-      setResults(updatedResults);
-    };
-  }, [setResults, results]);
+  }, [setCurrentPage, results, setResults]);
 
   const SurveyQuestions = () => {
     const QuestionList = surveyQuestionObjects.map((object, index) => {

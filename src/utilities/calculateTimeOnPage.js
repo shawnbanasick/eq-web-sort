@@ -31,6 +31,7 @@ const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
   const formattedDuration = millisecondsToTime(newDurationCumulative);
   localStorage.setItem(identifier3, formattedDuration);
   results[identifier3] = formattedDuration;
+  console.log(JSON.stringify(results));
   return results;
 };
 

@@ -224,6 +224,11 @@ const SortGrid = (props) => {
   // adjust width by q sort design
   // todo - find better adjustment process
   let visibleWidthAdjust;
+
+  // less than -3
+  if (qSortPattern.length > 0) {
+    visibleWidthAdjust = 70;
+  }
   // -3 to +3
   if (qSortPattern.length > 6) {
     visibleWidthAdjust = 96;
