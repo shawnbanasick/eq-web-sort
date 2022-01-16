@@ -110,7 +110,6 @@ function App() {
             shuffleCards,
             vColsObj
           );
-          console.log(JSON.stringify(statementsObj.columnStatements));
           setColumnStatements(statementsObj.columnStatements);
           const resetColumnStatements = cloneDeep(
             statementsObj.columnStatements

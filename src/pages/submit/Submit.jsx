@@ -77,14 +77,9 @@ const SubmitPage = () => {
       transmissionResults["timePostsort"] = results.timeOnpostsortPage;
     }
 
-    console.log(JSON.stringify(configObj));
-
     if (configObj.showSurvey === true) {
-      console.log("showSurvey resutls");
       transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
     }
-
-    console.log(transmissionResults);
 
     let numPos = results.npos;
     if (isNaN(numPos)) {

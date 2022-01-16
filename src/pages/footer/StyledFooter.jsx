@@ -57,7 +57,7 @@ const StyledFooter = () => {
   }
 
   // todo - fix properly so no escaping log in
-  if (currentPage !== "landing") {
+  if (currentPage !== "landing" || currentPage !== "submit") {
     displayNextButton = true;
   }
   if (initialScreenSetting === "anonymous") {
@@ -84,9 +84,6 @@ const StyledFooter = () => {
   if (configObj.firebaseOrLocal === "local" && currentPage === "landing") {
     displayNextButton = false;
     displayHelpButton = false;
-  } else {
-    displayNextButton = true;
-    displayHelpButton = true;
   }
 
   if (currentPage === "presort") {

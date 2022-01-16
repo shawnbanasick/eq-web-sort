@@ -8,8 +8,6 @@ const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
   const identifier3 = `timeOn${prefix2}`;
   const identifier4 = `lastAccess${prefix2}`;
 
-  console.log(identifier3);
-
   // const durationCumulative = store.getState()[identifier];
   const durationCumulative = localStorage.getItem(identifier) || 0;
 
@@ -31,7 +29,6 @@ const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
   const formattedDuration = millisecondsToTime(newDurationCumulative);
   localStorage.setItem(identifier3, formattedDuration);
   results[identifier3] = formattedDuration;
-  console.log(JSON.stringify(results));
   return results;
 };
 
