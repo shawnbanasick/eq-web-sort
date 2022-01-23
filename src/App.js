@@ -137,6 +137,7 @@ function App() {
     setSurveyQuestionObjArray,
     setMapObj,
     setDataLoaded,
+    setResetColumnStatements,
   ]);
 
   if (isLoading) {

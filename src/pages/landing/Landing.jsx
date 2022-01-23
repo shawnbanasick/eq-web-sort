@@ -58,6 +58,7 @@ const LandingPage = () => {
 
   // calc time on page
   useEffect(() => {
+    console.log("calTime");
     const startTime = Date.now();
     return () => {
       const updatedResults = calculateTimeOnPage(

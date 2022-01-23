@@ -5,6 +5,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import getCurrentDateTime from "../../utilities/getCurrentDateTime";
 
 const getLangObj = (state) => state.langObj;
 const getLocalParticipantName = (state) => state.localParticipantName;
@@ -15,6 +16,8 @@ const getSetLocalPartIdWarning1 = (state) => state.setLocalPartIdWarning1;
 const getSetLocalPartIdWarning2 = (state) => state.setLocalPartIdWarning2;
 const getSetTriggerLocalSubmitSuccessModal = (state) =>
   state.setTriggerLocalSubmitSuccessModal;
+const getSetResults = (state) => state.setResults;
+const getResults = (state) => state.results;
 
 const LogInSubmitButton = (props) => {
   // STATE
@@ -28,6 +31,8 @@ const LogInSubmitButton = (props) => {
   const setTriggerLocalSubmitSuccessModal = useStore(
     getSetTriggerLocalSubmitSuccessModal
   );
+  const setResults = useStore(getSetResults);
+  const results = useStore(getResults);
 
   const localStartButtonText = ReactHtmlParser(
     decodeHTML(langObj.localStartButtonText)
@@ -82,7 +87,11 @@ const LogInSubmitButton = (props) => {
 
   useEffect(() => {
     const handleKeyUpStart = (event) => {
-      // let target;
+      // reset time stamp
+      const dateString = getCurrentDateTime();
+      results.dateTime = dateString;
+      setResults(results);
+
       if (event.key === "Enter") {
         let isInputComplete = checkForNextPageConditions();
         if (isInputComplete) {
@@ -94,7 +103,7 @@ const LogInSubmitButton = (props) => {
     window.addEventListener("keyup", handleKeyUpStart);
 
     return () => window.removeEventListener("keyup", handleKeyUpStart);
-  }, [history, checkForNextPageConditions]);
+  }, [history, checkForNextPageConditions, results, setResults]);
 
   useEffect(() => {
     setLocalParticipantName("");

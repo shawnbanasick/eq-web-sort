@@ -18,8 +18,6 @@ const ReturnToLocalPanelButton = (props) => {
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
   const setColumnStatements = useSettingsStore(getSetColumnStatements);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
-  console.log(resetColumnStatements);
-
   const newColumnStatements = cloneDeep(resetColumnStatements);
 
   const btnTransferText = ReactHtmlParser(
