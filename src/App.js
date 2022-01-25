@@ -18,6 +18,7 @@ import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
+// import iOS from "./isIos";
 
 const convert = require("xml-js");
 
