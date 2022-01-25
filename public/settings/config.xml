@@ -5,7 +5,7 @@
    <!-- GENERAL SETTINGS -->
    <item id="studyTitle">my Q study</item> 
    <item id="setupTarget">online</item>
-   <item id="firebaseOrLocal">local</item>
+   <item id="firebaseOrLocal">firebase</item>
    <item id="shuffleCards">false</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item>
@@ -13,7 +13,7 @@
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->
-   <item id="initialScreen">anonymous</item>
+   <item id="initialScreen">partId-access</item>
    <item id="accessCode">demo</item>
 
 

@@ -59,37 +59,41 @@ const LogInScreen = () => {
   };
 
   const handleSubmit = () => {
-    let userPartIdOK = false;
-    let userAccessOK = false;
-    const projectAccessCode = configObj.accessCode;
+    try {
+      let userPartIdOK = false;
+      let userAccessOK = false;
+      const projectAccessCode = configObj.accessCode;
 
-    // get user input
+      // get user input
 
-    if (userInputPartId.length > 0) {
-      userPartIdOK = true;
-    } else {
-    }
-    if (userInputAccessCode === projectAccessCode) {
-      userAccessOK = true;
-    }
+      if (userInputPartId.length) {
+        userPartIdOK = true;
+      } else {
+      }
+      if (userInputAccessCode === projectAccessCode) {
+        userAccessOK = true;
+      }
 
-    // invalid input ==> display warnings
-    if (userAccessOK && userPartIdOK) {
-      setDisplayLandingContent(true);
-      setDisplayContinueButton(true);
-      setPartId(userInputPartId);
-      setDisplayNextButton(true);
-      setIsLoggedIn(true);
-    } else if (userAccessOK === false) {
-      setDisplayAccessCodeWarning(true);
-      setTimeout(() => {
-        setDisplayAccessCodeWarning(false);
-      }, 5000);
-    } else if (userPartIdOK === false) {
-      setDisplayPartIdWarning(true);
-      setTimeout(() => {
-        setDisplayPartIdWarning(false);
-      }, 5000);
+      // invalid input ==> display warnings
+      if (userAccessOK && userPartIdOK) {
+        setDisplayLandingContent(true);
+        setDisplayContinueButton(true);
+        setPartId(userInputPartId);
+        setDisplayNextButton(true);
+        setIsLoggedIn(true);
+      } else if (userAccessOK === false) {
+        setDisplayAccessCodeWarning(true);
+        setTimeout(() => {
+          setDisplayAccessCodeWarning(false);
+        }, 5000);
+      } else if (userPartIdOK === false) {
+        setDisplayPartIdWarning(true);
+        setTimeout(() => {
+          setDisplayPartIdWarning(false);
+        }, 5000);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
