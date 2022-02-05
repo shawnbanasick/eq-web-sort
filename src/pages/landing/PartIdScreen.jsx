@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
@@ -33,9 +33,45 @@ const LogInScreen = () => {
   const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
 
   const handleInput = (e) => {
-    console.log(e.target.value);
     setUserInputPartId(e.target.value);
   };
+
+  useEffect(() => {
+    const handleKeyUpStart = (event) => {
+      if (event.key === "Enter") {
+        console.log("Enter");
+        let userPartIdOK = false;
+
+        // get user input
+        if (userInputPartId.length > 0) {
+          userPartIdOK = true;
+          setDisplayLandingContent(true);
+          setPartId(userInputPartId);
+          setDisplayNextButton(true);
+          setIsLoggedIn(true);
+        }
+
+        // invalid input ==> display warnings
+        if (userPartIdOK === false) {
+          setDisplayPartIdWarning(true);
+          setTimeout(() => {
+            setDisplayPartIdWarning(false);
+          }, 5000);
+        }
+      }
+    }; // end keyup
+
+    window.addEventListener("keyup", handleKeyUpStart);
+
+    return () => window.removeEventListener("keyup", handleKeyUpStart);
+  }, [
+    setDisplayLandingContent,
+    setPartId,
+    setDisplayNextButton,
+    setIsLoggedIn,
+    userInputPartId,
+    setDisplayPartIdWarning,
+  ]);
 
   const handleSubmit = (e) => {
     let userPartIdOK = false;
@@ -67,7 +103,7 @@ const LogInScreen = () => {
       <div>
         <h3>{loginPartIdText}</h3>
         <StyledInputDiv>
-          <StyledInput onChange={handleInput} type="text" />
+          <StyledInput onChange={handleInput} type="text" autoFocus />
           {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
         </StyledInputDiv>
       </div>
