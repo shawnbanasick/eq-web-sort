@@ -15,7 +15,7 @@ const getSetUserInputAccessCode = (state) => state.setUserInputAccessCode;
 const getUserInputPartId = (state) => state.userInputPartId;
 const getUserInputAccessCode = (state) => state.userInputAccessCode;
 const getSetDisplayLandingContent = (state) => state.setDisplayLandingContent;
-const getSetDisplayContinueButton = (state) => state.setDisplayContinueButton;
+//const getSetDisplayContinueButton = (state) => state.setDisplayContinueButton;
 const getSetPartId = (state) => state.setPartId;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getSetIsLoggedIn = (state) => state.setIsLoggedIn;
@@ -35,7 +35,6 @@ const LogInScreen = () => {
   const userInputPartId = useStore(getUserInputPartId);
   const userInputAccessCode = useStore(getUserInputAccessCode);
   const setDisplayLandingContent = useStore(getSetDisplayLandingContent);
-  const setDisplayContinueButton = useStore(getSetDisplayContinueButton);
   const setPartId = useStore(getSetPartId);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const setIsLoggedIn = useStore(getSetIsLoggedIn);
@@ -50,10 +49,6 @@ const LogInScreen = () => {
     decodeHTML(langObj.accessCodeWarning)
   );
   const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
-  let displayNextButton = useStore(getDisplayNextButton);
-
-  console.log(userInputPartId.length);
-  console.log({ displayNextButton });
 
   const handleInput = (e) => {
     setUserInputPartId(e.target.value);
@@ -70,9 +65,6 @@ const LogInScreen = () => {
       const projectAccessCode = configObj.accessCode;
 
       // get user input
-
-      console.log(userInputPartId.length);
-
       if (userInputPartId.length > 1) {
         userPartIdOK = true;
       } else {
@@ -83,11 +75,8 @@ const LogInScreen = () => {
       }
 
       // invalid input ==> display warnings
-      console.log({ userAccessOK, userPartIdOK });
-
       if (userAccessOK && userPartIdOK) {
         setDisplayLandingContent(true);
-        //setDisplayContinueButton(true);
         setPartId(userInputPartId);
         setDisplayNextButton(true);
         setIsLoggedIn(true);

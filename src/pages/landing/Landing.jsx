@@ -23,6 +23,7 @@ const getSetUsercode = (state) => state.setUsercode;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const LandingPage = () => {
   // STATE
@@ -35,6 +36,7 @@ const LandingPage = () => {
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
   let displayLandingContent = useStore(getDisplayLandingContent);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   const headerBarColor = configObj.headerBarColor;
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
@@ -48,6 +50,12 @@ const LandingPage = () => {
   }, [setProgressScore, setCurrentPage]);
 
   useEffect(() => {
+    // display "Next" button if anonymous log in
+    if (configObj.initialScreen === "anonymous") {
+      setDisplayNextButton(true);
+    }
+
+    // set partId if in URL
     let urlName = parseParams(window.location.href);
     if (urlName !== undefined) {
       console.log(urlName.usercode);

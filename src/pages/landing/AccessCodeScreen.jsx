@@ -3,6 +3,8 @@ import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -26,6 +28,13 @@ const LogInScreen = () => {
   const setIsLoggedIn = useStore(getSetIsLoggedIn);
   const setUserInputAccessCode = useStore(getSetUserInputAccessCode);
   const setDisplayAccessCodeWarning = useStore(getSetDisplayAccessCodeWarning);
+
+  // Language
+  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
+  const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
+  const accessCodeWarning = ReactHtmlParser(
+    decodeHTML(langObj.accessCodeWarning)
+  );
 
   const handleAccess = (e) => {
     setUserInputAccessCode(e.target.value);
@@ -56,15 +65,15 @@ const LogInScreen = () => {
   return (
     <Container>
       <div>
-        <h2>{langObj.loginHeaderText}</h2>
+        <h2>{loginHeaderText}</h2>
         <StyledHr />
       </div>
       <div>
-        <h3>{langObj.accessInputText}</h3>
+        <h3>{accessInputText}</h3>
         <StyledInputDiv>
           <StyledInput onChange={handleAccess} type="text" />
           {displayAccessCodeWarning && (
-            <WarningText>{langObj.accessCodeWarning}</WarningText>
+            <WarningText>{accessCodeWarning}</WarningText>
           )}
         </StyledInputDiv>
       </div>
