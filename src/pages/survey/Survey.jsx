@@ -27,6 +27,7 @@ const getSetCurrentPage = (state) => state.setCurrentPage;
 const getCheckReqQuesComplete = (state) => state.checkRequiredQuestionsComplete;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const SurveyPage = () => {
   // STATE
@@ -39,12 +40,16 @@ const SurveyPage = () => {
   const checkRequiredQuestionsComplete = useStore(getCheckReqQuesComplete);
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
 
   // setup language
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
+
+  // set next button display
+  setDisplayNextButton(true);
 
   useEffect(() => {
     // reset required questions if page return

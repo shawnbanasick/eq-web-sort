@@ -4,7 +4,7 @@ const createFooterSlice = (set, get) => ({
   progressScore: 10,
   progressScoreAdditional: 0,
   progressScoreAdditionalSort: 0,
-  displayNextButton: true,
+  displayNextButton: false,
 
   setCardFontSize: (inputValue) => {
     set(() => ({ cardFontSize: inputValue }));
@@ -22,6 +22,7 @@ const createFooterSlice = (set, get) => ({
     set(() => ({ progressScoreAdditionalSort: inputValue }));
   },
   setDisplayNextButton: (inputValue) => {
+    console.log({ inputValue });
     set(() => ({ displayNextButton: inputValue }));
   },
 });

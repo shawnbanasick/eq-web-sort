@@ -24,6 +24,7 @@ const getPresortNoReturn = (state) => state.presortNoReturn;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getResetColumnStatements = (state) => state.resetColumnStatements;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const PresortPage = (props) => {
   // STATE
@@ -38,6 +39,10 @@ const PresortPage = (props) => {
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
+
+  // set next button display
+  setDisplayNextButton(true);
 
   useEffect(() => {
     setTimeout(() => {

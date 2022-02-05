@@ -33,6 +33,7 @@ const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetTopMargin = (state) => state.setTopMargin;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const Sort = () => {
   // STATE
@@ -46,6 +47,10 @@ const Sort = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const setTopMargin = useStore(getSetTopMargin);
   const setResults = useStore(getSetResults);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
+
+  // set next button display
+  setDisplayNextButton(true);
 
   const headerBarColor = configObj.headerBarColor;
 

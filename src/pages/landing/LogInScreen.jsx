@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import ReactHtmlParser from "react-html-parser";
@@ -22,6 +22,7 @@ const getSetIsLoggedIn = (state) => state.setIsLoggedIn;
 const getSetDisplayAccessCodeWarning = (state) =>
   state.setDisplayAccessCodeWarning;
 const getSetDisplayPartIdWarning = (state) => state.setDisplayPartIdWarning;
+const getDisplayNextButton = (state) => state.displayNextButton;
 
 const LogInScreen = () => {
   // STATE
@@ -49,6 +50,10 @@ const LogInScreen = () => {
     decodeHTML(langObj.accessCodeWarning)
   );
   const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
+  let displayNextButton = useStore(getDisplayNextButton);
+
+  console.log(userInputPartId.length);
+  console.log({ displayNextButton });
 
   const handleInput = (e) => {
     setUserInputPartId(e.target.value);
@@ -66,28 +71,38 @@ const LogInScreen = () => {
 
       // get user input
 
-      if (userInputPartId.length) {
+      console.log(userInputPartId.length);
+
+      if (userInputPartId.length > 1) {
         userPartIdOK = true;
       } else {
+        userPartIdOK = false;
       }
       if (userInputAccessCode === projectAccessCode) {
         userAccessOK = true;
       }
 
       // invalid input ==> display warnings
+      console.log({ userAccessOK, userPartIdOK });
+
       if (userAccessOK && userPartIdOK) {
         setDisplayLandingContent(true);
-        setDisplayContinueButton(true);
+        //setDisplayContinueButton(true);
         setPartId(userInputPartId);
         setDisplayNextButton(true);
         setIsLoggedIn(true);
       } else if (userAccessOK === false) {
+        console.log("no access code");
         setDisplayAccessCodeWarning(true);
+        setDisplayNextButton(false);
         setTimeout(() => {
           setDisplayAccessCodeWarning(false);
         }, 5000);
       } else if (userPartIdOK === false) {
         setDisplayPartIdWarning(true);
+        setDisplayNextButton(false);
+        console.log("no id");
+
         setTimeout(() => {
           setDisplayPartIdWarning(false);
         }, 5000);

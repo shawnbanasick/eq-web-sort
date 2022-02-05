@@ -19,6 +19,7 @@ const getCurrentPage = (state) => state.currentPage;
 const getAdditionalProgress = (state) => state.progressScoreAdditional;
 const getAdditionalProgressSort = (state) => state.progressScoreAdditionalSort;
 const getLocalUsercode = (state) => state.localUsercode;
+const getUserInputPartId = (state) => state.userInputPartId;
 
 const StyledFooter = () => {
   // STATE
@@ -29,6 +30,7 @@ const StyledFooter = () => {
   const additionalProgress = useStore(getAdditionalProgress);
   const additionalProgressSort = useStore(getAdditionalProgressSort);
   const localUsercode = useStore(getLocalUsercode);
+  const userInputPartId = useStore(getUserInputPartId);
 
   const initialScreenSetting = configObj.initialScreen;
 
@@ -57,12 +59,22 @@ const StyledFooter = () => {
   }
 
   // todo - fix properly so no escaping log in
-  if (currentPage !== "landing" || currentPage !== "submit") {
-    displayNextButton = true;
+  /* if (
+    currentPage
+    // currentPage === "presort" ||
+    // currentPage === "sort" ||
+    // currentPage === "postsort" ||
+    // currentPage === "survey"
+  ) {
+    // displayNextButton = true;
   }
   if (initialScreenSetting === "anonymous") {
     displayNextButton = true;
   }
+  // if (initialScreenSetting === "partId-access" && userInputPartId.length < 1) {
+  //   displayNextButton = false;
+  // }
+  */
 
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;

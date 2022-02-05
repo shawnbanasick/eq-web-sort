@@ -9,7 +9,15 @@ const createLandingSlice = (set, get) => ({
   userInputAccessCode: "",
   displayLandingContent: false,
   triggerSaveBeforeDeleteModal: false,
+  userInputPartId: "",
+  displayPartIdWarning: false,
 
+  setDisplayPartIdWarning: (inputValue) => {
+    set(() => ({ displayPartIdWarning: inputValue }));
+  },
+  setUserInputPartId: (inputValue) => {
+    set(() => ({ userInputPartId: inputValue }));
+  },
   setTriggerSaveBeforeDeleteModal: (inputValue) => {
     set(() => ({ triggerSaveBeforeDeleteModal: inputValue }));
   },

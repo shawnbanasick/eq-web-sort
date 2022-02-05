@@ -23,6 +23,7 @@ const getCardFontSize = (state) => state.cardFontSize;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
+const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const PostSort = () => {
   // STATE
@@ -36,9 +37,13 @@ const PostSort = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
+  const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   // console.log("conf: ", JSON.stringify(configObj, null, 2));
   //  console.log("map: ", JSON.stringify(mapObj, null, 2));
+
+  // set next button display
+  setDisplayNextButton(true);
 
   const headerBarColor = configObj.headerBarColor;
   const postsortInstructions = ReactHtmlParser(
