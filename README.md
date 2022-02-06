@@ -2,7 +2,7 @@ If you need the Version 2 files for compatibility reasons, the files are here: [
 
 # EQ Web Sort ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
 
-## Use the latest version of EQ Configurator for setup ([EQ Configurator version 3](https://github.com/shawnbanasick/eq_configurator)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to link to an (free) online database and how to upload the files to a (free) web host.
+## Use the latest version of EQ Configurator ([EQ Configurator version 3](https://github.com/shawnbanasick/eq_configurator)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to link to a free online database and how to upload the files to a free web host.
 
 ## For a preview, try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
 

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+   <config version="1.0" htmlParse="false">
+
+   <!-- GENERAL SETTINGS -->
+   <item id="studyTitle">my Q study</item> 
+   <item id="setupTarget">online</item>
+   <item id="firebaseOrLocal">firebase</item>
+   <item id="shuffleCards">false</item>
+   <item id="headerBarColor">#337ab7</item>
+   <item id="devMode">false</item>
+   
+
+   <!-- ACCESS -->
+   <!-- options: anonymous, partId-access, partId, access -->
+   <item id="initialScreen">access</item>
+   <item id="accessCode">demo</item>
+
+
+   <!-- FOOTER -->
+   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ_default.svg" height="40" width="250" /}}}{{{/center}}}</item>
+
+
+   <!-- PRESORT -->
+   <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="greenCardColor">#ccffcc</item>
+   <item id="yellowCardColor">#e0e0e0</item>
+   <item id="pinkCardColor">#ffe0e0</item>
+ 
+
+   <!-- SORT -->
+   <item id="condOfInstFontSize">20</item>
+   <item id="allowUnforcedSorts">false</item>
+   <item id="warnOverloadedColumn">true</item>
+
+
+   <!-- POSTSORT -->
+   <item id="showPostsort">true</item>
+   <item id="showSecondPosColumn">false</item>
+   <item id="showSecondNegColumn">false</item>
+   
+   <item id="displayNeutralObjects">false</item>
+
+
+   <!-- SURVEY - Survey Questions -->
+   <item id="showSurvey">true</item>
+
+   <item id="survey">
+       <input type="information"></input>
+       <note bg="#e7b8b8">All {{{b}}}fields{{{/b}}} marked with an * are mandatory</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" required="false" maxlength="4" ></input>
+        <label>{{{u}}}Age{{{/u}}}*</label>
+        <note>Please {{{b}}}enter{{{/b}}} your year of birth.</note>
+   </item>
+
+   <item id="survey">
+        <input type="text" restricted="true" limited="true" required="false" maxlength="4" ></input>
+        <label>{{{b}}}Age{{{/b}}} - Restricted*</label>
+        <note>Please enter your year of {{{b}}}birth{{{/b}}}</note>
+   </item>
+
+   <item id="survey">
+        <input type="textarea" required="false"></input>
+        <label>{{{b}}}Comments ok?{{{/b}}}</label>
+        <placeholder>input comments here</placeholder>
+   </item>
+
+   <item id="survey">
+        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <label>{{{b}}}Year{{{/b}}}</label>
+        <note>Please {{{b}}}select{{{/b}}} your year</note>
+   </item>
+
+   <item id="survey">
+        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
+        <label>What is your {{{b}}}program{{{/b}}} focus?</label>
+   </item>
+
+   <item id="survey">
+        <input type="checkbox" required="false">Lecture;;;Group Discussion;;;Active Learning</input>
+        <label>What kind of {{{u}}}class{{{/u}}} do you prefer?</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating2" required="false" scale="{{{b}}}Yes{{{/b}}};;;{{{b}}}No{{{/b}}}">I have {{{u}}}used{{{/u}}} an iPad;;;I have used a notebook</input>
+        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating5" required="false" scale="1;2;3;4;5">{{{u}}}How{{{/u}}} would you rate the use of the iPads?;;;How would you rate this class overall?</input>
+        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">{{{u}}}How{{{/u}}} would you rate Socrative?;;;How would you rate Quizlet?</input>
+        <label>{{{b}}}Please{{{/b}}}  answer the following questions</label>
+   </item>
+
+
+       
+  </config>
