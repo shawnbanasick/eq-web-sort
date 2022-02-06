@@ -72,7 +72,6 @@ const SurveyPage = () => {
         "surveyPage",
         results
       );
-      console.log(updatedResults);
       setResults(updatedResults);
     };
   }, [setCurrentPage, results, setResults]);

@@ -19,7 +19,6 @@ const getCurrentPage = (state) => state.currentPage;
 const getAdditionalProgress = (state) => state.progressScoreAdditional;
 const getAdditionalProgressSort = (state) => state.progressScoreAdditionalSort;
 const getLocalUsercode = (state) => state.localUsercode;
-const getUserInputPartId = (state) => state.userInputPartId;
 
 const StyledFooter = () => {
   // STATE
@@ -30,9 +29,6 @@ const StyledFooter = () => {
   const additionalProgress = useStore(getAdditionalProgress);
   const additionalProgressSort = useStore(getAdditionalProgressSort);
   const localUsercode = useStore(getLocalUsercode);
-  const userInputPartId = useStore(getUserInputPartId);
-
-  const initialScreenSetting = configObj.initialScreen;
 
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;

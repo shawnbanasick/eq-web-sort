@@ -3,6 +3,7 @@ const createLandingSlice = (set, get) => ({
   isLoggedIn: false,
   triggerLandingModal: false,
   usercode: "",
+  urlUsercode: "not set",
   partId: "",
   localUsercode: "",
   displayAccessCodeWarning: false,
@@ -12,6 +13,9 @@ const createLandingSlice = (set, get) => ({
   userInputPartId: "",
   displayPartIdWarning: false,
 
+  setUrlUsercode: (inputValue) => {
+    set(() => ({ urlUsercode: inputValue }));
+  },
   setDisplayPartIdWarning: (inputValue) => {
     set(() => ({ displayPartIdWarning: inputValue }));
   },

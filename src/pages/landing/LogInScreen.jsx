@@ -15,14 +15,12 @@ const getSetUserInputAccessCode = (state) => state.setUserInputAccessCode;
 const getUserInputPartId = (state) => state.userInputPartId;
 const getUserInputAccessCode = (state) => state.userInputAccessCode;
 const getSetDisplayLandingContent = (state) => state.setDisplayLandingContent;
-//const getSetDisplayContinueButton = (state) => state.setDisplayContinueButton;
 const getSetPartId = (state) => state.setPartId;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getSetIsLoggedIn = (state) => state.setIsLoggedIn;
 const getSetDisplayAccessCodeWarning = (state) =>
   state.setDisplayAccessCodeWarning;
 const getSetDisplayPartIdWarning = (state) => state.setDisplayPartIdWarning;
-const getDisplayNextButton = (state) => state.displayNextButton;
 
 const LogInScreen = () => {
   // STATE
@@ -57,6 +55,66 @@ const LogInScreen = () => {
   const handleAccess = (e) => {
     setUserInputAccessCode(e.target.value);
   };
+
+  useEffect(() => {
+    const handleKeyUpStart = (event) => {
+      if (event.key === "Enter") {
+        try {
+          let userPartIdOK = false;
+          let userAccessOK = false;
+          const projectAccessCode = configObj.accessCode;
+
+          // get user input
+          if (userInputPartId.length > 1) {
+            userPartIdOK = true;
+          } else {
+            userPartIdOK = false;
+          }
+          if (userInputAccessCode === projectAccessCode) {
+            userAccessOK = true;
+          }
+
+          // invalid input ==> display warnings
+          if (userAccessOK && userPartIdOK) {
+            setDisplayLandingContent(true);
+            setPartId(userInputPartId);
+            setDisplayNextButton(true);
+            setIsLoggedIn(true);
+          } else if (userAccessOK === false) {
+            console.log("no access code");
+            setDisplayAccessCodeWarning(true);
+            setDisplayNextButton(false);
+            setTimeout(() => {
+              setDisplayAccessCodeWarning(false);
+            }, 5000);
+          } else if (userPartIdOK === false) {
+            setDisplayPartIdWarning(true);
+            setDisplayNextButton(false);
+            console.log("no id");
+
+            setTimeout(() => {
+              setDisplayPartIdWarning(false);
+            }, 5000);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }; // end keyup
+    window.addEventListener("keyup", handleKeyUpStart);
+
+    return () => window.removeEventListener("keyup", handleKeyUpStart);
+  }, [
+    setDisplayLandingContent,
+    setDisplayNextButton,
+    setIsLoggedIn,
+    configObj.accessCode,
+    setDisplayAccessCodeWarning,
+    userInputAccessCode,
+    setPartId,
+    setDisplayPartIdWarning,
+    userInputPartId,
+  ]);
 
   const handleSubmit = () => {
     try {
@@ -112,7 +170,7 @@ const LogInScreen = () => {
         <div>
           <h3>{loginPartIdText}</h3>
           <StyledInputDiv>
-            <StyledInput onChange={handleInput} type="text" />
+            <StyledInput onChange={handleInput} type="text" autoFocus />
             {displayPartIdWarning && <WarningText>{partIdWarning}</WarningText>}
           </StyledInputDiv>
         </div>

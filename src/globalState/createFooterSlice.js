@@ -22,7 +22,6 @@ const createFooterSlice = (set, get) => ({
     set(() => ({ progressScoreAdditionalSort: inputValue }));
   },
   setDisplayNextButton: (inputValue) => {
-    console.log({ inputValue });
     set(() => ({ displayNextButton: inputValue }));
   },
 });

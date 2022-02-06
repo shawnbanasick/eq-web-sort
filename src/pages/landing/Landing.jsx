@@ -19,7 +19,7 @@ const getConfigObj = (state) => state.configObj;
 const getDataLoaded = (state) => state.dataLoaded;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetProgressScore = (state) => state.setProgressScore;
-const getSetUsercode = (state) => state.setUsercode;
+const getSetUrlUsercode = (state) => state.setUrlUsercode;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
@@ -32,7 +32,7 @@ const LandingPage = () => {
   const dataLoaded = useStore(getDataLoaded);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
-  const setUsercode = useStore(getSetUsercode);
+  const setUrlUsercode = useStore(getSetUrlUsercode);
   const results = useStore(getResults);
   const setResults = useStore(getSetResults);
   let displayLandingContent = useStore(getDisplayLandingContent);
@@ -60,9 +60,9 @@ const LandingPage = () => {
     if (urlName !== undefined) {
       console.log(urlName.usercode);
       const codeName = urlName.usercode;
-      setUsercode(codeName);
+      setUrlUsercode(codeName);
     }
-  }, [setUsercode]);
+  }, [setUrlUsercode, configObj.initialScreen, setDisplayNextButton]);
 
   // calc time on page
   useEffect(() => {

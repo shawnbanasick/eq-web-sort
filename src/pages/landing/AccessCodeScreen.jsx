@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LogInSubmitButton from "./LogInSubmitButton";
 import useSettingsStore from "../../globalState/useSettingsStore";
@@ -40,6 +40,42 @@ const LogInScreen = () => {
     setUserInputAccessCode(e.target.value);
   };
 
+  useEffect(() => {
+    const handleKeyUpStart = (event) => {
+      if (event.key === "Enter") {
+        let userAccessOK = false;
+        const projectAccessCode = configObj.accessCode;
+
+        // get user input
+
+        if (userInputAccessCode === projectAccessCode) {
+          userAccessOK = true;
+          setDisplayLandingContent(true);
+          setDisplayNextButton(true);
+          setIsLoggedIn(true);
+        }
+
+        // invalid input ==> display warnings
+        if (userAccessOK === false) {
+          setDisplayAccessCodeWarning(true);
+          setTimeout(() => {
+            setDisplayAccessCodeWarning(false);
+          }, 3000);
+        }
+      }
+    }; // end keyup
+    window.addEventListener("keyup", handleKeyUpStart);
+
+    return () => window.removeEventListener("keyup", handleKeyUpStart);
+  }, [
+    setDisplayLandingContent,
+    setDisplayNextButton,
+    setIsLoggedIn,
+    configObj.accessCode,
+    setDisplayAccessCodeWarning,
+    userInputAccessCode,
+  ]);
+
   const handleSubmit = (e) => {
     let userAccessOK = false;
     const projectAccessCode = configObj.accessCode;
@@ -71,7 +107,7 @@ const LogInScreen = () => {
       <div>
         <h3>{accessInputText}</h3>
         <StyledInputDiv>
-          <StyledInput onChange={handleAccess} type="text" />
+          <StyledInput onChange={handleAccess} type="text" autoFocus />
           {displayAccessCodeWarning && (
             <WarningText>{accessCodeWarning}</WarningText>
           )}

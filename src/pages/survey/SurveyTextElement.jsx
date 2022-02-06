@@ -38,6 +38,9 @@ const SurveyTextElement = (props) => {
 
   // to force component update
   const [userText, setUserText] = useState("");
+  if (userText.length > 100) {
+    console.log(userText);
+  }
 
   // for required question check
   const [formatOptions, setFormatOptions] = useState({

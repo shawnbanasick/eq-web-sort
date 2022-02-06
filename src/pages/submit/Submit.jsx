@@ -21,9 +21,12 @@ const getResultsPostsort = (state) => state.resultsPostsort;
 const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
 const getUsercode = (state) => state.usercode;
+const getUrlUsercode = (state) => state.urlUsercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
 const getLocalUsercode = (state) => state.localUsercode;
+
+let transmissionResults = {};
 
 const SubmitPage = () => {
   // STATE
@@ -37,6 +40,7 @@ const SubmitPage = () => {
   const resultsSurvey = useStore(getResultsSurvey);
   const partId = useStore(getPartId);
   const usercode = useStore(getUsercode);
+  const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
   const localUsercode = useStore(getLocalUsercode);
@@ -54,80 +58,82 @@ const SubmitPage = () => {
   // config options
   const headerBarColor = configObj.headerBarColor;
 
-  let transmissionResults = {};
   useEffect(() => {
     // format results for transmission
+    try {
+      // finish setup and format results object
+      transmissionResults["projectName"] = configObj.studyTitle;
+      transmissionResults["partId"] = partId;
+      transmissionResults["randomId"] = uuid().substring(0, 12);
+      transmissionResults["urlUsercode"] = urlUsercode;
+      transmissionResults["dateTime"] = results.dateTime;
+      transmissionResults["timeLanding"] = results.timeOnlandingPage;
+      transmissionResults["timePresort"] = results.timeOnpresortPage;
+      transmissionResults["timeSort"] = results.timeOnsortPage;
 
-    // finish setup and format results object
-    transmissionResults["projectName"] = configObj.studyTitle;
-    transmissionResults["partId"] = partId;
-    transmissionResults["randomId"] = uuid().substring(0, 12);
-    transmissionResults["usercode"] = usercode;
-    transmissionResults["dateTime"] = results.dateTime;
-    transmissionResults["timeLanding"] = results.timeOnlandingPage;
-    transmissionResults["timePresort"] = results.timeOnpresortPage;
-    transmissionResults["timeSort"] = results.timeOnsortPage;
-
-    if (configObj.firebaseOrLocal === "local") {
-      transmissionResults["partId"] = localParticipantName;
-      transmissionResults["usercode"] = localUsercode;
-    }
-
-    if (configObj.showPostsort === true) {
-      transmissionResults["timePostsort"] = results.timeOnpostsortPage;
-    }
-
-    if (configObj.showSurvey === true) {
-      transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
-    }
-
-    let numPos = results.npos;
-    if (isNaN(numPos)) {
-      numPos = 0;
-    }
-    let numNeu = results.nneu;
-    if (isNaN(numNeu)) {
-      numNeu = 0;
-    }
-    let numNeg = results.nneg;
-    if (isNaN(numNeg)) {
-      numNeg = 0;
-    }
-
-    transmissionResults["npos"] = numPos;
-    transmissionResults["nneu"] = numNeu;
-    transmissionResults["nneg"] = numNeg;
-
-    // if project included POSTSORT, read in complete sorted results
-    if (configObj.showPostsort) {
-      const newPostsortObject = calculatePostsortResults(
-        resultsPostsort,
-        mapObj,
-        configObj
-      );
-      const keys = Object.keys(newPostsortObject);
-      for (let i = 0; i < keys.length; i++) {
-        transmissionResults[keys[i]] = newPostsortObject[keys[i]];
+      if (configObj.firebaseOrLocal === "local") {
+        transmissionResults["partId"] = localParticipantName;
+        transmissionResults["usercode"] = localUsercode;
       }
-    }
 
-    // if project included SURVEY, read in results
-    if (configObj.showSurvey) {
-      const keys2 = Object.keys(resultsSurvey);
-      for (let ii = 0; ii < keys2.length; ii++) {
-        transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
+      if (configObj.showPostsort === true) {
+        transmissionResults["timePostsort"] = results.timeOnpostsortPage;
       }
-    }
-    transmissionResults["sort"] = results.sort;
 
-    // remove null values to prevent errors
-    for (const property in transmissionResults) {
-      if (
-        transmissionResults[property] === null ||
-        transmissionResults[property] === undefined
-      ) {
-        transmissionResults[property] = "no data";
+      if (configObj.showSurvey === true) {
+        transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
       }
+
+      let numPos = results.npos;
+      if (isNaN(numPos)) {
+        numPos = 0;
+      }
+      let numNeu = results.nneu;
+      if (isNaN(numNeu)) {
+        numNeu = 0;
+      }
+      let numNeg = results.nneg;
+      if (isNaN(numNeg)) {
+        numNeg = 0;
+      }
+
+      transmissionResults["npos"] = numPos;
+      transmissionResults["nneu"] = numNeu;
+      transmissionResults["nneg"] = numNeg;
+
+      // if project included POSTSORT, read in complete sorted results
+      if (configObj.showPostsort) {
+        const newPostsortObject = calculatePostsortResults(
+          resultsPostsort,
+          mapObj,
+          configObj
+        );
+        const keys = Object.keys(newPostsortObject);
+        for (let i = 0; i < keys.length; i++) {
+          transmissionResults[keys[i]] = newPostsortObject[keys[i]];
+        }
+      }
+
+      // if project included SURVEY, read in results
+      if (configObj.showSurvey) {
+        const keys2 = Object.keys(resultsSurvey);
+        for (let ii = 0; ii < keys2.length; ii++) {
+          transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
+        }
+      }
+      transmissionResults["sort"] = results.sort;
+
+      // remove null values to prevent errors
+      for (const property in transmissionResults) {
+        if (
+          transmissionResults[property] === null ||
+          transmissionResults[property] === undefined
+        ) {
+          transmissionResults[property] = "no data";
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [
     results,
@@ -139,7 +145,6 @@ const SubmitPage = () => {
     resultsPostsort,
     resultsSurvey,
     usercode,
-    transmissionResults,
   ]);
 
   // early return if data submit success event
