@@ -24,11 +24,14 @@ const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
+const getSetCardFontSize = (state) => state.setCardFontSize;
+const getMapObject = (state) => state.mapObj;
 
 const LandingPage = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
+  const mapObj = useSettingsStore(getMapObject);
   const dataLoaded = useStore(getDataLoaded);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
@@ -37,6 +40,7 @@ const LandingPage = () => {
   const setResults = useStore(getSetResults);
   let displayLandingContent = useStore(getDisplayLandingContent);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
+  const setCardFontSize = useStore(getSetCardFontSize);
 
   const headerBarColor = configObj.headerBarColor;
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
@@ -55,6 +59,13 @@ const LandingPage = () => {
       setDisplayNextButton(true);
     }
 
+    // set FONT SIZE estimate
+    let fontSizeEstimate =
+      5 + Math.ceil(10 * (9 / mapObj.qSortHeaderNumbers.length));
+
+    console.log(fontSizeEstimate);
+    setCardFontSize(fontSizeEstimate);
+
     // set partId if in URL
     let urlName = parseParams(window.location.href);
     if (urlName !== undefined) {
@@ -62,7 +73,13 @@ const LandingPage = () => {
       const codeName = urlName.usercode;
       setUrlUsercode(codeName);
     }
-  }, [setUrlUsercode, configObj.initialScreen, setDisplayNextButton]);
+  }, [
+    setUrlUsercode,
+    configObj.initialScreen,
+    setCardFontSize,
+    setDisplayNextButton,
+    mapObj,
+  ]);
 
   // calc time on page
   useEffect(() => {

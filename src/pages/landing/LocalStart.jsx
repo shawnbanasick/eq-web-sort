@@ -83,17 +83,17 @@ const LogInScreen = () => {
   };
 
   const handleDeleteLocal = (e) => {
-    console.log(hasDownloadedQsorts);
+    // console.log(hasDownloadedQsorts);
     if (hasDownloadedQsorts) {
       setLocalDeleteModal(true);
     } else {
-      console.log("false branch");
+      // console.log("false branch");
       setTriggerSaveBeforeDeleteModal(true);
     }
   };
 
   const handleDownloadLocal = (e) => {
-    console.log(JSON.stringify(localStoredQsorts));
+    // console.log(JSON.stringify(localStoredQsorts));
     const studyTitle = configObj.studyTitle;
     const myDate = new Date();
     const myDateString =

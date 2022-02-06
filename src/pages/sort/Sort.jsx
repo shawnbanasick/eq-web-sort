@@ -114,6 +114,8 @@ const Sort = () => {
 
   // calc time on page
   useEffect(() => {
+    // get card font size
+
     let startTime;
     startTime = Date.now();
     return () => {

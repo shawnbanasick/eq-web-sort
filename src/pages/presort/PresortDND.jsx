@@ -48,7 +48,7 @@ function PresortDND(props) {
   );
 
   const itemsFromBackend = props.statements;
-  const cardFontSize = `${props.cardFontSize + 6}px`;
+  const cardFontSize = `${props.cardFontSize}px`;
 
   const cardHeight = 210;
 

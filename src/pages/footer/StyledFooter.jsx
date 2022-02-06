@@ -54,24 +54,6 @@ const StyledFooter = () => {
     logoHtml = `${usercode} - ${projectName} - ${dateTime}`;
   }
 
-  // todo - fix properly so no escaping log in
-  /* if (
-    currentPage
-    // currentPage === "presort" ||
-    // currentPage === "sort" ||
-    // currentPage === "postsort" ||
-    // currentPage === "survey"
-  ) {
-    // displayNextButton = true;
-  }
-  if (initialScreenSetting === "anonymous") {
-    displayNextButton = true;
-  }
-  // if (initialScreenSetting === "partId-access" && userInputPartId.length < 1) {
-  //   displayNextButton = false;
-  // }
-  */
-
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;
 

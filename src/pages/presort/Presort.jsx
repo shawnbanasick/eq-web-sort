@@ -44,6 +44,8 @@ const PresortPage = (props) => {
   // set next button display
   setDisplayNextButton(true);
 
+  console.log(cardFontSize);
+
   useEffect(() => {
     setTimeout(() => {
       setCurrentPage("presort");

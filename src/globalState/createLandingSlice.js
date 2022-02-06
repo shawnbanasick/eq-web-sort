@@ -4,7 +4,7 @@ const createLandingSlice = (set, get) => ({
   triggerLandingModal: false,
   usercode: "",
   urlUsercode: "not set",
-  partId: "",
+  partId: "not required",
   localUsercode: "",
   displayAccessCodeWarning: false,
   userInputAccessCode: "",

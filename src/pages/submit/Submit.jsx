@@ -145,6 +145,7 @@ const SubmitPage = () => {
     resultsPostsort,
     resultsSurvey,
     usercode,
+    urlUsercode,
   ]);
 
   // early return if data submit success event
