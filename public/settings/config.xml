@@ -6,7 +6,7 @@
    <item id="studyTitle">my Q study</item> 
    <item id="setupTarget">online</item>
    <item id="firebaseOrLocal">firebase</item>
-   <item id="shuffleCards">false</item>
+   <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item>
    

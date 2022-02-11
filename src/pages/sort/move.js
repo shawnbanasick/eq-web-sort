@@ -55,8 +55,6 @@ const move = (
     qSortHeaderNumbers
   );
 
-  console.log(sourceListArray.length);
-
   // to disable checking if unforced Q sorts allowed
   if (allowUnforcedSorts === false) {
     // if the sort pattern matches default sort pattern
@@ -65,25 +63,28 @@ const move = (
       useStore.setState({ sortCompleted: true });
       console.log("sorting complete");
       useStore.setState({ isSortingCards: false });
+      useStore.setState({ isSortingFinished: true });
     } else {
       useStore.setState({ sortCompleted: false });
       useStore.setState({ isSortingCards: true });
       useStore.setState({ hasOverloadedColumn: true });
+      useStore.setState({ isSortingFinished: false });
     }
   } else {
     // for unforced sorts - is source array empty?
     if (sourceListArray.length === 0) {
       useStore.setState({ hasOverloadedColumn: false });
       useStore.setState({ sortCompleted: true });
-      console.log("sorting complete 2");
+      console.log("sorting complete");
       useStore.setState({ isSortingCards: false });
+      useStore.setState({ isSortingFinished: true });
     } else {
       useStore.setState({ sortCompleted: false });
       useStore.setState({ isSortingCards: true });
       useStore.setState({ hasOverloadedColumn: false });
+      useStore.setState({ isSortingFinished: false });
     }
   }
-  console.log("moved");
   return null;
 };
 
