@@ -13,7 +13,7 @@
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->
-   <item id="initialScreen">access</item>
+   <item id="initialScreen">anonymous</item>
    <item id="accessCode">demo</item>
 
 
@@ -32,7 +32,7 @@
 
    <!-- SORT -->
    <item id="condOfInstFontSize">20</item>
-   <item id="allowUnforcedSorts">false</item>
+   <item id="allowUnforcedSorts">true</item>
    <item id="warnOverloadedColumn">true</item>
 
 
@@ -53,7 +53,7 @@
    </item>
 
    <item id="survey">
-        <input type="text" required="false" maxlength="4" ></input>
+        <input type="text" restricted="false" limited="false" required="false" maxlength="99999" ></input>
         <label>{{{u}}}Age{{{/u}}}*</label>
         <note>Please {{{b}}}enter{{{/b}}} your year of birth.</note>
    </item>
