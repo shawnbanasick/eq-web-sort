@@ -63,7 +63,6 @@ const LandingPage = () => {
     let fontSizeEstimate =
       5 + Math.ceil(10 * (9 / mapObj.qSortHeaderNumbers.length));
 
-    console.log(fontSizeEstimate);
     setCardFontSize(fontSizeEstimate);
 
     // set partId if in URL
@@ -83,7 +82,6 @@ const LandingPage = () => {
 
   // calc time on page
   useEffect(() => {
-    console.log("calTime");
     const startTime = Date.now();
     return () => {
       const updatedResults = calculateTimeOnPage(

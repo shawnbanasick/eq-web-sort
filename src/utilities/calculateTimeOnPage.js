@@ -3,7 +3,6 @@ import millisecondsToTime from "./millisecondsToTime";
 import getCurrentDateTime from "./getCurrentDateTime";
 
 const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
-  console.log(results.dateTime);
   const identifier = `cumulative${prefix}Duration`;
   // const identifier2 = `set${prefix2}DurationCumulative`;
   const identifier3 = `timeOn${prefix2}`;

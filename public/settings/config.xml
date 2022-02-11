@@ -32,7 +32,7 @@
 
    <!-- SORT -->
    <item id="condOfInstFontSize">20</item>
-   <item id="allowUnforcedSorts">true</item>
+   <item id="allowUnforcedSorts">false</item>
    <item id="warnOverloadedColumn">true</item>
 
 
