@@ -68,7 +68,7 @@ const move = (
       useStore.setState({ hasOverloadedColumn: true });
       useStore.setState({ sortCompleted: false });
       useStore.setState({ isSortingCards: true });
-      if (sourceListArray.length === 0) {
+      if (columnStatements.statementList.length === 0) {
         useStore.setState({ isSortingFinished: true });
       } else {
         useStore.setState({ isSortingFinished: false });

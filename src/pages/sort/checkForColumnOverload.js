@@ -9,6 +9,8 @@ const checkForColumnOverload = (
 ) => {
   if (forcedSorts === true) {
     const tempArray = [];
+
+    // iterate through array and check if col length > design length
     columnLengthCheckArray.forEach(function (item, index) {
       if (item > +qSortPattern[index]) {
         tempArray.push(qSortHeaderNumbers[index]);
@@ -19,6 +21,7 @@ const checkForColumnOverload = (
         return null;
       }
     });
+    // if no overload - set overload to no and is sorting to true
     if (tempArray.length === 0) {
       useStore.setState({ hasOverloadedColumn: false });
       useStore.setState({ isSortingCards: true });

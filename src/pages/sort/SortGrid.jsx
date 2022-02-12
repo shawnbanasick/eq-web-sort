@@ -161,6 +161,7 @@ const SortGrid = (props) => {
         ];
         const sortCharacteristics = sortCharacterisiticsPrep;
         const allowUnforcedSorts = configObj.allowUnforcedSorts;
+
         move(
           sourceListArray,
           destinationListArray,
