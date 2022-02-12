@@ -76,6 +76,7 @@ const LinkButton = (props) => {
         } else {
           // unforced not ok -> allow nav if no overloaded columns
           if (hasOverloadedColumn === true) {
+            setTriggerSortPreventNavModal(false);
             setTriggerSortOverloadedColModal(true);
             return false;
           } else {

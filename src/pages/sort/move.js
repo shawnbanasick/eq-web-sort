@@ -65,10 +65,14 @@ const move = (
       useStore.setState({ isSortingCards: false });
       useStore.setState({ isSortingFinished: true });
     } else {
+      useStore.setState({ hasOverloadedColumn: true });
       useStore.setState({ sortCompleted: false });
       useStore.setState({ isSortingCards: true });
-      useStore.setState({ hasOverloadedColumn: true });
-      useStore.setState({ isSortingFinished: false });
+      if (sourceListArray.length === 0) {
+        useStore.setState({ isSortingFinished: true });
+      } else {
+        useStore.setState({ isSortingFinished: false });
+      }
     }
   } else {
     // for unforced sorts - is source array empty?

@@ -33,7 +33,7 @@
    <!-- SORT -->
    <item id="condOfInstFontSize">20</item>
    <item id="allowUnforcedSorts">false</item>
-   <item id="warnOverloadedColumn">true</item>
+   <item id="warnOverloadedColumn">false</item>
 
 
    <!-- POSTSORT -->
