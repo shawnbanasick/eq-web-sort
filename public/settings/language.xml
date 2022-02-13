@@ -36,11 +36,11 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">{{{div}}}University Research Project{{{/div}}}</item>
-        <item id="welcomeText">{{{div}}}{{{center}}}{{{h2}}}EQ Web Sort V3 Demo Project - iPad Use in the Classroom.{{{/h2}}} {{{/center}}}{{{br/}}}{{{br}}} {{{div style=&quot;display: flex; flex-direction: column; align-items: center;&quot;}}} {{{div}}}{{{h2}}}Features{{{/h2}}}
+        <item id="welcomeText">{{{div}}}{{{center}}}{{{h2}}}EQ Web Sort V3 Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{/center}}} {{{br/}}}{{{br}}} {{{div style=&quot;display: flex; flex-direction: column; align-items: center;&quot;}}} {{{div}}}{{{h2}}}Features{{{/h2}}}
     {{{ul style=&quot;margin-left: 20px;&quot;}}} {{{li}}}Smooth drag and drop actions for desktop and mobile (touch) devices {{{/li}}} {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
     {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  {{{li}}}Simple localization into the research language {{{/li}}} {{{li}}}HTML formatting for statements and User Interface text (including bold font, italics, underlines, line breaks) {{{/li}}} {{{li}}}Custom logo in page footers {{{/li}}} {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} {{{/ul}}}{{{a href=&quot;https://qmethod.org/&quot; target=&quot;_blank&quot;}}} {{{u}}}qmethod.org{{{/u}}} {{{/a}}}{{{/div}}}{{{/div}}}
     {{{br}}}{{{br}}}
-    {{{div style=&quot;display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; width: 100%&quot;}}} {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Images{{{img src=&quot;/images/sortScreen3.png&quot; width=&quot;640&quot; /}}} {{{/div}}}
+    {{{div style=&quot;display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 50px; width: 100%&quot;}}} {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Images{{{img src=&quot;/images/sortScreen3.png&quot; width=&quot;640&quot; /}}} {{{/div}}}
     {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Video (enable subtitles / closed captions) {{{iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/aHpeu5M7Rlo&quot;}}} {{{/iframe}}} {{{/div}}} {{{/div}}}{{{/div}}}</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->

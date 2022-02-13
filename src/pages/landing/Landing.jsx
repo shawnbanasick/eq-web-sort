@@ -204,11 +204,14 @@ const ContainerDiv = styled.div`
 `;
 
 const ContentDiv = styled.div`
+  display: flex;
   width: 75vw;
   font-size: 1.25em;
   visibility: ${(props) => (props.view ? "hidden" : "visible")};
   animation: ${(props) => (props.view ? fadeOut : fadeIn)} 0.5s linear;
   transition: visibility 0.5s linear;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SortTitleBar = styled.div`
