@@ -126,18 +126,23 @@ const SurveyRatings2Element = (props) => {
   };
 
   if (id in answersStorage) {
+    // set state - answered or no response (checks all parts)
     const keys2 = Object.keys(answersStorage[id]);
 
-    let objLen = keys2.length - 1;
-
-    if (objLen >= rows) {
-      testValue = 0;
-      requiredAnswersObj[id] = "answered";
-      setRequiredAnswersObj(requiredAnswersObj);
-    } else {
-      testValue = 1;
-      requiredAnswersObj[id] = "no response";
-      setRequiredAnswersObj(requiredAnswersObj);
+    // skip check that all answered if not required
+    // prevents error in which answering only one
+    // prevents navigation
+    if (props.opts.required === true || props.opts.required === "true") {
+      let objLen = keys2.length - 1;
+      if (objLen >= rows) {
+        testValue = 0;
+        requiredAnswersObj[id] = "answered";
+        setRequiredAnswersObj(requiredAnswersObj);
+      } else {
+        testValue = 1;
+        requiredAnswersObj[id] = "no response";
+        setRequiredAnswersObj(requiredAnswersObj);
+      }
     }
 
     keys2.forEach((item, index) => {
