@@ -1,115 +1,107 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
    <language version="1.0" htmlParse="true">
 ;
 
         <!-- MULTI-PURPOSE MODALS -->
-        <item id="stepCompleteMessage">{{{div}}}You have completed this step. Please click on the {{{b}}} blue &quot;Continue&quot; button {{{/b}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
-        <item id="logInFirst">{{{div}}}Please complete the log-in process first.{{{/div}}}</item>
+        <item id="stepCompleteMessage">{{{div}}}You have completed this step. Please click on the {{{strong}}} blue &quot;Continue&quot; button {{{/strong}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
+        <item id="logInFirst">Please complete the log-in process first.</item>
 
         <!-- FOOTER -->
-        <item id="fontSizeText">{{{div}}}Text Size{{{/div}}}</item>
-        <item id="cardHeightText">{{{div}}}Card Height{{{/div}}}</item>
-        <item id="btnHelp">{{{div}}}Help me!{{{/div}}}</item>
-        <item id="btnNext">{{{div}}}Continue{{{/div}}}</item>
+        <item id="fontSizeText">Text Size</item>
+        <item id="cardHeightText">Card Height</item>
+        <item id="btnHelp">Help me!</item>
+        <item id="btnNext">Continue</item>
 
+        <!-- LANDING SCREEN -->
+        <item id="landingHead">University Research Project</item>
+        <item id="welcomeText">{{{div}}}{{{h2}}}EQ Web Sort Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{br/}}}{{{br}}}{{{p}}}Thank you for helping with this research project{{{/p}}}{{{/div}}}</item>
 
-        <!-- LOCAL DATA COLLECTION -->
-        <item id="localHeader">{{{div}}}Offline Q-sort Control Panel{{{/div}}}</item>
-        <item id="partIdText">{{{div}}}Participant Name{{{/div}}}</item>
-        <item id="usercodeText">{{{div}}}Usercode{{{/div}}}</item>
-        <item id="localStartButtonText">{{{div}}}Start Q-sort{{{/div}}}</item>
-        <item id="localDeleteButtonText">{{{div}}}Delete{{{/div}}}</item>
-        <item id="localDownloadButtonText">{{{div}}}Save Q-sort Data to Disk{{{/div}}}</item>
+        <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
+        <item id="accessCodeText">Access Code</item>
+        <item id="accessInputText">Please enter the access code for this survey.</item>
+        <item id="loginSubmitButtonText">Submit</item>
+        <item id="loginPartIdText">Please enter your name or participant ID</item>
+        <item id="accessCodeWarning">Access code invalid</item>
+        <item id="partIdWarning">Invalid name or ID</item>
+        <item id="loginHeaderText">Sign In</item>
+        <item id="loginWelcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. {{{/div}}}</item>
+        <item id="landingHelpModalHead">Welcome!</item>
+        <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width=&quot;640&quot; height=&quot;360&quot;
+    src=&quot;https://www.youtube.com/embed/723gJhElR7Q&quot;}}}
+    {{{/iframe}}}{{{/center}}}</item>
+
+        <!-- LOCAL DATA COLLECTION -->  
+        <item id="localHeader">Offline Q-sort Control Panel</item>
+        <item id="partIdText">Participant Name</item>
+        <item id="usercodeText">Usercode</item>
+        <item id="localStartButtonText">Start Q-sort</item>
+        <item id="localDeleteButtonText">Delete</item>
+        <item id="localDownloadButtonText">Save Q-sort Data to Disk</item>
         <item id="storedQsortsHeaderText">Stored Q-sorts</item>
-        <item id="localDeleteModalText">{{{div}}}This will delete the particpant Q-sort data that is currently stored in the browser. You would usually only do this when you are starting a new project.{{{br}}}{{{br}}}{{{b}}}CAUTION - Deleted data cannot be recovered.{{{/b}}} {{{br}}}{{{br}}} {{{center}}}{{{/center}}}{{{/div}}}</item>
-        <item id="localDeleteModalHead">{{{div}}}Delete Data Stored in Browser?{{{/div}}}</item>
+        <item id="localDeleteModalHead">Delete Data Stored in Browser?</item>
+        <item id="localDeleteModalText">This will delete the particpant Q-sort data that is currently stored in the browser. You would usually only do this when you are starting a new project.{{{br}}}{{{br}}}{{{b}}}CAUTION - Deleted data cannot be recovered.{{{/b}}} {{{br}}}{{{br}}} {{{center}}}{{{/center}}}</item>
         <item id="localParticipantsText">Participants</item>
+        <item id="localSaveBeforeDeleteModalHeader">Delete Disabled</item>
+        <item id="localSaveBeforeDeleteModalText">Save Q sort Data to Disk before deleting.</item>
         <item id="localSaveDataButton">Save Participant Data to Browser Memory</item>
         <item id="localSubmitSuccessModalHeader">Success</item>
         <item id="localSubmitSuccessModalText">Participant Q sort data have been succesfully saved to browser memory</item>
         <item id="returnToLocalPanelButtonText">Return to Control Panel</item>
-        <item id="LocalSaveBeforeDeleteModalHeader">Delete Disabled</item>
-        <item id="LocalSaveBeforeDeleteModalText">Save Q sort Data to Disk before deleting.</item>
-
-
-
-        <!-- LANDING SCREEN -->
-        <item id="landingHead">{{{div}}}University Research Project{{{/div}}}</item>
-        <item id="welcomeText">{{{div}}}{{{center}}}{{{h2}}}EQ Web Sort V3 Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{/center}}} {{{br/}}}{{{br}}} {{{div style=&quot;display: flex; flex-direction: column; align-items: center;&quot;}}} {{{div}}}{{{h2}}}Features{{{/h2}}}
-    {{{ul style=&quot;margin-left: 20px;&quot;}}} {{{li}}}Smooth drag and drop actions for desktop and mobile (touch) devices {{{/li}}} {{{li}}}Custom Image and video embedding capability (on the page and in help messages) {{{/li}}} 
-    {{{li}}}Participant-adjustable text and card sizes {{{/li}}}  {{{li}}}Simple localization into the research language {{{/li}}} {{{li}}}HTML formatting for statements and User Interface text (including bold font, italics, underlines, line breaks) {{{/li}}} {{{li}}}Custom logo in page footers {{{/li}}} {{{li}}}Ability to do offline data collection when used on a notebook computer with EQ-Configurator{{{/li}}} {{{/ul}}}{{{a href=&quot;https://qmethod.org/&quot; target=&quot;_blank&quot;}}} {{{u}}}qmethod.org{{{/u}}} {{{/a}}}{{{/div}}}{{{/div}}}
-    {{{br}}}{{{br}}}
-    {{{div style=&quot;display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 50px; width: 100%&quot;}}} {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Images{{{img src=&quot;/images/sortScreen3.png&quot; width=&quot;640&quot; /}}} {{{/div}}}
-    {{{div style=&quot;display:flex; flex-direction:column&quot;}}} Video (enable subtitles / closed captions) {{{iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/aHpeu5M7Rlo&quot;}}} {{{/iframe}}} {{{/div}}} {{{/div}}}{{{/div}}}</item>
-
-        <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
-        <item id="accessCodeText">{{{div}}}Access Code{{{/div}}}</item>
-        <item id="accessInputText">{{{div}}}Please enter the access code for this survey.{{{/div}}}</item>
-        <item id="loginSubmitButtonText">{{{div}}}Submit{{{/div}}}</item>
-        <item id="loginPartIdText">{{{div}}}Please enter your name or participant ID{{{/div}}}</item>
-        <item id="accessCodeWarning">{{{div}}}Access code invalid{{{/div}}}</item>
-        <item id="partIdWarning">{{{div}}}Invalid name or ID{{{/div}}}</item>
-        <item id="loginHeaderText">{{{div}}}Sign In{{{/div}}}</item>
-        <item id="loginWelcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{b}}}sign in{{{/b}}} using the form below to begin the process. {{{/div}}}</item>
-        <item id="landingHelpModalHead">{{{div}}}Welcome!{{{/div}}}</item>
-        <item id="landingHelpModalText">{{{div}}}Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width=&quot;640&quot; height=&quot;360&quot;
-    src=&quot;https://www.youtube.com/embed/aHpeu5M7Rlo&quot;}}}
-    {{{/iframe}}}{{{/center}}}{{{/div}}}</item>
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
-        <item id="titleBarText">{{{div}}}Preliminary Sorting{{{/div}}}</item>
-        <item id="presortAgreement">{{{div}}}Agree{{{/div}}}</item>
-        <item id="presortStatements">{{{div}}}Statements{{{/div}}}</item>
-        <item id="presortNeutral">{{{div}}}No Strong Feelings{{{/div}}}</item>
-        <item id="presortDisagreement">{{{div}}}Disagree{{{/div}}}</item>
-        <item id="presortModalHead">{{{div}}}Step 1 of 4{{{/div}}}</item>
-        <item id="presortModalText">{{{div}}}Read the following statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.{{{/div}}}</item>
-        <item id="presortPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
-        <item id="presortPreventNavModalText">{{{div}}}Please finish the preliminary sorting before going to the next step.{{{/div}}}</item>
-        <item id="presortFinishedModalHead">{{{div}}}Preliminary Sorting Complete{{{/div}}}</item>
-        <item id="presortFinishedModalText">{{{div}}}You have completed this step. Please click the &quot;Continue&quot; button in the bottom right side of the page to go to the next step.{{{/div}}}</item>
+        <item id="titleBarText">Preliminary Sorting</item>
+        <item id="presortAgreement">Agree</item>
+        <item id="presortStatements">Statements</item>
+        <item id="presortNeutral">No Strong Feelings</item>
+        <item id="presortDisagreement">Disagree</item>
+        <item id="presortModalHead">Step 1 of 4</item>
+        <item id="presortModalText">{{{div}}}Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.{{{/div}}}</item>
+        <item id="presortPreventNavModalHead">Navigation Disabled</item>
+        <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
+        <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
+        <item id="presortFinishedModalText">You have completed this step. Please click the &quot;Continue&quot; button in the bottom right side of the page to go to the next step.</item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
-        <item id="sortHelpModalHead">{{{div}}}Step 2 of 4{{{/div}}}</item>
-        <item id="sortHelpModalText">{{{div}}}In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the far right side of the grid, and statements which you most disagree with should be placed on the far left side. Please watch the video for more information on how to sort the cards in this step.{{{/div}}}</item>
-        <item id="sortAgreement">{{{div}}}Agree{{{/div}}}</item>
-        <item id="sortDisagreement">{{{div}}}Disagree{{{/div}}}</item>
-        <item id="condOfInst">{{{div}}}Sort the cards according to your experience with the iPads this semester{{{/div}}}</item>
-        <item id="sortingCompleteModalHead">{{{div}}}Sorting Complete{{{/div}}}</item>
+        <item id="sortHelpModalHead">Step 2 of 4</item>
+        <item id="sortHelpModalText">In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the far right side of the grid, and statements which you most disagree with should be placed on the far left side. Please watch the video for more information on how to sort the cards in this step.</item>
+        <item id="sortAgreement">Agree</item>
+        <item id="sortDisagreement">Disagree</item>
+        <item id="condOfInst">Sort the cards according to your experience with the iPads this semester</item>
+        <item id="sortingCompleteModalHead">Sorting Complete</item>
         <item id="sortingCompleteModalText">{{{div}}}You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
-        <item id="sortPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
-        <item id="sortPreventNavModalText">{{{div}}}Please finish the grid sorting before going to the next step.{{{/div}}}</item>
-        <item id="sortOverloadedColumnModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
-        <item id="sortOverloadedColumnModalText">{{{div}}}One of the columns has too many cards (it will be outlined in orange and have a dashed border). Please adjust the placement of the cards so that all columns have the correct number.{{{/div}}}</item>
+        <item id="sortPreventNavModalHead">Navigation Disabled</item>
+        <item id="sortPreventNavModalText">Please finish the grid sorting before going to the next step.</item>
+        <item id="sortOverloadedColumnModalHead">Navigation Disabled</item>
+        <item id="sortOverloadedColumnModalText">One of the columns has too many cards (it will be outlined in orange and have a dashed border). Please adjust the placement of the cards so that all columns have the correct number.</item>
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
-        <item id="postsortHeader">{{{div}}}Post-Sort Comments{{{/div}}}</item>
+        <item id="postsortHeader">Post-Sort Comments</item>
         <item id="postsortInstructions">{{{div}}}{{{h3}}}Please describe your thoughts about these statements in more detail.{{{/h3}}}{{{/div}}}</item>
         <item id="placeholder">Click here to add comment</item>
-        <item id="postsortAgreement">{{{div}}}Placed on Agree{{{/div}}}</item>
-        <item id="postsortDisagreement">{{{div}}}Placed on Disagree{{{/div}}}</item>
-        <item id="postsortModalHead">{{{div}}}Step 3 of 4{{{/div}}}</item>
-        <item id="postsortModalText">{{{div}}}You can use the buttons at the bottom of the page to change the font size or card height.{{{/div}}}</item>
+        <item id="postsortAgreement">Placed on Agree</item>
+        <item id="postsortDisagreement">Placed on Disagree</item>
+        <item id="postsortModalHead">Step 3 of 4</item>
+        <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.</item>
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
-        <item id="surveyHeader">{{{div}}}Post-Sort Questionnaire{{{/div}}}</item>
-        <item id="surveyModalHead">{{{div}}}Step 4 of 4{{{/div}}}</item>
-        <item id="surveyModalText">{{{div}}}Finally, please answer the following questions regarding your background. The questions marked with an &quot;*&quot; in their title are required.{{{/div}}}</item>
-        <item id="surveyPreventNavModalHead">{{{div}}}Navigation Disabled{{{/div}}}</item>
-        <item id="surveyPreventNavModalText">{{{div}}}Please answer the required questions (outlined in red) before going to the next step.{{{/div}}}</item>
+        <item id="surveyHeader">Post-Sort Questionnaire</item>
+        <item id="surveyModalHead">Step 4 of 4</item>
+        <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an &quot;*&quot; in their title are required.</item>
+        <item id="surveyPreventNavModalHead">Navigation Disabled</item>
+        <item id="surveyPreventNavModalText">Please answer the required questions (outlined in red) before going to the next step.</item>
        
         <!-- SUBMIT -->
-        <item id="btnTransfer">{{{div}}}Submit Data{{{/div}}}</item>
-        <item id="transferHead">{{{div}}}Final Step{{{/div}}}</item>
-        <item id="transferTextAbove">{{{div}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}{{{/div}}}</item>
+        <item id="btnTransfer">Submit Data</item>
+        <item id="transferHead">Final Step</item>
+        <item id="transferTextAbove">{{{div}}}{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}{{{/div}}}</item>
         <item id="transferTextBelow">{{{div}}}If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.{{{/div}}}</item>
-        <item id="transferOkModalHeader">{{{div}}}Success - The data have been sent to the server.{{{/div}}}</item>   
+        <item id="transferOkModalHeader">Success - The data have been sent to the server</item>   
         <item id="transferOkModalText">{{{div}}}Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.{{{/div}}}</item>
-        <item id="transferFailModalHeader">{{{div}}}Connection to server failed{{{/div}}}</item>   
-        <item id="transferFailModalText">{{{div}}}Please try again in a few moments.{{{/div}}}</item>   
-        <item id="fallbackMessage">{{{div}}}Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com.  Thank you!{{{/div}}}</item>   
-        <item id="btnDownload">{{{div}}}Download{{{/div}}}</item>   
+        <item id="transferFailModalHeader">Connection to server failed</item>   
+        <item id="transferFailModalText">Please try again in a few moments.</item>   
+        <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
+        <item id="btnDownload">Download</item>   
         <item id="goodbyeMessage">{{{div}}}{{{div}}}Thank You!{{{/div}}} {{{br /}}}{{{div}}}You can now close the browser tab{{{/div}}}{{{/div}}}</item>   
 
    </language>

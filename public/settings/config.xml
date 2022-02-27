@@ -3,11 +3,11 @@
    <config version="1.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
-   <item id="studyTitle">my Q study</item> 
-   <item id="setupTarget">online</item>
-   <item id="firebaseOrLocal">firebase</item>
+   <item id="studyTitle">My_Q_project</item> 
+   <item id="setupTarget">undefined</item>
+   <item id="firebaseOrLocal">undefined</item>
    <item id="shuffleCards">true</item>
-   <item id="headerBarColor">#337ab7</item>
+   <item id="headerBarColor">#5bcce5</item>
    <item id="devMode">false</item>
    
 
@@ -25,9 +25,9 @@
 
    <!-- PRESORT -->
    <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
-   <item id="greenCardColor">#ccffcc</item>
-   <item id="yellowCardColor">#e0e0e0</item>
-   <item id="pinkCardColor">#ffe0e0</item>
+   <item id="greenCardColor">#7ff97f</item>
+   <item id="yellowCardColor">#fffefe</item>
+   <item id="pinkCardColor">#f99a9a</item>
  
 
    <!-- SORT -->
@@ -41,6 +41,7 @@
    <item id="showSecondPosColumn">false</item>
    <item id="showSecondNegColumn">false</item>
    
+
    <item id="displayNeutralObjects">false</item>
 
 
@@ -49,56 +50,50 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="#e7b8b8">All {{{b}}}fields{{{/b}}} marked with an * are mandatory</note>
+       <note bg="goldenrod">{{{div}}}All fields marked with an * are {{{b}}}required.{{{/b}}}{{{/div}}}</note>
    </item>
 
    <item id="survey">
-        <input type="text" restricted="false" limited="false" required="false" maxlength="99999" ></input>
-        <label>{{{u}}}Age{{{/u}}}*</label>
-        <note>Please {{{b}}}enter{{{/b}}} your year of birth.</note>
-   </item>
-
-   <item id="survey">
-        <input type="text" restricted="true" limited="true" required="false" maxlength="4" ></input>
-        <label>{{{b}}}Age{{{/b}}} - Restricted*</label>
-        <note>Please enter your year of {{{b}}}birth{{{/b}}}</note>
+        <input type="text" required="true" limited="true" maxlength="100" restricted="false"></input>
+        <label>1. Have you had classes with me before?*</label>
+        <note>{{{div}}}If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters){{{/div}}}</note>
    </item>
 
    <item id="survey">
         <input type="textarea" required="false"></input>
-        <label>{{{b}}}Comments ok?{{{/b}}}</label>
-        <placeholder>input comments here</placeholder>
+        <label>3. Describe your experience using the iPads in this class</label>
+        <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
         <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
-        <label>{{{b}}}Year{{{/b}}}</label>
-        <note>Please {{{b}}}select{{{/b}}} your year</note>
+        <label>4. Year</label>
+        <note>Please select your year</note>
    </item>
 
    <item id="survey">
         <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
-        <label>What is your {{{b}}}program{{{/b}}} focus?</label>
+        <label>5. What is your program focus?</label>
    </item>
 
    <item id="survey">
-        <input type="checkbox" required="false">Lecture;;;Group Discussion;;;Active Learning</input>
-        <label>What kind of {{{u}}}class{{{/u}}} do you prefer?</label>
+        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
+        <label>6. What kind of class do you prefer?*</label>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="false" scale="{{{b}}}Yes{{{/b}}};;;{{{b}}}No{{{/b}}}">I have {{{u}}}used{{{/u}}} an iPad;;;I have used a notebook</input>
-        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
+        <input type="rating2" required="false" scale="Yes;;;No">{{{div}}}I have used an iPad in class {{{b}}}before{{{/b}}}.{{{/div}}};;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <label>{{{div}}}7. Please respond to the following {{{u}}}statements{{{/u}}}{{{/div}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="1;2;3;4;5">{{{u}}}How{{{/u}}} would you rate the use of the iPads?;;;How would you rate this class overall?</input>
-        <label>{{{b}}}Please{{{/b}}} answer the following questions</label>
+        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;{{{div}}}How was your interaction with {{{u}}}other students?{{{/u}}}{{{/div}}};;;How was access to the computer lab?</input>
+        <label>{{{div}}}8. {{{i}}}Please{{{/i}}} answer the following questions{{{/div}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="false" scale="1;2;3;4;5;6;7;8;9;10">{{{u}}}How{{{/u}}} would you rate Socrative?;;;How would you rate Quizlet?</input>
-        <label>{{{b}}}Please{{{/b}}}  answer the following questions</label>
+        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;{{{div}}}How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?{{{/div}}};;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <label>{{{div}}}9. {{{u}}}Please{{{/u}}} answer the following questions{{{/div}}}</label>
    </item>
 
 
