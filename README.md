@@ -1,10 +1,12 @@
 # EQ Web Sort ([download](https://github.com/shawnbanasick/eq-web-sort/releases/download/v1.0.0/EQ-web-sort-v1.zip))
 
-## Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_configurator_v3)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to link to a free online database and how to upload the files to a free web host.
+### EQ Web Sort is do-it-yourself software to set up online Q sorting for a Q methodology project. No programming skills are required. If you can do basic file editing (edit, save, and drag/drop files) you can set up a free online Q sort.
 
-## For a preview, give the [English language demo](https://eng-demo.netlify.app/#/) or the [non-English language demo](https://jpn-demo.netlify.app/#/) (use access code "demo") a try.
+### Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_configurator_v3)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to link to a free online database and how to upload the files to a free web host.
 
-[Demo video](https://youtu.be/723gJhElR7Q)
+### For a preview, give the [English language demo](https://eng-demo.netlify.app/#/) or the [non-English language demo](https://jpn-demo.netlify.app/#/) (use access code "demo") a try.
+
+### [Demo video](https://youtu.be/723gJhElR7Q)
 
 Pre-Sorting
 
@@ -29,3 +31,5 @@ Survey Questions
 <p>
 
 ## License
+
+GNU General Public License version 3
