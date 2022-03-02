@@ -11,23 +11,23 @@
 Pre-Sorting
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presort.png?raw=true" width="700" />
+<kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/presort.png?raw=true" width="700" /></kbd>
 <p>
   
 Responsive Sorting Grid
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/sortScreen.png?raw=true" width="700" />
+<kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/sortScreen.png?raw=true" width="700" /></kbd>
 <p>
 
 Card Comments
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/postsortScreen.png?raw=true" width="700" />
+<kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/postsortScreen.png?raw=true" width="700" /></kbd>
 <p>
   
 Survey Questions  
 <p align="center">
-<img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/surveyScreen.png?raw=true" width="700" />
+<kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/surveyScreen.png?raw=true" width="700" /></kbd>
 <p>
 
 ## License
