@@ -7,7 +7,7 @@
    <item id="setupTarget">undefined</item>
    <item id="firebaseOrLocal">undefined</item>
    <item id="shuffleCards">true</item>
-   <item id="headerBarColor">#5bcce5</item>
+   <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item>
    
 
@@ -25,9 +25,9 @@
 
    <!-- PRESORT -->
    <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
-   <item id="greenCardColor">#7ff97f</item>
-   <item id="yellowCardColor">#fffefe</item>
-   <item id="pinkCardColor">#f99a9a</item>
+   <item id="greenCardColor">#ccffcc</item>
+   <item id="yellowCardColor">#e0e0e0</item>
+   <item id="pinkCardColor">#ffe0f0</item>
  
 
    <!-- SORT -->
