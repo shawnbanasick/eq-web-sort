@@ -1,5 +1,5 @@
 <p align="center"><kbd>
-<img src="./readme_assets/web_sort.svg"  width="700"></kbd>
+<img src="./readme_assets/web_sort.svg"  width="1100"></kbd>
 </p>
 
 # [Download link](https://github.com/shawnbanasick/eq-web-sort/releases/download/v1.0.1/eq-web-sort-v101.zip)
