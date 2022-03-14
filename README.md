@@ -1,4 +1,6 @@
+<center>
 <img src="./readme_assets/web_sort.svg"  width="700">
+</center>
 # ([download link](https://github.com/shawnbanasick/eq-web-sort/releases/download/v1.0.1/eq-web-sort-v101.zip))
 
 ### EQ Web Sort is do-it-yourself software to set up online Q sorting for a Q methodology project. No programming skills are required. If you can do basic file editing (edit, save, and drag/drop files) you can set up a free online Q sort.
