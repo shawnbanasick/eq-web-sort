@@ -1,6 +1,7 @@
 {
-  "name": "easy_htmlq_v3",
-  "version": "0.1.0",
+  "name": "eq_web_sort",
+  "version": "1.0.1",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@ramonak/react-progress-bar": "^3.2.1",
