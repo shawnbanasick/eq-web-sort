@@ -34,7 +34,12 @@ const StyledFooter = () => {
   let showCardHeightSizer = true;
   let displayHelpButton = true;
 
-  let logoHtml = ReactHtmlParser(decodeHTML(configObj.footerLogo));
+  let logoHtml = ReactHtmlParser(
+    decodeHTML(
+      `{{{center}}}{{{img src="./images/logo.png" height="40" width="250" /}}}{{{/center}}}`
+    )
+  );
+
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 
   if (currentPage === "sort" && configObj.firebaseOrLocal === "local") {
