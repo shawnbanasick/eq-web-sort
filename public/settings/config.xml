@@ -4,8 +4,8 @@
 
    <!-- GENERAL SETTINGS -->
    <item id="studyTitle">My_Q_project</item> 
-   <item id="setupTarget">undefined</item>
-   <item id="firebaseOrLocal">undefined</item>
+   <item id="setupTarget">firebase</item>
+   <item id="firebaseOrLocal">firebase</item>
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item>
@@ -15,12 +15,6 @@
    <!-- options: anonymous, partId-access, partId, access -->
    <item id="initialScreen">anonymous</item>
    <item id="accessCode">demo</item>
-
-
-   <!-- FOOTER -->
-   <item id="footerLogo">{{{center}}}{{{img src="/images/EQ_default.svg" height="40" width="250" /}}}{{{/center}}}</item>
-
-   <item id="footerLogoName">EQ_default.svg</item>
 
 
    <!-- PRESORT -->
@@ -50,50 +44,50 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="goldenrod">{{{div}}}All fields marked with an * are {{{b}}}required.{{{/b}}}{{{/div}}}</note>
+       <note bg="goldenrod">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
    </item>
 
    <item id="survey">
         <input type="text" required="true" limited="true" maxlength="100" restricted="false"></input>
         <label>1. Have you had classes with me before?*</label>
-        <note>{{{div}}}If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters){{{/div}}}</note>
+        <note>If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters)</note>
    </item>
 
    <item id="survey">
         <input type="textarea" required="false"></input>
-        <label>3. Describe your experience using the iPads in this class</label>
+        <label>2. Describe your experience using the iPads in this class</label>
         <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
         <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
-        <label>4. Year</label>
+        <label>3. Year</label>
         <note>Please select your year</note>
    </item>
 
    <item id="survey">
         <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
-        <label>5. What is your program focus?</label>
+        <label>4. What is your program focus?</label>
    </item>
 
    <item id="survey">
         <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
-        <label>6. What kind of class do you prefer?*</label>
+        <label>5. What kind of class do you prefer?*</label>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="false" scale="Yes;;;No">{{{div}}}I have used an iPad in class {{{b}}}before{{{/b}}}.{{{/div}}};;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
-        <label>{{{div}}}7. Please respond to the following {{{u}}}statements{{{/u}}}{{{/div}}}</label>
+        <input type="rating2" required="false" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <label>6. Please respond to the following {{{u}}}statements{{{/u}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;{{{div}}}How was your interaction with {{{u}}}other students?{{{/u}}}{{{/div}}};;;How was access to the computer lab?</input>
-        <label>{{{div}}}8. {{{i}}}Please{{{/i}}} answer the following questions{{{/div}}}</label>
+        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <label>7. {{{i}}}Please{{{/i}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;{{{div}}}How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?{{{/div}}};;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
-        <label>{{{div}}}9. {{{u}}}Please{{{/u}}} answer the following questions{{{/div}}}</label>
+        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <label>8. {{{u}}}Please{{{/u}}} answer the following questions</label>
    </item>
 
 

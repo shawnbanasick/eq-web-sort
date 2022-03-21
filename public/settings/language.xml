@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
    <language version="1.0" htmlParse="true">
 ;
 
         <!-- MULTI-PURPOSE MODALS -->
-        <item id="stepCompleteMessage">{{{div}}}You have completed this step. Please click on the {{{strong}}} blue &quot;Continue&quot; button {{{/strong}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
+        <item id="stepCompleteMessage">You have completed this step. Please click on the {{{strong}}} blue &quot;Continue&quot; button {{{/strong}}} at the bottom right-side of your screen to go to the next step.</item>
         <item id="logInFirst">Please complete the log-in process first.</item>
 
         <!-- FOOTER -->
@@ -15,7 +15,7 @@
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
-        <item id="welcomeText">{{{div}}}{{{h2}}}EQ Web Sort Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{br/}}}{{{br}}}{{{p}}}Thank you for helping with this research project{{{/p}}}{{{/div}}}</item>
+        <item id="welcomeText">{{{h2}}}EQ Web Sort Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{br/}}}{{{br}}}{{{p}}}Thank you for helping with this research project{{{/p}}}</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
         <item id="accessCodeText">Access Code</item>
@@ -25,7 +25,7 @@
         <item id="accessCodeWarning">Access code invalid</item>
         <item id="partIdWarning">Invalid name or ID</item>
         <item id="loginHeaderText">Sign In</item>
-        <item id="loginWelcomeText">{{{div}}}{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. {{{/div}}}</item>
+        <item id="loginWelcomeText">{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. </item>
         <item id="landingHelpModalHead">Welcome!</item>
         <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width=&quot;640&quot; height=&quot;360&quot;
     src=&quot;https://www.youtube.com/embed/723gJhElR7Q&quot;}}}
@@ -51,12 +51,12 @@
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
         <item id="titleBarText">Preliminary Sorting</item>
-        <item id="presortAgreement">Agree</item>
+        <item id="presortAgreement">Agree (3)</item>
         <item id="presortStatements">Statements</item>
-        <item id="presortNeutral">No Strong Feelings</item>
-        <item id="presortDisagreement">Disagree</item>
+        <item id="presortNeutral">No Strong Feelings (2)</item>
+        <item id="presortDisagreement">Disagree (1)</item>
         <item id="presortModalHead">Step 1 of 4</item>
-        <item id="presortModalText">{{{div}}}Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.{{{/div}}}</item>
+        <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.</item>
         <item id="presortPreventNavModalHead">Navigation Disabled</item>
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
         <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
@@ -69,7 +69,7 @@
         <item id="sortDisagreement">Disagree</item>
         <item id="condOfInst">Sort the cards according to your experience with the iPads this semester</item>
         <item id="sortingCompleteModalHead">Sorting Complete</item>
-        <item id="sortingCompleteModalText">{{{div}}}You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.{{{/div}}}</item>
+        <item id="sortingCompleteModalText">You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.</item>
         <item id="sortPreventNavModalHead">Navigation Disabled</item>
         <item id="sortPreventNavModalText">Please finish the grid sorting before going to the next step.</item>
         <item id="sortOverloadedColumnModalHead">Navigation Disabled</item>
@@ -77,7 +77,7 @@
 
         <!-- POSTSORT: comments - only displayed if showStep3 = true -->
         <item id="postsortHeader">Post-Sort Comments</item>
-        <item id="postsortInstructions">{{{div}}}{{{h3}}}Please describe your thoughts about these statements in more detail.{{{/h3}}}{{{/div}}}</item>
+        <item id="postsortInstructions">{{{h3}}}Please describe your thoughts about these statements in more detail.{{{/h3}}}</item>
         <item id="placeholder">Click here to add comment</item>
         <item id="postsortAgreement">Placed on Agree</item>
         <item id="postsortDisagreement">Placed on Disagree</item>
@@ -94,14 +94,14 @@
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{div}}}{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}{{{/div}}}</item>
-        <item id="transferTextBelow">{{{div}}}If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.{{{/div}}}</item>
+        <item id="transferTextAbove">{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}</item>
+        <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferOkModalHeader">Success - The data have been sent to the server</item>   
-        <item id="transferOkModalText">{{{div}}}Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.{{{/div}}}</item>
+        <item id="transferOkModalText">Thank you for using Easy HTMLQ!{{{br}}}{{{br}}}You can now close your browser tab.</item>
         <item id="transferFailModalHeader">Connection to server failed</item>   
         <item id="transferFailModalText">Please try again in a few moments.</item>   
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
         <item id="btnDownload">Download</item>   
-        <item id="goodbyeMessage">{{{div}}}{{{div}}}Thank You!{{{/div}}} {{{br /}}}{{{div}}}You can now close the browser tab{{{/div}}}{{{/div}}}</item>   
+        <item id="goodbyeMessage">Thank You! {{{br /}}}You can now close the browser tab</item>   
 
    </language>

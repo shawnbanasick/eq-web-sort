@@ -151,7 +151,9 @@ const LandingPage = () => {
               {displayPartIdScreen && <PartIdScreen />}
               {displayAccessCodeScreen && <AccessCodeScreen />}
               {displayLandingContent && (
-                <ContentDiv>{welcomeTextHtml}</ContentDiv>
+                <ContentDiv>
+                  <div>{welcomeTextHtml}</div>
+                </ContentDiv>
               )}
             </ContainerDiv>
           </React.Fragment>
