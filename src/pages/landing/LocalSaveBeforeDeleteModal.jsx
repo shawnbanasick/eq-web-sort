@@ -24,10 +24,10 @@ const LocalDeleteModal = () => {
   );
 
   const localDeleteModalHead = ReactHtmlParser(
-    decodeHTML(langObj.LocalSaveBeforeDeleteModalHeader)
+    decodeHTML(langObj.localSaveBeforeDeleteModalHeader)
   );
   const localDeleteModalText = ReactHtmlParser(
-    decodeHTML(langObj.LocalSaveBeforeDeleteModalText)
+    decodeHTML(langObj.localSaveBeforeDeleteModalText)
   );
 
   const onCloseModal = () => {
