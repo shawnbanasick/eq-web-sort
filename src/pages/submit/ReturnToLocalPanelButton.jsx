@@ -30,14 +30,19 @@ const ReturnToLocalPanelButton = (props) => {
     // ⬆ filtering out props that `button` doesn’t know what to do with.
   } = props;
 
+  let reload = async function (history) {
+    await new Promise((resolve, reject) => window.location.reload());
+  };
+
   return (
     <React.Fragment>
       <StyledButton
         onClick={(event) => {
           onClick && onClick(event);
-          history.push("/");
           setPresortNoReturn(false);
           setColumnStatements(newColumnStatements);
+          history.push("/");
+          reload();
         }}
       >
         {btnTransferText}
