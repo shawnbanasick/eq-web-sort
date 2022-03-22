@@ -11,7 +11,7 @@ const createSortSlice = (set, get) => ({
   sortFinishedModalHasBeenShown: false,
   sortCharacteristics: {},
   topMargin: 50,
-  triggerSortModal: false,
+  triggerSortModal: true,
   triggerSortPreventNavModal: false,
   triggerSortOverloadedColumnModal: false,
   triggerSortingFinishedModal: false,
