@@ -10,6 +10,10 @@
 
 ### For a preview, give the [English language demo](https://eng-demo.netlify.app/#/) or the [non-English language demo](https://jpn-demo.netlify.app/#/) (use access code "demo") a try.
 
+<br />
+<br />
+<br />
+
 ### [Demo video](https://youtu.be/723gJhElR7Q)
 
 <br />
@@ -37,6 +41,12 @@ Survey Questions
 <p align="center">
 <kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/surveyScreen.png?raw=true" width="700" /></kbd>
 </p>
+
+### EQ Web Sort, when used with EQ Web Sort Configurator, can also be used for offline, in-person Q sort data collection using a notebook computer ---
+
+### [visual guide (A4 size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_A4.pdf)
+
+### [visual guide (US letter size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_letter.pdf)
 
 ## License
 
