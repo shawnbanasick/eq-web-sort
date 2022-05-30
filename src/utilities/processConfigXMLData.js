@@ -62,7 +62,13 @@ const processConfigXMLData = (dataObject) => {
         tempObj.qNum = j + 1;
         tempObj.type = "information";
         tempObj.background = surveyData[j][1].attributes.bg;
-        tempObj.options = surveyData[j][1].elements[0].text;
+
+        try {
+          tempObj.options = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
 
         surveyQuestionArray.push(tempObj);
       }
@@ -78,11 +84,43 @@ const processConfigXMLData = (dataObject) => {
         tempObj.qNum = j + 1;
         tempObj.type = "text";
         tempObj.required = isRequired;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.note = surveyData[j][2].elements[0].text;
-        tempObj.limitLength = JSON.parse(surveyData[j][0].attributes.maxlength);
-        tempObj.restricted = surveyData[j][0].attributes.restricted;
-        tempObj.limited = surveyData[j][0].attributes.limited;
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          tempObj.note = "";
+        }
+
+        try {
+          tempObj.limitLength = JSON.parse(
+            surveyData[j][0].attributes.maxlength
+          );
+        } catch (error) {
+          console.log(error);
+          tempObj.limitLength = "999";
+        }
+
+        try {
+          tempObj.restricted = surveyData[j][0].attributes.restricted;
+        } catch (error) {
+          console.log(error);
+          tempObj.restricted = "false";
+        }
+
+        try {
+          tempObj.limited = surveyData[j][0].attributes.limited;
+        } catch (error) {
+          console.log(error);
+          tempObj.limited = "false";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -98,9 +136,28 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "textarea";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.placeholder = surveyData[j][2].elements[0].text;
+
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = false;
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.placeholder = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.placeholder = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -116,10 +173,35 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "radio";
-        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.note = surveyData[j][2].elements[0].text;
-        tempObj.options = surveyData[j][0].elements[0].text;
+
+        try {
+          tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.note = "";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -135,9 +217,28 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "select";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.options = surveyData[j][0].elements[0].text;
+
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -153,9 +254,27 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "checkbox";
-        tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.options = surveyData[j][0].elements[0].text;
+        try {
+          tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -171,10 +290,34 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "rating2";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.scale = surveyData[j][0].attributes.scale;
-        tempObj.options = surveyData[j][0].elements[0].text;
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.scale = surveyData[j][0].attributes.scale;
+        } catch (error) {
+          console.log(error);
+          tempObj.scale = "Yes;;;No";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -190,9 +333,27 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "rating5";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.options = surveyData[j][0].elements[0].text;
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -208,9 +369,27 @@ const processConfigXMLData = (dataObject) => {
         }
         tempObj.qNum = j + 1;
         tempObj.type = "rating10";
-        tempObj.required = surveyData[j][0].attributes.required;
-        tempObj.label = surveyData[j][1].elements[0].text;
-        tempObj.options = surveyData[j][0].elements[0].text;
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
