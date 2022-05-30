@@ -1,5 +1,5 @@
 const createPresortSlice = (set, get) => ({
-  triggerPresortModal: false,
+  triggerPresortModal: true,
   presortNoReturn: false,
   presortPosCards: [],
   presortNeuCards: [],
