@@ -40,7 +40,8 @@ const SurveyRadioElement = (props) => {
     array = array.filter(function (e) {
       return e;
     });
-    array = array.map((x) => x.replace(/\s/g, ""));
+    // array = array.map((x) => x.replace(/\s/g, ""));
+    array = array.map((x) => x.trim());
     return array;
   };
 
