@@ -29,6 +29,7 @@ const SubmitResultsButton = (props) => {
     e.preventDefault();
     e.target.disabled = true;
     console.log(JSON.stringify(props.results, null, 2));
+    console.log(props.results);
     console.log(window.firebase.apps.length);
 
     window.firebase
