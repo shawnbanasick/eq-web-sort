@@ -10,6 +10,7 @@ import SaveLocalDataToLocalStorageButton from "./SaveLocalDataToLocalStorageButt
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import LocalSubmitSuccessModal from "./LocalSubmitSuccessModal";
+import SubmitButtonGS from "./SubmitButtonGS";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -165,6 +166,26 @@ const SubmitPage = () => {
         <ContainerDiv>
           <SaveLocalDataToLocalStorageButton results={transmissionResults} />
         </ContainerDiv>
+      </React.Fragment>
+    );
+  } else if (configObj.firebaseOrLocal === "gSheets") {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <SubmitButtonGS
+            results={transmissionResults}
+            api={configObj.steinApi}
+          />
+
+          {displaySubmitFallback ? (
+            <SubmitFallback results={transmissionResults} />
+          ) : (
+            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+          )}
+        </ContainerDiv>
+        {/* <h1>test</h1> */}
       </React.Fragment>
     );
   } else {

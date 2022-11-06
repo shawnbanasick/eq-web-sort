@@ -3,7 +3,12 @@ const createSubmitSlice = (set, get) => ({
   displayGoodbyeMessage: false,
   triggerLocalSubmitSuccessModal: false,
   triggerTransmissionOKModal: false,
+  triggerTransmissionFailModal: false,
+  submitFailNumber: 0,
 
+  setTriggerTransmissionFailModal: (input) => {
+    set(() => ({ triggerTransmissionFailModal: input }));
+  },
   setTriggerTransmissionOKModal: (input) => {
     set(() => ({ triggerTransmissionOKModal: input }));
   },

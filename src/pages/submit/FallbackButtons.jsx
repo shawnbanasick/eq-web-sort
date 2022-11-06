@@ -29,7 +29,7 @@ const SubmitResultsButton = (props) => {
       URL.revokeObjectURL(a.href);
     }
 
-    download(finalResults, "EasyHtmlQ Results.txt", "text/plain");
+    download(finalResults, "EQ_Web_Sort_Results.txt", "text/plain");
   };
 
   return (
