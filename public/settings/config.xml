@@ -30,7 +30,7 @@
    <item id="allowUnforcedSorts">false</item>
    <item id="warnOverloadedColumn">true</item>
    <item id="setMinCardHeight">false</item>
-   <item id="minCardHeight">180</item>
+   <item id="minCardHeight">120</item>
 
 
    <!-- POSTSORT -->
