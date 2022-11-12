@@ -66,6 +66,10 @@ const SortGrid = (props) => {
   const yellowCardColor = configObj.yellowCardColor;
   const pinkCardColor = configObj.pinkCardColor;
 
+  // setMinCardHeight is boolean
+  const setMinCardHeight = configObj.setMinCardHeight;
+  const minCardHeight = +configObj.minCardHeight;
+
   // MAP out SORT COLUMNS component before render
   // code inside render so that column lists update automatically
   const qSortHeaders = [...mapObj.qSortHeaders];
@@ -209,8 +213,8 @@ const SortGrid = (props) => {
   // get user settings
   const cardFontSize = props.cardFontSize;
 
-  // todo - reset to researcher specified in next version
-  const horiCardMinHeight = 50;
+  // just the hori container size, not card size
+  let horiCardMinHeight = 50;
 
   // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
@@ -219,7 +223,11 @@ const SortGrid = (props) => {
       (props.dimensions.height - 320) /
       maxNumCardsInCol
     ).toFixed();
-    setCardHeight(+cardHeight);
+    if (setMinCardHeight === true || setMinCardHeight === "true") {
+      setCardHeight(minCardHeight);
+    } else {
+      setCardHeight(+cardHeight);
+    }
   }
 
   // adjust width by q sort design
