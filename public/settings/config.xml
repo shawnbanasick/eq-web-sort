@@ -18,16 +18,18 @@
    <item id="accessCode">demo</item>
 
 
+   <!-- FONT OPTIONS -->  
+   <item id="setDefaultFontSize">true</item>
+   <item id="defaultFontSize">25</item>
+   <item id="defaultFontColor">#2a2a2a</item>
+
+
    <!-- PRESORT -->
    <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
-   <item id="setPresortDefaultFontSize">true</item>
-   <item id="presortDefaultFontSize">25</item>
-   <item id="presortFontColor">#2a2a2a</item>
 
- 
 
    <!-- SORT -->
    <item id="condOfInstFontSize">20</item>
@@ -35,9 +37,6 @@
    <item id="warnOverloadedColumn">true</item>
    <item id="setMinCardHeight">false</item>
    <item id="minCardHeight">120</item>
-   <item id="setSortDefaultFontSize">true</item>
-   <item id="sortDefaultFontSize">25</item>
-   <item id="sortFontColor">#2a2a2a</item>
 
 
    <!-- POSTSORT -->

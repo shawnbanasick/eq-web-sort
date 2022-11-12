@@ -5,7 +5,6 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-import { reduce } from "lodash";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -50,7 +49,7 @@ function PresortDND(props) {
 
   const itemsFromBackend = props.statements;
   const cardFontSize = `${props.cardFontSize}px`;
-  let presortFontColor = configObj.presortFontColor;
+  let defaultFontColor = configObj.defaultFontColor;
 
   const cardHeight = 210;
 
@@ -333,7 +332,7 @@ function PresortDND(props) {
                                       backgroundColor: snapshot.isDragging
                                         ? item.backgroundColor
                                         : item.backgroundColor,
-                                      color: presortFontColor,
+                                      color: defaultFontColor,
                                       ...provided.draggableProps.style,
                                     }}
                                   >

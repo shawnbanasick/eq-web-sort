@@ -41,13 +41,6 @@ const PresortPage = (props) => {
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
-  if (
-    configObj.setPresortDefaultFontSize === "true" ||
-    configObj.setPresortDefaultFontSize === true
-  ) {
-    cardFontSize = configObj.presortDefaultFontSize;
-  }
-
   // set next button display
   setDisplayNextButton(true);
 

@@ -65,6 +65,13 @@ const LandingPage = () => {
 
     setCardFontSize(fontSizeEstimate);
 
+    if (
+      configObj.setDefaultFontSize === "true" ||
+      configObj.setDefaultFontSize === true
+    ) {
+      setCardFontSize(configObj.defaultFontSize);
+    }
+
     // set partId if in URL
     let urlName = parseParams(window.location.href);
     if (urlName !== undefined) {
@@ -75,6 +82,8 @@ const LandingPage = () => {
   }, [
     setUrlUsercode,
     configObj.initialScreen,
+    configObj.setDefaultFontSize,
+    configObj.defaultFontSize,
     setCardFontSize,
     setDisplayNextButton,
     mapObj,
