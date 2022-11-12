@@ -23,6 +23,7 @@ class SortColumn extends React.Component {
       greenCardColor,
       yellowCardColor,
       pinkCardColor,
+      fontColor,
     } = this.props;
 
     // had to push column sort value to state because didn't want to edit dnd library result object
@@ -72,7 +73,8 @@ class SortColumn extends React.Component {
                             `${item.cardColor}`,
                             greenCardColor,
                             yellowCardColor,
-                            pinkCardColor
+                            pinkCardColor,
+                            fontColor
                           )}
                         >
                           {statementHtml}

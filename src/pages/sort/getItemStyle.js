@@ -7,7 +7,8 @@ const getItemStyle = (
   cardColor,
   greenCardColor,
   yellowCardColor,
-  pinkCardColor
+  pinkCardColor,
+  fontColor
 ) => {
   let newCardColor;
   if (cardColor === "greenSortCard") {
@@ -27,6 +28,7 @@ const getItemStyle = (
     margin: `0 2px 8px 3px`,
     lineHeight: `1.3em`,
     fontSize: cardFontSize,
+    color: fontColor,
     height: cardHeight,
     width: cardWidth,
     borderRadius: `5px`,

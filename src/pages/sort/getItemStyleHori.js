@@ -9,7 +9,8 @@ const getItemStyleHori = (
   cardFontSize,
   greenCardColor,
   yellowCardColor,
-  pinkCardColor
+  pinkCardColor,
+  fontColor
 ) => {
   let newSortValue = sortValue;
   let newCardColor = cardColor;
@@ -35,6 +36,7 @@ const getItemStyleHori = (
     WebkitUserSelect: "none",
     lineHeight: `1.3em`,
     fontSize: cardFontSize,
+    color: fontColor,
     height: cardHeight,
     minWidth: columnWidth,
     maxWidth: columnWidth,

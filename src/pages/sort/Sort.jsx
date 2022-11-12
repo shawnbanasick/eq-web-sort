@@ -53,6 +53,7 @@ const Sort = () => {
   setDisplayNextButton(true);
 
   const headerBarColor = configObj.headerBarColor;
+  const fontColor = configObj.defaultFontColor;
 
   const sortDisagreement = ReactHtmlParser(
     decodeHTML(langObj.sortDisagreement)
@@ -146,7 +147,12 @@ const Sort = () => {
         <SortColGuides columnWidth={columnWidth} />
       </SortTitleBarContainer>
       <SortGridContainer marginTop={topMargin}>
-        <SortGrid dimensions={dimensions} cardFontSize={cardFontSize} />;
+        <SortGrid
+          dimensions={dimensions}
+          cardFontSize={cardFontSize}
+          fontColor={fontColor}
+        />
+        ;
       </SortGridContainer>
     </React.Fragment>
   );

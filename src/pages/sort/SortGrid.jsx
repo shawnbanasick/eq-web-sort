@@ -212,6 +212,7 @@ const SortGrid = (props) => {
 
   // get user settings
   const cardFontSize = props.cardFontSize;
+  const fontColor = props.fontColor;
 
   // just the hori container size, not card size
   let horiCardMinHeight = 50;
@@ -289,6 +290,7 @@ const SortGrid = (props) => {
         greenCardColor={greenCardColor}
         yellowCardColor={yellowCardColor}
         pinkCardColor={pinkCardColor}
+        fontColor={fontColor}
       />
     );
   }); // end map of sort columns
@@ -338,7 +340,8 @@ const SortGrid = (props) => {
                               cardFontSize,
                               greenCardColor,
                               yellowCardColor,
-                              pinkCardColor
+                              pinkCardColor,
+                              fontColor
                             )}
                           >
                             {statementHtml}
