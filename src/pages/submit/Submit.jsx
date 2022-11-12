@@ -168,7 +168,7 @@ const SubmitPage = () => {
         </ContainerDiv>
       </React.Fragment>
     );
-  } else if (configObj.firebaseOrLocal === "gSheets") {
+  } else if (configObj.firebaseOrLocal === "sheets") {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
@@ -176,7 +176,7 @@ const SubmitPage = () => {
           <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
           <SubmitButtonGS
             results={transmissionResults}
-            api={configObj.steinApi}
+            api={configObj.steinApiUrl}
           />
 
           {displaySubmitFallback ? (
