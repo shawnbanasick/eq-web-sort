@@ -31,7 +31,7 @@ const PresortPage = (props) => {
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
   const statementsObj = useSettingsStore(getStatementsObj);
-  const cardFontSize = useStore(getCardFontSize);
+  let cardFontSize = useStore(getCardFontSize);
   const isLoggedIn = useSettingsStore(getIsLoggedIn);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
@@ -40,6 +40,13 @@ const PresortPage = (props) => {
   const setResults = useStore(getSetResults);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
+
+  if (
+    configObj.setPresortDefaultFontSize === "true" ||
+    configObj.setPresortDefaultFontSize === true
+  ) {
+    cardFontSize = configObj.presortDefaultFontSize;
+  }
 
   // set next button display
   setDisplayNextButton(true);
