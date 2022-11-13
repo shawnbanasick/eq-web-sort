@@ -80,6 +80,7 @@ const SubmitResultsButton = (props) => {
       sortArray.forEach((item, index) => (sortObj["s" + (index + 1)] = +item));
       sortObj.randomId = rawData.randomId;
       sortObj.partId = rawData.partId;
+      sortObj.urlUsercode = rawData.urlUsercode;
 
       console.log(JSON.stringify(sortObj, null, 2));
       store.append("Sheet2", [sortObj]).then((res) => {
