@@ -39,7 +39,7 @@ const Sort = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
-  const cardFontSize = useStore(getCardFontSize);
+  let cardFontSize = useStore(getCardFontSize);
   const columnWidth = useStore(getColumnWidth);
   const topMargin = useStore(getTopMargin);
   const results = useStore(getResults);
@@ -48,6 +48,10 @@ const Sort = () => {
   const setTopMargin = useStore(getSetTopMargin);
   const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
+
+  // shrink from sort size
+  // todo - add configurator default
+  cardFontSize = cardFontSize - 5;
 
   // set next button display
   setDisplayNextButton(true);
