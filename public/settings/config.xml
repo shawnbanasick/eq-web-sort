@@ -3,6 +3,7 @@
    <config version="1.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
+   <!-- options: firebase, local, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
    <item id="setupTarget">sheets</item>
    <item id="firebaseOrLocal">sheets</item>
