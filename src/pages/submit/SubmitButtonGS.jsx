@@ -14,6 +14,11 @@ const getSubmitFailNumber = (state) => state.submitFailNumber;
 const getSetTrigTranFailMod = (state) => state.setTriggerTransmissionFailModal;
 const getSetTrigTransOKModal = (state) => state.setTriggerTransmissionOKModal;
 const getSetDisplaySubmitFallback = (state) => state.setDisplaySubmitFallback;
+const getTransmittingData = (state) => state.transmittingData;
+const getSetTransmittingData = (state) => state.setTransmittingData;
+const getCheckInternetConnection = (state) => state.checkInternetConnection;
+const getSetCheckInternetConnection = (state) =>
+  state.setCheckInternetConnection;
 
 const SubmitResultsButton = (props) => {
   // STATE
@@ -26,12 +31,25 @@ const SubmitResultsButton = (props) => {
   const setTriggerTransmissionFailModal = useStore(getSetTrigTranFailMod);
   const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
   const setDisplaySubmitFallback = useStore(getSetDisplaySubmitFallback);
+  let transmittingData = useStore(getTransmittingData);
+  const setTransmittingData = useStore(getSetTransmittingData);
+  let checkInternetConnection = useStore(getCheckInternetConnection);
+  const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
 
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
+
+  const store = new SteinStore(apiString);
 
   const handleClick = (e) => {
     e.preventDefault();
     e.target.disabled = true;
+    setTransmittingData(true);
+    setCheckInternetConnection(false);
+
+    setTimeout(() => {
+      setTransmittingData(false);
+      setCheckInternetConnection(true);
+    }, 20000);
 
     // create results object for transmission
     let formattedResultsObj = {};
@@ -42,14 +60,27 @@ const SubmitResultsButton = (props) => {
     }
 
     // POST TO STEIN
-    const store = new SteinStore(apiString);
 
     console.log(JSON.stringify(formattedResultsObj, null, 2));
     store.append("Sheet1", [formattedResultsObj]).then((res) => {
       if (Object.keys(res)[0] === "error") {
         console.log("there was an error");
-        setTriggerTransmissionFailModal(true);
+        // setTriggerTransmissionFailModal(true);
+
+        // re-enable submit button and log error number for fallback
         e.target.disabled = false;
+        setTransmittingData(false);
+
+        submitFailNumber = submitFailNumber + 1;
+        console.log(submitFailNumber);
+
+        if (submitFailNumber > 2) {
+          console.log("display fallback set to true");
+          setDisplaySubmitFallback(true);
+          displaySubmitFallback = true;
+        } else {
+          setTriggerTransmissionFailModal(true);
+        }
       } else {
         // submission success
         console.log(res);
@@ -73,6 +104,7 @@ const SubmitResultsButton = (props) => {
       }
     });
 
+    /*
     if (props.results.sort !== "no data") {
       let rawSort = props.results.sort;
       let sortArray = rawSort.split("|");
@@ -83,6 +115,7 @@ const SubmitResultsButton = (props) => {
       sortObj.urlUsercode = rawData.urlUsercode;
 
       console.log(JSON.stringify(sortObj, null, 2));
+
       store.append("Sheet2", [sortObj]).then((res) => {
         if (Object.keys(res)[0] === "error") {
           console.log("there was an error");
@@ -120,6 +153,7 @@ const SubmitResultsButton = (props) => {
         }
       });
     }
+    */
   };
 
   if (displaySubmitFallback === true) {
@@ -136,9 +170,16 @@ const SubmitResultsButton = (props) => {
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
-      <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
-        {btnTransferText}
-      </StyledButton>
+      {transmittingData ? (
+        <TransmittingSpin />
+      ) : (
+        <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
+          {btnTransferText}
+        </StyledButton>
+      )}
+      {checkInternetConnection && (
+        <WarningDiv>Check your internet connection</WarningDiv>
+      )}
     </React.Fragment>
   );
 };
@@ -191,6 +232,35 @@ const DisabledButton = styled.button`
   margin-top: 30px;
   margin-bottom: 20px;
   background-color: lightgray;
+`;
+
+const TransmittingSpin = styled.div`
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #337ab7;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+`;
+
+const WarningDiv = styled.div`
+  background-color: lightpink;
+  padding: 5px;
+  border-radius: 3px;
+  font-weight: bold;
 `;
 
 /* 

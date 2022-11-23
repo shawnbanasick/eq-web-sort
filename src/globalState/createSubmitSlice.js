@@ -5,7 +5,15 @@ const createSubmitSlice = (set, get) => ({
   triggerTransmissionOKModal: false,
   triggerTransmissionFailModal: false,
   submitFailNumber: 0,
+  transmittingData: false,
+  checkInternetConnection: false,
 
+  setCheckInternetConnection: (input) => {
+    set(() => ({ checkInternetConnection: input }));
+  },
+  setTransmittingData: (input) => {
+    set(() => ({ transmittingData: input }));
+  },
   setTriggerTransmissionFailModal: (input) => {
     set(() => ({ triggerTransmissionFailModal: input }));
   },
