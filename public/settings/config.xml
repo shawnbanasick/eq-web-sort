@@ -6,8 +6,13 @@
    <!-- options: firebase, local, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
    <item id="setupTarget">sheets</item>
-   <item id="firebaseOrLocal">sheets</item>
+   <item id="firebaseOrLocal">email</item>
    <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
+
+   <item id="emailAddress">banasick@gmail.com</item>  
+   <item id="emailSubject">EQ Websort Results</item>  
+   <item id="clipboardText">Copy to Clipboard</item>  
+
 
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>

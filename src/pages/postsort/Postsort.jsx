@@ -10,6 +10,7 @@ import ReactHtmlParser from "react-html-parser";
 import PostsortHelpModal from "./PostsortHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import PromptUnload from "../../utilities/PromptUnload";
 
 /* eslint react/prop-types: 0 */
 
@@ -111,6 +112,7 @@ const PostSort = () => {
 
   return (
     <div>
+      <PromptUnload />
       <PostsortHelpModal />
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
       <CardsContainer>

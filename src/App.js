@@ -13,7 +13,7 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import LoadingScreen from "./pages/landing/LoadingScreen";
-import PromptUnload from "./utilities/PromptUnload";
+// import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
@@ -148,7 +148,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <PromptUnload />
         <Switch>
           <Route exact path="/presort" component={PresortPage} />
           <Route exact path="/sort" component={SortPage} />

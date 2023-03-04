@@ -17,6 +17,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import SurveyHelpModal from "./SurveyHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import PromptUnload from "../../utilities/PromptUnload";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -118,6 +119,7 @@ const SurveyPage = () => {
 
   return (
     <React.Fragment>
+      <PromptUnload />
       <SurveyHelpModal />
       <AnswerAllSurveyQuestionsModal />
       <SortTitleBar background={headerBarColor}>{surveyHeader}</SortTitleBar>

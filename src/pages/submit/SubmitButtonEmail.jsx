@@ -6,14 +6,11 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-import PromptUnload from "../../utilities/PromptUnload";
+import CopyToClipboardButton from "./CopyToClipboardButton";
 
 const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getSubmitFailNumber = (state) => state.submitFailNumber;
-const getSetTrigTranFailMod = (state) => state.setTriggerTransmissionFailModal;
-const getSetTrigTransOKModal = (state) => state.setTriggerTransmissionOKModal;
-const getSetDisplaySubmitFallback = (state) => state.setDisplaySubmitFallback;
 const getTransmittingData = (state) => state.transmittingData;
 const getSetTransmittingData = (state) => state.setTransmittingData;
 const getCheckInternetConnection = (state) => state.checkInternetConnection;
@@ -23,14 +20,13 @@ const getSetCheckInternetConnection = (state) =>
 const SubmitResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const rawData = props.results;
+
   let displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  let submitFailNumber = useStore(getSubmitFailNumber);
-  const setTriggerTransmissionFailModal = useStore(getSetTrigTranFailMod);
-  const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
-  const setDisplaySubmitFallback = useStore(getSetDisplaySubmitFallback);
   let transmittingData = useStore(getTransmittingData);
   const setTransmittingData = useStore(getSetTransmittingData);
-  let checkInternetConnection = useStore(getCheckInternetConnection);
+  // let checkInternetConnection = useStore(getCheckInternetConnection);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
 
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
@@ -39,78 +35,33 @@ const SubmitResultsButton = (props) => {
     e.preventDefault();
     e.target.disabled = true;
 
-    // setup for client-side internet connection fail case
+    // create results object for transmission
+    let formattedResultsTxt = ``;
+    for (const [key, value] of Object.entries(rawData)) {
+      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
+    }
+
     setTransmittingData(true);
     setCheckInternetConnection(false);
+
     setTimeout(() => {
       setTransmittingData(false);
       setCheckInternetConnection(true);
-    }, 20000);
+    }, 200);
 
-    console.log(JSON.stringify(props.results, null, 2));
-    console.log(props.results);
-    console.log(window.firebase.apps.length);
+    // POST TO EMail
+    console.log(JSON.stringify(formattedResultsTxt, null, 2));
 
-    window.firebase
-      .auth()
-      .signInAnonymously()
-      .then(() => {
-        // Signed in..
-        window.rootRef.push(props.results, function (error) {
-          if (error) {
-            // data error action -  modal
-            console.log("data error - there was an error at rootRef level!");
-            setTriggerTransmissionFailModal(true);
-            e.target.disabled = false;
-          } else {
-            // do success action - modal
-            setTriggerTransmissionOKModal(true);
-            console.log("success! pushed to database");
-            localStorage.removeItem("cumulativelandingPageDuration");
-            localStorage.removeItem("cumulativepresortPageDuration");
-            localStorage.removeItem("cumulativesortPageDuration");
-            localStorage.removeItem("cumulativepostsortPageDuration");
-            localStorage.removeItem("cumulativesurveyPageDuration");
-            localStorage.removeItem("lastAccesslandingPage");
-            localStorage.removeItem("lastAccesspresortPage");
-            localStorage.removeItem("lastAccesssortPage");
-            localStorage.removeItem("lastAccesspostsortPage");
-            localStorage.removeItem("lastAccesssurveyPage");
-            localStorage.removeItem("timeOnlandingPage");
-            localStorage.removeItem("timeOnpresortPage");
-            localStorage.removeItem("timeOnsortPage");
-            localStorage.removeItem("timeOnpostsortPage");
-            localStorage.removeItem("timeOnsurveyPage");
-          }
-        });
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        submitFailNumber = submitFailNumber + 1;
-        console.log(submitFailNumber);
-        setTransmittingData(false);
-        // Firebase connection error
-        console.log("Connection error - there was an error at firebase level!");
-        setTriggerTransmissionFailModal(true);
-        console.log(errorCode, errorMessage);
-        e.target.disabled = false;
-
-        if (submitFailNumber > 2) {
-          console.log("display fallback set to true");
-          setDisplaySubmitFallback(true);
-          displaySubmitFallback = true;
-        }
-      });
-    console.log("submission processed");
+    window.open(
+      `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `
+    );
   };
 
   if (displaySubmitFallback === true) {
     return (
       <React.Fragment>
-        <PromptUnload />
         <SubmitSuccessModal />
-        <SubmitFailureModal />
+
         <DisabledButton tabindex="0">{btnTransferText}</DisabledButton>
       </React.Fragment>
     );
@@ -118,7 +69,6 @@ const SubmitResultsButton = (props) => {
 
   return (
     <React.Fragment>
-      <PromptUnload />
       <SubmitSuccessModal />
       <SubmitFailureModal />
       {transmittingData ? (
@@ -128,9 +78,7 @@ const SubmitResultsButton = (props) => {
           {btnTransferText}
         </StyledButton>
       )}
-      {checkInternetConnection && (
-        <WarningDiv>Check your internet connection</WarningDiv>
-      )}
+      <CopyToClipboardButton results={rawData} />
     </React.Fragment>
   );
 };

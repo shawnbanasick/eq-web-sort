@@ -11,6 +11,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import SortColGuides from "./SortColGuides";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import PromptUnload from "../../utilities/PromptUnload";
 
 function debounce(fn, ms) {
   let timer;
@@ -136,6 +137,7 @@ const Sort = () => {
 
   return (
     <React.Fragment>
+      <PromptUnload />
       <SortHelpModal />
       <PreventSortNavModal />
       <SortingFinishedModal />

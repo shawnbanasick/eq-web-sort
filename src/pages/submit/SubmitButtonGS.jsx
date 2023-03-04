@@ -7,6 +7,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import SteinStore from "stein-js-client";
+import PromptUnload from "../../utilities/PromptUnload";
 
 const getLangObj = (state) => state.langObj;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
@@ -159,6 +160,7 @@ const SubmitResultsButton = (props) => {
   if (displaySubmitFallback === true) {
     return (
       <React.Fragment>
+        <PromptUnload />
         <SubmitSuccessModal />
         <SubmitFailureModal />
         <DisabledButton tabindex="0">{btnTransferText}</DisabledButton>
@@ -168,6 +170,7 @@ const SubmitResultsButton = (props) => {
 
   return (
     <React.Fragment>
+      <PromptUnload />
       <SubmitSuccessModal />
       <SubmitFailureModal />
       {transmittingData ? (

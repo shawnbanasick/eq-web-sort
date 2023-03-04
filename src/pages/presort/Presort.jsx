@@ -12,6 +12,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import PromptUnload from "../../utilities/PromptUnload";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -90,6 +91,7 @@ const PresortPage = (props) => {
 
   return (
     <React.Fragment>
+      <PromptUnload />
       <PresortModal />
       <PresortFinishedModal />
       <PresortPreventNavModal />

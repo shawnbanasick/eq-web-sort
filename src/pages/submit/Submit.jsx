@@ -11,6 +11,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import LocalSubmitSuccessModal from "./LocalSubmitSuccessModal";
 import SubmitButtonGS from "./SubmitButtonGS";
+import SubmitButtonEmail from "./SubmitButtonEmail";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -178,6 +179,23 @@ const SubmitPage = () => {
             results={transmissionResults}
             api={configObj.steinApiUrl}
           />
+
+          {displaySubmitFallback ? (
+            <SubmitFallback results={transmissionResults} />
+          ) : (
+            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+          )}
+        </ContainerDiv>
+        {/* <h1>test</h1> */}
+      </React.Fragment>
+    );
+  } else if (configObj.firebaseOrLocal === "email") {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <SubmitButtonEmail results={transmissionResults} />
 
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
