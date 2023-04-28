@@ -13,7 +13,7 @@ const getConfigObj = (state) => state.configObj;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
 const getTransmittingData = (state) => state.transmittingData;
 const getSetTransmittingData = (state) => state.setTransmittingData;
-const getCheckInternetConnection = (state) => state.checkInternetConnection;
+// const getCheckInternetConnection = (state) => state.checkInternetConnection;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
 
@@ -49,12 +49,10 @@ const SubmitResultsButton = (props) => {
       setCheckInternetConnection(true);
     }, 200);
 
-    // POST TO EMail
+    // Pass to Email client
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
 
-    window.open(
-      `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `
-    );
+    window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `;
   };
 
   if (displaySubmitFallback === true) {
@@ -155,6 +153,7 @@ const TransmittingSpin = styled.div`
   }
 `;
 
+/* 
 const WarningDiv = styled.div`
   background-color: lightpink;
   padding: 5px;
@@ -162,7 +161,6 @@ const WarningDiv = styled.div`
   font-weight: bold;
 `;
 
-/* 
   const demoData = {
     projectName: "My_Q_project",
     partId: "jimbo-wilbur",
