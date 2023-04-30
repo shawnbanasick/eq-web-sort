@@ -5,38 +5,53 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 
 const getLangObj = (state) => state.langObj;
-const getConfigObj = (state) => state.configObj;
 
 const CopyToClipboardButton = (props) => {
   console.log("props: " + JSON.stringify(props));
 
   // STATE
   // const langObj = useSettingsStore(getLangObj);
-  const configObj = useSettingsStore(getConfigObj);
+  //const btnTransferText = ReactHtmlParser(decodeHTML(langObj.clipboardText));
+  const [result, setResult] = useState("");
 
-  const btnTransferText = ReactHtmlParser(decodeHTML(configObj.clipboardText));
+  // async generic function for copying to clipboard
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setResult("success");
+    } catch (err) {
+      setResult("error");
+      console.error("Failed to copy: ", err);
+    } finally {
+      setTimeout(() => setResult(""), 3000);
+    }
+  }
 
   const handleClick = (e) => {
-    // create results object for transmission
-    let formattedResultsTxt = ``;
-    for (const [key, value] of Object.entries(props.results)) {
-      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
-    }
-
-    navigator.clipboard.writeText(formattedResultsTxt);
+    copyToClipboard(props.content).then(() => {
+      console.log("copied to clipboard");
+    });
   };
 
   return (
     <React.Fragment>
-      <StyledButton tabindex="1" onClick={(e) => handleClick(e)}>
-        {btnTransferText}
-      </StyledButton>
+      <ContainerDiv>
+        <StyledButton tabindex="1" onClick={(e) => handleClick(e)}>
+          {props.text}
+        </StyledButton>
+        <MessageDiv>
+          {result === "success" && "Copied!"}
+          {result === "error" && `Error: Please try again.`}
+        </MessageDiv>
+      </ContainerDiv>
     </React.Fragment>
   );
 };
+
 export default CopyToClipboardButton;
 
 const StyledButton = styled.button`
+  grid-area: b;
   border-color: #2e6da4;
   color: white;
   font-size: 1.2em;
@@ -58,28 +73,19 @@ const StyledButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.secondary};
   }
-
-  &:focus {
-    background-color: green;
-  }
 `;
 
-const DisabledButton = styled.button`
-  border-color: lightgray;
-  color: white;
+const ContainerDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  grid-template-areas: "a b c";
+`;
+
+const MessageDiv = styled.div`
+  grid-area: c;
   font-size: 1.2em;
   font-weight: bold;
-  padding: 0.25em 1em;
-  border-radius: 3px;
-  text-decoration: none;
-  width: 200px;
-  height: 50px;
-  justify-self: right;
-  margin-right: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  background-color: lightgray;
+  margin-top: 0.7em;
 `;

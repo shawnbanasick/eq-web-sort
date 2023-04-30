@@ -11,8 +11,6 @@
 
    <item id="emailAddress">banasick@gmail.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
-   <item id="clipboardText">Copy to Clipboard</item>  
-
 
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>

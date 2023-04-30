@@ -93,6 +93,8 @@
        
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
+        <item id="btnTransferEmail">Open Email Client and Send Results</item>
+
         <item id="transferHead">Final Step</item>
         <item id="transferTextAbove">{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
@@ -103,5 +105,8 @@
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
         <item id="btnDownload">Download</item>   
         <item id="goodbyeMessage">Thank You! {{{br /}}}You can now close the browser tab</item>   
+        <item id="clipboardResults">Copy Results to Clipboard</item>  
+        <item id="clipboardEmail">Copy Email Address to Clipboard</item>  
+
 
    </language>

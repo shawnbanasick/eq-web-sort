@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
@@ -17,41 +17,44 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
 
+
 const SubmitResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
-  const rawData = props.results;
+  // const rawData = props.results;
 
   let displaySubmitFallback = useStore(getDisplaySubmitFallback);
   let transmittingData = useStore(getTransmittingData);
   const setTransmittingData = useStore(getSetTransmittingData);
   // let checkInternetConnection = useStore(getCheckInternetConnection);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
+  //const buttonLabel = ReactHtmlParser(decodeHTML(langObj.clipboardResults));
 
-  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
+  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransferEmail));
+
+  useEffect(() => {
+    // create results object for transmission - * is a delimiter
+    let formattedResultsTxt = ``;
+    for (const [key, value] of Object.entries(props.results)) {
+      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
+    }
+    console.log("formattedResultsTxt: " + formattedResultsTxt);
+  };
+  
+
 
   const handleClick = (e) => {
     e.preventDefault();
-    e.target.disabled = true;
-
-    // create results object for transmission
-    let formattedResultsTxt = ``;
-    for (const [key, value] of Object.entries(rawData)) {
-      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
-    }
-
     setTransmittingData(true);
     setCheckInternetConnection(false);
-
     setTimeout(() => {
       setTransmittingData(false);
       setCheckInternetConnection(true);
     }, 200);
-
+    let formattedResultsTxt = formatResults(props.results);
     // Pass to Email client
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
-
     window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `;
   };
 
@@ -69,20 +72,24 @@ const SubmitResultsButton = (props) => {
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
-      {transmittingData ? (
-        <TransmittingSpin />
-      ) : (
+      <ContainerDiv>
         <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
           {btnTransferText}
         </StyledButton>
-      )}
-      <CopyToClipboardButton results={rawData} />
+
+        {transmittingData ? <TransmittingSpin /> : null}
+      </ContainerDiv>
+      <CopyToClipboardButton
+        content={() => formatResults(props.results)}
+        text={langObj.clipboardResults}
+      />
     </React.Fragment>
   );
 };
 export default SubmitResultsButton;
 
 const StyledButton = styled.button`
+  grid-area: b;
   border-color: #2e6da4;
   color: white;
   font-size: 1.2em;
@@ -90,7 +97,7 @@ const StyledButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 200px;
+  width: 400px;
   height: 50px;
   justify-self: right;
   margin-right: 35px;
@@ -109,6 +116,14 @@ const StyledButton = styled.button`
   &:focus {
     background-color: ${({ theme }) => theme.focus};
   }
+`;
+
+const ContainerDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  grid-template-areas: "a b c";
 `;
 
 const DisabledButton = styled.button`
@@ -132,7 +147,11 @@ const DisabledButton = styled.button`
 `;
 
 const TransmittingSpin = styled.div`
-  display: inline-block;
+  grid-area: c;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 0.7em;
+
   width: 50px;
   height: 50px;
   border: 5px solid rgba(255, 255, 255, 0.3);
