@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
@@ -17,42 +17,38 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
 
-
 const SubmitResultsButton = (props) => {
+  console.log("props: " + JSON.stringify(props));
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
-  // const rawData = props.results;
+  const rawData = props.results;
+  const emailAddress = configObj.emailAddress;
 
   let displaySubmitFallback = useStore(getDisplaySubmitFallback);
   let transmittingData = useStore(getTransmittingData);
   const setTransmittingData = useStore(getSetTransmittingData);
-  // let checkInternetConnection = useStore(getCheckInternetConnection);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
-  //const buttonLabel = ReactHtmlParser(decodeHTML(langObj.clipboardResults));
-
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransferEmail));
-
-  useEffect(() => {
-    // create results object for transmission - * is a delimiter
-    let formattedResultsTxt = ``;
-    for (const [key, value] of Object.entries(props.results)) {
-      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
-    }
-    console.log("formattedResultsTxt: " + formattedResultsTxt);
-  };
-  
-
 
   const handleClick = (e) => {
     e.preventDefault();
     setTransmittingData(true);
     setCheckInternetConnection(false);
+
+    // create results object for transmission - * is a delimiter
+    let formattedResultsTxt = "";
+    for (const [key, value] of Object.entries(props.results)) {
+      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
+    }
+    console.log("formattedResults: " + formattedResultsTxt);
+
+    // check for internet connection
     setTimeout(() => {
       setTransmittingData(false);
       setCheckInternetConnection(true);
     }, 200);
-    let formattedResultsTxt = formatResults(props.results);
+
     // Pass to Email client
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
     window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `;
@@ -80,8 +76,14 @@ const SubmitResultsButton = (props) => {
         {transmittingData ? <TransmittingSpin /> : null}
       </ContainerDiv>
       <CopyToClipboardButton
-        content={() => formatResults(props.results)}
+        type={"results"}
+        content={rawData}
         text={langObj.clipboardResults}
+      />
+      <CopyToClipboardButton
+        type={"email"}
+        content={emailAddress}
+        text={langObj.clipboardEmail}
       />
     </React.Fragment>
   );

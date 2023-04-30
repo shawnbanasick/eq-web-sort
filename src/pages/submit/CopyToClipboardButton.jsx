@@ -7,7 +7,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 const getLangObj = (state) => state.langObj;
 
 const CopyToClipboardButton = (props) => {
-  console.log("props: " + JSON.stringify(props));
+  console.log("incoming: " + JSON.stringify(props.content));
 
   // STATE
   // const langObj = useSettingsStore(getLangObj);
@@ -15,9 +15,19 @@ const CopyToClipboardButton = (props) => {
   const [result, setResult] = useState("");
 
   // async generic function for copying to clipboard
-  async function copyToClipboard(text) {
+  async function copyToClipboard() {
     try {
-      await navigator.clipboard.writeText(text);
+      let formattedResultsTxt = "";
+      if (props.type === "results") {
+        for (const [key, value] of Object.entries(props.content)) {
+          formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
+        }
+      } else {
+        formattedResultsTxt = props.content;
+      }
+      console.log("formattedResults: " + formattedResultsTxt);
+
+      await navigator.clipboard.writeText(formattedResultsTxt);
       setResult("success");
     } catch (err) {
       setResult("error");
