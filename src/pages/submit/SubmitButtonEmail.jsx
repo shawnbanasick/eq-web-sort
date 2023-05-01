@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
@@ -18,17 +18,17 @@ const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
 
 const SubmitResultsButton = (props) => {
-  console.log("props: " + JSON.stringify(props));
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
-  const rawData = props.results;
-  const emailAddress = configObj.emailAddress;
-
   let displaySubmitFallback = useStore(getDisplaySubmitFallback);
   let transmittingData = useStore(getTransmittingData);
   const setTransmittingData = useStore(getSetTransmittingData);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
+  const [showEmailButtons, setShowEmailButtons] = useState(false);
+
+  const rawData = props.results;
+  const emailAddress = configObj.emailAddress;
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransferEmail));
 
   const handleClick = (e) => {
@@ -52,6 +52,7 @@ const SubmitResultsButton = (props) => {
     // Pass to Email client
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
     window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt} `;
+    setShowEmailButtons(true);
   };
 
   if (displaySubmitFallback === true) {
@@ -75,16 +76,27 @@ const SubmitResultsButton = (props) => {
 
         {transmittingData ? <TransmittingSpin /> : null}
       </ContainerDiv>
-      <CopyToClipboardButton
-        type={"results"}
-        content={rawData}
-        text={langObj.clipboardResults}
-      />
-      <CopyToClipboardButton
-        type={"email"}
-        content={emailAddress}
-        text={langObj.clipboardEmail}
-      />
+      {showEmailButtons ? (
+        <EmailButtonDiv>
+          <ContentDiv>
+            Your email client should automatically open with the results in the
+            body. If it doesn't open, please copy your results using the buttons
+            below and paste them manually into your email client.
+          </ContentDiv>
+          <CopyToClipboardButton
+            type={"email"}
+            content={emailAddress}
+            text={langObj.clipboardEmail}
+          />
+          <CopyToClipboardButton
+            type={"results"}
+            content={rawData}
+            text={langObj.clipboardResults}
+          />
+        </EmailButtonDiv>
+      ) : (
+        <SpacerDiv />
+      )}
     </React.Fragment>
   );
 };
@@ -172,6 +184,31 @@ const TransmittingSpin = styled.div`
       -webkit-transform: rotate(360deg);
     }
   }
+`;
+
+const ContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2em;
+  width: 65vw;
+  font-size: 1.35em;
+  margin-top: 25px;
+  padding: 5px;
+  align-self: center;
+`;
+
+const SpacerDiv = styled.div`
+  height: 300px;
+`;
+
+const EmailButtonDiv = styled.div`
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 /* 
