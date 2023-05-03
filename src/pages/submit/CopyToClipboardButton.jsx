@@ -10,9 +10,10 @@ const CopyToClipboardButton = (props) => {
   console.log("incoming: " + JSON.stringify(props.content));
 
   // STATE
-  // const langObj = useSettingsStore(getLangObj);
-  //const btnTransferText = ReactHtmlParser(decodeHTML(langObj.clipboardText));
+  const langObj = useSettingsStore(getLangObj);
   const [result, setResult] = useState("");
+  const copiedText = ReactHtmlParser(decodeHTML(langObj.copiedText));
+  const copyTextError = ReactHtmlParser(decodeHTML(langObj.copyTextError));
 
   // async generic function for copying to clipboard
   async function copyToClipboard() {
@@ -50,8 +51,8 @@ const CopyToClipboardButton = (props) => {
           {props.text}
         </StyledButton>
         <MessageDiv>
-          {result === "success" && "Copied!"}
-          {result === "error" && `Error: Please try again.`}
+          {result === "success" && copiedText}
+          {result === "error" && copyTextError}
         </MessageDiv>
       </ContainerDiv>
     </React.Fragment>

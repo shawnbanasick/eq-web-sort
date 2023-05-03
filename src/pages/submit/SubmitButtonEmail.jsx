@@ -30,6 +30,9 @@ const SubmitResultsButton = (props) => {
   const rawData = props.results;
   const emailAddress = configObj.emailAddress;
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransferEmail));
+  const defaultEmailClientFailText = ReactHtmlParser(
+    decodeHTML(langObj.defaultEmailClientFail)
+  );
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -78,11 +81,7 @@ const SubmitResultsButton = (props) => {
       </ContainerDiv>
       {showEmailButtons ? (
         <EmailButtonDiv>
-          <ContentDiv>
-            Your email client should automatically open with the results in the
-            body. If it doesn't open, please copy your results using the buttons
-            below and paste them manually into your email client.
-          </ContentDiv>
+          <ContentDiv>{defaultEmailClientFailText}</ContentDiv>
           <CopyToClipboardButton
             type={"email"}
             content={emailAddress}
