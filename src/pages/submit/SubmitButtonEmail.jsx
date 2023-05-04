@@ -58,12 +58,6 @@ const SubmitResultsButton = (props) => {
       `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt}`
     );
     setShowEmailButtons(true);
-
-    /*    // Pass to Email client
-    console.log(JSON.stringify(formattedResultsTxt, null, 2));
-    window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt}?target="_blank"? rel="noopener noreferrer"`;
-    setShowEmailButtons(true);
-  */
   };
 
   if (displaySubmitFallback === true) {
