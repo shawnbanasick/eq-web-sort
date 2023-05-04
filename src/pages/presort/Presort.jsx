@@ -26,6 +26,8 @@ const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getResetColumnStatements = (state) => state.resetColumnStatements;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
+const getBypassPresort = (state) => state.bypassSort;
+const getSetCardFontSize = (state) => state.setCardFontSize;
 
 const PresortPage = (props) => {
   // STATE
@@ -41,6 +43,21 @@ const PresortPage = (props) => {
   const setResults = useStore(getSetResults);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
+  const bypassPresort = useStore(getBypassPresort);
+  const setCardFontSize = useStore(getSetCardFontSize);
+
+  console.log("card font size: " + cardFontSize);
+
+  // set default font size
+  if (
+    (configObj.setSortDefaultFontSizePresort === true &&
+      bypassPresort === false) ||
+    (configObj.setSortDefaultFontSizePresort === "true" &&
+      bypassPresort === false)
+  ) {
+    cardFontSize = configObj.defaultSortFontSizePresort;
+    setCardFontSize(configObj.defaultSortFontSizePresort);
+  }
 
   // set next button display
   setDisplayNextButton(true);

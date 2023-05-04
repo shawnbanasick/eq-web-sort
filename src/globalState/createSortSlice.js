@@ -17,7 +17,11 @@ const createSortSlice = (set, get) => ({
   triggerSortingFinishedModal: false,
   sortGridResults: {},
   bypassSort: false,
+  bypassPresort: false,
 
+  setBypassPresort: (inputValue) => {
+    set(() => ({ bypassPresort: inputValue }));
+  },
   setBypassSort: (inputValue) => {
     set(() => ({ bypassSort: inputValue }));
   },

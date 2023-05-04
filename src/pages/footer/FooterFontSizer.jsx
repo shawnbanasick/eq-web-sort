@@ -9,6 +9,7 @@ const getLangObj = (state) => state.langObj;
 const getCardFontSize = (state) => state.cardFontSize;
 const getSetCardFontSize = (state) => state.setCardFontSize;
 const getSetBypassSort = (state) => state.setBypassSort;
+const getSetBypassPresort = (state) => state.setBypassPresort;
 
 const FooterFontSizer = () => {
   // STATE
@@ -16,11 +17,13 @@ const FooterFontSizer = () => {
   const cardFontSize = useStore(getCardFontSize);
   const setCardFontSize = useStore(getSetCardFontSize);
   const setBypassSort = useStore(getSetBypassSort);
+  const setBypassPresort = useStore(getSetBypassPresort);
 
   const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
 
   const increaseFontSize = () => {
     setBypassSort(true);
+    setBypassPresort(true);
     const currentSize = cardFontSize;
     const newSize = currentSize + 1;
     setCardFontSize(newSize);
@@ -28,6 +31,7 @@ const FooterFontSizer = () => {
   };
   const decreaseFontSize = () => {
     setBypassSort(true);
+    setBypassPresort(true);
     const currentSize = cardFontSize;
     const newSize = currentSize - 1;
     setCardFontSize(newSize);
