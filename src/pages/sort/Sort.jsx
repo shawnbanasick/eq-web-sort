@@ -54,9 +54,6 @@ const Sort = () => {
   const bypassSort = useStore(getBypassSort);
   const setCardFontSize = useStore(getSetCardFontSize);
 
-  console.log("byPass: " + bypassSort);
-  console.log("fontsize: " + cardFontSize);
-
   // shrink from sort size
   if (
     configObj.setSortDefaultFontSizeSort === false ||

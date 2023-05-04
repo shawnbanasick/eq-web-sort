@@ -46,8 +46,6 @@ const PresortPage = (props) => {
   const bypassPresort = useStore(getBypassPresort);
   const setCardFontSize = useStore(getSetCardFontSize);
 
-  console.log("card font size: " + cardFontSize);
-
   // set default font size
   if (
     (configObj.setSortDefaultFontSizePresort === true &&

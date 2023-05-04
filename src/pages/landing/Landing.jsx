@@ -75,7 +75,7 @@ const LandingPage = () => {
     // set partId if in URL
     let urlName = parseParams(window.location.href);
     if (urlName !== undefined) {
-      console.log(urlName.usercode);
+      console.log("URL usercode: " + urlName.usercode);
       const codeName = urlName.usercode;
       setUrlUsercode(codeName);
     }
