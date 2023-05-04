@@ -8,24 +8,30 @@ import useStore from "../../globalState/useStore";
 const getLangObj = (state) => state.langObj;
 const getCardFontSize = (state) => state.cardFontSize;
 const getSetCardFontSize = (state) => state.setCardFontSize;
+const getSetBypassSort = (state) => state.setBypassSort;
 
 const FooterFontSizer = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const cardFontSize = useStore(getCardFontSize);
   const setCardFontSize = useStore(getSetCardFontSize);
+  const setBypassSort = useStore(getSetBypassSort);
 
   const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
 
   const increaseFontSize = () => {
+    setBypassSort(true);
     const currentSize = cardFontSize;
     const newSize = currentSize + 1;
     setCardFontSize(newSize);
+    console.log("newSize: " + newSize);
   };
   const decreaseFontSize = () => {
+    setBypassSort(true);
     const currentSize = cardFontSize;
     const newSize = currentSize - 1;
     setCardFontSize(newSize);
+    console.log("newSize: " + newSize);
   };
 
   return (

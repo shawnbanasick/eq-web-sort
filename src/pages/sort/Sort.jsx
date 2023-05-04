@@ -35,6 +35,8 @@ const getSetTopMargin = (state) => state.setTopMargin;
 const getResults = (state) => state.results;
 const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
+const getBypassSort = (state) => state.bypassSort;
+const getSetCardFontSize = (state) => state.setCardFontSize;
 
 const Sort = () => {
   // STATE
@@ -49,10 +51,28 @@ const Sort = () => {
   const setTopMargin = useStore(getSetTopMargin);
   const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
+  const bypassSort = useStore(getBypassSort);
+  const setCardFontSize = useStore(getSetCardFontSize);
+
+  console.log("byPass: " + bypassSort);
+  console.log("fontsize: " + cardFontSize);
 
   // shrink from sort size
-  // todo - add configurator default
-  cardFontSize = cardFontSize - 5;
+  if (
+    configObj.setSortDefaultFontSizeSort === false ||
+    configObj.setSortDefaultFontSizeSort === "false"
+  ) {
+    cardFontSize = cardFontSize - 10;
+  }
+
+  // set default font size
+  if (
+    (configObj.setSortDefaultFontSizeSort === true && bypassSort === false) ||
+    (configObj.setSortDefaultFontSizeSort === "true" && bypassSort === false)
+  ) {
+    cardFontSize = configObj.defaultSortFontSizeSort;
+    setCardFontSize(configObj.defaultSortFontSizeSort);
+  }
 
   // set next button display
   setDisplayNextButton(true);

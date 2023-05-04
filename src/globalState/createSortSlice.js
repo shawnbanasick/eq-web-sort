@@ -16,7 +16,11 @@ const createSortSlice = (set, get) => ({
   triggerSortOverloadedColumnModal: false,
   triggerSortingFinishedModal: false,
   sortGridResults: {},
+  bypassSort: false,
 
+  setBypassSort: (inputValue) => {
+    set(() => ({ bypassSort: inputValue }));
+  },
   setDraggingOverColumnId: (inputValue) => {
     set(() => ({ draggingOverColumnId: inputValue }));
   },
