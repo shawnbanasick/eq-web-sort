@@ -55,14 +55,15 @@ const SubmitResultsButton = (props) => {
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
 
     // Pass to Email client
-    if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-      // Do Firefox-related activities
-      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
-    } else {
-      // Do non-Firefox-related activities
+    if (navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
+      // Do Chrome-related actions
       window.open(
         `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`
       );
+      setShowEmailButtons(true);
+    } else {
+      // Do non-Chrome-related actions
+      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
       setShowEmailButtons(true);
     }
   };
