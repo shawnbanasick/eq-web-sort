@@ -46,6 +46,8 @@ const SurveyPage = () => {
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
 
+  console.log("surveyQuestionObjects", surveyQuestionObjects);
+
   // setup language
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
@@ -78,43 +80,47 @@ const SurveyPage = () => {
   }, [setCurrentPage, results, setResults]);
 
   const SurveyQuestions = () => {
-    const QuestionList = surveyQuestionObjects.map((object, index) => {
-      if (object.type === "text") {
-        return (
-          <SurveyTextElement
-            key={uuid()}
-            check={checkRequiredQuestionsComplete}
-            opts={object}
-          />
-        );
-      }
-      if (object.type === "textarea") {
-        return <SurveyTextAreaElement key={uuid()} opts={object} />;
-      }
-      if (object.type === "radio") {
-        return <SurveyRadioElement key={uuid()} opts={object} />;
-      }
-      if (object.type === "select") {
-        return <SurveyDropdownElement key={uuid()} opts={object} />;
-      }
-      if (object.type === "checkbox") {
-        return <SurveyCheckboxElement key={uuid()} opts={object} />;
-      }
-      if (object.type === "rating2") {
-        return <SurveyRating2Element key={uuid()} opts={object} />;
-      }
-      if (object.type === "rating5") {
-        return <SurveyRating5Element key={uuid()} opts={object} />;
-      }
-      if (object.type === "rating10") {
-        return <SurveyRating10Element key={uuid()} opts={object} />;
-      }
-      if (object.type === "information") {
-        return <SurveyInformationElement key={uuid()} opts={object} />;
-      }
-      return null;
-    });
-    return QuestionList;
+    if (!surveyQuestionObjects) {
+      return <NoQuestionsDiv>No questions added.</NoQuestionsDiv>;
+    } else {
+      const QuestionList = surveyQuestionObjects.map((object, index) => {
+        if (object.type === "text") {
+          return (
+            <SurveyTextElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
+        }
+        if (object.type === "textarea") {
+          return <SurveyTextAreaElement key={uuid()} opts={object} />;
+        }
+        if (object.type === "radio") {
+          return <SurveyRadioElement key={uuid()} opts={object} />;
+        }
+        if (object.type === "select") {
+          return <SurveyDropdownElement key={uuid()} opts={object} />;
+        }
+        if (object.type === "checkbox") {
+          return <SurveyCheckboxElement key={uuid()} opts={object} />;
+        }
+        if (object.type === "rating2") {
+          return <SurveyRating2Element key={uuid()} opts={object} />;
+        }
+        if (object.type === "rating5") {
+          return <SurveyRating5Element key={uuid()} opts={object} />;
+        }
+        if (object.type === "rating10") {
+          return <SurveyRating10Element key={uuid()} opts={object} />;
+        }
+        if (object.type === "information") {
+          return <SurveyInformationElement key={uuid()} opts={object} />;
+        }
+        return null;
+      });
+      return QuestionList;
+    }
   };
 
   return (
@@ -156,4 +162,10 @@ const SortTitleBar = styled.div`
   position: fixed;
   top: 0;
   z-index: 9999;
+`;
+
+const NoQuestionsDiv = styled.div`
+  margin-top: 50px;
+  font-size: 24px;
+  font-weight: bold;
 `;

@@ -52,12 +52,19 @@ const SubmitResultsButton = (props) => {
       setCheckInternetConnection(true);
     }, 200);
 
-    // Pass to Email client
     console.log(JSON.stringify(formattedResultsTxt, null, 2));
-    window.open(
-      `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${formattedResultsTxt}`
-    );
-    setShowEmailButtons(true);
+
+    // Pass to Email client
+    if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
+      // Do Firefox-related activities
+      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
+    } else {
+      // Do non-Firefox-related activities
+      window.open(
+        `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`
+      );
+      setShowEmailButtons(true);
+    }
   };
 
   if (displaySubmitFallback === true) {

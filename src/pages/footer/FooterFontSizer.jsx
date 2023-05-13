@@ -27,7 +27,6 @@ const FooterFontSizer = () => {
     const currentSize = cardFontSize;
     const newSize = currentSize + 1;
     setCardFontSize(newSize);
-    console.log("newSize: " + newSize);
   };
   const decreaseFontSize = () => {
     setBypassSort(true);
@@ -35,7 +34,6 @@ const FooterFontSizer = () => {
     const currentSize = cardFontSize;
     const newSize = currentSize - 1;
     setCardFontSize(newSize);
-    console.log("newSize: " + newSize);
   };
 
   return (

@@ -186,7 +186,6 @@ const SubmitPage = () => {
             <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
           )}
         </ContainerDiv>
-        {/* <h1>test</h1> */}
       </React.Fragment>
     );
   } else if (configObj.firebaseOrLocal === "email") {
@@ -196,14 +195,7 @@ const SubmitPage = () => {
         <ContainerDiv>
           <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
           <SubmitButtonEmail results={transmissionResults} />
-
-          {displaySubmitFallback ? (
-            <SubmitFallback results={transmissionResults} />
-          ) : (
-            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
-          )}
         </ContainerDiv>
-        {/* <h1>test</h1> */}
       </React.Fragment>
     );
   } else {
@@ -220,7 +212,6 @@ const SubmitPage = () => {
             <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
           )}
         </ContainerDiv>
-        {/* <h1>test</h1> */}
       </React.Fragment>
     );
   }
