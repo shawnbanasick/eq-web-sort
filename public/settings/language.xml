@@ -109,7 +109,7 @@
         <item id="clipboardEmail">Copy Email Address to Clipboard</item>  
         <item id="copiedText">Copied!</item>  
         <item id="copyTextError">Error: Please try again</item>  
-        <item id="defaultEmailClientFail"> Your default email client should have automatically opened with the results in the email body. If it didn't, please use the buttons below to copy and paste the information into your email client.</item>  
+        <item id="defaultEmailClientFail"> Your default email client should have automatically opened with the results in the email body. If it didn't, please use the buttons below to copy and paste your information into an email.</item>  
 
 
 

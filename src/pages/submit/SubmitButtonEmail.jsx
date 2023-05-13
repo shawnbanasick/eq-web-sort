@@ -58,12 +58,12 @@ const SubmitResultsButton = (props) => {
     if (navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
       // Do Chrome-related actions
       window.open(
-        `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`
+        `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`
       );
       setShowEmailButtons(true);
     } else {
       // Do non-Chrome-related actions
-      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
+      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
       setShowEmailButtons(true);
     }
   };
