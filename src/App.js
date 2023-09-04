@@ -49,6 +49,24 @@ function App() {
   const setDataLoaded = useStore(getSetDataLoaded);
 
   useEffect(() => {
+    const unloadCallback = (event) => {
+      const e = event || window.event;
+      //console.log(e)
+      e.preventDefault();
+      if (e) {
+        e.returnValue = "";
+      }
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => {
+      //cleanup function
+      window.removeEventListener("beforeunload", unloadCallback);
+    };
+  }, []);
+
+  useEffect(() => {
     let shuffleCards;
     let vColsObj;
 

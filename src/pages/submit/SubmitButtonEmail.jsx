@@ -16,8 +16,11 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 // const getCheckInternetConnection = (state) => state.checkInternetConnection;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
+const getUrlUsercode = (state) => state.urlUsercode;
 
 const SubmitResultsButton = (props) => {
+  const urlUsercode = useStore(getUrlUsercode);
+
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
@@ -67,6 +70,8 @@ const SubmitResultsButton = (props) => {
       setShowEmailButtons(true);
     }
   };
+
+  console.log("urlUsername: ", urlUsercode);
 
   if (displaySubmitFallback === true) {
     return (
