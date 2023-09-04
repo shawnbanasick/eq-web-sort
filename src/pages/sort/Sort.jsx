@@ -63,13 +63,15 @@ const Sort = () => {
   }
 
   // set default font size
-  if (
-    (configObj.setSortDefaultFontSizeSort === true && bypassSort === false) ||
-    (configObj.setSortDefaultFontSizeSort === "true" && bypassSort === false)
-  ) {
-    cardFontSize = configObj.defaultSortFontSizeSort;
-    setCardFontSize(configObj.defaultSortFontSizeSort);
-  }
+  useEffect(() => {
+    if (
+      (configObj.setSortDefaultFontSizeSort === true && bypassSort === false) ||
+      (configObj.setSortDefaultFontSizeSort === "true" && bypassSort === false)
+    ) {
+      cardFontSize = configObj.defaultSortFontSizeSort;
+      setCardFontSize(configObj.defaultSortFontSizeSort);
+    }
+  }, [configObj, bypassSort, setCardFontSize]);
 
   // set next button display
   setDisplayNextButton(true);

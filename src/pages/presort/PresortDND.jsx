@@ -97,7 +97,7 @@ function PresortDND(props) {
             statementsArray[i].pinkChecked = true;
             statementsArray[i].yellowChecked = false;
             statementsArray[i].greenChecked = false;
-            statementsArray[i].sortValue = 111;
+            statementsArray[i].sortValue = 333;
           }
           if (destinationId === "neutral") {
             statementsArray[i].divColor = "isUncertainStatement";
@@ -113,7 +113,7 @@ function PresortDND(props) {
             statementsArray[i].pinkChecked = false;
             statementsArray[i].yellowChecked = false;
             statementsArray[i].greenChecked = true;
-            statementsArray[i].sortValue = 333;
+            statementsArray[i].sortValue = 111;
           }
         }
       }

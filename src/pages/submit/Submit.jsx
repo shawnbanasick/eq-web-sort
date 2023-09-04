@@ -150,6 +150,8 @@ const SubmitPage = () => {
     urlUsercode,
   ]);
 
+  console.log(urlUsercode);
+
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {
     return (

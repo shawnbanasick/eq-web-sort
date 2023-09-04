@@ -613,9 +613,13 @@ footer {
   width: 100vw;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: right;
 }
 
+.placeholder {
+  width: 100px;
+  -webkit-animation: placeholderAnimate 3s ease-in;
+}
 
 
 
@@ -650,5 +654,33 @@ footer {
   to { -webkit-transform: rotate(360deg); }
 }
 
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+
+@-webkit-keyframes placeholderAnimate {
+  100% {
+    width: 100%;
+  }
+  0% {
+    width: 0px;
+  }
+}
 
 `;

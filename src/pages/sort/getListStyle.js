@@ -34,7 +34,6 @@ const getListStyle = (
     marginTop: 0,
     marginRight: 0,
     minHeight: props.minHeight - 10,
-    marginBottom: cardHeight + 80,
     borderRadius: `2px`,
     outline: isUnderMaxCards ? "1px solid #d8d8d8" : "2px dashed black",
     outlineOffset: "-1px",

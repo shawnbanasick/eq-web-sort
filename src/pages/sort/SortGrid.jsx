@@ -295,66 +295,85 @@ const SortGrid = (props) => {
     );
   }); // end map of sort columns
 
+  const InnerList = React.memo((props) => {
+    const items = props.statements.map((item, index) => {
+      const statementHtml = ReactHtmlParser(
+        `<div>${decodeHTML(item.statement)}</div>`
+      );
+      return (
+        <Draggable
+          key={item.id}
+          draggableId={item.id}
+          index={index}
+          sortValue={item.sortValue}
+          cardColor={item.cardColor}
+          className="droppableCards"
+        >
+          {(provided, snapshot) => (
+            <>
+              <div
+                ref={provided.innerRef}
+                className={`${item.cardColor}`}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getItemStyleHori(
+                  snapshot.isDragging,
+                  provided.draggableProps.style,
+                  `${item.sortValue}`,
+                  `${item.cardColor}`,
+                  columnWidth,
+                  cardHeight,
+                  cardFontSize,
+                  greenCardColor,
+                  yellowCardColor,
+                  pinkCardColor,
+                  fontColor
+                )}
+              >
+                {statementHtml}
+              </div>
+              <div style={{ width: `0px` }}>{provided.placeholder}</div>
+            </>
+          )}
+        </Draggable>
+      );
+    });
+    /*
+    let finalItem = <div key={"placeholder"}>{props.provided.placeholder}</div>;
+    items.unshift(finalItem);
+    */
+    return items;
+  });
+
   // returning main content => horizontal feeder
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="rootDiv">
         {columns}
-        <SortFooterDiv>
-          <div className="cardSlider">
-            <Droppable droppableId="statements" direction="horizontal">
+        <SortFooterDiv id="SortFooterDiv">
+          <CardSlider id="CardSlider">
+            <Droppable
+              id="Droppable"
+              droppableId="statements"
+              direction="horizontal"
+            >
               {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyleHori(
-                    snapshot.isDraggingOver,
-                    horiCardMinHeight
-                  )}
-                >
-                  {statements.map((item, index) => {
-                    const statementHtml = ReactHtmlParser(
-                      `<div>${decodeHTML(item.statement)}</div>`
-                    );
-                    return (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                        sortValue={item.sortValue}
-                        cardColor={item.cardColor}
-                        className="droppableCards"
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            className={`${item.cardColor}`}
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyleHori(
-                              snapshot.isDragging,
-                              provided.draggableProps.style,
-                              `${item.sortValue}`,
-                              `${item.cardColor}`,
-                              columnWidth,
-                              cardHeight,
-                              cardFontSize,
-                              greenCardColor,
-                              yellowCardColor,
-                              pinkCardColor,
-                              fontColor
-                            )}
-                          >
-                            {statementHtml}
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
+                <>
+                  {" "}
+                  <div
+                    ref={provided.innerRef}
+                    style={getListStyleHori(
+                      snapshot.isDraggingOver,
+                      horiCardMinHeight
+                    )}
+                  >
+                    <InnerList statements={statements} provided={provided} />
+                  </div>
+                  <div style={{ width: `0px` }}>{provided.placeholder}</div>
+                </>
               )}
             </Droppable>
-          </div>
+          </CardSlider>
         </SortFooterDiv>
       </div>
     </DragDropContext>
@@ -364,14 +383,19 @@ const SortGrid = (props) => {
 export default SortGrid;
 
 const SortFooterDiv = styled.div`
-  flex-direction: row;
   background: #e4e4e4;
-  position: fixed;
   padding-right: 10px;
+  position: fixed;
   left: 0px;
   bottom: 50px;
   width: 100vw;
   height: ${(props) => `${+props.cardHeight + 20}px;`};
+`;
+
+const CardSlider = styled.div`
+  display: flex;
+  width: 100vw;
+  overflow: hidden;
 `;
 
 /* DO NOT DELETE - important

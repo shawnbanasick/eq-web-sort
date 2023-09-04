@@ -29,8 +29,12 @@ class SortColumn extends React.Component {
     // had to push column sort value to state because didn't want to edit dnd library result object
     // was't able to just pass it as a prop
     return (
-      <ContainerDiv>
-        <Droppable droppableId={columnId} direction="vertical">
+      <ContainerDiv id="sortColumnsDiv">
+        <Droppable
+          id="ColDroppable"
+          droppableId={columnId}
+          direction="vertical"
+        >
           {(provided, snapshot) => {
             if (snapshot.isDraggingOver) {
               useStore.setState({ draggingOverColumnId: columnId });
