@@ -59,6 +59,7 @@ const SubmitPage = () => {
 
   // config options
   const headerBarColor = configObj.headerBarColor;
+  let hasSurveyLink;
 
   useEffect(() => {
     // format results for transmission
@@ -151,6 +152,32 @@ const SubmitPage = () => {
   ]);
 
   console.log(urlUsercode);
+  console.log(configObj.linkToSecondProject);
+
+  /*
+  if (
+    displayGoodbyeMessage === true &&
+    configObj.linkToSecondProject === true
+  ) {
+    return (
+      <div>
+        {" "}
+        <a
+          id="secondProjectLink"
+          href={`${configObj.secondProjectUrl}/#/?usercode=${urlUsercode}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ targetNew: "tab" }}
+        >
+          <button style={{ backgroundColor: "#d3d3d3", color: "black" }}>
+            Go to next Step
+          </button>
+        </a>
+      </div>
+    );
+  }
+
+  */
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {

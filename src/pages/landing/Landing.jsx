@@ -72,12 +72,20 @@ const LandingPage = () => {
       setCardFontSize(configObj.defaultFontSize);
     }
 
-    // set partId if in URL
+    // set participant Id if set in URL
     let urlName = parseParams(window.location.href);
-    if (urlName !== undefined) {
+    if (urlName === undefined) {
+      let urlName = localStorage.getItem("urlUsercode");
+      if (urlName === null || urlName === undefined) {
+        console.log("no url usercode in storage");
+        setUrlUsercode("not_set");
+        localStorage.setItem("urlUsercode", "not_set");
+      }
+    } else {
       console.log("URL usercode: " + urlName.usercode);
       const codeName = urlName.usercode;
       setUrlUsercode(codeName);
+      localStorage.setItem("urlUsercode", codeName);
     }
   }, [
     setUrlUsercode,

@@ -31,6 +31,7 @@ const getSetResetColumnStatements = (state) => state.setResetColumnStatements;
 const getSetSurveyQuesObjArray = (state) => state.setSurveyQuestionObjArray;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetDataLoaded = (state) => state.setDataLoaded;
+const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 
 function App() {
   // STATE
@@ -47,6 +48,7 @@ function App() {
   const setSurveyQuestionObjArray = useSettingsStore(getSetSurveyQuesObjArray);
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setDataLoaded = useStore(getSetDataLoaded);
+  const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
 
   useEffect(() => {
     const unloadCallback = (event) => {
@@ -59,12 +61,16 @@ function App() {
       return "";
     };
 
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => {
-      //cleanup function
+    if (displayGoodbyeMessage) {
       window.removeEventListener("beforeunload", unloadCallback);
-    };
-  }, []);
+    } else {
+      window.addEventListener("beforeunload", unloadCallback);
+      return () => {
+        //cleanup function
+        window.removeEventListener("beforeunload", unloadCallback);
+      };
+    }
+  }, [displayGoodbyeMessage]);
 
   useEffect(() => {
     let shuffleCards;

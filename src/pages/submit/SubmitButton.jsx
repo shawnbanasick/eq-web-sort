@@ -9,6 +9,7 @@ import useStore from "../../globalState/useStore";
 import PromptUnload from "../../utilities/PromptUnload";
 
 const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
 const getSubmitFailNumber = (state) => state.submitFailNumber;
 const getSetTrigTranFailMod = (state) => state.setTriggerTransmissionFailModal;
@@ -19,10 +20,12 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 const getCheckInternetConnection = (state) => state.checkInternetConnection;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
+const getSetDisplayGoodbyeMessage = (state) => state.setDisplayGoodbyeMessage;
 
 const SubmitResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
   let displaySubmitFallback = useStore(getDisplaySubmitFallback);
   let submitFailNumber = useStore(getSubmitFailNumber);
   const setTriggerTransmissionFailModal = useStore(getSetTrigTranFailMod);
@@ -32,6 +35,7 @@ const SubmitResultsButton = (props) => {
   const setTransmittingData = useStore(getSetTransmittingData);
   let checkInternetConnection = useStore(getCheckInternetConnection);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
+  const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
 
   const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
 
@@ -64,7 +68,6 @@ const SubmitResultsButton = (props) => {
             e.target.disabled = false;
           } else {
             // do success action - modal
-            setTriggerTransmissionOKModal(true);
             console.log("success! pushed to database");
             localStorage.removeItem("cumulativelandingPageDuration");
             localStorage.removeItem("cumulativepresortPageDuration");
@@ -81,6 +84,25 @@ const SubmitResultsButton = (props) => {
             localStorage.removeItem("timeOnsortPage");
             localStorage.removeItem("timeOnpostsortPage");
             localStorage.removeItem("timeOnsurveyPage");
+
+            if (configObj.linkToSecondProject === true) {
+              setDisplayGoodbyeMessage(true);
+
+              let urlUsercode = localStorage.getItem("urlUsercode");
+              const nextLinkAnchor = document.createElement("a");
+              nextLinkAnchor.setAttribute("id", "secondProjectLink");
+              nextLinkAnchor.setAttribute(
+                "href",
+                `${configObj.secondProjectUrl}/#/?usercode=${urlUsercode}`
+              );
+              if (navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
+                nextLinkAnchor.setAttribute("target", "_blank");
+              }
+              document.body.appendChild(nextLinkAnchor);
+              document.getElementById("secondProjectLink").click();
+            }
+
+            setTriggerTransmissionOKModal(true);
           }
         });
       })

@@ -16,11 +16,8 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 // const getCheckInternetConnection = (state) => state.checkInternetConnection;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
-const getUrlUsercode = (state) => state.urlUsercode;
 
 const SubmitResultsButton = (props) => {
-  const urlUsercode = useStore(getUrlUsercode);
-
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
@@ -71,7 +68,7 @@ const SubmitResultsButton = (props) => {
     }
   };
 
-  console.log("urlUsername: ", urlUsercode);
+  console.log("urlUsercode: ", props.results.urlUsercode);
 
   if (displaySubmitFallback === true) {
     return (
@@ -107,6 +104,20 @@ const SubmitResultsButton = (props) => {
             content={rawData}
             text={langObj.clipboardResults}
           />
+          <div>
+            <a
+              href={`localhost:3000/#/?usercode=${props.results.urlUsercode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ targetNew: "tab" }}
+            >
+              <StyledButton
+                style={{ backgroundColor: "#d3d3d3", color: "black" }}
+              >
+                Go to next Step
+              </StyledButton>
+            </a>
+          </div>
         </EmailButtonDiv>
       ) : (
         <SpacerDiv />

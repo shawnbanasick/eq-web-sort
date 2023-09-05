@@ -26,6 +26,7 @@ const SubmitSuccessModal = () => {
   const onCloseModal = () => {
     setTriggerTransmissionOKModal(false);
     setDisplayGoodbyeMessage(true);
+    //document.getElementById("secondProjectLink").click();
   };
 
   return (
