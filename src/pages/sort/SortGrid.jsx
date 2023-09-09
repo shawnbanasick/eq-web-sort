@@ -206,7 +206,7 @@ const SortGrid = (props) => {
       }
       setSortCharacteristics(sortCharacteristics);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }; // end of dragEnd helper function
 

@@ -68,6 +68,7 @@ const Sort = () => {
       (configObj.setSortDefaultFontSizeSort === true && bypassSort === false) ||
       (configObj.setSortDefaultFontSizeSort === "true" && bypassSort === false)
     ) {
+      /* eslint-disable-next-line */
       cardFontSize = configObj.defaultSortFontSizeSort;
       setCardFontSize(configObj.defaultSortFontSizeSort);
     }

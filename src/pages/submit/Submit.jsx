@@ -154,9 +154,6 @@ const SubmitPage = () => {
     urlUsercode,
   ]);
 
-  console.log(urlUsercode);
-  console.log(configObj.linkToSecondProject);
-
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {
     if (configObj.linkToSecondProject === true) {

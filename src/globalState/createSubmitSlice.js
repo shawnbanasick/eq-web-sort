@@ -1,4 +1,5 @@
 const createSubmitSlice = (set, get) => ({
+  disableRefreshCheck: false,
   displaySubmitFallback: false,
   displayGoodbyeMessage: false,
   triggerLocalSubmitSuccessModal: false,
@@ -8,6 +9,9 @@ const createSubmitSlice = (set, get) => ({
   transmittingData: false,
   checkInternetConnection: false,
 
+  setDisableRefreshCheck: (input) => {
+    set(() => ({ disableRefreshCheck: input }));
+  },
   setCheckInternetConnection: (input) => {
     set(() => ({ checkInternetConnection: input }));
   },

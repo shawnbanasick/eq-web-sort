@@ -7,6 +7,7 @@ const globalState = store({
   currentPage: "landing",
   dataLoaded: false,
   defaultCardFontSize: 15,
+  disableRefreshCheck: false,
   displayAccessCodeWarning: false,
   displayContinueButton: false,
   displayLandingContent: false,

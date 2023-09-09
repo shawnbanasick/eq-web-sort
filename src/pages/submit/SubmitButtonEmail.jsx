@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SubmitSuccessModal from "./SubmitSuccessModal";
 import SubmitFailureModal from "./SubmitFailureModal";
@@ -16,6 +16,7 @@ const getSetTransmittingData = (state) => state.setTransmittingData;
 // const getCheckInternetConnection = (state) => state.checkInternetConnection;
 const getSetCheckInternetConnection = (state) =>
   state.setCheckInternetConnection;
+const getSetDisableRefreshCheck = (state) => state.setDisableRefreshCheck;
 
 const SubmitResultsButton = (props) => {
   // STATE
@@ -25,6 +26,7 @@ const SubmitResultsButton = (props) => {
   let transmittingData = useStore(getTransmittingData);
   const setTransmittingData = useStore(getSetTransmittingData);
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
+  const setDisableRefreshCheck = useStore(getSetDisableRefreshCheck);
   const [showEmailButtons, setShowEmailButtons] = useState(false);
 
   const rawData = props.results;
@@ -56,17 +58,22 @@ const SubmitResultsButton = (props) => {
 
     // Pass to Email client
     if (navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
-      // Do Chrome-related actions
+      // Do Chrome-related actions  -  %0D%0A is a line break
       window.open(
-        `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`
+        `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${langObj.emailMessage1} %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`
       );
       setShowEmailButtons(true);
     } else {
-      // Do non-Chrome-related actions
-      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body= %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
+      // Do non-Chrome-related actions   -  %0D%0A is a line break
+      window.location.href = `mailto:${configObj.emailAddress}?subject=${configObj.emailSubject}&body=${langObj.emailMessage1} %0D%0A%0D%0AMy Results:%0D%0A${formattedResultsTxt}`;
       setShowEmailButtons(true);
     }
   };
+
+  // set disable refresh check
+  useEffect(() => {
+    setDisableRefreshCheck(true);
+  }, [setDisableRefreshCheck]);
 
   console.log("urlUsercode: ", props.results.urlUsercode);
 
@@ -104,20 +111,6 @@ const SubmitResultsButton = (props) => {
             content={rawData}
             text={langObj.clipboardResults}
           />
-          <div>
-            <a
-              href={`localhost:3000/#/?usercode=${props.results.urlUsercode}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ targetNew: "tab" }}
-            >
-              <StyledButton
-                style={{ backgroundColor: "#d3d3d3", color: "black" }}
-              >
-                Go to next Step
-              </StyledButton>
-            </a>
-          </div>
         </EmailButtonDiv>
       ) : (
         <SpacerDiv />

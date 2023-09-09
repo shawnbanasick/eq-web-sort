@@ -3,11 +3,11 @@
    <config version="1.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
-   <!-- options: firebase, local, or sheets -->
+   <!-- "firebaseOrLocal" options: firebase, local, email, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
-   <item id="firebaseOrLocal">firebase</item>
+   <item id="firebaseOrLocal">email</item>
    <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
-   <item id="linkToSecondProject">true</item> 
+   <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://eqv2-link-receive.netlify.app</item> 
 
 

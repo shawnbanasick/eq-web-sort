@@ -46,8 +46,6 @@ const SurveyPage = () => {
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
 
-  console.log("surveyQuestionObjects", surveyQuestionObjects);
-
   // setup language
   const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
 
