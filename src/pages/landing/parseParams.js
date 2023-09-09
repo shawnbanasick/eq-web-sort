@@ -1,11 +1,10 @@
 const parseParams = (params = "") => {
-  const rawParams1 = params.split("?");
-  const extractedParams = {};
-  rawParams1.forEach((item) => {
-    item = item.split("=");
-    extractedParams[item[0]] = item[1];
-  });
-  return extractedParams;
+  let returnVal;
+  if (params.includes("?")) {
+    const rawParams1 = params.split("=");
+    return rawParams1[1];
+  }
+  return returnVal;
 };
 
 export default parseParams;

@@ -73,17 +73,29 @@ const LandingPage = () => {
     }
 
     // set participant Id if set in URL
-    let urlName = parseParams(window.location.href);
-    if (urlName === undefined) {
+    let urlString = parseParams(window.location.href);
+    // if nothing in URL, check local storage
+    if (urlString === undefined || urlString === null) {
       let urlName = localStorage.getItem("urlUsercode");
-      if (urlName === null || urlName === undefined) {
+      // if nothing in local storage, set to "not_set"
+      if (
+        urlName === null ||
+        urlName === undefined ||
+        urlName === "undefined"
+      ) {
         console.log("no url usercode in storage");
         setUrlUsercode("not_set");
         localStorage.setItem("urlUsercode", "not_set");
+      } else {
+        // if something in local storage, set state
+        console.log("URL usercode from storage: ", urlName);
+        setUrlUsercode(`${urlName} (stored)`);
       }
     } else {
-      console.log("URL usercode: " + urlName.usercode);
-      const codeName = urlName.usercode;
+      // if something in URL, set it in state
+      let codeName = urlString;
+      codeName = codeName.replace(/\/|#/g, "");
+      console.log("URL usercode: ", codeName);
       setUrlUsercode(codeName);
       localStorage.setItem("urlUsercode", codeName);
     }

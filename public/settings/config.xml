@@ -8,7 +8,7 @@
    <item id="firebaseOrLocal">firebase</item>
    <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
    <item id="linkToSecondProject">true</item> 
-   <item id="secondProjectUrl">https://eqwebsort-email.netlify.app</item> 
+   <item id="secondProjectUrl">https://eqv2-link-receive.netlify.app</item> 
 
 
    <item id="emailAddress">banasick@gmail.com</item>  

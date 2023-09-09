@@ -100,6 +100,7 @@
         <item id="transferFailModalText">Please try again in a few moments.</item>   
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
         <item id="btnDownload">Download</item>   
-        <item id="goodbyeMessage">Please wait while you are transfered to the next survey</item>   
-
+        <item id="goodbyeMessage">Thank you! You can close this tab now.</item>   
+        <item id="linkedProjectFallbackMessage">Please click the button to begin the next Q sort</item>   
+         <item id="linkedProjectBtnMessage">Go to the next Step</item>   
    </language>
