@@ -101,6 +101,7 @@
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
         <item id="btnDownload">Download</item>   
         <item id="goodbyeMessage">Thank you! You can close this tab now.</item>  
+        
         <!-- EMAIL -->
         <item id="btnTransferEmail">Open Email Client and Send Results</item>
         <item id="clipboardResults">Copy Results to Clipboard</item>  
@@ -109,8 +110,9 @@
         <item id="copyTextError">Error: Please try again</item>  
         <item id="defaultEmailClientFail"> Your default email client should have automatically opened with the results in the email body. If it didn't, please use the buttons below to copy and paste your information into an email.</item>   
         <item id="emailMessage1">You don't have to add anything to this email. Please just click the SEND button.</item>
+        
         <!-- LINKING -->
         <item id="linkedProjectFallbackMessage">Please click the button to begin the next Q sort</item>   
-         <item id="linkedProjectBtnMessage">Go to the next Step</item>   
+         <item id="linkedProjectBtnMessage">Begin Next Q sort</item>   
             
    </language>
