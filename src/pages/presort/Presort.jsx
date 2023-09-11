@@ -83,7 +83,7 @@ const PresortPage = (props) => {
 
   let columnStatements = statementsObj.columnStatements;
 
-  if (configObj.firebaseOrLocal === "local") {
+  if (configObj.setupTarget === "local") {
     columnStatements = JSON.parse(JSON.stringify(resetColumnStatements));
   }
 

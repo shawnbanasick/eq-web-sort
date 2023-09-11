@@ -42,7 +42,7 @@ const StyledFooter = () => {
 
   const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
 
-  if (currentPage === "sort" && configObj.firebaseOrLocal === "local") {
+  if (currentPage === "sort" && configObj.setupTarget === "local") {
     const usercode = localUsercode;
     const projectName = configObj.studyTitle;
     const today = new Date();
@@ -76,7 +76,7 @@ const StyledFooter = () => {
     displayNextButton = false;
   }
 
-  if (configObj.firebaseOrLocal === "local" && currentPage === "landing") {
+  if (configObj.setupTarget === "local" && currentPage === "landing") {
     displayNextButton = false;
     displayHelpButton = false;
   }

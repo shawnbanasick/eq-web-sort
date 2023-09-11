@@ -77,7 +77,7 @@ const SubmitPage = () => {
       transmissionResults["timePresort"] = results.timeOnpresortPage;
       transmissionResults["timeSort"] = results.timeOnsortPage;
 
-      if (configObj.firebaseOrLocal === "local") {
+      if (configObj.setupTarget === "local") {
         transmissionResults["partId"] = localParticipantName;
         transmissionResults["usercode"] = localUsercode;
       }
@@ -181,7 +181,7 @@ const SubmitPage = () => {
     }
   }
 
-  if (configObj.firebaseOrLocal === "local") {
+  if (configObj.setupTarget === "local") {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
@@ -191,7 +191,7 @@ const SubmitPage = () => {
         </ContainerDiv>
       </React.Fragment>
     );
-  } else if (configObj.firebaseOrLocal === "sheets") {
+  } else if (configObj.setupTarget === "sheets") {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
@@ -210,7 +210,7 @@ const SubmitPage = () => {
         </ContainerDiv>
       </React.Fragment>
     );
-  } else if (configObj.firebaseOrLocal === "email") {
+  } else if (configObj.setupTarget === "email") {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>

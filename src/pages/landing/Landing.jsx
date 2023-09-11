@@ -128,7 +128,7 @@ const LandingPage = () => {
   let displayPartIdScreen = false;
   let displayAccessCodeScreen = false;
 
-  if (configObj.firebaseOrLocal === "local") {
+  if (configObj.setupTarget === "local") {
     return (
       <>
         {dataLoaded && (

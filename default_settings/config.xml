@@ -5,8 +5,7 @@
    <!-- GENERAL SETTINGS -->
    <!-- options: firebase, local, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
-   <item id="setupTarget">sheets</item>
-   <item id="firebaseOrLocal">email</item>
+   <item id="setupTarget">email</item>
    <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
 
    <item id="emailAddress">banasick@gmail.com</item>  
