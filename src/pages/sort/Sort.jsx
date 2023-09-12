@@ -54,23 +54,16 @@ const Sort = () => {
   const bypassSort = useStore(getBypassSort);
   const setCardFontSize = useStore(getSetCardFontSize);
 
-  // shrink from sort size
-  if (
-    configObj.setSortDefaultFontSizeSort === false ||
-    configObj.setSortDefaultFontSizeSort === "false"
-  ) {
-    cardFontSize = cardFontSize - 10;
-  }
-
   // set default font size
   useEffect(() => {
     if (
-      (configObj.setSortDefaultFontSizeSort === true && bypassSort === false) ||
-      (configObj.setSortDefaultFontSizeSort === "true" && bypassSort === false)
+      (configObj.setDefaultFontSizeSort === true && bypassSort === false) ||
+      (configObj.setDefaultFontSizeSort === "true" && bypassSort === false)
     ) {
       /* eslint-disable-next-line */
-      cardFontSize = configObj.defaultSortFontSizeSort;
-      setCardFontSize(configObj.defaultSortFontSizeSort);
+      cardFontSize = configObj.defaultFontSizeSort;
+      setCardFontSize(configObj.defaultFontSizeSort);
+      console.log("useEffect setCardFontSize", cardFontSize);
     }
   }, [configObj, bypassSort, setCardFontSize]);
 
@@ -154,6 +147,8 @@ const Sort = () => {
       setResults(updatedResults);
     };
   }, [results, setResults]);
+
+  console.log(cardFontSize);
 
   return (
     <React.Fragment>

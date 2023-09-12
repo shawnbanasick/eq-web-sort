@@ -60,10 +60,12 @@ const LandingPage = () => {
     }
 
     // set FONT SIZE estimate
+    /*
     let fontSizeEstimate =
       5 + Math.ceil(10 * (9 / mapObj.qSortHeaderNumbers.length));
 
     setCardFontSize(fontSizeEstimate);
+    */
 
     if (
       configObj.setDefaultFontSize === "true" ||

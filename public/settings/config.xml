@@ -5,56 +5,54 @@
    <!-- GENERAL SETTINGS -->
    <!-- "setupTarget" options: firebase, local, email, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
+   <item id="databaseOptions">Include_Google_Options</item>
    <item id="setupTarget">email</item>
+   <!-- STEIN -->
    <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
-   <item id="linkToSecondProject">false</item> 
-   <item id="secondProjectUrl">https://eqv2-link-receive.netlify.app</item> 
-
-
+   <!-- EMAIL -->
    <item id="emailAddress">banasick@gmail.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
-
+   <!-- SECOND PROJECT -->
+   <item id="linkToSecondProject">false</item> 
+   <item id="secondProjectUrl">https://eqv2-link-receive.netlify.app</item> 
+   <!-- OTHER GENERAL OPTIONS -->
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
-   <item id="devMode">false</item>
-   
+   <item id="devMode">false</item> 
+
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->
    <item id="initialScreen">anonymous</item>
    <item id="accessCode">demo</item>
 
-
-   <!-- FONT OPTIONS -->  
+   <!-- LEGACY DEFAULTS (do not change these)-->
    <item id="setDefaultFontSize">true</item>
    <item id="defaultFontSize">25</item>
-   <item id="defaultFontColor">#2a2a2a</item>
-
-
+   
    <!-- PRESORT -->
-   <!-- default colors #ccffcc, #e0e0e0, #ffe0f0 -->
+   <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="defaultFontColor">#2a2a2a</item>
+   <item id="defaultFontSizePresort">26</item>
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
-   <item id="setSortDefaultFontSizePresort">true</item>
-   <item id="defaultSortFontSizePresort">28</item>
-
+   <item id="setDefaultFontSizePresort">true</item>
+  
 
    <!-- SORT -->
+   <item id="defaultFontSizeSort">16</item>
    <item id="condOfInstFontSize">20</item>
    <item id="allowUnforcedSorts">false</item>
    <item id="warnOverloadedColumn">true</item>
-   <item id="setMinCardHeight">true</item>
    <item id="minCardHeight">120</item>
-   <item id="setSortDefaultFontSizeSort">true</item>
-   <item id="defaultSortFontSizeSort">16</item>
+   <item id="setMinCardHeight">true</item>
+   <item id="setDefaultFontSizeSort">true</item>
 
 
    <!-- POSTSORT -->
    <item id="showPostsort">true</item>
    <item id="showSecondPosColumn">false</item>
    <item id="showSecondNegColumn">false</item>
-   
-
    <item id="displayNeutralObjects">false</item>
 
 

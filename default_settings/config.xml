@@ -32,8 +32,8 @@
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
-   <item id="setSortDefaultFontSizePresort">true</item>
-   <item id="defaultSortFontSizePresort">28</item>
+   <item id="setDefaultFontSizePresort">true</item>
+   <item id="defaultFontSizePresort">28</item>
 
 
    <!-- SORT -->
@@ -42,7 +42,7 @@
    <item id="warnOverloadedColumn">true</item>
    <item id="setMinCardHeight">true</item>
    <item id="minCardHeight">120</item>
-   <item id="setSortDefaultFontSizeSort">true</item>
+   <item id="setDefaultFontSizeSort">true</item>
    <item id="defaultSortFontSizeSort">16</item>
 
 
