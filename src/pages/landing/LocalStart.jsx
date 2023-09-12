@@ -79,6 +79,8 @@ const LogInScreen = () => {
 
   const handleUsercodeInput = (e) => {
     setLocalUsercode(e.target.value);
+    // in case there is any value lingering from testing other setup targets
+    localStorage.setItem("urlUsercode", "");
     setLocalPartIdWarning2(false);
   };
 
