@@ -63,7 +63,6 @@ const Sort = () => {
       /* eslint-disable-next-line */
       cardFontSize = configObj.defaultFontSizeSort;
       setCardFontSize(configObj.defaultFontSizeSort);
-      console.log("useEffect setCardFontSize", cardFontSize);
     }
   }, [configObj, bypassSort, setCardFontSize]);
 
@@ -147,8 +146,6 @@ const Sort = () => {
       setResults(updatedResults);
     };
   }, [results, setResults]);
-
-  console.log(cardFontSize);
 
   return (
     <React.Fragment>
