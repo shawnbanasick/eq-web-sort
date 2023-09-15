@@ -8,13 +8,13 @@
    <item id="databaseOptions">Include_Google_Options</item>
    <item id="setupTarget">email</item>
    <!-- STEIN -->
-   <item id="steinApiUrl">https://api.steinhq.com/v1/storages/636742d5eced9b09e9a38cea</item>
+   <item id="steinApiUrl">https://</item>
    <!-- EMAIL -->
-   <item id="emailAddress">banasick@gmail.com</item>  
+   <item id="emailAddress">@.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
    <!-- SECOND PROJECT -->
    <item id="linkToSecondProject">false</item> 
-   <item id="secondProjectUrl">https://eqv2-link-receive.netlify.app</item> 
+   <item id="secondProjectUrl">https://</item> 
    <!-- OTHER GENERAL OPTIONS -->
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
