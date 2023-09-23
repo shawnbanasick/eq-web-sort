@@ -52,8 +52,6 @@ const SubmitResultsButton = (props) => {
     }, 20000);
 
     console.log(JSON.stringify(props.results, null, 2));
-    console.log(props.results);
-    console.log(window.firebase.apps.length);
 
     window.firebase
       .auth()

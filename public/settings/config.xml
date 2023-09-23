@@ -18,7 +18,6 @@
    <!-- OTHER GENERAL OPTIONS -->
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
-   <item id="sortDirection">positive</item> 
    <item id="devMode">false</item> 
 
    <!-- ACCESS -->
@@ -48,7 +47,7 @@
    <item id="minCardHeight">120</item>
    <item id="setMinCardHeight">true</item>
    <item id="setDefaultFontSizeSort">true</item>
-
+   <item id="sortDirection">positive</item> 
 
    <!-- POSTSORT -->
    <item id="showPostsort">true</item>
