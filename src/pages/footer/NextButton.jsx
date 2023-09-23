@@ -3,6 +3,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import convertObjectToResults from "../sort/convertObjectToResults";
 
 const getConfigObj = (state) => state.configObj;
 const getPresortFinished = (state) => state.presortFinished;
@@ -20,6 +21,9 @@ const getSetTrigSortPrevNavModal = (state) =>
   state.setTriggerSortPreventNavModal;
 const getSetTrigSortOverColMod = (state) =>
   state.setTriggerSortOverloadedColumnModal;
+const getStatementsObj = (state) => state.statementsObj;
+const getColumnStatements = (state) => state.columnStatements;
+const getSetResults = (state) => state.setResults;
 
 const LinkButton = (props) => {
   let goToNextPage;
@@ -36,6 +40,9 @@ const LinkButton = (props) => {
   const hasOverloadedColumn = useStore(getHasOverloadedColumn);
   const setTriggerSortPreventNavModal = useStore(getSetTrigSortPrevNavModal);
   const setTriggerSortOverloadedColModal = useStore(getSetTrigSortOverColMod);
+  const statementsObj = useSettingsStore(getStatementsObj);
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const setResults = useStore(getSetResults);
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
@@ -54,6 +61,10 @@ const LinkButton = (props) => {
     allowUnforcedSorts,
     isPresortFinished
   ) => {
+    // *** ReCalc Results ***
+    let sortResults1 = convertObjectToResults(columnStatements);
+    console.log(sortResults1);
+
     if (currentPage === "presort") {
       if (isPresortFinished === false) {
         setTriggerPresortPreventNavModal(true);
@@ -64,9 +75,30 @@ const LinkButton = (props) => {
     }
     if (currentPage === "sort") {
       if (isSortingFinished === false) {
-        // not finished sorting
-        setTriggerSortPreventNavModal(true);
-        return false;
+        // check to see if finished, but had sorting registration error
+        if (statementsObj.columnStatements.statementList.length === 0) {
+          if (allowUnforcedSorts === true) {
+            // unforced ok -> allow nav
+            setResults(sortResults1);
+            setTriggerSortPreventNavModal(false);
+            return true;
+          } else {
+            // unforced not ok -> allow nav if no overloaded columns
+            if (hasOverloadedColumn === true) {
+              setTriggerSortPreventNavModal(false);
+              setTriggerSortOverloadedColModal(true);
+              return false;
+            } else {
+              setResults(sortResults1);
+              setTriggerSortPreventNavModal(false);
+              return true;
+            }
+          }
+        } else {
+          // not finished sorting
+          setTriggerSortPreventNavModal(true);
+          return false;
+        }
       } else {
         // has finished sorting
         if (allowUnforcedSorts === true) {

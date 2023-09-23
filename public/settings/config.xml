@@ -18,6 +18,7 @@
    <!-- OTHER GENERAL OPTIONS -->
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
+   <item id="sortDirection">positive</item> 
    <item id="devMode">false</item> 
 
    <!-- ACCESS -->

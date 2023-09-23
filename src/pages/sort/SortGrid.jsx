@@ -11,6 +11,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import convertObjectToResults from "./convertObjectToResults";
 
 /* eslint react/prop-types: 0 */
 
@@ -82,6 +83,12 @@ const SortGrid = (props) => {
 
   // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
+
+  // get sort direction
+  let sortDirection = "rtl";
+  if (configObj.sortDirection === "negative") {
+    sortDirection = "ltr";
+  }
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
@@ -180,6 +187,8 @@ const SortGrid = (props) => {
 
         // global state updates
         setColumnStatements(columnStatements);
+
+        convertObjectToResults(columnStatements);
 
         if (columnStatements.statementList.length === 0) {
           setIsSortingCards(false);
@@ -330,7 +339,7 @@ const SortGrid = (props) => {
                   fontColor
                 )}
               >
-                {statementHtml}
+                <span style={{ direction: "ltr" }}>{statementHtml}</span>
               </div>
               <div style={{ width: `0px` }}>{provided.placeholder}</div>
             </>
@@ -364,7 +373,8 @@ const SortGrid = (props) => {
                     ref={provided.innerRef}
                     style={getListStyleHori(
                       snapshot.isDraggingOver,
-                      horiCardMinHeight
+                      horiCardMinHeight,
+                      sortDirection
                     )}
                   >
                     <InnerList statements={statements} provided={provided} />

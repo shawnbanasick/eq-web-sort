@@ -76,6 +76,14 @@ function PresortDND(props) {
     },
   });
 
+  // default = positive sort direction
+  let pinkArraySortValue = 333,
+    greenArraySortValue = 111;
+  if (configObj.sortDirection === "negative") {
+    pinkArraySortValue = 111;
+    greenArraySortValue = 333;
+  }
+
   const onDragEnd = useCallback(
     (result, columns, setColumns) => {
       if (!result.destination || result.destination.droppableId === "cards") {
@@ -97,7 +105,7 @@ function PresortDND(props) {
             statementsArray[i].pinkChecked = true;
             statementsArray[i].yellowChecked = false;
             statementsArray[i].greenChecked = false;
-            statementsArray[i].sortValue = 333;
+            statementsArray[i].sortValue = pinkArraySortValue;
           }
           if (destinationId === "neutral") {
             statementsArray[i].divColor = "isUncertainStatement";
@@ -113,7 +121,7 @@ function PresortDND(props) {
             statementsArray[i].pinkChecked = false;
             statementsArray[i].yellowChecked = false;
             statementsArray[i].greenChecked = true;
-            statementsArray[i].sortValue = 111;
+            statementsArray[i].sortValue = greenArraySortValue;
           }
         }
       }

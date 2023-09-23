@@ -1,5 +1,9 @@
 // horizontal column styling
-const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
+const getListStyleHori = (
+  isDraggingOver,
+  horiCardMinHeight,
+  sortDirection
+) => ({
   background: isDraggingOver ? "lightblue" : "#e4e4e4",
   display: "flex",
   flexDirection: "row",
@@ -8,7 +12,7 @@ const getListStyleHori = (isDraggingOver, horiCardMinHeight) => ({
   paddingRight: "20px",
   minHeight: horiCardMinHeight,
   overflowX: `scroll`,
-  direction: `rtl`,
+  direction: sortDirection,
   scrollBehavior: `smooth`,
 });
 
