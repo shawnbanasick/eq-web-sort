@@ -92,7 +92,7 @@
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}</item>
+        <item id="transferTextAbove">{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the button to transmit your results.{{{/h2}}}</item>
         <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
         <item id="transferOkModalHeader">Success - The data have been sent to the server</item>   
         <item id="transferOkModalText">Thank you for using EQ Web Sort!{{{br}}}{{{br}}}You can now close your browser tab.</item>
