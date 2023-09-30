@@ -11,6 +11,7 @@ import HelpButton from "./HelpButton";
 import getNextPage from "./getNextPage";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import PostsortBackButton from "./PostsortBackButton";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -33,6 +34,15 @@ const StyledFooter = () => {
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
   let displayHelpButton = true;
+
+  let showBackButton;
+  let backButtonText = langObj.postsortBackButtonText;
+
+  if (currentPage === "postsort" && configObj.showBackButton) {
+    showBackButton = true;
+  } else {
+    showBackButton = false;
+  }
 
   let logoHtml = ReactHtmlParser(
     decodeHTML(
@@ -123,9 +133,14 @@ const StyledFooter = () => {
     <StyledFooterDiv>
       <LogoContainer>{logoHtml}</LogoContainer>
       <CenterDiv>{CenterContent}</CenterDiv>
-      {displayNextButton && (
-        <NextButton to={nextPage}>{nextButtonText}</NextButton>
-      )}
+      <ButtonDiv>
+        {showBackButton && (
+          <PostsortBackButton to={"/sort"}>{backButtonText}</PostsortBackButton>
+        )}
+        {displayNextButton && (
+          <NextButton to={nextPage}>{nextButtonText}</NextButton>
+        )}
+      </ButtonDiv>
     </StyledFooterDiv>
   );
 };
@@ -168,4 +183,10 @@ const CenterDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;

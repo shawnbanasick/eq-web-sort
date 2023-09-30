@@ -92,8 +92,8 @@ const LowCards2 = (props) => {
     item.indexVal = index;
     let highlighting = true;
     if (
-      configObj.postsortAnswersRequired === "true" ||
-      configObj.postsortAnswersRequired === true
+      configObj.postsortCommentsRequired === "true" ||
+      configObj.postsortCommentsRequired === true
     ) {
       if (showPostsortCommentHighlighting === true) {
         highlighting = commentCheckObj[`lc2-${index}`];

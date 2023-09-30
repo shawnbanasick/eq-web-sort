@@ -144,8 +144,8 @@ const LinkButton = (props) => {
 
       if (checkArray2.length > 0) {
         if (
-          configObj.postsortAnswersRequired === true ||
-          configObj.postsortAnswersRequired === "true"
+          configObj.postsortCommentsRequired === true ||
+          configObj.postsortCommentsRequired === "true"
         ) {
           // answers required in configObj
           setShowPostsortCommentHighlighting(true);

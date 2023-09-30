@@ -28,6 +28,8 @@
    <!-- LEGACY DEFAULTS (do not change these)-->
    <item id="setDefaultFontSize">true</item>
    <item id="defaultFontSize">25</item>
+   <item id="displayNeutralObjects">false</item>
+
    
    <!-- PRESORT -->
    <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
@@ -53,9 +55,8 @@
    <item id="showPostsort">true</item>
    <item id="showSecondPosColumn">false</item>
    <item id="showSecondNegColumn">false</item>
-   <item id="displayNeutralObjects">false</item>
-   <item id="showBackButton">true</item>
-   <item id="postsortAnswersRequired">true</item>
+   <item id="showBackButton">false</item>
+   <item id="postsortCommentsRequired">false</item>
 
 
    <!-- SURVEY - Survey Questions -->
@@ -63,7 +64,7 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="goldenrod">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
+       <note bg="#fde047">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
    </item>
 
    <item id="survey">

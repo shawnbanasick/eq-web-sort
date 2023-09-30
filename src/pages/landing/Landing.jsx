@@ -13,7 +13,6 @@ import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-import { set } from "lodash";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -149,7 +148,6 @@ const LandingPage = () => {
         postsortCommentCheckObj[key] = false;
       }
     }
-    console.log(postsortCommentCheckObj);
     setPostsortCommentCheckObj(postsortCommentCheckObj);
   }, [mapObj, configObj, setPostsortCommentCheckObj]);
 
