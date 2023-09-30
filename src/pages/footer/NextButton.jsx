@@ -75,7 +75,6 @@ const LinkButton = (props) => {
   ) => {
     // *** ReCalc Results ***
     let sortResults1 = convertObjectToResults(columnStatements);
-    console.log(sortResults1);
 
     if (currentPage === "presort") {
       if (isPresortFinished === false) {
@@ -132,15 +131,12 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "postsort") {
-      console.log(postsortCommentCheckObj);
       const checkArray2 = [];
       Object.keys(postsortCommentCheckObj).forEach((key) => {
         if (postsortCommentCheckObj[key] === false) {
           checkArray2.push("false");
         }
       });
-
-      console.log(checkArray2);
 
       if (checkArray2.length > 0) {
         if (

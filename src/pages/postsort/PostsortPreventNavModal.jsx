@@ -17,8 +17,6 @@ const PostsortPreventNavModal = () => {
   const langObj = useSettingsStore(getLangObj);
   const triggerModalOpen = useStore(getTriggerModalOpen);
 
-  console.log("triggerModalOpen: ", triggerModalOpen);
-
   const setTriggerPostsortPreventNavModal = useStore(
     getSetTrigPostPrevNavModal
   );
