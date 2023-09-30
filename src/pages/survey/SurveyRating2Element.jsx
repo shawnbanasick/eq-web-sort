@@ -161,7 +161,7 @@ const SurveyRatings2Element = (props) => {
       checkRequiredQuestionsComplete === true &&
       testValue > 0
     ) {
-      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",

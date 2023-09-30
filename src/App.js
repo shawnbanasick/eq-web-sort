@@ -151,6 +151,7 @@ function App() {
       setDataLoaded(true);
 
       setTimeout(() => {
+        // prevent spinner flicker
         // setIsDataLoaded(true);
         setLoading(false);
       }, 700);

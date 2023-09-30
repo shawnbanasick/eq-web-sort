@@ -95,7 +95,7 @@ const SurveyTextElement = (props) => {
       props.opts.required === true
     ) {
       setFormatOptions({
-        bgColor: "lightpink",
+        bgColor: "#fde047",
         border: "3px dashed black",
       });
     } else {

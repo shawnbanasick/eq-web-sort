@@ -13,6 +13,7 @@ import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import { set } from "lodash";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -26,6 +27,8 @@ const getDisplayLandingContent = (state) => state.displayLandingContent;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getSetCardFontSize = (state) => state.setCardFontSize;
 const getMapObject = (state) => state.mapObj;
+const getSetPostsortCommentCheckObj = (state) =>
+  state.setPostsortCommentCheckObj;
 
 const LandingPage = () => {
   // STATE
@@ -41,6 +44,7 @@ const LandingPage = () => {
   let displayLandingContent = useStore(getDisplayLandingContent);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const setCardFontSize = useStore(getSetCardFontSize);
+  const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
 
   const headerBarColor = configObj.headerBarColor;
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
@@ -110,6 +114,44 @@ const LandingPage = () => {
     setDisplayNextButton,
     mapObj,
   ]);
+
+  // setup postsort comments object
+  useEffect(() => {
+    let objectKeys = Object.keys(mapObj.qSortPattern);
+    let mostPos = Math.max(...objectKeys);
+    let mostNeg = Math.min(...objectKeys);
+    let MostPos2 = mostPos - 1;
+    let MostNeg2 = mostNeg + 1;
+    let highVal = mapObj.qSortPattern[mostPos];
+    let highVal2 = mapObj.qSortPattern[MostPos2];
+    let lowVal = mapObj.qSortPattern[mostNeg];
+    let lowVal2 = mapObj.qSortPattern[MostNeg2];
+    let showSecondMostPos = configObj.showSecondPosColumn;
+    let showSecondMostNeg = configObj.showSecondNegColumn;
+    const postsortCommentCheckObj = {};
+    for (let i = 0; i < highVal; i++) {
+      let key = `hc-${i}`;
+      postsortCommentCheckObj[key] = false;
+    }
+    for (let j = 0; j < lowVal; j++) {
+      let key = `lc-${j}`;
+      postsortCommentCheckObj[key] = false;
+    }
+    if (showSecondMostPos === "true" || showSecondMostPos === true) {
+      for (let k = 0; k < highVal2; k++) {
+        let key = `hc2-${k}`;
+        postsortCommentCheckObj[key] = false;
+      }
+    }
+    if (showSecondMostNeg === "true" || showSecondMostNeg === true) {
+      for (let l = 0; l < lowVal2; l++) {
+        let key = `lc2-${l}`;
+        postsortCommentCheckObj[key] = false;
+      }
+    }
+    console.log(postsortCommentCheckObj);
+    setPostsortCommentCheckObj(postsortCommentCheckObj);
+  }, [mapObj, configObj, setPostsortCommentCheckObj]);
 
   // calc time on page
   useEffect(() => {

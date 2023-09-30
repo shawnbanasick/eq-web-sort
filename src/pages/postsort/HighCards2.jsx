@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -14,16 +14,45 @@ const getColumnStatements = (state) => state.columnStatements;
 const getResultsPostsort = (state) => state.resultsPostsort;
 const getSetResultsPostsort = (state) => state.setResultsPostsort;
 const getStatementCommentsObj = (state) => state.statementCommentsObj;
+const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
+const getSetPostsortCommentCheckObj = (state) =>
+  state.setPostsortCommentCheckObj;
+const getConfigObj = (state) => state.configObj;
+const getShowPostsortCommentHighlighting = (state) =>
+  state.showPostsortCommentHighlighting;
 
 const HighCards2 = (props) => {
+  const [commentCheckObj, setCommentCheckObj] = useState({});
+
   // STATE
   const columnStatements = useSettingsStore(getColumnStatements);
   const resultsPostsort = useStore(getResultsPostsort);
   const setResultsPostsort = useStore(getSetResultsPostsort);
   const statementCommentsObj = useStore(getStatementCommentsObj);
+  const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
+  const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const showPostsortCommentHighlighting = useStore(
+    getShowPostsortCommentHighlighting
+  );
+
+  useEffect(() => {
+    setCommentCheckObj(postsortCommentCheckObj);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setCommentCheckObj]);
 
   // on leaving card comment section,
-  const onBlur = (event, columnDisplay, itemId) => {
+  const onChange = (event, columnDisplay, itemId) => {
+    let commentLength = event.target.value.length;
+    if (commentLength > 0) {
+      postsortCommentCheckObj[`hc2-${itemId}`] = true;
+      setPostsortCommentCheckObj(postsortCommentCheckObj);
+      setCommentCheckObj({ ...postsortCommentCheckObj });
+    } else {
+      postsortCommentCheckObj[`hc2-${itemId}`] = false;
+      setPostsortCommentCheckObj(postsortCommentCheckObj);
+      setCommentCheckObj({ ...postsortCommentCheckObj });
+    }
     const results = resultsPostsort;
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
@@ -61,6 +90,15 @@ const HighCards2 = (props) => {
     const statementHtml = ReactHtmlParser(
       `<div>${decodeHTML(item.statement)}</div>`
     );
+    let highlighting = true;
+    if (
+      configObj.postsortAnswersRequired === "true" ||
+      configObj.postsortAnswersRequired === true
+    ) {
+      if (showPostsortCommentHighlighting === true) {
+        highlighting = commentCheckObj[`hc2-${index}`];
+      }
+    }
 
     return (
       <Container key={item.statement}>
@@ -71,14 +109,16 @@ const HighCards2 = (props) => {
           </Card>
           <TagContainerDiv>
             <CommentArea
+              bgColor={highlighting}
+              border={highlighting}
               data-gramm_editor="false"
               height={height}
               cardFontSize={cardFontSize}
               id={item.id}
               placeholder={placeholder}
               defaultValue={item.comment}
-              onBlur={(e) => {
-                onBlur(e, columnDisplay, index);
+              onChange={(e) => {
+                onChange(e, columnDisplay, index);
               }}
             />
           </TagContainerDiv>
@@ -121,12 +161,13 @@ const CardAndTextHolder = styled.div`
 const CommentArea = styled.textarea`
   padding: 10px;
   margin-top: 2px;
-  background-color: white;
+  background-color: ${(props) => (props.bgColor ? "whitesmoke" : "#fde047")};
   height: ${(props) => `${props.height}px;`};
   font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
   border: 2px solid darkgray;
   border-radius: 3px;
+  outline: ${(props) => (props.border ? "none" : "dashed 3px black")};
 `;
 
 const TagContainerDiv = styled.div`

@@ -124,7 +124,7 @@ const SurveyDropdownElement = (props) => {
       hasBeenAnswered === false
     ) {
       setFormatOptions({
-        bgColor: "lightpink",
+        bgColor: "#fde047",
         border: "3px dashed black",
       });
     } else {

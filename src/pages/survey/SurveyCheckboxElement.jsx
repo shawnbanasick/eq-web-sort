@@ -126,7 +126,7 @@ const SurveyCheckboxElement = (props) => {
       checkRequiredQuestionsComplete === true &&
       hasBeenAnswered === false
     ) {
-      setFormatOptions({ bgColor: "lightpink", border: "3px dashed black" });
+      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",

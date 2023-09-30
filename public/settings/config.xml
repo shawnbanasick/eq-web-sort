@@ -54,6 +54,8 @@
    <item id="showSecondPosColumn">false</item>
    <item id="showSecondNegColumn">false</item>
    <item id="displayNeutralObjects">false</item>
+   <item id="showBackButton">true</item>
+   <item id="postsortAnswersRequired">true</item>
 
 
    <!-- SURVEY - Survey Questions -->

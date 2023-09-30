@@ -24,6 +24,11 @@ const getSetTrigSortOverColMod = (state) =>
 const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getSetResults = (state) => state.setResults;
+const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
+const getSetShowPostsortCommentHighlighting = (state) =>
+  state.setShowPostsortCommentHighlighting;
+const getSetTriggerPostsortPreventNavModal = (state) =>
+  state.setTriggerPostsortPreventNavModal;
 
 const LinkButton = (props) => {
   let goToNextPage;
@@ -43,6 +48,13 @@ const LinkButton = (props) => {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setResults = useStore(getSetResults);
+  const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
+  const setShowPostsortCommentHighlighting = useStore(
+    getSetShowPostsortCommentHighlighting
+  );
+  const setTriggerPostsortPreventNavModal = useStore(
+    getSetTriggerPostsortPreventNavModal
+  );
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
@@ -116,6 +128,35 @@ const LinkButton = (props) => {
             return true;
           }
         }
+      }
+    }
+
+    if (currentPage === "postsort") {
+      console.log(postsortCommentCheckObj);
+      const checkArray2 = [];
+      Object.keys(postsortCommentCheckObj).forEach((key) => {
+        if (postsortCommentCheckObj[key] === false) {
+          checkArray2.push("false");
+        }
+      });
+
+      console.log(checkArray2);
+
+      if (checkArray2.length > 0) {
+        if (
+          configObj.postsortAnswersRequired === true ||
+          configObj.postsortAnswersRequired === "true"
+        ) {
+          // answers required in configObj
+          setShowPostsortCommentHighlighting(true);
+          setTriggerPostsortPreventNavModal(true);
+          return false;
+        } else {
+          // answers not required in configObj
+          return true;
+        }
+      } else {
+        return true;
       }
     }
 

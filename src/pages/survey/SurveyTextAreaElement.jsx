@@ -72,7 +72,7 @@ const SurveyTextAreaElement = (props) => {
       userTextLen < 1
     ) {
       setFormatOptions({
-        bgColor: "lightpink",
+        bgColor: "#fde047",
         border: "3px dashed black",
       });
     } else {

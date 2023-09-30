@@ -11,6 +11,7 @@ import PostsortHelpModal from "./PostsortHelpModal";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import PromptUnload from "../../utilities/PromptUnload";
+import PostsortPreventNavModal from "./PostsortPreventNavModal";
 
 /* eslint react/prop-types: 0 */
 
@@ -114,6 +115,7 @@ const PostSort = () => {
     <div>
       <PromptUnload />
       <PostsortHelpModal />
+      <PostsortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
       <CardsContainer>
         <PostsortInstructions>{postsortInstructions}</PostsortInstructions>

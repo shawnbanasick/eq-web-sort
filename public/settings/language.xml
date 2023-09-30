@@ -81,6 +81,9 @@
         <item id="postsortDisagreement">Placed on Disagree</item>
         <item id="postsortModalHead">Step 3 of 4</item>
         <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.</item>
+        <item id="postsortPreventNavModalHead">Navigation Disabled</item>
+        <item id="postsortPreventNavModalText">Please add comments to all of the cards before going to the next step.</item>
+
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
         <item id="surveyHeader">Post-Sort Questionnaire</item>

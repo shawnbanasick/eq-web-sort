@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
@@ -14,16 +13,44 @@ const getColumnStatements = (state) => state.columnStatements;
 const getResultsPostsort = (state) => state.resultsPostsort;
 const getSetResultsPostsort = (state) => state.setResultsPostsort;
 const getStatementCommentsObj = (state) => state.statementCommentsObj;
+const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
+const getSetPostsortCommentCheckObj = (state) =>
+  state.setPostsortCommentCheckObj;
+const getConfigObj = (state) => state.configObj;
+const getShowPostsortCommentHighlighting = (state) =>
+  state.showPostsortCommentHighlighting;
 
 const HighCards = (props) => {
+  const [commentCheckObj, setCommentCheckObj] = useState({});
+
   // STATE
   const columnStatements = useSettingsStore(getColumnStatements);
   const resultsPostsort = useStore(getResultsPostsort);
   const setResultsPostsort = useStore(getSetResultsPostsort);
   const statementCommentsObj = useStore(getStatementCommentsObj);
+  const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
+  const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const showPostsortCommentHighlighting = useStore(
+    getShowPostsortCommentHighlighting
+  );
 
-  // on leaving card comment section,
-  const onBlur = (event, columnDisplay, itemId) => {
+  useEffect(() => {
+    setCommentCheckObj(postsortCommentCheckObj);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setCommentCheckObj]);
+
+  const handleChange = (event, columnDisplay, itemId) => {
+    let commentLength = event.target.value.length;
+    if (commentLength > 0) {
+      postsortCommentCheckObj[`hc-${itemId}`] = true;
+      setPostsortCommentCheckObj(postsortCommentCheckObj);
+      setCommentCheckObj({ ...postsortCommentCheckObj });
+    } else {
+      postsortCommentCheckObj[`hc-${itemId}`] = false;
+      setPostsortCommentCheckObj(postsortCommentCheckObj);
+      setCommentCheckObj({ ...postsortCommentCheckObj });
+    }
     const results = resultsPostsort;
     const cards = columnStatements.vCols[columnDisplay];
     const targetCard = event.target.id;
@@ -48,7 +75,7 @@ const HighCards = (props) => {
       return el;
     });
     setResultsPostsort(results);
-  }; // end onBlur
+  };
 
   const { agreeObj, cardFontSize, width, height } = props;
 
@@ -57,11 +84,20 @@ const HighCards = (props) => {
   const { agreeText, placeholder } = agreeObj;
 
   let columnDisplay = agreeObj.columnDisplay;
-
   return highCards.map((item, index) => {
     const statementHtml = ReactHtmlParser(
       `<div>${decodeHTML(item.statement)}</div>`
     );
+    let highlighting = true;
+    if (
+      configObj.postsortAnswersRequired === "true" ||
+      configObj.postsortAnswersRequired === true
+    ) {
+      if (showPostsortCommentHighlighting === true) {
+        highlighting = commentCheckObj[`hc-${index}`];
+      }
+    }
+
     return (
       <Container key={item.statement}>
         <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
@@ -76,14 +112,16 @@ const HighCards = (props) => {
           </Card>
           <TagContainerDiv>
             <CommentArea
+              bgColor={highlighting}
+              border={highlighting}
               data-gramm_editor="false"
               cardFontSize={cardFontSize}
               height={height}
               id={item.id}
               placeholder={placeholder}
               defaultValue={item.comment}
-              onBlur={(e) => {
-                onBlur(e, columnDisplay, index);
+              onChange={(e) => {
+                handleChange(e, columnDisplay, index);
               }}
             />
           </TagContainerDiv>
@@ -126,12 +164,13 @@ const CardAndTextHolder = styled.div`
 const CommentArea = styled.textarea`
   padding: 10px;
   margin-top: 2px;
-  background-color: white;
+  background-color: ${(props) => (props.bgColor ? "whitesmoke" : "#fde047")};
   height: ${(props) => `${props.height}px;`};
   font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);
   border: 2px solid darkgray;
   border-radius: 3px;
+  outline: ${(props) => (props.border ? "none" : "dashed 3px black")};
 `;
 
 const TagContainerDiv = styled.div`
