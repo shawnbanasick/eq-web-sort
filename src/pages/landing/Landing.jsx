@@ -94,7 +94,11 @@ const LandingPage = () => {
       } else {
         // if something in local storage, set state
         console.log("URL usercode from storage: ", urlName);
-        setUrlUsercode(`${urlName} (stored)`);
+        if (urlName === "not_set") {
+          setUrlUsercode("not_set");
+        } else {
+          setUrlUsercode(`${urlName} (stored)`);
+        }
       }
     } else {
       // if something in URL, set it in state

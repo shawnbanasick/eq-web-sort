@@ -295,7 +295,7 @@ const ItemContainer = styled.div`
   display: inline-grid;
   grid-template-columns: minmax(30%, 900px) 50px 50px 50px 50px 50px 50px;
   margin-bottom: 17px;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
   height: 40px;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   font-size: 16px;
@@ -314,6 +314,9 @@ const RadioInput = styled.input`
   justify-self: center;
   align-self: center;
   text-align: center;
+  border: 0px;
+  width: 100%;
+  height: 1.4em;
 `;
 
 const CircleDiv = styled.div`

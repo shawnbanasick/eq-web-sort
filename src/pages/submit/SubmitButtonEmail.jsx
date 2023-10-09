@@ -44,7 +44,7 @@ const SubmitResultsButton = (props) => {
     // create results object for transmission - * is a delimiter
     let formattedResultsTxt = "";
     for (const [key, value] of Object.entries(props.results)) {
-      formattedResultsTxt = formattedResultsTxt + `${key}: ${value} * `;
+      formattedResultsTxt = formattedResultsTxt + `${key}:| ${value} | `;
     }
     console.log("formattedResults: " + formattedResultsTxt);
 

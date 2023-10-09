@@ -347,7 +347,7 @@ const ItemContainer = styled.div`
   margin-bottom: 17px;
   font-size: 16px;
   align-items: end;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
   height: 40px;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   border-radius: 3px;
@@ -372,7 +372,9 @@ const RadioInput = styled.input`
   justify-self: center;
   align-self: center;
   text-align: center;
-  margin-bottom: 6px;
+  border: 0px;
+  width: 100%;
+  height: 1.4em;
 `;
 
 const OptionsText = styled.span`

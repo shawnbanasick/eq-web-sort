@@ -280,7 +280,7 @@ const ItemContainer = styled.div`
   grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
   margin-bottom: 17px;
   padding-left: 5px;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
   height: 40px;
   align-items: end;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
@@ -302,6 +302,9 @@ const RadioInput = styled.input`
   display: flex;
   justify-self: center;
   align-self: center;
+  border: 0px;
+  width: 100%;
+  height: 1.4em;
 `;
 
 const OptionsText = styled.span`
