@@ -132,13 +132,17 @@ const LinkButton = (props) => {
 
     if (currentPage === "postsort") {
       const checkArray2 = [];
+      console.log(postsortCommentCheckObj);
       Object.keys(postsortCommentCheckObj).forEach((key) => {
-        if (postsortCommentCheckObj[key] === false) {
+        if (
+          postsortCommentCheckObj[key] === false ||
+          postsortCommentCheckObj[key] === "false"
+        ) {
           checkArray2.push("false");
         }
       });
 
-      if (checkArray2.length > 0) {
+      if (checkArray2.length > 0 || checkArray2.includes("false")) {
         if (
           configObj.postsortCommentsRequired === true ||
           configObj.postsortCommentsRequired === "true"

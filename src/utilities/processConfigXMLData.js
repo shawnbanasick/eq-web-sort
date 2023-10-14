@@ -398,6 +398,7 @@ const processConfigXMLData = (dataObject) => {
     useStore.setState({ requiredAnswersObj: requiredAnswersObj });
     useStore.setState({ surveyQuestionObjArray: surveyQuestionArray });
   }
+  console.log(configObj);
   let returnObj = {};
   let shuffleCards = configObj?.shuffleCards;
   returnObj.requiredAnswersObj = requiredAnswersObj;
