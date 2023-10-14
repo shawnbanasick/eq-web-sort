@@ -57,6 +57,7 @@ const LinkButton = (props) => {
   );
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
+  const postsortCommentsRequired = configObj.postsortCommentsRequired;
 
   const {
     history,
@@ -143,9 +144,10 @@ const LinkButton = (props) => {
         }
       });
       console.log(JSON.stringify(checkArray2));
+      console.log(postsortCommentsRequired);
       if (
-        configObj.postsortCommentsRequired === true ||
-        configObj.postsortCommentsRequired === "true"
+        postsortCommentsRequired === true ||
+        postsortCommentsRequired === "true"
       ) {
         console.log("checkArray length > 0");
         if (checkArray2.length > 0 || checkArray2.includes("false")) {
