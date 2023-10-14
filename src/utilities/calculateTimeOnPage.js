@@ -9,7 +9,10 @@ const calculateTimeOnPage = (startTime, prefix, prefix2, results) => {
   const identifier4 = `lastAccess${prefix2}`;
 
   // const durationCumulative = store.getState()[identifier];
-  const durationCumulative = localStorage.getItem(identifier) || 0;
+  let durationCumulative = localStorage.getItem(identifier) || 0;
+  if (durationCumulative === undefined) {
+    durationCumulative = 0;
+  }
 
   const newDurationCumulative = getCumulativeDuration(
     startTime,

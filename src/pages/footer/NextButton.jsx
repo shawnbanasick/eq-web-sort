@@ -133,7 +133,8 @@ const LinkButton = (props) => {
     if (currentPage === "postsort") {
       const checkArray2 = [];
       console.log(postsortCommentCheckObj);
-      Object.keys(postsortCommentCheckObj).forEach((key) => {
+      const keyArray = Object.keys(postsortCommentCheckObj);
+      keyArray.forEach((key) => {
         if (
           postsortCommentCheckObj[key] === false ||
           postsortCommentCheckObj[key] === "false"
