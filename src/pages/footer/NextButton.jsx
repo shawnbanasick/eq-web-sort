@@ -142,21 +142,26 @@ const LinkButton = (props) => {
           checkArray2.push("false");
         }
       });
-
-      if (checkArray2.length > 0 || checkArray2.includes("false")) {
-        if (
-          configObj.postsortCommentsRequired === true ||
-          configObj.postsortCommentsRequired === "true"
-        ) {
+      console.log(JSON.stringify(checkArray2));
+      if (
+        configObj.postsortCommentsRequired === true ||
+        configObj.postsortCommentsRequired === "true"
+      ) {
+        console.log("checkArray length > 0");
+        if (checkArray2.length > 0 || checkArray2.includes("false")) {
+          console.log("prevent nav indicated and prevent");
           // answers required in configObj
           setShowPostsortCommentHighlighting(true);
           setTriggerPostsortPreventNavModal(true);
           return false;
         } else {
           // answers not required in configObj
+
+          console.log(" check required but has false in array");
           return true;
         }
       } else {
+        console.log("allow nav - ");
         return true;
       }
     }
