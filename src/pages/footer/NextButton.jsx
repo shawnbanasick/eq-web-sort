@@ -133,7 +133,6 @@ const LinkButton = (props) => {
 
     if (currentPage === "postsort") {
       const checkArray2 = [];
-      console.log(postsortCommentCheckObj);
       const keyArray = Object.keys(postsortCommentCheckObj);
       keyArray.forEach((key) => {
         if (
@@ -143,27 +142,19 @@ const LinkButton = (props) => {
           checkArray2.push("false");
         }
       });
-      console.log(JSON.stringify(checkArray2));
-      console.log(postsortCommentsRequired);
       if (
         postsortCommentsRequired === true ||
         postsortCommentsRequired === "true"
       ) {
-        console.log("checkArray length > 0");
         if (checkArray2.length > 0 || checkArray2.includes("false")) {
-          console.log("prevent nav indicated and prevent");
           // answers required in configObj
           setShowPostsortCommentHighlighting(true);
           setTriggerPostsortPreventNavModal(true);
           return false;
         } else {
-          // answers not required in configObj
-
-          console.log(" check required but has false in array");
           return true;
         }
       } else {
-        console.log("allow nav - ");
         return true;
       }
     }

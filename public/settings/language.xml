@@ -92,7 +92,7 @@
         <item id="surveyModalHead">Step 4 of 4</item>
         <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an &amp;quot;*&amp;quot; in their title are required.</item>
         <item id="surveyPreventNavModalHead">Navigation Disabled</item>
-        <item id="surveyPreventNavModalText">Please answer the required questions (outlined in red) before going to the next step.</item>
+        <item id="surveyPreventNavModalText">Please answer the required questions (outlined in yellow) before going to the next step.</item>
        
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
