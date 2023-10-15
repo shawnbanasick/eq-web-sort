@@ -1,4 +1,4 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)[![DOI](https://zenodo.org/badge/393677350.svg)](https://zenodo.org/doi/10.5281/zenodo.8339818)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) <a href="https://doi.org/10.5281/zenodo.8339819"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8339819.svg" alt="DOI"></a>
 
 <p align="center">
 <kbd><img src="./readme_assets/web_sort.svg"  width="1100"></kbd>
