@@ -1,5 +1,7 @@
-<p align="center"><kbd>
-<img src="./readme_assets/web_sort.svg"  width="1100"></kbd>
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)[![DOI](https://zenodo.org/badge/393677350.svg)](https://zenodo.org/doi/10.5281/zenodo.8339818)
+
+<p align="center">
+<kbd><img src="./readme_assets/web_sort.svg"  width="1100"></kbd>
 </p>
 
 # [Version 3.0.0 Download link](https://github.com/shawnbanasick/eq-web-sort/releases/download/v3.0.0/eq-web-sort-v300.zip) Use with EQ Web Sort Configurator v3.0.0
@@ -50,6 +52,10 @@ Survey Questions
 ### [visual guide (A4 size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_A4.pdf)
 
 ### [visual guide (US letter size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_letter.pdf)
+
+## Citation
+
+`Banasick, S. (2023). EQ Web Sort (Version 3.0.0) [Computer software]. https://doi.org/10.5281/zenodo.8339819`
 
 ## License
 
