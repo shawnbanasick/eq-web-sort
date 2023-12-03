@@ -16,6 +16,9 @@
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://</item> 
    <!-- OTHER GENERAL OPTIONS -->
+   <item id="useImages">true</item>
+   <item id="numImages">22</item>
+
    <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item> 

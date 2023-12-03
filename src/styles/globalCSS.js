@@ -411,7 +411,6 @@ footer {
   }
   
   #cards{
-    max-height:215px;
     min-height:150px;
     overflow: hidden;
   }
@@ -509,6 +508,142 @@ footer {
 
   #neg{
     min-height: 52vh;
+    border-radius: 3px;
+  }
+}
+
+
+
+/***********************************
+  PRESORT CSS  ** IMAGES ** 
+ *******************************************************************************/
+
+
+
+#cardsDivImg{
+    grid-column-start: 3;
+    overflow-y: hidden;
+    min-height: 300px;
+    border: 3px solid red;
+    height: 30vh;
+    padding: 0px;
+
+    img {
+      height: 100% !important;
+    }
+  }
+
+  #cardsDivImg  img {
+    border: 5px solid orange;
+    margin-bottom: 50px;
+  }
+
+  .dragObject {
+  }
+
+  #cardsImg{
+    min-height:150px;
+    overflow: hidden;
+  }
+  
+  #completionRatioImg {
+    grid-row-start: 2;
+    grid-column-start: 3;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #negDivImg{
+    grid-row-start: 3;
+    grid-column-start: 2;
+    overflow-y: auto;
+    background-color: white;
+    min-height: 300px;
+    height: 58vh;
+    padding-top: 5px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid #aeaeae;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+  }
+  
+
+  #neutralDivImg{
+    grid-row-start: 3;
+    grid-column-start: 3;
+    overflow-y: auto;
+    background-color: white;
+    min-height: 300px;
+    height: 58vh;
+    padding-top: 5px;
+    border: 1px solid #aeaeae;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+
+  }
+
+  #posDivImg{
+    grid-row-start: 3;
+    grid-column-start: 4;
+    overflow-y: auto;
+    background-color: white;
+    height: 58vh;
+    padding-top: 5px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid #aeaeae;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 10px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+  }
+
+  #pos{
+    min-height: 52vh;
+    border-radius: 3px;
+  }
+
+  #neutral{
+    min-height: 52vh;
+    border-radius: 3px;
+  }
+
+  #neg{
+    min-height: 52vh;
+    border-radius: 3px;
+  }
+
+  #cards{
+    min-height: 22vh;
     border-radius: 3px;
   }
 }

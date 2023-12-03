@@ -13,6 +13,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import PromptUnload from "../../utilities/PromptUnload";
+import PresortDndImages from "./PresortDndImages";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -109,7 +110,7 @@ const PresortPage = (props) => {
       <PresortFinishedModal />
       <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleBarText}</SortTitleBar>
-      <PresortDND statements={statements} cardFontSize={cardFontSize} />
+      <PresortDndImages cardFontSize={cardFontSize} />
     </React.Fragment>
   );
 };

@@ -1,0 +1,459 @@
+import React, { useState, useEffect, useCallback } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import styled from "styled-components";
+import ReactHtmlParser from "react-html-parser";
+import decodeHTML from "../../utilities/decodeHTML";
+import useSettingsStore from "../../globalState/useSettingsStore";
+import useStore from "../../globalState/useStore";
+
+const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
+const getStatementsObj = (state) => state.statementsObj;
+const getColumnStatements = (state) => state.columnStatements;
+const getPreSortedStateNumInit = (state) =>
+  state.presortSortedStatementsNumInitial;
+const getSetColumnStatements = (state) => state.setColumnStatements;
+const getSetPresortFinished = (state) => state.setPresortFinished;
+const getSetTrigPresortFinModal = (state) =>
+  state.setTriggerPresortFinishedModal;
+const getResults = (state) => state.results;
+const getSetResults = (state) => state.setResults;
+const getSetProgressScoreAdditional = (state) =>
+  state.setProgressScoreAdditional;
+
+/*
+ *
+ *  note: drop column css is in "globalCSS.js" and column ids are generated string literals
+ *  cardsDivImg, negDivImg,
+ */
+
+function PresortDND(props) {
+  // STATE
+  const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const statementsObj = useSettingsStore(getStatementsObj);
+  const columnStatements = useSettingsStore(getColumnStatements);
+  const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
+  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  const setPresortFinished = useStore(getSetPresortFinished);
+  const setTriggerPresortFinishedModal = useStore(getSetTrigPresortFinModal);
+  const results = useStore(getResults);
+  const setResults = useStore(getSetResults);
+  const setProgressScoreAdditional = useStore(getSetProgressScoreAdditional);
+
+  const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
+  const btnDisagreement = ReactHtmlParser(
+    decodeHTML(langObj.presortDisagreement)
+  );
+  const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
+  const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
+
+  // initialize local state
+  let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
+    presortSortedStatementsNumInitial
+  );
+
+  const handleOnClick = (e) => {
+    if (e.detail === 2) {
+      console.log(e.target.alt);
+      console.log("double click");
+    }
+  };
+
+  let statementsArray = [];
+  for (let i = 0; i < configObj.numImages; i++) {
+    let item = {};
+    item.backgroundColor = "#e0e0e0";
+    item.element = (
+      <CustomImage
+        src={`/settings/images/image${i + 1}.png`}
+        alt={`image${i + 1}`}
+        className="dragObject"
+      />
+    );
+    item.cardColor = "yellowSortCard";
+    item.divColor = "isUncertainStatement";
+    item.pinkChecked = false;
+    item.yellowChecked = true;
+    item.greenChecked = false;
+    item.sortValue = 222;
+    item.id = `image${i + 1}`;
+    item.statement = `image${i + 1}`;
+    item.statementNum = `${i + 1}`;
+
+    statementsArray.push(item);
+  }
+
+  const statementsLength = statementsArray.length;
+
+  const cardFontSize = `${props.cardFontSize}px`;
+  let defaultFontColor = configObj.defaultFontColor;
+
+  const cardHeight = "12vh";
+
+  const [columns, setColumns] = useState({
+    cards: {
+      name: statementsName,
+      items: statementsArray,
+      id: "cardsImg",
+    },
+    neg: {
+      name: btnDisagreement,
+      items: [],
+      id: "negImg",
+    },
+    neutral: {
+      name: btnNeutral,
+      items: [],
+      id: "neutralImg",
+    },
+    pos: {
+      name: btnAgreement,
+      id: "posImg",
+      items: [],
+    },
+  });
+
+  // default = positive sort direction
+  let pinkArraySortValue = 333,
+    greenArraySortValue = 111;
+  if (configObj.sortDirection === "negative") {
+    pinkArraySortValue = 111;
+    greenArraySortValue = 333;
+  }
+
+  const onDragEnd = useCallback(
+    (result, columns, setColumns) => {
+      if (!result.destination || result.destination.droppableId === "cards") {
+        return;
+      }
+      const { source, destination } = result;
+
+      // update statement characteristics
+      // const statementsArray = [...columnStatements.statementList];
+      const destinationId = result.destination.droppableId;
+      const draggableId = result.draggableId;
+
+      // set METADATA FOR SORTING
+      for (let i = 0; i < statementsArray.length; i++) {
+        if (statementsArray[i].id === draggableId) {
+          if (destinationId === "neg") {
+            statementsArray[i].divColor = "isNegativeStatement";
+            statementsArray[i].cardColor = "pinkSortCard";
+            statementsArray[i].pinkChecked = true;
+            statementsArray[i].yellowChecked = false;
+            statementsArray[i].greenChecked = false;
+            statementsArray[i].sortValue = pinkArraySortValue;
+          }
+          if (destinationId === "neutral") {
+            statementsArray[i].divColor = "isUncertainStatement";
+            statementsArray[i].cardColor = "yellowSortCard";
+            statementsArray[i].pinkChecked = false;
+            statementsArray[i].yellowChecked = true;
+            statementsArray[i].greenChecked = false;
+            statementsArray[i].sortValue = 222;
+          }
+          if (destinationId === "pos") {
+            statementsArray[i].divColor = "isPositiveStatement";
+            statementsArray[i].cardColor = "greenSortCard";
+            statementsArray[i].pinkChecked = false;
+            statementsArray[i].yellowChecked = false;
+            statementsArray[i].greenChecked = true;
+            statementsArray[i].sortValue = greenArraySortValue;
+          }
+        }
+      }
+
+      // set new ordering
+      for (let i = 0; i < statementsArray.length; i++) {
+        statementsArray[i].listIndex = i + 1;
+      }
+
+      // save to memory
+      columnStatements.statementList = [...statementsArray];
+      setColumnStatements(columnStatements);
+
+      // when dropped on different droppable
+      if (source.droppableId !== destination.droppableId) {
+        try {
+          const sourceColumn = columns[source.droppableId];
+          const destColumn = columns[destination.droppableId];
+          const sourceItems = [...sourceColumn.items];
+          const destItems = [...destColumn.items];
+          const [removed] = sourceItems.splice(source.index, 1);
+
+          // change background color
+          if (destColumn.id === "pos") {
+            removed.backgroundColor = configObj.greenCardColor;
+          }
+          if (destColumn.id === "neg") {
+            removed.backgroundColor = configObj.pinkCardColor;
+          }
+          if (destColumn.id === "neutral") {
+            removed.backgroundColor = configObj.yellowCardColor;
+          }
+
+          destItems.splice(destination.index, 0, removed);
+
+          // update columns
+          setColumns({
+            ...columns,
+            [source.droppableId]: {
+              ...sourceColumn,
+              items: sourceItems,
+            },
+            [destination.droppableId]: {
+              ...destColumn,
+              items: destItems,
+            },
+          });
+
+          // calc remaining statements
+          let sortedStatements;
+          if (sourceColumn.id === "cardsImg") {
+            sortedStatements =
+              statementsObj.totalStatements - sourceColumn.items.length + 1;
+            setPresortSortedStatementsNum(sortedStatements);
+            const ratio = sortedStatements / statementsLength;
+            const completedPercent = (ratio * 30).toFixed();
+
+            // update Progress Bar State
+            setProgressScoreAdditional(completedPercent);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          // MOVING BETWEEN COLUMNS
+          const sourceCol = columns[source.droppableId];
+          const copiedItems = [...sourceCol.items];
+          const [removed] = copiedItems.splice(source.index, 1);
+          copiedItems.splice(destination.index, 0, removed);
+          setColumns({
+            ...columns,
+            [source.droppableId]: {
+              ...sourceCol,
+              items: copiedItems,
+            },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    [
+      configObj,
+      columnStatements,
+      setColumnStatements,
+      statementsObj,
+      setProgressScoreAdditional,
+    ]
+  ); // END DRAG-END
+
+  useEffect(() => {
+    const handleKeyUp = (event) => {
+      let target;
+      if (event.key === "1" || event.key === 1) {
+        target = "neg";
+      } else if (event.key === "2" || event.key === 2) {
+        target = "neutral";
+      } else if (event.key === "3" || event.key === 3) {
+        target = "pos";
+      } else {
+        return;
+      }
+
+      if (columns.cards.items.length > 0) {
+        let source = columns.cards.items[0].id;
+        const results = {
+          draggableId: source,
+          type: "DEFAULT",
+          source: {
+            index: 0,
+            droppableId: "cards",
+          },
+          reason: "DROP",
+          mode: "FLUID",
+          destination: {
+            droppableId: target,
+            index: 0,
+          },
+          combine: null,
+        };
+
+        onDragEnd(results, columns, setColumns);
+      }
+    }; // end keyup
+
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  }, [onDragEnd, columns]);
+
+  useEffect(() => {
+    let projectResultsObj = results;
+    projectResultsObj.npos = columns.pos.items.length;
+    projectResultsObj.nneu = columns.neutral.items.length;
+    projectResultsObj.nneg = columns.neg.items.length;
+    setResults(projectResultsObj);
+  }, [columns, results, setResults]);
+
+  useEffect(() => {
+    if (columns.cards.items.length === 0) {
+      setPresortFinished(true);
+      setTriggerPresortFinishedModal(true);
+    }
+  }, [
+    columns.cards.items.length,
+    setPresortFinished,
+    setTriggerPresortFinishedModal,
+  ]);
+
+  // RENDER COMPONENT
+
+  // <img src="/settings/images/image1.png" alt="test" />
+
+  return (
+    <PresortGrid>
+      <CompletionRatioDiv id="completionRatioImg">
+        {presortSortedStatementsNum}/{statementsLength}
+      </CompletionRatioDiv>
+
+      <DragDropContext
+        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+      >
+        {Object.entries(columns).map(([columnId, column], index) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+              key={columnId}
+              id={`${columnId}DivImg`}
+              onClick={(e) => {
+                handleOnClick(e);
+              }}
+            >
+              <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
+              <div
+                style={{
+                  margin: 2,
+                }}
+              >
+                <Droppable droppableId={columnId} key={columnId}>
+                  {(provided, snapshot) => {
+                    return (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        id={columnId}
+                        style={{
+                          background: snapshot.isDraggingOver
+                            ? "lightblue"
+                            : "white",
+                          padding: 4,
+                          width: "22vw",
+                        }}
+                      >
+                        {column.items.map((item, index) => {
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                              className="dragObject"
+                              onClick={(e) => {
+                                handleOnClick(e, item.id);
+                              }}
+                            >
+                              {(provided, snapshot) => {
+                                return (
+                                  <DroppableContainer
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      userSelect: "none",
+                                      padding: 0,
+                                      margin: "0 0 2px 0",
+                                      overflow: "hidden",
+                                      fontSize: cardFontSize,
+                                      border: "0px solid #a8a8a8",
+                                      filter: snapshot.isDragging
+                                        ? "brightness(0.85)"
+                                        : "brightness(1.00)",
+                                      color: defaultFontColor,
+                                      ...provided.draggableProps.style,
+                                    }}
+                                  >
+                                    {item.element}
+                                  </DroppableContainer>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              </div>
+            </div>
+          );
+        })}
+      </DragDropContext>
+    </PresortGrid>
+  );
+}
+
+export default PresortDND;
+
+const ColumnNamesDiv = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 3px;
+  // outline: 1px solid blue;
+`;
+
+const PresortGrid = styled.div`
+  margin-top: 60px;
+  margin-bottom: 50px;
+  margin-left: 5px;
+  width: calc(100vw - 10px);
+  display: grid;
+  height: calc(100vh - 115px);
+  grid-template-rows: 30vh min-content 1fr; // calc(100vh- cardHeight) 22px 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
+  row-gap: 3px;
+  column-gap: 15px;
+  outline: 1px solid red;
+`;
+
+const DroppableContainer = styled.div`
+  background-color: "#83cafe";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 2px;
+  // border: 5px solid green; //
+`;
+
+const CustomImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0px;
+`;
+
+const CompletionRatioDiv = styled.div`
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 3px;
+`;
