@@ -54,6 +54,7 @@ function PresortDND(props) {
   );
 
   const handleOnClick = (e) => {
+    console.log("click");
     if (e.detail === 2) {
       console.log(e.target.alt);
       console.log("double click");
@@ -326,10 +327,12 @@ function PresortDND(props) {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
               key={columnId}
               id={`${columnId}Div`}
+              onClick={(e) => {
+                handleOnClick(e);
+              }}
             >
               <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
               <div style={{ margin: 4 }}>
@@ -356,9 +359,6 @@ function PresortDND(props) {
                               draggableId={item.id}
                               index={index}
                               className="dragObject"
-                              onClick={(e) => {
-                                handleOnClick(e, item.id);
-                              }}
                             >
                               {(provided, snapshot) => {
                                 return (
@@ -370,7 +370,7 @@ function PresortDND(props) {
                                       userSelect: "none",
                                       padding: 6,
                                       margin: "0 0 8px 0",
-                                      height: cardHeight,
+                                      height: "100%",
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
                                       filter: snapshot.isDragging
@@ -407,6 +407,7 @@ function PresortDND(props) {
 export default PresortDND;
 
 const ColumnNamesDiv = styled.div`
+  align-self: center;
   font-size: 20px;
   font-weight: bold;
   padding-left: 3px;
@@ -419,7 +420,7 @@ const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-75);
   grid-template-rows: 230px 15px 1fr;
-  grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr 1fr;
+  grid-template-columns: 0.25fr 1.75fr 1.75fr 1.75fr 0.25fr;
   row-gap: 3px;
   column-gap: 15px;
 `;
@@ -431,6 +432,8 @@ const DroppableContainer = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 2px;
+  width: 28.5vw;
+  // margin-left: 15px;
   border: 1px solid #a8a8a8;
 `;
 
