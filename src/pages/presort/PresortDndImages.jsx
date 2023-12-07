@@ -211,8 +211,7 @@ function PresortDND(props) {
           // calc remaining statements
           let sortedStatements;
           if (sourceColumn.id === "cards") {
-            sortedStatements =
-              statementsObj.totalStatements - sourceColumn.items.length + 1;
+            sortedStatements = statementsLength - sourceColumn.items.length + 1;
             setPresortSortedStatementsNum(sortedStatements);
             const ratio = sortedStatements / statementsObj.totalStatements;
             const completedPercent = (ratio * 30).toFixed();
@@ -353,6 +352,7 @@ function PresortDND(props) {
                           return (
                             <Draggable
                               key={item.id}
+                              id={item.id}
                               draggableId={item.id}
                               index={index}
                               className="dragObject"
@@ -368,7 +368,7 @@ function PresortDND(props) {
                                     {...provided.dragHandleProps}
                                     style={{
                                       userSelect: "none",
-                                      padding: 16,
+                                      padding: 6,
                                       margin: "0 0 8px 0",
                                       height: cardHeight,
                                       overflow: "hidden",
@@ -419,7 +419,7 @@ const PresortGrid = styled.div`
   display: grid;
   height: calc(100vh-75);
   grid-template-rows: 230px 15px 1fr;
-  grid-template-columns: 1fr 325px 325px 325px 1fr;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr 1fr;
   row-gap: 3px;
   column-gap: 15px;
 `;
