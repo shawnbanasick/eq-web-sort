@@ -522,11 +522,11 @@ footer {
 
 #cardsDivImg{
     grid-column-start: 3;
-    overflow-y: hidden;
+    overflow: hidden;
     min-height: 300px;
     border: 3px solid red;
     height: 30vh;
-    padding: 0px;
+    padding-top: 10px;
 
     img {
       height: 100% !important;

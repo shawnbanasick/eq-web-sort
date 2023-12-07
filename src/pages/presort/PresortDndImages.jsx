@@ -89,27 +89,27 @@ function PresortDND(props) {
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
 
-  const cardHeight = "12vh";
+  const cardHeight = 210;
 
   const [columns, setColumns] = useState({
     cards: {
       name: statementsName,
       items: statementsArray,
-      id: "cardsImg",
+      id: "cards",
     },
     neg: {
       name: btnDisagreement,
       items: [],
-      id: "negImg",
+      id: "neg",
     },
     neutral: {
       name: btnNeutral,
       items: [],
-      id: "neutralImg",
+      id: "neutral",
     },
     pos: {
       name: btnAgreement,
-      id: "posImg",
+      id: "pos",
       items: [],
     },
   });
@@ -130,7 +130,7 @@ function PresortDND(props) {
       const { source, destination } = result;
 
       // update statement characteristics
-      // const statementsArray = [...columnStatements.statementList];
+      const statementsArray = [...columnStatements.statementList];
       const destinationId = result.destination.droppableId;
       const draggableId = result.draggableId;
 
@@ -210,11 +210,11 @@ function PresortDND(props) {
 
           // calc remaining statements
           let sortedStatements;
-          if (sourceColumn.id === "cardsImg") {
+          if (sourceColumn.id === "cards") {
             sortedStatements =
               statementsObj.totalStatements - sourceColumn.items.length + 1;
             setPresortSortedStatementsNum(sortedStatements);
-            const ratio = sortedStatements / statementsLength;
+            const ratio = sortedStatements / statementsObj.totalStatements;
             const completedPercent = (ratio * 30).toFixed();
 
             // update Progress Bar State
@@ -312,8 +312,6 @@ function PresortDND(props) {
 
   // RENDER COMPONENT
 
-  // <img src="/settings/images/image1.png" alt="test" />
-
   return (
     <PresortGrid>
       <CompletionRatioDiv id="completionRatioImg">
@@ -332,17 +330,10 @@ function PresortDND(props) {
                 alignItems: "center",
               }}
               key={columnId}
-              id={`${columnId}DivImg`}
-              onClick={(e) => {
-                handleOnClick(e);
-              }}
+              id={`${columnId}Div`}
             >
               <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
-              <div
-                style={{
-                  margin: 2,
-                }}
-              >
+              <div style={{ margin: 4 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -355,7 +346,7 @@ function PresortDND(props) {
                             ? "lightblue"
                             : "white",
                           padding: 4,
-                          width: "22vw",
+                          width: 300,
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -377,14 +368,17 @@ function PresortDND(props) {
                                     {...provided.dragHandleProps}
                                     style={{
                                       userSelect: "none",
-                                      padding: 0,
-                                      margin: "0 0 2px 0",
+                                      padding: 16,
+                                      margin: "0 0 8px 0",
+                                      height: cardHeight,
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
-                                      border: "0px solid #a8a8a8",
                                       filter: snapshot.isDragging
                                         ? "brightness(0.85)"
                                         : "brightness(1.00)",
+                                      backgroundColor: snapshot.isDragging
+                                        ? item.backgroundColor
+                                        : item.backgroundColor,
                                       color: defaultFontColor,
                                       ...provided.draggableProps.style,
                                     }}
@@ -417,21 +411,17 @@ const ColumnNamesDiv = styled.div`
   font-weight: bold;
   padding-left: 3px;
   padding-right: 3px;
-  // outline: 1px solid blue;
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 60px;
-  margin-bottom: 50px;
-  margin-left: 5px;
-  width: calc(100vw - 10px);
+  margin-top: 75px;
+  margin-bottom: 55px;
   display: grid;
-  height: calc(100vh - 115px);
-  grid-template-rows: 30vh min-content 1fr; // calc(100vh- cardHeight) 22px 1fr;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
+  height: calc(100vh-75);
+  grid-template-rows: 230px 15px 1fr;
+  grid-template-columns: 1fr 325px 325px 325px 1fr;
   row-gap: 3px;
   column-gap: 15px;
-  outline: 1px solid red;
 `;
 
 const DroppableContainer = styled.div`
@@ -441,7 +431,7 @@ const DroppableContainer = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 2px;
-  // border: 5px solid green; //
+  border: 1px solid #a8a8a8;
 `;
 
 const CustomImage = styled.img`
