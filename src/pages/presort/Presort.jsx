@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import PresortModal from "./PresortModal";
-import PresortDND from "./PresortDND";
+// import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 import PresortPreventNavModal from "./PresortPreventNavModal";
@@ -89,6 +89,7 @@ const PresortPage = (props) => {
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
   const statements = cloneDeep(columnStatements.statementList);
+  console.log("statements", statements);
 
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 

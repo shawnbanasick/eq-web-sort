@@ -425,10 +425,11 @@ const ColumnNamesNeg = styled.div`
 
   div {
     display: flex;
+    outline: 1px solid #a8a8a8;
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 182, 193, 0.4);
-    width: 50%;
+    min-width: 50%;
     padding: 2px;
     border-radius: 5px;
   }
@@ -448,8 +449,9 @@ const ColumnNamesNeu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    outline: 1px solid #a8a8a8;
     background-color: lightgray;
-    width: 50%;
+    min-width: 50%;
     padding: 2px;
     border-radius: 5px;
   }
@@ -469,14 +471,15 @@ const ColumnNamesPos = styled.div`
     justify-content: center;
     align-items: center;
     background-color: rgba(199, 246, 199, 0.6);
-    width: 50%;
+    min-width: 50%;
     padding: 2px;
     border-radius: 5px;
+    outline: 1px solid #a8a8a8;
   }
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 75px;
+  margin-top: 25px;
   margin-bottom: 55px;
   display: grid;
   height: calc(100vh-100px);
@@ -484,6 +487,8 @@ const PresortGrid = styled.div`
   grid-template-columns: 0.25fr 1.5fr 1.5fr 1.5fr 0.25fr;
   row-gap: 3px;
   column-gap: 15px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const DroppableContainer = styled.div`
@@ -523,6 +528,5 @@ const AllColWrapper = styled.div`
   margin: 4px;
   display: "flex";
   flex-direction: "column";
-  padding: 0px;
   width: 100%;
 `;

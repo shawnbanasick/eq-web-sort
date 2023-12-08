@@ -44,6 +44,7 @@ body {
   margin: 0;
   height:calc(100vh-50px);
   overscroll-behavior: none;
+  overflow: hidden;
 }
 
 /**
@@ -556,12 +557,13 @@ footer {
     height: 50vh;
     padding-top: 5px;
     border-top-left-radius: 3px;
+    overflow-x: hidden;
     border-bottom-left-radius: 3px;
     border: 1px solid #aeaeae;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
-      width: 10px;
+      width: 3px;
       // Height of horizontal scroll bar
       height: 10px;
 
@@ -581,11 +583,12 @@ footer {
     min-height: 300px;
     height: 50vh;
     padding-top: 5px;
+    overflow-x: hidden;
     border: 1px solid #aeaeae;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
-      width: 10px;
+      width: 3px;
       // Height of horizontal scroll bar
       height: 10px;
 
@@ -607,10 +610,11 @@ footer {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border: 1px solid #aeaeae;
+    overflow-x: hidden;
 
     ::-webkit-scrollbar {
       // Width of vertical scroll bar
-      width: 10px;
+      width: 3px;
       // Height of horizontal scroll bar
       height: 10px;
 
