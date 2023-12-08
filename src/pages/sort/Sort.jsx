@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SortGrid from "./SortGrid";
+import SortGridImages from "./SortGridImages";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import SortHelpModal from "./SortHelpModal";
@@ -165,7 +166,7 @@ const Sort = () => {
         <SortColGuides columnWidth={columnWidth} />
       </SortTitleBarContainer>
       <SortGridContainer marginTop={topMargin}>
-        <SortGrid
+        <SortGridImages
           dimensions={dimensions}
           cardFontSize={cardFontSize}
           fontColor={fontColor}

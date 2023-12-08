@@ -23,9 +23,12 @@ const getSetProgressScoreAdditional = (state) =>
 
 /*
  *
- *  note: drop column css is in "globalCSS.js" and column ids are generated string literals
+ *  note: drop column css is in "globalCSS.js" and column ids are generated string concatenations
  *  cardsDivImg, negDivImg,
  */
+
+// todo - add double click to enlarge image
+// todo - add scrolling on ios Safari
 
 function PresortDND(props) {
   // STATE
@@ -163,14 +166,17 @@ function PresortDND(props) {
         }
       }
 
+      console.log(statementsArray);
+
       // set new ordering
       for (let i = 0; i < statementsArray.length; i++) {
         statementsArray[i].listIndex = i + 1;
       }
 
       // save to memory
-      columnStatements.statementList = [...statementsArray];
+      columnStatements.imageList = [...statementsArray];
       setColumnStatements(columnStatements);
+      // console.log("columnStatements", columnStatements);
 
       // when dropped on different droppable
       if (source.droppableId !== destination.droppableId) {
