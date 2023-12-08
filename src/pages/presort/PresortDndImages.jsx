@@ -90,8 +90,6 @@ function PresortDND(props) {
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
 
-  const cardHeight = 210;
-
   const [columns, setColumns] = useState({
     cards: {
       name: statementsName,
@@ -313,42 +311,53 @@ function PresortDND(props) {
   // RENDER COMPONENT
 
   return (
-    <PresortGrid>
+    <PresortGrid id="imageGrid">
       <CompletionRatioDiv id="completionRatioImg">
         {presortSortedStatementsNum}/{statementsLength}
       </CompletionRatioDiv>
+      <ColumnNamesNeg id="negDivImg">
+        <div>{columns.neg.name}</div>
+      </ColumnNamesNeg>
+      <ColumnNamesNeu id="negDivImg">
+        <div>{columns.neutral.name}</div>
+      </ColumnNamesNeu>
+      <ColumnNamesPos id="negDivImg">
+        <div>{columns.pos.name}</div>
+      </ColumnNamesPos>
 
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
+            <AllColWrapper
               key={columnId}
               id={`${columnId}Div`}
+              className={`${columnId}DivImg`}
               onClick={(e) => {
                 handleOnClick(e);
               }}
             >
-              <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
-              <div style={{ margin: 4 }}>
-                <Droppable droppableId={columnId} key={columnId}>
+              <ThreeColCardWrapper>
+                <Droppable
+                  droppableId={columnId}
+                  className={columnId}
+                  key={columnId}
+                >
                   {(provided, snapshot) => {
                     return (
                       <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         id={columnId}
+                        className={columnId}
                         style={{
                           background: snapshot.isDraggingOver
                             ? "lightblue"
                             : "white",
                           padding: 4,
-                          width: 300,
+                          width: "100%",
+                          height: "auto",
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -370,7 +379,6 @@ function PresortDND(props) {
                                       userSelect: "none",
                                       padding: 6,
                                       margin: "0 0 8px 0",
-                                      height: "100%",
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
                                       filter: snapshot.isDragging
@@ -395,8 +403,8 @@ function PresortDND(props) {
                     );
                   }}
                 </Droppable>
-              </div>
-            </div>
+              </ThreeColCardWrapper>
+            </AllColWrapper>
           );
         })}
       </DragDropContext>
@@ -406,21 +414,74 @@ function PresortDND(props) {
 
 export default PresortDND;
 
-const ColumnNamesDiv = styled.div`
-  align-self: center;
+const ColumnNamesNeg = styled.div`
+  display: flex;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   font-weight: bold;
-  padding-left: 3px;
-  padding-right: 3px;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 182, 193, 0.4);
+    width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+  }
+`;
+
+const ColumnNamesNeu = styled.div`
+  display: flex;
+  align-self: center;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+  }
+`;
+
+const ColumnNamesPos = styled.div`
+  display: flex;
+  grid-column-start: 4;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(199, 246, 199, 0.6);
+    width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+  }
 `;
 
 const PresortGrid = styled.div`
   margin-top: 75px;
   margin-bottom: 55px;
   display: grid;
-  height: calc(100vh-75);
-  grid-template-rows: 230px 15px 1fr;
-  grid-template-columns: 0.25fr 1.75fr 1.75fr 1.75fr 0.25fr;
+  height: calc(100vh-100px);
+  grid-template-rows: 34h 25px 40vh;
+  grid-template-columns: 0.25fr 1.5fr 1.5fr 1.5fr 0.25fr;
   row-gap: 3px;
   column-gap: 15px;
 `;
@@ -432,7 +493,7 @@ const DroppableContainer = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 2px;
-  width: 28.5vw;
+  width: 28.4vw;
   // margin-left: 15px;
   border: 1px solid #a8a8a8;
 `;
@@ -444,9 +505,24 @@ const CustomImage = styled.img`
 `;
 
 const CompletionRatioDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 5px;
-  font-size: 20px;
+  font-size: 60px;
   font-weight: bold;
   padding-left: 3px;
   padding-right: 3px;
+`;
+
+const ThreeColCardWrapper = styled.div`
+  margin: 4px;
+`;
+
+const AllColWrapper = styled.div`
+  margin: 4px;
+  display: "flex";
+  flex-direction: "column";
+  padding: 0px;
+  width: 100%;
 `;

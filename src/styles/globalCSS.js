@@ -411,6 +411,7 @@ footer {
   }
   
   #cards{
+    max-height: 215px;1
     min-height:150px;
     overflow: hidden;
   }
@@ -520,46 +521,39 @@ footer {
 
 
 
-#cardsDivImg{
+#imageGrid .cardsDivImg{
     grid-column-start: 3;
     overflow: hidden;
-    min-height: 300px;
-    border: 3px solid red;
-    height: 30vh;
     padding-top: 10px;
-
-    img {
-      height: 100% !important;
-    }
   }
 
-  #cardsDivImg  img {
-    border: 5px solid orange;
-    margin-bottom: 50px;
+
+
+ #imageGrid .cardsDivImg  img {
+    width: 100%;
   }
 
-  .dragObject {
-  }
-
-  #cardsImg{
-    min-height:150px;
-    overflow: hidden;
+  
+  #imageGrid #cards{
+    min-height:34vh;
+   overflow: hidden;
   }
   
-  #completionRatioImg {
-    grid-row-start: 2;
-    grid-column-start: 3;
+
+  #imageGrid #completionRatioImg {
+    grid-row-start: 1;
+    grid-column-start: 4;
     text-align: center;
     font-weight: bold;
   }
 
-  #negDivImg{
+  #imageGrid .negDivImg{
     grid-row-start: 3;
     grid-column-start: 2;
     overflow-y: auto;
     background-color: white;
     min-height: 300px;
-    height: 58vh;
+    height: 50vh;
     padding-top: 5px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -579,13 +573,13 @@ footer {
   }
   
 
-  #neutralDivImg{
+  #imageGrid .neutralDivImg{
     grid-row-start: 3;
     grid-column-start: 3;
     overflow-y: auto;
     background-color: white;
     min-height: 300px;
-    height: 58vh;
+    height: 50vh;
     padding-top: 5px;
     border: 1px solid #aeaeae;
 
@@ -603,12 +597,12 @@ footer {
 
   }
 
-  #posDivImg{
+  #imageGrid .posDivImg{
     grid-row-start: 3;
     grid-column-start: 4;
     overflow-y: auto;
     background-color: white;
-    height: 58vh;
+    height: 50vh;
     padding-top: 5px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -627,27 +621,30 @@ footer {
     }
   }
 
-  #pos{
-    min-height: 52vh;
+  .pos{
+    min-height: 25vh;
     border-radius: 3px;
   }
 
-  #neutral{
-    min-height: 52vh;
+  .neutral{
+    min-height: 38vh;
     border-radius: 3px;
   }
 
-  #neg{
-    min-height: 52vh;
+  .neg{
+    min-height: 38vh;
     border-radius: 3px;
   }
 
-  #cards{
-    min-height: 22vh;
+  #imageGrid .cards{
     border-radius: 3px;
+    
   }
-}
-
+  
+  #imageGrid .cards > :not(:first-child) {
+    opacity: 0;
+    }
+  
 
 /***********************************
   SORT CSS
