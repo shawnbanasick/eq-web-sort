@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
@@ -64,31 +64,8 @@ function PresortDND(props) {
     }
   };
 
-  let statementsArray = [];
-  for (let i = 0; i < configObj.numImages; i++) {
-    let item = {};
-    item.backgroundColor = "#e0e0e0";
-    item.element = (
-      <CustomImage
-        src={`/settings/images/image${i + 1}.png`}
-        alt={`image${i + 1}`}
-        className="dragObject"
-      />
-    );
-    item.cardColor = "yellowSortCard";
-    item.divColor = "isUncertainStatement";
-    item.pinkChecked = false;
-    item.yellowChecked = true;
-    item.greenChecked = false;
-    item.sortValue = 222;
-    item.id = `image${i + 1}`;
-    item.statement = `image${i + 1}`;
-    item.statementNum = `${i + 1}`;
-
-    statementsArray.push(item);
-  }
-
-  const statementsLength = statementsArray.length;
+  let statementsLength = columnStatements.imagesList.length;
+  console.log(columnStatements);
 
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
@@ -96,7 +73,7 @@ function PresortDND(props) {
   const [columns, setColumns] = useState({
     cards: {
       name: statementsName,
-      items: statementsArray,
+      items: [...columnStatements.imagesList],
       id: "cards",
     },
     neg: {
@@ -116,6 +93,8 @@ function PresortDND(props) {
     },
   });
 
+  console.log(columns);
+
   // default = positive sort direction
   let pinkArraySortValue = 333,
     greenArraySortValue = 111;
@@ -132,49 +111,49 @@ function PresortDND(props) {
       const { source, destination } = result;
 
       // update statement characteristics
-      const statementsArray = [...columnStatements.statementList];
+      const imagesArray = [...columnStatements.imagesList];
       const destinationId = result.destination.droppableId;
       const draggableId = result.draggableId;
 
       // set METADATA FOR SORTING
-      for (let i = 0; i < statementsArray.length; i++) {
-        if (statementsArray[i].id === draggableId) {
+      for (let i = 0; i < imagesArray.length; i++) {
+        if (imagesArray[i].id === draggableId) {
           if (destinationId === "neg") {
-            statementsArray[i].divColor = "isNegativeStatement";
-            statementsArray[i].cardColor = "pinkSortCard";
-            statementsArray[i].pinkChecked = true;
-            statementsArray[i].yellowChecked = false;
-            statementsArray[i].greenChecked = false;
-            statementsArray[i].sortValue = pinkArraySortValue;
+            imagesArray[i].divColor = "isNegativeStatement";
+            imagesArray[i].cardColor = "pinkSortCard";
+            imagesArray[i].pinkChecked = true;
+            imagesArray[i].yellowChecked = false;
+            imagesArray[i].greenChecked = false;
+            imagesArray[i].sortValue = pinkArraySortValue;
           }
           if (destinationId === "neutral") {
-            statementsArray[i].divColor = "isUncertainStatement";
-            statementsArray[i].cardColor = "yellowSortCard";
-            statementsArray[i].pinkChecked = false;
-            statementsArray[i].yellowChecked = true;
-            statementsArray[i].greenChecked = false;
-            statementsArray[i].sortValue = 222;
+            imagesArray[i].divColor = "isUncertainStatement";
+            imagesArray[i].cardColor = "yellowSortCard";
+            imagesArray[i].pinkChecked = false;
+            imagesArray[i].yellowChecked = true;
+            imagesArray[i].greenChecked = false;
+            imagesArray[i].sortValue = 222;
           }
           if (destinationId === "pos") {
-            statementsArray[i].divColor = "isPositiveStatement";
-            statementsArray[i].cardColor = "greenSortCard";
-            statementsArray[i].pinkChecked = false;
-            statementsArray[i].yellowChecked = false;
-            statementsArray[i].greenChecked = true;
-            statementsArray[i].sortValue = greenArraySortValue;
+            imagesArray[i].divColor = "isPositiveStatement";
+            imagesArray[i].cardColor = "greenSortCard";
+            imagesArray[i].pinkChecked = false;
+            imagesArray[i].yellowChecked = false;
+            imagesArray[i].greenChecked = true;
+            imagesArray[i].sortValue = greenArraySortValue;
           }
         }
       }
 
-      console.log(statementsArray);
+      console.log(imagesArray);
 
       // set new ordering
-      for (let i = 0; i < statementsArray.length; i++) {
-        statementsArray[i].listIndex = i + 1;
+      for (let i = 0; i < imagesArray.length; i++) {
+        imagesArray[i].listIndex = i + 1;
       }
 
       // save to memory
-      columnStatements.imageList = [...statementsArray];
+      columnStatements.imagesList = [...imagesArray];
       setColumnStatements(columnStatements);
       // console.log("columnStatements", columnStatements);
 
@@ -509,10 +488,13 @@ const DroppableContainer = styled.div`
   border: 1px solid #a8a8a8;
 `;
 
-const CustomImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  padding: 0px;
+const ThreeColCardWrapper = styled.div`
+  margin: 4px;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0px;
+  }
 `;
 
 const CompletionRatioDiv = styled.div`
@@ -524,10 +506,6 @@ const CompletionRatioDiv = styled.div`
   font-weight: bold;
   padding-left: 3px;
   padding-right: 3px;
-`;
-
-const ThreeColCardWrapper = styled.div`
-  margin: 4px;
 `;
 
 const AllColWrapper = styled.div`
