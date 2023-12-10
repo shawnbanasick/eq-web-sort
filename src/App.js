@@ -114,7 +114,9 @@ function App() {
               item.element = (
                 // eslint-disable-next-line
                 <img
-                  src={`/settings/images/image${i + 1}.png`}
+                  src={`/settings/images/image${i + 1}.${
+                    info.configObj.imageFileType
+                  }`}
                   alt={`image${i + 1}`}
                   className="dragObject"
                 />

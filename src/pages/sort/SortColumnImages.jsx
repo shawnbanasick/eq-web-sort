@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import getItemStyleImages from "./getItemStyleImages";
@@ -9,90 +9,84 @@ import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
-class SortColumn extends React.Component {
-  render() {
-    const {
-      forcedSorts,
-      columnWidth,
-      cardHeight,
-      columnId,
-      sortValue,
-      columnStatementsArray,
-      columnColor,
-      cardFontSize,
-      greenCardColor,
-      yellowCardColor,
-      pinkCardColor,
-      fontColor,
-    } = this.props;
+const SortColumn = memo((props) => {
+  const {
+    forcedSorts,
+    columnWidth,
+    cardHeight,
+    columnId,
+    sortValue,
+    columnStatementsArray,
+    columnColor,
+    cardFontSize,
+    greenCardColor,
+    yellowCardColor,
+    pinkCardColor,
+    fontColor,
+  } = props;
 
-    // had to push column sort value to state because didn't want to edit dnd library result object
-    // was't able to just pass it as a prop
-    return (
-      <ContainerDiv id="sortColumnsDiv">
-        <Droppable
-          id="ColDroppable"
-          droppableId={columnId}
-          direction="vertical"
-        >
-          {(provided, snapshot) => {
-            if (snapshot.isDraggingOver) {
-              useStore.setState({ draggingOverColumnId: columnId });
-              useStore.setState({ currentSortValue: sortValue });
-            }
-            return (
-              <div
-                ref={provided.innerRef}
-                style={getListStyle(
-                  snapshot.isDraggingOver,
-                  this.props,
-                  forcedSorts,
-                  columnWidth,
-                  columnColor,
-                  cardHeight
-                )}
-              >
-                {columnStatementsArray.map((item, index) => {
-                  return (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      cardColor={item.cardColor}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <ImageDiv
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyleImages(
-                            snapshot.isDragging,
-                            provided.draggableProps.style,
-                            columnWidth,
-                            cardHeight,
-                            cardFontSize,
-                            `${item.cardColor}`,
-                            greenCardColor,
-                            yellowCardColor,
-                            pinkCardColor,
-                            fontColor
-                          )}
-                        >
-                          {item.element}
-                        </ImageDiv>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </div>
-            );
-          }}
-        </Droppable>
-      </ContainerDiv>
-    );
-  }
-}
+  // had to push column sort value to state because didn't want to edit dnd library result object
+  // was't able to just pass it as a prop
+  return (
+    <ContainerDiv id="sortColumnsDiv">
+      <Droppable id="ColDroppable" droppableId={columnId} direction="vertical">
+        {(provided, snapshot) => {
+          if (snapshot.isDraggingOver) {
+            useStore.setState({ draggingOverColumnId: columnId });
+            useStore.setState({ currentSortValue: sortValue });
+          }
+          return (
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(
+                snapshot.isDraggingOver,
+                props,
+                forcedSorts,
+                columnWidth,
+                columnColor,
+                cardHeight
+              )}
+            >
+              {columnStatementsArray.map((item, index) => {
+                return (
+                  <Draggable
+                    key={item.id}
+                    draggableId={item.id}
+                    cardColor={item.cardColor}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <ImageDiv
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyleImages(
+                          snapshot.isDragging,
+                          provided.draggableProps.style,
+                          columnWidth,
+                          cardHeight,
+                          cardFontSize,
+                          `${item.cardColor}`,
+                          greenCardColor,
+                          yellowCardColor,
+                          pinkCardColor,
+                          fontColor
+                        )}
+                      >
+                        {item.element}
+                      </ImageDiv>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          );
+        }}
+      </Droppable>
+    </ContainerDiv>
+  );
+});
 
 export default SortColumn;
 
