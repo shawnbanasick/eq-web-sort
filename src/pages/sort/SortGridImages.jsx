@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
 import reorder from "./reorder";
-import SortColumn from "./SortColumn";
+import SortColumnImages from "./SortColumnImages";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHori from "./getItemStyleHori";
-import calculateDragResults from "./calculateDragResults";
+import calculateDragResultsImages from "./calculateDragResultsImages";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
@@ -39,7 +39,7 @@ const getSetTriggerSortingFinModal = (state) =>
   state.setTriggerSortingFinishedModal;
 const getSetSortGridResults = (state) => state.setSortGridResults;
 
-const SortGrid = (props) => {
+const SortGrid = memo((props) => {
   // STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
@@ -51,6 +51,7 @@ const SortGrid = (props) => {
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
   const sortCharacteristics = useStore(getSortCharacteristics);
   const setSortCharacteristics = useStore(getSetSortCharacteristics);
+
   let cardHeight = useStore(getCardHeight);
   const setCardHeight = useStore(getSetCardHeight);
   const setColumnWidth = useStore(getSetColumnWidth);
@@ -101,9 +102,9 @@ const SortGrid = (props) => {
     "reason":"DROP"}
     */
 
-      const totalStatements = statementsObj.totalStatements;
+      const totalStatements = +configObj.numImages;
 
-      const manageDragResults = calculateDragResults(
+      const manageDragResults = calculateDragResultsImages(
         { ...result },
         totalStatements,
         results,
@@ -149,19 +150,19 @@ const SortGrid = (props) => {
         let sourceListArray;
         let destinationListArray;
         if (source.droppableId === "statements") {
-          sourceListArray = columnStatements.statementList;
+          sourceListArray = columnStatements.imagesList;
         } else {
           sourceListArray = columnStatements.vCols[source.droppableId];
         }
         if (destination.droppableId === "statements") {
-          destinationListArray = columnStatements.statementList;
+          destinationListArray = columnStatements.imagesList;
         } else {
           destinationListArray =
             columnStatements.vCols[destination.droppableId];
         }
         const droppableSource = source;
         const droppableDestination = destination;
-        const totalStatements = +configObj.totalStatements;
+        const totalStatements = +configObj.numImages;
 
         const sortCharacterisiticsPrep = {};
         sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
@@ -190,7 +191,7 @@ const SortGrid = (props) => {
 
         convertObjectToResults(columnStatements);
 
-        if (columnStatements.statementList.length === 0) {
+        if (columnStatements.imagesList.length === 0) {
           setIsSortingCards(false);
           setSortCompleted(true);
         } else {
@@ -199,8 +200,8 @@ const SortGrid = (props) => {
         }
 
         // increment Progress Bar
-        const totalStatements2 = statementsObj.totalStatements;
-        const remainingStatements = columnStatements.statementList.length;
+        const totalStatements2 = configObj.numImages;
+        const remainingStatements = columnStatements.imagesList.length;
         const numerator = totalStatements2 - remainingStatements;
 
         const ratio = numerator / totalStatements2;
@@ -273,7 +274,7 @@ const SortGrid = (props) => {
   setTimeout(() => setColumnWidth(columnWidth), 0);
 
   // pull data from STATE
-  const statements = columnStatements.imageList;
+  const statements = columnStatements.imagesList;
 
   // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
@@ -282,7 +283,7 @@ const SortGrid = (props) => {
     const columnColor = columnColorsArray[index];
 
     return (
-      <SortColumn
+      <SortColumnImages
         key={columnId}
         minHeight={qSortPattern[index] * (+cardHeight + 8) + 15}
         maxCards={qSortPattern[index]}
@@ -385,7 +386,7 @@ const SortGrid = (props) => {
       </div>
     </DragDropContext>
   );
-};
+});
 
 export default SortGrid;
 

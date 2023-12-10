@@ -689,6 +689,12 @@ footer {
   justify-content: center;
   background: lightgreen;
   border: 2px solid gray;
+  
+  img {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    object-fit: contain;
+  }
 }
 
 .pinkSortCard {
@@ -696,6 +702,12 @@ footer {
   justify-content: center;
   background-color: rgba(255, 182, 193, 0.4);
   border: 2px solid gray;
+
+  img {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    object-fit: contain;
+  }
 }
 
 .yellowSortCard {
@@ -703,6 +715,12 @@ footer {
   justify-content: center;
   background-color: lightgray;
   border: 2px solid gray;
+
+  img {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    object-fit: contain;
+  }
 }
 
 /* 

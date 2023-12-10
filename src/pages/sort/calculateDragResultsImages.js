@@ -29,7 +29,7 @@ const calculateDragResults = (
       if (testForCompleteArray.length === totalStatements) {
         let resultsText = "";
         for (let i = 0; i < totalStatements; i++) {
-          let key = `s${i + 1}`;
+          let key = `image${i + 1}`;
           let newValue = sortGridResults[key];
           if (isNaN(newValue)) {
             catchNan = true;
