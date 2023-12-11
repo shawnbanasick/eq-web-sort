@@ -2,14 +2,14 @@ import React, { memo } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import getItemStyleImages from "./getItemStyleImages";
-import getListStyle from "./getListStyle";
-import ReactHtmlParser from "react-html-parser";
-import decodeHTML from "../../utilities/decodeHTML";
+import getListStyleImages from "./getListStyleImages";
+// import ReactHtmlParser from "react-html-parser";
+// import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
-const SortColumn = memo((props) => {
+const SortColumnImages = memo((props) => {
   const {
     forcedSorts,
     columnWidth,
@@ -25,10 +25,12 @@ const SortColumn = memo((props) => {
     fontColor,
   } = props;
 
+  console.log("cardsHeight", props.cardHeight);
+
   // had to push column sort value to state because didn't want to edit dnd library result object
   // was't able to just pass it as a prop
   return (
-    <ContainerDiv id="sortColumnsDiv">
+    <SortColumnsDiv id="sortColumnsDiv">
       <Droppable id="ColDroppable" droppableId={columnId} direction="vertical">
         {(provided, snapshot) => {
           if (snapshot.isDraggingOver) {
@@ -36,9 +38,10 @@ const SortColumn = memo((props) => {
             useStore.setState({ currentSortValue: sortValue });
           }
           return (
-            <div
+            <DroppableColDiv
+              id="DroppableColDiv"
               ref={provided.innerRef}
-              style={getListStyle(
+              style={getListStyleImages(
                 snapshot.isDraggingOver,
                 props,
                 forcedSorts,
@@ -57,6 +60,7 @@ const SortColumn = memo((props) => {
                   >
                     {(provided, snapshot) => (
                       <ImageDiv
+                        id="imageDiv"
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -80,15 +84,15 @@ const SortColumn = memo((props) => {
                 );
               })}
               {provided.placeholder}
-            </div>
+            </DroppableColDiv>
           );
         }}
       </Droppable>
-    </ContainerDiv>
+    </SortColumnsDiv>
   );
 });
 
-export default SortColumn;
+export default SortColumnImages;
 
 /*
 const HeaderDiv = styled.div`
@@ -105,17 +109,26 @@ const HeaderDiv = styled.div`
 `;
 */
 
-const ContainerDiv = styled.div`
+const SortColumnsDiv = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
+const DroppableColDiv = styled.div`
+  justify-content: center;
+`;
+
 const ImageDiv = styled.div`
-  flex: 1 0 auto;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  width: 96%;
+  margin-bottom: 5px !important;
+  height: ${(props) => `${props.cardHeight}px`};
+  margin-left: 8px !important;
+  justify-content: center;
+
   img {
-    max-width: calc(100% - 10px);
-    max-height: calc(100%; - 10px);
+    max-width: 96%;
+    max-height: 96%;
+    object-fit: contain;
   }
 `;

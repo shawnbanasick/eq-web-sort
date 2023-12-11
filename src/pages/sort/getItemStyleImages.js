@@ -1,4 +1,4 @@
-const getItemStyle = (
+const getItemStyleImages = (
   isDragging,
   draggableStyle,
   cardWidth,
@@ -24,15 +24,11 @@ const getItemStyle = (
   return {
     // some basic styles to make the items look a bit nicer
     userSelect: "none",
-    padding: `0 2px 0 2px`,
-    margin: `0 2px 8px 3px`,
     lineHeight: `1.3em`,
     fontSize: cardFontSize,
+    maxHeight: cardHeight,
     color: fontColor,
     borderRadius: `5px`,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     border: `1px solid #a8a8a8`,
     filter: isDragging ? "brightness(0.85)" : "brightness(1.00)",
     zIndex: "-1",
@@ -47,4 +43,4 @@ const getItemStyle = (
   };
 };
 
-export default getItemStyle;
+export default getItemStyleImages;

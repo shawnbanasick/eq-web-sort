@@ -1,14 +1,14 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useMemo } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
 import reorder from "./reorder";
 import SortColumnImages from "./SortColumnImages";
 import getListStyleHori from "./getListStyleHori";
-import getItemStyleHori from "./getItemStyleHori";
+import getItemStyleHoriImages from "./getItemStyleHoriImages";
 import calculateDragResultsImages from "./calculateDragResultsImages";
-import ReactHtmlParser from "react-html-parser";
-import decodeHTML from "../../utilities/decodeHTML";
+// import ReactHtmlParser from "react-html-parser";
+// import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import convertObjectToResults from "./convertObjectToResults";
@@ -68,9 +68,9 @@ const SortGrid = memo((props) => {
   const yellowCardColor = configObj.yellowCardColor;
   const pinkCardColor = configObj.pinkCardColor;
 
-  // setMinCardHeight is boolean
-  const setMinCardHeight = configObj.setMinCardHeight;
-  const minCardHeight = +configObj.minCardHeight;
+  // setMinCardHeight is boolean (statements only - not images)
+  // const setMinCardHeight = configObj.setMinCardHeight;
+  // const minCardHeight = +configObj.minCardHeight;
 
   // MAP out SORT COLUMNS component before render
   // code inside render so that column lists update automatically
@@ -229,16 +229,16 @@ const SortGrid = memo((props) => {
 
   // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
+  console.log("maxNumCardsInCol", maxNumCardsInCol);
+  console.log(window.innerHeight);
+
   if (+cardHeight === 0) {
     cardHeight = +(
-      (props.dimensions.height - 320) /
-      maxNumCardsInCol
+      (window.innerHeight - 150) /
+      (maxNumCardsInCol + 1)
     ).toFixed();
-    if (setMinCardHeight === true || setMinCardHeight === "true") {
-      setCardHeight(minCardHeight);
-    } else {
-      setCardHeight(+cardHeight);
-    }
+    console.log("cardHeight", cardHeight);
+    setCardHeight(+cardHeight);
   }
 
   // adjust width by q sort design
@@ -267,8 +267,9 @@ const SortGrid = memo((props) => {
   }
 
   // set dynamic width on page load on reload
-  const columnWidth =
-    (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
+  const columnWidth = useMemo(() => {
+    return (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
+  }, [props.dimensions.width, visibleWidthAdjust, qSortPattern.length]);
 
   // send column width to global state
   setTimeout(() => setColumnWidth(columnWidth), 0);
@@ -285,7 +286,7 @@ const SortGrid = memo((props) => {
     return (
       <SortColumnImages
         key={columnId}
-        minHeight={qSortPattern[index] * (+cardHeight + 8) + 15}
+        minHeight={qSortPattern[index] * (+cardHeight + 8)}
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
@@ -317,30 +318,27 @@ const SortGrid = memo((props) => {
           className="droppableCards"
         >
           {(provided, snapshot) => (
-            <>
-              <div
-                ref={provided.innerRef}
-                className={`${item.cardColor}`}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                style={getItemStyleHori(
-                  snapshot.isDragging,
-                  provided.draggableProps.style,
-                  `${item.sortValue}`,
-                  `${item.cardColor}`,
-                  columnWidth,
-                  cardHeight,
-                  cardFontSize,
-                  greenCardColor,
-                  yellowCardColor,
-                  pinkCardColor,
-                  fontColor
-                )}
-              >
-                <span style={{ direction: "ltr" }}>{item.element}</span>
-              </div>
-              <div style={{ width: `0px` }}>{provided.placeholder}</div>
-            </>
+            <FeederCard
+              ref={provided.innerRef}
+              className={`${item.cardColor}`}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              style={getItemStyleHoriImages(
+                snapshot.isDragging,
+                provided.draggableProps.style,
+                `${item.sortValue}`,
+                `${item.cardColor}`,
+                columnWidth,
+                cardHeight,
+                cardFontSize,
+                greenCardColor,
+                yellowCardColor,
+                pinkCardColor,
+                fontColor
+              )}
+            >
+              {item.element}
+            </FeederCard>
           )}
         </Draggable>
       );
@@ -363,22 +361,24 @@ const SortGrid = memo((props) => {
               id="Droppable"
               droppableId="statements"
               direction="horizontal"
+              style={{ maxWidth: "100vw" }}
             >
               {(provided, snapshot) => (
-                <>
-                  {" "}
-                  <div
-                    ref={provided.innerRef}
-                    style={getListStyleHori(
-                      snapshot.isDraggingOver,
-                      horiCardMinHeight,
-                      sortDirection
-                    )}
-                  >
-                    <InnerList statements={statements} provided={provided} />
-                  </div>
-                  <div style={{ width: `0px` }}>{provided.placeholder}</div>
-                </>
+                <HorizontalFeederDiv
+                  id="HorizontalFeederDiv"
+                  ref={provided.innerRef}
+                  style={getListStyleHori(
+                    snapshot.isDraggingOver,
+                    horiCardMinHeight,
+                    sortDirection
+                  )}
+                >
+                  <InnerList statements={statements} provided={provided} />
+                  <span style={{ display: "none" }}>
+                    {" "}
+                    {provided.placeholder}
+                  </span>
+                </HorizontalFeederDiv>
               )}
             </Droppable>
           </CardSlider>
@@ -404,6 +404,15 @@ const CardSlider = styled.div`
   display: flex;
   width: 100vw;
   overflow: hidden;
+`;
+
+const HorizontalFeederDiv = styled.div``;
+const FeederCard = styled.div`
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 /* DO NOT DELETE - important

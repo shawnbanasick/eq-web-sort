@@ -40,7 +40,6 @@ const convertObjectToResults = (columnStatements) => {
   if (resultsText.charAt(resultsText.length - 1) === "|") {
     resultsText = resultsText.substring(0, resultsText.length - 1);
   }
-  console.log(resultsText);
   return resultsText;
 };
 
