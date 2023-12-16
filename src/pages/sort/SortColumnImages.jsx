@@ -23,6 +23,7 @@ const SortColumnImages = memo((props) => {
     yellowCardColor,
     pinkCardColor,
     fontColor,
+    handleOpenImageModal,
   } = props;
 
   console.log("cardsHeight", props.cardHeight);
@@ -64,6 +65,9 @@ const SortColumnImages = memo((props) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        onClick={() =>
+                          handleOpenImageModal(item.element.props.src)
+                        }
                         style={getItemStyleImages(
                           snapshot.isDragging,
                           provided.draggableProps.style,

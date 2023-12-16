@@ -761,15 +761,30 @@ footer {
   -webkit-animation: placeholderAnimate 3s ease-in;
 }
 
+/*
+.imageModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
 
-
+  img {
+  width: 100%;
+  height: auto;
+  }
+}
+*/
 /***********************************
   LANDING MODAL CSS
  *******************************************************************************/
-/* 
-.customModal .react-responsive-modal-modal {
-    background: rgba(0, 0, 0, 0.8) !important;
-  } */
+
+
+  .postSortImageModal {
+    background: black;
+    width: 70vw;
+    max-width: none;
+   }
+
 
   /*
   spinner css

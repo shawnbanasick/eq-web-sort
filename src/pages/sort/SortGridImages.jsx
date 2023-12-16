@@ -1,4 +1,11 @@
-import React, { useState, memo, useMemo } from "react";
+import React, {
+  useState,
+  memo,
+  useMemo,
+  useEffect,
+  useRef,
+  createPortal,
+} from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
@@ -12,6 +19,7 @@ import calculateDragResultsImages from "./calculateDragResultsImages";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import convertObjectToResults from "./convertObjectToResults";
+import { Modal } from "react-responsive-modal";
 
 /* eslint react/prop-types: 0 */
 
@@ -84,12 +92,46 @@ const SortGrid = memo((props) => {
 
   // force updates after dragend - do not delete
   const [value, setValue] = useState(0); // integer state
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [imageSource, setImageSource] = useState("");
 
   // get sort direction
   let sortDirection = "rtl";
   if (configObj.sortDirection === "negative") {
     sortDirection = "ltr";
   }
+
+  const handleOpenImageModal = (src) => {
+    setImageSource(src);
+    setOpenImageModal(true);
+  };
+
+  const useDraggableInPortal = () => {
+    const self = useRef({}).current;
+
+    useEffect(() => {
+      const div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.pointerEvents = "none";
+      div.style.top = "0";
+      div.style.width = "100%";
+      div.style.height = "100%";
+      self.elt = div;
+      document.body.appendChild(div);
+      return () => {
+        document.body.removeChild(div);
+      };
+    }, [self]);
+
+    return (render) =>
+      (provided, ...args) => {
+        const element = render(provided, ...args);
+        if (provided.draggableProps.style.position === "fixed") {
+          return createPortal(element, self.elt);
+        }
+        return element;
+      };
+  };
 
   // fire move and re-order functions
   const onDragEnd = (result) => {
@@ -302,6 +344,7 @@ const SortGrid = memo((props) => {
         yellowCardColor={yellowCardColor}
         pinkCardColor={pinkCardColor}
         fontColor={fontColor}
+        handleOpenImageModal={handleOpenImageModal}
       />
     );
   }); // end map of sort columns
@@ -315,30 +358,34 @@ const SortGrid = memo((props) => {
           index={index}
           sortValue={item.sortValue}
           cardColor={item.cardColor}
+          onClick={() => handleOpenImageModal(item.element.props.src)}
           className="droppableCards"
         >
           {(provided, snapshot) => (
-            <FeederCard
-              ref={provided.innerRef}
-              className={`${item.cardColor}`}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              style={getItemStyleHoriImages(
-                snapshot.isDragging,
-                provided.draggableProps.style,
-                `${item.sortValue}`,
-                `${item.cardColor}`,
-                columnWidth,
-                cardHeight,
-                cardFontSize,
-                greenCardColor,
-                yellowCardColor,
-                pinkCardColor,
-                fontColor
-              )}
-            >
-              {item.element}
-            </FeederCard>
+            <>
+              <FeederCard
+                ref={provided.innerRef}
+                className={`${item.cardColor}`}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getItemStyleHoriImages(
+                  snapshot.isDragging,
+                  provided.draggableProps.style,
+                  `${item.sortValue}`,
+                  `${item.cardColor}`,
+                  columnWidth,
+                  cardHeight,
+                  cardFontSize,
+                  greenCardColor,
+                  yellowCardColor,
+                  pinkCardColor,
+                  fontColor
+                )}
+              >
+                {item.element}
+              </FeederCard>
+              {provided.placeholder}
+            </>
           )}
         </Draggable>
       );
@@ -352,39 +399,49 @@ const SortGrid = memo((props) => {
 
   // returning main content => horizontal feeder
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="rootDiv">
-        {columns}
-        <SortFooterDiv id="SortFooterDiv">
-          <CardSlider id="CardSlider">
-            <Droppable
-              id="Droppable"
-              droppableId="statements"
-              direction="horizontal"
-              style={{ maxWidth: "100vw" }}
-            >
-              {(provided, snapshot) => (
-                <HorizontalFeederDiv
-                  id="HorizontalFeederDiv"
-                  ref={provided.innerRef}
-                  style={getListStyleHori(
-                    snapshot.isDraggingOver,
-                    horiCardMinHeight,
-                    sortDirection
-                  )}
-                >
-                  <InnerList statements={statements} provided={provided} />
-                  <span style={{ display: "none" }}>
-                    {" "}
-                    {provided.placeholder}
-                  </span>
-                </HorizontalFeederDiv>
-              )}
-            </Droppable>
-          </CardSlider>
-        </SortFooterDiv>
-      </div>
-    </DragDropContext>
+    <>
+      <Modal
+        open={openImageModal}
+        center
+        onClose={() => setOpenImageModal(false)}
+        classNames={{ modal: "postSortImageModal" }}
+      >
+        <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+      </Modal>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="rootDiv">
+          {columns}
+          <SortFooterDiv id="SortFooterDiv">
+            <CardSlider id="CardSlider">
+              <Droppable
+                id="Droppable"
+                droppableId="statements"
+                direction="horizontal"
+                style={{ maxWidth: "100vw" }}
+              >
+                {(provided, snapshot) => (
+                  <HorizontalFeederDiv
+                    id="HorizontalFeederDiv"
+                    ref={provided.innerRef}
+                    style={getListStyleHori(
+                      snapshot.isDraggingOver,
+                      horiCardMinHeight,
+                      sortDirection
+                    )}
+                  >
+                    <InnerList statements={statements} provided={provided} />
+                    <span style={{ display: "none" }}>
+                      {" "}
+                      {provided.placeholder}
+                    </span>
+                  </HorizontalFeederDiv>
+                )}
+              </Droppable>
+            </CardSlider>
+          </SortFooterDiv>
+        </div>
+      </DragDropContext>
+    </>
   );
 });
 

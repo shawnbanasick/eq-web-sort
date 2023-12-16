@@ -5,6 +5,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import { Modal } from "react-responsive-modal";
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
@@ -22,6 +23,8 @@ const getShowPostsortCommentHighlighting = (state) =>
 
 const HighCards = (props) => {
   const [commentCheckObj, setCommentCheckObj] = useState({});
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [imageSource, setImageSource] = useState("");
 
   // STATE
   const columnStatements = useSettingsStore(getColumnStatements);
@@ -39,6 +42,11 @@ const HighCards = (props) => {
     setCommentCheckObj(postsortCommentCheckObj);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCommentCheckObj]);
+
+  const handleOpenImageModal = (src) => {
+    setImageSource(src);
+    setOpenImageModal(true);
+  };
 
   const handleChange = (event, columnDisplay, itemId) => {
     let commentLength = event.target.value.length;
@@ -85,9 +93,14 @@ const HighCards = (props) => {
 
   let columnDisplay = agreeObj.columnDisplay;
   return highCards.map((item, index) => {
-    const statementHtml = ReactHtmlParser(
-      `<div>${decodeHTML(item.statement)}</div>`
-    );
+    let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
+
+    if (configObj.useImages === true) {
+      content = ReactHtmlParser(
+        `<img src="${item.element.props.src}" style="pointer-events: all" alt=${item.element.props.alt} />`
+      );
+    }
+
     let highlighting = true;
     if (
       configObj.postsortCommentsRequired === "true" ||
@@ -99,7 +112,15 @@ const HighCards = (props) => {
     }
 
     return (
-      <Container key={item.statement}>
+      <Container id="postSortImageModal" key={item.statement}>
+        <Modal
+          open={openImageModal}
+          center
+          onClose={() => setOpenImageModal(false)}
+          classNames={{ modal: "postSortImageModal" }}
+        >
+          <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+        </Modal>
         <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
         <CardAndTextHolder>
           <Card
@@ -107,8 +128,9 @@ const HighCards = (props) => {
             width={width}
             height={height}
             cardColor={item.cardColor}
+            onClick={() => handleOpenImageModal(item.element.props.src)}
           >
-            {statementHtml}
+            {content}
           </Card>
           <TagContainerDiv>
             <CommentArea
@@ -118,6 +140,7 @@ const HighCards = (props) => {
               cardFontSize={cardFontSize}
               height={height}
               id={item.id}
+              useImages={configObj.useImages}
               placeholder={placeholder}
               defaultValue={item.comment}
               onChange={(e) => {
@@ -135,7 +158,7 @@ export default HighCards;
 
 const Container = styled.div`
   width: 90vw;
-  max-width: 900px;
+  max-width: 1100px;
   margin-top: 50px;
   border-radius: 3px;
   border: 1px solid darkgray;
@@ -157,8 +180,7 @@ const CardAndTextHolder = styled.div`
   display: flex;
   align-content: center;
   background: rgb(224, 224, 224);
-  width: 90vw;
-  max-width: 898px;
+  width: 100%;
 `;
 
 const CommentArea = styled.textarea`
@@ -184,8 +206,8 @@ const Card = styled.div`
   margin: 5px 5px 5px 5px;
   line-height: 1em;
   height: ${(props) => `${props.height}px;`};
-  width: 20vw;
-  max-width: ${(props) => `${props.width}px;`};
+  width: 35vw;
+  //max-width: ${(props) => (props.useImages ? `none` : `${props.width}px;`)};
   border-radius: 5px;
   font-size: ${(props) => `${props.cardFontSize}px`};
   display: flex;
@@ -194,4 +216,10 @@ const Card = styled.div`
   border: 2px solid darkslategray;
   background-color: #f6f6f6;
   text-align: center;
+
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;

@@ -5,6 +5,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
+import { Modal } from "react-responsive-modal";
 
 /* eslint react/prop-types: 0 */
 
@@ -23,6 +24,8 @@ const getShowPostsortCommentHighlighting = (state) =>
 
 const LowCards2 = (props) => {
   const [commentCheckObj, setCommentCheckObj] = useState({});
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [imageSource, setImageSource] = useState("");
 
   //STATE
   const columnStatements = useSettingsStore(getColumnStatements);
@@ -40,6 +43,11 @@ const LowCards2 = (props) => {
     setCommentCheckObj(postsortCommentCheckObj);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCommentCheckObj]);
+
+  const handleOpenImageModal = (src) => {
+    setImageSource(src);
+    setOpenImageModal(true);
+  };
 
   // on blur, get text and add comment to card object
   const onChange = (event, columnDisplay, itemId) => {
@@ -86,9 +94,14 @@ const LowCards2 = (props) => {
   const columnDisplay = disagreeObj.columnDisplay2;
 
   return lowCards2.map((item, index) => {
-    const statementHtml = ReactHtmlParser(
-      `<div>${decodeHTML(item.statement)}</div>`
-    );
+    let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
+
+    if (configObj.useImages === true) {
+      content = ReactHtmlParser(
+        `<img src="${item.element.props.src}" style="pointer-events: all" alt=${item.element.props.alt} />`
+      );
+    }
+
     item.indexVal = index;
     let highlighting = true;
     if (
@@ -101,10 +114,23 @@ const LowCards2 = (props) => {
     }
     return (
       <Container key={item.statement}>
+        <Modal
+          open={openImageModal}
+          center
+          onClose={() => setOpenImageModal(false)}
+          classNames={{ modal: "postSortImageModal" }}
+        >
+          <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+        </Modal>
         <CardTag cardFontSize={cardFontSize}>{disagreeText}</CardTag>
         <CardAndTextHolder>
-          <Card cardFontSize={cardFontSize} width={width} height={height}>
-            {statementHtml}
+          <Card
+            cardFontSize={cardFontSize}
+            width={width}
+            height={height}
+            onClick={() => handleOpenImageModal(item.element.props.src)}
+          >
+            {content}
           </Card>
           <TagContainerDiv>
             <CommentArea
@@ -132,7 +158,7 @@ export default LowCards2;
 
 const Container = styled.div`
   width: 90vw;
-  max-width: 900px;
+  max-width: 1100px;
   margin-top: 50px;
   border-radius: 3px;
   border: 1px solid darkgray;
@@ -154,8 +180,7 @@ const CardAndTextHolder = styled.div`
   display: flex;
   align-content: center;
   background: rgb(224, 224, 224);
-  width: 90vw;
-  max-width: 898px;
+  width: 100%;
 `;
 
 const CommentArea = styled.textarea`
@@ -180,8 +205,8 @@ const Card = styled.div`
   margin: 5px 5px 5px 5px;
   line-height: 1em;
   height: ${(props) => `${props.height}px;`};
-  width: 20vw;
-  max-width: ${(props) => `${props.width}px;`};
+  width: 35vw;
+  // max-width: ${(props) => `${props.width}px;`};
   border-radius: 5px;
   font-size: ${(props) => `${props.cardFontSize}px`};
   display: flex;
@@ -190,4 +215,10 @@ const Card = styled.div`
   border: 2px solid black;
   background-color: #f6f6f6;
   text-align: center;
+
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
