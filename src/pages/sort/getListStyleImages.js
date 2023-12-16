@@ -28,8 +28,8 @@ const getListStyle = (
       : isUnderMaxCards
       ? columnColor
       : "orange",
-    padding: `0px 0px 0px 0px`,
-
+    padding: `5px 0px 0px 0px`,
+    justifyContent: "center",
     width: columnWidth + 13,
     marginTop: 0,
     marginRight: 0,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SortGrid from "./SortGrid";
+//import SortGrid from "./SortGrid";
 import SortGridImages from "./SortGridImages";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";

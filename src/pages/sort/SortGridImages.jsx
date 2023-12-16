@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  memo,
-  useMemo,
-  useEffect,
-  useRef,
-  createPortal,
-} from "react";
+import React, { useState, memo, useMemo } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
@@ -20,12 +13,13 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import convertObjectToResults from "./convertObjectToResults";
 import { Modal } from "react-responsive-modal";
+import { set } from "lodash";
 
 /* eslint react/prop-types: 0 */
 
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
-const getStatementsObj = (state) => state.statementsObj;
+// const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getSetColState = (state) => state.setColumnStatements;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
@@ -51,7 +45,7 @@ const SortGrid = memo((props) => {
   // STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
-  const statementsObj = useSettingsStore(getStatementsObj);
+  // const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setColumnStatements = useSettingsStore(getSetColState);
   const setIsSortingCards = useStore(getSetIsSortingCards);
@@ -94,6 +88,8 @@ const SortGrid = memo((props) => {
   const [value, setValue] = useState(0); // integer state
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
+  const [dualPhotoArray, setDualPhotoArray] = useState([]);
+  const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
   // get sort direction
   let sortDirection = "rtl";
@@ -101,36 +97,22 @@ const SortGrid = memo((props) => {
     sortDirection = "ltr";
   }
 
-  const handleOpenImageModal = (src) => {
-    setImageSource(src);
-    setOpenImageModal(true);
-  };
+  const handleOpenImageModal = (e, src) => {
+    console.log(e.target.src);
+    console.log(e.detail);
 
-  const useDraggableInPortal = () => {
-    const self = useRef({}).current;
-
-    useEffect(() => {
-      const div = document.createElement("div");
-      div.style.position = "absolute";
-      div.style.pointerEvents = "none";
-      div.style.top = "0";
-      div.style.width = "100%";
-      div.style.height = "100%";
-      self.elt = div;
-      document.body.appendChild(div);
-      return () => {
-        document.body.removeChild(div);
-      };
-    }, [self]);
-
-    return (render) =>
-      (provided, ...args) => {
-        const element = render(provided, ...args);
-        if (provided.draggableProps.style.position === "fixed") {
-          return createPortal(element, self.elt);
+    if (e.detail === 2) {
+      if (e.shiftKey) {
+        dualPhotoArray.push(e.target.src);
+        setDualPhotoArray(dualPhotoArray);
+        if (dualPhotoArray.length === 2) {
+          setOpenDualImageModal(true);
         }
-        return element;
-      };
+      } else {
+        setImageSource(e.target.src);
+        setOpenImageModal(true);
+      }
+    }
   };
 
   // fire move and re-order functions
@@ -358,7 +340,6 @@ const SortGrid = memo((props) => {
           index={index}
           sortValue={item.sortValue}
           cardColor={item.cardColor}
-          onClick={() => handleOpenImageModal(item.element.props.src)}
           className="droppableCards"
         >
           {(provided, snapshot) => (
@@ -404,9 +385,35 @@ const SortGrid = memo((props) => {
         open={openImageModal}
         center
         onClose={() => setOpenImageModal(false)}
-        classNames={{ modal: "postSortImageModal" }}
+        classNames={{
+          modal: `${configObj.imageType}`,
+          overlay: "dualImageOverlay",
+        }}
       >
         <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+      </Modal>
+      <Modal
+        open={openDualImageModal}
+        center
+        onClose={() => {
+          setOpenDualImageModal(false);
+          setDualPhotoArray([]);
+        }}
+        classNames={{ overlay: "dualImageOverlay", modal: "dualImageModal" }}
+      >
+        <img
+          src={dualPhotoArray[0]}
+          width="49.5%"
+          height="auto"
+          alt="modalImage"
+        />
+        <img
+          src={dualPhotoArray[1]}
+          width="49.5%"
+          height="auto"
+          style={{ marginLeft: "1%" }}
+          alt="modalImage2"
+        />
       </Modal>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="rootDiv">

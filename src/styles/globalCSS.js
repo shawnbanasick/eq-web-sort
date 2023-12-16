@@ -775,15 +775,38 @@ footer {
 }
 */
 /***********************************
-  LANDING MODAL CSS
+  IMAGE MODAL CSS
  *******************************************************************************/
 
 
-  .postSortImageModal {
+  .postSortImageModal169 {
     background: black;
     width: 70vw;
     max-width: none;
    }
+
+
+  .postSortImageModal43 {
+    background: black;
+    width: 40vw;
+    max-width: none;
+   }
+
+
+   .dualImageModal {
+    background: black;
+    width: 85vw;
+    max-width: none;
+   }
+
+   .dualImageOverlay {
+    background: black;
+    opacity: 0.85;
+  }
+
+  /***********************************
+  LANDING MODAL CSS
+ *******************************************************************************/
 
 
   /*

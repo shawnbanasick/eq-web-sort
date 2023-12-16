@@ -65,8 +65,8 @@ const SortColumnImages = memo((props) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        onClick={() =>
-                          handleOpenImageModal(item.element.props.src)
+                        onClick={(e) =>
+                          handleOpenImageModal(e, item.element.props.src)
                         }
                         style={getItemStyleImages(
                           snapshot.isDragging,
@@ -119,15 +119,15 @@ const SortColumnsDiv = styled.div`
 `;
 
 const DroppableColDiv = styled.div`
-  justify-content: center;
+  justify-items: center;
 `;
 
 const ImageDiv = styled.div`
   display: flex;
   width: 96%;
+  margin-left: 2%;
   margin-bottom: 5px !important;
   height: ${(props) => `${props.cardHeight}px`};
-  margin-left: 8px !important;
   justify-content: center;
 
   img {
