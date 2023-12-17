@@ -8,9 +8,10 @@ const reorder = (
   columnStatements
 ) => {
   try {
+    console.log("reorder");
     // no re-ordering of statements list / it's arranged by flexbox "order" css property
     if (columnToBeReordered === "statements") {
-      return;
+      return columnStatements;
     }
     // let list = state.getState(columnList);
     const list = columnStatements.vCols[columnToBeReordered];
@@ -20,9 +21,7 @@ const reorder = (
 
     columnStatements.vCols[columnToBeReordered] = [...result];
 
-    useStore.setState({ columnStatements: columnStatements });
-
-    return null;
+    return { ...columnStatements };
   } catch (error) {
     console.error(error);
   }
