@@ -116,8 +116,6 @@ const Sort = () => {
     }
   }, [qlength]);
 
-  console.log("visibleWidthAdjust", visibleWidthAdjust);
-
   // page resize
   useEffect(() => {
     const columnWidth =
