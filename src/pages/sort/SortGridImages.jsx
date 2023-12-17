@@ -125,7 +125,7 @@ const SortGrid = (props) => {
     "destination":{"droppableId":"column1","index":0},
     "reason":"DROP"}
     */
-
+      // translated column name and starts results calculations
       const manageDragResults = calculateDragResultsImages(
         { ...result },
         totalStatements,
@@ -153,19 +153,19 @@ const SortGrid = (props) => {
       }
       // if moving inside the same column
       if (source.droppableId === destination.droppableId) {
-        reorder(
+        let newCols = reorder(
           source.droppableId,
           source.index,
           destination.index,
           columnStatements
         );
 
+        setColumnStatements(newCols);
         // force component update
         // const newValue = value + 1;
         // setValue(newValue);
       } else {
         // moving to another column
-
         // source.droppableId give orgin id => "statements" or "columnN1"
         // sourceList is cards in that origin
         // gather data to send to move function
@@ -248,7 +248,6 @@ const SortGrid = (props) => {
 
   // pull data from STATE
   const statements = columnStatements.imagesList;
-  //   console.log("vCols", JSON.stringify(columnStatements));
 
   // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
