@@ -96,21 +96,6 @@ const SortColumnImages = (props) => {
 
 export default SortColumnImages;
 
-/*
-const HeaderDiv = styled.div`
-  background: ${(props) => props.color};
-  text-align: center;
-  border-bottom: 2px solid black;
-  min-width: 50px;
-  border-radius: 2px;
-  margin-bottom: 1px;
-  font-weight: bold;
-  font-size: 25px;
-  border-right: 1px solid #d8d8d8;
-  border-left: 1px solid #d8d8d8;
-`;
-*/
-
 const SortColumnsDiv = styled.div`
   display: flex;
   flex-direction: column;
