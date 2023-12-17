@@ -17,8 +17,8 @@
    <item id="secondProjectUrl">https://</item> 
    <!-- OTHER GENERAL OPTIONS -->
    <item id="useImages">true</item>
-   <item id="numImages">14</item>
-   <item id="imageFileType">jpg</item>
+   <item id="numImages">30</item>
+   <item id="imageFileType">png</item>
    <item id="imageType">postSortImageModal169</item>
 
 
