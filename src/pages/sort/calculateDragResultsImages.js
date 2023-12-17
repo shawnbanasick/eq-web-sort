@@ -49,7 +49,7 @@ const calculateDragResults = (
             resultsText = resultsText.substring(0, resultsText.length - 1);
           }
 
-          console.log(resultsText);
+          // console.log(resultsText);
 
           results.sort = resultsText;
 

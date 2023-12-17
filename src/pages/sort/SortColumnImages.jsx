@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import getItemStyleImages from "./getItemStyleImages";
@@ -9,7 +9,7 @@ import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
 
-const SortColumnImages = memo((props) => {
+const SortColumnImages = (props) => {
   const {
     forcedSorts,
     columnWidth,
@@ -25,8 +25,6 @@ const SortColumnImages = memo((props) => {
     fontColor,
     handleOpenImageModal,
   } = props;
-
-  console.log("cardsHeight", props.cardHeight);
 
   // had to push column sort value to state because didn't want to edit dnd library result object
   // was't able to just pass it as a prop
@@ -94,7 +92,7 @@ const SortColumnImages = memo((props) => {
       </Droppable>
     </SortColumnsDiv>
   );
-});
+};
 
 export default SortColumnImages;
 

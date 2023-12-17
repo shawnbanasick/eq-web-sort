@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo } from "react";
+import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
@@ -11,9 +11,8 @@ import calculateDragResultsImages from "./calculateDragResultsImages";
 // import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-import convertObjectToResults from "./convertObjectToResults";
+// import convertObjectToResults from "./convertObjectToResults";
 import { Modal } from "react-responsive-modal";
-import { set } from "lodash";
 
 /* eslint react/prop-types: 0 */
 
@@ -25,11 +24,11 @@ const getSetColState = (state) => state.setColumnStatements;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
-const getSortCharacteristics = (state) => state.sortCharacteristics;
-const getSetSortCharacteristics = (state) => state.setSortCharacteristics;
+//const getSortCharacteristics = (state) => state.sortCharacteristics;
+// const getSetSortCharacteristics = (state) => state.setSortCharacteristics;
 let getCardHeight = (state) => state.cardHeight;
 const getSetCardHeight = (state) => state.setCardHeight;
-const getSetColumnWidth = (state) => state.setColumnWidth;
+// const getSetColumnWidth = (state) => state.setColumnWidth;
 const getResults = (state) => state.results;
 const getSortFinModalHasBeenShown = (state) =>
   state.sortFinishedModalHasBeenShown;
@@ -41,7 +40,7 @@ const getSetTriggerSortingFinModal = (state) =>
   state.setTriggerSortingFinishedModal;
 const getSetSortGridResults = (state) => state.setSortGridResults;
 
-const SortGrid = memo((props) => {
+const SortGrid = (props) => {
   // STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
@@ -51,12 +50,12 @@ const SortGrid = memo((props) => {
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
-  const sortCharacteristics = useStore(getSortCharacteristics);
-  const setSortCharacteristics = useStore(getSetSortCharacteristics);
+  // const sortCharacteristics = useStore(getSortCharacteristics);
+  // const setSortCharacteristics = useStore(getSetSortCharacteristics);
 
   let cardHeight = useStore(getCardHeight);
   const setCardHeight = useStore(getSetCardHeight);
-  const setColumnWidth = useStore(getSetColumnWidth);
+  // const setColumnWidth = useStore(getSetColumnWidth);
   const results = useStore(getResults);
   const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
   const sortGridResults = useStore(getSortGridResults);
@@ -91,6 +90,18 @@ const SortGrid = memo((props) => {
   const [dualPhotoArray, setDualPhotoArray] = useState([]);
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
+  let columnWidth = props.columnWidth;
+  const totalStatements = +configObj.numImages;
+
+  const sortCharacterisiticsPrep = {};
+  sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
+  sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
+  sortCharacterisiticsPrep.forcedSorts = configObj.warnOverloadedColumn;
+  sortCharacterisiticsPrep.qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
+
+  const sortCharacteristics = sortCharacterisiticsPrep;
+  const allowUnforcedSorts = configObj.allowUnforcedSorts;
+
   // get sort direction
   let sortDirection = "rtl";
   if (configObj.sortDirection === "negative") {
@@ -98,9 +109,6 @@ const SortGrid = memo((props) => {
   }
 
   const handleOpenImageModal = (e, src) => {
-    console.log(e.target.src);
-    console.log(e.detail);
-
     if (e.detail === 2) {
       if (e.shiftKey) {
         dualPhotoArray.push(e.target.src);
@@ -125,8 +133,6 @@ const SortGrid = memo((props) => {
     "destination":{"droppableId":"column1","index":0},
     "reason":"DROP"}
     */
-
-      const totalStatements = +configObj.numImages;
 
       const manageDragResults = calculateDragResultsImages(
         { ...result },
@@ -164,7 +170,7 @@ const SortGrid = memo((props) => {
 
         // force component update
         const newValue = value + 1;
-        setValue(newValue);
+        // setValue(newValue);
       } else {
         // moving to another column
 
@@ -186,17 +192,6 @@ const SortGrid = memo((props) => {
         }
         const droppableSource = source;
         const droppableDestination = destination;
-        const totalStatements = +configObj.numImages;
-
-        const sortCharacterisiticsPrep = {};
-        sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
-        sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
-        sortCharacterisiticsPrep.forcedSorts = configObj.warnOverloadedColumn;
-        sortCharacterisiticsPrep.qSortHeaderNumbers = [
-          ...mapObj.qSortHeaderNumbers,
-        ];
-        const sortCharacteristics = sortCharacterisiticsPrep;
-        const allowUnforcedSorts = configObj.allowUnforcedSorts;
 
         move(
           sourceListArray,
@@ -213,8 +208,6 @@ const SortGrid = memo((props) => {
         // global state updates
         setColumnStatements(columnStatements);
 
-        convertObjectToResults(columnStatements);
-
         if (columnStatements.imagesList.length === 0) {
           setIsSortingCards(false);
           setSortCompleted(true);
@@ -227,7 +220,6 @@ const SortGrid = memo((props) => {
         const totalStatements2 = configObj.numImages;
         const remainingStatements = columnStatements.imagesList.length;
         const numerator = totalStatements2 - remainingStatements;
-
         const ratio = numerator / totalStatements2;
         const completedPercent = (ratio * 30).toFixed();
 
@@ -236,9 +228,9 @@ const SortGrid = memo((props) => {
 
         // force component update
         const newValue = value + 1;
-        setValue(newValue);
+        // setValue(newValue);
       }
-      setSortCharacteristics(sortCharacteristics);
+      // setSortCharacteristics(sortCharacteristics);
     } catch (error) {
       console.log(error.message);
     }
@@ -253,50 +245,14 @@ const SortGrid = memo((props) => {
 
   // maximize cardHeight on first mount using default 0 in globalState
   const maxNumCardsInCol = Math.max(...qSortPattern);
-  console.log("maxNumCardsInCol", maxNumCardsInCol);
-  console.log(window.innerHeight);
 
   if (+cardHeight === 0) {
     cardHeight = +(
       (window.innerHeight - 150) /
       (maxNumCardsInCol + 1)
     ).toFixed();
-    console.log("cardHeight", cardHeight);
     setCardHeight(+cardHeight);
   }
-
-  // adjust width by q sort design
-  // todo - find better adjustment process
-  let visibleWidthAdjust;
-
-  // less than -3
-  if (qSortPattern.length > 0) {
-    visibleWidthAdjust = 70;
-  }
-  // -3 to +3
-  if (qSortPattern.length > 6) {
-    visibleWidthAdjust = 96;
-  }
-  // -4 to +4
-  if (qSortPattern.length > 8) {
-    visibleWidthAdjust = 120;
-  }
-  // -5 to +5
-  if (qSortPattern.length > 10) {
-    visibleWidthAdjust = 145;
-  }
-  // -6 to +6
-  if (qSortPattern.length > 12) {
-    visibleWidthAdjust = 170;
-  }
-
-  // set dynamic width on page load on reload
-  const columnWidth = useMemo(() => {
-    return (props.dimensions.width - visibleWidthAdjust) / qSortPattern.length;
-  }, [props.dimensions.width, visibleWidthAdjust, qSortPattern.length]);
-
-  // send column width to global state
-  setTimeout(() => setColumnWidth(columnWidth), 0);
 
   // pull data from STATE
   const statements = columnStatements.imagesList;
@@ -315,7 +271,7 @@ const SortGrid = memo((props) => {
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
         forcedSorts={configObj.warnOverloadedColumn}
-        columnWidth={columnWidth}
+        columnWidth={props.columnWidth}
         cardHeight={+cardHeight}
         sortValue={sortValue}
         columnColor={columnColor}
@@ -331,7 +287,7 @@ const SortGrid = memo((props) => {
     );
   }); // end map of sort columns
 
-  const InnerList = React.memo((props) => {
+  const InnerList = (props) => {
     const items = props.statements.map((item, index) => {
       return (
         <Draggable
@@ -349,6 +305,7 @@ const SortGrid = memo((props) => {
                 className={`${item.cardColor}`}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
+                onClick={(e) => handleOpenImageModal(e, item.element.props.src)}
                 style={getItemStyleHoriImages(
                   snapshot.isDragging,
                   provided.draggableProps.style,
@@ -376,7 +333,7 @@ const SortGrid = memo((props) => {
     items.unshift(finalItem);
     */
     return items;
-  });
+  };
 
   // returning main content => horizontal feeder
   return (
@@ -450,7 +407,7 @@ const SortGrid = memo((props) => {
       </DragDropContext>
     </>
   );
-});
+};
 
 export default SortGrid;
 

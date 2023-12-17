@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 //import SortGrid from "./SortGrid";
 import SortGridImages from "./SortGridImages";
 import styled from "styled-components";
@@ -27,8 +27,9 @@ function debounce(fn, ms) {
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
+const getMapObj = (state) => state.mapObj;
 const getCardFontSize = (state) => state.cardFontSize;
-const getColumnWidth = (state) => state.columnWidth;
+// const getColumnWidth = (state) => state.columnWidth;
 const getTopMargin = (state) => state.topMargin;
 const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
@@ -43,8 +44,9 @@ const Sort = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
+  const mapObj = useSettingsStore(getMapObj);
   let cardFontSize = useStore(getCardFontSize);
-  const columnWidth = useStore(getColumnWidth);
+  // const columnWidth = useStore(getColumnWidth);
   const topMargin = useStore(getTopMargin);
   const results = useStore(getResults);
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
@@ -54,6 +56,14 @@ const Sort = () => {
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const bypassSort = useStore(getBypassSort);
   const setCardFontSize = useStore(getSetCardFontSize);
+
+  // force updates on window resize
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: document.body.clientWidth,
+  });
+
+  const [columnWidth, setColumnWidth] = useState(0);
 
   // set default font size
   useEffect(() => {
@@ -79,14 +89,41 @@ const Sort = () => {
   const sortAgreement = ReactHtmlParser(decodeHTML(langObj.sortAgreement));
   const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst));
 
-  // force updates on window resize
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: document.body.clientWidth,
-  });
+  const qSortPattern = [...mapObj.qSortPattern];
+  const qlength = qSortPattern.length;
+
+  const visibleWidthAdjust = useMemo(() => {
+    // less than -3
+    // -6 to +6
+    if (qlength > 12) {
+      return 170;
+    }
+    // -5 to +5
+    if (qlength > 10) {
+      return 145;
+    }
+    // -4 to +4
+    if (qlength > 8) {
+      return 120;
+    }
+    // -3 to +3
+    if (qlength > 6) {
+      return 96;
+    }
+
+    if (qlength > 0) {
+      return 70;
+    }
+  }, [qlength]);
+
+  console.log("visibleWidthAdjust", visibleWidthAdjust);
 
   // page resize
   useEffect(() => {
+    const columnWidth =
+      (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
+    setColumnWidth(columnWidth);
+
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({
         height: window.innerHeight,
@@ -99,7 +136,7 @@ const Sort = () => {
     return (_) => {
       window.removeEventListener("resize", debouncedHandleResize);
     };
-  });
+  }, [dimensions, qSortPattern.length, visibleWidthAdjust]);
 
   useEffect(() => {
     /* this should adjust the margin of the sort grid because I can't know
@@ -134,7 +171,7 @@ const Sort = () => {
   // calc time on page
   useEffect(() => {
     // get card font size
-
+    console.log("useEffect sort 137");
     let startTime;
     startTime = Date.now();
     return () => {
@@ -147,6 +184,8 @@ const Sort = () => {
       setResults(updatedResults);
     };
   }, [results, setResults]);
+
+  useEffect(() => {}, [mapObj]);
 
   return (
     <React.Fragment>
@@ -170,6 +209,7 @@ const Sort = () => {
           dimensions={dimensions}
           cardFontSize={cardFontSize}
           fontColor={fontColor}
+          columnWidth={columnWidth}
         />
         ;
       </SortGridContainer>
