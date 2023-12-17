@@ -63,7 +63,7 @@ const Sort = () => {
     width: document.body.clientWidth,
   });
 
-  const [columnWidth, setColumnWidth] = useState(0);
+  const [columnWidth, setColumnWidth] = useState(150);
 
   // set default font size
   useEffect(() => {

@@ -20,7 +20,7 @@ const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 // const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
-const getSetColState = (state) => state.setColumnStatements;
+// const getSetColState = (state) => state.setColumnStatements;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
@@ -45,8 +45,8 @@ const SortGrid = (props) => {
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
   // const statementsObj = useSettingsStore(getStatementsObj);
-  const columnStatements = useSettingsStore(getColumnStatements);
-  const setColumnStatements = useSettingsStore(getSetColState);
+  const columnStatementsPrep = useSettingsStore(getColumnStatements);
+  // const setColumnStatements = useSettingsStore(getSetColState);
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
@@ -68,27 +68,19 @@ const SortGrid = (props) => {
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;
   const pinkCardColor = configObj.pinkCardColor;
-
-  // setMinCardHeight is boolean (statements only - not images)
-  // const setMinCardHeight = configObj.setMinCardHeight;
-  // const minCardHeight = +configObj.minCardHeight;
-
-  // MAP out SORT COLUMNS component before render
-  // code inside render so that column lists update automatically
   const qSortHeaders = [...mapObj.qSortHeaders];
   const qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
-
-  // column colors
   const columnColorsArray = [...mapObj.columnColorsArray];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
 
-  // force updates after dragend - do not delete
-  const [value, setValue] = useState(0); // integer state
+  // Component Local State
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [dualPhotoArray, setDualPhotoArray] = useState([]);
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
+  const [columnStatements, setColumnStatements] =
+    useState(columnStatementsPrep);
 
   let columnWidth = props.columnWidth;
   const totalStatements = +configObj.numImages;
@@ -169,7 +161,7 @@ const SortGrid = (props) => {
         );
 
         // force component update
-        const newValue = value + 1;
+        // const newValue = value + 1;
         // setValue(newValue);
       } else {
         // moving to another column
@@ -227,7 +219,7 @@ const SortGrid = (props) => {
         setProgressScoreAdditionalSort(completedPercent);
 
         // force component update
-        const newValue = value + 1;
+        // const newValue = value + 1;
         // setValue(newValue);
       }
       // setSortCharacteristics(sortCharacteristics);
@@ -256,6 +248,7 @@ const SortGrid = (props) => {
 
   // pull data from STATE
   const statements = columnStatements.imagesList;
+  //   console.log("vCols", JSON.stringify(columnStatements));
 
   // setup grid columns
   const columns = qSortHeaders.map((value, index, highlightedColHeader) => {
