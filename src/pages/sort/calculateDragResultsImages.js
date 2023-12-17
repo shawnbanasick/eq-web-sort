@@ -23,6 +23,7 @@ const calculateDragResults = (
 
       // create results string
       const testForCompleteArray = Object.keys(sortGridResults);
+
       let catchNan = false;
 
       // test if finished
@@ -48,8 +49,6 @@ const calculateDragResults = (
           if (resultsText.charAt(resultsText.length - 1) === "|") {
             resultsText = resultsText.substring(0, resultsText.length - 1);
           }
-
-          // console.log(resultsText);
 
           results.sort = resultsText;
 
