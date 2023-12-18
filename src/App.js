@@ -179,13 +179,8 @@ function App() {
           console.log(error);
         });
 
-      setDataLoaded(true);
-
-      setTimeout(() => {
-        // prevent spinner flicker
-        // setIsDataLoaded(true);
-        setLoading(false);
-      }, 700);
+      await setDataLoaded(true);
+      await setLoading(false);
     })();
   }, [
     setConfigObj,

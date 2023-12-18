@@ -5,6 +5,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import { Modal } from "react-responsive-modal";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -55,18 +56,28 @@ function PresortDND(props) {
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
     presortSortedStatementsNumInitial
   );
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [imageSource, setImageSource] = useState("");
+  const [dualPhotoArray, setDualPhotoArray] = useState([]);
+  const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
-  const handleOnClick = (e) => {
-    console.log("click");
+  const handleOpenImageModal = (e, src) => {
+    console.log("clicked ");
     if (e.detail === 2) {
-      console.log(e.target.alt);
-      console.log("double click");
+      if (e.shiftKey) {
+        dualPhotoArray.push(e.target.src);
+        setDualPhotoArray(dualPhotoArray);
+        if (dualPhotoArray.length === 2) {
+          setOpenDualImageModal(true);
+        }
+      } else {
+        setImageSource(e.target.src);
+        setOpenImageModal(true);
+      }
     }
   };
 
   let statementsLength = columnStatements.imagesList.length;
-  console.log(columnStatements);
-
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
 
@@ -92,8 +103,6 @@ function PresortDND(props) {
       items: [],
     },
   });
-
-  console.log(columns);
 
   // default = positive sort direction
   let pinkArraySortValue = 333,
@@ -144,8 +153,6 @@ function PresortDND(props) {
           }
         }
       }
-
-      console.log(imagesArray);
 
       // set new ordering
       for (let i = 0; i < imagesArray.length; i++) {
@@ -310,6 +317,41 @@ function PresortDND(props) {
         <div>{columns.pos.name}</div>
       </ColumnNamesPos>
 
+      <Modal
+        open={openImageModal}
+        center
+        onClose={() => setOpenImageModal(false)}
+        classNames={{
+          modal: `${configObj.imageType}`,
+          overlay: "dualImageOverlay",
+        }}
+      >
+        <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+      </Modal>
+      <Modal
+        open={openDualImageModal}
+        center
+        onClose={() => {
+          setOpenDualImageModal(false);
+          setDualPhotoArray([]);
+        }}
+        classNames={{ overlay: "dualImageOverlay", modal: "dualImageModal" }}
+      >
+        <img
+          src={dualPhotoArray[0]}
+          width="49.5%"
+          height="auto"
+          alt="modalImage"
+        />
+        <img
+          src={dualPhotoArray[1]}
+          width="49.5%"
+          height="auto"
+          style={{ marginLeft: "1%" }}
+          alt="modalImage2"
+        />
+      </Modal>
+
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
@@ -319,9 +361,6 @@ function PresortDND(props) {
               key={columnId}
               id={`${columnId}Div`}
               className={`${columnId}DivImg`}
-              onClick={(e) => {
-                handleOnClick(e);
-              }}
             >
               <ThreeColCardWrapper>
                 <Droppable
@@ -375,6 +414,12 @@ function PresortDND(props) {
                                       color: defaultFontColor,
                                       ...provided.draggableProps.style,
                                     }}
+                                    onClick={(e) =>
+                                      handleOpenImageModal(
+                                        e,
+                                        item.element.props.src
+                                      )
+                                    }
                                   >
                                     {item.element}
                                   </DroppableContainer>

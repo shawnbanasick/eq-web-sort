@@ -94,7 +94,7 @@ const SortColumnImages = (props) => {
   );
 };
 
-export default SortColumnImages;
+export default React.memo(SortColumnImages);
 
 const SortColumnsDiv = styled.div`
   display: flex;

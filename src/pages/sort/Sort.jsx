@@ -150,26 +150,27 @@ const Sort = () => {
     height = +JSON.stringify(height);
 
     setTimeout(() => {
+      console.log("timer");
       if (sortGridMarginTop !== height) {
         setTopMargin(height);
         localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
       } else {
         setTopMargin(+sortGridMarginTop);
       }
-    }, 200);
+    }, 50);
   });
 
   useEffect(() => {
-    setPresortNoReturn(true);
-    setTimeout(() => {
-      setCurrentPage("sort");
-    }, 300);
+    const setStateAsync = async () => {
+      await setPresortNoReturn(true);
+      await setCurrentPage("sort");
+    };
+    setStateAsync();
   }, [setPresortNoReturn, setCurrentPage]);
 
   // calc time on page
   useEffect(() => {
     // get card font size
-    console.log("useEffect sort 137");
     let startTime;
     startTime = Date.now();
     return () => {

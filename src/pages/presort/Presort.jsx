@@ -60,10 +60,11 @@ const PresortPage = (props) => {
   setDisplayNextButton(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCurrentPage("presort");
-      setProgressScore(20);
-    }, 200);
+    const setStateAsync = async () => {
+      await setCurrentPage("presort");
+      await setProgressScore(20);
+    };
+    setStateAsync();
   }, [setCurrentPage, setProgressScore]);
 
   // calc time on page
@@ -89,7 +90,6 @@ const PresortPage = (props) => {
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
   const statements = cloneDeep(columnStatements.statementList);
-  console.log("statements", statements);
 
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
