@@ -21,12 +21,13 @@ const getSetPostsortCommentCheckObj = (state) =>
 const getConfigObj = (state) => state.configObj;
 const getShowPostsortCommentHighlighting = (state) =>
   state.showPostsortCommentHighlighting;
+const getPostsortDualImageArray = (state) => state.postsortDualImageArray;
+const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
 const HighCards2 = (props) => {
   const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
-  const [dualPhotoArray, setDualPhotoArray] = useState([]);
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
   // STATE
@@ -40,6 +41,8 @@ const HighCards2 = (props) => {
   const showPostsortCommentHighlighting = useStore(
     getShowPostsortCommentHighlighting
   );
+  const postsortDualImageArray = useStore(getPostsortDualImageArray);
+  const setPostsortDualImageArray = useStore(getSetPostsortDualImageArray);
 
   useEffect(() => {
     setCommentCheckObj(postsortCommentCheckObj);
@@ -49,9 +52,9 @@ const HighCards2 = (props) => {
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
       if (e.shiftKey) {
-        dualPhotoArray.push(e.target.src);
-        setDualPhotoArray(dualPhotoArray);
-        if (dualPhotoArray.length === 2) {
+        postsortDualImageArray.push(e.target.src);
+        setPostsortDualImageArray(postsortDualImageArray);
+        if (postsortDualImageArray.length === 2) {
           setOpenDualImageModal(true);
         }
       } else {
@@ -60,6 +63,7 @@ const HighCards2 = (props) => {
       }
     }
   };
+
   // on leaving card comment section,
   const onChange = (event, columnDisplay, itemId) => {
     let commentLength = event.target.value.length;
@@ -142,18 +146,18 @@ const HighCards2 = (props) => {
           center
           onClose={() => {
             setOpenDualImageModal(false);
-            setDualPhotoArray([]);
+            setPostsortDualImageArray([]);
           }}
           classNames={{ overlay: "dualImageOverlay", modal: "dualImageModal" }}
         >
           <img
-            src={dualPhotoArray[0]}
+            src={postsortDualImageArray[0]}
             width="49.5%"
             height="auto"
             alt="modalImage"
           />
           <img
-            src={dualPhotoArray[1]}
+            src={postsortDualImageArray[1]}
             width="49.5%"
             height="auto"
             style={{ marginLeft: "1%" }}
