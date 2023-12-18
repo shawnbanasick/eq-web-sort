@@ -62,7 +62,6 @@ function PresortDND(props) {
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
   const handleOpenImageModal = (e, src) => {
-    console.log("clicked ");
     if (e.detail === 2) {
       if (e.shiftKey) {
         dualPhotoArray.push(e.target.src);
@@ -509,6 +508,7 @@ const ColumnNamesPos = styled.div`
 `;
 
 const PresortGrid = styled.div`
+  padding-top: 10px;
   margin-top: 25px;
   margin-bottom: 55px;
   display: grid;
@@ -528,7 +528,7 @@ const DroppableContainer = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 2px;
-  width: 28.4vw;
+  width: 27.8vw;
   // margin-left: 15px;
   border: 1px solid #a8a8a8;
 `;
@@ -536,8 +536,8 @@ const DroppableContainer = styled.div`
 const ThreeColCardWrapper = styled.div`
   margin: 4px;
   img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 98%;
+    max-height: 98%;
     padding: 0px;
   }
 `;

@@ -18,7 +18,7 @@
    <!-- OTHER GENERAL OPTIONS -->
    <item id="useImages">true</item>
    <item id="numImages">30</item>
-   <item id="imageFileType">png</item>
+   <item id="imageFileType">jpg</item>
    <item id="imageType">postSortImageModal169</item>
 
 
@@ -62,7 +62,7 @@
    <item id="showSecondPosColumn">true</item>
    <item id="showSecondNegColumn">true</item>
    <item id="showBackButton">true</item>
-   <item id="postsortCommentsRequired">true</item>
+   <item id="postsortCommentsRequired">false</item>
 
 
    <!-- SURVEY - Survey Questions -->

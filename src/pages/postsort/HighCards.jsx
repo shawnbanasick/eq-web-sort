@@ -25,6 +25,8 @@ const HighCards = (props) => {
   const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
+  const [dualPhotoArray, setDualPhotoArray] = useState([]);
+  const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
   // STATE
   const columnStatements = useSettingsStore(getColumnStatements);
@@ -43,9 +45,19 @@ const HighCards = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCommentCheckObj]);
 
-  const handleOpenImageModal = (src) => {
-    setImageSource(src);
-    setOpenImageModal(true);
+  const handleOpenImageModal = (e, src) => {
+    if (e.detail === 2) {
+      if (e.shiftKey) {
+        dualPhotoArray.push(e.target.src);
+        setDualPhotoArray(dualPhotoArray);
+        if (dualPhotoArray.length === 2) {
+          setOpenDualImageModal(true);
+        }
+      } else {
+        setImageSource(e.target.src);
+        setOpenImageModal(true);
+      }
+    }
   };
 
   const handleChange = (event, columnDisplay, itemId) => {
@@ -117,9 +129,35 @@ const HighCards = (props) => {
           open={openImageModal}
           center
           onClose={() => setOpenImageModal(false)}
-          classNames={{ modal: "postSortImageModal" }}
+          classNames={{
+            modal: `${configObj.imageType}`,
+            overlay: "dualImageOverlay",
+          }}
         >
           <img src={imageSource} width="100%" height="auto" alt="modalImage" />
+        </Modal>
+        <Modal
+          open={openDualImageModal}
+          center
+          onClose={() => {
+            setOpenDualImageModal(false);
+            setDualPhotoArray([]);
+          }}
+          classNames={{ overlay: "dualImageOverlay", modal: "dualImageModal" }}
+        >
+          <img
+            src={dualPhotoArray[0]}
+            width="49.5%"
+            height="auto"
+            alt="modalImage"
+          />
+          <img
+            src={dualPhotoArray[1]}
+            width="49.5%"
+            height="auto"
+            style={{ marginLeft: "1%" }}
+            alt="modalImage2"
+          />
         </Modal>
         <CardTag cardFontSize={cardFontSize}>{agreeText}</CardTag>
         <CardAndTextHolder>
@@ -128,7 +166,7 @@ const HighCards = (props) => {
             width={width}
             height={height}
             cardColor={item.cardColor}
-            onClick={() => handleOpenImageModal(item.element.props.src)}
+            onClick={(e) => handleOpenImageModal(e, item.element.props.src)}
           >
             {content}
           </Card>
