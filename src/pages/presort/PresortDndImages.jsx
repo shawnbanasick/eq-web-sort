@@ -237,6 +237,9 @@ function PresortDND(props) {
       setColumnStatements,
       statementsObj,
       setProgressScoreAdditional,
+      statementsLength,
+      greenArraySortValue,
+      pinkArraySortValue,
     ]
   ); // END DRAG-END
 
