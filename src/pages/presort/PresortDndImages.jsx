@@ -284,10 +284,39 @@ function PresortDND(props) {
   }, [onDragEnd, columns]);
 
   useEffect(() => {
+    let posText = "";
+    let neutralText = "";
+    let negText = "";
+
+    columns.pos.items.forEach((item) => {
+      if (columns.pos.items[0]) {
+        posText += item.statementNum + ",";
+      }
+    });
+
+    console.log("posText", posText);
+
+    if (columns.neutral.items[0]) {
+      columns.neutral.items.forEach((item) => {
+        neutralText += item.statementNum + ",";
+      });
+    }
+    console.log("neutralText", neutralText);
+
+    if (columns.neg.items[0]) {
+      columns.neg.items.forEach((item) => {
+        negText += item.statementNum + ",";
+      });
+      console.log("negText", negText);
+    }
+
     let projectResultsObj = results;
     projectResultsObj.npos = columns.pos.items.length;
+    projectResultsObj.nposText = posText;
     projectResultsObj.nneu = columns.neutral.items.length;
+    projectResultsObj.nneuText = neutralText;
     projectResultsObj.nneg = columns.neg.items.length;
+    projectResultsObj.nnegText = negText;
     setResults(projectResultsObj);
   }, [columns, results, setResults]);
 
