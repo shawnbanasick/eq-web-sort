@@ -104,8 +104,11 @@ const SubmitPage = () => {
       }
 
       transmissionResults["npos"] = numPos;
+      transmissionResults["posStateNums"] = results.posStateNums;
       transmissionResults["nneu"] = numNeu;
+      transmissionResults["neuStateNums"] = results.neuStateNums;
       transmissionResults["nneg"] = numNeg;
+      transmissionResults["negStateNums"] = results.negStateNums;
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {

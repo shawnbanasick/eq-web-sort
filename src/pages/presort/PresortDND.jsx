@@ -278,11 +278,11 @@ function PresortDND(props) {
 
     let projectResultsObj = results;
     projectResultsObj.npos = columns.pos.items.length;
-    projectResultsObj.nposText = posText;
+    projectResultsObj.posStateNums = posText;
     projectResultsObj.nneu = columns.neutral.items.length;
-    projectResultsObj.nneuText = neutralText;
+    projectResultsObj.neuStateNums = neutralText;
     projectResultsObj.nneg = columns.neg.items.length;
-    projectResultsObj.nnegText = negText;
+    projectResultsObj.negStateNums = negText;
     setResults(projectResultsObj);
   }, [columns, results, setResults]);
 

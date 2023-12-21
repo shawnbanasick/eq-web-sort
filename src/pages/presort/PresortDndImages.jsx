@@ -294,29 +294,25 @@ function PresortDND(props) {
       }
     });
 
-    console.log("posText", posText);
-
     if (columns.neutral.items[0]) {
       columns.neutral.items.forEach((item) => {
         neutralText += item.statementNum + ",";
       });
     }
-    console.log("neutralText", neutralText);
 
     if (columns.neg.items[0]) {
       columns.neg.items.forEach((item) => {
         negText += item.statementNum + ",";
       });
-      console.log("negText", negText);
     }
 
     let projectResultsObj = results;
     projectResultsObj.npos = columns.pos.items.length;
-    projectResultsObj.nposText = posText;
+    projectResultsObj.posStateNums = posText;
     projectResultsObj.nneu = columns.neutral.items.length;
-    projectResultsObj.nneuText = neutralText;
+    projectResultsObj.neuStateNums = neutralText;
     projectResultsObj.nneg = columns.neg.items.length;
-    projectResultsObj.nnegText = negText;
+    projectResultsObj.negStateNums = negText;
     setResults(projectResultsObj);
   }, [columns, results, setResults]);
 
