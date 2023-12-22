@@ -556,7 +556,6 @@ footer {
     grid-row-start: 1;
     grid-column-start: 2;
     text-align: center;
-    font-weight: bold;
   }
 
   #imageGrid .negDivImg{

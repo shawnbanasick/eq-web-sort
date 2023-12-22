@@ -593,7 +593,6 @@ const ImageEnlargeInstructionsDiv = styled.div`
   align-items: center;
   margin-bottom: 5px;
   font-size: 16px;
-  font-weight: bold;
   padding-left: 3px;
   padding-right: 3px;
   width: 100%;
