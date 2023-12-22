@@ -30,8 +30,8 @@ const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const PostSort = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
-  const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
+  const configObj = useSettingsStore(getConfigObj);
   const setProgressScore = useStore(getSetProgressScore);
   const columnStatements = useSettingsStore(getColumnStatements);
   const cardHeight = useStore(getCardHeight);
@@ -126,7 +126,6 @@ const PostSort = () => {
           width={columnWidth}
           highCards={highCards}
         />
-
         {agreeObj.displaySecondColumn && (
           <HighCards2
             agreeObj={agreeObj}

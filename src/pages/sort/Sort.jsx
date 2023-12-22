@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-//import SortGrid from "./SortGrid";
+import SortGrid from "./SortGrid";
 import SortGridImages from "./SortGridImages";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -43,8 +43,10 @@ const getSetCardFontSize = (state) => state.setCardFontSize;
 const Sort = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
-  const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
+  const configObj = useSettingsStore(getConfigObj);
+  const imageSort = configObj.useImages;
+
   let cardFontSize = useStore(getCardFontSize);
   // const columnWidth = useStore(getColumnWidth);
   const topMargin = useStore(getTopMargin);
@@ -184,7 +186,7 @@ const Sort = () => {
     };
   }, [results, setResults]);
 
-  useEffect(() => {}, [mapObj]);
+  // useEffect(() => {}, [mapObj]);
 
   return (
     <React.Fragment>
@@ -204,12 +206,21 @@ const Sort = () => {
         <SortColGuides columnWidth={columnWidth} />
       </SortTitleBarContainer>
       <SortGridContainer marginTop={topMargin}>
-        <SortGridImages
-          dimensions={dimensions}
-          cardFontSize={cardFontSize}
-          fontColor={fontColor}
-          columnWidth={columnWidth}
-        />
+        {imageSort ? (
+          <SortGridImages
+            dimensions={dimensions}
+            cardFontSize={cardFontSize}
+            fontColor={fontColor}
+            columnWidth={columnWidth}
+          />
+        ) : (
+          <SortGrid
+            dimensions={dimensions}
+            cardFontSize={cardFontSize}
+            fontColor={fontColor}
+            columnWidth={columnWidth}
+          />
+        )}
         ;
       </SortGridContainer>
     </React.Fragment>

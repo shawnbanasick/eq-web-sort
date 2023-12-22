@@ -18,7 +18,7 @@
    <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
    <item id="useImages">true</item>
    <item id="numImages">30</item>
-   <item id="imageFileType">jpg</item>
+   <item id="imageFileType">png</item>
    <item id="imageType">postSortImageModal169</item>
    <item id="shuffleImages">true</item>
    <!-- OTHER GENERAL OPTIONS -->

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import PresortModal from "./PresortModal";
-// import PresortDND from "./PresortDND";
+import PresortDND from "./PresortDND";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import styled from "styled-components";
 import PresortPreventNavModal from "./PresortPreventNavModal";
@@ -90,6 +90,7 @@ const PresortPage = (props) => {
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
   const statements = cloneDeep(columnStatements.statementList);
+  const imageSort = configObj.useImages;
 
   const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
 
@@ -111,7 +112,11 @@ const PresortPage = (props) => {
       <PresortFinishedModal />
       <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleBarText}</SortTitleBar>
-      <PresortDndImages cardFontSize={cardFontSize} />
+      {imageSort ? (
+        <PresortDndImages cardFontSize={cardFontSize} />
+      ) : (
+        <PresortDND statements={statements} cardFontSize={cardFontSize} />
+      )}
     </React.Fragment>
   );
 };

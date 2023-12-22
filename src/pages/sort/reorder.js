@@ -1,5 +1,3 @@
-import useStore from "../../globalState/useStore";
-
 // to reorder within the same column
 const reorder = (
   columnToBeReordered,
