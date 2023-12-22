@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-   <config version="1.0" htmlParse="false">
+   <config version="5.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
    <!-- "setupTarget" options: firebase, local, email, or sheets -->
@@ -12,18 +12,18 @@
    <!-- EMAIL -->
    <item id="emailAddress">ken.q.tools@gmail.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
-   <!-- SECOND PROJECT -->
+   <!-- SECOND PROJECT LINKING-->
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://</item> 
-   <!-- OTHER GENERAL OPTIONS -->
+   <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
    <item id="useImages">true</item>
    <item id="numImages">30</item>
    <item id="imageFileType">jpg</item>
    <item id="imageType">postSortImageModal169</item>
    <item id="shuffleImages">true</item>
-
-   <item id="shuffleCards">true</item>
+   <!-- OTHER GENERAL OPTIONS -->
    <item id="headerBarColor">#337ab7</item>
+   <item id="shuffleCards">true</item>
    <item id="devMode">false</item> 
 
    <!-- ACCESS -->
