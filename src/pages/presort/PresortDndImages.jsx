@@ -31,7 +31,7 @@ const getSetProgressScoreAdditional = (state) =>
 // todo - add double click to enlarge image
 // todo - add scrolling on ios Safari
 
-function PresortDND(props) {
+function PresortDNDImages(props) {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
@@ -469,7 +469,7 @@ function PresortDND(props) {
   );
 }
 
-export default PresortDND;
+export default PresortDNDImages;
 
 const ColumnNamesNeg = styled.div`
   display: flex;

@@ -18,6 +18,7 @@ import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
+import shuffle from "lodash/shuffle";
 // import iOS from "./isIos";
 
 const convert = require("xml-js");
@@ -132,6 +133,11 @@ function App() {
               item.statementNum = `${i + 1}`;
 
               imagesArray.push(item);
+            }
+
+            if (info.configObj.shuffleImages === true) {
+              const shuffledCards = shuffle(imagesArray);
+              imagesArray = [...shuffledCards];
             }
           }
         })
