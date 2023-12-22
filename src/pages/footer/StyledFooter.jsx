@@ -34,6 +34,7 @@ const StyledFooter = () => {
   let showAdjustmentContainer = true;
   let showCardHeightSizer = true;
   let displayHelpButton = true;
+  let showFooterFontSizer = true;
 
   let showBackButton;
   let backButtonText = langObj.postsortBackButtonText;
@@ -71,6 +72,7 @@ const StyledFooter = () => {
 
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;
+  const useImages = configObj.useImages;
 
   const totalProgressScore = calcProgressScore(
     currentPage,
@@ -95,9 +97,27 @@ const StyledFooter = () => {
   }
 
   if (currentPage === "presort") {
-    showAdjustmentContainer = true;
-    showCardHeightSizer = false;
+    if (configObj.useImages === true) {
+      showAdjustmentContainer = false;
+      showCardHeightSizer = false;
+    } else {
+      showAdjustmentContainer = true;
+      showCardHeightSizer = false;
+    }
   }
+
+  if (currentPage === "sort") {
+    if (useImages === true) {
+      showAdjustmentContainer = true;
+      showCardHeightSizer = true;
+      showFooterFontSizer = false;
+    } else {
+      showAdjustmentContainer = true;
+      showCardHeightSizer = true;
+      showFooterFontSizer = true;
+    }
+  }
+
   if (
     currentPage === "landing" ||
     currentPage === "survey" ||
@@ -111,7 +131,7 @@ const StyledFooter = () => {
       {displayHelpButton && <HelpButton />}
       {showAdjustmentContainer && (
         <AdjustmentsContainer>
-          <FooterFontSizer />
+          {showFooterFontSizer && <FooterFontSizer />}
           {showCardHeightSizer && <CardHeightSizer />}
         </AdjustmentsContainer>
       )}
