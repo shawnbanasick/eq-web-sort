@@ -51,6 +51,9 @@ function PresortDNDImages(props) {
   );
   const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
+  const enlargeText = ReactHtmlParser(
+    decodeHTML(langObj.presortImageSortInstructions)
+  );
 
   // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
@@ -331,6 +334,9 @@ function PresortDNDImages(props) {
 
   return (
     <PresortGrid id="imageGrid">
+      <ImageEnlargeInstructionsDiv id="imageEnlargeInstructionsDiv">
+        <div>{enlargeText}</div>
+      </ImageEnlargeInstructionsDiv>
       <CompletionRatioDiv id="completionRatioImg">
         {presortSortedStatementsNum}/{statementsLength}
       </CompletionRatioDiv>
@@ -579,6 +585,18 @@ const CompletionRatioDiv = styled.div`
   font-weight: bold;
   padding-left: 3px;
   padding-right: 3px;
+`;
+
+const ImageEnlargeInstructionsDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 3px;
+  width: 100%;
 `;
 
 const AllColWrapper = styled.div`

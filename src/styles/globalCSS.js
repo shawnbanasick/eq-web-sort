@@ -552,6 +552,13 @@ footer {
     font-weight: bold;
   }
 
+  #imageEnlargeInstructionsDiv {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    text-align: center;
+    font-weight: bold;
+  }
+
   #imageGrid .negDivImg{
     grid-row-start: 3;
     grid-column-start: 2;
