@@ -79,7 +79,10 @@ const SortColumnImages = (props) => {
                           fontColor
                         )}
                       >
-                        {item.element}
+                        <img
+                          src={item.element.props.src}
+                          alt={item.element.props.alt}
+                        />
                       </ImageDiv>
                     )}
                   </Draggable>

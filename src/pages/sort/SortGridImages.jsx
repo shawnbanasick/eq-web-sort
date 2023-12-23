@@ -13,6 +13,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 // import convertObjectToResults from "./convertObjectToResults";
 import { Modal } from "react-responsive-modal";
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 /* eslint react/prop-types: 0 */
 
@@ -74,13 +75,19 @@ const SortGrid = (props) => {
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
 
+  let presortColumnStatments = JSON.parse(
+    localStorage.getItem("columnStatements")
+  );
+
   // Component Local State
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [dualPhotoArray, setDualPhotoArray] = useState([]);
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
-  const [columnStatements, setColumnStatements] =
-    useState(columnStatementsPrep);
+  const [columnStatements, setColumnStatements] = useLocalStorage(
+    "sortColumns",
+    presortColumnStatments
+  );
 
   let columnWidth = props.columnWidth;
   const totalStatements = +configObj.numImages;
@@ -312,7 +319,10 @@ const SortGrid = (props) => {
                   fontColor
                 )}
               >
-                {item.element}
+                <img
+                  src={item.element.props.src}
+                  alt={item.element.props.alt}
+                />
               </FeederCard>
               {provided.placeholder}
             </>

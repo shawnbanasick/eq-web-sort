@@ -51,6 +51,8 @@ const LandingPage = () => {
 
   // clear local storage if previous sorts exist
   localStorage.removeItem("columns");
+  localStorage.removeItem("sortColumns");
+  localStorage.removeItem("columnStatements");
   localStorage.removeItem("presortSortedCards");
 
   useEffect(() => {

@@ -161,7 +161,11 @@ function PresortDNDImages(props) {
 
       // save to memory
       columnStatements.imagesList = [...imagesArray];
-      setColumnStatements(columnStatements);
+      // setColumnStatements(columnStatements);
+      localStorage.setItem(
+        "columnStatements",
+        JSON.stringify(columnStatements)
+      );
       // console.log("columnStatements", columnStatements);
 
       // when dropped on different droppable
