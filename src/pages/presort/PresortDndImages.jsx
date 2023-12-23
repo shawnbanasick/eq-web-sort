@@ -6,13 +6,12 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import { Modal } from "react-responsive-modal";
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
-const getPreSortedStateNumInit = (state) =>
-  state.presortSortedStatementsNumInitial;
 const getSetColumnStatements = (state) => state.setColumnStatements;
 const getSetPresortFinished = (state) => state.setPresortFinished;
 const getSetTrigPresortFinModal = (state) =>
@@ -37,7 +36,7 @@ function PresortDNDImages(props) {
   const configObj = useSettingsStore(getConfigObj);
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
-  const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
+  // const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
   const setColumnStatements = useSettingsStore(getSetColumnStatements);
   const setPresortFinished = useStore(getSetPresortFinished);
   const setTriggerPresortFinishedModal = useStore(getSetTrigPresortFinModal);
@@ -56,9 +55,8 @@ function PresortDNDImages(props) {
   );
 
   // initialize local state
-  let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
-    presortSortedStatementsNumInitial
-  );
+  let [presortSortedStatementsNum, setPresortSortedStatementsNum] =
+    useLocalStorage("presortSortedCards", 0);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [dualPhotoArray, setDualPhotoArray] = useState([]);
@@ -83,7 +81,7 @@ function PresortDNDImages(props) {
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
 
-  const [columns, setColumns] = useState({
+  const [columns, setColumns] = useLocalStorage("columns", {
     cards: {
       name: statementsName,
       items: [...columnStatements.imagesList],
@@ -284,7 +282,7 @@ function PresortDNDImages(props) {
     window.addEventListener("keyup", handleKeyUp);
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [onDragEnd, columns]);
+  }, [onDragEnd, columns, setColumns]);
 
   useEffect(() => {
     let posText = "";
@@ -331,6 +329,7 @@ function PresortDNDImages(props) {
   ]);
 
   // RENDER COMPONENT
+  console.log(339);
 
   return (
     <PresortGrid id="imageGrid">
@@ -389,6 +388,8 @@ function PresortDNDImages(props) {
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
+          console.log(398);
+
           return (
             <AllColWrapper
               key={columnId}
@@ -427,6 +428,8 @@ function PresortDNDImages(props) {
                               className="dragObject"
                             >
                               {(provided, snapshot) => {
+                                console.log(item.element);
+
                                 return (
                                   <DroppableContainer
                                     ref={provided.innerRef}
@@ -454,7 +457,10 @@ function PresortDNDImages(props) {
                                       )
                                     }
                                   >
-                                    {item.element}
+                                    <img
+                                      src={item.element.props.src}
+                                      alt={item.element.props.alt}
+                                    />
                                   </DroppableContainer>
                                 );
                               }}

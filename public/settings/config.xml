@@ -20,7 +20,7 @@
    <item id="numImages">30</item>
    <item id="imageFileType">png</item>
    <item id="imageType">postSortImageModal169</item>
-   <item id="shuffleImages">true</item>
+   <item id="shuffleImages">false</item>
    <!-- OTHER GENERAL OPTIONS -->
    <item id="headerBarColor">#337ab7</item>
    <item id="shuffleCards">true</item>

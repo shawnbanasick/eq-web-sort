@@ -49,6 +49,10 @@ const LandingPage = () => {
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
   const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
 
+  // clear local storage if previous sorts exist
+  localStorage.removeItem("columns");
+  localStorage.removeItem("presortSortedCards");
+
   useEffect(() => {
     setTimeout(() => {
       setProgressScore(10);
