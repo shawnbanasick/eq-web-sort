@@ -166,7 +166,6 @@ function PresortDNDImages(props) {
         "columnStatements",
         JSON.stringify(columnStatements)
       );
-      // console.log("columnStatements", columnStatements);
 
       // when dropped on different droppable
       if (source.droppableId !== destination.droppableId) {
@@ -239,12 +238,12 @@ function PresortDNDImages(props) {
     [
       configObj,
       columnStatements,
-      setColumnStatements,
       statementsObj,
       setProgressScoreAdditional,
       statementsLength,
       greenArraySortValue,
       pinkArraySortValue,
+      setPresortSortedStatementsNum,
     ]
   ); // END DRAG-END
 
@@ -333,8 +332,6 @@ function PresortDNDImages(props) {
   ]);
 
   // RENDER COMPONENT
-  console.log(339);
-
   return (
     <PresortGrid id="imageGrid">
       <ImageEnlargeInstructionsDiv id="imageEnlargeInstructionsDiv">
@@ -392,8 +389,6 @@ function PresortDNDImages(props) {
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
-          console.log(398);
-
           return (
             <AllColWrapper
               key={columnId}
@@ -432,8 +427,6 @@ function PresortDNDImages(props) {
                               className="dragObject"
                             >
                               {(provided, snapshot) => {
-                                console.log(item.element);
-
                                 return (
                                   <DroppableContainer
                                     ref={provided.innerRef}

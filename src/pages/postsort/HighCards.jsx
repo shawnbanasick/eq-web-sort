@@ -10,7 +10,7 @@ import { Modal } from "react-responsive-modal";
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-const getColumnStatements = (state) => state.columnStatements;
+//const getColumnStatements = (state) => state.columnStatements;
 const getResultsPostsort = (state) => state.resultsPostsort;
 const getSetResultsPostsort = (state) => state.setResultsPostsort;
 const getStatementCommentsObj = (state) => state.statementCommentsObj;
@@ -30,7 +30,8 @@ const HighCards = (props) => {
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
   // STATE
-  const columnStatements = useSettingsStore(getColumnStatements);
+  //  const columnStatements = useSettingsStore(getColumnStatements);
+  const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
   const resultsPostsort = useStore(getResultsPostsort);
   const setResultsPostsort = useStore(getSetResultsPostsort);
   const statementCommentsObj = useStore(getStatementCommentsObj);
@@ -63,6 +64,7 @@ const HighCards = (props) => {
     }
   };
 
+  // on leaving card comment section
   const handleChange = (event, columnDisplay, itemId) => {
     let commentLength = event.target.value.length;
     if (commentLength > 0) {
@@ -76,6 +78,7 @@ const HighCards = (props) => {
     }
     const results = resultsPostsort;
     const cards = columnStatements.vCols[columnDisplay];
+    console.log("cards: ", cards);
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 

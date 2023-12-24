@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
@@ -46,7 +46,7 @@ const SortGrid = (props) => {
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
   // const statementsObj = useSettingsStore(getStatementsObj);
-  const columnStatementsPrep = useSettingsStore(getColumnStatements);
+  // const columnStatementsPrep = useSettingsStore(getColumnStatements);
   // const setColumnStatements = useSettingsStore(getSetColState);
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
@@ -74,8 +74,10 @@ const SortGrid = (props) => {
   const columnColorsArray = [...mapObj.columnColorsArray];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
+  const maxNumCardsInCol = Math.max(...qSortPattern.current);
+  const cardHeightRef = useRef(null);
 
-  let presortColumnStatments = JSON.parse(
+  let presortColumnStatements = JSON.parse(
     localStorage.getItem("columnStatements")
   );
 
@@ -86,7 +88,7 @@ const SortGrid = (props) => {
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
   const [columnStatements, setColumnStatements] = useLocalStorage(
     "sortColumns",
-    presortColumnStatments
+    presortColumnStatements
   );
 
   let columnWidth = props.columnWidth;
@@ -106,6 +108,22 @@ const SortGrid = (props) => {
   if (configObj.sortDirection === "negative") {
     sortDirection = "ltr";
   }
+
+  useEffect(() => {
+    // maximize cardHeight on first mount using default 0 in globalState
+    let updateCardHeight = async () => {
+      let currentCardHeight = cardHeightRef.current;
+      if (cardHeight === null || currentCardHeight !== cardHeight) {
+        currentCardHeight = +(
+          (window.innerHeight - 150) /
+          (maxNumCardsInCol + 1)
+        ).toFixed();
+        await setCardHeight(currentCardHeight);
+        localStorage.setItem("sortGridCardHeight", currentCardHeight);
+      }
+    };
+    updateCardHeight();
+  }, [cardHeight, maxNumCardsInCol, setCardHeight]);
 
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
@@ -241,17 +259,6 @@ const SortGrid = (props) => {
 
   // just the hori container size, not card size
   let horiCardMinHeight = 50;
-
-  // maximize cardHeight on first mount using default 0 in globalState
-  const maxNumCardsInCol = Math.max(...qSortPattern);
-
-  if (+cardHeight === 0) {
-    cardHeight = +(
-      (window.innerHeight - 150) /
-      (maxNumCardsInCol + 1)
-    ).toFixed();
-    setCardHeight(+cardHeight);
-  }
 
   // pull data from STATE
   const statements = columnStatements.imagesList;

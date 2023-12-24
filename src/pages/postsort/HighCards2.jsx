@@ -6,12 +6,11 @@ import sanitizeString from "../../utilities/sanitizeString";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import { Modal } from "react-responsive-modal";
-
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-const getColumnStatements = (state) => state.columnStatements;
+// const getColumnStatements = (state) => state.columnStatements;
 const getResultsPostsort = (state) => state.resultsPostsort;
 const getSetResultsPostsort = (state) => state.setResultsPostsort;
 const getStatementCommentsObj = (state) => state.statementCommentsObj;
@@ -24,14 +23,9 @@ const getShowPostsortCommentHighlighting = (state) =>
 const getPostsortDualImageArray = (state) => state.postsortDualImageArray;
 const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
-const HighCards2 = (props) => {
-  const [commentCheckObj, setCommentCheckObj] = useState({});
-  const [openImageModal, setOpenImageModal] = useState(false);
-  const [imageSource, setImageSource] = useState("");
-  const [openDualImageModal, setOpenDualImageModal] = useState(false);
-
-  // STATE
-  const columnStatements = useSettingsStore(getColumnStatements);
+const HighCards2Display = (props) => {
+  // GLOBAL STATE
+  const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
   const resultsPostsort = useStore(getResultsPostsort);
   const setResultsPostsort = useStore(getSetResultsPostsort);
   const statementCommentsObj = useStore(getStatementCommentsObj);
@@ -44,11 +38,19 @@ const HighCards2 = (props) => {
   const postsortDualImageArray = useStore(getPostsortDualImageArray);
   const setPostsortDualImageArray = useStore(getSetPostsortDualImageArray);
 
+  // LOCAL STATE
+  const [commentCheckObj, setCommentCheckObj] = useState({});
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [imageSource, setImageSource] = useState("");
+  const [openDualImageModal, setOpenDualImageModal] = useState(false);
+
+  // On component load
   useEffect(() => {
     setCommentCheckObj(postsortCommentCheckObj);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCommentCheckObj]);
 
+  // enlarge images on double click
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
       if (e.shiftKey) {
@@ -77,7 +79,8 @@ const HighCards2 = (props) => {
       setCommentCheckObj({ ...postsortCommentCheckObj });
     }
     const results = resultsPostsort;
-    const cards = columnStatements.vCols[columnDisplay];
+    const cards = columnStatements?.vCols[agreeObj.columnDisplay2];
+
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
 
@@ -103,12 +106,12 @@ const HighCards2 = (props) => {
     setResultsPostsort(results);
   }; // end onBlur
 
-  const { height, width, agreeObj, highCards2, cardFontSize } = props;
-
+  const { height, width, agreeObj, cardFontSize } = props;
+  const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
   const { agreeText, placeholder } = agreeObj;
+  let columnDisplay = agreeObj.columnDisplay2;
 
-  const columnDisplay = agreeObj.columnDisplay2;
-
+  // render elements
   return highCards2.map((item, index) => {
     let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
 
@@ -195,7 +198,7 @@ const HighCards2 = (props) => {
   });
 };
 
-export default HighCards2;
+export default HighCards2Display;
 
 const Container = styled.div`
   width: 90vw;
