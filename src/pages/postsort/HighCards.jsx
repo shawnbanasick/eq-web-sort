@@ -6,11 +6,12 @@ import sanitizeString from "../../utilities/sanitizeString";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import { Modal } from "react-responsive-modal";
+import useLocalStorage from "../../utilities/useLocalStorage";
+
 /* eslint react/prop-types: 0 */
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-//const getColumnStatements = (state) => state.columnStatements;
 const getResultsPostsort = (state) => state.resultsPostsort;
 const getSetResultsPostsort = (state) => state.setResultsPostsort;
 const getStatementCommentsObj = (state) => state.statementCommentsObj;
@@ -24,14 +25,22 @@ const getPostsortDualImageArray = (state) => state.postsortDualImageArray;
 const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
 const HighCards = (props) => {
+  // LOCAL STATE
   const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
 
-  // STATE
-  //  const columnStatements = useSettingsStore(getColumnStatements);
+  // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
+  let [allCommentsObj, setAllCommentsObj] = useLocalStorage(
+    "allCommentsObj",
+    {}
+  );
+  const requiredCommentsObj =
+    JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
+
+  // GLOBAL STATE
   const resultsPostsort = useStore(getResultsPostsort);
   const setResultsPostsort = useStore(getSetResultsPostsort);
   const statementCommentsObj = useStore(getStatementCommentsObj);
@@ -44,11 +53,31 @@ const HighCards = (props) => {
   const postsortDualImageArray = useStore(getPostsortDualImageArray);
   const setPostsortDualImageArray = useStore(getSetPostsortDualImageArray);
 
+  const { agreeObj, cardFontSize, width, height } = props;
+  const highCards = columnStatements.vCols[agreeObj.columnDisplay];
+  const { agreeText, placeholder } = agreeObj;
+  let columnDisplay = agreeObj.columnDisplay;
+
+  // restore results from localStorage
+  useEffect(() => {
+    const keys = Object.keys(allCommentsObj);
+    // read in comments
+    if (keys.length > 0) {
+      keys.map((key) => {
+        const identifier = key;
+        const comment = allCommentsObj[key];
+        resultsPostsort[identifier] = comment;
+        return key;
+      });
+    }
+  });
+
+  // transfer state from global to local (for highlighting)
   useEffect(() => {
     setCommentCheckObj(postsortCommentCheckObj);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCommentCheckObj]);
+  }, [setCommentCheckObj, postsortCommentCheckObj]);
 
+  // on double click of card, enlarge image
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
       if (e.shiftKey) {
@@ -65,7 +94,8 @@ const HighCards = (props) => {
   };
 
   // on leaving card comment section
-  const handleChange = (event, columnDisplay, itemId) => {
+  const handleChange = (event, itemId) => {
+    // set comment check object for Results formatting on Submit page
     let commentLength = event.target.value.length;
     if (commentLength > 0) {
       postsortCommentCheckObj[`hc-${itemId}`] = true;
@@ -78,13 +108,12 @@ const HighCards = (props) => {
     }
     const results = resultsPostsort;
     const cards = columnStatements.vCols[columnDisplay];
-    console.log("cards: ", cards);
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
+    const identifier = `${columnDisplay}_${+itemId + 1}`;
 
-    const identifier = `${columnDisplay}_${itemId + 1}`;
-
-    // to update just the card that changed
+    // to update RESULTS storage for just the card that changed
+    // results format  ===> { column3_1: "(image3) yes I think so" }
     cards.map((el) => {
       if (el.id === targetCard) {
         const comment3 = userEnteredText;
@@ -93,25 +122,38 @@ const HighCards = (props) => {
         let comment = comment2.replace(/,/g, " ");
         // assign to main data object for confirmation / debugging
         el.comment = sanitizeString(comment);
-
         // assign to comments object
         statementCommentsObj[identifier] = `(${el.id}) ${comment}`;
         results[identifier] = `(${el.id}) ${comment}`;
+        // setup persistence for comments
+        allCommentsObj[identifier] = `(${el.id}) ${comment}`;
+        allCommentsObj[
+          `textArea-${columnDisplay}_${itemId + 1}`
+        ] = `${comment}`;
+        setAllCommentsObj({ ...allCommentsObj });
       }
       return el;
     });
     setResultsPostsort(results);
-  };
+    localStorage.setItem("resultsPostsort", JSON.stringify(results));
+  }; // END handleChange
 
-  const { agreeObj, cardFontSize, width, height } = props;
-
-  const highCards = columnStatements.vCols[agreeObj.columnDisplay];
-
-  const { agreeText, placeholder } = agreeObj;
-
-  let columnDisplay = agreeObj.columnDisplay;
+  // MAP cards to DOM
   return highCards.map((item, index) => {
     let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
+    let cardComment =
+      allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`] || "";
+
+    if (cardComment.length > 0) {
+      requiredCommentsObj[`hc-${index}`] = true;
+    } else {
+      requiredCommentsObj[`hc-${index}`] = false;
+    }
+
+    localStorage.setItem(
+      "requiredCommentsObj",
+      JSON.stringify(requiredCommentsObj)
+    );
 
     if (configObj.useImages === true) {
       content = ReactHtmlParser(
@@ -124,8 +166,9 @@ const HighCards = (props) => {
       configObj.postsortCommentsRequired === "true" ||
       configObj.postsortCommentsRequired === true
     ) {
+      // if comments are required, highlight if no comment
       if (showPostsortCommentHighlighting === true) {
-        highlighting = commentCheckObj[`hc-${index}`];
+        highlighting = requiredCommentsObj[`hc-${index}`];
       }
     }
 
@@ -186,9 +229,9 @@ const HighCards = (props) => {
               id={item.id}
               useImages={configObj.useImages}
               placeholder={placeholder}
-              defaultValue={item.comment}
+              defaultValue={cardComment}
               onChange={(e) => {
-                handleChange(e, columnDisplay, index);
+                handleChange(e, index);
               }}
             />
           </TagContainerDiv>

@@ -41,7 +41,7 @@ const getSetTriggerSortingFinModal = (state) =>
   state.setTriggerSortingFinishedModal;
 const getSetSortGridResults = (state) => state.setSortGridResults;
 
-const SortGrid = (props) => {
+const SortGridImages = (props) => {
   // STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
@@ -74,12 +74,16 @@ const SortGrid = (props) => {
   const columnColorsArray = [...mapObj.columnColorsArray];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
-  const maxNumCardsInCol = Math.max(...qSortPattern.current);
+  const maxNumCardsInCol = Math.max(...qSortPattern);
   const cardHeightRef = useRef(null);
 
   let presortColumnStatements = JSON.parse(
     localStorage.getItem("columnStatements")
   );
+
+  if (presortColumnStatements === null) {
+    presortColumnStatements = [];
+  }
 
   // Component Local State
   const [openImageModal, setOpenImageModal] = useState(false);
@@ -418,7 +422,7 @@ const SortGrid = (props) => {
   );
 };
 
-export default SortGrid;
+export default SortGridImages;
 
 const SortFooterDiv = styled.div`
   background: #e4e4e4;

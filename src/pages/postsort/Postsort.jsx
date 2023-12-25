@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -19,7 +19,6 @@ const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetProgressScore = (state) => state.setProgressScore;
-const getColumnStatements = (state) => state.columnStatements;
 const getCardHeight = (state) => state.cardHeight;
 const getCardFontSize = (state) => state.cardFontSize;
 const getSetCurrentPage = (state) => state.setCurrentPage;
@@ -28,12 +27,11 @@ const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const PostSort = () => {
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const mapObj = useSettingsStore(getMapObj);
   const configObj = useSettingsStore(getConfigObj);
   const setProgressScore = useStore(getSetProgressScore);
-  //const columnStatements = useSettingsStore(getColumnStatements);
   let cardHeight = useStore(getCardHeight);
   const cardFontSize = useStore(getCardFontSize);
   const setCurrentPage = useStore(getSetCurrentPage);
@@ -41,9 +39,8 @@ const PostSort = () => {
   const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
+  // PERSISTENT STATE
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
-
-  console.log("columnStatements: ", columnStatements);
 
   if (cardHeight === 0) {
     let storedCardHeight = JSON.parse(
@@ -52,11 +49,7 @@ const PostSort = () => {
     if (storedCardHeight) {
       cardHeight = storedCardHeight;
     }
-    console.log("cardHeight", cardHeight);
   }
-
-  // console.log("conf: ", JSON.stringify(configObj, null, 2));
-  //  console.log("map: ", JSON.stringify(mapObj, null, 2));
 
   // set next button display
   setDisplayNextButton(true);
@@ -119,11 +112,8 @@ const PostSort = () => {
   disagreeObj.displaySecondColumn = showSecondNegColumn;
   disagreeObj.placeholder = placeholder;
 
-  console.log(columnStatements?.vCols);
-
   const highCards = columnStatements?.vCols[agreeObj.columnDisplay];
   const highCards2 = columnStatements?.vCols[agreeObj.columnDisplay2];
-  console.log(highCards2);
   // const neutralCards = columnStatements.vCols[neutralObj.columnDisplay];
   const lowCards = columnStatements?.vCols[disagreeObj.columnDisplay];
   const lowCards2 = columnStatements?.vCols[disagreeObj.columnDisplay2];
@@ -156,17 +146,16 @@ const PostSort = () => {
           <LowCards2
             disagreeObj={disagreeObj}
             height={cardHeight}
+            cardFontSize={cardFontSize}
             width={columnWidth}
             lowCards2={lowCards2}
-            cardFontSize={cardFontSize}
           />
         )}
-
         <LowCards
           disagreeObj={disagreeObj}
           height={cardHeight}
-          width={columnWidth}
           cardFontSize={cardFontSize}
+          width={columnWidth}
           lowCards={lowCards}
         />
       </CardsContainer>

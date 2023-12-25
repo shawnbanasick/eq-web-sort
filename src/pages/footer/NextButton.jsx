@@ -132,12 +132,16 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "postsort") {
+      const requiredCommentsObj = JSON.parse(
+        localStorage.getItem("requiredCommentsObj")
+      );
+
       const checkArray2 = [];
-      const keyArray = Object.keys(postsortCommentCheckObj);
+      const keyArray = Object.keys(requiredCommentsObj);
       keyArray.forEach((key) => {
         if (
-          postsortCommentCheckObj[key] === false ||
-          postsortCommentCheckObj[key] === "false"
+          requiredCommentsObj[key] === false ||
+          requiredCommentsObj[key] === "false"
         ) {
           checkArray2.push("false");
         }

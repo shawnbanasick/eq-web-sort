@@ -119,6 +119,11 @@ const SubmitPage = () => {
         );
         const keys = Object.keys(newPostsortObject);
         for (let i = 0; i < keys.length; i++) {
+          // skip unnecessary entries
+          let skipText = keys[i].substring(0, 9);
+          if (skipText === "textArea-") {
+            continue;
+          }
           transmissionResults[keys[i]] = newPostsortObject[keys[i]];
         }
       }

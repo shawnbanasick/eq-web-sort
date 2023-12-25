@@ -62,7 +62,7 @@
    <item id="showSecondPosColumn">true</item>
    <item id="showSecondNegColumn">true</item>
    <item id="showBackButton">true</item>
-   <item id="postsortCommentsRequired">false</item>
+   <item id="postsortCommentsRequired">true</item>
 
 
    <!-- SURVEY - Survey Questions -->
