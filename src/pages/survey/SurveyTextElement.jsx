@@ -4,70 +4,65 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
 import useStore from "../../globalState/useStore";
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 const getResults = (state) => state.resultsSurvey;
 const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+// const getAnswersStorage = (state) => state.answersStorage;
+// const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyTextElement = (props) => {
-  // STATE
+  // GLOBAL STATE
   const results = useStore(getResults);
   const setResultsSurvey = useStore(getSetResultsSurvey);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  const checkRequiredQuestionsComplete = props.check;
-  // useStore(
-  //   (state) => state.checkRequiredQuestionsComplete
-  // );
-
+  //const answersStorage = useStore(getAnswersStorage);
+  //const setAnswersStorage = useStore(getSetAnswersStorage);
   const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  // const resultsSurvey = useStore((state) => state.resultsSurvey);
   const setRequiredAnswersObj = useStore(
     (state) => state.setRequiredAnswersObj
   );
 
-  // preload "no response" in state
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, setResultsSurvey, results]);
+  // PERSISTENT STATE
+  const answersStorage =
+    JSON.parse(localStorage.getItem("answersStorage")) || {};
+  let questionId = props.opts.id;
+  const [userText, setUserText] = useLocalStorage(questionId, "");
 
-  const id = `qNum${props.opts.qNum}`;
-
-  // to force component update
-  const [userText, setUserText] = useState("");
-  if (userText.length > 100) {
-    console.log(userText);
-  }
-
+  // LOCAL STATE
   // for required question check
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
 
+  // FROM PROPS
+  const checkRequiredQuestionsComplete = props.check;
+
+  // preload "no response" in state
+  useEffect(() => {
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setResultsSurvey(results);
+  }, [props, setResultsSurvey, results]);
+  const id = `qNum${props.opts.qNum}`;
+
   // event handler
   const handleOnChange = (e) => {
     let value = e.target.value;
     let valueLen = value.length;
-
-    // restrict to numbers
+    console.log(value, valueLen);
+    // restrict to numbers (from config.xml)
     if (props.opts.restricted === "true" || props.opts.restricted === true) {
       value = value.replace(/\D/g, "");
     }
-
-    // limit length
+    // limit length (from config.xml)
     if (props.opts.limited === "true" || props.opts.limited === true) {
       if (value.length > +props.opts.limitLength) {
         value = value.substring(0, +props.opts.limitLength);
       }
     }
+    answersStorage[questionId] = value;
+    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
     setUserText(value);
-    answersStorage[id] = value;
-    setAnswersStorage(answersStorage);
-
     // record if answered or not
     if (valueLen > 0) {
       requiredAnswersObj[id] = "answered";
@@ -79,13 +74,14 @@ const SurveyTextElement = (props) => {
     }
     setRequiredAnswersObj(requiredAnswersObj);
     setResultsSurvey(results);
-  };
+  }; // End event handler
+
+  console.log(JSON.stringify(answersStorage));
 
   // required question answer check
   let userTextLen = false;
-  if (id in answersStorage) {
-    let userTextLen1 = answersStorage[id];
-    userTextLen = userTextLen1.length;
+  if (userText.length > 0) {
+    userTextLen = true;
   }
 
   useEffect(() => {
@@ -110,9 +106,11 @@ const SurveyTextElement = (props) => {
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
 
   let inputValue;
+  console.log(answersStorage);
+
   if (id in answersStorage) {
     inputValue = answersStorage[id];
-
+    console.log(inputValue);
     requiredAnswersObj[id] = "answered";
     results[`qNum${props.opts.qNum}`] = inputValue;
 
@@ -130,7 +128,7 @@ const SurveyTextElement = (props) => {
       <NoteText>
         <div>{noteText}</div>
       </NoteText>
-      <TextInput value={inputValue} onChange={handleOnChange} />
+      <TextInput value={userText} onChange={handleOnChange} />
     </Container>
   );
 };
