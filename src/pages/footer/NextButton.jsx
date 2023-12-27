@@ -171,9 +171,9 @@ const LinkButton = (props) => {
           checkArray.push("false");
         }
       }
-
+      console.log("next Button check array", checkArray);
       if (checkArray.length > 0) {
-        // to turn on pink color for unanswered
+        // to turn on yellow color for unanswered
         setCheckRequiredQuestionsComplete(true);
         setTriggerSurveyPreventNavModal(true);
         return false;

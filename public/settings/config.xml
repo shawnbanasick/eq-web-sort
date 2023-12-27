@@ -80,19 +80,19 @@
    </item>
 
    <item id="survey">
-        <input type="textarea" required="false"></input>
+        <input type="textarea" required="true"></input>
         <label>2. Describe your experience using the iPads in this class</label>
         <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
-        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
         <label>3. Year</label>
         <note>Please select your year</note>
    </item>
 
    <item id="survey">
-        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
+        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
         <label>4. What is your program focus?</label>
    </item>
 
@@ -102,18 +102,23 @@
    </item>
 
    <item id="survey">
-        <input type="rating2" required="false" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <input type="rating2" required="true" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
         <label>6. Please respond to the following {{{u}}}statements{{{/u}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <input type="rating5" required="true" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
         <label>7. {{{i}}}Please{{{/i}}} answer the following questions</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <input type="rating10" required="true" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
         <label>8. {{{u}}}Please{{{/u}}} answer the following questions</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating5" required="true" scale="-2;;;-1;;;0;;;1;;;2">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <label>9. {{{i}}}Please{{{/i}}} answer the following questions</label>
    </item>
 
 

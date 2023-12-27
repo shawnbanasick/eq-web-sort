@@ -4,26 +4,31 @@ import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 let getResults = (state) => state.resultsSurvey;
 const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyRadioElement = (props) => {
+  // PROPS
+  let questionId = props.opts.id;
+
   // STATE
   let results = useStore(getResults);
   const setResultsSurvey = useStore(getSetResultsSurvey);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  // local state for required question warning
+  // PERSISTENT STATE
+  const answersStorage =
+    JSON.parse(localStorage.getItem("answersStorage")) || {};
+  let [selected, setSelected] = useLocalStorage(questionId, "");
+
+  // LOCAL STATE
   let [testValue, setTestValue] = useState(false);
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -68,16 +73,12 @@ const SurveyRadioElement = (props) => {
 
   const id = `qNum${props.opts.qNum}`;
 
-  let [selected, setSelected] = useState();
-
   const handleChange = (e) => {
     requiredAnswersObj[id] = "answered";
     setRequiredAnswersObj(requiredAnswersObj);
-
     results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
-
     answersStorage[`qNum${props.opts.qNum}`] = +e.target.value;
-    setAnswersStorage(answersStorage);
+    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
     setResultsSurvey(results);
     setTestValue(true);
   }; // end handle change
@@ -87,12 +88,9 @@ const SurveyRadioElement = (props) => {
     let response = answersStorage[id];
     selected = response;
     testValue = true;
-
     requiredAnswersObj[id] = "answered";
     setRequiredAnswersObj(requiredAnswersObj);
-
     results[`qNum${props.opts.qNum}`] = +response + 1;
-
     setResultsSurvey(results);
   }
 

@@ -4,38 +4,45 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
 import useStore from "../../globalState/useStore.js";
+import useLocalStorage from "../../utilities/useLocalStorage.js";
 
 const getResults = (state) => state.resultsSurvey;
 const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+// const getAnswersStorage = (state) => state.answersStorage;
+// const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyTextAreaElement = (props) => {
-  // STATE
+  // GLOBAL STATE
   const results = useStore(getResults);
   const setResultsSurvey = useStore(getSetResultsSurvey);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
+  // const answersStorage = useStore(getAnswersStorage);
+  // const setAnswersStorage = useStore(getSetAnswersStorage);
 
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
+  // PERSISTENT STATE
+  const answersStorage =
+    JSON.parse(localStorage.getItem("answersStorage")) || {};
+  let questionId = props.opts.id;
+  const [userText, setUserText] = useLocalStorage(questionId, "");
 
-  // let savedTextAreaText;
-  const [userText, setUserText] = useState("");
+  // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
 
+  // FROM PROPS
   const id = `qNum${props.opts.qNum}`;
+
+  useEffect(() => {
+    results[`qNum${props.opts.qNum}`] = "no response";
+    setResultsSurvey(results);
+  }, [props, results, setResultsSurvey]);
 
   // ON CHANGE
   const handleOnChange = (e) => {
@@ -43,7 +50,8 @@ const SurveyTextAreaElement = (props) => {
     // value = value.trim();
     setUserText(value);
     answersStorage[id] = value;
-    setAnswersStorage(answersStorage);
+    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
+    setUserText(value);
 
     // record if answered or not
     if (value.length > 0) {
@@ -60,9 +68,8 @@ const SurveyTextAreaElement = (props) => {
 
   // required question answer check
   let userTextLen = false;
-  if (id in answersStorage) {
-    let userTextLen1 = answersStorage[id];
-    userTextLen = userTextLen1.length;
+  if (userText.length > 0) {
+    userTextLen = true;
   }
 
   useEffect(() => {
@@ -112,7 +119,7 @@ const SurveyTextAreaElement = (props) => {
         <div>{labelText}</div>
       </TitleBar>
       <TextAreaInput
-        value={inputValue}
+        value={userText}
         placeholder={placeholder}
         onChange={handleOnChange}
       />

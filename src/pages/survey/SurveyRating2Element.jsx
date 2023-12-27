@@ -4,49 +4,18 @@ import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
+import useLocalStorage from "../../utilities/useLocalStorage";
+import flatten from "lodash/flatten";
+import countBy from "lodash/countBy";
 
 const getResults = (state) => state.resultsSurvey;
 const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyRatings2Element = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  // local state for required question warning
-  let [testValue, setTestValue] = useState(5);
-  const [formatOptions, setFormatOptions] = useState({
-    bgColor: "whitesmoke",
-    border: "none",
-  });
-
-  // setup default results if no input
-  useEffect(() => {
-    let array = props.opts.options.split(";;;");
-    array = array.filter(function (e) {
-      return e;
-    });
-
-    const length = array.length;
-
-    for (let i = 0; i < length; i++) {
-      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
-    }
-
-    setResultsSurvey(results);
-  }, [props, setResultsSurvey, results]);
-
-  // filter to remove empty strings if present
+  // HELPER FUNCTIONS
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
     array = array.filter(function (e) {
@@ -55,37 +24,72 @@ const SurveyRatings2Element = (props) => {
     return array;
   };
 
-  // to use with required check and related css formatting
-  const [localStore, setLocalStore] = useState({});
-
+  // PROPS
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
+  const questionId = `qNum${props.opts.qNum}`;
 
+  // GLOBAL STATE
+  const results = useStore(getResults);
+  const setResultsSurvey = useStore(getSetResultsSurvey);
+  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
+  const requiredAnswersObj = useStore(getRequiredAnswersObj);
+  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+
+  // PERSISTENT STATE
+  const answersStorage =
+    JSON.parse(localStorage.getItem("answersStorage")) || {};
+  let [checkedState, setCheckedState] = useLocalStorage(
+    questionId,
+    Array.from({ length: rows }, () => Array.from({ length: 2 }, () => false))
+  );
+
+  // LOCAL STATE
+  let [testValue, setTestValue] = useState(5);
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
+  const [localStore, setLocalStore] = useState({});
+
+  // register default results if no input
+  useEffect(() => {
+    let array = props.opts.options.split(";;;");
+    array = array.filter(function (e) {
+      return e;
+    });
+    const length = array.length;
+    for (let i = 0; i < length; i++) {
+      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
+    }
+    setResultsSurvey(results);
+  }, [props, setResultsSurvey, results]);
+
+  useEffect(() => {
+    const rating2State = localStore;
+    console.log("rating2state", rating2State);
+    const testArray = Object.keys(rating2State);
+    const conditionalLength = testArray.length;
+    setTestValue(optsArray.length - conditionalLength);
+    console.log("show yellow", optsArray.length - conditionalLength);
+  }, [localStore, optsArray.length]);
+
+  // ****** GET SCALE ARRAY *******
   const getScaleArray = (options) => {
     let array = options.split(";;;");
     return array;
   };
   const scaleArray = getScaleArray(props.opts.scale);
 
-  // setup local state
-  let [checkedState, setCheckedState] = useState(
-    Array.from({ length: rows }, () => Array.from({ length: 2 }, () => false))
-  );
-
-  const id = `qNum${props.opts.qNum}`;
-
   // ****** ON CHANGE  *******
-
   const handleChange = (selectedRow, column, e) => {
     let name = e.target.name;
     let value = e.target.value;
-
     // needed for required question check
     const newObj = localStore;
     newObj[name] = value;
     setLocalStore(newObj);
-    answersStorage[id] = newObj;
-
+    answersStorage[questionId] = newObj;
     // update local state with radio selected
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
@@ -104,54 +108,57 @@ const SurveyRatings2Element = (props) => {
         return row;
       }
     });
-
+    console.log("newCheckedState", newCheckedState);
     setCheckedState(newCheckedState);
-    answersStorage[id]["checkedState"] = [...newCheckedState];
-    setAnswersStorage(answersStorage);
-
+    answersStorage[questionId]["checkedState"] = [...newCheckedState];
+    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
     // record if answered or not
     if (newCheckedState.length > 0) {
-      requiredAnswersObj[id] = "answered";
+      requiredAnswersObj[questionId] = "answered";
     } else {
-      requiredAnswersObj[id] = "no response";
+      requiredAnswersObj[questionId] = "no response";
     }
     setRequiredAnswersObj(requiredAnswersObj);
     results[name] = +value;
     setResultsSurvey(results);
-
     const rating2State = localStore;
     const testArray = Object.keys(rating2State);
     const conditionalLength = testArray.length;
     setTestValue(optsArray.length - conditionalLength);
-  };
+    console.log(optsArray.length - conditionalLength);
+  }; // end handleChange
 
-  if (id in answersStorage) {
-    // set state - answered or no response (checks all parts)
-    const keys2 = Object.keys(answersStorage[id]);
-
-    // skip check that all answered if not required
-    // prevents error in which answering only one
-    // prevents navigation
+  if (questionId in answersStorage) {
+    const keys2 = Object.keys(answersStorage[questionId]);
+    // skip check for "all answered" if not required
     if (props.opts.required === true || props.opts.required === "true") {
       let objLen = keys2.length - 1;
       if (objLen >= rows) {
         testValue = 0;
-        requiredAnswersObj[id] = "answered";
+        requiredAnswersObj[questionId] = "answered";
         setRequiredAnswersObj(requiredAnswersObj);
       } else {
         testValue = 1;
-        requiredAnswersObj[id] = "no response";
+        requiredAnswersObj[questionId] = "no response";
         setRequiredAnswersObj(requiredAnswersObj);
       }
     }
-
     keys2.forEach((item, index) => {
       if (item !== "checkedState") {
-        results[item] = answersStorage[id][item];
+        results[item] = answersStorage[questionId][item];
       }
     });
+    // checkedState = [...answersStorage[questionId]["checkedState"]];
+  }
 
-    checkedState = [...answersStorage[id]["checkedState"]];
+  // ****** CHECK IF ALL PARTS ANSWERED *******
+  let setYellow = false;
+  let arrayLen = checkedState.length;
+  let flattenedCheckedState = flatten([...checkedState]);
+  let count = countBy(flattenedCheckedState);
+  let objTestValue = count[true] || 0;
+  if (objTestValue < arrayLen) {
+    setYellow = true;
   }
 
   useEffect(() => {
@@ -159,7 +166,7 @@ const SurveyRatings2Element = (props) => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      testValue > 0
+      setYellow
     ) {
       setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
     } else {
@@ -168,7 +175,12 @@ const SurveyRatings2Element = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
+  }, [
+    checkRequiredQuestionsComplete,
+    testValue,
+    setYellow,
+    props.opts.required,
+  ]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
@@ -284,6 +296,9 @@ const ItemContainer = styled.div`
   height: 40px;
   align-items: end;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
+  &:hover {
+    background-color: rgba(131, 202, 254, 0.4);
+  }
 `;
 
 const RatingTitle = styled.div`

@@ -4,34 +4,39 @@ import MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
+import useLocalStorage from "../../utilities/useLocalStorage";
+import { has } from "lodash";
 
 const getResults = (state) => state.resultsSurvey;
 const getSetResultsSurvey = (state) => state.setResultsSurvey;
 const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
 const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
 
 const SurveyDropdownElement = (props) => {
-  // STATE
+  // GlOBAL STATE
   const results = useStore(getResults);
   const setResultsSurvey = useStore(getSetResultsSurvey);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
   const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
+
+  // PERSISTENT STATE
+  let questionId = props.opts.id;
+  let [selected, setSelected] = useLocalStorage(questionId, []);
+  let answersStorage = JSON.parse(localStorage.getItem("answersStorage")) || {};
+
+  // LOCAL STATE
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
+  const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
 
   useEffect(() => {
     results[`qNum${props.opts.qNum}`] = "no response";
     setResultsSurvey(results);
   }, [props, results, setResultsSurvey]);
-
-  const [formatOptions, setFormatOptions] = useState({
-    bgColor: "whitesmoke",
-    border: "none",
-  });
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -51,19 +56,14 @@ const SurveyDropdownElement = (props) => {
   let originalOptions = props.opts.options.split(";;;");
   originalOptions = originalOptions.map((x) => x.trim());
 
-  let localStore = {
-    hasBeenAnswered: false,
-  };
-
-  let [selected, setSelected] = useState([]);
-
   const id = `qNum${props.opts.qNum}`;
 
   // HANDLE ON CHANGE
   const handleOnChange = (e) => {
+    console.log(e);
     setSelected(e);
     answersStorage[id] = e;
-    setAnswersStorage(answersStorage);
+    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
 
     if (e.length !== 0) {
       requiredAnswersObj[id] = "answered";
@@ -79,28 +79,23 @@ const SurveyDropdownElement = (props) => {
       }
       results[`qNum${props.opts.qNum}`] = selected2;
       setResultsSurvey(results);
+      setHasBeenAnswered(true);
     } else {
+      console.log("no response");
       requiredAnswersObj[id] = "no response";
       results[`qNum${props.opts.qNum}`] = "no response";
       setResultsSurvey(results);
+      setHasBeenAnswered(false);
     }
+    console.log(selected);
     setRequiredAnswersObj(requiredAnswersObj);
   };
 
-  if (selected.length > 0) {
-    localStore["hasBeenAnswered"] = true;
-  } else {
-    localStore["hasBeenAnswered"] = false;
-  }
-
-  // required question answered?
-  let hasBeenAnswered = localStore.hasBeenAnswered;
-
   // check if response in global state and inject into results
   if (id in answersStorage) {
+    console.log("in answersStorage");
     let response = answersStorage[id];
     selected = response;
-    hasBeenAnswered = true;
 
     requiredAnswersObj[id] = "answered";
     let selected2 = "";
@@ -117,11 +112,16 @@ const SurveyDropdownElement = (props) => {
     setResultsSurvey(results);
   }
 
+  let selectedLen = false;
+  if (selected.length > 0) {
+    selectedLen = true;
+  }
+
   useEffect(() => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      hasBeenAnswered === false
+      selectedLen === false
     ) {
       setFormatOptions({
         bgColor: "#fde047",
@@ -133,7 +133,12 @@ const SurveyDropdownElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
+  }, [
+    checkRequiredQuestionsComplete,
+    hasBeenAnswered,
+    selectedLen,
+    props.opts.required,
+  ]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
