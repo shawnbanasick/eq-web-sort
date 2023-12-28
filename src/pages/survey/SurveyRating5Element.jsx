@@ -3,16 +3,9 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
 import useLocalStorage from "../../utilities/useLocalStorage";
 import flatten from "lodash/flatten";
 import countBy from "lodash/countBy";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 
 const SurveyRatings5Element = (props) => {
   // HELPER FUNCTIONS
@@ -28,21 +21,27 @@ const SurveyRatings5Element = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
   const questionId = `qNum${props.opts.qNum}`;
-
-  // GLOBAL STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  const checkRequiredQuestionsComplete = props.check;
 
   // PERSISTENT STATE
-  const answersStorage =
-    JSON.parse(localStorage.getItem("answersStorage")) || {};
   let [checked5State, setChecked5State] = useLocalStorage(
     questionId,
     Array.from({ length: rows }, () => Array.from({ length: 5 }, () => false))
   );
+
+  // set default
+  useEffect(() => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === ""
+    ) {
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum]);
 
   // LOCAL STATE
   const [local5Store, setLocal5Store] = useState({});
@@ -51,30 +50,15 @@ const SurveyRatings5Element = (props) => {
     border: "none",
   });
 
-  // SET UP RESULTS OBJECT
-  useEffect(() => {
-    let array = props.opts.options.split(";;;");
-    array = array.filter(function (e) {
-      return e;
-    });
-    const length = array.length;
-    for (let i = 0; i < length; i++) {
-      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
-    }
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
-  const id = `qNum${props.opts.qNum}`;
-
   // HANDLE CHANGE
   const handleChange = (selectedRow, column, e) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     let name = e.target.name;
     let value = e.target.value;
     // needed for required question check
     const newObj = local5Store;
     newObj[name] = value;
     setLocal5Store(newObj);
-    answersStorage[id] = newObj;
     // update local state with radio selected
     const newArray = [];
     const newChecked5State = checked5State.map(function (row, index) {
@@ -94,42 +78,14 @@ const SurveyRatings5Element = (props) => {
       }
     });
     setChecked5State(newChecked5State);
-    answersStorage[id]["checkedState"] = [...newChecked5State];
-    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
     // record if answered or not
     if (newChecked5State.length > 0) {
-      requiredAnswersObj[id] = "answered";
+      resultsSurvey[`qNum${props.opts.qNum}`] = [...newChecked5State];
     } else {
-      requiredAnswersObj[id] = "no response";
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
     }
-    setRequiredAnswersObj(requiredAnswersObj);
-    results[name] = +value;
-    setResultsSurvey(results);
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange
-
-  if (id in answersStorage) {
-    const keys2 = Object.keys(answersStorage[id]);
-    // skip check that all answered if not required
-    // prevents error in which answering only one
-    // prevents navigation
-    if (props.opts.required === true || props.opts.required === "true") {
-      let objLen = keys2.length - 1;
-      if (objLen >= rows) {
-        // setTestValue(0);
-        requiredAnswersObj[id] = "answered";
-        setRequiredAnswersObj(requiredAnswersObj);
-      } else {
-        // setTestValue(1);
-        requiredAnswersObj[id] = "no response";
-        setRequiredAnswersObj(requiredAnswersObj);
-      }
-    }
-    keys2.forEach((item, index) => {
-      if (item !== "checkedState") {
-        results[item] = answersStorage[id][item];
-      }
-    });
-  }
 
   // ****** CHECK IF ALL PARTS ANSWERED *******
   let setYellow = false;

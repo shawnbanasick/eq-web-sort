@@ -20,7 +20,7 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 // const getStatementsObj = (state) => state.statementsObj;
-const getColumnStatements = (state) => state.columnStatements;
+// const getColumnStatements = (state) => state.columnStatements;
 // const getSetColState = (state) => state.setColumnStatements;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;

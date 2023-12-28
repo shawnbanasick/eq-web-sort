@@ -92,25 +92,67 @@ const SurveyPage = () => {
           );
         }
         if (object.type === "textarea") {
-          return <SurveyTextAreaElement key={uuid()} opts={object} />;
+          return (
+            <SurveyTextAreaElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "radio") {
-          return <SurveyRadioElement key={uuid()} opts={object} />;
+          return (
+            <SurveyRadioElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "select") {
-          return <SurveyDropdownElement key={uuid()} opts={object} />;
+          return (
+            <SurveyDropdownElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "checkbox") {
-          return <SurveyCheckboxElement key={uuid()} opts={object} />;
+          return (
+            <SurveyCheckboxElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating2") {
-          return <SurveyRating2Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating2Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating5") {
-          return <SurveyRating5Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating5Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating10") {
-          return <SurveyRating10Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating10Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "information") {
           return <SurveyInformationElement key={uuid()} opts={object} />;

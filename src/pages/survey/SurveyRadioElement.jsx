@@ -3,42 +3,35 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
 import useLocalStorage from "../../utilities/useLocalStorage";
-
-let getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 
 const SurveyRadioElement = (props) => {
   // PROPS
   let questionId = props.opts.id;
-
-  // STATE
-  let results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  const checkRequiredQuestionsComplete = props.check;
 
   // PERSISTENT STATE
-  const answersStorage =
-    JSON.parse(localStorage.getItem("answersStorage")) || {};
+
   let [selected, setSelected] = useLocalStorage(questionId, "");
 
+  // set default
+  useEffect(() => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null
+    ) {
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum]);
+
   // LOCAL STATE
-  let [testValue, setTestValue] = useState(false);
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -71,27 +64,15 @@ const SurveyRadioElement = (props) => {
     );
   };
 
-  const id = `qNum${props.opts.qNum}`;
-
   const handleChange = (e) => {
-    requiredAnswersObj[id] = "answered";
-    setRequiredAnswersObj(requiredAnswersObj);
-    results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
-    answersStorage[`qNum${props.opts.qNum}`] = +e.target.value;
-    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
-    setResultsSurvey(results);
-    setTestValue(true);
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+    resultsSurvey[`qNum${props.opts.qNum}`] = +e.target.value + 1;
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handle change
 
-  // check if response is in global state and inject into results
-  if (id in answersStorage) {
-    let response = answersStorage[id];
-    selected = response;
-    testValue = true;
-    requiredAnswersObj[id] = "answered";
-    setRequiredAnswersObj(requiredAnswersObj);
-    results[`qNum${props.opts.qNum}`] = +response + 1;
-    setResultsSurvey(results);
+  let setYellow = false;
+  if (selected.length === 0) {
+    setYellow = true;
   }
 
   useEffect(() => {
@@ -99,7 +80,7 @@ const SurveyRadioElement = (props) => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      testValue === false
+      setYellow
     ) {
       setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
     } else {
@@ -108,7 +89,7 @@ const SurveyRadioElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
+  }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (

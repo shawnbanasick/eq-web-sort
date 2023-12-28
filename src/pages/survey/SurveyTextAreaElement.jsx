@@ -3,32 +3,37 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
-import useStore from "../../globalState/useStore.js";
 import useLocalStorage from "../../utilities/useLocalStorage.js";
 
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-// const getAnswersStorage = (state) => state.answersStorage;
-// const getSetAnswersStorage = (state) => state.setAnswersStorage;
-
 const SurveyTextAreaElement = (props) => {
-  // GLOBAL STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  // const answersStorage = useStore(getAnswersStorage);
-  // const setAnswersStorage = useStore(getSetAnswersStorage);
+  // HELPER FUNCTION
+  const asyncLocalStorage = {
+    async setItem(key, value) {
+      await null;
+      return localStorage.setItem(key, value);
+    },
+  };
+
+  // FROM PROPS
+  const id = `qNum${props.opts.qNum}`;
+  const checkRequiredQuestionsComplete = props.check;
 
   // PERSISTENT STATE
-  const answersStorage =
-    JSON.parse(localStorage.getItem("answersStorage")) || {};
-  let questionId = props.opts.id;
-  const [userText, setUserText] = useLocalStorage(questionId, "");
+  const [userText, setUserText] = useLocalStorage(id, "");
+
+  // set default
+  useEffect(() => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === ""
+    ) {
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum]);
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
@@ -36,39 +41,24 @@ const SurveyTextAreaElement = (props) => {
     border: "none",
   });
 
-  // FROM PROPS
-  const id = `qNum${props.opts.qNum}`;
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
   // ON CHANGE
   const handleOnChange = (e) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     let value = e.target.value;
-    // value = value.trim();
     setUserText(value);
-    answersStorage[id] = value;
-    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
-    setUserText(value);
-
     // record if answered or not
     if (value.length > 0) {
-      requiredAnswersObj[id] = "answered";
       let sanitizedText = sanitizeString(value);
-      results[`qNum${props.opts.qNum}`] = sanitizedText;
+      resultsSurvey[id] = sanitizedText;
     } else {
-      requiredAnswersObj[id] = "no response";
-      results[`qNum${props.opts.qNum}`] = "no response";
+      resultsSurvey[id] = "no-*-response";
     }
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
+    asyncLocalStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   };
 
   // required question answer check
   let userTextLen = false;
-  if (userText.length > 0) {
+  if (userText.length > 0 && userText !== "") {
     userTextLen = true;
   }
 
@@ -97,21 +87,6 @@ const SurveyTextAreaElement = (props) => {
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
   const placeholder = props.opts.placeholder;
-
-  // to check for response in global state and inject into results if present
-  let inputValue;
-  if (id in answersStorage) {
-    inputValue = answersStorage[id];
-
-    // record if answered or not
-    requiredAnswersObj[id] = "answered";
-    results[`qNum${props.opts.qNum}`] = inputValue;
-
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
-  } else {
-    inputValue = "";
-  }
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>

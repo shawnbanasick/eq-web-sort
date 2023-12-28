@@ -12,7 +12,7 @@ const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
-const getSetColumnStatements = (state) => state.setColumnStatements;
+// const getSetColumnStatements = (state) => state.setColumnStatements;
 const getSetPresortFinished = (state) => state.setPresortFinished;
 const getSetTrigPresortFinModal = (state) =>
   state.setTriggerPresortFinishedModal;
@@ -37,7 +37,7 @@ function PresortDNDImages(props) {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   // const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
-  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  // const setColumnStatements = useSettingsStore(getSetColumnStatements);
   const setPresortFinished = useStore(getSetPresortFinished);
   const setTriggerPresortFinishedModal = useStore(getSetTrigPresortFinModal);
   const results = useStore(getResults);

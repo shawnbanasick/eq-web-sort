@@ -26,7 +26,7 @@ const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
 const LowCards2 = (props) => {
   // LOCAL STATE
-  const [commentCheckObj, setCommentCheckObj] = useState({});
+  // const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
@@ -72,10 +72,12 @@ const LowCards2 = (props) => {
     }
   });
 
+  /*
   // determine if comments exist when comments are required - highlight if not
   useEffect(() => {
     setCommentCheckObj(postsortCommentCheckObj);
   }, [setCommentCheckObj, postsortCommentCheckObj]);
+*/
 
   // on double click of card, enlarge image
   const handleOpenImageModal = (e, src) => {
@@ -100,11 +102,11 @@ const LowCards2 = (props) => {
     if (commentLength > 0) {
       postsortCommentCheckObj[`lc2-${itemId}`] = true;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      setCommentCheckObj({ ...postsortCommentCheckObj });
+      // setCommentCheckObj({ ...postsortCommentCheckObj });
     } else {
       postsortCommentCheckObj[`lc2-${itemId}`] = false;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      setCommentCheckObj({ ...postsortCommentCheckObj });
+      // setCommentCheckObj({ ...postsortCommentCheckObj });
     }
     const results = resultsPostsort;
     const cards = [...columnStatements.vCols[columnDisplay]];

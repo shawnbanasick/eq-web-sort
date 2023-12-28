@@ -3,40 +3,32 @@ import styled from "styled-components";
 import MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
 import useLocalStorage from "../../utilities/useLocalStorage";
-import { has } from "lodash";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 
 const SurveyDropdownElement = (props) => {
-  // GlOBAL STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  // PROPS
+  const checkRequiredQuestionsComplete = props.check;
+  let questionId = props.opts.id;
 
   // PERSISTENT STATE
-  let questionId = props.opts.id;
   let [selected, setSelected] = useLocalStorage(questionId, []);
-  let answersStorage = JSON.parse(localStorage.getItem("answersStorage")) || {};
+  const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+
+  // set default
+  if (
+    resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+    resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+    resultsSurvey[`qNum${props.opts.qNum}`] === ""
+  ) {
+    resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+  }
+  localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
-  const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
 
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -56,17 +48,13 @@ const SurveyDropdownElement = (props) => {
   let originalOptions = props.opts.options.split(";;;");
   originalOptions = originalOptions.map((x) => x.trim());
 
-  const id = `qNum${props.opts.qNum}`;
-
   // HANDLE ON CHANGE
   const handleOnChange = (e) => {
-    console.log(e);
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
     setSelected(e);
-    answersStorage[id] = e;
-    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
 
     if (e.length !== 0) {
-      requiredAnswersObj[id] = "answered";
       let selected2 = "";
       for (let i = 0; i < e.length; i++) {
         let label = e[i].label;
@@ -77,40 +65,12 @@ const SurveyDropdownElement = (props) => {
           selected2 += "|" + (id + 1);
         }
       }
-      results[`qNum${props.opts.qNum}`] = selected2;
-      setResultsSurvey(results);
-      setHasBeenAnswered(true);
+      resultsSurvey[`qNum${props.opts.qNum}`] = selected2;
     } else {
-      console.log("no response");
-      requiredAnswersObj[id] = "no response";
-      results[`qNum${props.opts.qNum}`] = "no response";
-      setResultsSurvey(results);
-      setHasBeenAnswered(false);
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
     }
-    console.log(selected);
-    setRequiredAnswersObj(requiredAnswersObj);
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   };
-
-  // check if response in global state and inject into results
-  if (id in answersStorage) {
-    console.log("in answersStorage");
-    let response = answersStorage[id];
-    selected = response;
-
-    requiredAnswersObj[id] = "answered";
-    let selected2 = "";
-    for (let i = 0; i < response.length; i++) {
-      let label = response[i].label;
-      let id = originalOptions.indexOf(label);
-      if (i === 0) {
-        selected2 += id + 1;
-      } else {
-        selected2 += "|" + (id + 1);
-      }
-    }
-    results[`qNum${props.opts.qNum}`] = selected2;
-    setResultsSurvey(results);
-  }
 
   let selectedLen = false;
   if (selected.length > 0) {
@@ -133,12 +93,7 @@ const SurveyDropdownElement = (props) => {
         border: "none",
       });
     }
-  }, [
-    checkRequiredQuestionsComplete,
-    hasBeenAnswered,
-    selectedLen,
-    props.opts.required,
-  ]);
+  }, [checkRequiredQuestionsComplete, selectedLen, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 

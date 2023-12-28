@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import convertObjectToResults from "../sort/convertObjectToResults";
+import getObjectValues from "lodash/values";
 
 const getConfigObj = (state) => state.configObj;
 const getPresortFinished = (state) => state.presortFinished;
@@ -48,7 +49,7 @@ const LinkButton = (props) => {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setResults = useStore(getSetResults);
-  const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
+  // const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
   const setShowPostsortCommentHighlighting = useStore(
     getSetShowPostsortCommentHighlighting
   );
@@ -164,15 +165,10 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "survey") {
-      const checkArray = [];
-      const keys = Object.keys(requiredAnswersObj);
-      for (let i = 0; i < keys.length; i++) {
-        if (requiredAnswersObj[keys[i]] === "no response") {
-          checkArray.push("false");
-        }
-      }
-      console.log("next Button check array", checkArray);
-      if (checkArray.length > 0) {
+      let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+      let values = getObjectValues(resultsSurvey);
+      let includesNoResponse = values.includes("no-*-response");
+      if (includesNoResponse) {
         // to turn on yellow color for unanswered
         setCheckRequiredQuestionsComplete(true);
         setTriggerSurveyPreventNavModal(true);

@@ -26,7 +26,7 @@ const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
 const HighCards = (props) => {
   // LOCAL STATE
-  const [commentCheckObj, setCommentCheckObj] = useState({});
+  // const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
@@ -73,9 +73,11 @@ const HighCards = (props) => {
   });
 
   // transfer state from global to local (for highlighting)
+  /*
   useEffect(() => {
     setCommentCheckObj(postsortCommentCheckObj);
   }, [setCommentCheckObj, postsortCommentCheckObj]);
+*/
 
   // on double click of card, enlarge image
   const handleOpenImageModal = (e, src) => {
@@ -100,11 +102,11 @@ const HighCards = (props) => {
     if (commentLength > 0) {
       postsortCommentCheckObj[`hc-${itemId}`] = true;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      setCommentCheckObj({ ...postsortCommentCheckObj });
+      // setCommentCheckObj({ ...postsortCommentCheckObj });
     } else {
       postsortCommentCheckObj[`hc-${itemId}`] = false;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      setCommentCheckObj({ ...postsortCommentCheckObj });
+      // setCommentCheckObj({ ...postsortCommentCheckObj });
     }
     const results = resultsPostsort;
     const cards = columnStatements.vCols[columnDisplay];

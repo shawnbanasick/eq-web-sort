@@ -3,14 +3,9 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
 import useLocalStorage from "../../utilities/useLocalStorage";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
+import flatten from "lodash/flatten";
+import countBy from "lodash/countBy";
 
 const SurveyCheckboxElement = (props) => {
   // HELPER FUNCTIONS
@@ -25,48 +20,46 @@ const SurveyCheckboxElement = (props) => {
   };
 
   // PROPS
+  const checkRequiredQuestionsComplete = props.check;
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
-  const id = `qNum${props.opts.qNum}`;
-
-  // GLOBAL STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
+  let questionId = props.opts.id;
 
   // PERSISTENT STATE
-  const answersStorage =
-    JSON.parse(localStorage.getItem("answersStorage")) || {};
-  let questionId = props.opts.id;
   let [checkedState, setCheckedState] = useLocalStorage(
     questionId,
     new Array(optsArray.length).fill(false)
   );
 
+  // set default
+  useEffect(() => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === ""
+    ) {
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum]);
+
   // LOCAL STATE
-  let [hasBeenAnswered, setHasBeenAnswered] = useState(false);
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
 
-  // PRELOAD "no response" in state
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
   // HANDLE CHANGE
   const handleChange = (position) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     position = parseInt(position, 10);
+    console.log(checkedState);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
     setCheckedState(updatedCheckedState);
-    answersStorage[id] = updatedCheckedState;
-    localStorage.setItem("answersStorage", JSON.stringify(answersStorage));
     // prep the selected answers for storage
     let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
@@ -80,57 +73,30 @@ const SurveyCheckboxElement = (props) => {
     if (selected.charAt(selected.length - 1) === "|") {
       selected = selected.substr(0, selected.length - 1);
     }
-    // determine if the question has been answered - yellow highlight
-    if (selected.length > 0) {
-      setHasBeenAnswered(true);
-      requiredAnswersObj[id] = "answered";
-    } else {
-      setHasBeenAnswered(false);
-      requiredAnswersObj[id] = "no response";
-      selected = "no response";
-    }
     // store the selected answers in the results object
-    results[`qNum${props.opts.qNum}`] = selected;
-    setResultsSurvey(results);
-    setRequiredAnswersObj(requiredAnswersObj);
+    resultsSurvey[`qNum${props.opts.qNum}`] = selected;
+
+    if (selected === "") {
+      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange
 
-  // Persist answers
-  let selected = "";
-  if (id in answersStorage) {
-    let response = answersStorage[id];
-    // prep the selected answers for storage
-    selected = response.reduce((text = "", currentState, index) => {
-      if (currentState === true) {
-        return text + (index + 1).toString() + "|";
-      }
-      return text;
-    }, "");
-    if (selected.charAt(selected.length - 1) === "|") {
-      checkedState = response;
-      hasBeenAnswered = true;
-      selected = selected.substring(0, selected.length - 1);
-    }
-    requiredAnswersObj[id] = "answered";
-    results[`qNum${props.opts.qNum}`] = selected;
-    setResultsSurvey(results);
-    setRequiredAnswersObj(requiredAnswersObj);
-    console.log(selected);
+  // ****** CHECK IF ALL PARTS ANSWERED on render *******
+  let setYellow = false;
+  let flattenedCheckedState = flatten([...checkedState]);
+  let count = countBy(flattenedCheckedState);
+  let objTestValue = count[true] || 0;
+  if (objTestValue === 0) {
+    setYellow = true;
   }
-
-  let selectedLen = false;
-  if (selected.length > 0) {
-    selectedLen = true;
-  }
-
-  console.log("checkedstate", checkedState);
 
   // determine if highlight needed
   useEffect(() => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      selectedLen === false
+      setYellow
     ) {
       setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
     } else {
@@ -139,12 +105,7 @@ const SurveyCheckboxElement = (props) => {
         border: "none",
       });
     }
-  }, [
-    checkRequiredQuestionsComplete,
-    hasBeenAnswered,
-    selectedLen,
-    props.opts.required,
-  ]);
+  }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
