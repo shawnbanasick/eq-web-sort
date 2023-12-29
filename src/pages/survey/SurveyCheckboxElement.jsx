@@ -31,24 +31,6 @@ const SurveyCheckboxElement = (props) => {
     new Array(optsArray.length).fill(false)
   );
 
-  // set default
-  useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required]);
-
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -59,7 +41,6 @@ const SurveyCheckboxElement = (props) => {
   const handleChange = (position) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     position = parseInt(position, 10);
-    console.log(checkedState);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
@@ -81,7 +62,7 @@ const SurveyCheckboxElement = (props) => {
     resultsSurvey[`qNum${props.opts.qNum}`] = selected;
 
     if (selected === "") {
-      if (props.opts.required === true) {
+      if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no response";

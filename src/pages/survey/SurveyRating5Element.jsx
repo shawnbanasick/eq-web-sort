@@ -29,24 +29,6 @@ const SurveyRatings5Element = (props) => {
     Array.from({ length: rows }, () => Array.from({ length: 5 }, () => false))
   );
 
-  // set default
-  useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required]);
-
   // LOCAL STATE
   const [local5Store, setLocal5Store] = useState({});
   const [formatOptions, setFormatOptions] = useState({
@@ -83,10 +65,14 @@ const SurveyRatings5Element = (props) => {
     });
     setChecked5State(newChecked5State);
     // record if answered or not
-    if (newChecked5State.length > 0) {
+    let arrayLen2 = checked5State.length;
+    let flattenedCheckedState2 = flatten([...newChecked5State]);
+    let count2 = countBy(flattenedCheckedState2);
+    let objTestValue2 = count2[true] || 0;
+    if (objTestValue2 === arrayLen2) {
       resultsSurvey[`qNum${props.opts.qNum}`] = [...newChecked5State];
     } else {
-      if (props.opts.required === true) {
+      if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no response";

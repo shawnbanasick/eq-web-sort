@@ -12,23 +12,6 @@ const SurveyDropdownElement = (props) => {
 
   // PERSISTENT STATE
   let [selected, setSelected] = useLocalStorage(questionId, []);
-  const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-
-  // set default
-  useEffect(() => {
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required, resultsSurvey]);
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
@@ -73,7 +56,7 @@ const SurveyDropdownElement = (props) => {
       }
       resultsSurvey[`qNum${props.opts.qNum}`] = selected2;
     } else {
-      if (props.opts.required === true) {
+      if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no response";

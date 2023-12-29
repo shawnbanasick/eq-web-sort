@@ -14,23 +14,6 @@ const SurveyRadioElement = (props) => {
 
   let [selected, setSelected] = useLocalStorage(questionId, "");
 
-  // set default
-  useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required]);
-
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",

@@ -21,24 +21,6 @@ const SurveyTextAreaElement = (props) => {
   // PERSISTENT STATE
   const [userText, setUserText] = useLocalStorage(id, "");
 
-  // set default
-  useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required]);
-
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -53,9 +35,9 @@ const SurveyTextAreaElement = (props) => {
     // record if answered or not
     if (value.length > 0) {
       let sanitizedText = sanitizeString(value);
-      resultsSurvey[id] = sanitizedText;
+      resultsSurvey[`qNum${props.opts.qNum}`] = sanitizedText;
     } else {
-      if (props.opts.required === true) {
+      if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no response";

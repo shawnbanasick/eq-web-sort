@@ -30,24 +30,6 @@ const SurveyRatings10Element = (props) => {
     Array.from({ length: rows }, () => Array.from({ length: 10 }, () => false))
   );
 
-  // set default
-  useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      if (props.opts.required === true) {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
-      } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
-      }
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum, props.opts.required]);
-
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -81,10 +63,14 @@ const SurveyRatings10Element = (props) => {
       }
     });
     setCheckedState(newCheckedState);
-    if (newCheckedState.length > 0) {
+    let arrayLen2 = checkedState.length;
+    let flattenedCheckedState2 = flatten([...newCheckedState]);
+    let count2 = countBy(flattenedCheckedState2);
+    let objTestValue2 = count2[true] || 0;
+    if (objTestValue2 === arrayLen2) {
       resultsSurvey[`qNum${props.opts.qNum}`] = [...newCheckedState];
     } else {
-      if (props.opts.required === true) {
+      if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no response";

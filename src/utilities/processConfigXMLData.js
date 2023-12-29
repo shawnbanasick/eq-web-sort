@@ -1,5 +1,3 @@
-import useStore from "../globalState/useStore";
-
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
   const configObj = {};
@@ -59,6 +57,7 @@ const processConfigXMLData = (dataObject) => {
 
       // INFORMATION question
       if (questionType === "information") {
+        tempObj.id = `qNum${j + 1}`;
         tempObj.qNum = j + 1;
         tempObj.type = "information";
         tempObj.background = surveyData[j][1].attributes.bg;
@@ -79,6 +78,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -132,6 +133,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -169,6 +172,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -213,6 +218,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -250,6 +257,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -286,6 +295,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -329,6 +340,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -365,6 +378,8 @@ const processConfigXMLData = (dataObject) => {
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
@@ -395,10 +410,11 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
     }
-    useStore.setState({ requiredAnswersObj: requiredAnswersObj });
-    useStore.setState({ surveyQuestionObjArray: surveyQuestionArray });
+    let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+    if (!resultsSurvey) {
+      localStorage.setItem("resultsSurvey", JSON.stringify(requiredAnswersObj));
+    }
   }
-  console.log(configObj);
   let returnObj = {};
   let shuffleCards = configObj?.shuffleCards;
   returnObj.requiredAnswersObj = requiredAnswersObj;
@@ -409,5 +425,3 @@ const processConfigXMLData = (dataObject) => {
 };
 
 export default processConfigXMLData;
-
-// https://stackoverflow.com/questions/7936480/how-to-check-if-a-javascript-object-contains-null-value-or-it-itself-is-null
