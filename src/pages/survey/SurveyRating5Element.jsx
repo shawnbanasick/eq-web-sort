@@ -38,10 +38,14 @@ const SurveyRatings5Element = (props) => {
       resultsSurvey[`qNum${props.opts.qNum}`] === null ||
       resultsSurvey[`qNum${props.opts.qNum}`] === ""
     ) {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum]);
+  }, [props.opts.qNum, props.opts.required]);
 
   // LOCAL STATE
   const [local5Store, setLocal5Store] = useState({});
@@ -82,7 +86,11 @@ const SurveyRatings5Element = (props) => {
     if (newChecked5State.length > 0) {
       resultsSurvey[`qNum${props.opts.qNum}`] = [...newChecked5State];
     } else {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange

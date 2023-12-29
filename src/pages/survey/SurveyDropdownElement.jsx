@@ -15,14 +15,20 @@ const SurveyDropdownElement = (props) => {
   const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey")) || {};
 
   // set default
-  if (
-    resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-    resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-    resultsSurvey[`qNum${props.opts.qNum}`] === ""
-  ) {
-    resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
-  }
-  localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  useEffect(() => {
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === ""
+    ) {
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum, props.opts.required, resultsSurvey]);
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
@@ -67,7 +73,11 @@ const SurveyDropdownElement = (props) => {
       }
       resultsSurvey[`qNum${props.opts.qNum}`] = selected2;
     } else {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   };

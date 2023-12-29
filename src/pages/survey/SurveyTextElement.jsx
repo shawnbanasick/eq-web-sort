@@ -23,17 +23,29 @@ const SurveyTextElement = (props) => {
 
   // set default
   useEffect(() => {
-    const resultsSurvey =
-      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
-    if (
-      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
-      resultsSurvey[`qNum${props.opts.qNum}`] === ""
-    ) {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
-    }
-    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum]);
+    const setDefaultAsync = async () => {
+      const resultsSurvey =
+        (await JSON.parse(localStorage.getItem("resultsSurvey"))) || {};
+      console.log(props.opts.required);
+      console.log(resultsSurvey[`qNum${props.opts.qNum}`]);
+      if (
+        resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+        resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+        resultsSurvey[`qNum${props.opts.qNum}`] === ""
+      ) {
+        if (props.opts.required === true) {
+          resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        } else {
+          resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        }
+      }
+      await localStorage.setItem(
+        "resultsSurvey",
+        JSON.stringify(resultsSurvey)
+      );
+    };
+    setDefaultAsync();
+  }, [props.opts.qNum, props.opts.required]);
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
@@ -63,7 +75,11 @@ const SurveyTextElement = (props) => {
       resultsSurvey[`qNum${props.opts.qNum}`] = sanitizedText;
     } else {
       // for when participant deletes their answer after entering it
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     asyncLocalStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // End event handler

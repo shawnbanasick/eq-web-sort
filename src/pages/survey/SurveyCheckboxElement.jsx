@@ -40,10 +40,14 @@ const SurveyCheckboxElement = (props) => {
       resultsSurvey[`qNum${props.opts.qNum}`] === null ||
       resultsSurvey[`qNum${props.opts.qNum}`] === ""
     ) {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum]);
+  }, [props.opts.qNum, props.opts.required]);
 
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
@@ -77,7 +81,11 @@ const SurveyCheckboxElement = (props) => {
     resultsSurvey[`qNum${props.opts.qNum}`] = selected;
 
     if (selected === "") {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange

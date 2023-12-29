@@ -30,6 +30,24 @@ const SurveyRatings10Element = (props) => {
     Array.from({ length: rows }, () => Array.from({ length: 10 }, () => false))
   );
 
+  // set default
+  useEffect(() => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+    if (
+      resultsSurvey[`qNum${props.opts.qNum}`] === undefined ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === null ||
+      resultsSurvey[`qNum${props.opts.qNum}`] === ""
+    ) {
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.qNum, props.opts.required]);
+
   // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
@@ -66,7 +84,11 @@ const SurveyRatings10Element = (props) => {
     if (newCheckedState.length > 0) {
       resultsSurvey[`qNum${props.opts.qNum}`] = [...newCheckedState];
     } else {
-      resultsSurvey[`qNum${props.opts.qNum}`] = "no-*-response";
+      if (props.opts.required === true) {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+      }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange

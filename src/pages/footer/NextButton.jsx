@@ -11,7 +11,6 @@ const getPresortFinished = (state) => state.presortFinished;
 const getSetTrigPrePrevNavModal = (state) =>
   state.setTriggerPresortPreventNavModal;
 const getCurrentPage = (state) => state.currentPage;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetCheckReqQuesCompl = (state) =>
   state.setCheckRequiredQuestionsComplete;
 const getSetTrigSurvPrevNavModal = (state) =>
@@ -25,7 +24,6 @@ const getSetTrigSortOverColMod = (state) =>
 const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getSetResults = (state) => state.setResults;
-const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
 const getSetShowPostsortCommentHighlighting = (state) =>
   state.setShowPostsortCommentHighlighting;
 const getSetTriggerPostsortPreventNavModal = (state) =>
@@ -39,7 +37,6 @@ const LinkButton = (props) => {
   const presortFinished = useStore(getPresortFinished);
   const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
   const currentPage = useStore(getCurrentPage);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setCheckRequiredQuestionsComplete = useStore(getSetCheckReqQuesCompl);
   const setTriggerSurveyPreventNavModal = useStore(getSetTrigSurvPrevNavModal);
   const isSortingFinished = useStore(getIsSortingFinished);
@@ -49,7 +46,6 @@ const LinkButton = (props) => {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setResults = useStore(getSetResults);
-  // const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
   const setShowPostsortCommentHighlighting = useStore(
     getSetShowPostsortCommentHighlighting
   );
@@ -167,7 +163,7 @@ const LinkButton = (props) => {
     if (currentPage === "survey") {
       let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
       let values = getObjectValues(resultsSurvey);
-      let includesNoResponse = values.includes("no-*-response");
+      let includesNoResponse = values.includes("no-*?*-response");
       if (includesNoResponse) {
         // to turn on yellow color for unanswered
         setCheckRequiredQuestionsComplete(true);
