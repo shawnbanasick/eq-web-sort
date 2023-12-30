@@ -19,7 +19,6 @@ const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
 const getResults = (state) => state.results;
-const getResultsPostsort = (state) => state.resultsPostsort;
 const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
 const getUsercode = (state) => state.usercode;
@@ -38,7 +37,6 @@ const SubmitPage = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
   const results = useStore(getResults);
-  const resultsPostsort = useStore(getResultsPostsort);
   const resultsSurvey = useStore(getResultsSurvey);
   const partId = useStore(getPartId);
   const usercode = useStore(getUsercode);
@@ -112,6 +110,9 @@ const SubmitPage = () => {
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {
+        const resultsPostsort = JSON.parse(
+          localStorage.getItem("resultsPostsort")
+        );
         const newPostsortObject = calculatePostsortResults(
           resultsPostsort,
           mapObj,
@@ -156,7 +157,6 @@ const SubmitPage = () => {
     localUsercode,
     mapObj,
     partId,
-    resultsPostsort,
     resultsSurvey,
     usercode,
     urlUsercode,

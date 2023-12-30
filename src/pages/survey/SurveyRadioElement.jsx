@@ -6,12 +6,28 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useLocalStorage from "../../utilities/useLocalStorage";
 
 const SurveyRadioElement = (props) => {
+  // HELPER FUNCTION
+  const getOptionsArray = (options) => {
+    let array = options.split(";;;");
+    array = array.filter(function (e) {
+      return e;
+    });
+    array = array.map((x) => x.trim());
+    return array;
+  };
+
   // PROPS
   let questionId = props.opts.id;
   const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  const optsArray = getOptionsArray(props.opts.options);
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
-
   let [selected, setSelected] = useLocalStorage(questionId, "");
 
   // LOCAL STATE
@@ -19,18 +35,6 @@ const SurveyRadioElement = (props) => {
     bgColor: "whitesmoke",
     border: "none",
   });
-
-  const getOptionsArray = (options) => {
-    let array = options.split(";;;");
-    array = array.filter(function (e) {
-      return e;
-    });
-    // array = array.map((x) => x.replace(/\s/g, ""));
-    array = array.map((x) => x.trim());
-    return array;
-  };
-
-  const optsArray = getOptionsArray(props.opts.options);
 
   // template
   const RadioInput = ({ label, value, checked, setter }) => {
@@ -69,7 +73,10 @@ const SurveyRadioElement = (props) => {
       checkRequiredQuestionsComplete === true &&
       setYellow
     ) {
-      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
+      setFormatOptions({
+        bgColor: "rgba(253, 224, 71, .5)",
+        border: "3px dashed black",
+      });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",
@@ -92,22 +99,32 @@ const SurveyRadioElement = (props) => {
     return <div>{radioList}</div>;
   };
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <NoteText>
-        <div>{noteText}</div>
-      </NoteText>
-      <RadioContainer onChange={(e) => handleChange(e)}>
-        <RadioItems />
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText>
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer onChange={(e) => handleChange(e)}>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer onChange={(e) => handleChange(e)}>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyRadioElement;
@@ -142,7 +159,7 @@ const RadioContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   vertical-align: center;
   margin-top: 0px;
   min-height: 100px;

@@ -96,7 +96,10 @@ const SurveyRatings10Element = (props) => {
       checkRequiredQuestionsComplete === true &&
       setYellow
     ) {
-      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
+      setFormatOptions({
+        bgColor: "rgba(253, 224, 71, .5)",
+        border: "3px dashed black",
+      });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",

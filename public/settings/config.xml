@@ -70,57 +70,79 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="#fde047">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
+       <note bg="rgba(253, 224, 71, .5)">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
    </item>
 
    <item id="survey">
-        <input type="text" required="false" limited="true" maxlength="100" restricted="false"></input>
+        <input type="text" required="true" limited="true" maxlength="100" restricted="false"></input>
         <label>1. Have you had classes with me before?*</label>
         <note>If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters)</note>
-   </item>
-
-   <item id="survey">
-        <input type="textarea" required="false"></input>
-        <label>2. Describe your experience using the iPads in this class</label>
         <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
-        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
+        <input type="textarea" required="true"></input>
+        <label>2. Describe your experience using the iPads in this class</label>
+         <note>Write as much as you want - no character limit</note>
+        <placeholder>input comment here</placeholder>
+   </item>
+
+   <item id="survey">
+        <input type="radio" required="true">Freshman;;;Sophomore;;;Junior;;;Senior</input>
         <label>3. Year</label>
         <note>Please select your year</note>
    </item>
 
    <item id="survey">
-        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
+        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
         <label>4. What is your program focus?</label>
    </item>
 
    <item id="survey">
-        <input type="checkbox" required="false">Lecture;;;Group Discussion;;;Active Learning</input>
+        <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
         <label>5. What kind of class do you prefer?*</label>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="false" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <input type="rating2" required="true" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
         <label>6. Please respond to the following {{{u}}}statements{{{/u}}}</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
-        <label>7. {{{i}}}Please{{{/i}}} answer the following questions</label>
+        <input type="rating5" required="true" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <label>7. {{{i}}}Please{{{/i}}} rate the following statements</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
-        <label>8. {{{u}}}Please{{{/u}}} answer the following questions</label>
+        <input type="rating10" required="true" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <label>8. {{{u}}}Please{{{/u}}} rate the following statements</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="-2;;;-1;;;0;;;1;;;2">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
-        <label>9. {{{i}}}Please{{{/i}}} answer the following questions</label>
+        <input type="rating5" required="true" scale="-2;;;-1;;;0;;;1;;;2">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <label>9. {{{i}}}Please{{{/i}}} rate the following statements</label>
    </item>
 
+   <item id="survey">
+        <input type="lickert5" required="true" scale="Strongly Disagree;;;Disagree;;;Neutral;;;Agree;;;Strongly Agree">.</input>
+        <label>10. The iPads made it easier to access the course materials.</label>
+   </item>
+
+
+   <item id="survey">
+        <input type="lickert5" required="true" scale="Very Unimportant;;;Unimportant;;;Neutral;;;Important;;;Very Important">.</input>
+        <label>11. How important is it to have an iPad for each class session?</label>
+   </item>
+
+   <item id="survey">
+        <input type="lickert5" required="true" scale="Very Unconcerned;;;Unconcerned;;;Neutral;;;Concerned;;;Very Concerned">.</input>
+        <label>12. How concerned are you about the amount of time that you spend looking at screens (TV, smartphone, computer, iPad, etc.)</label>
+   </item>
+
+   <item id="survey">
+        <input type="lickert5" required="true" scale="Never;;;Rarely;;;Occasionally;;;Frequently;;;Very Frequently">.</input>
+        <label>13. How often do you use an iPad in your daily life?</label>
+   </item>
 
        
   </config>

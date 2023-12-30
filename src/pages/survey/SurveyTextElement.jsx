@@ -8,15 +8,22 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 const SurveyTextElement = (props) => {
   // HELPER FUNCTION
   const asyncLocalStorage = {
-    async setItem(key, value) {
+    async setItem(name, value) {
       await null;
-      return localStorage.setItem(key, value);
+      return localStorage.setItem(name, value);
     },
   };
 
   // PROPS
   let questionId = `qNum${props.opts.qNum}`;
   const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   const [userText, setUserText] = useLocalStorage(questionId, "");
@@ -69,7 +76,7 @@ const SurveyTextElement = (props) => {
       props.opts.required === true
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -80,20 +87,38 @@ const SurveyTextElement = (props) => {
     }
   }, [checkRequiredQuestionsComplete, userText, props]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <NoteText>
-        <div>{noteText}</div>
-      </NoteText>
-      <TextInput value={userText} onChange={handleOnChange} />
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <TextInput
+          type="text"
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <TextInput
+          type="text"
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
+  }
 };
 
 export default SurveyTextElement;
@@ -104,7 +129,6 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1300px;
-  min-height: 200px;
   background-color: ${(props) => props.bgColor};
   outline: ${(props) => props.border};
   outline-offset: -3px;
@@ -129,6 +153,7 @@ const NoteText = styled.div`
   align-items: center;
   vertical-align: center;
   margin-top: 5px;
+  margin-bottom: 5px;
   height: 50px;
   font-size: 16px;
   text-align: center;
@@ -142,7 +167,6 @@ const TextInput = styled.input`
   justify-content: left;
   align-items: center;
   vertical-align: center;
-  margin-top: 5px;
   height: 50px;
   font-size: 18px;
   background-color: white;

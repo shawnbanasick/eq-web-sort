@@ -27,7 +27,7 @@ const SurveyRatings2Element = (props) => {
   // PERSISTENT STATE
   let [checkedState, setCheckedState] = useLocalStorage(
     questionId,
-    Array.from({ length: rows }, () => Array.from({ length: 2 }, () => false))
+    Array.from({ length: rows }, () => Array.from({ length: 5 }, () => false))
   );
 
   // LOCAL STATE
@@ -38,11 +38,13 @@ const SurveyRatings2Element = (props) => {
   const [localStore, setLocalStore] = useState({});
 
   // ****** GET SCALE ARRAY *******
+
   const getScaleArray = (options) => {
     let array = options.split(";;;");
     return array;
   };
   const scaleArray = getScaleArray(props.opts.scale);
+  console.log(scaleArray);
 
   // ****** ON CHANGE  *******
   const handleChange = (selectedRow, column, e) => {
@@ -120,10 +122,8 @@ const SurveyRatings2Element = (props) => {
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
-      const itemText = ReactHtmlParser(decodeHTML(item));
       return (
         <ItemContainer indexVal={index} key={uuid()}>
-          <OptionsText key={uuid()}>{itemText}</OptionsText>
           <RadioInput
             key={uuid()}
             id={`Q-${index}`}
@@ -142,6 +142,33 @@ const SurveyRatings2Element = (props) => {
             onChange={(e) => handleChange(index, 1, e)}
             checked={checkedState[index][1]}
           />
+          <RadioInput
+            key={uuid()}
+            id={`Q3-${index}`}
+            type="radio"
+            value={3}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 2, e)}
+            checked={checkedState[index][2]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q4-${index}`}
+            type="radio"
+            value={4}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 3, e)}
+            checked={checkedState[index][3]}
+          />
+          <RadioInput
+            key={uuid()}
+            id={`Q5-${index}`}
+            type="radio"
+            value={5}
+            name={`qNum${props.opts.qNum}-${index + 1}`}
+            onChange={(e) => handleChange(index, 4, e)}
+            checked={checkedState[index][4]}
+          />
         </ItemContainer>
       );
     });
@@ -157,12 +184,20 @@ const SurveyRatings2Element = (props) => {
       </TitleBar>
       <RadioContainer>
         <RatingTitle>
-          <div />
           <ScaleDiv>
             <div>{ReactHtmlParser(decodeHTML(scaleArray[0]))}</div>
           </ScaleDiv>
           <ScaleDiv>
             <div>{ReactHtmlParser(decodeHTML(scaleArray[1]))}</div>
+          </ScaleDiv>
+          <ScaleDiv>
+            <div>{ReactHtmlParser(decodeHTML(scaleArray[2]))}</div>
+          </ScaleDiv>
+          <ScaleDiv>
+            <div>{ReactHtmlParser(decodeHTML(scaleArray[3]))}</div>
+          </ScaleDiv>
+          <ScaleDiv>
+            <div>{ReactHtmlParser(decodeHTML(scaleArray[4]))}</div>
           </ScaleDiv>
         </RatingTitle>
         <RadioItems />
@@ -175,11 +210,11 @@ export default SurveyRatings2Element;
 
 const Container = styled.div`
   width: 90vw;
-  padding: 20px;
+  padding: 12px 20px 0px 20px;
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1300px;
-  min-height: 200px;
+  min-height: 170px;
   background-color: ${(props) => props.bgColor};
   outline: ${(props) => props.border};
   outline-offset: -3px;
@@ -203,7 +238,7 @@ const RadioContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  padding: 20px;
+  padding: 10px 20px 0px 20px;
   vertical-align: center;
   margin-top: 0px;
   height: auto;
@@ -225,21 +260,21 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
+  //grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   margin-bottom: 17px;
   padding-left: 5px;
   padding-bottom: 8px;
   height: 40px;
+  width: 100%;
+
   align-items: end;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
-  &:hover {
-    background-color: rgba(131, 202, 254, 0.4);
-  }
 `;
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   margin-bottom: 7px;
 `;
 
@@ -247,6 +282,7 @@ const ScaleDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 `;
 
 const RadioInput = styled.input`
@@ -256,9 +292,4 @@ const RadioInput = styled.input`
   border: 0px;
   width: 100%;
   height: 1.4em;
-`;
-
-const OptionsText = styled.span`
-  margin-bottom: 2px;
-  padding-left: 5px;
 `;

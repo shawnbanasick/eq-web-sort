@@ -64,7 +64,7 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="#fde047">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
+       <note bg="rgba(253, 224, 71, .5)">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
    </item>
 
    <item id="survey">

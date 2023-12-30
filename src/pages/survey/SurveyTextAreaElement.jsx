@@ -17,6 +17,13 @@ const SurveyTextAreaElement = (props) => {
   // FROM PROPS
   const id = `qNum${props.opts.qNum}`;
   const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   const [userText, setUserText] = useLocalStorage(id, "");
@@ -59,7 +66,7 @@ const SurveyTextAreaElement = (props) => {
       userTextLen < 1
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -75,21 +82,34 @@ const SurveyTextAreaElement = (props) => {
     props.opts.required,
   ]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const placeholder = props.opts.placeholder;
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <TextAreaInput
-        value={userText}
-        placeholder={placeholder}
-        onChange={handleOnChange}
-      />
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText>{noteText}</NoteText>
+        <TextAreaInput
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <TextAreaInput
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
+  }
 };
 
 export default SurveyTextAreaElement;
@@ -116,6 +136,21 @@ const TitleBar = styled.div`
   font-size: 18px;
   text-align: center;
   background-color: lightgray;
+  width: 100%;
+  border-radius: 3px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
   width: 100%;
   border-radius: 3px;
 `;

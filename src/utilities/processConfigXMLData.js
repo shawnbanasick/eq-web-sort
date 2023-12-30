@@ -122,6 +122,11 @@ const processConfigXMLData = (dataObject) => {
           tempObj.limited = "false";
         }
 
+        try {
+          tempObj.placeholder = surveyData[j][3].elements[0].text;
+        } catch (error) {
+          tempObj.placeholder = "";
+        }
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -155,7 +160,13 @@ const processConfigXMLData = (dataObject) => {
         }
 
         try {
-          tempObj.placeholder = surveyData[j][2].elements[0].text;
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          tempObj.note = "";
+        }
+
+        try {
+          tempObj.placeholder = surveyData[j][3].elements[0].text;
         } catch (error) {
           console.log(error);
           tempObj.placeholder = "";
@@ -320,6 +331,52 @@ const processConfigXMLData = (dataObject) => {
         } catch (error) {
           console.log(error);
           tempObj.scale = "Yes;;;No";
+        }
+
+        try {
+          tempObj.options = surveyData[j][0].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.options = "";
+        }
+
+        tempObj.hasBeenAnswered = false;
+
+        surveyQuestionArray.push(tempObj);
+      }
+
+      // Lickert 5 question
+      if (questionType === "lickert5") {
+        tempObj.id = `qNum${j + 1}`;
+        let isRequired = JSON.parse(surveyData[j][0].attributes.required);
+        if (isRequired === "true" || isRequired === true) {
+          isRequired = true;
+          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+        } else {
+          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+        }
+        tempObj.qNum = j + 1;
+        tempObj.type = "lickert5";
+        try {
+          tempObj.required = surveyData[j][0].attributes.required;
+        } catch (error) {
+          console.log(error);
+          tempObj.required = "false";
+        }
+
+        try {
+          tempObj.label = surveyData[j][1].elements[0]?.text;
+        } catch (error) {
+          console.log(error);
+          tempObj.label = "";
+        }
+
+        try {
+          tempObj.scale = surveyData[j][0].attributes.scale;
+        } catch (error) {
+          console.log(error);
+          tempObj.scale =
+            "Strongly Disagree;;;Disagree;;;Neutral;;;Agree;;;Strongly Agree";
         }
 
         try {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -12,9 +12,6 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 
 // format example ===> {high: ["column4"], middle: ["column0"], low: ["columnN4"]}
 
-const getResultsPostsort = (state) => state.resultsPostsort;
-const getSetResultsPostsort = (state) => state.setResultsPostsort;
-const getStatementCommentsObj = (state) => state.statementCommentsObj;
 const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
 const getSetPostsortCommentCheckObj = (state) =>
   state.setPostsortCommentCheckObj;
@@ -25,8 +22,15 @@ const getPostsortDualImageArray = (state) => state.postsortDualImageArray;
 const getSetPostsortDualImageArray = (state) => state.setPostsortDualImageArray;
 
 const HighCards2Display = (props) => {
+  // HELPER FUNCTION
+  const asyncLocalStorage = {
+    async setItem(key, value) {
+      await null;
+      return localStorage.setItem(key, value);
+    },
+  };
+
   // LOCAL STATE
-  // const [commentCheckObj, setCommentCheckObj] = useState({});
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
@@ -41,9 +45,6 @@ const HighCards2Display = (props) => {
     JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
   // GLOBAL STATE
-  const resultsPostsort = useStore(getResultsPostsort);
-  const setResultsPostsort = useStore(getSetResultsPostsort);
-  const statementCommentsObj = useStore(getStatementCommentsObj);
   const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
   const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
   const configObj = useSettingsStore(getConfigObj);
@@ -57,27 +58,6 @@ const HighCards2Display = (props) => {
   const highCards2 = columnStatements.vCols[agreeObj.columnDisplay2];
   const { agreeText, placeholder } = agreeObj;
   let columnDisplay = agreeObj.columnDisplay2;
-
-  // restore results from localStorage
-  useEffect(() => {
-    const keys = Object.keys(allCommentsObj);
-    // read in comments
-    if (keys.length > 0) {
-      keys.map((key) => {
-        const identifier = key;
-        const comment = allCommentsObj[key];
-        resultsPostsort[identifier] = comment;
-        return key;
-      });
-    }
-  });
-
-  /*
-  // determine if comments exist when comments are required - highlight if not
-  useEffect(() => {
-    setCommentCheckObj(postsortCommentCheckObj);
-  }, [setCommentCheckObj, postsortCommentCheckObj]);
-*/
 
   // enlarge images on double click
   const handleOpenImageModal = (e, src) => {
@@ -97,18 +77,17 @@ const HighCards2Display = (props) => {
 
   // on leaving card comment section,
   const onChange = (event, itemId) => {
+    const results = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
+
     // set comment check object for Results formatting on Submit page
     let commentLength = event.target.value.length;
     if (commentLength > 0) {
       postsortCommentCheckObj[`hc2-${itemId}`] = true;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      //setCommentCheckObj({ ...postsortCommentCheckObj });
     } else {
       postsortCommentCheckObj[`hc2-${itemId}`] = false;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
-      // setCommentCheckObj({ ...postsortCommentCheckObj });
     }
-    const results = resultsPostsort;
     const cards = columnStatements?.vCols[agreeObj.columnDisplay2];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
@@ -121,23 +100,30 @@ const HighCards2Display = (props) => {
         const comment3 = userEnteredText;
         // remove new line and commas to make csv export easier
         const comment2 = comment3.replace(/\n/g, " ");
-        const comment = comment2.replace(/,/g, " ");
+        const comment = comment2.replace(/,/g, " ").trim();
         // assign to main data object for confirmation / debugging
-        el.comment = sanitizeString(comment);
-        // assign to comments object
-        statementCommentsObj[identifier] = `(${el.id}) ${comment}`;
-        results[identifier] = `(${el.id}) ${comment}`;
-        // setup persistence for comments
-        allCommentsObj[identifier] = `(${el.id}) ${comment}`;
-        allCommentsObj[
-          `textArea-${columnDisplay}_${itemId + 1}`
-        ] = `${comment}`;
-        setAllCommentsObj({ ...allCommentsObj });
+        if (comment.length > 0) {
+          el.comment = sanitizeString(comment);
+          // assign to comments object
+
+          results[identifier] = `(${el.id}) ${comment}`;
+          // setup persistence for comments
+          allCommentsObj[identifier] = `(${el.id}) ${comment}`;
+          allCommentsObj[
+            `textArea-${columnDisplay}_${itemId + 1}`
+          ] = `${comment}`;
+          setAllCommentsObj({ ...allCommentsObj });
+        } else {
+          el.comment = "";
+          results[identifier] = "";
+          allCommentsObj[identifier] = "";
+          allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
+          setAllCommentsObj({ ...allCommentsObj });
+        }
       }
       return el;
     });
-    setResultsPostsort(results);
-    localStorage.setItem("resultsPostsort", JSON.stringify(results));
+    asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
   }; // end onBlur
 
   // render elements
@@ -273,7 +259,8 @@ const CardAndTextHolder = styled.div`
 const CommentArea = styled.textarea`
   padding: 10px;
   margin-top: 2px;
-  background-color: ${(props) => (props.bgColor ? "whitesmoke" : "#fde047")};
+  background-color: ${(props) =>
+    props.bgColor ? "whitesmoke" : "rgba(253, 224, 71, .5)"};
   height: ${(props) => `${props.height}px;`};
   font-size: ${(props) => `${props.cardFontSize}px`};
   width: calc(100% - 6px);

@@ -6,9 +6,30 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useLocalStorage from "../../utilities/useLocalStorage";
 
 const SurveyDropdownElement = (props) => {
+  // HELPER FUNCTION
+  const getOptionsArray = (options) => {
+    let array = options.split(";;;");
+    array = array.filter(function (e) {
+      return e;
+    });
+    const objArray = array.map((x) => {
+      x.replace(/\s/g, "");
+      const tempObj = {};
+      tempObj.label = ReactHtmlParser(decodeHTML(x));
+      tempObj.value = x;
+      return tempObj;
+    });
+    return objArray;
+  };
+
   // PROPS
   const checkRequiredQuestionsComplete = props.check;
   let questionId = props.opts.id;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  let originalOptions = props.opts.options.split(";;;") || [];
+  originalOptions = originalOptions.map((x) =>
+    ReactHtmlParser(decodeHTML(x.trim()))
+  );
 
   // PERSISTENT STATE
   let [selected, setSelected] = useLocalStorage(questionId, []);
@@ -18,24 +39,6 @@ const SurveyDropdownElement = (props) => {
     bgColor: "whitesmoke",
     border: "none",
   });
-
-  const getOptionsArray = (options) => {
-    let array = options.split(";;;");
-    array = array.filter(function (e) {
-      return e;
-    });
-    const objArray = array.map((x) => {
-      x.replace(/\s/g, "");
-      const tempObj = {};
-      tempObj.label = x;
-      tempObj.value = x;
-      return tempObj;
-    });
-    return objArray;
-  };
-
-  let originalOptions = props.opts.options.split(";;;");
-  originalOptions = originalOptions.map((x) => x.trim());
 
   // HANDLE ON CHANGE
   const handleOnChange = (e) => {
@@ -77,7 +80,7 @@ const SurveyDropdownElement = (props) => {
       selectedLen === false
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -87,8 +90,6 @@ const SurveyDropdownElement = (props) => {
       });
     }
   }, [checkRequiredQuestionsComplete, selectedLen, props.opts.required]);
-
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
 
   return (
     <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
