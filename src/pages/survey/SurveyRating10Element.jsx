@@ -23,6 +23,12 @@ const SurveyRatings10Element = (props) => {
   const rows = optsArray.length;
   const questionId = `qNum${props.opts.qNum}`;
   const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   const [checkedState, setCheckedState] = useLocalStorage(
@@ -210,31 +216,58 @@ const SurveyRatings10Element = (props) => {
     return <div>{radioList}</div>;
   };
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <RadioContainer>
-        <RatingTitle>
-          <div />
-          <CircleDiv>1</CircleDiv>
-          <CircleDiv>2</CircleDiv>
-          <CircleDiv>3</CircleDiv>
-          <CircleDiv>4</CircleDiv>
-          <CircleDiv>5</CircleDiv>
-          <CircleDiv>6</CircleDiv>
-          <CircleDiv>7</CircleDiv>
-          <CircleDiv>8</CircleDiv>
-          <CircleDiv>9</CircleDiv>
-          <CircleDiv>10</CircleDiv>
-        </RatingTitle>
-        <RadioItems />
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <CircleDiv>1</CircleDiv>
+            <CircleDiv>2</CircleDiv>
+            <CircleDiv>3</CircleDiv>
+            <CircleDiv>4</CircleDiv>
+            <CircleDiv>5</CircleDiv>
+            <CircleDiv>6</CircleDiv>
+            <CircleDiv>7</CircleDiv>
+            <CircleDiv>8</CircleDiv>
+            <CircleDiv>9</CircleDiv>
+            <CircleDiv>10</CircleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <CircleDiv>1</CircleDiv>
+            <CircleDiv>2</CircleDiv>
+            <CircleDiv>3</CircleDiv>
+            <CircleDiv>4</CircleDiv>
+            <CircleDiv>5</CircleDiv>
+            <CircleDiv>6</CircleDiv>
+            <CircleDiv>7</CircleDiv>
+            <CircleDiv>8</CircleDiv>
+            <CircleDiv>9</CircleDiv>
+            <CircleDiv>10</CircleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyRatings10Element;
@@ -331,4 +364,19 @@ const RadioInput = styled.input`
 const OptionsText = styled.span`
   margin-bottom: 2px;
   padding-left: 5px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;

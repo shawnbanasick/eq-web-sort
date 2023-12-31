@@ -18,8 +18,8 @@ const SurveyTextElement = (props) => {
   let questionId = `qNum${props.opts.qNum}`;
   const checkRequiredQuestionsComplete = props.check;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
-  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
   const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
   let displayNoteText = true;
   if (noteText.length < 1 || noteText === "") {
     displayNoteText = false;

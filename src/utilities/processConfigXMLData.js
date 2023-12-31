@@ -257,6 +257,13 @@ const processConfigXMLData = (dataObject) => {
           tempObj.options = "";
         }
 
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.note = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -293,6 +300,13 @@ const processConfigXMLData = (dataObject) => {
         } catch (error) {
           console.log(error);
           tempObj.options = "";
+        }
+
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.note = "";
         }
 
         tempObj.hasBeenAnswered = false;
@@ -340,13 +354,20 @@ const processConfigXMLData = (dataObject) => {
           tempObj.options = "";
         }
 
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.note = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
       }
 
-      // Lickert 5 question
-      if (questionType === "lickert5") {
+      // likert 5 question
+      if (questionType === "likert5") {
         tempObj.id = `qNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
@@ -356,7 +377,7 @@ const processConfigXMLData = (dataObject) => {
           requiredAnswersObj[`qNum${j + 1}`] = "no response";
         }
         tempObj.qNum = j + 1;
-        tempObj.type = "lickert5";
+        tempObj.type = "likert5";
         try {
           tempObj.required = surveyData[j][0].attributes.required;
         } catch (error) {
@@ -424,6 +445,14 @@ const processConfigXMLData = (dataObject) => {
           tempObj.options = "";
         }
 
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log("rating 5 note error");
+          console.log(error);
+          tempObj.note = "";
+        }
+
         tempObj.hasBeenAnswered = false;
 
         surveyQuestionArray.push(tempObj);
@@ -460,6 +489,13 @@ const processConfigXMLData = (dataObject) => {
         } catch (error) {
           console.log(error);
           tempObj.options = "";
+        }
+
+        try {
+          tempObj.note = surveyData[j][2].elements[0].text;
+        } catch (error) {
+          console.log(error);
+          tempObj.note = "";
         }
 
         tempObj.hasBeenAnswered = false;

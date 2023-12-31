@@ -14,6 +14,9 @@ const SurveyRatings2Element = (props) => {
     array = array.filter(function (e) {
       return e;
     });
+    if (array.length === 0) {
+      array = ["", ""];
+    }
     return array;
   };
 
@@ -23,6 +26,12 @@ const SurveyRatings2Element = (props) => {
   // gives the number of questions
   const rows = optsArray.length;
   const questionId = `qNum${props.opts.qNum}`;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   let [checkedState, setCheckedState] = useLocalStorage(
@@ -37,12 +46,7 @@ const SurveyRatings2Element = (props) => {
   });
   const [localStore, setLocalStore] = useState({});
 
-  // ****** GET SCALE ARRAY *******
-  const getScaleArray = (options) => {
-    let array = options.split(";;;");
-    return array;
-  };
-  const scaleArray = getScaleArray(props.opts.scale);
+  const scaleArray = getOptionsArray(props.opts.scale);
 
   // ****** ON CHANGE  *******
   const handleChange = (selectedRow, column, e) => {
@@ -120,7 +124,7 @@ const SurveyRatings2Element = (props) => {
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
-      const itemText = ReactHtmlParser(decodeHTML(item));
+      const itemText = ReactHtmlParser(decodeHTML(item)) || "";
       return (
         <ItemContainer indexVal={index} key={uuid()}>
           <OptionsText key={uuid()}>{itemText}</OptionsText>
@@ -148,27 +152,50 @@ const SurveyRatings2Element = (props) => {
     return <div>{radioList}</div>;
   };
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <RadioContainer>
-        <RatingTitle>
-          <div />
-          <ScaleDiv>
-            <div>{ReactHtmlParser(decodeHTML(scaleArray[0]))}</div>
-          </ScaleDiv>
-          <ScaleDiv>
-            <div>{ReactHtmlParser(decodeHTML(scaleArray[1]))}</div>
-          </ScaleDiv>
-        </RatingTitle>
-        <RadioItems />
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <ScaleDiv>
+              <div>{ReactHtmlParser(decodeHTML(scaleArray[0]))}</div>
+            </ScaleDiv>
+            <ScaleDiv>
+              <div>{ReactHtmlParser(decodeHTML(scaleArray[1]))}</div>
+            </ScaleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <ScaleDiv>
+              <div>{ReactHtmlParser(decodeHTML(scaleArray[0]))}</div>
+            </ScaleDiv>
+            <ScaleDiv>
+              <div>{ReactHtmlParser(decodeHTML(scaleArray[1]))}</div>
+            </ScaleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyRatings2Element;
@@ -261,4 +288,19 @@ const RadioInput = styled.input`
 const OptionsText = styled.span`
   margin-bottom: 2px;
   padding-left: 5px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;

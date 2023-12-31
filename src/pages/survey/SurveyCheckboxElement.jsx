@@ -24,6 +24,12 @@ const SurveyCheckboxElement = (props) => {
   const optsArray = getOptionsArray(props.opts.options);
   const nameValue = `question${props.opts.qNum}`;
   let questionId = props.opts.id;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   let [checkedState, setCheckedState] = useLocalStorage(
@@ -99,32 +105,60 @@ const SurveyCheckboxElement = (props) => {
     }
   }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <RadioContainer>
-        {optsArray.map((item, index) => {
-          return (
-            <div key={uuid()}>
-              <input
-                id={`${item}-${index}`}
-                type="checkbox"
-                value={item}
-                name={nameValue}
-                checked={checkedState[index]}
-                onChange={() => handleChange(index)}
-              />
-              <label htmlFor={`${item}-${index}`}>{item}</label>
-            </div>
-          );
-        })}
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer>
+          {optsArray.map((item, index) => {
+            return (
+              <div key={uuid()}>
+                <input
+                  id={`${item}-${index}`}
+                  type="checkbox"
+                  value={item}
+                  name={nameValue}
+                  checked={checkedState[index]}
+                  onChange={() => handleChange(index)}
+                />
+                <label htmlFor={`${item}-${index}`}>{item}</label>
+              </div>
+            );
+          })}
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer>
+          {optsArray.map((item, index) => {
+            return (
+              <div key={uuid()}>
+                <input
+                  id={`${item}-${index}`}
+                  type="checkbox"
+                  value={item}
+                  name={nameValue}
+                  checked={checkedState[index]}
+                  onChange={() => handleChange(index)}
+                />
+                <label htmlFor={`${item}-${index}`}>{item}</label>
+              </div>
+            );
+          })}
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyCheckboxElement;
@@ -176,4 +210,19 @@ const RadioContainer = styled.div`
   label {
     margin-left: 8px;
   }
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;

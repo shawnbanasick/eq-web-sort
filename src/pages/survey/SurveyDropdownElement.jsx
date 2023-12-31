@@ -30,6 +30,11 @@ const SurveyDropdownElement = (props) => {
   originalOptions = originalOptions.map((x) =>
     ReactHtmlParser(decodeHTML(x.trim()))
   );
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
   // PERSISTENT STATE
   let [selected, setSelected] = useLocalStorage(questionId, []);
@@ -91,20 +96,40 @@ const SurveyDropdownElement = (props) => {
     }
   }, [checkRequiredQuestionsComplete, selectedLen, props.opts.required]);
 
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <MultiSelect
-        className={"multiselect"}
-        options={getOptionsArray(props.opts.options)}
-        labelledBy="Select"
-        onChange={handleOnChange}
-        value={selected}
-      />
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <MultiSelect
+          className={"multiselect"}
+          options={getOptionsArray(props.opts.options)}
+          labelledBy="Select"
+          onChange={handleOnChange}
+          value={selected}
+        />
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <MultiSelect
+          className={"multiselect"}
+          options={getOptionsArray(props.opts.options)}
+          labelledBy="Select"
+          onChange={handleOnChange}
+          value={selected}
+        />
+      </Container>
+    );
+  }
 };
 
 export default SurveyDropdownElement;
@@ -135,6 +160,21 @@ const TitleBar = styled.div`
   font-size: 18px;
   text-align: center;
   background-color: lightgray;
+  width: 100%;
+  border-radius: 3px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
   width: 100%;
   border-radius: 3px;
 `;
