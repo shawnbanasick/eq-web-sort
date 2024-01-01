@@ -37,10 +37,7 @@ const HighCards2Display = (props) => {
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
-  let [allCommentsObj, setAllCommentsObj] = useLocalStorage(
-    "allCommentsObj",
-    {}
-  );
+
   const requiredCommentsObj =
     JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
@@ -78,6 +75,8 @@ const HighCards2Display = (props) => {
   // on leaving card comment section,
   const onChange = (event, itemId) => {
     const results = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
+    let allCommentsObj =
+      JSON.parse(localStorage.getItem("allCommentsObj")) || {};
 
     // set comment check object for Results formatting on Submit page
     let commentLength = event.target.value.length;
@@ -89,9 +88,11 @@ const HighCards2Display = (props) => {
       setPostsortCommentCheckObj(postsortCommentCheckObj);
     }
     const cards = columnStatements?.vCols[agreeObj.columnDisplay2];
+    console.log("cards", cards);
+
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
-    const identifier = `${columnDisplay}_${+itemId + 1}`;
+    const identifier = `${columnDisplay}_${+itemId}`;
 
     // to update RESULTS storage for just the card that changed
     // results format  ===> { column3_1: "(image3) yes I think so" }
@@ -112,23 +113,26 @@ const HighCards2Display = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          setAllCommentsObj({ ...allCommentsObj });
+          // setAllCommentsObj({ ...allCommentsObj });
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          setAllCommentsObj({ ...allCommentsObj });
+          // setAllCommentsObj({ ...allCommentsObj });
         }
       }
       return el;
     });
+    asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
   }; // end onBlur
 
   // render elements
   return highCards2.map((item, index) => {
     let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
+    let allCommentsObj =
+      JSON.parse(localStorage.getItem("allCommentsObj")) || {};
     let cardComment =
       allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`] || "";
 

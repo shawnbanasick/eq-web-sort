@@ -34,15 +34,10 @@ const HighCards = (props) => {
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
+  const [forceRerenderCount, setForceRerenderCount] = useState(0);
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
-  let [allCommentsObj, setAllCommentsObj] = useLocalStorage(
-    "allCommentsObj",
-    {}
-  );
-  const requiredCommentsObj =
-    JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
   // GLOBAL STATE
   const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
@@ -78,6 +73,10 @@ const HighCards = (props) => {
   // on leaving card comment section
   const handleChange = (event, itemId) => {
     const results = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
+    let allCommentsObj =
+      JSON.parse(localStorage.getItem("allCommentsObj")) || {};
+    const requiredCommentsObj =
+      JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
     // set comment check object for Results formatting on Submit page
     let commentLength = event.target.value.length;
@@ -88,10 +87,11 @@ const HighCards = (props) => {
       postsortCommentCheckObj[`hc-${itemId}`] = false;
       setPostsortCommentCheckObj(postsortCommentCheckObj);
     }
-    const cards = columnStatements.vCols[columnDisplay];
+    const cards = columnStatements.vCols[agreeObj.columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
-    const identifier = `${columnDisplay}_${+itemId + 1}`;
+
+    const identifier = `${columnDisplay}_${+itemId}`;
 
     // to update RESULTS storage for just the card that changed
     // results format  ===> { column3_1: "(image3) yes I think so" }
@@ -112,31 +112,41 @@ const HighCards = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObj[`hc-${itemId}`] = true;
+
+          // setAllCommentsObj({ ...allCommentsObj });
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObj[`hc-${itemId}`] = false;
+
+          // setAllCommentsObj({ ...allCommentsObj });
         }
       }
       return el;
     });
+    asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
+    asyncLocalStorage.setItem(
+      "requiredCommentsObj",
+      JSON.stringify(requiredCommentsObj)
+    );
+    setForceRerenderCount(forceRerenderCount + 1);
   }; // END handleChange
 
   // MAP cards to DOM
   return highCards.map((item, index) => {
+    console.log("item rendering");
     let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
-    let cardComment =
-      allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`] || "";
+    let allCommentsObj =
+      JSON.parse(localStorage.getItem("allCommentsObj")) || {};
+    let cardComment = allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`];
+    const requiredCommentsObj =
+      JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
-    if (cardComment.length > 0) {
-      requiredCommentsObj[`hc-${index}`] = true;
-    } else {
-      requiredCommentsObj[`hc-${index}`] = false;
-    }
+    console.log(JSON.stringify(requiredCommentsObj, null, 2));
 
     localStorage.setItem(
       "requiredCommentsObj",
@@ -212,10 +222,9 @@ const HighCards = (props) => {
               bgColor={highlighting}
               border={highlighting}
               data-gramm_editor="false"
-              cardFontSize={cardFontSize}
               height={height}
+              cardFontSize={cardFontSize}
               id={item.id}
-              useImages={configObj.useImages}
               placeholder={placeholder}
               defaultValue={cardComment}
               onChange={(e) => {
