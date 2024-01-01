@@ -34,13 +34,15 @@ const HighCards2Display = (props) => {
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
+  const [forceRerenderCount, setForceRerenderCount] = useState(0);
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
 
-  const requiredCommentsObj =
-    JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
-
+  const [requiredCommentsObject, setRequiredCommentsObject] = useLocalStorage(
+    "HC2-requiredCommentsObj",
+    {}
+  );
   // GLOBAL STATE
   const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
   const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
@@ -88,8 +90,6 @@ const HighCards2Display = (props) => {
       setPostsortCommentCheckObj(postsortCommentCheckObj);
     }
     const cards = columnStatements?.vCols[agreeObj.columnDisplay2];
-    console.log("cards", cards);
-
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
     const identifier = `${columnDisplay}_${+itemId}`;
@@ -113,19 +113,22 @@ const HighCards2Display = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`hc2-${itemId}`] = true;
+          setRequiredCommentsObject(requiredCommentsObject);
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`hc2-${itemId}`] = false;
+          setRequiredCommentsObject(requiredCommentsObject);
         }
       }
       return el;
     });
     asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
+    setForceRerenderCount(forceRerenderCount + 1);
   }; // end onBlur
 
   // render elements
@@ -136,31 +139,19 @@ const HighCards2Display = (props) => {
     let cardComment =
       allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`] || "";
 
-    if (cardComment.length > 0) {
-      requiredCommentsObj[`hc2-${index}`] = true;
-    } else {
-      requiredCommentsObj[`hc2-${index}`] = false;
-    }
-
-    localStorage.setItem(
-      "requiredCommentsObj",
-      JSON.stringify(requiredCommentsObj)
-    );
-
     if (configObj.useImages === true) {
       content = ReactHtmlParser(
         `<img src="${item.element.props.src}" style="pointer-events: all" alt=${item.element.props.alt} />`
       );
     }
 
-    item.indexVal = index;
     let highlighting = true;
     if (
       configObj.postsortCommentsRequired === "true" ||
       configObj.postsortCommentsRequired === true
     ) {
       if (showPostsortCommentHighlighting === true) {
-        highlighting = requiredCommentsObj[`hc2-${index}`];
+        highlighting = requiredCommentsObject[`hc2-${index}`];
       }
     }
 

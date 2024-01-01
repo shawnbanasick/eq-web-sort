@@ -129,32 +129,35 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "postsort") {
-      const requiredCommentsObj = JSON.parse(
-        localStorage.getItem("requiredCommentsObj")
-      );
+      const required1 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("HC-requiredCommentsObj"))
+        ) || [];
+      const required2 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("HC2-requiredCommentsObj"))
+        ) || [];
+      const required3 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("LC-requiredCommentsObj"))
+        ) || [];
+      const required4 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("LC2-requiredCommentsObj"))
+        ) || [];
 
-      const checkArray2 = [];
-      const keyArray = Object.keys(requiredCommentsObj);
-      keyArray.forEach((key) => {
-        if (
-          requiredCommentsObj[key] === false ||
-          requiredCommentsObj[key] === "false"
-        ) {
-          checkArray2.push("false");
-        }
-      });
-      if (
-        postsortCommentsRequired === true ||
-        postsortCommentsRequired === "true"
-      ) {
-        if (checkArray2.length > 0 || checkArray2.includes("false")) {
-          // answers required in configObj
-          setShowPostsortCommentHighlighting(true);
-          setTriggerPostsortPreventNavModal(true);
-          return false;
-        } else {
-          return true;
-        }
+      const checkArray2 = [
+        ...required1,
+        ...required2,
+        ...required3,
+        ...required4,
+      ];
+
+      if (checkArray2.includes("false") || checkArray2.includes(false)) {
+        // answers required in configObj
+        setShowPostsortCommentHighlighting(true);
+        setTriggerPostsortPreventNavModal(true);
+        return false;
       } else {
         return true;
       }

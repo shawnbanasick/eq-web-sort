@@ -38,6 +38,10 @@ const HighCards = (props) => {
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
+  const [requiredCommentsObject, setRequiredCommentsObject] = useLocalStorage(
+    "HC-requiredCommentsObj",
+    {}
+  );
 
   // GLOBAL STATE
   const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
@@ -75,8 +79,6 @@ const HighCards = (props) => {
     const results = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
     let allCommentsObj =
       JSON.parse(localStorage.getItem("allCommentsObj")) || {};
-    const requiredCommentsObj =
-      JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
 
     // set comment check object for Results formatting on Submit page
     let commentLength = event.target.value.length;
@@ -90,7 +92,6 @@ const HighCards = (props) => {
     const cards = columnStatements.vCols[agreeObj.columnDisplay];
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
-
     const identifier = `${columnDisplay}_${+itemId}`;
 
     // to update RESULTS storage for just the card that changed
@@ -104,7 +105,6 @@ const HighCards = (props) => {
         // assign to main data object for confirmation / debugging
         if (comment.length > 0) {
           el.comment = sanitizeString(comment);
-          // assign to comments object
 
           results[identifier] = `(${el.id}) ${comment}`;
           // setup persistence for comments
@@ -112,46 +112,30 @@ const HighCards = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          requiredCommentsObj[`hc-${itemId}`] = true;
-
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`hc-${itemId}`] = true;
+          setRequiredCommentsObject(requiredCommentsObject);
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          requiredCommentsObj[`hc-${itemId}`] = false;
-
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`hc-${itemId}`] = false;
+          setRequiredCommentsObject(requiredCommentsObject);
         }
       }
       return el;
     });
     asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
-    asyncLocalStorage.setItem(
-      "requiredCommentsObj",
-      JSON.stringify(requiredCommentsObj)
-    );
     setForceRerenderCount(forceRerenderCount + 1);
   }; // END handleChange
 
   // MAP cards to DOM
   return highCards.map((item, index) => {
-    console.log("item rendering");
     let content = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
     let allCommentsObj =
       JSON.parse(localStorage.getItem("allCommentsObj")) || {};
     let cardComment = allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`];
-    const requiredCommentsObj =
-      JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
-
-    console.log(JSON.stringify(requiredCommentsObj, null, 2));
-
-    localStorage.setItem(
-      "requiredCommentsObj",
-      JSON.stringify(requiredCommentsObj)
-    );
 
     if (configObj.useImages === true) {
       content = ReactHtmlParser(
@@ -166,7 +150,7 @@ const HighCards = (props) => {
     ) {
       // if comments are required, highlight if no comment
       if (showPostsortCommentHighlighting === true) {
-        highlighting = requiredCommentsObj[`hc-${index}`];
+        highlighting = requiredCommentsObject[`hc-${index}`];
       }
     }
 

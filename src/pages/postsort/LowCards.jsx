@@ -34,12 +34,14 @@ const LowCards = (props) => {
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
+  const [forceRerenderCount, setForceRerenderCount] = useState(0);
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
-
-  const requiredCommentsObj =
-    JSON.parse(localStorage.getItem("requiredCommentsObj")) || {};
+  const [requiredCommentsObject, setRequiredCommentsObject] = useLocalStorage(
+    "LC-requiredCommentsObj",
+    {}
+  );
 
   // GLOBAL STATE
   const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
@@ -90,8 +92,6 @@ const LowCards = (props) => {
       // setCommentCheckObj({ ...postsortCommentCheckObj });
     }
     const cards = columnStatements.vCols[disagreeObj.columnDisplay];
-    console.log("cards", cards);
-
     const targetCard = event.target.id;
     const userEnteredText = event.target.value;
     const identifier = `${columnDisplay}_${itemId}`;
@@ -115,19 +115,22 @@ const LowCards = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`lc-${itemId}`] = true;
+          setRequiredCommentsObject(requiredCommentsObject);
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          // setAllCommentsObj({ ...allCommentsObj });
+          requiredCommentsObject[`lc-${itemId}`] = false;
+          setRequiredCommentsObject(requiredCommentsObject);
         }
       }
       return el;
     });
     asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
+    setForceRerenderCount(forceRerenderCount + 1);
   }; // end onBlur
 
   // MAP cards to DOM
@@ -138,31 +141,19 @@ const LowCards = (props) => {
     let cardComment =
       allCommentsObj[`textArea-${columnDisplay}_${+index + 1}`] || "";
 
-    if (cardComment.length > 0) {
-      requiredCommentsObj[`lc-${index}`] = true;
-    } else {
-      requiredCommentsObj[`lc-${index}`] = false;
-    }
-
-    localStorage.setItem(
-      "requiredCommentsObj",
-      JSON.stringify(requiredCommentsObj)
-    );
-
     if (configObj.useImages === true) {
       content = ReactHtmlParser(
         `<img src="${item.element.props.src}" style="pointer-events: all" alt=${item.element.props.alt} />`
       );
     }
 
-    item.indexVal = index;
     let highlighting = true;
     if (
       configObj.postsortCommentsRequired === "true" ||
       configObj.postsortCommentsRequired === true
     ) {
       if (showPostsortCommentHighlighting === true) {
-        highlighting = requiredCommentsObj[`lc-${index}`];
+        highlighting = requiredCommentsObject[`lc-${index}`];
       }
     }
 
