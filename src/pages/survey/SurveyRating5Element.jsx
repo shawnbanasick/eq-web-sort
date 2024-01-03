@@ -82,7 +82,7 @@ const SurveyRatings5Element = (props) => {
       if (index === 0) {
         textString += value;
       } else {
-        textString += "~" + value;
+        textString += "," + value;
       }
     });
     resultsSurvey[`qNum${props.opts.qNum}`] = textString;

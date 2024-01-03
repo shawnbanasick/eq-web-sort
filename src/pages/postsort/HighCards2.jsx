@@ -34,7 +34,6 @@ const HighCards2Display = (props) => {
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
-  const [forceRerenderCount, setForceRerenderCount] = useState(0);
 
   // PERSISTED STATE
   const columnStatements = JSON.parse(localStorage.getItem("sortColumns"));
@@ -113,22 +112,23 @@ const HighCards2Display = (props) => {
           allCommentsObj[
             `textArea-${columnDisplay}_${itemId + 1}`
           ] = `${comment}`;
-          requiredCommentsObject[`hc2-${itemId}`] = true;
-          setRequiredCommentsObject(requiredCommentsObject);
+          setRequiredCommentsObject((requiredCommentsObject) => {
+            return { ...requiredCommentsObject, [`hc2-${itemId}`]: true };
+          });
         } else {
           el.comment = "";
           results[identifier] = "";
           allCommentsObj[identifier] = "";
           allCommentsObj[`textArea-${columnDisplay}_${itemId + 1}`] = "";
-          requiredCommentsObject[`hc2-${itemId}`] = false;
-          setRequiredCommentsObject(requiredCommentsObject);
+          setRequiredCommentsObject((requiredCommentsObject) => {
+            return { ...requiredCommentsObject, [`hc2-${itemId}`]: false };
+          });
         }
       }
       return el;
     });
     asyncLocalStorage.setItem("allCommentsObj", JSON.stringify(allCommentsObj));
     asyncLocalStorage.setItem("resultsPostsort", JSON.stringify(results));
-    setForceRerenderCount(forceRerenderCount + 1);
   }; // end onBlur
 
   // render elements

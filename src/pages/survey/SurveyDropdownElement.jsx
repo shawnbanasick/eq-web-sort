@@ -65,7 +65,7 @@ const SurveyDropdownElement = (props) => {
         if (i === 0) {
           selected2 += id + 1;
         } else {
-          selected2 += "~" + (id + 1);
+          selected2 += "," + (id + 1);
         }
       }
       resultsSurvey[`qNum${props.opts.qNum}`] = selected2;

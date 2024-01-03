@@ -20,7 +20,6 @@ const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
 // const getUsercode = (state) => state.usercode;
 const getUrlUsercode = (state) => state.urlUsercode;
@@ -31,19 +30,21 @@ const getLocalUsercode = (state) => state.localUsercode;
 let transmissionResults = {};
 
 const SubmitPage = () => {
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  const resultsSurvey = useStore(getResultsSurvey);
   const partId = useStore(getPartId);
   // const usercode = useStore(getUsercode);
   const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
   const localUsercode = useStore(getLocalUsercode);
+
+  // PERSISTENT STATE
+  const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
 
   useEffect(() => {
     setCurrentPage("submit");
@@ -58,8 +59,9 @@ const SubmitPage = () => {
   const linkedProjectBtnMessage = decodeHTML(langObj.linkedProjectBtnMessage);
 
   const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
-  const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort"));
-  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns"));
+  const resultsPresort =
+    JSON.parse(localStorage.getItem("resultsPresort")) || {};
+  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
 
   // config options
   const headerBarColor = configObj.headerBarColor;
@@ -121,9 +123,8 @@ const SubmitPage = () => {
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {
-        const resultsPostsort = JSON.parse(
-          localStorage.getItem("resultsPostsort")
-        );
+        const resultsPostsort =
+          JSON.parse(localStorage.getItem("resultsPostsort")) || {};
         const newPostsortObject = calculatePostsortResults(
           resultsPostsort,
           mapObj,
@@ -140,7 +141,7 @@ const SubmitPage = () => {
         }
       }
 
-      // if project included SURVEY, read in results
+      // ** SURVEY, read in results
       if (configObj.showSurvey) {
         const keys2 = Object.keys(resultsSurvey);
         for (let ii = 0; ii < keys2.length; ii++) {

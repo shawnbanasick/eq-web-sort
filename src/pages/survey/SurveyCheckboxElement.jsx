@@ -55,13 +55,13 @@ const SurveyCheckboxElement = (props) => {
     let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
         if (currentState === true) {
-          return text + (index + 1).toString() + "~";
+          return text + (index + 1).toString() + ",";
         }
         return text;
       },
       ""
     );
-    if (selected.charAt(selected.length - 1) === "~") {
+    if (selected.charAt(selected.length - 1) === ",") {
       selected = selected.substr(0, selected.length - 1);
     }
     // store the selected answers in the results object
