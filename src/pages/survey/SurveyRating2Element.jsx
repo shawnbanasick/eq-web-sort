@@ -25,7 +25,7 @@ const SurveyRatings2Element = (props) => {
   const checkRequiredQuestionsComplete = props.check;
   // gives the number of questions
   const rows = optsArray.length;
-  const questionId = `qNum${props.opts.qNum}`;
+  const questionId = `itemNum${props.opts.itemNum}`;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
   let displayNoteText = true;
@@ -77,7 +77,7 @@ const SurveyRatings2Element = (props) => {
 
     let textString = "";
     newCheckedState.forEach((item, index) => {
-      // let name = `qNum${props.opts.qNum}-${index + 1}`;
+      // let name = `itemNum${props.opts.itemNum}-${index + 1}`;
       let value = item[0] ? "1" : "2";
       if (index === 0) {
         textString += value;
@@ -85,13 +85,13 @@ const SurveyRatings2Element = (props) => {
         textString += "," + value;
       }
     });
-    resultsSurvey[`qNum${props.opts.qNum}`] = textString;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = textString;
 
     if (objTestValue2 !== arrayLen2) {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
@@ -137,7 +137,7 @@ const SurveyRatings2Element = (props) => {
             id={`Q-${index}`}
             type="radio"
             value={1}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 0, e)}
             checked={checkedState[index][0]}
           />
@@ -146,7 +146,7 @@ const SurveyRatings2Element = (props) => {
             id={`Q2-${index}`}
             type="radio"
             value={2}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 1, e)}
             checked={checkedState[index][1]}
           />

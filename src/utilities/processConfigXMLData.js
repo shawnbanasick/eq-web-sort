@@ -57,8 +57,8 @@ const processConfigXMLData = (dataObject) => {
 
       // INFORMATION question
       if (questionType === "information") {
-        tempObj.id = `qNum${j + 1}`;
-        tempObj.qNum = j + 1;
+        tempObj.id = `itemNum${j + 1}`;
+        tempObj.itemNum = j + 1;
         tempObj.type = "information";
         tempObj.background = surveyData[j][1].attributes.bg;
 
@@ -68,22 +68,22 @@ const processConfigXMLData = (dataObject) => {
           console.log(error);
           tempObj.options = "";
         }
-        requiredAnswersObj[`qNum${j + 1}`] = "info - n.a.";
+        requiredAnswersObj[`itemNum${j + 1}`] = "info - n.a.";
 
         surveyQuestionArray.push(tempObj);
       }
 
       // TEXT question
       if (questionType === "text") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "text";
         tempObj.required = isRequired;
 
@@ -135,15 +135,15 @@ const processConfigXMLData = (dataObject) => {
 
       // TEXTAREA question
       if (questionType === "textarea") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "textarea";
 
         try {
@@ -180,15 +180,15 @@ const processConfigXMLData = (dataObject) => {
 
       // RADIO question
       if (questionType === "radio") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "radio";
 
         try {
@@ -226,15 +226,15 @@ const processConfigXMLData = (dataObject) => {
 
       // SELECT question
       if (questionType === "select") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "select";
 
         try {
@@ -272,15 +272,15 @@ const processConfigXMLData = (dataObject) => {
 
       // CHECKBOX question
       if (questionType === "checkbox") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "checkbox";
         try {
           tempObj.required = JSON.parse(surveyData[j][0].attributes.required);
@@ -317,15 +317,15 @@ const processConfigXMLData = (dataObject) => {
 
       // RATING2 question
       if (questionType === "rating2") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "rating2";
         try {
           tempObj.required = surveyData[j][0].attributes.required;
@@ -369,15 +369,15 @@ const processConfigXMLData = (dataObject) => {
 
       // likert 5 question
       if (questionType === "likert5") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "likert5";
         try {
           tempObj.required = surveyData[j][0].attributes.required;
@@ -415,15 +415,15 @@ const processConfigXMLData = (dataObject) => {
 
       // RATING5 question
       if (questionType === "rating5") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "rating5";
         try {
           tempObj.required = surveyData[j][0].attributes.required;
@@ -461,15 +461,15 @@ const processConfigXMLData = (dataObject) => {
 
       // RATING10 question
       if (questionType === "rating10") {
-        tempObj.id = `qNum${j + 1}`;
+        tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
           isRequired = true;
-          requiredAnswersObj[`qNum${j + 1}`] = "no-*?*-response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no-*?*-response";
         } else {
-          requiredAnswersObj[`qNum${j + 1}`] = "no response";
+          requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
-        tempObj.qNum = j + 1;
+        tempObj.itemNum = j + 1;
         tempObj.type = "rating10";
         try {
           tempObj.required = surveyData[j][0].attributes.required;

@@ -9,7 +9,7 @@ const SurveyLikertElement = (props) => {
   // PROPS
   const checkRequiredQuestionsComplete = props.check;
   // gives the number of questions
-  const questionId = `qNum${props.opts.qNum}`;
+  const questionId = `itemNum${props.opts.itemNum}`;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
 
   // PERSISTENT STATE
@@ -32,7 +32,7 @@ const SurveyLikertElement = (props) => {
   // ****** ON CHANGE  *******
   const handleChange = (e) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    resultsSurvey[`qNum${props.opts.qNum}`] = +e.target.value + 1;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = +e.target.value + 1;
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handleChange
 

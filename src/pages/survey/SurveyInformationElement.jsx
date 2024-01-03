@@ -6,9 +6,9 @@ import decodeHTML from "../../utilities/decodeHTML";
 const SurveyInformationElement = (props) => {
   useEffect(() => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    resultsSurvey[`qNum${props.opts.qNum}`] = "info. - na";
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = "info. - na";
     // localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
-  }, [props.opts.qNum]);
+  }, [props.opts.itemNum]);
 
   const infoText = ReactHtmlParser(decodeHTML(props.opts.options));
 

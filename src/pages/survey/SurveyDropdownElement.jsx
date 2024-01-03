@@ -68,12 +68,12 @@ const SurveyDropdownElement = (props) => {
           selected2 += "," + (id + 1);
         }
       }
-      resultsSurvey[`qNum${props.opts.qNum}`] = selected2;
+      resultsSurvey[`itemNum${props.opts.itemNum}`] = selected2;
     } else {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));

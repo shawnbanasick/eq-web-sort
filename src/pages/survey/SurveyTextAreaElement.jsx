@@ -15,7 +15,7 @@ const SurveyTextAreaElement = (props) => {
   };
 
   // FROM PROPS
-  const id = `qNum${props.opts.qNum}`;
+  const id = `itemNum${props.opts.itemNum}`;
   const checkRequiredQuestionsComplete = props.check;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
@@ -42,12 +42,12 @@ const SurveyTextAreaElement = (props) => {
     // record if answered or not
     if (value.length > 0) {
       let sanitizedText = sanitizeString(value);
-      resultsSurvey[`qNum${props.opts.qNum}`] = sanitizedText;
+      resultsSurvey[`itemNum${props.opts.itemNum}`] = sanitizedText;
     } else {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     asyncLocalStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));

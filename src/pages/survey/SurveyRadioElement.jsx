@@ -57,7 +57,7 @@ const SurveyRadioElement = (props) => {
 
   const handleChange = (e) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    resultsSurvey[`qNum${props.opts.qNum}`] = +e.target.value + 1;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = +e.target.value + 1;
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handle change
 

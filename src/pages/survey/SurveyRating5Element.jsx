@@ -20,7 +20,7 @@ const SurveyRatings5Element = (props) => {
   // PROPS
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
-  const questionId = `qNum${props.opts.qNum}`;
+  const questionId = `itemNum${props.opts.itemNum}`;
   const checkRequiredQuestionsComplete = props.check;
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
   let displayNoteText = true;
@@ -78,13 +78,13 @@ const SurveyRatings5Element = (props) => {
         textString += "," + value;
       }
     });
-    resultsSurvey[`qNum${props.opts.qNum}`] = textString;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = textString;
 
     if (objTestValue2 !== arrayLen2) {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
@@ -130,7 +130,7 @@ const SurveyRatings5Element = (props) => {
             id={`Q-${index}`}
             type="radio"
             value={1}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 0, e)}
             checked={checked5State[index][0]}
           />
@@ -139,7 +139,7 @@ const SurveyRatings5Element = (props) => {
             id={`Q2-${index}`}
             type="radio"
             value={2}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 1, e)}
             checked={checked5State[index][1]}
           />
@@ -148,7 +148,7 @@ const SurveyRatings5Element = (props) => {
             id={`Q3-${index}`}
             type="radio"
             value={3}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 2, e)}
             checked={checked5State[index][2]}
           />
@@ -157,7 +157,7 @@ const SurveyRatings5Element = (props) => {
             id={`Q4-${index}`}
             type="radio"
             value={4}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 3, e)}
             checked={checked5State[index][3]}
           />
@@ -166,7 +166,7 @@ const SurveyRatings5Element = (props) => {
             id={`Q5-${index}`}
             type="radio"
             value={5}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 4, e)}
             checked={checked5State[index][4]}
           />

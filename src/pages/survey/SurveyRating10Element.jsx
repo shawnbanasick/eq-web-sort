@@ -21,7 +21,7 @@ const SurveyRatings10Element = (props) => {
   // PROPS
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
-  const questionId = `qNum${props.opts.qNum}`;
+  const questionId = `itemNum${props.opts.itemNum}`;
   const checkRequiredQuestionsComplete = props.check;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
@@ -77,13 +77,13 @@ const SurveyRatings10Element = (props) => {
         textString += "," + value;
       }
     });
-    resultsSurvey[`qNum${props.opts.qNum}`] = textString;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = textString;
 
     if (objTestValue2 !== arrayLen2) {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
@@ -129,7 +129,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q-${index}`}
             type="radio"
             value={1}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 0, e)}
             checked={checkedState[index][0]}
           />
@@ -138,7 +138,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q2-${index}`}
             type="radio"
             value={2}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 1, e)}
             checked={checkedState[index][1]}
           />
@@ -147,7 +147,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q3-${index}`}
             type="radio"
             value={3}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 2, e)}
             checked={checkedState[index][2]}
           />
@@ -156,7 +156,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q4-${index}`}
             type="radio"
             value={4}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 3, e)}
             checked={checkedState[index][3]}
           />
@@ -165,7 +165,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q5-${index}`}
             type="radio"
             value={5}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 4, e)}
             checked={checkedState[index][4]}
           />
@@ -174,7 +174,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q6-${index}`}
             type="radio"
             value={6}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 5, e)}
             checked={checkedState[index][5]}
           />
@@ -183,7 +183,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q7-${index}`}
             type="radio"
             value={7}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 6, e)}
             checked={checkedState[index][6]}
           />
@@ -192,7 +192,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q8-${index}`}
             type="radio"
             value={8}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 7, e)}
             checked={checkedState[index][7]}
           />
@@ -201,7 +201,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q9-${index}`}
             type="radio"
             value={9}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 8, e)}
             checked={checkedState[index][8]}
           />
@@ -210,7 +210,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q10-${index}`}
             type="radio"
             value={10}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 9, e)}
             checked={checkedState[index][9]}
           />

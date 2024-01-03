@@ -22,7 +22,7 @@ const SurveyCheckboxElement = (props) => {
   // PROPS
   const checkRequiredQuestionsComplete = props.check;
   const optsArray = getOptionsArray(props.opts.options);
-  const nameValue = `question${props.opts.qNum}`;
+  const nameValue = `question${props.opts.itemNum}`;
   let questionId = props.opts.id;
   const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
   const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
@@ -65,13 +65,13 @@ const SurveyCheckboxElement = (props) => {
       selected = selected.substr(0, selected.length - 1);
     }
     // store the selected answers in the results object
-    resultsSurvey[`qNum${props.opts.qNum}`] = selected;
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = selected;
 
     if (selected === "") {
       if (props.opts.required === true || props.opts.required === "true") {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        resultsSurvey[`qNum${props.opts.qNum}`] = "no response";
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
     localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
