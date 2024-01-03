@@ -41,16 +41,10 @@ const SurveyRatings10Element = (props) => {
     bgColor: "whitesmoke",
     border: "none",
   });
-  const [localStore, setLocalStore] = useState({});
 
   // *** HANDLE CHANGE ***
   const handleChange = (selectedRow, column, e) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    let name = e.target.name;
-    let value = e.target.value;
-    const newObj = localStore;
-    newObj[name] = value;
-    setLocalStore(newObj);
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
       if (selectedRow === index) {

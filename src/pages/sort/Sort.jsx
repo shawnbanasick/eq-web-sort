@@ -157,13 +157,15 @@ const Sort = () => {
   });
 
   useEffect(() => {
+    let startTime = Date.now();
     const setStateAsync = async () => {
-      let startTime = Date.now();
       await setPresortNoReturn(true);
       await setCurrentPage("sort");
-      await calculateTimeOnPage(startTime, "sortPage", "sortPage");
     };
     setStateAsync();
+    return () => {
+      calculateTimeOnPage(startTime, "sortPage", "sortPage");
+    };
   }, [setPresortNoReturn, setCurrentPage]);
 
   return (

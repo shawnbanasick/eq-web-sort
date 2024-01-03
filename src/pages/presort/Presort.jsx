@@ -58,13 +58,15 @@ const PresortPage = (props) => {
   setDisplayNextButton(true);
 
   useEffect(() => {
+    let startTime = Date.now();
     const setStateAsync = async () => {
-      let startTime = Date.now();
       await setCurrentPage("presort");
       await setProgressScore(20);
-      await calculateTimeOnPage(startTime, "presortPage", "presortPage");
     };
     setStateAsync();
+    return () => {
+      calculateTimeOnPage(startTime, "presortPage", "presortPage");
+    };
   }, [setCurrentPage, setProgressScore]);
 
   let columnStatements = statementsObj.columnStatements;

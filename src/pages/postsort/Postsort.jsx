@@ -63,10 +63,12 @@ const PostSort = () => {
   });
 
   useEffect(() => {
-    let startTime;
-    startTime = Date.now();
-    setCurrentPage("postsort");
-    setProgressScore(50);
+    let startTime = Date.now();
+    const setStateAsync = async () => {
+      await setCurrentPage("postsort");
+      await setProgressScore(50);
+    };
+    setStateAsync();
     return () => {
       calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
     };

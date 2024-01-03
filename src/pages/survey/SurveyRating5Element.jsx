@@ -36,7 +36,6 @@ const SurveyRatings5Element = (props) => {
   );
 
   // LOCAL STATE
-  const [local5Store, setLocal5Store] = useState({});
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
@@ -45,12 +44,6 @@ const SurveyRatings5Element = (props) => {
   // HANDLE CHANGE
   const handleChange = (selectedRow, column, e) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    let name = e.target.name;
-    let value = e.target.value;
-    // needed for required question check
-    const newObj = local5Store;
-    newObj[name] = value;
-    setLocal5Store(newObj);
     // update local state with radio selected
     const newArray = [];
     const newChecked5State = checked5State.map(function (row, index) {

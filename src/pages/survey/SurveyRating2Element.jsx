@@ -44,19 +44,12 @@ const SurveyRatings2Element = (props) => {
     bgColor: "whitesmoke",
     border: "none",
   });
-  const [localStore, setLocalStore] = useState({});
 
   const scaleArray = getOptionsArray(props.opts.scale);
 
   // ****** ON CHANGE  *******
   const handleChange = (selectedRow, column, e) => {
     const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
-    let name = e.target.name;
-    let value = e.target.value;
-    // needed for required question check
-    const newObj = localStore;
-    newObj[name] = value;
-    setLocalStore(newObj);
     // update local state with radio selected
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
