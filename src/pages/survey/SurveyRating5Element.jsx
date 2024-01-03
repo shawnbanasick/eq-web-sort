@@ -75,9 +75,19 @@ const SurveyRatings5Element = (props) => {
     let flattenedCheckedState2 = flatten([...newChecked5State]);
     let count2 = countBy(flattenedCheckedState2);
     let objTestValue2 = count2[true] || 0;
-    if (objTestValue2 === arrayLen2) {
-      resultsSurvey[`qNum${props.opts.qNum}`] = [...newChecked5State];
-    } else {
+
+    let textString = "";
+    newChecked5State.forEach((item, index) => {
+      let value = newChecked5State[index].indexOf(true) + 1;
+      if (index === 0) {
+        textString += value;
+      } else {
+        textString += "~" + value;
+      }
+    });
+    resultsSurvey[`qNum${props.opts.qNum}`] = textString;
+
+    if (objTestValue2 !== arrayLen2) {
       if (props.opts.required === true || props.opts.required === "true") {
         resultsSurvey[`qNum${props.opts.qNum}`] = "no-*?*-response";
       } else {

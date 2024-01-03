@@ -68,6 +68,7 @@ const processConfigXMLData = (dataObject) => {
           console.log(error);
           tempObj.options = "";
         }
+        requiredAnswersObj[`qNum${j + 1}`] = "info - n.a.";
 
         surveyQuestionArray.push(tempObj);
       }

@@ -23,8 +23,6 @@ const getIsLoggedIn = (state) => state.isLoggedIn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetProgressScore = (state) => state.setProgressScore;
 const getPresortNoReturn = (state) => state.presortNoReturn;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getResetColumnStatements = (state) => state.resetColumnStatements;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getBypassPresort = (state) => state.bypassSort;
@@ -40,8 +38,6 @@ const PresortPage = (props) => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
   const presortNoReturn = useStore(getPresortNoReturn);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const bypassPresort = useStore(getBypassPresort);
@@ -53,33 +49,23 @@ const PresortPage = (props) => {
     (configObj.setDefaultFontSizePresort === "true" && bypassPresort === false)
   ) {
     cardFontSize = configObj.defaultFontSizePresort;
-    setCardFontSize(configObj.defaultFontSizePresort);
   }
+  useEffect(() => {
+    setCardFontSize(configObj.defaultFontSizePresort);
+  }, [configObj.defaultFontSizePresort, setCardFontSize]);
 
   // set next button display
   setDisplayNextButton(true);
 
   useEffect(() => {
     const setStateAsync = async () => {
+      let startTime = Date.now();
       await setCurrentPage("presort");
       await setProgressScore(20);
+      await calculateTimeOnPage(startTime, "presortPage", "presortPage");
     };
     setStateAsync();
   }, [setCurrentPage, setProgressScore]);
-
-  // calc time on page
-  useEffect(() => {
-    let startTime = Date.now();
-    return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "presortPage",
-        "presortPage",
-        results
-      );
-      setResults(updatedResults);
-    };
-  }, [results, setResults]);
 
   let columnStatements = statementsObj.columnStatements;
 

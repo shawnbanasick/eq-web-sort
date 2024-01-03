@@ -75,6 +75,7 @@ const SortGridImages = (props) => {
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
   const maxNumCardsInCol = Math.max(...qSortPattern);
+
   const cardHeightRef = useRef(null);
 
   let presortColumnStatements = JSON.parse(
@@ -165,6 +166,7 @@ const SortGridImages = (props) => {
 
       setIsSortingFinished(manageDragResults.sortFinished);
       setResults(manageDragResults.results);
+
       setSortFinishedModalHasBeenShown(
         manageDragResults.sortFinishedModalHasBeenShown
       );
@@ -240,6 +242,7 @@ const SortGridImages = (props) => {
         // increment Progress Bar
         const totalStatements2 = configObj.numImages;
         const remainingStatements = columnStatements.imagesList.length;
+        console.log(columnStatements);
         const numerator = totalStatements2 - remainingStatements;
         const ratio = numerator / totalStatements2;
         const completedPercent = (ratio * 30).toFixed();

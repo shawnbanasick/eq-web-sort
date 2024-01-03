@@ -112,6 +112,7 @@ const SortGrid = (props) => {
       );
 
       setIsSortingFinished(manageDragResults.sortFinished);
+
       setResults(manageDragResults.results);
       setSortFinishedModalHasBeenShown(
         manageDragResults.sortFinishedModalHasBeenShown

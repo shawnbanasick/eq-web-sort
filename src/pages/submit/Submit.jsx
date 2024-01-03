@@ -12,16 +12,17 @@ import useStore from "../../globalState/useStore";
 import LocalSubmitSuccessModal from "./LocalSubmitSuccessModal";
 import SubmitButtonGS from "./SubmitButtonGS";
 import SubmitButtonEmail from "./SubmitButtonEmail";
+import convertObjectToResults from "../sort/convertObjectToResults";
+import getCurrentDateTime from "../../utilities/getCurrentDateTime";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getResults = (state) => state.results;
 const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
-const getUsercode = (state) => state.usercode;
+// const getUsercode = (state) => state.usercode;
 const getUrlUsercode = (state) => state.urlUsercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
@@ -36,10 +37,9 @@ const SubmitPage = () => {
   const mapObj = useSettingsStore(getMapObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  const results = useStore(getResults);
   const resultsSurvey = useStore(getResultsSurvey);
   const partId = useStore(getPartId);
-  const usercode = useStore(getUsercode);
+  // const usercode = useStore(getUsercode);
   const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
@@ -58,6 +58,8 @@ const SubmitPage = () => {
   const linkedProjectBtnMessage = decodeHTML(langObj.linkedProjectBtnMessage);
 
   const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
+  const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort"));
+  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns"));
 
   // config options
   const headerBarColor = configObj.headerBarColor;
@@ -70,10 +72,17 @@ const SubmitPage = () => {
       transmissionResults["partId"] = partId;
       transmissionResults["randomId"] = uuid().substring(0, 12);
       transmissionResults["urlUsercode"] = urlUsercode;
-      transmissionResults["dateTime"] = results.dateTime;
-      transmissionResults["timeLanding"] = results.timeOnlandingPage;
-      transmissionResults["timePresort"] = results.timeOnpresortPage;
-      transmissionResults["timeSort"] = results.timeOnsortPage;
+      const dateString = getCurrentDateTime();
+
+      transmissionResults["dateTime (yyyy/MM/dd@hr:mins:sec)"] = dateString;
+      // let timeLanding = localStorage.getItem("timeOnlandingPage") || "00:00:00";
+      // console.log(timeLanding);
+      transmissionResults["timeLanding (hr:min:sec)"] =
+        localStorage.getItem("timeOnlandingPage") || "00:00:00";
+      transmissionResults["timePresort (hr:min:sec)"] =
+        localStorage.getItem("timeOnpresortPage") || "00:00:00";
+      transmissionResults["timeSort (hr:min:sec)"] =
+        localStorage.getItem("timeOnsortPage") || "00:00:00";
 
       if (configObj.setupTarget === "local") {
         transmissionResults["partId"] = localParticipantName;
@@ -81,32 +90,34 @@ const SubmitPage = () => {
       }
 
       if (configObj.showPostsort === true) {
-        transmissionResults["timePostsort"] = results.timeOnpostsortPage;
+        transmissionResults["timePostsort (hr:min:sec)"] =
+          localStorage.getItem("timeOnpostsortPage") || "00:00:00";
       }
 
       if (configObj.showSurvey === true) {
-        transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
+        transmissionResults["timeSurvey (hr:min:sec)"] =
+          localStorage.getItem("timeOnsurveyPage") || "00:00:00";
       }
 
-      let numPos = results.npos;
+      let numPos = resultsPresort.npos;
       if (isNaN(numPos)) {
         numPos = 0;
       }
-      let numNeu = results.nneu;
+      let numNeu = resultsPresort.nneu;
       if (isNaN(numNeu)) {
         numNeu = 0;
       }
-      let numNeg = results.nneg;
+      let numNeg = resultsPresort.nneg;
       if (isNaN(numNeg)) {
         numNeg = 0;
       }
 
       transmissionResults["npos"] = numPos;
-      transmissionResults["posStateNums"] = results.posStateNums;
+      transmissionResults["posStateNums"] = resultsPresort.posStateNums;
       transmissionResults["nneu"] = numNeu;
-      transmissionResults["neuStateNums"] = results.neuStateNums;
+      transmissionResults["neuStateNums"] = resultsPresort.neuStateNums;
       transmissionResults["nneg"] = numNeg;
-      transmissionResults["negStateNums"] = results.negStateNums;
+      transmissionResults["negStateNums"] = resultsPresort.negStateNums;
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {
@@ -136,7 +147,10 @@ const SubmitPage = () => {
           transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
         }
       }
-      transmissionResults["sort"] = results.sort;
+
+      // *** SORT RESULTS
+      const resultsSort = convertObjectToResults(resultsSortObj);
+      transmissionResults["sort"] = resultsSort;
 
       // remove null values to prevent errors
       for (const property in transmissionResults) {
@@ -150,17 +164,7 @@ const SubmitPage = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [
-    results,
-    configObj,
-    localParticipantName,
-    localUsercode,
-    mapObj,
-    partId,
-    resultsSurvey,
-    usercode,
-    urlUsercode,
-  ]);
+  }); // *** end useEffect
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {

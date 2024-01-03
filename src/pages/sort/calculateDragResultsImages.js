@@ -1,4 +1,4 @@
-const calculateDragResults = (
+const calculateDragResultsImages = (
   outcome,
   totalStatements,
   results,
@@ -26,8 +26,9 @@ const calculateDragResults = (
 
       let catchNan = false;
 
-      // test if finished
+      // *** IF SORTING FINISHED
       if (testForCompleteArray.length === totalStatements) {
+        // convert to results text
         let resultsText = "";
         for (let i = 0; i < totalStatements; i++) {
           let key = `image${i + 1}`;
@@ -45,12 +46,15 @@ const calculateDragResults = (
           // if sort is complete
           // process string to remove trailing bar
           isSortingFinished = true;
-
+          // remove trailing bar
           if (resultsText.charAt(resultsText.length - 1) === "|") {
             resultsText = resultsText.substring(0, resultsText.length - 1);
           }
 
           results.sort = resultsText;
+          console.log("resultsText", resultsText);
+
+          localStorage.setItem("resultsSort", JSON.stringify(resultsText));
 
           if (sortFinishedModalHasBeenShown === false) {
             sortFinishedModalHasBeenShown = true;
@@ -74,4 +78,4 @@ const calculateDragResults = (
   }
 };
 
-export default calculateDragResults;
+export default calculateDragResultsImages;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -22,11 +22,11 @@ const getSetProgressScore = (state) => state.setProgressScore;
 const getCardHeight = (state) => state.cardHeight;
 const getCardFontSize = (state) => state.cardFontSize;
 const getSetCurrentPage = (state) => state.setCurrentPage;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const PostSort = () => {
+  const ElementRef = useRef(null);
+
   // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const mapObj = useSettingsStore(getMapObj);
@@ -35,8 +35,6 @@ const PostSort = () => {
   let cardHeight = useStore(getCardHeight);
   const cardFontSize = useStore(getCardFontSize);
   const setCurrentPage = useStore(getSetCurrentPage);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   // PERSISTENT STATE
@@ -60,21 +58,19 @@ const PostSort = () => {
   );
 
   useEffect(() => {
+    const Elementcount = ElementRef.current.childNodes.length;
+    localStorage.setItem("postsortCommentCardCount", Elementcount - 1);
+  });
+
+  useEffect(() => {
     let startTime;
     startTime = Date.now();
     setCurrentPage("postsort");
     setProgressScore(50);
-
     return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "postsortPage",
-        "postsortPage",
-        results
-      );
-      setResults(updatedResults);
+      calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
     };
-  }, [setCurrentPage, setProgressScore, results, setResults]);
+  }, [setCurrentPage, setProgressScore]);
 
   // pull data from localStorage
   const columnWidth = 250;
@@ -124,7 +120,7 @@ const PostSort = () => {
       <PostsortHelpModal />
       <PostsortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
-      <CardsContainer>
+      <CardsContainer ref={ElementRef}>
         <PostsortInstructions>{postsortInstructions}</PostsortInstructions>
         <HighCards
           agreeObj={agreeObj}

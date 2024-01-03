@@ -4,6 +4,7 @@ import MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useLocalStorage from "../../utilities/useLocalStorage";
+import flatten from "lodash/flatten";
 
 const SurveyDropdownElement = (props) => {
   // HELPER FUNCTION
@@ -51,15 +52,20 @@ const SurveyDropdownElement = (props) => {
       JSON.parse(localStorage.getItem("resultsSurvey")) || {};
     setSelected(e);
 
+    console.log(originalOptions);
+    let newArray = flatten(originalOptions);
+    console.log(newArray);
+    console.log(e);
+
     if (e.length !== 0) {
       let selected2 = "";
       for (let i = 0; i < e.length; i++) {
-        let label = e[i].label;
-        let id = originalOptions.indexOf(label);
+        let label = e[i].value;
+        let id = newArray.indexOf(label);
         if (i === 0) {
           selected2 += id + 1;
         } else {
-          selected2 += "|" + (id + 1);
+          selected2 += "~" + (id + 1);
         }
       }
       resultsSurvey[`qNum${props.opts.qNum}`] = selected2;

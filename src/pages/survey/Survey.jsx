@@ -27,8 +27,6 @@ const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getCheckReqQuesComplete = (state) => state.checkRequiredQuestionsComplete;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const SurveyPage = () => {
@@ -40,8 +38,6 @@ const SurveyPage = () => {
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQuesComplete);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   const headerBarColor = configObj.headerBarColor;
@@ -63,20 +59,12 @@ const SurveyPage = () => {
   }, [setRequiredAnswersObj, requiredAnswersObj]);
 
   useEffect(() => {
-    let startTime;
-    startTime = Date.now();
+    let startTime = Date.now();
     setCurrentPage("survey");
-
     return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "surveyPage",
-        "surveyPage",
-        results
-      );
-      setResults(updatedResults);
+      calculateTimeOnPage(startTime, "surveyPage", "surveyPage");
     };
-  }, [setCurrentPage, results, setResults]);
+  }, [setCurrentPage]);
 
   const SurveyQuestions = () => {
     if (!surveyQuestionObjects) {

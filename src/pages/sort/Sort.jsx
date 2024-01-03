@@ -29,13 +29,10 @@ const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getCardFontSize = (state) => state.cardFontSize;
-// const getColumnWidth = (state) => state.columnWidth;
 const getTopMargin = (state) => state.topMargin;
 const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetTopMargin = (state) => state.setTopMargin;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getBypassSort = (state) => state.bypassSort;
 const getSetCardFontSize = (state) => state.setCardFontSize;
@@ -50,11 +47,9 @@ const Sort = () => {
   let cardFontSize = useStore(getCardFontSize);
   // const columnWidth = useStore(getColumnWidth);
   const topMargin = useStore(getTopMargin);
-  const results = useStore(getResults);
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setTopMargin = useStore(getSetTopMargin);
-  const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const bypassSort = useStore(getBypassSort);
   const setCardFontSize = useStore(getSetCardFontSize);
@@ -152,7 +147,6 @@ const Sort = () => {
     height = +JSON.stringify(height);
 
     setTimeout(() => {
-      console.log("timer");
       if (sortGridMarginTop !== height) {
         setTopMargin(height);
         localStorage.setItem("sortGridMarginTop", JSON.stringify(height));
@@ -164,29 +158,13 @@ const Sort = () => {
 
   useEffect(() => {
     const setStateAsync = async () => {
+      let startTime = Date.now();
       await setPresortNoReturn(true);
       await setCurrentPage("sort");
+      await calculateTimeOnPage(startTime, "sortPage", "sortPage");
     };
     setStateAsync();
   }, [setPresortNoReturn, setCurrentPage]);
-
-  // calc time on page
-  useEffect(() => {
-    // get card font size
-    let startTime;
-    startTime = Date.now();
-    return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "sortPage",
-        "sortPage",
-        results
-      );
-      setResults(updatedResults);
-    };
-  }, [results, setResults]);
-
-  // useEffect(() => {}, [mapObj]);
 
   return (
     <React.Fragment>
@@ -208,6 +186,7 @@ const Sort = () => {
       <SortGridContainer marginTop={topMargin}>
         {imageSort ? (
           <SortGridImages
+            id="sortGridImages"
             dimensions={dimensions}
             cardFontSize={cardFontSize}
             fontColor={fontColor}

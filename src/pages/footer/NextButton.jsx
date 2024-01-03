@@ -32,7 +32,7 @@ const getSetTriggerPostsortPreventNavModal = (state) =>
 const LinkButton = (props) => {
   let goToNextPage;
 
-  // STATE
+  // GLOBAL STATE
   const configObj = useSettingsStore(getConfigObj);
   const presortFinished = useStore(getPresortFinished);
   const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
@@ -56,6 +56,9 @@ const LinkButton = (props) => {
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
   const postsortCommentsRequired = configObj.postsortCommentsRequired;
 
+  // PERSISTENT STATE
+  const sortColumns = JSON.parse(localStorage.getItem("sortColumns"));
+
   const {
     history,
     location,
@@ -74,6 +77,9 @@ const LinkButton = (props) => {
     // *** ReCalc Results ***
     let sortResults1 = convertObjectToResults(columnStatements);
 
+    console.log("sortResults1");
+    //console.log(sortResults1);
+
     if (currentPage === "presort") {
       if (isPresortFinished === false) {
         setTriggerPresortPreventNavModal(true);
@@ -85,20 +91,28 @@ const LinkButton = (props) => {
     if (currentPage === "sort") {
       if (isSortingFinished === false) {
         // check to see if finished, but had sorting registration error
-        if (statementsObj.columnStatements.statementList.length === 0) {
+        if (
+          statementsObj.columnStatements.statementList.length === 0 ||
+          sortColumns.imagesList.length === 0
+        ) {
           if (allowUnforcedSorts === true) {
             // unforced ok -> allow nav
+
+            // persist results to localStorage
             setResults(sortResults1);
+            // localStorage.setItem("resultsSort", JSON.stringify(sortResults1));
             setTriggerSortPreventNavModal(false);
             return true;
           } else {
-            // unforced not ok -> allow nav if no overloaded columns
+            // if forced sort -> allow nav only if no overloaded columns
             if (hasOverloadedColumn === true) {
               setTriggerSortPreventNavModal(false);
               setTriggerSortOverloadedColModal(true);
               return false;
             } else {
               setResults(sortResults1);
+              // persist results to localStorage
+              // localStorage.setItem("resultsSort", JSON.stringify(sortResults1));
               setTriggerSortPreventNavModal(false);
               return true;
             }
@@ -129,6 +143,11 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "postsort") {
+      let postsortCommentCardCount = +localStorage.getItem(
+        "postsortCommentCardCount"
+      );
+      console.log(postsortCommentCardCount);
+
       const required1 =
         getObjectValues(
           JSON.parse(localStorage.getItem("HC-requiredCommentsObj"))
@@ -153,11 +172,18 @@ const LinkButton = (props) => {
         ...required4,
       ];
 
-      if (checkArray2.includes("false") || checkArray2.includes(false)) {
+      if (
+        checkArray2.includes("false") ||
+        checkArray2.includes(false) ||
+        checkArray2.length < postsortCommentCardCount
+      ) {
         // answers required in configObj
-        setShowPostsortCommentHighlighting(true);
-        setTriggerPostsortPreventNavModal(true);
-        return false;
+        if (postsortCommentsRequired === true) {
+          setShowPostsortCommentHighlighting(true);
+          setTriggerPostsortPreventNavModal(true);
+          return false;
+        }
+        return true;
       } else {
         return true;
       }

@@ -20,8 +20,6 @@ const getDataLoaded = (state) => state.dataLoaded;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetProgressScore = (state) => state.setProgressScore;
 const getSetUrlUsercode = (state) => state.setUrlUsercode;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getSetCardFontSize = (state) => state.setCardFontSize;
@@ -38,8 +36,6 @@ const LandingPage = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
   const setUrlUsercode = useStore(getSetUrlUsercode);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   let displayLandingContent = useStore(getDisplayLandingContent);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const setCardFontSize = useStore(getSetCardFontSize);
@@ -54,13 +50,6 @@ const LandingPage = () => {
   localStorage.removeItem("sortColumns");
   localStorage.removeItem("columnStatements");
   localStorage.removeItem("presortSortedCards");
-
-  useEffect(() => {
-    setTimeout(() => {
-      setProgressScore(10);
-      setCurrentPage("landing");
-    }, 100);
-  }, [setProgressScore, setCurrentPage]);
 
   useEffect(() => {
     // display "Next" button if anonymous log in
@@ -164,16 +153,13 @@ const LandingPage = () => {
   // calc time on page
   useEffect(() => {
     const startTime = Date.now();
+    setProgressScore(10);
+    setCurrentPage("landing");
     return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "landingPage",
-        "landingPage",
-        results
-      );
-      setResults(updatedResults);
+      // will persist in localStorage
+      calculateTimeOnPage(startTime, "landingPage", "landingPage");
     };
-  }, [setResults, results]);
+  }, [setCurrentPage, setProgressScore]);
 
   // check for complete
   let displayLogInScreen = false;

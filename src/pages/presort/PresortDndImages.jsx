@@ -318,6 +318,7 @@ function PresortDNDImages(props) {
     projectResultsObj.nneg = columns.neg.items.length;
     projectResultsObj.negStateNums = negText;
     setResults(projectResultsObj);
+    localStorage.setItem("resultsPresort", JSON.stringify(projectResultsObj));
   }, [columns, results, setResults]);
 
   useEffect(() => {
