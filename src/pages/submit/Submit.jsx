@@ -76,14 +76,14 @@ const SubmitPage = () => {
       transmissionResults["urlUsercode"] = urlUsercode;
       const dateString = getCurrentDateTime();
 
-      transmissionResults["dateTime (yyyy/MM/dd@hr:mins:sec)"] = dateString;
+      transmissionResults["dateTime"] = dateString;
       // let timeLanding = localStorage.getItem("timeOnlandingPage") || "00:00:00";
       // console.log(timeLanding);
-      transmissionResults["timeLanding (hr:min:sec)"] =
+      transmissionResults["timeLanding"] =
         localStorage.getItem("timeOnlandingPage") || "00:00:00";
-      transmissionResults["timePresort (hr:min:sec)"] =
+      transmissionResults["timePresort"] =
         localStorage.getItem("timeOnpresortPage") || "00:00:00";
-      transmissionResults["timeSort (hr:min:sec)"] =
+      transmissionResults["timeSort"] =
         localStorage.getItem("timeOnsortPage") || "00:00:00";
 
       if (configObj.setupTarget === "local") {
@@ -92,12 +92,12 @@ const SubmitPage = () => {
       }
 
       if (configObj.showPostsort === true) {
-        transmissionResults["timePostsort (hr:min:sec)"] =
+        transmissionResults["timePostsort"] =
           localStorage.getItem("timeOnpostsortPage") || "00:00:00";
       }
 
       if (configObj.showSurvey === true) {
-        transmissionResults["timeSurvey (hr:min:sec)"] =
+        transmissionResults["timeSurvey"] =
           localStorage.getItem("timeOnsurveyPage") || "00:00:00";
       }
 
