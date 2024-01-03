@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import move from "./move";
@@ -42,7 +42,7 @@ const getSetTriggerSortingFinModal = (state) =>
 const getSetSortGridResults = (state) => state.setSortGridResults;
 
 const SortGridImages = (props) => {
-  // STATE
+  // GLOBAL STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
   // const statementsObj = useSettingsStore(getStatementsObj);
@@ -76,8 +76,6 @@ const SortGridImages = (props) => {
   const qSortPattern = [...mapObj.qSortPattern];
   const maxNumCardsInCol = Math.max(...qSortPattern);
 
-  const cardHeightRef = useRef(null);
-
   let presortColumnStatements = JSON.parse(
     localStorage.getItem("columnStatements")
   );
@@ -86,11 +84,13 @@ const SortGridImages = (props) => {
     presortColumnStatements = [];
   }
 
-  // Component Local State
+  // LOCAL STATE
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageSource, setImageSource] = useState("");
   const [dualPhotoArray, setDualPhotoArray] = useState([]);
   const [openDualImageModal, setOpenDualImageModal] = useState(false);
+
+  // PERSISTENT STATE
   const [columnStatements, setColumnStatements] = useLocalStorage(
     "sortColumns",
     presortColumnStatements
@@ -98,7 +98,6 @@ const SortGridImages = (props) => {
 
   let columnWidth = props.columnWidth;
   const totalStatements = +configObj.numImages;
-
   const sortCharacterisiticsPrep = {};
   sortCharacterisiticsPrep.qSortPattern = [...mapObj.qSortPattern];
   sortCharacterisiticsPrep.qSortHeaders = [...mapObj.qSortHeaders];
@@ -114,21 +113,13 @@ const SortGridImages = (props) => {
     sortDirection = "ltr";
   }
 
-  useEffect(() => {
-    // maximize cardHeight on first mount using default 0 in globalState
-    let updateCardHeight = async () => {
-      let currentCardHeight = cardHeightRef.current;
-      if (cardHeight === null || currentCardHeight !== cardHeight) {
-        currentCardHeight = +(
-          (window.innerHeight - 150) /
-          (maxNumCardsInCol + 1)
-        ).toFixed();
-        await setCardHeight(currentCardHeight);
-        localStorage.setItem("sortGridCardHeight", currentCardHeight);
-      }
-    };
-    updateCardHeight();
-  }, [cardHeight, maxNumCardsInCol, setCardHeight]);
+  if (+cardHeight === 0) {
+    cardHeight = +(
+      (window.innerHeight - 150) /
+      (maxNumCardsInCol + 1)
+    ).toFixed();
+    setCardHeight(+cardHeight);
+  }
 
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
@@ -192,9 +183,6 @@ const SortGridImages = (props) => {
         );
 
         setColumnStatements(newCols);
-        // force component update
-        // const newValue = value + 1;
-        // setValue(newValue);
       } else {
         // moving to another column
         // source.droppableId give orgin id => "statements" or "columnN1"
@@ -242,19 +230,13 @@ const SortGridImages = (props) => {
         // increment Progress Bar
         const totalStatements2 = configObj.numImages;
         const remainingStatements = columnStatements.imagesList.length;
-        console.log(columnStatements);
         const numerator = totalStatements2 - remainingStatements;
         const ratio = numerator / totalStatements2;
         const completedPercent = (ratio * 30).toFixed();
 
         // update Progress Bar State
         setProgressScoreAdditionalSort(completedPercent);
-
-        // force component update
-        // const newValue = value + 1;
-        // setValue(newValue);
       }
-      // setSortCharacteristics(sortCharacteristics);
     } catch (error) {
       console.log(error.message);
     }
@@ -344,12 +326,14 @@ const SortGridImages = (props) => {
         </Draggable>
       );
     });
-    /*
-    let finalItem = <div key={"placeholder"}>{props.provided.placeholder}</div>;
-    items.unshift(finalItem);
-    */
     return items;
   };
+  /*
+  *** placeholder problem is from React Beautiful DND lib - due to position fixed
+  let finalItem = <div key={"placeholder"}>{props.provided.placeholder}</div>;
+  items.unshift(finalItem);
+  todo - fix placeholder problem
+  */
 
   // returning main content => horizontal feeder
   return (
