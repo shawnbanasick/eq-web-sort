@@ -23,7 +23,7 @@ const getSetProgressScoreAdditional = (state) =>
 
 /*
  *
- *  note: drop column css is in "globalCSS.js" and column ids are generated string concatenations
+ *  drop column css is in "globalCSS.js" and column ids are generated string concatenations
  *  cardsDivImg, negDivImg,
  */
 

@@ -413,17 +413,18 @@ footer {
     grid-column-start: 3;
     overflow: hidden;
     align-self: end;
+    margin-top: 20px;
   }
   
   #cards{
-    max-height: 215px;1
+    max-height: 215px;
     min-height:150px;
     overflow: hidden;
   }
   
   #completionRatio {
-    grid-row-start: 2;
-    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-column-start: 4;
     text-align: center;
     font-weight: bold;
   }

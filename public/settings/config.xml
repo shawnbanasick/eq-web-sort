@@ -16,9 +16,9 @@
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://</item> 
    <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
-   <item id="useImages">true</item>
+   <item id="useImages">false</item>
    <item id="numImages">30</item>
-   <item id="imageFileType">png</item>
+   <item id="imageFileType">jpg</item>
    <item id="imageType">postSortImageModal169</item>
    <item id="shuffleImages">false</item>
    <!-- OTHER GENERAL OPTIONS -->
@@ -39,12 +39,12 @@
    
    <!-- PRESORT -->
    <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
-   <item id="defaultFontColor">#2a2a2a</item>
-   <item id="defaultFontSizePresort">26</item>
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
-   <item id="setDefaultFontSizePresort">true</item>
+   <item id="defaultFontColor">#2a2a2a</item>
+   <item id="defaultFontSizePresort">26</item>
+   <item id="setDefaultFontSizePresort">false</item>
   
 
    <!-- SORT -->

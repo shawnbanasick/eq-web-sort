@@ -5,6 +5,7 @@ import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -12,7 +13,7 @@ const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getPreSortedStateNumInit = (state) =>
   state.presortSortedStatementsNumInitial;
-const getSetColumnStatements = (state) => state.setColumnStatements;
+// const getSetColumnStatements = (state) => state.setColumnStatements;
 const getSetPresortFinished = (state) => state.setPresortFinished;
 const getSetTrigPresortFinModal = (state) =>
   state.setTriggerPresortFinishedModal;
@@ -28,7 +29,7 @@ function PresortDND(props) {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const presortSortedStatementsNumInitial = useStore(getPreSortedStateNumInit);
-  const setColumnStatements = useSettingsStore(getSetColumnStatements);
+  // const setColumnStatements = useSettingsStore(getSetColumnStatements);
   const setPresortFinished = useStore(getSetPresortFinished);
   const setTriggerPresortFinishedModal = useStore(getSetTrigPresortFinModal);
   const results = useStore(getResults);
@@ -41,22 +42,25 @@ function PresortDND(props) {
   );
   const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
+  const onPageInstructions = ReactHtmlParser(
+    decodeHTML(langObj.onPageInstructions)
+  );
 
   // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(
     presortSortedStatementsNumInitial
   );
 
-  const itemsFromBackend = props.statements;
   const cardFontSize = `${props.cardFontSize}px`;
   let defaultFontColor = configObj.defaultFontColor;
+  let statementsLength = columnStatements.statementList.length;
 
   const cardHeight = 210;
 
-  const [columns, setColumns] = useState({
+  const [columns, setColumns] = useLocalStorage("columns", {
     cards: {
       name: statementsName,
-      items: itemsFromBackend,
+      items: [...props.statements],
       id: "cards",
     },
     neg: {
@@ -133,7 +137,11 @@ function PresortDND(props) {
 
       // save to memory
       columnStatements.statementList = [...statementsArray];
-      setColumnStatements(columnStatements);
+      //setColumnStatements(columnStatements);
+      localStorage.setItem(
+        "columnStatements",
+        JSON.stringify(columnStatements)
+      );
 
       // when dropped on different droppable
       if (source.droppableId !== destination.droppableId) {
@@ -207,9 +215,10 @@ function PresortDND(props) {
     [
       configObj,
       columnStatements,
-      setColumnStatements,
       statementsObj,
       setProgressScoreAdditional,
+      greenArraySortValue,
+      pinkArraySortValue,
     ]
   ); // END DRAG-END
 
@@ -251,7 +260,7 @@ function PresortDND(props) {
     window.addEventListener("keyup", handleKeyUp);
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [onDragEnd, columns]);
+  }, [onDragEnd, setColumns, columns]);
 
   useEffect(() => {
     let posText = "";
@@ -284,6 +293,7 @@ function PresortDND(props) {
     projectResultsObj.nneg = columns.neg.items.length;
     projectResultsObj.negStateNums = negText;
     setResults(projectResultsObj);
+    localStorage.setItem("resultsPresort", JSON.stringify(projectResultsObj));
   }, [columns, results, setResults]);
 
   useEffect(() => {
@@ -300,39 +310,51 @@ function PresortDND(props) {
   // RENDER COMPONENT
 
   return (
-    <PresortGrid>
-      <div id="completionRatio">
-        {presortSortedStatementsNum}/{statementsObj.totalStatements}
-      </div>
+    <PresortGrid id="statementsGrid">
+      <ImageEnlargeInstructionsDiv id="imageEnlargeInstructionsDiv">
+        <div>{onPageInstructions}</div>
+      </ImageEnlargeInstructionsDiv>
+      <CompletionRatioDiv id="completionRatio">
+        {presortSortedStatementsNum}/{statementsLength}
+      </CompletionRatioDiv>
+      <ColumnNamesNeg id="negDivImg">
+        <div>{columns.neg.name}</div>
+      </ColumnNamesNeg>
+      <ColumnNamesNeu id="negDivImg">
+        <div>{columns.neutral.name}</div>
+      </ColumnNamesNeu>
+      <ColumnNamesPos id="negDivImg">
+        <div>{columns.pos.name}</div>
+      </ColumnNamesPos>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
+            <AllColWrapper
               key={columnId}
               id={`${columnId}Div`}
+              className={`${columnId}Div`}
             >
-              <ColumnNamesDiv>{column.name}</ColumnNamesDiv>
-              <div style={{ margin: 4 }}>
-                <Droppable droppableId={columnId} key={columnId}>
+              <ThreeColCardWrapper>
+                <Droppable
+                  droppableId={columnId}
+                  className={columnId}
+                  key={columnId}
+                >
                   {(provided, snapshot) => {
                     return (
                       <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         id={columnId}
+                        className={columnId}
                         style={{
                           background: snapshot.isDraggingOver
                             ? "lightblue"
                             : "white",
                           padding: 4,
-                          width: 300,
+                          width: "100%",
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -342,6 +364,7 @@ function PresortDND(props) {
                           return (
                             <Draggable
                               key={item.id}
+                              id={item.id}
                               draggableId={item.id}
                               index={index}
                               className="dragObject"
@@ -354,8 +377,9 @@ function PresortDND(props) {
                                     {...provided.dragHandleProps}
                                     style={{
                                       userSelect: "none",
-                                      padding: 16,
+                                      padding: 6,
                                       margin: "0 0 8px 0",
+                                      width: "100%",
                                       height: cardHeight,
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
@@ -381,8 +405,8 @@ function PresortDND(props) {
                     );
                   }}
                 </Droppable>
-              </div>
-            </div>
+              </ThreeColCardWrapper>
+            </AllColWrapper>
           );
         })}
       </DragDropContext>
@@ -391,23 +415,82 @@ function PresortDND(props) {
 }
 
 export default PresortDND;
-
-const ColumnNamesDiv = styled.div`
+const ColumnNamesNeg = styled.div`
+  display: flex;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   font-weight: bold;
-  padding-left: 3px;
-  padding-right: 3px;
+
+  div {
+    display: flex;
+    outline: 1px solid #a8a8a8;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 182, 193, 0.4);
+    min-width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+  }
+`;
+
+const ColumnNamesNeu = styled.div`
+  display: flex;
+  align-self: center;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 1px solid #a8a8a8;
+    background-color: lightgray;
+    min-width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+  }
+`;
+
+const ColumnNamesPos = styled.div`
+  display: flex;
+  grid-column-start: 4;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(199, 246, 199, 0.6);
+    min-width: 50%;
+    padding: 2px;
+    border-radius: 5px;
+    outline: 1px solid #a8a8a8;
+  }
 `;
 
 const PresortGrid = styled.div`
-  margin-top: 75px;
+  padding-top: 10px;
+  margin-top: 25px;
   margin-bottom: 55px;
   display: grid;
-  height: calc(100vh-75);
-  grid-template-rows: 230px 15px 1fr;
-  grid-template-columns: 1fr 325px 325px 325px 1fr;
+  height: calc(100vh-100px);
+  grid-template-rows: 34h 25px 40vh;
+  grid-template-columns: 0.25fr 1.5fr 1.5fr 1.5fr 0.25fr;
   row-gap: 3px;
   column-gap: 15px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const DroppableContainer = styled.div`
@@ -417,5 +500,44 @@ const DroppableContainer = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 2px;
+  width: 27.8vw;
   border: 1px solid #a8a8a8;
+`;
+
+const ThreeColCardWrapper = styled.div`
+  margin: 4px;
+  img {
+    max-width: 98%;
+    max-height: 98%;
+    padding: 0px;
+  }
+`;
+
+const CompletionRatioDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 60px;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 3px;
+`;
+
+const ImageEnlargeInstructionsDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 16px;
+  padding-left: 3px;
+  padding-right: 3px;
+  width: 100%;
+`;
+
+const AllColWrapper = styled.div`
+  margin: 4px;
+  display: "flex";
+  flex-direction: "column";
+  width: 100%;
 `;

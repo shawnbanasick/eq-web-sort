@@ -77,9 +77,6 @@ const LinkButton = (props) => {
     // *** ReCalc Results ***
     let sortResults1 = convertObjectToResults(columnStatements);
 
-    console.log("sortResults1");
-    //console.log(sortResults1);
-
     if (currentPage === "presort") {
       if (isPresortFinished === false) {
         setTriggerPresortPreventNavModal(true);
