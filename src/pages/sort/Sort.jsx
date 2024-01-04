@@ -196,6 +196,7 @@ const Sort = () => {
           />
         ) : (
           <SortGrid
+            id="sortGridDiv"
             dimensions={dimensions}
             cardFontSize={cardFontSize}
             fontColor={fontColor}

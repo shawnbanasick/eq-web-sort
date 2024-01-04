@@ -282,7 +282,7 @@ const SortGridImages = (props) => {
     );
   }); // end map of sort columns
 
-  const InnerList = (props) => {
+  const InnerList = React.memo((props) => {
     const items = props.statements.map((item, index) => {
       return (
         <Draggable
@@ -327,7 +327,7 @@ const SortGridImages = (props) => {
       );
     });
     return items;
-  };
+  });
   /*
   *** placeholder problem is from React Beautiful DND lib - due to position fixed
   let finalItem = <div key={"placeholder"}>{props.provided.placeholder}</div>;
@@ -428,6 +428,7 @@ const CardSlider = styled.div`
 `;
 
 const HorizontalFeederDiv = styled.div``;
+
 const FeederCard = styled.div`
   img {
     width: 100%;
