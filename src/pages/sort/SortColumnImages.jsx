@@ -3,8 +3,6 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import getItemStyleImages from "./getItemStyleImages";
 import getListStyleImages from "./getListStyleImages";
-// import ReactHtmlParser from "react-html-parser";
-// import decodeHTML from "../../utilities/decodeHTML";
 import useStore from "../../globalState/useStore";
 
 /* eslint react/prop-types: 0 */
