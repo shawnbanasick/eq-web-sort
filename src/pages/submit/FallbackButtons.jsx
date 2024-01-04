@@ -11,7 +11,8 @@ const SubmitResultsButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const downloadButtonText = ReactHtmlParser(decodeHTML(langObj.btnDownload));
+  const downloadButtonText =
+    ReactHtmlParser(decodeHTML(langObj.btnDownload)) || "";
   const randomId = uuid().substring(0, 12);
 
   const resultsWithId = {};

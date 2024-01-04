@@ -53,9 +53,8 @@ const PostSort = () => {
   setDisplayNextButton(true);
 
   const headerBarColor = configObj.headerBarColor;
-  const postsortInstructions = ReactHtmlParser(
-    decodeHTML(langObj.postsortInstructions)
-  );
+  const postsortInstructions =
+    ReactHtmlParser(decodeHTML(langObj.postsortInstructions)) || "";
 
   useEffect(() => {
     const Elementcount = ElementRef.current.childNodes.length;
@@ -77,10 +76,10 @@ const PostSort = () => {
   // pull data from localStorage
   const columnWidth = 250;
 
-  const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader));
-  const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement));
-  const disagree = ReactHtmlParser(decodeHTML(langObj.postsortDisagreement));
-  // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
+  const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader)) || "";
+  const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement)) || "";
+  const disagree =
+    ReactHtmlParser(decodeHTML(langObj.postsortDisagreement)) || "";
   const placeholder = langObj.placeholder;
 
   const keys = Object.keys(mapObj.postsortConvertObj);

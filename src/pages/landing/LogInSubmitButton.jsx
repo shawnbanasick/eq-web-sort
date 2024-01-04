@@ -10,9 +10,8 @@ const LogInSubmitButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const loginSubmitButtonText = ReactHtmlParser(
-    decodeHTML(langObj.loginSubmitButtonText)
-  );
+  const loginSubmitButtonText =
+    ReactHtmlParser(decodeHTML(langObj.loginSubmitButtonText)) || "";
 
   return (
     <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>

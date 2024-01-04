@@ -80,11 +80,11 @@ const Sort = () => {
   const headerBarColor = configObj.headerBarColor;
   const fontColor = configObj.defaultFontColor;
 
-  const sortDisagreement = ReactHtmlParser(
-    decodeHTML(langObj.sortDisagreement)
-  );
-  const sortAgreement = ReactHtmlParser(decodeHTML(langObj.sortAgreement));
-  const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst));
+  const sortDisagreement =
+    ReactHtmlParser(decodeHTML(langObj.sortDisagreement)) || "";
+  const sortAgreement =
+    ReactHtmlParser(decodeHTML(langObj.sortAgreement)) || "";
+  const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst)) || "";
 
   const qSortPattern = [...mapObj.qSortPattern];
   const qlength = qSortPattern.length;

@@ -20,12 +20,10 @@ const PresortPreventNavModal = () => {
     getSetTriggerSortPreventNavModal
   );
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.sortPreventNavModalHead)
-  );
-  const modalText = ReactHtmlParser(
-    decodeHTML(langObj.sortPreventNavModalText)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.sortPreventNavModalHead)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.sortPreventNavModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

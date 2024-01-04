@@ -27,9 +27,8 @@ const SubmitLocalResultsButton = (props) => {
     getSetTriggerLocalSubmitSuccessModal
   );
 
-  const btnTransferText = ReactHtmlParser(
-    decodeHTML(langObj.localSaveDataButton)
-  );
+  const btnTransferText =
+    ReactHtmlParser(decodeHTML(langObj.localSaveDataButton)) || "";
 
   const handleClick = (e) => {
     e.preventDefault();

@@ -7,11 +7,8 @@ import SortColumnImages from "./SortColumnImages";
 import getListStyleHori from "./getListStyleHori";
 import getItemStyleHoriImages from "./getItemStyleHoriImages";
 import calculateDragResultsImages from "./calculateDragResultsImages";
-// import ReactHtmlParser from "react-html-parser";
-// import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-// import convertObjectToResults from "./convertObjectToResults";
 import { Modal } from "react-responsive-modal";
 import useLocalStorage from "../../utilities/useLocalStorage";
 
@@ -19,17 +16,11 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
-// const getStatementsObj = (state) => state.statementsObj;
-// const getColumnStatements = (state) => state.columnStatements;
-// const getSetColState = (state) => state.setColumnStatements;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
-//const getSortCharacteristics = (state) => state.sortCharacteristics;
-// const getSetSortCharacteristics = (state) => state.setSortCharacteristics;
 let getCardHeight = (state) => state.cardHeight;
 const getSetCardHeight = (state) => state.setCardHeight;
-// const getSetColumnWidth = (state) => state.setColumnWidth;
 const getResults = (state) => state.results;
 const getSortFinModalHasBeenShown = (state) =>
   state.sortFinishedModalHasBeenShown;
@@ -45,18 +36,11 @@ const SortGridImages = (props) => {
   // GLOBAL STATE
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
-  // const statementsObj = useSettingsStore(getStatementsObj);
-  // const columnStatementsPrep = useSettingsStore(getColumnStatements);
-  // const setColumnStatements = useSettingsStore(getSetColState);
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
-  // const sortCharacteristics = useStore(getSortCharacteristics);
-  // const setSortCharacteristics = useStore(getSetSortCharacteristics);
-
   let cardHeight = useStore(getCardHeight);
   const setCardHeight = useStore(getSetCardHeight);
-  // const setColumnWidth = useStore(getSetColumnWidth);
   const results = useStore(getResults);
   const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
   const sortGridResults = useStore(getSortGridResults);
@@ -65,7 +49,6 @@ const SortGridImages = (props) => {
   const setSortFinishedModalHasBeenShown = useStore(getSetSortFinModal);
   const setTriggerSortingFinishedModal = useStore(getSetTriggerSortingFinModal);
   const setSortGridResults = useStore(getSetSortGridResults);
-
   const greenCardColor = configObj.greenCardColor;
   const yellowCardColor = configObj.yellowCardColor;
   const pinkCardColor = configObj.pinkCardColor;
@@ -185,7 +168,7 @@ const SortGridImages = (props) => {
         setColumnStatements(newCols);
       } else {
         // moving to another column
-        // source.droppableId give orgin id => "statements" or "columnN1"
+        // source.droppableId give origin id => "statements" or "columnN1"
         // sourceList is cards in that origin
         // gather data to send to move function
         let sourceListArray;

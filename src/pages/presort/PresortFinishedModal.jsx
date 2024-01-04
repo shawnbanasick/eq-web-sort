@@ -17,12 +17,10 @@ const PresortFinishedModal = () => {
   const triggerModal = useStore(getTriggerModal);
   const setTriggerModal = useStore(getSetTriggerModal);
 
-  const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.presortFinishedModalHead)
-  );
-  const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.presortFinishedModalText)
-  );
+  const loginHelpModalHead =
+    ReactHtmlParser(decodeHTML(langObj.presortFinishedModalHead)) || "";
+  const loginHelpModalText =
+    ReactHtmlParser(decodeHTML(langObj.presortFinishedModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

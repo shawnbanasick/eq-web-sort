@@ -50,15 +50,20 @@ const SubmitPage = () => {
     setCurrentPage("submit");
   }, [setCurrentPage]);
 
-  const transferTextAbove = decodeHTML(langObj.transferTextAbove);
-  const transferTextBelow = decodeHTML(langObj.transferTextBelow);
-  const goodbyeMessage = decodeHTML(langObj.goodbyeMessage);
-  const linkedProjectFallbackMessage = decodeHTML(
-    langObj.linkedProjectFallbackMessage
-  );
-  const linkedProjectBtnMessage = decodeHTML(langObj.linkedProjectBtnMessage);
+  // Language
+  const transferTextAbove =
+    ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
+  const transferTextBelow =
+    ReactHtmlParser(decodeHTML(langObj.transferTextBelow)) || "";
+  const goodbyeMessage =
+    ReactHtmlParser(decodeHTML(langObj.goodbyeMessage)) || "";
+  const linkedProjectFallbackMessage =
+    ReactHtmlParser(decodeHTML(langObj.linkedProjectFallbackMessage)) || "";
+  const linkedProjectBtnMessage =
+    decodeHTML(langObj.linkedProjectBtnMessage) || "";
+  const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead)) || "";
 
-  const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
+  // PERSISTENT STATE
   const resultsPresort =
     JSON.parse(localStorage.getItem("resultsPresort")) || {};
   const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
@@ -172,15 +177,13 @@ const SubmitPage = () => {
     if (configObj.linkToSecondProject === true) {
       return (
         <GoodbyeDiv>
-          {ReactHtmlParser(linkedProjectFallbackMessage)}
+          {linkedProjectFallbackMessage}
           <a
             id="secondProjectLink"
             href={`${configObj.secondProjectUrl}/#/?usercode=${urlUsercode}`}
             style={{ targetNew: "tab", textDecoration: "none" }}
           >
-            <StyledButton>
-              {ReactHtmlParser(linkedProjectBtnMessage)}
-            </StyledButton>
+            <StyledButton>{linkedProjectBtnMessage}</StyledButton>
           </a>
         </GoodbyeDiv>
       );
@@ -188,7 +191,7 @@ const SubmitPage = () => {
       // *** goodbye message for a normal firebase project ***
       return (
         <React.Fragment>
-          <GoodbyeDiv>{ReactHtmlParser(goodbyeMessage)}</GoodbyeDiv>
+          <GoodbyeDiv>{goodbyeMessage}</GoodbyeDiv>
         </React.Fragment>
       );
     }
@@ -209,7 +212,7 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonGS
             results={transmissionResults}
             api={configObj.steinApiUrl}
@@ -218,7 +221,7 @@ const SubmitPage = () => {
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
           ) : (
-            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+            <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
         </ContainerDiv>
       </React.Fragment>
@@ -228,7 +231,7 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonEmail results={transmissionResults} />
         </ContainerDiv>
       </React.Fragment>
@@ -239,13 +242,13 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButton results={transmissionResults} />
 
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
           ) : (
-            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+            <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
         </ContainerDiv>
       </React.Fragment>

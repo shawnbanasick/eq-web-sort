@@ -39,14 +39,18 @@ const LogInScreen = () => {
   const setDisplayAccessCodeWarning = useStore(getSetDisplayAccessCodeWarning);
   const setDisplayPartIdWarning = useStore(getSetDisplayPartIdWarning);
 
-  const welcomeText = ReactHtmlParser(decodeHTML(langObj.loginWelcomeText));
-  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
-  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.loginPartIdText));
-  const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
-  const accessCodeWarning = ReactHtmlParser(
-    decodeHTML(langObj.accessCodeWarning)
-  );
-  const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
+  const welcomeText =
+    ReactHtmlParser(decodeHTML(langObj.loginWelcomeText)) || "";
+  const loginHeaderText =
+    ReactHtmlParser(decodeHTML(langObj.loginHeaderText)) || "";
+  const loginPartIdText =
+    ReactHtmlParser(decodeHTML(langObj.loginPartIdText)) || "";
+  const partIdWarning =
+    ReactHtmlParser(decodeHTML(langObj.partIdWarning)) || "";
+  const accessCodeWarning =
+    ReactHtmlParser(decodeHTML(langObj.accessCodeWarning)) || "";
+  const accessInputText =
+    ReactHtmlParser(decodeHTML(langObj.accessInputText)) || "";
 
   const handleInput = (e) => {
     setUserInputPartId(e.target.value);

@@ -37,7 +37,8 @@ const SubmitResultsButton = (props) => {
   const setCheckInternetConnection = useStore(getSetCheckInternetConnection);
   const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
 
-  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer));
+  const btnTransferText =
+    ReactHtmlParser(decodeHTML(langObj.btnTransfer)) || "";
 
   const handleClick = (e) => {
     e.preventDefault();

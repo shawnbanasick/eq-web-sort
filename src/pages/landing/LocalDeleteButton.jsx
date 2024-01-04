@@ -10,9 +10,8 @@ const LogInSubmitButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const localDeleteButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localDeleteButtonText)
-  );
+  const localDeleteButtonText =
+    ReactHtmlParser(decodeHTML(langObj.localDeleteButtonText)) || "";
 
   return (
     <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>

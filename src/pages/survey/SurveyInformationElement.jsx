@@ -10,7 +10,7 @@ const SurveyInformationElement = (props) => {
     // localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }, [props.opts.itemNum]);
 
-  const infoText = ReactHtmlParser(decodeHTML(props.opts.options));
+  const infoText = ReactHtmlParser(decodeHTML(props.opts.options)) || "";
 
   return (
     <Container>

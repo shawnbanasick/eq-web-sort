@@ -17,12 +17,10 @@ const LandingModal = () => {
   const triggerLandingModal = useStore(getTriggerLandingModal);
   const setTriggerLandingModal = useStore(getSetTriggerLandingModal);
 
-  const loginHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.landingHelpModalHead)
-  );
-  const loginHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.landingHelpModalText)
-  );
+  const loginHelpModalHead =
+    ReactHtmlParser(decodeHTML(langObj.landingHelpModalHead)) || "";
+  const loginHelpModalText =
+    ReactHtmlParser(decodeHTML(langObj.landingHelpModalText)) || "";
 
   const onCloseModal = () => {
     setTriggerLandingModal(false);

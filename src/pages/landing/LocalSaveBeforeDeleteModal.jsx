@@ -23,12 +23,10 @@ const LocalDeleteModal = () => {
     getSetTriggerSaveBeforeDeleteModal
   );
 
-  const localDeleteModalHead = ReactHtmlParser(
-    decodeHTML(langObj.localSaveBeforeDeleteModalHeader)
-  );
-  const localDeleteModalText = ReactHtmlParser(
-    decodeHTML(langObj.localSaveBeforeDeleteModalText)
-  );
+  const localDeleteModalHead =
+    ReactHtmlParser(decodeHTML(langObj.localSaveBeforeDeleteModalHeader)) || "";
+  const localDeleteModalText =
+    ReactHtmlParser(decodeHTML(langObj.localSaveBeforeDeleteModalText)) || "";
 
   const onCloseModal = () => {
     setTriggerSaveBeforeDeleteModal(false);

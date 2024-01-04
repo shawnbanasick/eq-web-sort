@@ -31,10 +31,10 @@ const SubmitResultsButton = (props) => {
 
   const rawData = props.results;
   const emailAddress = configObj.emailAddress;
-  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransferEmail));
-  const defaultEmailClientFailText = ReactHtmlParser(
-    decodeHTML(langObj.defaultEmailClientFail)
-  );
+  const btnTransferText =
+    ReactHtmlParser(decodeHTML(langObj.btnTransferEmail)) || "";
+  const defaultEmailClientFailText =
+    ReactHtmlParser(decodeHTML(langObj.defaultEmailClientFail)) || "";
 
   const handleClick = (e) => {
     e.preventDefault();

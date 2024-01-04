@@ -42,8 +42,9 @@ const LandingPage = () => {
   const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
 
   const headerBarColor = configObj.headerBarColor;
-  const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead));
-  const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText));
+  const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead)) || "";
+  const welcomeTextHtml =
+    ReactHtmlParser(decodeHTML(langObj.welcomeText)) || "";
 
   // clear local storage if previous sorts exist
   localStorage.removeItem("columns");

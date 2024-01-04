@@ -26,8 +26,8 @@ const PresortModal = () => {
     setTriggerPresortModal(false);
   };
 
-  const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead));
-  const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText));
+  const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead)) || "";
+  const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText)) || "";
 
   return (
     <Modal

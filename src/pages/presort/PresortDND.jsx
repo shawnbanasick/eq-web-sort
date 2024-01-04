@@ -36,15 +36,15 @@ function PresortDND(props) {
   const setResults = useStore(getSetResults);
   const setProgressScoreAdditional = useStore(getSetProgressScoreAdditional);
 
-  const statementsName = ReactHtmlParser(decodeHTML(langObj.presortStatements));
-  const btnDisagreement = ReactHtmlParser(
-    decodeHTML(langObj.presortDisagreement)
-  );
-  const btnAgreement = ReactHtmlParser(decodeHTML(langObj.presortAgreement));
-  const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral));
-  const onPageInstructions = ReactHtmlParser(
-    decodeHTML(langObj.onPageInstructions)
-  );
+  const statementsName =
+    ReactHtmlParser(decodeHTML(langObj.presortStatements)) || "";
+  const btnDisagreement =
+    ReactHtmlParser(decodeHTML(langObj.presortDisagreement)) || "";
+  const btnAgreement =
+    ReactHtmlParser(decodeHTML(langObj.presortAgreement)) || "";
+  const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral)) || "";
+  const onPageInstructions =
+    ReactHtmlParser(decodeHTML(langObj.onPageInstructions)) || "";
 
   // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(

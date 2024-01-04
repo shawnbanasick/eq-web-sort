@@ -20,9 +20,8 @@ const LogInSubmitButton = (props) => {
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
   const localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
 
-  const localDeleteButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localDeleteButtonText)
-  );
+  const localDeleteButtonText =
+    ReactHtmlParser(decodeHTML(langObj.localDeleteButtonText)) || "";
 
   const clearLocalStorage = () => {
     console.log("deleted localStorage");

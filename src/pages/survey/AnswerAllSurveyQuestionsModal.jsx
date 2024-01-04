@@ -18,12 +18,10 @@ const AnswerAllSurveyQuestionsModal = () => {
   const triggerModalOpen = useStore(getTriggerModalOpen);
   const setTriggerSurveyPreventNavModal = useStore(getSetTrigSurvPrevNavModal);
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.surveyPreventNavModalHead)
-  );
-  const modalText = ReactHtmlParser(
-    decodeHTML(langObj.surveyPreventNavModalText)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.surveyPreventNavModalHead)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.surveyPreventNavModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

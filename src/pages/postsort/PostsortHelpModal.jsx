@@ -17,12 +17,10 @@ const PostsortHelpModal = () => {
   const triggerPostsortModal = useStore(getTriggerPostsortModal);
   const setTriggerPostsortModal = useStore(getSetTriggerPostsortModal);
 
-  const postsortHelpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.postsortModalHead)
-  );
-  const postsortHelpModalText = ReactHtmlParser(
-    decodeHTML(langObj.postsortModalText)
-  );
+  const postsortHelpModalHead =
+    ReactHtmlParser(decodeHTML(langObj.postsortModalHead)) || "";
+  const postsortHelpModalText =
+    ReactHtmlParser(decodeHTML(langObj.postsortModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

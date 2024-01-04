@@ -19,8 +19,10 @@ const SubmitSuccessModal = () => {
   const setTriggerTransmissionOKModal = useStore(getSetTriggerTransOKMod);
   const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
 
-  const modalHead = ReactHtmlParser(decodeHTML(langObj.transferOkModalHeader));
-  const modalText = ReactHtmlParser(decodeHTML(langObj.transferOkModalText));
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.transferOkModalHeader)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.transferOkModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

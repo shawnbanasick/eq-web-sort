@@ -19,7 +19,7 @@ const FooterFontSizer = () => {
   const setBypassSort = useStore(getSetBypassSort);
   const setBypassPresort = useStore(getSetBypassPresort);
 
-  const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText));
+  const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText)) || "";
 
   const increaseFontSize = () => {
     setBypassSort(true);

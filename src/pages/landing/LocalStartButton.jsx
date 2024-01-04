@@ -33,9 +33,8 @@ const LogInSubmitButton = (props) => {
   const setResults = useStore(getSetResults);
   const results = useStore(getResults);
 
-  const localStartButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localStartButtonText)
-  );
+  const localStartButtonText =
+    ReactHtmlParser(decodeHTML(langObj.localStartButtonText)) || "";
 
   const checkForNextPageConditions = useCallback(() => {
     let value0 = false;

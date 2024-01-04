@@ -18,12 +18,10 @@ const LocalDeleteModal = () => {
   const triggerLocalDeleteModal = useStore(getTriggerLocalDeleteModal);
   const setLocalDeleteModal = useStore(getSetLocalDeleteModal);
 
-  const localDeleteModalHead = ReactHtmlParser(
-    decodeHTML(langObj.localDeleteModalHead)
-  );
-  const localDeleteModalText = ReactHtmlParser(
-    decodeHTML(langObj.localDeleteModalText)
-  );
+  const localDeleteModalHead =
+    ReactHtmlParser(decodeHTML(langObj.localDeleteModalHead)) || "";
+  const localDeleteModalText =
+    ReactHtmlParser(decodeHTML(langObj.localDeleteModalText)) || "";
 
   const onCloseModal = () => {
     setLocalDeleteModal(false);

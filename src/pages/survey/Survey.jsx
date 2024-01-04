@@ -44,7 +44,7 @@ const SurveyPage = () => {
   const surveyQuestionObjects = surveyQuestionObjArray;
 
   // setup language
-  const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
+  const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader)) || "";
 
   // set next button display
   setDisplayNextButton(true);

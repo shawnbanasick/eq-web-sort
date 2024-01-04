@@ -10,10 +10,10 @@ const LogInScreen = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const ieWarningHeaderText = ReactHtmlParser(
-    decodeHTML(langObj.ieWarningHeaderText)
-  );
-  const ieWarningText = ReactHtmlParser(decodeHTML(langObj.ieWarningText));
+  const ieWarningHeaderText =
+    ReactHtmlParser(decodeHTML(langObj.ieWarningHeaderText)) || "";
+  const ieWarningText =
+    ReactHtmlParser(decodeHTML(langObj.ieWarningText)) || "";
 
   return (
     <Container>

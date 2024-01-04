@@ -80,7 +80,7 @@ const PresortPage = (props) => {
   const statements = cloneDeep(columnStatements.statementList);
   const imageSort = configObj.useImages;
 
-  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
+  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText)) || "";
 
   // early return if log-in required and not logged in
   if (initialScreen !== "anonymous") {

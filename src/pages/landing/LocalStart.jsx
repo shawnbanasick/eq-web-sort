@@ -57,16 +57,16 @@ const LogInScreen = () => {
     getSetTriggerSaveBeforeDeleteModal
   );
 
-  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.localHeader));
-  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText));
-  const partIdWarning = ReactHtmlParser(decodeHTML(langObj.partIdWarning));
-  const usercodeText = ReactHtmlParser(decodeHTML(langObj.usercodeText));
-  const localParticipantsText = ReactHtmlParser(
-    decodeHTML(langObj.localParticipantsText)
-  );
-  const storedQsortsHeaderText = ReactHtmlParser(
-    decodeHTML(langObj.storedQsortsHeaderText)
-  );
+  const loginHeaderText =
+    ReactHtmlParser(decodeHTML(langObj.localHeader)) || "";
+  const loginPartIdText = ReactHtmlParser(decodeHTML(langObj.partIdText)) || "";
+  const partIdWarning =
+    ReactHtmlParser(decodeHTML(langObj.partIdWarning)) || "";
+  const usercodeText = ReactHtmlParser(decodeHTML(langObj.usercodeText)) || "";
+  const localParticipantsText =
+    ReactHtmlParser(decodeHTML(langObj.localParticipantsText)) || "";
+  const storedQsortsHeaderText =
+    ReactHtmlParser(decodeHTML(langObj.storedQsortsHeaderText)) || "";
 
   const headerText = `${storedQsortsHeaderText}: ${
     Object.keys(localStoredQsorts).length

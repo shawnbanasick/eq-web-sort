@@ -18,12 +18,10 @@ const PresortImageModal = () => {
   const triggerModalOpen = useStore(getTriggerModalOpen);
   const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.presortPreventNavModalHead)
-  );
-  const modalText = ReactHtmlParser(
-    decodeHTML(langObj.presortPreventNavModalText)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.presortPreventNavModalHead)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.presortPreventNavModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

@@ -51,7 +51,7 @@ const StyledFooter = () => {
     )
   );
 
-  const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext));
+  const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext)) || "";
 
   if (currentPage === "sort" && configObj.setupTarget === "local") {
     const usercode = localUsercode;
