@@ -43,18 +43,18 @@
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
    <item id="defaultFontColor">#2a2a2a</item>
-   <item id="defaultFontSizePresort">26</item>
    <item id="setDefaultFontSizePresort">false</item>
+   <item id="defaultFontSizePresort">26</item>
   
 
    <!-- SORT -->
-   <item id="defaultFontSizeSort">16</item>
-   <item id="condOfInstFontSize">20</item>
    <item id="allowUnforcedSorts">false</item>
    <item id="warnOverloadedColumn">true</item>
-   <item id="minCardHeight">120</item>
    <item id="setMinCardHeight">true</item>
+   <item id="minCardHeightSort">120</item>
+   <item id="condOfInstFontSize">20</item>
    <item id="setDefaultFontSizeSort">true</item>
+   <item id="defaultFontSizeSort">16</item>
    <item id="sortDirection">positive</item> 
 
    <!-- POSTSORT -->
@@ -63,6 +63,11 @@
    <item id="showSecondNegColumn">true</item>
    <item id="showBackButton">true</item>
    <item id="postsortCommentsRequired">true</item>
+   <item id="setDefaultFontSizePostsort">true</item>
+   <item id="defaultFontSizePostsort">26</item>
+   <item id="setMinCardHeight">true</item>
+   <item id="minCardHeightPostsort">120</item>
+
 
 
    <!-- SURVEY - Survey Questions -->

@@ -33,17 +33,42 @@ const PostSort = () => {
   const configObj = useSettingsStore(getConfigObj);
   const setProgressScore = useStore(getSetProgressScore);
   let cardHeight = useStore(getCardHeight);
-  const cardFontSize = useStore(getCardFontSize);
+  let cardFontSize = useStore(getCardFontSize);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   // PERSISTENT STATE
   const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  let cardFontSizePersist = +JSON.parse(
+    localStorage.getItem("fontSizePostsort")
+  );
+
+  console.log("cardFontSizePersist", cardFontSizePersist);
+  console.log("cardFontSize", cardFontSize);
+
+  if (
+    cardFontSize === 0 ||
+    cardFontSize === null ||
+    cardFontSize === undefined ||
+    cardFontSize !== cardFontSizePersist
+  ) {
+    if (cardFontSizePersist) {
+      cardFontSize = cardFontSizePersist;
+    } else {
+      if (
+        configObj.setDefaultFontSizePostsort === "true" ||
+        configObj.setDefaultFontSizePostsort === true
+      ) {
+        cardFontSize = +configObj.defaultFontSizePostsort;
+      } else {
+        cardFontSize = 16;
+      }
+    }
+  }
+  console.log("cardFontSize", cardFontSize);
 
   if (cardHeight === 0) {
-    let storedCardHeight = JSON.parse(
-      localStorage.getItem("sortGridCardHeight")
-    );
+    let storedCardHeight = localStorage.getItem("sortGridCardHeight");
     if (storedCardHeight) {
       cardHeight = storedCardHeight;
     }

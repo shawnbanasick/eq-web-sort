@@ -37,15 +37,17 @@ const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getBypassSort = (state) => state.bypassSort;
 const getSetCardFontSize = (state) => state.setCardFontSize;
 
+let getCardHeight = (state) => state.cardHeight;
+const getSetCardHeight = (state) => state.setCardHeight;
+
 const Sort = () => {
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const mapObj = useSettingsStore(getMapObj);
   const configObj = useSettingsStore(getConfigObj);
   const imageSort = configObj.useImages;
 
   let cardFontSize = useStore(getCardFontSize);
-  // const columnWidth = useStore(getColumnWidth);
   const topMargin = useStore(getTopMargin);
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
   const setCurrentPage = useStore(getSetCurrentPage);
@@ -54,12 +56,32 @@ const Sort = () => {
   const bypassSort = useStore(getBypassSort);
   const setCardFontSize = useStore(getSetCardFontSize);
 
+  const qSortPattern = [...mapObj.qSortPattern];
+  const maxNumCardsInCol = Math.max(...qSortPattern);
+  let cardHeight = useStore(getCardHeight);
+  const setCardHeight = useStore(getSetCardHeight);
+  const setMinCardHeight = configObj.setMinCardHeight;
+  const minCardHeight = +configObj.minCardHeightSort;
+
+  if (+cardHeight === 0) {
+    cardHeight = +(
+      (window.innerHeight - 150) /
+      (maxNumCardsInCol + 1)
+    ).toFixed();
+    if (setMinCardHeight === true || setMinCardHeight === "true") {
+      setCardHeight(minCardHeight);
+    } else {
+      setCardHeight(+cardHeight);
+    }
+  }
+
   // force updates on window resize
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: document.body.clientWidth,
   });
 
+  // LOCAL STATE
   const [columnWidth, setColumnWidth] = useState(150);
 
   // set default font size
@@ -86,7 +108,6 @@ const Sort = () => {
     ReactHtmlParser(decodeHTML(langObj.sortAgreement)) || "";
   const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst)) || "";
 
-  const qSortPattern = [...mapObj.qSortPattern];
   const qlength = qSortPattern.length;
 
   const visibleWidthAdjust = useMemo(() => {
@@ -201,6 +222,7 @@ const Sort = () => {
             cardFontSize={cardFontSize}
             fontColor={fontColor}
             columnWidth={columnWidth}
+            cardHeight={cardHeight}
           />
         )}
         ;

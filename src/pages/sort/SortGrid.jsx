@@ -26,8 +26,8 @@ const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
 //const getSortCharacteristics = (state) => state.sortCharacteristics;
 // const getSetSortCharacteristics = (state) => state.setSortCharacteristics;
-let getCardHeight = (state) => state.cardHeight;
-const getSetCardHeight = (state) => state.setCardHeight;
+// let getCardHeight = (state) => state.cardHeight;
+// const getSetCardHeight = (state) => state.setCardHeight;
 // const getSetColumnWidth = (state) => state.setColumnWidth;
 const getResults = (state) => state.results;
 const getSortFinModalHasBeenShown = (state) =>
@@ -52,8 +52,6 @@ const SortGrid = (props) => {
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
   // const sortCharacteristics = useStore(getSortCharacteristics);
   // const setSortCharacteristics = useStore(getSetSortCharacteristics);
-  let cardHeight = useStore(getCardHeight);
-  const setCardHeight = useStore(getSetCardHeight);
   // const setColumnWidth = useStore(getSetColumnWidth);
   const results = useStore(getResults);
   const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
@@ -68,15 +66,12 @@ const SortGrid = (props) => {
   const yellowCardColor = configObj.yellowCardColor;
   const pinkCardColor = configObj.pinkCardColor;
 
-  const setMinCardHeight = configObj.setMinCardHeight;
-  const minCardHeight = +configObj.minCardHeight;
-
   const qSortHeaders = [...mapObj.qSortHeaders];
   const qSortHeaderNumbers = [...mapObj.qSortHeaderNumbers];
   const columnColorsArray = [...mapObj.columnColorsArray];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
-  const maxNumCardsInCol = Math.max(...qSortPattern);
+  const cardHeight = props.cardHeight;
 
   let presortColumnStatements = JSON.parse(
     localStorage.getItem("columnStatements")
@@ -92,6 +87,8 @@ const SortGrid = (props) => {
     "sortColumns",
     presortColumnStatements
   );
+
+  // layout settings
   let columnWidth = props.columnWidth;
   const totalStatements = +configObj.totalStatements;
   const sortCharacterisiticsPrep = {};
@@ -107,18 +104,6 @@ const SortGrid = (props) => {
   let sortDirection = "rtl";
   if (configObj.sortDirection === "negative") {
     sortDirection = "ltr";
-  }
-
-  if (+cardHeight === 0) {
-    cardHeight = +(
-      (window.innerHeight - 150) /
-      (maxNumCardsInCol + 1)
-    ).toFixed();
-    if (setMinCardHeight === true || setMinCardHeight === "true") {
-      setCardHeight(minCardHeight);
-    } else {
-      setCardHeight(+cardHeight);
-    }
   }
 
   // fire move and re-order functions
@@ -303,7 +288,6 @@ const SortGrid = (props) => {
               >
                 <span style={{ direction: "ltr" }}>{statementHtml}</span>
               </div>
-              <div style={{ width: `0px` }}>{provided.placeholder}</div>
             </>
           )}
         </Draggable>
