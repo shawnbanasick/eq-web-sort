@@ -28,17 +28,15 @@ function debounce(fn, ms) {
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
-const getCardFontSize = (state) => state.cardFontSize;
+const getCardFontSizeSort = (state) => state.cardFontSizeSort;
 const getTopMargin = (state) => state.topMargin;
 const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetTopMargin = (state) => state.setTopMargin;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
-const getBypassSort = (state) => state.bypassSort;
 const getSetCardFontSize = (state) => state.setCardFontSize;
-
-let getCardHeight = (state) => state.cardHeight;
-const getSetCardHeight = (state) => state.setCardHeight;
+let getCardHeightSort = (state) => state.cardHeightSort;
+const getSetCardHeightSort = (state) => state.setMinCardHeightSort;
 
 const Sort = () => {
   // GLOBAL STATE
@@ -47,33 +45,30 @@ const Sort = () => {
   const configObj = useSettingsStore(getConfigObj);
   const imageSort = configObj.useImages;
 
-  let cardFontSize = useStore(getCardFontSize);
+  let cardFontSize = useStore(getCardFontSizeSort);
   const topMargin = useStore(getTopMargin);
   const setPresortNoReturn = useStore(getSetPresortNoReturn);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setTopMargin = useStore(getSetTopMargin);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
-  const bypassSort = useStore(getBypassSort);
-  const setCardFontSize = useStore(getSetCardFontSize);
-
+  // const setCardFontSize = useStore(getSetCardFontSize);
   const qSortPattern = [...mapObj.qSortPattern];
-  const maxNumCardsInCol = Math.max(...qSortPattern);
-  let cardHeight = useStore(getCardHeight);
-  const setCardHeight = useStore(getSetCardHeight);
-  const setMinCardHeight = configObj.setMinCardHeight;
-  const minCardHeight = +configObj.minCardHeightSort;
+  let cardHeight = useStore(getCardHeightSort);
+  const cardHeightPersist = +localStorage.getItem("cardHeightSort");
+  const cardFontSizePersist = +localStorage.getItem("fontSizeSort");
 
-  if (+cardHeight === 0) {
-    cardHeight = +(
-      (window.innerHeight - 150) /
-      (maxNumCardsInCol + 1)
-    ).toFixed();
-    if (setMinCardHeight === true || setMinCardHeight === "true") {
-      setCardHeight(minCardHeight);
-    } else {
-      setCardHeight(+cardHeight);
-    }
+  console.log(cardHeightPersist);
+  console.log(cardHeight);
+  // adjust card height from optional default or from local storage
+
+  if (cardHeightPersist) {
+    cardHeight = cardHeightPersist;
   }
+  if (cardFontSizePersist) {
+    cardFontSize = cardFontSizePersist;
+  }
+
+  console.log(cardHeight);
 
   // force updates on window resize
   const [dimensions, setDimensions] = useState({
@@ -83,18 +78,6 @@ const Sort = () => {
 
   // LOCAL STATE
   const [columnWidth, setColumnWidth] = useState(150);
-
-  // set default font size
-  useEffect(() => {
-    if (
-      (configObj.setDefaultFontSizeSort === true && bypassSort === false) ||
-      (configObj.setDefaultFontSizeSort === "true" && bypassSort === false)
-    ) {
-      /* eslint-disable-next-line */
-      cardFontSize = configObj.defaultFontSizeSort;
-      setCardFontSize(configObj.defaultFontSizeSort);
-    }
-  }, [configObj, bypassSort, setCardFontSize]);
 
   // set next button display
   setDisplayNextButton(true);

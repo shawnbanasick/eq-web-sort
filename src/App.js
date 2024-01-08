@@ -13,15 +13,12 @@ import processMapXMLData from "./utilities/processMapXMLData";
 import processLanguageXMLData from "./utilities/processLanguageXMLData";
 import processStatementsXMLData from "./utilities/processStatementsXMLData";
 import LoadingScreen from "./pages/landing/LoadingScreen";
-// import PromptUnload from "./utilities/PromptUnload";
 import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
 import shuffle from "lodash/shuffle";
-// import iOS from "./isIos";
-
-const convert = require("xml-js");
+import convert from "xml-js";
 
 const getSetConfigObj = (state) => state.setConfigObj;
 const getSetLangObj = (state) => state.setLangObj;
