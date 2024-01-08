@@ -1,5 +1,6 @@
 const createSortSlice = (set, get) => ({
-  cardHeight: 0,
+  cardHeightSort: 120,
+  cardHeightPostsort: 120,
   columnWidth: 100,
   draggingOverColumnId: "",
   hasOverloadedColumn: false,
@@ -58,8 +59,11 @@ const createSortSlice = (set, get) => ({
   setSortCharacteristics: (inputValue) => {
     set(() => ({ sortCharacteristics: inputValue }));
   },
-  setCardHeight: (inputValue) => {
-    set(() => ({ cardHeight: inputValue }));
+  setCardHeightSort: (inputValue) => {
+    set(() => ({ cardHeightSort: inputValue }));
+  },
+  setCardHeightPostsort: (inputValue) => {
+    set(() => ({ cardHeightPostsort: inputValue }));
   },
   setTriggerSortModal: (inputValue) => {
     set(() => ({ triggerSortModal: inputValue }));

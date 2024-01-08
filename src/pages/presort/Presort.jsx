@@ -18,41 +18,31 @@ import PresortDndImages from "./PresortDndImages";
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getStatementsObj = (state) => state.statementsObj;
-const getCardFontSize = (state) => state.cardFontSize;
+const getCardFontSizePresort = (state) => state.cardFontSizePresort;
 const getIsLoggedIn = (state) => state.isLoggedIn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetProgressScore = (state) => state.setProgressScore;
 const getPresortNoReturn = (state) => state.presortNoReturn;
 const getResetColumnStatements = (state) => state.resetColumnStatements;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
-const getBypassPresort = (state) => state.bypassSort;
-const getSetCardFontSize = (state) => state.setCardFontSize;
 
 const PresortPage = (props) => {
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
   const statementsObj = useSettingsStore(getStatementsObj);
-  let cardFontSize = useStore(getCardFontSize);
+  let cardFontSize = useStore(getCardFontSizePresort);
   const isLoggedIn = useSettingsStore(getIsLoggedIn);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
   const presortNoReturn = useStore(getPresortNoReturn);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
-  const bypassPresort = useStore(getBypassPresort);
-  const setCardFontSize = useStore(getSetCardFontSize);
+  const cardFontSizePersist = +localStorage.getItem("fontSizePresort");
 
-  // set default font size
-  if (
-    (configObj.setDefaultFontSizePresort === true && bypassPresort === false) ||
-    (configObj.setDefaultFontSizePresort === "true" && bypassPresort === false)
-  ) {
-    cardFontSize = configObj.defaultFontSizePresort;
+  if (cardFontSizePersist) {
+    cardFontSize = cardFontSizePersist;
   }
-  useEffect(() => {
-    setCardFontSize(configObj.defaultFontSizePresort);
-  }, [configObj.defaultFontSizePresort, setCardFontSize]);
 
   // set next button display
   setDisplayNextButton(true);

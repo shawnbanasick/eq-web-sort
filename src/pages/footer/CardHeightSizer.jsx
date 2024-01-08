@@ -6,27 +6,63 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const getLangObj = (state) => state.langObj;
-const getCardHeight = (state) => state.cardHeight;
-const getSetCardHeight = (state) => state.setCardHeight;
+const getCardHeightSort = (state) => state.cardHeightSort;
+const getSetCardHeightSort = (state) => state.setCardHeightSort;
+const getCardHeightPostsort = (state) => state.cardHeightPostsort;
+const getSetCardHeightPostsort = (state) => state.setCardHeightPostsort;
+const getCurrentPage = (state) => state.currentPage;
 
 const CardHeightSizer = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
-  const cardHeight = useStore(getCardHeight);
-  const setCardHeight = useStore(getSetCardHeight);
+
+  let cardHeightSort = useStore(getCardHeightSort);
+  const cardHeightPersistSort = localStorage.getItem("cardHeightSort");
+  let cardHeightPostsort = useStore(getCardHeightPostsort);
+  const cardHeightPersistPostsort = localStorage.getItem("cardHeightPostsort");
+
+  const currentPage = useStore(getCurrentPage);
+  const setCardHeightSort = useStore(getSetCardHeightSort);
+  const setCardHeightPostsort = useStore(getSetCardHeightPostsort);
+
+  if (cardHeightPersistSort) {
+    cardHeightSort = cardHeightPersistSort;
+  }
+
+  if (cardHeightPersistPostsort) {
+    cardHeightPostsort = cardHeightPersistPostsort;
+  }
 
   const cardHeightText =
     ReactHtmlParser(decodeHTML(langObj.cardHeightText)) || "";
 
   const increaseHeight = () => {
-    const currentSize = +cardHeight;
-    const newSize = currentSize + 2;
-    setCardHeight(newSize);
+    if (currentPage === "sort") {
+      const currentSize = +cardHeightSort;
+      const newSize = currentSize + 2;
+      localStorage.setItem("cardHeightSort", JSON.stringify(newSize));
+      setCardHeightSort(newSize);
+    }
+    if (currentPage === "postsort") {
+      const currentSize = +cardHeightPostsort;
+      const newSize = currentSize + 2;
+      localStorage.setItem("cardHeightPostsort", JSON.stringify(newSize));
+      setCardHeightPostsort(newSize);
+    }
   };
   const decreaseHeight = () => {
-    const currentSize = +cardHeight;
-    const newSize = currentSize - 2;
-    setCardHeight(newSize);
+    if (currentPage === "sort") {
+      const currentSize = +cardHeightSort;
+      const newSize = currentSize - 2;
+      localStorage.setItem("cardHeightSort", JSON.stringify(newSize));
+      setCardHeightSort(newSize);
+    }
+    if (currentPage === "postsort") {
+      const currentSize = +cardHeightPostsort;
+      const newSize = currentSize - 2;
+      localStorage.setItem("cardHeightPostsort", JSON.stringify(newSize));
+      setCardHeightPostsort(newSize);
+    }
   };
 
   return (

@@ -6,30 +6,85 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const getLangObj = (state) => state.langObj;
-const getCardFontSize = (state) => state.cardFontSize;
-const getSetCardFontSize = (state) => state.setCardFontSize;
+// const getSetCardFontSize = (state) => state.setCardFontSize;
+const getCardFontSizeSort = (state) => state.cardFontSizeSort;
+const getSetCardFontSizeSort = (state) => state.setCardFontSizeSort;
+const getCardFontSizePresort = (state) => state.cardFontSizePresort;
+const getSetCardFontSizePresort = (state) => state.setCardFontSizePresort;
+const getCardFontSizePostsort = (state) => state.cardFontSizePostsort;
+const getSetCardFontSizePostsort = (state) => state.setCardFontSizePostsort;
+const getCurrentPage = (state) => state.currentPage;
 
 const FooterFontSizer = () => {
   // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
-  const cardFontSize = useStore(getCardFontSize);
+  let cardFontSizeSort = useStore(getCardFontSizeSort);
+  let cardFontSizePostsort = useStore(getCardFontSizePostsort);
+  let cardFontSizePresort = useStore(getCardFontSizePresort);
   const fontSizeText = ReactHtmlParser(decodeHTML(langObj.fontSizeText)) || "";
+  // const setCardFontSize = useStore(getSetCardFontSize);
+  const setCardFontSizeSort = useStore(getSetCardFontSizeSort);
+  const currentPage = useStore(getCurrentPage);
+  const cardFontSizeSortPersist = +localStorage.getItem("fontSizeSort");
+  const cardFontSizePostsortPersist = +localStorage.getItem("fontSizePostsort");
+  const cardFontSizePresortPersist = +localStorage.getItem("fontSizePresort");
+  const setCardFontSizePostsort = useStore(getSetCardFontSizePostsort);
+  const setCardFontSizePresort = useStore(getSetCardFontSizePresort);
 
-  const setCardFontSize = useStore(getSetCardFontSize);
+  if (cardFontSizePresortPersist && currentPage === "presort") {
+    cardFontSizePresort = cardFontSizePresortPersist;
+  }
+
+  if (cardFontSizeSortPersist && currentPage === "sort") {
+    cardFontSizeSort = cardFontSizeSortPersist;
+  }
+
+  if (cardFontSizePostsortPersist && currentPage === "postsort") {
+    cardFontSizePostsort = cardFontSizePostsortPersist;
+  }
+
+  console.log(currentPage);
 
   const increaseFontSize = () => {
-    const currentSize = cardFontSize;
-    const newSize = currentSize + 1;
-    setCardFontSize(newSize);
-    localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
-    localStorage.setItem("fontSizePostsort", JSON.stringify(newSize));
+    if (currentPage === "presort") {
+      console.log("presort");
+      const currentSize = cardFontSizePresort;
+      const newSize = currentSize + 1;
+      localStorage.setItem("fontSizePresort", JSON.stringify(newSize));
+      setCardFontSizePresort(newSize);
+    }
+    if (currentPage === "sort") {
+      const currentSize = cardFontSizeSort;
+      const newSize = currentSize + 1;
+      localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
+      setCardFontSizeSort(newSize);
+    }
+    if (currentPage === "postsort") {
+      const currentSize = cardFontSizePostsort;
+      const newSize = currentSize + 1;
+      localStorage.setItem("fontSizePostsort", JSON.stringify(newSize));
+      setCardFontSizePostsort(newSize);
+    }
   };
   const decreaseFontSize = () => {
-    const currentSize = cardFontSize;
-    const newSize = currentSize - 1;
-    setCardFontSize(newSize);
-    localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
-    localStorage.setItem("fontSizePostsort", JSON.stringify(newSize));
+    if (currentPage === "presort") {
+      const currentSize = cardFontSizePresort;
+      const newSize = currentSize - 1;
+      localStorage.setItem("fontSizePresort", JSON.stringify(newSize));
+      setCardFontSizePresort(newSize);
+    }
+    if (currentPage === "sort") {
+      const currentSize = cardFontSizeSort;
+      const newSize = currentSize - 1;
+      localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
+      setCardFontSizeSort(newSize);
+    }
+    if (currentPage === "postsort") {
+      const currentSize = cardFontSizePostsort;
+      const newSize = currentSize - 1;
+      localStorage.setItem("fontSizePostsort", JSON.stringify(newSize));
+      setCardFontSizePostsort(newSize);
+    }
   };
 
   return (

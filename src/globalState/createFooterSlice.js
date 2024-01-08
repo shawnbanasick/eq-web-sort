@@ -1,5 +1,5 @@
 const createFooterSlice = (set, get) => ({
-  cardFontSize: 15,
+  cardFontSizePresort: 15,
   cardFontSizeSort: 15,
   cardFontSizePostsort: 15,
   currentPage: "landing",
@@ -7,15 +7,23 @@ const createFooterSlice = (set, get) => ({
   progressScoreAdditional: 0,
   progressScoreAdditionalSort: 0,
   displayNextButton: false,
+  minCardHeightSort: 120,
+  minCardHeightPostsort: 120,
 
+  setMinCardHeightPostsort: (inputValue) => {
+    set(() => ({ minCardHeightPostsort: inputValue }));
+  },
+  setMinCardHeightSort: (inputValue) => {
+    set(() => ({ minCardHeightSort: inputValue }));
+  },
   setCardFontSizePostsort: (inputValue) => {
     set(() => ({ cardFontSizePostsort: inputValue }));
   },
   setCardFontSizeSort: (inputValue) => {
     set(() => ({ cardFontSizeSort: inputValue }));
   },
-  setCardFontSize: (inputValue) => {
-    set(() => ({ cardFontSize: inputValue }));
+  setCardFontSizePresort: (inputValue) => {
+    set(() => ({ cardFontSizePresort: inputValue }));
   },
   setCurrentPage: (inputValue) => {
     set(() => ({ currentPage: inputValue }));

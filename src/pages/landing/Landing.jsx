@@ -22,10 +22,13 @@ const getSetProgressScore = (state) => state.setProgressScore;
 const getSetUrlUsercode = (state) => state.setUrlUsercode;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
-const getSetCardFontSize = (state) => state.setCardFontSize;
 const getMapObject = (state) => state.mapObj;
 const getSetPostsortCommentCheckObj = (state) =>
   state.setPostsortCommentCheckObj;
+const getSetCardFontSizeSort = (state) => state.setCardFontSizeSort;
+const getSetCardFontSizePostsort = (state) => state.setCardFontSizePostsort;
+const getSetMinCardHeightSort = (state) => state.setMinCardHeightSort;
+const getSetMinCardHeightPostsort = (state) => state.setMinCardHeightPostsort;
 
 const LandingPage = () => {
   // STATE
@@ -38,13 +41,15 @@ const LandingPage = () => {
   const setUrlUsercode = useStore(getSetUrlUsercode);
   let displayLandingContent = useStore(getDisplayLandingContent);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
-  const setCardFontSize = useStore(getSetCardFontSize);
   const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
-
   const headerBarColor = configObj.headerBarColor;
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead)) || "";
   const welcomeTextHtml =
     ReactHtmlParser(decodeHTML(langObj.welcomeText)) || "";
+  const setCardFontSizeSort = useStore(getSetCardFontSizeSort);
+  const setCardFontSizePostsort = useStore(getSetCardFontSizePostsort);
+  const setMinCardHeightSort = useStore(getSetMinCardHeightSort);
+  const setMinCardHeightPostsort = useStore(getSetMinCardHeightPostsort);
 
   // clear local storage if previous sorts exist
   localStorage.removeItem("columns");
@@ -58,11 +63,44 @@ const LandingPage = () => {
       setDisplayNextButton(true);
     }
 
+    // PRESORT font
     if (
-      configObj.setDefaultFontSize === "true" ||
-      configObj.setDefaultFontSize === true
+      configObj.setDefaultFontSizePresort === "true" ||
+      configObj.setDefaultFontSizePresort === true
     ) {
-      setCardFontSize(configObj.defaultFontSize);
+      localStorage.setItem("fontSizePresort", configObj.defaultFontSizePresort);
+    }
+
+    // SORT font
+    if (
+      configObj.setDefaultFontSizeSort === "true" ||
+      configObj.setDefaultFontSizeSort === true
+    ) {
+      localStorage.setItem("fontSizeSort", configObj.defaultFontSizeSort);
+    }
+
+    // SORT card height
+    if (
+      configObj.setMinCardHeightSort === "true" ||
+      configObj.setMinCardHeightSort === true
+    ) {
+      localStorage.setItem("cardHeightSort", configObj.minCardHeightSort);
+    }
+
+    // POSTSORT font
+    if (
+      configObj.setDefaultFontSizePostsort === "true" ||
+      configObj.setDefaultFontSizePostsort === true
+    ) {
+      setCardFontSizePostsort(configObj.defaultFontSizePostsort);
+    }
+
+    // POSTSORT card height
+    if (
+      configObj.setMinCardHeightPostsort === "true" ||
+      configObj.setMinCardHeightPostsort === true
+    ) {
+      setMinCardHeightPostsort(configObj.minCardHeightPostsort);
     }
 
     // set participant Id if set in URL
@@ -101,9 +139,13 @@ const LandingPage = () => {
     configObj.initialScreen,
     configObj.setDefaultFontSize,
     configObj.defaultFontSize,
-    setCardFontSize,
     setDisplayNextButton,
     mapObj,
+    setCardFontSizeSort,
+    setCardFontSizePostsort,
+    setMinCardHeightSort,
+    setMinCardHeightPostsort,
+    configObj,
   ]);
 
   // setup postsort comments object

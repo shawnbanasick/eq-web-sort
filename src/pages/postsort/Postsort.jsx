@@ -19,8 +19,8 @@ const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetProgressScore = (state) => state.setProgressScore;
-const getCardHeight = (state) => state.cardHeight;
-const getCardFontSize = (state) => state.cardFontSize;
+const getCardHeightPostsort = (state) => state.cardHeightPostsort;
+const getCardFontSizePostsort = (state) => state.cardFontSizePostsort;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
@@ -32,8 +32,8 @@ const PostSort = () => {
   const mapObj = useSettingsStore(getMapObj);
   const configObj = useSettingsStore(getConfigObj);
   const setProgressScore = useStore(getSetProgressScore);
-  let cardHeight = useStore(getCardHeight);
-  let cardFontSize = useStore(getCardFontSize);
+  let cardHeightPostsort = useStore(getCardHeightPostsort);
+  let cardFontSizePostsort = useStore(getCardFontSizePostsort);
   const setCurrentPage = useStore(getSetCurrentPage);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
@@ -42,36 +42,19 @@ const PostSort = () => {
   let cardFontSizePersist = +JSON.parse(
     localStorage.getItem("fontSizePostsort")
   );
+  let cardHeightPersist = +JSON.parse(
+    localStorage.getItem("cardHeightPostsort")
+  );
 
   console.log("cardFontSizePersist", cardFontSizePersist);
-  console.log("cardFontSize", cardFontSize);
+  console.log("cardFontSize", cardFontSizePostsort);
 
-  if (
-    cardFontSize === 0 ||
-    cardFontSize === null ||
-    cardFontSize === undefined ||
-    cardFontSize !== cardFontSizePersist
-  ) {
-    if (cardFontSizePersist) {
-      cardFontSize = cardFontSizePersist;
-    } else {
-      if (
-        configObj.setDefaultFontSizePostsort === "true" ||
-        configObj.setDefaultFontSizePostsort === true
-      ) {
-        cardFontSize = +configObj.defaultFontSizePostsort;
-      } else {
-        cardFontSize = 16;
-      }
-    }
+  if (cardFontSizePersist) {
+    cardFontSizePostsort = cardFontSizePersist;
   }
-  console.log("cardFontSize", cardFontSize);
 
-  if (cardHeight === 0) {
-    let storedCardHeight = localStorage.getItem("sortGridCardHeight");
-    if (storedCardHeight) {
-      cardHeight = storedCardHeight;
-    }
+  if (cardHeightPersist) {
+    cardHeightPostsort = cardHeightPersist;
   }
 
   // set next button display
@@ -150,16 +133,16 @@ const PostSort = () => {
         <PostsortInstructions>{postsortInstructions}</PostsortInstructions>
         <HighCards
           agreeObj={agreeObj}
-          height={cardHeight}
-          cardFontSize={cardFontSize}
+          height={cardHeightPostsort}
+          cardFontSize={cardFontSizePostsort}
           width={columnWidth}
           highCards={highCards}
         />
         {agreeObj.displaySecondColumn && (
           <HighCards2
             agreeObj={agreeObj}
-            height={cardHeight}
-            cardFontSize={cardFontSize}
+            height={cardHeightPostsort}
+            cardFontSize={cardFontSizePostsort}
             width={columnWidth}
             highCards2={highCards2}
           />
@@ -167,16 +150,16 @@ const PostSort = () => {
         {disagreeObj.displaySecondColumn && (
           <LowCards2
             disagreeObj={disagreeObj}
-            height={cardHeight}
-            cardFontSize={cardFontSize}
+            height={cardHeightPostsort}
+            cardFontSize={cardFontSizePostsort}
             width={columnWidth}
             lowCards2={lowCards2}
           />
         )}
         <LowCards
           disagreeObj={disagreeObj}
-          height={cardHeight}
-          cardFontSize={cardFontSize}
+          height={cardHeightPostsort}
+          cardFontSize={cardFontSizePostsort}
           width={columnWidth}
           lowCards={lowCards}
         />
