@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import LowCards from "./LowCards";
 import LowCards2 from "./LowCards2";
 import HighCards from "./HighCards";
@@ -19,63 +19,92 @@ const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetProgressScore = (state) => state.setProgressScore;
-const getColumnStatements = (state) => state.columnStatements;
 const getCardHeight = (state) => state.cardHeight;
 const getCardFontSize = (state) => state.cardFontSize;
 const getSetCurrentPage = (state) => state.setCurrentPage;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const PostSort = () => {
-  // STATE
+  const ElementRef = useRef(null);
+
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
-  const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
+  const configObj = useSettingsStore(getConfigObj);
   const setProgressScore = useStore(getSetProgressScore);
-  const columnStatements = useSettingsStore(getColumnStatements);
-  const cardHeight = useStore(getCardHeight);
-  const cardFontSize = useStore(getCardFontSize);
+  let cardHeight = useStore(getCardHeight);
+  let cardFontSize = useStore(getCardFontSize);
   const setCurrentPage = useStore(getSetCurrentPage);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
-  // console.log("conf: ", JSON.stringify(configObj, null, 2));
-  //  console.log("map: ", JSON.stringify(mapObj, null, 2));
+  // PERSISTENT STATE
+  const columnStatements = JSON.parse(localStorage.getItem("columnStatements"));
+  let cardFontSizePersist = +JSON.parse(
+    localStorage.getItem("fontSizePostsort")
+  );
+
+  console.log("cardFontSizePersist", cardFontSizePersist);
+  console.log("cardFontSize", cardFontSize);
+
+  if (
+    cardFontSize === 0 ||
+    cardFontSize === null ||
+    cardFontSize === undefined ||
+    cardFontSize !== cardFontSizePersist
+  ) {
+    if (cardFontSizePersist) {
+      cardFontSize = cardFontSizePersist;
+    } else {
+      if (
+        configObj.setDefaultFontSizePostsort === "true" ||
+        configObj.setDefaultFontSizePostsort === true
+      ) {
+        cardFontSize = +configObj.defaultFontSizePostsort;
+      } else {
+        cardFontSize = 16;
+      }
+    }
+  }
+  console.log("cardFontSize", cardFontSize);
+
+  if (cardHeight === 0) {
+    let storedCardHeight = localStorage.getItem("sortGridCardHeight");
+    if (storedCardHeight) {
+      cardHeight = storedCardHeight;
+    }
+  }
 
   // set next button display
   setDisplayNextButton(true);
 
   const headerBarColor = configObj.headerBarColor;
-  const postsortInstructions = ReactHtmlParser(
-    decodeHTML(langObj.postsortInstructions)
-  );
+  const postsortInstructions =
+    ReactHtmlParser(decodeHTML(langObj.postsortInstructions)) || "";
 
   useEffect(() => {
-    let startTime;
-    startTime = Date.now();
-    setCurrentPage("postsort");
-    setProgressScore(50);
+    const Elementcount = ElementRef.current.childNodes.length;
+    localStorage.setItem("postsortCommentCardCount", Elementcount - 1);
+  });
 
-    return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "postsortPage",
-        "postsortPage",
-        results
-      );
-      setResults(updatedResults);
+  useEffect(() => {
+    let startTime = Date.now();
+    const setStateAsync = async () => {
+      await setCurrentPage("postsort");
+      await setProgressScore(50);
     };
-  }, [setCurrentPage, setProgressScore, results, setResults]);
+    setStateAsync();
+    return () => {
+      calculateTimeOnPage(startTime, "postsortPage", "postsortPage");
+    };
+  }, [setCurrentPage, setProgressScore]);
 
   // pull data from localStorage
   const columnWidth = 250;
 
-  const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader));
-  const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement));
-  const disagree = ReactHtmlParser(decodeHTML(langObj.postsortDisagreement));
-  // const neutral = ReactHtmlParser(decodeHTML(langObj.postsortNeutral));
+  const titleText = ReactHtmlParser(decodeHTML(langObj.postsortHeader)) || "";
+  const agree = ReactHtmlParser(decodeHTML(langObj.postsortAgreement)) || "";
+  const disagree =
+    ReactHtmlParser(decodeHTML(langObj.postsortDisagreement)) || "";
   const placeholder = langObj.placeholder;
 
   const keys = Object.keys(mapObj.postsortConvertObj);
@@ -117,7 +146,7 @@ const PostSort = () => {
       <PostsortHelpModal />
       <PostsortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleText}</SortTitleBar>
-      <CardsContainer>
+      <CardsContainer ref={ElementRef}>
         <PostsortInstructions>{postsortInstructions}</PostsortInstructions>
         <HighCards
           agreeObj={agreeObj}
@@ -126,7 +155,6 @@ const PostSort = () => {
           width={columnWidth}
           highCards={highCards}
         />
-
         {agreeObj.displaySecondColumn && (
           <HighCards2
             agreeObj={agreeObj}
@@ -140,17 +168,16 @@ const PostSort = () => {
           <LowCards2
             disagreeObj={disagreeObj}
             height={cardHeight}
+            cardFontSize={cardFontSize}
             width={columnWidth}
             lowCards2={lowCards2}
-            cardFontSize={cardFontSize}
           />
         )}
-
         <LowCards
           disagreeObj={disagreeObj}
           height={cardHeight}
-          width={columnWidth}
           cardFontSize={cardFontSize}
+          width={columnWidth}
           lowCards={lowCards}
         />
       </CardsContainer>

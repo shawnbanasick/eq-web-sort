@@ -17,11 +17,11 @@ const SubmitFailureModal = () => {
   const triggerModalOpen = useStore(getTriggerModalOpen);
   const setTriggerTransmissionFailModal = useStore(getSetTrigTransFailMod);
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.transferFailModalHeader)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.transferFailModalHeader)) || "";
 
-  const modalText = ReactHtmlParser(decodeHTML(langObj.transferFailModalText));
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.transferFailModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

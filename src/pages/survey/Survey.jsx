@@ -8,6 +8,7 @@ import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
+import SurveyLikert5Element from "./SurveyLikert5Element";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -26,8 +27,6 @@ const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getCheckReqQuesComplete = (state) => state.checkRequiredQuestionsComplete;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const SurveyPage = () => {
@@ -39,15 +38,13 @@ const SurveyPage = () => {
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQuesComplete);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
 
   const headerBarColor = configObj.headerBarColor;
   const surveyQuestionObjects = surveyQuestionObjArray;
 
   // setup language
-  const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader));
+  const surveyHeader = ReactHtmlParser(decodeHTML(langObj.surveyHeader)) || "";
 
   // set next button display
   setDisplayNextButton(true);
@@ -62,20 +59,12 @@ const SurveyPage = () => {
   }, [setRequiredAnswersObj, requiredAnswersObj]);
 
   useEffect(() => {
-    let startTime;
-    startTime = Date.now();
+    let startTime = Date.now();
     setCurrentPage("survey");
-
     return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "surveyPage",
-        "surveyPage",
-        results
-      );
-      setResults(updatedResults);
+      calculateTimeOnPage(startTime, "surveyPage", "surveyPage");
     };
-  }, [setCurrentPage, results, setResults]);
+  }, [setCurrentPage]);
 
   const SurveyQuestions = () => {
     if (!surveyQuestionObjects) {
@@ -92,25 +81,76 @@ const SurveyPage = () => {
           );
         }
         if (object.type === "textarea") {
-          return <SurveyTextAreaElement key={uuid()} opts={object} />;
+          return (
+            <SurveyTextAreaElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "radio") {
-          return <SurveyRadioElement key={uuid()} opts={object} />;
+          return (
+            <SurveyRadioElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "select") {
-          return <SurveyDropdownElement key={uuid()} opts={object} />;
+          return (
+            <SurveyDropdownElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "checkbox") {
-          return <SurveyCheckboxElement key={uuid()} opts={object} />;
+          return (
+            <SurveyCheckboxElement
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating2") {
-          return <SurveyRating2Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating2Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
+        }
+        if (object.type === "likert5") {
+          return (
+            <SurveyLikert5Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating5") {
-          return <SurveyRating5Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating5Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "rating10") {
-          return <SurveyRating10Element key={uuid()} opts={object} />;
+          return (
+            <SurveyRating10Element
+              key={uuid()}
+              check={checkRequiredQuestionsComplete}
+              opts={object}
+            />
+          );
         }
         if (object.type === "information") {
           return <SurveyInformationElement key={uuid()} opts={object} />;

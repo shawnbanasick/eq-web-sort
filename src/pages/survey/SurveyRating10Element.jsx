@@ -3,48 +3,12 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage";
+import flatten from "lodash/flatten";
+import countBy from "lodash/countBy";
 
 const SurveyRatings10Element = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  // local state for required question warning
-  let [testValue, setTestValue] = useState(5);
-  const [formatOptions, setFormatOptions] = useState({
-    bgColor: "whitesmoke",
-    border: "none",
-  });
-
-  useEffect(() => {
-    let array = props.opts.options.split(";;;");
-    array = array.filter(function (e) {
-      return e;
-    });
-
-    const length = array.length;
-
-    for (let i = 0; i < length; i++) {
-      results[`qNum${props.opts.qNum}-${i + 1}`] = "no response";
-    }
-
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
+  // HELPER FUNCTIONS
   // filter to remove empty strings if present
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
@@ -54,30 +18,33 @@ const SurveyRatings10Element = (props) => {
     return array;
   };
 
-  // to use with required check and related css formating
-  const [localStore, setLocalStore] = useState({});
-
+  // PROPS
   const optsArray = getOptionsArray(props.opts.options);
   const rows = optsArray.length;
+  const questionId = `itemNum${props.opts.itemNum}`;
+  const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
-  // setup local state
-  let [checkedState, setCheckedState] = useState(
+  // PERSISTENT STATE
+  const [checkedState, setCheckedState] = useLocalStorage(
+    questionId,
     Array.from({ length: rows }, () => Array.from({ length: 10 }, () => false))
   );
 
-  const id = `qNum${props.opts.qNum}`;
+  // LOCAL STATE
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
+  // *** HANDLE CHANGE ***
   const handleChange = (selectedRow, column, e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
-    // needed for required question check
-    const newObj = localStore;
-    newObj[name] = value;
-    setLocalStore(newObj);
-    answersStorage[id] = newObj;
-
-    // update local state with radio selected
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     const newArray = [];
     const newCheckedState = checkedState.map(function (row, index) {
       if (selectedRow === index) {
@@ -96,52 +63,40 @@ const SurveyRatings10Element = (props) => {
       }
     });
     setCheckedState(newCheckedState);
+    let arrayLen2 = checkedState.length;
+    let flattenedCheckedState2 = flatten([...newCheckedState]);
+    let count2 = countBy(flattenedCheckedState2);
+    let objTestValue2 = count2[true] || 0;
 
-    answersStorage[id]["checkedState"] = [...newCheckedState];
-    setAnswersStorage(answersStorage);
-
-    // record if answered or not
-    if (newCheckedState.length > 0) {
-      requiredAnswersObj[id] = "answered";
-    } else {
-      requiredAnswersObj[id] = "no response";
-    }
-    setRequiredAnswersObj(requiredAnswersObj);
-    results[name] = +value;
-    setResultsSurvey(results);
-
-    // if is a required question, check if all parts answered
-    const ratingState = localStore;
-    const testArray = Object.keys(ratingState);
-    const conditionalLength = testArray.length;
-    setTestValue(optsArray.length - conditionalLength);
-  };
-
-  if (id in answersStorage) {
-    const keys2 = Object.keys(answersStorage[id]);
-
-    // skip check that all answered if not required
-    // prevents error in which answering only one
-    // prevents navigation
-    if (props.opts.required === true || props.opts.required === "true") {
-      let objLen = keys2.length - 1;
-      if (objLen >= rows) {
-        testValue = 0;
-        requiredAnswersObj[id] = "answered";
-        setRequiredAnswersObj(requiredAnswersObj);
+    let textString = "";
+    newCheckedState.forEach((item, index) => {
+      let value = newCheckedState[index].indexOf(true) + 1;
+      if (index === 0) {
+        textString += value;
       } else {
-        testValue = 1;
-        requiredAnswersObj[id] = "no response";
-        setRequiredAnswersObj(requiredAnswersObj);
-      }
-    }
-    keys2.forEach((item, index) => {
-      if (item !== "checkedState") {
-        results[item] = answersStorage[id][item];
+        textString += "," + value;
       }
     });
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = textString;
 
-    checkedState = [...answersStorage[id]["checkedState"]];
+    if (objTestValue2 !== arrayLen2) {
+      if (props.opts.required === true || props.opts.required === "true") {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
+      }
+    }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }; // end handleChange
+
+  // ****** CHECK IF ALL PARTS ANSWERED *******
+  let setYellow = false;
+  let arrayLen = checkedState.length;
+  let flattenedCheckedState = flatten([...checkedState]);
+  let count = countBy(flattenedCheckedState);
+  let objTestValue = count[true] || 0;
+  if (objTestValue < arrayLen) {
+    setYellow = true;
   }
 
   useEffect(() => {
@@ -149,16 +104,19 @@ const SurveyRatings10Element = (props) => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      testValue > 0
+      setYellow
     ) {
-      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
+      setFormatOptions({
+        bgColor: "rgba(253, 224, 71, .5)",
+        border: "3px dashed black",
+      });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
+  }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => {
@@ -171,7 +129,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q-${index}`}
             type="radio"
             value={1}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 0, e)}
             checked={checkedState[index][0]}
           />
@@ -180,7 +138,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q2-${index}`}
             type="radio"
             value={2}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 1, e)}
             checked={checkedState[index][1]}
           />
@@ -189,7 +147,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q3-${index}`}
             type="radio"
             value={3}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 2, e)}
             checked={checkedState[index][2]}
           />
@@ -198,7 +156,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q4-${index}`}
             type="radio"
             value={4}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 3, e)}
             checked={checkedState[index][3]}
           />
@@ -207,7 +165,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q5-${index}`}
             type="radio"
             value={5}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 4, e)}
             checked={checkedState[index][4]}
           />
@@ -216,7 +174,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q6-${index}`}
             type="radio"
             value={6}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 5, e)}
             checked={checkedState[index][5]}
           />
@@ -225,7 +183,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q7-${index}`}
             type="radio"
             value={7}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 6, e)}
             checked={checkedState[index][6]}
           />
@@ -234,7 +192,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q8-${index}`}
             type="radio"
             value={8}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 7, e)}
             checked={checkedState[index][7]}
           />
@@ -243,7 +201,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q9-${index}`}
             type="radio"
             value={9}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 8, e)}
             checked={checkedState[index][8]}
           />
@@ -252,7 +210,7 @@ const SurveyRatings10Element = (props) => {
             id={`Q10-${index}`}
             type="radio"
             value={10}
-            name={`qNum${props.opts.qNum}-${index + 1}`}
+            name={`itemNum${props.opts.itemNum}-${index + 1}`}
             onChange={(e) => handleChange(index, 9, e)}
             checked={checkedState[index][9]}
           />
@@ -262,31 +220,58 @@ const SurveyRatings10Element = (props) => {
     return <div>{radioList}</div>;
   };
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <RadioContainer>
-        <RatingTitle>
-          <div />
-          <CircleDiv>1</CircleDiv>
-          <CircleDiv>2</CircleDiv>
-          <CircleDiv>3</CircleDiv>
-          <CircleDiv>4</CircleDiv>
-          <CircleDiv>5</CircleDiv>
-          <CircleDiv>6</CircleDiv>
-          <CircleDiv>7</CircleDiv>
-          <CircleDiv>8</CircleDiv>
-          <CircleDiv>9</CircleDiv>
-          <CircleDiv>10</CircleDiv>
-        </RatingTitle>
-        <RadioItems />
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <CircleDiv>1</CircleDiv>
+            <CircleDiv>2</CircleDiv>
+            <CircleDiv>3</CircleDiv>
+            <CircleDiv>4</CircleDiv>
+            <CircleDiv>5</CircleDiv>
+            <CircleDiv>6</CircleDiv>
+            <CircleDiv>7</CircleDiv>
+            <CircleDiv>8</CircleDiv>
+            <CircleDiv>9</CircleDiv>
+            <CircleDiv>10</CircleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer>
+          <RatingTitle>
+            <div />
+            <CircleDiv>1</CircleDiv>
+            <CircleDiv>2</CircleDiv>
+            <CircleDiv>3</CircleDiv>
+            <CircleDiv>4</CircleDiv>
+            <CircleDiv>5</CircleDiv>
+            <CircleDiv>6</CircleDiv>
+            <CircleDiv>7</CircleDiv>
+            <CircleDiv>8</CircleDiv>
+            <CircleDiv>9</CircleDiv>
+            <CircleDiv>10</CircleDiv>
+          </RatingTitle>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyRatings10Element;
@@ -351,6 +336,9 @@ const ItemContainer = styled.div`
   height: 40px;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   border-radius: 3px;
+  &:hover {
+    background-color: rgba(131, 202, 254, 0.4);
+  }
 `;
 
 const RatingTitle = styled.div`
@@ -380,4 +368,19 @@ const RadioInput = styled.input`
 const OptionsText = styled.span`
   margin-bottom: 2px;
   padding-left: 5px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;

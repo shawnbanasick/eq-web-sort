@@ -5,7 +5,6 @@ import decodeHTML from "../../utilities/decodeHTML";
 import { withRouter } from "react-router";
 import useStore from "../../globalState/useStore";
 import useSettingsStore from "../../globalState/useSettingsStore";
-import getCurrentDateTime from "../../utilities/getCurrentDateTime";
 
 const getLangObj = (state) => state.langObj;
 const getLocalParticipantName = (state) => state.localParticipantName;
@@ -34,9 +33,8 @@ const LogInSubmitButton = (props) => {
   const setResults = useStore(getSetResults);
   const results = useStore(getResults);
 
-  const localStartButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localStartButtonText)
-  );
+  const localStartButtonText =
+    ReactHtmlParser(decodeHTML(langObj.localStartButtonText)) || "";
 
   const checkForNextPageConditions = useCallback(() => {
     let value0 = false;
@@ -88,8 +86,6 @@ const LogInSubmitButton = (props) => {
   useEffect(() => {
     const handleKeyUpStart = (event) => {
       // reset time stamp
-      const dateString = getCurrentDateTime();
-      results.dateTime = dateString;
       setResults(results);
 
       if (event.key === "Enter") {

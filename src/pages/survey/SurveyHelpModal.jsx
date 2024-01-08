@@ -17,8 +17,10 @@ const SurveyHelpModal = () => {
   const triggerSurveyModal = useStore(getTriggerSurveyModal);
   const setTriggerSurveyModal = useStore(getSetTriggerSurveyModal);
 
-  const helpModalHead = ReactHtmlParser(decodeHTML(langObj.surveyModalHead));
-  const helpModalText = ReactHtmlParser(decodeHTML(langObj.surveyModalText));
+  const helpModalHead =
+    ReactHtmlParser(decodeHTML(langObj.surveyModalHead)) || "";
+  const helpModalText =
+    ReactHtmlParser(decodeHTML(langObj.surveyModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

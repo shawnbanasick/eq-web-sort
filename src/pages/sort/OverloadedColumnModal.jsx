@@ -18,12 +18,10 @@ const OverloadedColumnModal = () => {
   const triggerModalOpen = useStore(getTriggerModalOpen);
   const setTriggerSortOverloadedColumnModal = useStore(getSetTrigOverColModal);
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.sortOverloadedColumnModalHead)
-  );
-  const modalText = ReactHtmlParser(
-    decodeHTML(langObj.sortOverloadedColumnModalText)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.sortOverloadedColumnModalHead)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.sortOverloadedColumnModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

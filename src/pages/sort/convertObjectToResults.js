@@ -4,6 +4,7 @@ const convertObjectToResults = (columnStatements) => {
   const sortArray = [];
 
   // old style loops for speed
+  //
   for (let i = 0; i < columnSortValues.length; i++) {
     let tempArray1 = columnStatements.vCols[columnSortValues[i]];
 
@@ -39,7 +40,6 @@ const convertObjectToResults = (columnStatements) => {
   if (resultsText.charAt(resultsText.length - 1) === "|") {
     resultsText = resultsText.substring(0, resultsText.length - 1);
   }
-
   return resultsText;
 };
 

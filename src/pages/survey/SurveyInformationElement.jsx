@@ -2,22 +2,15 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
 
 const SurveyInformationElement = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-
   useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "info. - na";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = "info. - na";
+    // localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }, [props.opts.itemNum]);
 
-  const infoText = ReactHtmlParser(decodeHTML(props.opts.options));
+  const infoText = ReactHtmlParser(decodeHTML(props.opts.options)) || "";
 
   return (
     <Container>

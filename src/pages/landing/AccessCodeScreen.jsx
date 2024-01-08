@@ -30,11 +30,12 @@ const LogInScreen = () => {
   const setDisplayAccessCodeWarning = useStore(getSetDisplayAccessCodeWarning);
 
   // Language
-  const loginHeaderText = ReactHtmlParser(decodeHTML(langObj.loginHeaderText));
-  const accessInputText = ReactHtmlParser(decodeHTML(langObj.accessInputText));
-  const accessCodeWarning = ReactHtmlParser(
-    decodeHTML(langObj.accessCodeWarning)
-  );
+  const loginHeaderText =
+    ReactHtmlParser(decodeHTML(langObj.loginHeaderText)) || "";
+  const accessInputText =
+    ReactHtmlParser(decodeHTML(langObj.accessInputText)) || "";
+  const accessCodeWarning =
+    ReactHtmlParser(decodeHTML(langObj.accessCodeWarning)) || "";
 
   const handleAccess = (e) => {
     setUserInputAccessCode(e.target.value);

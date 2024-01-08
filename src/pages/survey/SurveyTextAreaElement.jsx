@@ -3,66 +3,60 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString.js";
-import useStore from "../../globalState/useStore.js";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage.js";
 
 const SurveyTextAreaElement = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
+  // HELPER FUNCTION
+  const asyncLocalStorage = {
+    async setItem(key, value) {
+      await null;
+      return localStorage.setItem(key, value);
+    },
+  };
 
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
+  // FROM PROPS
+  const id = `itemNum${props.opts.itemNum}`;
+  const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
-  // let savedTextAreaText;
-  const [userText, setUserText] = useState("");
+  // PERSISTENT STATE
+  const [userText, setUserText] = useLocalStorage(id, "");
+
+  // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
 
-  const id = `qNum${props.opts.qNum}`;
-
   // ON CHANGE
   const handleOnChange = (e) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     let value = e.target.value;
-    // value = value.trim();
     setUserText(value);
-    answersStorage[id] = value;
-    setAnswersStorage(answersStorage);
-
     // record if answered or not
     if (value.length > 0) {
-      requiredAnswersObj[id] = "answered";
       let sanitizedText = sanitizeString(value);
-      results[`qNum${props.opts.qNum}`] = sanitizedText;
+      resultsSurvey[`itemNum${props.opts.itemNum}`] = sanitizedText;
     } else {
-      requiredAnswersObj[id] = "no response";
-      results[`qNum${props.opts.qNum}`] = "no response";
+      if (props.opts.required === true || props.opts.required === "true") {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
+      }
     }
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
+    asyncLocalStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   };
 
   // required question answer check
   let userTextLen = false;
-  if (id in answersStorage) {
-    let userTextLen1 = answersStorage[id];
-    userTextLen = userTextLen1.length;
+  if (userText.length > 0 && userText !== "") {
+    userTextLen = true;
   }
 
   useEffect(() => {
@@ -72,7 +66,7 @@ const SurveyTextAreaElement = (props) => {
       userTextLen < 1
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -88,36 +82,34 @@ const SurveyTextAreaElement = (props) => {
     props.opts.required,
   ]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const placeholder = props.opts.placeholder;
-
-  // to check for response in global state and inject into results if present
-  let inputValue;
-  if (id in answersStorage) {
-    inputValue = answersStorage[id];
-
-    // record if answered or not
-    requiredAnswersObj[id] = "answered";
-    results[`qNum${props.opts.qNum}`] = inputValue;
-
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText>{noteText}</NoteText>
+        <TextAreaInput
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
   } else {
-    inputValue = "";
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <TextAreaInput
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
   }
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <TextAreaInput
-        value={inputValue}
-        placeholder={placeholder}
-        onChange={handleOnChange}
-      />
-    </Container>
-  );
 };
 
 export default SurveyTextAreaElement;
@@ -144,6 +136,21 @@ const TitleBar = styled.div`
   font-size: 18px;
   text-align: center;
   background-color: lightgray;
+  width: 100%;
+  border-radius: 3px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
   width: 100%;
   border-radius: 3px;
 `;

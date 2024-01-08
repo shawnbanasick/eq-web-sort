@@ -9,11 +9,14 @@ const getLangObj = (state) => state.langObj;
 const CopyToClipboardButton = (props) => {
   console.log("incoming: " + JSON.stringify(props.content));
 
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
+  const copiedText = ReactHtmlParser(decodeHTML(langObj.copiedText)) || "";
+  const copyTextError =
+    ReactHtmlParser(decodeHTML(langObj.copyTextError)) || "";
+
+  // LOCAL STATE
   const [result, setResult] = useState("");
-  const copiedText = ReactHtmlParser(decodeHTML(langObj.copiedText));
-  const copyTextError = ReactHtmlParser(decodeHTML(langObj.copyTextError));
 
   // async generic function for copying to clipboard
   async function copyToClipboard() {

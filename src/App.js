@@ -18,6 +18,7 @@ import StyledFooter from "./pages/footer/StyledFooter";
 import useSettingsStore from "./globalState/useSettingsStore";
 import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
+import shuffle from "lodash/shuffle";
 // import iOS from "./isIos";
 
 const convert = require("xml-js");
@@ -77,6 +78,7 @@ function App() {
   useEffect(() => {
     let shuffleCards;
     let vColsObj;
+    let imagesArray = [];
 
     (async () => {
       await axios
@@ -105,6 +107,39 @@ function App() {
           setConfigObj(info.configObj);
           setSurveyQuestionObjArray(info.surveyQuestionObjArray);
           setRequiredAnswersObj(info.requiredAnswersObj);
+
+          if (info.configObj.useImages === true) {
+            for (let i = 0; i < info.configObj.numImages; i++) {
+              let item = {};
+              item.backgroundColor = "#e0e0e0";
+              item.element = (
+                // eslint-disable-next-line
+                <img
+                  src={`/settings/images/image${i + 1}.${
+                    info.configObj.imageFileType
+                  }`}
+                  alt={`image${i + 1}`}
+                  className="dragObject"
+                />
+              );
+              item.cardColor = "yellowSortCard";
+              item.divColor = "isUncertainStatement";
+              item.pinkChecked = false;
+              item.yellowChecked = true;
+              item.greenChecked = false;
+              item.sortValue = 222;
+              item.id = `image${i + 1}`;
+              item.statement = `image${i + 1}`;
+              item.statementNum = `${i + 1}`;
+
+              imagesArray.push(item);
+            }
+
+            if (info.configObj.shuffleImages === true) {
+              const shuffledCards = shuffle(imagesArray);
+              imagesArray = [...shuffledCards];
+            }
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -137,6 +172,8 @@ function App() {
             shuffleCards,
             vColsObj
           );
+          // add for images setup
+          statementsObj.columnStatements.imagesList = imagesArray;
           setColumnStatements(statementsObj.columnStatements);
           const resetColumnStatements = cloneDeep(
             statementsObj.columnStatements
@@ -148,13 +185,8 @@ function App() {
           console.log(error);
         });
 
-      setDataLoaded(true);
-
-      setTimeout(() => {
-        // prevent spinner flicker
-        // setIsDataLoaded(true);
-        setLoading(false);
-      }, 700);
+      await setDataLoaded(true);
+      await setLoading(false);
     })();
   }, [
     setConfigObj,

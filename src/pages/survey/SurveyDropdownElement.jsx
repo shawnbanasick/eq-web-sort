@@ -3,36 +3,11 @@ import styled from "styled-components";
 import MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage";
+import flatten from "lodash/flatten";
 
 const SurveyDropdownElement = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
-  const [formatOptions, setFormatOptions] = useState({
-    bgColor: "whitesmoke",
-    border: "none",
-  });
-
+  // HELPER FUNCTION
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
     array = array.filter(function (e) {
@@ -41,90 +16,82 @@ const SurveyDropdownElement = (props) => {
     const objArray = array.map((x) => {
       x.replace(/\s/g, "");
       const tempObj = {};
-      tempObj.label = x;
+      tempObj.label = ReactHtmlParser(decodeHTML(x));
       tempObj.value = x;
       return tempObj;
     });
     return objArray;
   };
 
-  let originalOptions = props.opts.options.split(";;;");
-  originalOptions = originalOptions.map((x) => x.trim());
+  // PROPS
+  const checkRequiredQuestionsComplete = props.check;
+  let questionId = props.opts.id;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  let originalOptions = props.opts.options.split(";;;") || [];
+  originalOptions = originalOptions.map((x) =>
+    ReactHtmlParser(decodeHTML(x.trim()))
+  );
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
-  let localStore = {
-    hasBeenAnswered: false,
-  };
+  // PERSISTENT STATE
+  let [selected, setSelected] = useLocalStorage(questionId, []);
 
-  let [selected, setSelected] = useState([]);
-
-  const id = `qNum${props.opts.qNum}`;
+  // LOCAL STATE
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
   // HANDLE ON CHANGE
   const handleOnChange = (e) => {
+    const resultsSurvey =
+      JSON.parse(localStorage.getItem("resultsSurvey")) || {};
     setSelected(e);
-    answersStorage[id] = e;
-    setAnswersStorage(answersStorage);
+
+    console.log(originalOptions);
+    let newArray = flatten(originalOptions);
+    console.log(newArray);
+    console.log(e);
 
     if (e.length !== 0) {
-      requiredAnswersObj[id] = "answered";
       let selected2 = "";
       for (let i = 0; i < e.length; i++) {
-        let label = e[i].label;
-        let id = originalOptions.indexOf(label);
+        let label = e[i].value;
+        let id = newArray.indexOf(label);
         if (i === 0) {
           selected2 += id + 1;
         } else {
-          selected2 += "|" + (id + 1);
+          selected2 += "," + (id + 1);
         }
       }
-      results[`qNum${props.opts.qNum}`] = selected2;
-      setResultsSurvey(results);
+      resultsSurvey[`itemNum${props.opts.itemNum}`] = selected2;
     } else {
-      requiredAnswersObj[id] = "no response";
-      results[`qNum${props.opts.qNum}`] = "no response";
-      setResultsSurvey(results);
-    }
-    setRequiredAnswersObj(requiredAnswersObj);
-  };
-
-  if (selected.length > 0) {
-    localStore["hasBeenAnswered"] = true;
-  } else {
-    localStore["hasBeenAnswered"] = false;
-  }
-
-  // required question answered?
-  let hasBeenAnswered = localStore.hasBeenAnswered;
-
-  // check if response in global state and inject into results
-  if (id in answersStorage) {
-    let response = answersStorage[id];
-    selected = response;
-    hasBeenAnswered = true;
-
-    requiredAnswersObj[id] = "answered";
-    let selected2 = "";
-    for (let i = 0; i < response.length; i++) {
-      let label = response[i].label;
-      let id = originalOptions.indexOf(label);
-      if (i === 0) {
-        selected2 += id + 1;
+      if (props.opts.required === true || props.opts.required === "true") {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
       } else {
-        selected2 += "|" + (id + 1);
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
     }
-    results[`qNum${props.opts.qNum}`] = selected2;
-    setResultsSurvey(results);
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  };
+
+  let selectedLen = false;
+  if (selected.length > 0) {
+    selectedLen = true;
   }
 
   useEffect(() => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      hasBeenAnswered === false
+      selectedLen === false
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -133,24 +100,42 @@ const SurveyDropdownElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
+  }, [checkRequiredQuestionsComplete, selectedLen, props.opts.required]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <MultiSelect
-        className={"multiselect"}
-        options={getOptionsArray(props.opts.options)}
-        labelledBy="Select"
-        onChange={handleOnChange}
-        value={selected}
-      />
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <MultiSelect
+          className={"multiselect"}
+          options={getOptionsArray(props.opts.options)}
+          labelledBy="Select"
+          onChange={handleOnChange}
+          value={selected}
+        />
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <MultiSelect
+          className={"multiselect"}
+          options={getOptionsArray(props.opts.options)}
+          labelledBy="Select"
+          onChange={handleOnChange}
+          value={selected}
+        />
+      </Container>
+    );
+  }
 };
 
 export default SurveyDropdownElement;
@@ -181,6 +166,21 @@ const TitleBar = styled.div`
   font-size: 18px;
   text-align: center;
   background-color: lightgray;
+  width: 100%;
+  border-radius: 3px;
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
   width: 100%;
   border-radius: 3px;
 `;

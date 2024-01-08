@@ -3,49 +3,38 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
-
-let getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 const SurveyRadioElement = (props) => {
-  // STATE
-  let results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  // local state for required question warning
-  let [testValue, setTestValue] = useState(false);
-  const [formatOptions, setFormatOptions] = useState({
-    bgColor: "whitesmoke",
-    border: "none",
-  });
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
+  // HELPER FUNCTION
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
     array = array.filter(function (e) {
       return e;
     });
-    // array = array.map((x) => x.replace(/\s/g, ""));
     array = array.map((x) => x.trim());
     return array;
   };
 
+  // PROPS
+  let questionId = props.opts.id;
+  const checkRequiredQuestionsComplete = props.check;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
   const optsArray = getOptionsArray(props.opts.options);
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
+
+  // PERSISTENT STATE
+  let [selected, setSelected] = useLocalStorage(questionId, "");
+
+  // LOCAL STATE
+  const [formatOptions, setFormatOptions] = useState({
+    bgColor: "whitesmoke",
+    border: "none",
+  });
 
   // template
   const RadioInput = ({ label, value, checked, setter }) => {
@@ -66,34 +55,15 @@ const SurveyRadioElement = (props) => {
     );
   };
 
-  const id = `qNum${props.opts.qNum}`;
-
-  let [selected, setSelected] = useState();
-
   const handleChange = (e) => {
-    requiredAnswersObj[id] = "answered";
-    setRequiredAnswersObj(requiredAnswersObj);
-
-    results[`qNum${props.opts.qNum}`] = +e.target.value + 1;
-
-    answersStorage[`qNum${props.opts.qNum}`] = +e.target.value;
-    setAnswersStorage(answersStorage);
-    setResultsSurvey(results);
-    setTestValue(true);
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = +e.target.value + 1;
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
   }; // end handle change
 
-  // check if response is in global state and inject into results
-  if (id in answersStorage) {
-    let response = answersStorage[id];
-    selected = response;
-    testValue = true;
-
-    requiredAnswersObj[id] = "answered";
-    setRequiredAnswersObj(requiredAnswersObj);
-
-    results[`qNum${props.opts.qNum}`] = +response + 1;
-
-    setResultsSurvey(results);
+  let setYellow = false;
+  if (selected.length === 0) {
+    setYellow = true;
   }
 
   useEffect(() => {
@@ -101,16 +71,19 @@ const SurveyRadioElement = (props) => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      testValue === false
+      setYellow
     ) {
-      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
+      setFormatOptions({
+        bgColor: "rgba(253, 224, 71, .5)",
+        border: "3px dashed black",
+      });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, testValue, props.opts.required]);
+  }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
   const RadioItems = () => {
     const radioList = optsArray.map((item, index) => (
@@ -126,22 +99,32 @@ const SurveyRadioElement = (props) => {
     return <div>{radioList}</div>;
   };
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <NoteText>
-        <div>{noteText}</div>
-      </NoteText>
-      <RadioContainer onChange={(e) => handleChange(e)}>
-        <RadioItems />
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText>
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer onChange={(e) => handleChange(e)}>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer onChange={(e) => handleChange(e)}>
+          <RadioItems />
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyRadioElement;
@@ -176,7 +159,7 @@ const RadioContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   vertical-align: center;
   margin-top: 0px;
   min-height: 100px;

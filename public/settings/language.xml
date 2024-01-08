@@ -59,6 +59,11 @@
         <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
         <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
         <item id="presortFinishedModalText">You have completed this step. Please click the &amp;quot;Continue&amp;quot; button in the bottom right side of the page to go to the next step.</item>
+        <item id="onPageInstructions">{{{div style="font-size: 24px"}}}Click and drag on the cards  or press the "1", "2", or "3" keys to sort the statements.{{{/div}}} 
+        </item> 
+
+        <item id="presortImageSortInstructions">To enlarge an image, hover your mouse pointer over it and double-click. {{{br/}}}{{{br/}}} To compare images, {{{u}}}press and hold{{{/u}}} the {{{b}}}{{{i}}}Shift{{{/i}}}{{{/b}}} key on your keyboard and then double-click on TWO images with your mouse.
+        </item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="sortHelpModalHead">Step 2 of 4</item>

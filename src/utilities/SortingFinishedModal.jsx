@@ -17,12 +17,10 @@ const SortingFinishedModal = () => {
   const triggerSortingFinishedModal = useStore(getTriggerSortFinishedMod);
   const setTriggerSortingFinishedModal = useStore(getSetTrigSortFinishMod);
 
-  const helpModalHead = ReactHtmlParser(
-    decodeHTML(langObj.sortingCompleteModalHead)
-  );
-  const helpModalText = ReactHtmlParser(
-    decodeHTML(langObj.sortingCompleteModalText)
-  );
+  const helpModalHead =
+    ReactHtmlParser(decodeHTML(langObj.sortingCompleteModalHead)) || "";
+  const helpModalText =
+    ReactHtmlParser(decodeHTML(langObj.sortingCompleteModalText)) || "";
 
   // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {

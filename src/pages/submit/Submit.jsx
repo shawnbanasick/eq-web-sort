@@ -12,17 +12,16 @@ import useStore from "../../globalState/useStore";
 import LocalSubmitSuccessModal from "./LocalSubmitSuccessModal";
 import SubmitButtonGS from "./SubmitButtonGS";
 import SubmitButtonEmail from "./SubmitButtonEmail";
+import convertObjectToResults from "../sort/convertObjectToResults";
+import getCurrentDateTime from "../../utilities/getCurrentDateTime";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getResults = (state) => state.results;
-const getResultsPostsort = (state) => state.resultsPostsort;
-const getResultsSurvey = (state) => state.resultsSurvey;
 const getPartId = (state) => state.partId;
-const getUsercode = (state) => state.usercode;
+// const getUsercode = (state) => state.usercode;
 const getUrlUsercode = (state) => state.urlUsercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
@@ -31,35 +30,43 @@ const getLocalUsercode = (state) => state.localUsercode;
 let transmissionResults = {};
 
 const SubmitPage = () => {
-  // STATE
+  // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
   const mapObj = useSettingsStore(getMapObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  const results = useStore(getResults);
-  const resultsPostsort = useStore(getResultsPostsort);
-  const resultsSurvey = useStore(getResultsSurvey);
   const partId = useStore(getPartId);
-  const usercode = useStore(getUsercode);
+  // const usercode = useStore(getUsercode);
   const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
   const localUsercode = useStore(getLocalUsercode);
 
+  // PERSISTENT STATE
+  const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+
   useEffect(() => {
     setCurrentPage("submit");
   }, [setCurrentPage]);
 
-  const transferTextAbove = decodeHTML(langObj.transferTextAbove);
-  const transferTextBelow = decodeHTML(langObj.transferTextBelow);
-  const goodbyeMessage = decodeHTML(langObj.goodbyeMessage);
-  const linkedProjectFallbackMessage = decodeHTML(
-    langObj.linkedProjectFallbackMessage
-  );
-  const linkedProjectBtnMessage = decodeHTML(langObj.linkedProjectBtnMessage);
+  // Language
+  const transferTextAbove =
+    ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
+  const transferTextBelow =
+    ReactHtmlParser(decodeHTML(langObj.transferTextBelow)) || "";
+  const goodbyeMessage =
+    ReactHtmlParser(decodeHTML(langObj.goodbyeMessage)) || "";
+  const linkedProjectFallbackMessage =
+    ReactHtmlParser(decodeHTML(langObj.linkedProjectFallbackMessage)) || "";
+  const linkedProjectBtnMessage =
+    decodeHTML(langObj.linkedProjectBtnMessage) || "";
+  const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead)) || "";
 
-  const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead));
+  // PERSISTENT STATE
+  const resultsPresort =
+    JSON.parse(localStorage.getItem("resultsPresort")) || {};
+  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
 
   // config options
   const headerBarColor = configObj.headerBarColor;
@@ -72,10 +79,17 @@ const SubmitPage = () => {
       transmissionResults["partId"] = partId;
       transmissionResults["randomId"] = uuid().substring(0, 12);
       transmissionResults["urlUsercode"] = urlUsercode;
-      transmissionResults["dateTime"] = results.dateTime;
-      transmissionResults["timeLanding"] = results.timeOnlandingPage;
-      transmissionResults["timePresort"] = results.timeOnpresortPage;
-      transmissionResults["timeSort"] = results.timeOnsortPage;
+      const dateString = getCurrentDateTime();
+
+      transmissionResults["dateTime"] = dateString;
+      // let timeLanding = localStorage.getItem("timeOnlandingPage") || "00:00:00";
+      // console.log(timeLanding);
+      transmissionResults["timeLanding"] =
+        localStorage.getItem("timeOnlandingPage") || "00:00:00";
+      transmissionResults["timePresort"] =
+        localStorage.getItem("timeOnpresortPage") || "00:00:00";
+      transmissionResults["timeSort"] =
+        localStorage.getItem("timeOnsortPage") || "00:00:00";
 
       if (configObj.setupTarget === "local") {
         transmissionResults["partId"] = localParticipantName;
@@ -83,32 +97,39 @@ const SubmitPage = () => {
       }
 
       if (configObj.showPostsort === true) {
-        transmissionResults["timePostsort"] = results.timeOnpostsortPage;
+        transmissionResults["timePostsort"] =
+          localStorage.getItem("timeOnpostsortPage") || "00:00:00";
       }
 
       if (configObj.showSurvey === true) {
-        transmissionResults["timeSurvey"] = results.timeOnsurveyPage;
+        transmissionResults["timeSurvey"] =
+          localStorage.getItem("timeOnsurveyPage") || "00:00:00";
       }
 
-      let numPos = results.npos;
+      let numPos = resultsPresort.npos;
       if (isNaN(numPos)) {
         numPos = 0;
       }
-      let numNeu = results.nneu;
+      let numNeu = resultsPresort.nneu;
       if (isNaN(numNeu)) {
         numNeu = 0;
       }
-      let numNeg = results.nneg;
+      let numNeg = resultsPresort.nneg;
       if (isNaN(numNeg)) {
         numNeg = 0;
       }
 
       transmissionResults["npos"] = numPos;
+      transmissionResults["posStateNums"] = resultsPresort.posStateNums;
       transmissionResults["nneu"] = numNeu;
+      transmissionResults["neuStateNums"] = resultsPresort.neuStateNums;
       transmissionResults["nneg"] = numNeg;
+      transmissionResults["negStateNums"] = resultsPresort.negStateNums;
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {
+        const resultsPostsort =
+          JSON.parse(localStorage.getItem("resultsPostsort")) || {};
         const newPostsortObject = calculatePostsortResults(
           resultsPostsort,
           mapObj,
@@ -116,18 +137,26 @@ const SubmitPage = () => {
         );
         const keys = Object.keys(newPostsortObject);
         for (let i = 0; i < keys.length; i++) {
+          // skip unnecessary entries
+          let skipText = keys[i].substring(0, 9);
+          if (skipText === "textArea-") {
+            continue;
+          }
           transmissionResults[keys[i]] = newPostsortObject[keys[i]];
         }
       }
 
-      // if project included SURVEY, read in results
+      // ** SURVEY, read in results
       if (configObj.showSurvey) {
         const keys2 = Object.keys(resultsSurvey);
         for (let ii = 0; ii < keys2.length; ii++) {
           transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
         }
       }
-      transmissionResults["sort"] = results.sort;
+
+      // *** SORT RESULTS
+      const resultsSort = convertObjectToResults(resultsSortObj);
+      transmissionResults["sort"] = resultsSort;
 
       // remove null values to prevent errors
       for (const property in transmissionResults) {
@@ -141,33 +170,20 @@ const SubmitPage = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [
-    results,
-    configObj,
-    localParticipantName,
-    localUsercode,
-    mapObj,
-    partId,
-    resultsPostsort,
-    resultsSurvey,
-    usercode,
-    urlUsercode,
-  ]);
+  }); // *** end useEffect
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {
     if (configObj.linkToSecondProject === true) {
       return (
         <GoodbyeDiv>
-          {ReactHtmlParser(linkedProjectFallbackMessage)}
+          {linkedProjectFallbackMessage}
           <a
             id="secondProjectLink"
             href={`${configObj.secondProjectUrl}/#/?usercode=${urlUsercode}`}
             style={{ targetNew: "tab", textDecoration: "none" }}
           >
-            <StyledButton>
-              {ReactHtmlParser(linkedProjectBtnMessage)}
-            </StyledButton>
+            <StyledButton>{linkedProjectBtnMessage}</StyledButton>
           </a>
         </GoodbyeDiv>
       );
@@ -175,7 +191,7 @@ const SubmitPage = () => {
       // *** goodbye message for a normal firebase project ***
       return (
         <React.Fragment>
-          <GoodbyeDiv>{ReactHtmlParser(goodbyeMessage)}</GoodbyeDiv>
+          <GoodbyeDiv>{goodbyeMessage}</GoodbyeDiv>
         </React.Fragment>
       );
     }
@@ -196,7 +212,7 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonGS
             results={transmissionResults}
             api={configObj.steinApiUrl}
@@ -205,7 +221,7 @@ const SubmitPage = () => {
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
           ) : (
-            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+            <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
         </ContainerDiv>
       </React.Fragment>
@@ -215,7 +231,7 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonEmail results={transmissionResults} />
         </ContainerDiv>
       </React.Fragment>
@@ -226,13 +242,13 @@ const SubmitPage = () => {
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
-          <ContentDiv>{ReactHtmlParser(transferTextAbove)}</ContentDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButton results={transmissionResults} />
 
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
           ) : (
-            <ContentDiv>{ReactHtmlParser(transferTextBelow)}</ContentDiv>
+            <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
         </ContainerDiv>
       </React.Fragment>

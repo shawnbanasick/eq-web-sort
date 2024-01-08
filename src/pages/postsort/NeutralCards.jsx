@@ -59,7 +59,7 @@ const NeutralCards = (props) => {
   const columnInfo = ` Column ${postsortConvertObj[columnDisplay]}`;
 
   return neutralCards.map((item, index) => {
-    const statementHtml = ReactHtmlParser(decodeHTML(item.statement));
+    const statementHtml = ReactHtmlParser(decodeHTML(item.statement)) || "";
     return (
       <Container key={item.statement}>
         <CardTag cardFontSize={cardFontSize}>

@@ -3,46 +3,32 @@ import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import sanitizeString from "../../utilities/sanitizeString";
-import useStore from "../../globalState/useStore";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage";
 
 const SurveyTextElement = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
+  // HELPER FUNCTION
+  const asyncLocalStorage = {
+    async setItem(name, value) {
+      await null;
+      return localStorage.setItem(name, value);
+    },
+  };
 
+  // PROPS
+  let questionId = `itemNum${props.opts.itemNum}`;
   const checkRequiredQuestionsComplete = props.check;
-  // useStore(
-  //   (state) => state.checkRequiredQuestionsComplete
-  // );
-
-  const requiredAnswersObj = useStore((state) => state.requiredAnswersObj);
-  // const resultsSurvey = useStore((state) => state.resultsSurvey);
-  const setRequiredAnswersObj = useStore(
-    (state) => state.setRequiredAnswersObj
-  );
-
-  // preload "no response" in state
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, setResultsSurvey, results]);
-
-  const id = `qNum${props.opts.qNum}`;
-
-  // to force component update
-  const [userText, setUserText] = useState("");
-  if (userText.length > 100) {
-    console.log(userText);
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const placeholder = ReactHtmlParser(decodeHTML(props.opts.placeholder)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
   }
 
-  // for required question check
+  // PERSISTENT STATE
+  const [userText, setUserText] = useLocalStorage(questionId, "");
+
+  // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
@@ -50,52 +36,47 @@ const SurveyTextElement = (props) => {
 
   // event handler
   const handleOnChange = (e) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     let value = e.target.value;
     let valueLen = value.length;
-
-    // restrict to numbers
+    // restrict to numbers (from config.xml)
     if (props.opts.restricted === "true" || props.opts.restricted === true) {
       value = value.replace(/\D/g, "");
     }
-
-    // limit length
+    // limit length (from config.xml)
     if (props.opts.limited === "true" || props.opts.limited === true) {
       if (value.length > +props.opts.limitLength) {
         value = value.substring(0, +props.opts.limitLength);
       }
     }
     setUserText(value);
-    answersStorage[id] = value;
-    setAnswersStorage(answersStorage);
-
     // record if answered or not
     if (valueLen > 0) {
-      requiredAnswersObj[id] = "answered";
       let sanitizedText = sanitizeString(value);
-      results[`qNum${props.opts.qNum}`] = sanitizedText;
+      resultsSurvey[`itemNum${props.opts.itemNum}`] = sanitizedText;
     } else {
-      results[`qNum${props.opts.qNum}`] = "no response";
-      requiredAnswersObj[id] = "no response";
+      // for when participant deletes their answer after entering it
+      if (props.opts.required === true || props.opts.required === "true") {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
+      }
     }
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
-  };
-
-  // required question answer check
-  let userTextLen = false;
-  if (id in answersStorage) {
-    let userTextLen1 = answersStorage[id];
-    userTextLen = userTextLen1.length;
-  }
+    asyncLocalStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }; // End event handler
 
   useEffect(() => {
+    let userTextLen = false;
+    if (userText.length > 0 && userText !== "") {
+      userTextLen = true;
+    }
     if (
       checkRequiredQuestionsComplete === true &&
       userTextLen < 1 &&
       props.opts.required === true
     ) {
       setFormatOptions({
-        bgColor: "#fde047",
+        bgColor: "rgba(253, 224, 71, .5)",
         border: "3px dashed black",
       });
     } else {
@@ -104,35 +85,40 @@ const SurveyTextElement = (props) => {
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, userTextLen, props]);
+  }, [checkRequiredQuestionsComplete, userText, props]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-  const noteText = ReactHtmlParser(decodeHTML(props.opts.note));
-
-  let inputValue;
-  if (id in answersStorage) {
-    inputValue = answersStorage[id];
-
-    requiredAnswersObj[id] = "answered";
-    results[`qNum${props.opts.qNum}`] = inputValue;
-
-    setRequiredAnswersObj(requiredAnswersObj);
-    setResultsSurvey(results);
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <TextInput
+          type="text"
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
   } else {
-    inputValue = "";
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <TextInput
+          type="text"
+          value={userText}
+          placeholder={placeholder}
+          onChange={handleOnChange}
+        />
+      </Container>
+    );
   }
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <NoteText>
-        <div>{noteText}</div>
-      </NoteText>
-      <TextInput value={inputValue} onChange={handleOnChange} />
-    </Container>
-  );
 };
 
 export default SurveyTextElement;
@@ -143,7 +129,6 @@ const Container = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   max-width: 1300px;
-  min-height: 200px;
   background-color: ${(props) => props.bgColor};
   outline: ${(props) => props.border};
   outline-offset: -3px;
@@ -168,6 +153,7 @@ const NoteText = styled.div`
   align-items: center;
   vertical-align: center;
   margin-top: 5px;
+  margin-bottom: 5px;
   height: 50px;
   font-size: 16px;
   text-align: center;
@@ -181,7 +167,6 @@ const TextInput = styled.input`
   justify-content: left;
   align-items: center;
   vertical-align: center;
-  margin-top: 5px;
   height: 50px;
   font-size: 18px;
   background-color: white;

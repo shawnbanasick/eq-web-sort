@@ -10,9 +10,8 @@ const LocalSortsDownloadButton = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const localDownloadButtonText = ReactHtmlParser(
-    decodeHTML(langObj.localDownloadButtonText)
-  );
+  const localDownloadButtonText =
+    ReactHtmlParser(decodeHTML(langObj.localDownloadButtonText)) || "";
 
   return (
     <StyledSubmitButton tabindex="0" type="submit" onClick={props.onClick}>

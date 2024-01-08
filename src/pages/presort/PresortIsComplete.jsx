@@ -16,8 +16,9 @@ const PresortIsComplete = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
 
   const headerBarColor = configObj.headerBarColor;
-  const mainText = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
-  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
+  const mainText =
+    ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage)) || "";
+  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText)) || "";
 
   useEffect(() => {
     setCurrentPage("presort");

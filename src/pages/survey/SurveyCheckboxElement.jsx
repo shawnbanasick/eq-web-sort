@@ -3,35 +3,13 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
-import useStore from "../../globalState/useStore";
-
-const getResults = (state) => state.resultsSurvey;
-const getSetResultsSurvey = (state) => state.setResultsSurvey;
-const getCheckReqQsComplete = (state) => state.checkRequiredQuestionsComplete;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
-const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
-const getAnswersStorage = (state) => state.answersStorage;
-const getSetAnswersStorage = (state) => state.setAnswersStorage;
+import useLocalStorage from "../../utilities/useLocalStorage";
+import flatten from "lodash/flatten";
+import countBy from "lodash/countBy";
 
 const SurveyCheckboxElement = (props) => {
-  // STATE
-  const results = useStore(getResults);
-  const setResultsSurvey = useStore(getSetResultsSurvey);
-  const checkRequiredQuestionsComplete = useStore(getCheckReqQsComplete);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
-  const setRequiredAnswersObj = useStore(getSetRequiredAnswersObj);
-  const answersStorage = useStore(getAnswersStorage);
-  const setAnswersStorage = useStore(getSetAnswersStorage);
-
-  useEffect(() => {
-    results[`qNum${props.opts.qNum}`] = "no response";
-    setResultsSurvey(results);
-  }, [props, results, setResultsSurvey]);
-
-  let [hasBeenAnswered, setHasBeenAnswered] = useState(false);
-
+  // HELPER FUNCTIONS
   let localStore = {};
-
   const getOptionsArray = (options) => {
     let array = options.split(";;;");
     array = array.filter(function (e) {
@@ -41,126 +19,146 @@ const SurveyCheckboxElement = (props) => {
     return array;
   };
 
+  // PROPS
+  const checkRequiredQuestionsComplete = props.check;
   const optsArray = getOptionsArray(props.opts.options);
-  const nameValue = `question${props.opts.qNum}`;
+  const nameValue = `question${props.opts.itemNum}`;
+  let questionId = props.opts.id;
+  const labelText = ReactHtmlParser(decodeHTML(props.opts.label)) || "";
+  const noteText = ReactHtmlParser(decodeHTML(props.opts.note)) || "";
+  let displayNoteText = true;
+  if (noteText.length < 1 || noteText === "") {
+    displayNoteText = false;
+  }
 
-  let [checkedState, setCheckedState] = useState(
+  // PERSISTENT STATE
+  let [checkedState, setCheckedState] = useLocalStorage(
+    questionId,
     new Array(optsArray.length).fill(false)
   );
 
+  // LOCAL STATE
   const [formatOptions, setFormatOptions] = useState({
     bgColor: "whitesmoke",
     border: "none",
   });
 
-  const id = `qNum${props.opts.qNum}`;
-
   // HANDLE CHANGE
   const handleChange = (position) => {
+    const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     position = parseInt(position, 10);
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
-
     setCheckedState(updatedCheckedState);
-    answersStorage[id] = updatedCheckedState;
-    setAnswersStorage(answersStorage);
-
+    // prep the selected answers for storage
     let selected = updatedCheckedState.reduce(
       (text = "", currentState, index) => {
         if (currentState === true) {
-          return text + (index + 1).toString() + "|";
+          return text + (index + 1).toString() + ",";
         }
         return text;
       },
       ""
     );
-
-    if (selected.charAt(selected.length - 1) === "|") {
+    if (selected.charAt(selected.length - 1) === ",") {
       selected = selected.substr(0, selected.length - 1);
     }
+    // store the selected answers in the results object
+    resultsSurvey[`itemNum${props.opts.itemNum}`] = selected;
 
-    if (selected.length > 0) {
-      setHasBeenAnswered(true);
-      requiredAnswersObj[id] = "answered";
-    } else {
-      setHasBeenAnswered(false);
-
-      requiredAnswersObj[id] = "no response";
-      selected = "no response";
-    }
-
-    results[`qNum${props.opts.qNum}`] = selected;
-    setResultsSurvey(results);
-    setRequiredAnswersObj(requiredAnswersObj);
-  };
-
-  if (id in answersStorage) {
-    let response = answersStorage[id];
-
-    checkedState = response;
-    hasBeenAnswered = true;
-
-    let selected = response.reduce((text = "", currentState, index) => {
-      if (currentState === true) {
-        return text + (index + 1).toString() + "|";
+    if (selected === "") {
+      if (props.opts.required === true || props.opts.required === "true") {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no-*?*-response";
+      } else {
+        resultsSurvey[`itemNum${props.opts.itemNum}`] = "no response";
       }
-      return text;
-    }, "");
-
-    if (selected.charAt(selected.length - 1) === "|") {
-      selected = selected.substring(0, selected.length - 1);
     }
+    localStorage.setItem("resultsSurvey", JSON.stringify(resultsSurvey));
+  }; // end handleChange
 
-    requiredAnswersObj[id] = "answered";
-
-    results[`qNum${props.opts.qNum}`] = selected;
-
-    setResultsSurvey(results);
-    setRequiredAnswersObj(requiredAnswersObj);
+  // ****** CHECK IF ALL PARTS ANSWERED on render *******
+  let setYellow = false;
+  let flattenedCheckedState = flatten([...checkedState]);
+  let count = countBy(flattenedCheckedState);
+  let objTestValue = count[true] || 0;
+  if (objTestValue === 0) {
+    setYellow = true;
   }
 
+  // determine if highlight needed
   useEffect(() => {
     if (
       (props.opts.required === true || props.opts.required === "true") &&
       checkRequiredQuestionsComplete === true &&
-      hasBeenAnswered === false
+      setYellow
     ) {
-      setFormatOptions({ bgColor: "#fde047", border: "3px dashed black" });
+      setFormatOptions({
+        bgColor: "rgba(253, 224, 71, .5)",
+        border: "3px dashed black",
+      });
     } else {
       setFormatOptions({
         bgColor: "whitesmoke",
         border: "none",
       });
     }
-  }, [checkRequiredQuestionsComplete, hasBeenAnswered, props.opts.required]);
+  }, [checkRequiredQuestionsComplete, setYellow, props.opts.required]);
 
-  const labelText = ReactHtmlParser(decodeHTML(props.opts.label));
-
-  return (
-    <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
-      <TitleBar>
-        <div>{labelText}</div>
-      </TitleBar>
-      <RadioContainer>
-        {optsArray.map((item, index) => {
-          return (
-            <div key={uuid()}>
-              <input
-                id={`${item}-${index}`}
-                type="checkbox"
-                value={item}
-                name={nameValue}
-                checked={checkedState[index]}
-                onChange={() => handleChange(index)}
-              />
-              <label htmlFor={`${item}-${index}`}>{item}</label>
-            </div>
-          );
-        })}
-      </RadioContainer>
-    </Container>
-  );
+  if (displayNoteText) {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <NoteText id="noteText">
+          <div>{noteText}</div>
+        </NoteText>
+        <RadioContainer>
+          {optsArray.map((item, index) => {
+            return (
+              <div key={uuid()}>
+                <input
+                  id={`${item}-${index}`}
+                  type="checkbox"
+                  value={item}
+                  name={nameValue}
+                  checked={checkedState[index]}
+                  onChange={() => handleChange(index)}
+                />
+                <label htmlFor={`${item}-${index}`}>{item}</label>
+              </div>
+            );
+          })}
+        </RadioContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container bgColor={formatOptions.bgColor} border={formatOptions.border}>
+        <TitleBar>
+          <div>{labelText}</div>
+        </TitleBar>
+        <RadioContainer>
+          {optsArray.map((item, index) => {
+            return (
+              <div key={uuid()}>
+                <input
+                  id={`${item}-${index}`}
+                  type="checkbox"
+                  value={item}
+                  name={nameValue}
+                  checked={checkedState[index]}
+                  onChange={() => handleChange(index)}
+                />
+                <label htmlFor={`${item}-${index}`}>{item}</label>
+              </div>
+            );
+          })}
+        </RadioContainer>
+      </Container>
+    );
+  }
 };
 
 export default SurveyCheckboxElement;
@@ -212,4 +210,19 @@ const RadioContainer = styled.div`
   label {
     margin-left: 8px;
   }
+`;
+
+const NoteText = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 3px;
 `;

@@ -4,13 +4,13 @@ import { withRouter } from "react-router";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import convertObjectToResults from "../sort/convertObjectToResults";
+import getObjectValues from "lodash/values";
 
 const getConfigObj = (state) => state.configObj;
 const getPresortFinished = (state) => state.presortFinished;
 const getSetTrigPrePrevNavModal = (state) =>
   state.setTriggerPresortPreventNavModal;
 const getCurrentPage = (state) => state.currentPage;
-const getRequiredAnswersObj = (state) => state.requiredAnswersObj;
 const getSetCheckReqQuesCompl = (state) =>
   state.setCheckRequiredQuestionsComplete;
 const getSetTrigSurvPrevNavModal = (state) =>
@@ -24,7 +24,6 @@ const getSetTrigSortOverColMod = (state) =>
 const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getSetResults = (state) => state.setResults;
-const getPostsortCommentCheckObj = (state) => state.postsortCommentCheckObj;
 const getSetShowPostsortCommentHighlighting = (state) =>
   state.setShowPostsortCommentHighlighting;
 const getSetTriggerPostsortPreventNavModal = (state) =>
@@ -33,12 +32,11 @@ const getSetTriggerPostsortPreventNavModal = (state) =>
 const LinkButton = (props) => {
   let goToNextPage;
 
-  // STATE
+  // GLOBAL STATE
   const configObj = useSettingsStore(getConfigObj);
   const presortFinished = useStore(getPresortFinished);
   const setTriggerPresortPreventNavModal = useStore(getSetTrigPrePrevNavModal);
   const currentPage = useStore(getCurrentPage);
-  const requiredAnswersObj = useStore(getRequiredAnswersObj);
   const setCheckRequiredQuestionsComplete = useStore(getSetCheckReqQuesCompl);
   const setTriggerSurveyPreventNavModal = useStore(getSetTrigSurvPrevNavModal);
   const isSortingFinished = useStore(getIsSortingFinished);
@@ -48,7 +46,6 @@ const LinkButton = (props) => {
   const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setResults = useStore(getSetResults);
-  const postsortCommentCheckObj = useStore(getPostsortCommentCheckObj);
   const setShowPostsortCommentHighlighting = useStore(
     getSetShowPostsortCommentHighlighting
   );
@@ -58,6 +55,9 @@ const LinkButton = (props) => {
 
   const allowUnforcedSorts = configObj.allowUnforcedSorts;
   const postsortCommentsRequired = configObj.postsortCommentsRequired;
+
+  // PERSISTENT STATE
+  const sortColumns = JSON.parse(localStorage.getItem("sortColumns"));
 
   const {
     history,
@@ -88,20 +88,28 @@ const LinkButton = (props) => {
     if (currentPage === "sort") {
       if (isSortingFinished === false) {
         // check to see if finished, but had sorting registration error
-        if (statementsObj.columnStatements.statementList.length === 0) {
+        if (
+          statementsObj.columnStatements.statementList.length === 0 ||
+          sortColumns.imagesList.length === 0
+        ) {
           if (allowUnforcedSorts === true) {
             // unforced ok -> allow nav
+
+            // persist results to localStorage
             setResults(sortResults1);
+            // localStorage.setItem("resultsSort", JSON.stringify(sortResults1));
             setTriggerSortPreventNavModal(false);
             return true;
           } else {
-            // unforced not ok -> allow nav if no overloaded columns
+            // if forced sort -> allow nav only if no overloaded columns
             if (hasOverloadedColumn === true) {
               setTriggerSortPreventNavModal(false);
               setTriggerSortOverloadedColModal(true);
               return false;
             } else {
               setResults(sortResults1);
+              // persist results to localStorage
+              // localStorage.setItem("resultsSort", JSON.stringify(sortResults1));
               setTriggerSortPreventNavModal(false);
               return true;
             }
@@ -132,44 +140,58 @@ const LinkButton = (props) => {
     }
 
     if (currentPage === "postsort") {
-      const checkArray2 = [];
-      const keyArray = Object.keys(postsortCommentCheckObj);
-      keyArray.forEach((key) => {
-        if (
-          postsortCommentCheckObj[key] === false ||
-          postsortCommentCheckObj[key] === "false"
-        ) {
-          checkArray2.push("false");
-        }
-      });
+      let postsortCommentCardCount = +localStorage.getItem(
+        "postsortCommentCardCount"
+      );
+      console.log(postsortCommentCardCount);
+
+      const required1 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("HC-requiredCommentsObj"))
+        ) || [];
+      const required2 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("HC2-requiredCommentsObj"))
+        ) || [];
+      const required3 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("LC-requiredCommentsObj"))
+        ) || [];
+      const required4 =
+        getObjectValues(
+          JSON.parse(localStorage.getItem("LC2-requiredCommentsObj"))
+        ) || [];
+
+      const checkArray2 = [
+        ...required1,
+        ...required2,
+        ...required3,
+        ...required4,
+      ];
+
       if (
-        postsortCommentsRequired === true ||
-        postsortCommentsRequired === "true"
+        checkArray2.includes("false") ||
+        checkArray2.includes(false) ||
+        checkArray2.length < postsortCommentCardCount
       ) {
-        if (checkArray2.length > 0 || checkArray2.includes("false")) {
-          // answers required in configObj
+        // answers required in configObj
+        if (postsortCommentsRequired === true) {
           setShowPostsortCommentHighlighting(true);
           setTriggerPostsortPreventNavModal(true);
           return false;
-        } else {
-          return true;
         }
+        return true;
       } else {
         return true;
       }
     }
 
     if (currentPage === "survey") {
-      const checkArray = [];
-      const keys = Object.keys(requiredAnswersObj);
-      for (let i = 0; i < keys.length; i++) {
-        if (requiredAnswersObj[keys[i]] === "no response") {
-          checkArray.push("false");
-        }
-      }
-
-      if (checkArray.length > 0) {
-        // to turn on pink color for unanswered
+      let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+      let values = getObjectValues(resultsSurvey);
+      let includesNoResponse = values.includes("no-*?*-response");
+      if (includesNoResponse) {
+        // to turn on yellow color for unanswered
         setCheckRequiredQuestionsComplete(true);
         setTriggerSurveyPreventNavModal(true);
         return false;

@@ -16,12 +16,10 @@ const LocalSubmitSuccessModal = () => {
   const langObj = useSettingsStore(getLangObj);
   const triggerModalOpen = useStore(getTrigLclSubmitSucMdl);
 
-  const modalHead = ReactHtmlParser(
-    decodeHTML(langObj.localSubmitSuccessModalHeader)
-  );
-  const modalText = ReactHtmlParser(
-    decodeHTML(langObj.localSubmitSuccessModalText)
-  );
+  const modalHead =
+    ReactHtmlParser(decodeHTML(langObj.localSubmitSuccessModalHeader)) || "";
+  const modalText =
+    ReactHtmlParser(decodeHTML(langObj.localSubmitSuccessModalText)) || "";
 
   const onCloseModal = () => {};
 

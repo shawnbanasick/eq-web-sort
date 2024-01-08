@@ -13,6 +13,7 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 import PromptUnload from "../../utilities/PromptUnload";
+import PresortDndImages from "./PresortDndImages";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -22,8 +23,6 @@ const getIsLoggedIn = (state) => state.isLoggedIn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetProgressScore = (state) => state.setProgressScore;
 const getPresortNoReturn = (state) => state.presortNoReturn;
-const getResults = (state) => state.results;
-const getSetResults = (state) => state.setResults;
 const getResetColumnStatements = (state) => state.resetColumnStatements;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getBypassPresort = (state) => state.bypassSort;
@@ -39,8 +38,6 @@ const PresortPage = (props) => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const setProgressScore = useStore(getSetProgressScore);
   const presortNoReturn = useStore(getPresortNoReturn);
-  const results = useStore(getResults);
-  const setResults = useStore(getSetResults);
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const setDisplayNextButton = useStore(getSetDisplayNextButton);
   const bypassPresort = useStore(getBypassPresort);
@@ -52,32 +49,25 @@ const PresortPage = (props) => {
     (configObj.setDefaultFontSizePresort === "true" && bypassPresort === false)
   ) {
     cardFontSize = configObj.defaultFontSizePresort;
-    setCardFontSize(configObj.defaultFontSizePresort);
   }
+  useEffect(() => {
+    setCardFontSize(configObj.defaultFontSizePresort);
+  }, [configObj.defaultFontSizePresort, setCardFontSize]);
 
   // set next button display
   setDisplayNextButton(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCurrentPage("presort");
-      setProgressScore(20);
-    }, 200);
-  }, [setCurrentPage, setProgressScore]);
-
-  // calc time on page
-  useEffect(() => {
     let startTime = Date.now();
-    return () => {
-      const updatedResults = calculateTimeOnPage(
-        startTime,
-        "presortPage",
-        "presortPage",
-        results
-      );
-      setResults(updatedResults);
+    const setStateAsync = async () => {
+      await setCurrentPage("presort");
+      await setProgressScore(20);
     };
-  }, [results, setResults]);
+    setStateAsync();
+    return () => {
+      calculateTimeOnPage(startTime, "presortPage", "presortPage");
+    };
+  }, [setCurrentPage, setProgressScore]);
 
   let columnStatements = statementsObj.columnStatements;
 
@@ -88,8 +78,9 @@ const PresortPage = (props) => {
   const headerBarColor = configObj.headerBarColor;
   const initialScreen = configObj.initialScreen;
   const statements = cloneDeep(columnStatements.statementList);
+  const imageSort = configObj.useImages;
 
-  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText));
+  const titleBarText = ReactHtmlParser(decodeHTML(langObj.titleBarText)) || "";
 
   // early return if log-in required and not logged in
   if (initialScreen !== "anonymous") {
@@ -109,7 +100,11 @@ const PresortPage = (props) => {
       <PresortFinishedModal />
       <PresortPreventNavModal />
       <SortTitleBar background={headerBarColor}>{titleBarText}</SortTitleBar>
-      <PresortDND statements={statements} cardFontSize={cardFontSize} />
+      {imageSort ? (
+        <PresortDndImages cardFontSize={cardFontSize} />
+      ) : (
+        <PresortDND statements={statements} cardFontSize={cardFontSize} />
+      )}
     </React.Fragment>
   );
 };

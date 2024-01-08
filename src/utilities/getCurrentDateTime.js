@@ -12,19 +12,19 @@ const getCurrentDateTime = () => {
   if (minute < 10) {
     minute = "0" + minute;
   }
+
   let dateString =
-    date +
+    year +
     "/" +
     (month + 1) +
     "/" +
-    year +
-    " @ " +
+    date +
+    "@" +
     hour +
     ":" +
     minute +
     ":" +
     seconds;
-
   return dateString;
 };
 

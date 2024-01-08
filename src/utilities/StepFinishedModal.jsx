@@ -9,7 +9,8 @@ const getLangObj = (state) => state.langObj;
 const LoadingScreen = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
-  const message = ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage));
+  const message =
+    ReactHtmlParser(decodeHTML(langObj.stepCompleteMessage)) || "";
 
   return (
     <Container>

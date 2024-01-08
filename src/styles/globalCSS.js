@@ -44,6 +44,7 @@ body {
   margin: 0;
   height:calc(100vh-50px);
   overscroll-behavior: none;
+  overflow: hidden;
 }
 
 /**
@@ -387,11 +388,15 @@ footer {
   PRESORT CSS
  *******************************************************************************/
 
+  /* to speed up react beautiful dnd */
+[data-rbd-draggable-id] { will-change: transform, opacity }
+/*
+[data-rbd-draggable-id] { left: auto !important; top: auto !important; }
+*/
   .dragObject {
     -webkit-user-select: none;
     user-select: none;
     display: flex;
-    flex-direction: row;
   }
 
 
@@ -408,17 +413,18 @@ footer {
     grid-column-start: 3;
     overflow: hidden;
     align-self: end;
+    margin-top: 20px;
   }
   
   #cards{
-    max-height:215px;
+    max-height: 215px;
     min-height:150px;
     overflow: hidden;
   }
   
   #completionRatio {
-    grid-row-start: 2;
-    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-column-start: 4;
     text-align: center;
     font-weight: bold;
   }
@@ -513,6 +519,147 @@ footer {
   }
 }
 
+
+
+/***********************************
+  PRESORT CSS  ** IMAGES ** 
+ *******************************************************************************/
+
+
+
+#imageGrid .cardsDivImg{
+    grid-column-start: 3;
+    overflow: hidden;
+    padding-top: 10px;
+  }
+
+
+
+ #imageGrid .cardsDivImg  img {
+    width: 100%;
+  }
+
+  
+  #imageGrid #cards{
+    min-height:34vh;
+   overflow: hidden;
+  }
+  
+
+  #imageGrid #completionRatioImg {
+    grid-row-start: 1;
+    grid-column-start: 4;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #imageEnlargeInstructionsDiv {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    text-align: center;
+  }
+
+  #imageGrid .negDivImg{
+    grid-row-start: 3;
+    grid-column-start: 2;
+    overflow-y: auto;
+    background-color: white;
+    min-height: 300px;
+    height: 50vh;
+    padding-top: 5px;
+    border-top-left-radius: 3px;
+    overflow-x: hidden;
+    border-bottom-left-radius: 3px;
+    border: 1px solid #aeaeae;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 3px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+  }
+  
+
+  #imageGrid .neutralDivImg{
+    grid-row-start: 3;
+    grid-column-start: 3;
+    overflow-y: auto;
+    background-color: white;
+    min-height: 300px;
+    height: 50vh;
+    padding-top: 5px;
+    overflow-x: hidden;
+    border: 1px solid #aeaeae;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 3px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+
+  }
+
+  #imageGrid .posDivImg{
+    grid-row-start: 3;
+    grid-column-start: 4;
+    overflow-y: auto;
+    background-color: white;
+    height: 50vh;
+    padding-top: 5px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid #aeaeae;
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      // Width of vertical scroll bar
+      width: 3px;
+      // Height of horizontal scroll bar
+      height: 10px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: gray;
+    }
+  }
+
+  .pos{
+    min-height: 25vh;
+    border-radius: 3px;
+  }
+
+  .neutral{
+    min-height: 38vh;
+    border-radius: 3px;
+  }
+
+  .neg{
+    min-height: 38vh;
+    border-radius: 3px;
+  }
+
+  #imageGrid .cards{
+    border-radius: 3px;
+    
+  }
+  
+  #imageGrid .cards > :not(:first-child) {
+    opacity: 0;
+    }
+  
 
 /***********************************
   SORT CSS
@@ -621,15 +768,62 @@ footer {
   -webkit-animation: placeholderAnimate 3s ease-in;
 }
 
+/*
+.imageModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
 
+  img {
+  width: 100%;
+  height: auto;
+  }
+}
+*/
 
 /***********************************
+  POST SORT 
+ *******************************************************************************/
+.dropdown-heading-value {
+  padding-top: 5px;
+  min-height: 30px;
+}
+
+/***********************************
+  IMAGE MODAL CSS
+ *******************************************************************************/
+
+
+  .postSortImageModal169 {
+    background: black;
+    width: 70vw;
+    max-width: none;
+   }
+
+
+  .postSortImageModal43 {
+    background: black;
+    width: 40vw;
+    max-width: none;
+   }
+
+
+   .dualImageModal {
+    background: black;
+    width: 85vw;
+    max-width: none;
+   }
+
+   .dualImageOverlay {
+    background: black;
+    opacity: 0.85;
+  }
+
+  /***********************************
   LANDING MODAL CSS
  *******************************************************************************/
-/* 
-.customModal .react-responsive-modal-modal {
-    background: rgba(0, 0, 0, 0.8) !important;
-  } */
+
 
   /*
   spinner css

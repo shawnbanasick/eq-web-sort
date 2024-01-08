@@ -5,7 +5,11 @@ const createPostsortSlice = (set, get) => ({
   postsortCommentCheckObj: {},
   showPostsortCommentHighlighting: false,
   triggerPostsortPreventNavModal: false,
+  postsortDualImageArray: [],
 
+  setPostsortDualImageArray: (inputValue) => {
+    set(() => ({ postsortDualImageArray: inputValue }));
+  },
   setResultsPostsort: (inputValue) => {
     set(() => ({ resultsPostsort: inputValue }));
   },

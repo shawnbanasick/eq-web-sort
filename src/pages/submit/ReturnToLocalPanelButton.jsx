@@ -20,9 +20,8 @@ const ReturnToLocalPanelButton = (props) => {
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const newColumnStatements = cloneDeep(resetColumnStatements);
 
-  const btnTransferText = ReactHtmlParser(
-    decodeHTML(langObj.returnToLocalPanelButtonText)
-  );
+  const btnTransferText =
+    ReactHtmlParser(decodeHTML(langObj.returnToLocalPanelButtonText)) || "";
 
   const {
     history,

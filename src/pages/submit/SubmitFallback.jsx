@@ -18,7 +18,8 @@ const SubmitFallback = (props) => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
 
-  const fallbackMessage = ReactHtmlParser(decodeHTML(langObj.fallbackMessage));
+  const fallbackMessage =
+    ReactHtmlParser(decodeHTML(langObj.fallbackMessage)) || "";
 
   return (
     <div>

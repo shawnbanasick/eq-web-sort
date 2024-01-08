@@ -7,22 +7,27 @@ import decodeHTML from "../../utilities/decodeHTML";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
-const getLangObj = (state) => state.langObj;
-const getTriggerPresortModal = (state) => state.triggerPresortModal;
-const getSetTriggerPresortModal = (state) => state.setTriggerPresortModal;
-
 const PresortModal = () => {
+  const getLangObj = (state) => state.langObj;
+  const getTriggerPresortModal = (state) => state.triggerPresortModal;
+  const getSetTriggerPresortModal = (state) => state.setTriggerPresortModal;
+
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const triggerPresortModal = useStore(getTriggerPresortModal);
   const setTriggerPresortModal = useStore(getSetTriggerPresortModal);
 
+  const hasPresortSortingStarted = localStorage.getItem("columns");
+  if (hasPresortSortingStarted && hasPresortSortingStarted.length > 0) {
+    setTriggerPresortModal(false);
+  }
+
   const onCloseModal = () => {
     setTriggerPresortModal(false);
   };
 
-  const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead));
-  const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText));
+  const header = ReactHtmlParser(decodeHTML(langObj.presortModalHead)) || "";
+  const modalText = ReactHtmlParser(decodeHTML(langObj.presortModalText)) || "";
 
   return (
     <Modal

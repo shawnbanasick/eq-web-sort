@@ -35,6 +35,7 @@ const calculateDragResults = (
             catchNan = true;
           }
           resultsText += `${newValue}|`;
+          console.log(resultsText);
         } // loop end
 
         if (catchNan === true) {

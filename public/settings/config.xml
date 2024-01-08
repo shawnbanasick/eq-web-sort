@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-   <config version="1.0" htmlParse="false">
+   <config version="5.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
    <!-- "setupTarget" options: firebase, local, email, or sheets -->
@@ -12,12 +12,18 @@
    <!-- EMAIL -->
    <item id="emailAddress">ken.q.tools@gmail.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
-   <!-- SECOND PROJECT -->
+   <!-- SECOND PROJECT LINKING-->
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://</item> 
+   <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
+   <item id="useImages">false</item>
+   <item id="numImages">30</item>
+   <item id="imageFileType">jpg</item>
+   <item id="imageType">postSortImageModal169</item>
+   <item id="shuffleImages">false</item>
    <!-- OTHER GENERAL OPTIONS -->
-   <item id="shuffleCards">true</item>
    <item id="headerBarColor">#337ab7</item>
+   <item id="shuffleCards">true</item>
    <item id="devMode">false</item> 
 
    <!-- ACCESS -->
@@ -33,30 +39,35 @@
    
    <!-- PRESORT -->
    <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
-   <item id="defaultFontColor">#2a2a2a</item>
-   <item id="defaultFontSizePresort">26</item>
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0f0</item>
-   <item id="setDefaultFontSizePresort">true</item>
+   <item id="defaultFontColor">#2a2a2a</item>
+   <item id="setDefaultFontSizePresort">false</item>
+   <item id="defaultFontSizePresort">26</item>
   
 
    <!-- SORT -->
-   <item id="defaultFontSizeSort">16</item>
-   <item id="condOfInstFontSize">20</item>
    <item id="allowUnforcedSorts">false</item>
    <item id="warnOverloadedColumn">true</item>
-   <item id="minCardHeight">120</item>
    <item id="setMinCardHeight">true</item>
+   <item id="minCardHeightSort">120</item>
+   <item id="condOfInstFontSize">20</item>
    <item id="setDefaultFontSizeSort">true</item>
+   <item id="defaultFontSizeSort">16</item>
    <item id="sortDirection">positive</item> 
 
    <!-- POSTSORT -->
    <item id="showPostsort">true</item>
-   <item id="showSecondPosColumn">false</item>
-   <item id="showSecondNegColumn">false</item>
+   <item id="showSecondPosColumn">true</item>
+   <item id="showSecondNegColumn">true</item>
    <item id="showBackButton">true</item>
    <item id="postsortCommentsRequired">true</item>
+   <item id="setDefaultFontSizePostsort">true</item>
+   <item id="defaultFontSizePostsort">26</item>
+   <item id="setMinCardHeight">true</item>
+   <item id="minCardHeightPostsort">120</item>
+
 
 
    <!-- SURVEY - Survey Questions -->
@@ -64,52 +75,78 @@
 
    <item id="survey">
        <input type="information"></input>
-       <note bg="#fde047">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
+       <note bg="rgba(253, 224, 71, .5)">All fields marked with an * are {{{b}}}required.{{{/b}}}</note>
    </item>
 
    <item id="survey">
         <input type="text" required="true" limited="true" maxlength="100" restricted="false"></input>
         <label>1. Have you had classes with me before?*</label>
         <note>If yes, please {{{i}}}list them here{{{/i}}}. (limit = 100 characters)</note>
-   </item>
-
-   <item id="survey">
-        <input type="textarea" required="false"></input>
-        <label>2. Describe your experience using the iPads in this class</label>
         <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
-        <input type="radio" required="false">Freshman;;;Sophomore;;;Junior;;;Senior</input>
-        <label>3. Year</label>
-        <note>Please select your year</note>
+        <input type="textarea" required="true"></input>
+        <label>2. Describe your experience using the iPads in this class</label>
+         <note>Write as much as you want - no character limit</note>
+        <placeholder>input comment here</placeholder>
    </item>
 
    <item id="survey">
-        <input type="select" required="false">Global Studies;;;Linguistics;;;English Literature</input>
+        <input type="radio" required="true">Spring 2025;;;Fall 2025;;;Spring 2026;;;After Spring 2025</input>
+        <label>3. When is your expected graduation date? </label>
+        <note>Based on your current course load</note>
+   </item>
+
+   <item id="survey">
+        <input type="select" required="true">Global Studies;;;Linguistics;;;English Literature</input>
         <label>4. What is your program focus?</label>
+        <note>You can select more than one option</note>
    </item>
 
    <item id="survey">
         <input type="checkbox" required="true">Lecture;;;Group Discussion;;;Active Learning</input>
         <label>5. What kind of class do you prefer?*</label>
+        <note>You can select more than one option</note>
    </item>
 
    <item id="survey">
-        <input type="rating2" required="false" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
-        <label>6. Please respond to the following {{{u}}}statements{{{/u}}}</label>
+        <input type="likert5" required="true" scale="Strongly Disagree;;;Disagree;;;Neutral;;;Agree;;;Strongly Agree;;;Agree;;;Strongly Agree">.</input>
+        <label>6. The iPads helped to create an effective learning environment.</label>
    </item>
 
    <item id="survey">
-        <input type="rating5" required="false" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
-        <label>7. {{{i}}}Please{{{/i}}} answer the following questions</label>
+        <input type="likert5" required="true" scale="Very Unimportant;;;Unimportant;;;Neutral;;;Important;;;Very Important">.</input>
+        <label>7. How important is it to have an iPad for each class session?</label>
    </item>
 
    <item id="survey">
-        <input type="rating10" required="false" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
-        <label>8. {{{u}}}Please{{{/u}}} answer the following questions</label>
+        <input type="likert5" required="true" scale="Very Unconcerned;;;Unconcerned;;;Neutral;;;Concerned;;;Very Concerned">.</input>
+        <label>8. How concerned are you about the amount of time that you spend looking at screens? (TV, smartphone, computer, iPad, etc.)</label>
    </item>
 
+   <item id="survey">
+        <input type="likert5" required="true" scale="Never;;;Rarely;;;Occasionally;;;Frequently;;;Very Frequently">.</input>
+        <label>9. How often do you use an iPad in your daily life?</label>
+   </item>
+
+   <item id="survey">
+        <input type="rating2" required="true" scale="Yes;;;No">I have used an iPad in class {{{b}}}before{{{/b}}}.;;; I have used a notebook computer in class before.;;;I have used Moodle before.;;;I have used Quizlet before;;;</input>
+        <label>10. Please respond to the following {{{u}}}statements{{{/u}}}</label>
+        <note>Please answer all of the ratings</note>
+   </item>
+
+   <item id="survey">
+        <input type="rating5" required="true" scale="1;;;2;;;3;;;4;;;5">How would you rate the use of iPads in this class?;;;How would you rate this class overall?;;;How was your interaction with {{{u}}}other students?{{{/u}}};;;How was access to the computer lab?</input>
+        <label>11. {{{i}}}Please{{{/i}}} rate the following statements</label>
+        <note>Please answer all of the ratings</note>
+   </item>
+
+   <item id="survey">
+        <input type="rating10" required="true" scale="1;;;2;;;3;;;4;;;5;;;6;;;7;;;8;;;9;;;10">How would you rate the use of the Socrative website in this class?;;;How would you rate the use of the {{{b}}}Quizlet{{{/b}}} website in this class?;;;How would you rate the use of Moodle in this class?;;;How would you rate the use of Edmodo in this class?;;;</input>
+        <label>12. {{{u}}}Please{{{/u}}} rate the following statements</label>
+        <note>Please answer all of the ratings</note>
+   </item>
 
        
   </config>

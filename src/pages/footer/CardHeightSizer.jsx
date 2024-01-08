@@ -15,7 +15,8 @@ const CardHeightSizer = () => {
   const cardHeight = useStore(getCardHeight);
   const setCardHeight = useStore(getSetCardHeight);
 
-  const cardHeightText = ReactHtmlParser(decodeHTML(langObj.cardHeightText));
+  const cardHeightText =
+    ReactHtmlParser(decodeHTML(langObj.cardHeightText)) || "";
 
   const increaseHeight = () => {
     const currentSize = +cardHeight;
