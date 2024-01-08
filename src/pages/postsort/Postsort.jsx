@@ -46,9 +46,6 @@ const PostSort = () => {
     localStorage.getItem("cardHeightPostsort")
   );
 
-  console.log("cardFontSizePersist", cardFontSizePersist);
-  console.log("cardFontSize", cardFontSizePostsort);
-
   if (cardFontSizePersist) {
     cardFontSizePostsort = cardFontSizePersist;
   }

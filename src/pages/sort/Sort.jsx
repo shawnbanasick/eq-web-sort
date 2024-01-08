@@ -34,9 +34,7 @@ const getSetPresortNoReturn = (state) => state.setPresortNoReturn;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getSetTopMargin = (state) => state.setTopMargin;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
-const getSetCardFontSize = (state) => state.setCardFontSize;
 let getCardHeightSort = (state) => state.cardHeightSort;
-const getSetCardHeightSort = (state) => state.setMinCardHeightSort;
 
 const Sort = () => {
   // GLOBAL STATE
@@ -57,18 +55,12 @@ const Sort = () => {
   const cardHeightPersist = +localStorage.getItem("cardHeightSort");
   const cardFontSizePersist = +localStorage.getItem("fontSizeSort");
 
-  console.log(cardHeightPersist);
-  console.log(cardHeight);
-  // adjust card height from optional default or from local storage
-
   if (cardHeightPersist) {
     cardHeight = cardHeightPersist;
   }
   if (cardFontSizePersist) {
     cardFontSize = cardFontSizePersist;
   }
-
-  console.log(cardHeight);
 
   // force updates on window resize
   const [dimensions, setDimensions] = useState({
