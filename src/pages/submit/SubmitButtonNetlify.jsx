@@ -62,11 +62,14 @@ const SubmitResultsButton = (props) => {
       }),
     })
       .then(() => {
+        // SUCCESS
         console.log("Success!");
-
+        // reset localStorage
+        let urlUsercode = localStorage.getItem("urlUsercode");
+        localStorage.clear();
+        localStorage.setItem("urlUsercode", urlUsercode);
         if (configObj.linkToSecondProject === true) {
           setDisplayGoodbyeMessage(true);
-          let urlUsercode = localStorage.getItem("urlUsercode");
           const nextLinkAnchor = document.createElement("a");
           nextLinkAnchor.setAttribute("id", "secondProjectLink");
           nextLinkAnchor.setAttribute(
@@ -82,6 +85,7 @@ const SubmitResultsButton = (props) => {
         setTriggerTransmissionOKModal(true);
       })
       .catch((error) => {
+        // ERROR - show modal
         console.log("data error - there was an error at rootRef level!");
         console.log(error);
         setTriggerTransmissionFailModal(true);

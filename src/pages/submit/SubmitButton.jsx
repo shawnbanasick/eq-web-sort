@@ -68,26 +68,14 @@ const SubmitResultsButton = (props) => {
           } else {
             // do success action - modal
             console.log("success! pushed to database");
-            localStorage.removeItem("cumulativelandingPageDuration");
-            localStorage.removeItem("cumulativepresortPageDuration");
-            localStorage.removeItem("cumulativesortPageDuration");
-            localStorage.removeItem("cumulativepostsortPageDuration");
-            localStorage.removeItem("cumulativesurveyPageDuration");
-            localStorage.removeItem("lastAccesslandingPage");
-            localStorage.removeItem("lastAccesspresortPage");
-            localStorage.removeItem("lastAccesssortPage");
-            localStorage.removeItem("lastAccesspostsortPage");
-            localStorage.removeItem("lastAccesssurveyPage");
-            localStorage.removeItem("timeOnlandingPage");
-            localStorage.removeItem("timeOnpresortPage");
-            localStorage.removeItem("timeOnsortPage");
-            localStorage.removeItem("timeOnpostsortPage");
-            localStorage.removeItem("timeOnsurveyPage");
+            // reset localStorage
+            let urlUsercode = localStorage.getItem("urlUsercode");
+            localStorage.clear();
+            localStorage.setItem("urlUsercode", urlUsercode);
 
             if (configObj.linkToSecondProject === true) {
               setDisplayGoodbyeMessage(true);
 
-              let urlUsercode = localStorage.getItem("urlUsercode");
               const nextLinkAnchor = document.createElement("a");
               nextLinkAnchor.setAttribute("id", "secondProjectLink");
               nextLinkAnchor.setAttribute(
