@@ -189,6 +189,7 @@ const Sort = () => {
             cardFontSize={cardFontSize}
             fontColor={fontColor}
             columnWidth={columnWidth}
+            cardHeight={cardHeight}
           />
         ) : (
           <SortGrid
@@ -258,4 +259,5 @@ const Disagree = styled.div`
 
 const SortGridContainer = styled.div`
   margin-top: ${(props) => `${props.marginTop}px`};
+  margin-bottom: 250px;
 `;

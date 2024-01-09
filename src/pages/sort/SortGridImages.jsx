@@ -19,8 +19,8 @@ const getMapObj = (state) => state.mapObj;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
-let getCardHeight = (state) => state.cardHeight;
-const getSetCardHeight = (state) => state.setCardHeight;
+// let getCardHeight = (state) => state.cardHeight;
+// const getSetCardHeight = (state) => state.setCardHeight;
 const getResults = (state) => state.results;
 const getSortFinModalHasBeenShown = (state) =>
   state.sortFinishedModalHasBeenShown;
@@ -39,8 +39,8 @@ const SortGridImages = (props) => {
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
-  let cardHeight = useStore(getCardHeight);
-  const setCardHeight = useStore(getSetCardHeight);
+  //let cardHeight = useStore(getCardHeight);
+  //const setCardHeight = useStore(getSetCardHeight);
   const results = useStore(getResults);
   const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
   const sortGridResults = useStore(getSortGridResults);
@@ -96,6 +96,7 @@ const SortGridImages = (props) => {
     sortDirection = "ltr";
   }
 
+  /*
   if (+cardHeight === 0) {
     cardHeight = +(
       (window.innerHeight - 150) /
@@ -103,6 +104,7 @@ const SortGridImages = (props) => {
     ).toFixed();
     setCardHeight(+cardHeight);
   }
+*/
 
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {
@@ -244,13 +246,13 @@ const SortGridImages = (props) => {
     return (
       <SortColumnImages
         key={columnId}
-        minHeight={qSortPattern[index] * (+cardHeight + 8)}
+        minHeight={qSortPattern[index] * (+props.cardHeight + 8)}
         maxCards={qSortPattern[index]}
         columnId={columnId}
         columnStatementsArray={columnStatements.vCols[columnId]}
         forcedSorts={configObj.warnOverloadedColumn}
         columnWidth={props.columnWidth}
-        cardHeight={+cardHeight}
+        cardHeight={+props.cardHeight}
         sortValue={sortValue}
         columnColor={columnColor}
         cardFontSize={cardFontSize}
@@ -290,7 +292,7 @@ const SortGridImages = (props) => {
                   `${item.sortValue}`,
                   `${item.cardColor}`,
                   columnWidth,
-                  cardHeight,
+                  props.cardHeight,
                   cardFontSize,
                   greenCardColor,
                   yellowCardColor,
@@ -376,7 +378,11 @@ const SortGridImages = (props) => {
                       sortDirection
                     )}
                   >
-                    <InnerList statements={statements} provided={provided} />
+                    <InnerList
+                      statements={statements}
+                      cardHeight={props.cardHeight}
+                      provided={provided}
+                    />
                     <span style={{ display: "none" }}>
                       {" "}
                       {provided.placeholder}

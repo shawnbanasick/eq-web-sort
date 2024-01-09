@@ -3,10 +3,10 @@
    <config version="5.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
-   <!-- "setupTarget" options: firebase, local, email, or sheets -->
+   <!-- "setupTarget" options: firebase, local, email, netlifyForm, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
    <item id="databaseOptions">Include_Google_Options</item>
-   <item id="setupTarget">email</item>
+   <item id="setupTarget">netlifyForm</item>
    <!-- STEIN -->
    <item id="steinApiUrl">https://</item>
    <!-- EMAIL -->
@@ -16,7 +16,7 @@
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://</item> 
    <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
-   <item id="useImages">false</item>
+   <item id="useImages">true</item>
    <item id="numImages">30</item>
    <item id="imageFileType">jpg</item>
    <item id="imageType">postSortImageModal169</item>
@@ -65,7 +65,7 @@
    <item id="showSecondPosColumn">true</item>
    <item id="showSecondNegColumn">true</item>
    <item id="showBackButton">true</item>
-   <item id="postsortCommentsRequired">true</item>
+   <item id="postsortCommentsRequired">false</item>
    
    <item id="setDefaultFontSizePostsort">false</item>
    <item id="defaultFontSizePostsort">8</item>

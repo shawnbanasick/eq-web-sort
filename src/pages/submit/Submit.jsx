@@ -14,6 +14,7 @@ import SubmitButtonGS from "./SubmitButtonGS";
 import SubmitButtonEmail from "./SubmitButtonEmail";
 import convertObjectToResults from "../sort/convertObjectToResults";
 import getCurrentDateTime from "../../utilities/getCurrentDateTime";
+import SubmitButtonNetlify from "./SubmitButtonNetlify";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -233,6 +234,16 @@ const SubmitPage = () => {
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonEmail results={transmissionResults} />
+        </ContainerDiv>
+      </React.Fragment>
+    );
+  } else if (configObj.setupTarget === "netlifyForm") {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <ContentDiv>{transferTextAbove}</ContentDiv>
+          <SubmitButtonNetlify results={transmissionResults} />
         </ContainerDiv>
       </React.Fragment>
     );
