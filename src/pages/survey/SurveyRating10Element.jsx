@@ -361,8 +361,9 @@ const RadioInput = styled.input`
   align-self: center;
   text-align: center;
   border: 0px;
-  width: 100%;
+  width: 28px;
   height: 1.4em;
+  padding-left: 3px;
 `;
 
 const OptionsText = styled.span`

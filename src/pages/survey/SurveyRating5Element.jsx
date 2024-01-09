@@ -299,7 +299,7 @@ const RadioInput = styled.input`
   align-self: center;
   text-align: center;
   border: 0px;
-  width: 100%;
+  width: 25px;
   height: 1.4em;
 `;
 

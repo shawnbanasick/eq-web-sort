@@ -261,7 +261,9 @@ const ItemContainer = styled.div`
   padding-left: 5px;
   padding-bottom: 8px;
   height: 40px;
-  align-items: end;
+  // align-items: end;
+  justify-items: center;
+  align-items: center;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   &:hover {
     background-color: rgba(131, 202, 254, 0.4);
@@ -285,8 +287,10 @@ const RadioInput = styled.input`
   justify-self: center;
   align-self: center;
   border: 0px;
-  width: 100%;
+  width: 28px;
   height: 1.4em;
+  justify-items: center;
+  align-items: center;
 `;
 
 const OptionsText = styled.span`
