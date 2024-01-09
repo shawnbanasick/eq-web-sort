@@ -85,11 +85,24 @@ const SurveyLikertElement = (props) => {
 
   const RadioItems = () => {
     const radioList = scaleArray.map((item, index) => (
-      <RadioButtons key={uuid()} onChange={(e) => handleChange(e)}>
-        <RadioInput value={index} checked={selected} setter={setSelected} />
+      <RadioButtons
+        className="radioButtons"
+        key={uuid()}
+        onChange={(e) => handleChange(e)}
+      >
+        <RadioInput
+          className="radioInput"
+          value={index}
+          checked={selected}
+          setter={setSelected}
+        />
       </RadioButtons>
     ));
-    return <ItemContainer cols={scaleArray.length}>{radioList}</ItemContainer>;
+    return (
+      <ButtonContainer className="buttonContainer" cols={scaleArray.length}>
+        {radioList}
+      </ButtonContainer>
+    );
   };
 
   return (
@@ -97,8 +110,10 @@ const SurveyLikertElement = (props) => {
       <TitleBar>
         <div>{labelText}</div>
       </TitleBar>
-      <RadioContainer>
-        <RatingTitle cols={scaleArray.length}>{scaleList}</RatingTitle>
+      <RadioContainer className="radioContainer">
+        <RatingTitle className="ratingTitle" cols={scaleArray.length}>
+          {scaleList}
+        </RatingTitle>
         <RadioItems />
       </RadioContainer>
     </Container>
@@ -148,10 +163,6 @@ const RadioContainer = styled.div`
   border-radius: 3px;
   border: 2px solid lightgray;
 
-  input {
-    margin-top: 8px;
-  }
-
   label {
     margin-left: 8px;
   }
@@ -159,10 +170,8 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: ${(props) =>
-    `repeat(${props.cols}, ${100 / props.cols}%)`};
-  margin-bottom: 17px;
-  padding-left: 5px;
+  margin-bottom: 15px;
+  padding-left: 3px;
   padding-bottom: 8px;
   height: 40px;
   width: 100%;
@@ -171,11 +180,19 @@ const ItemContainer = styled.div`
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
 `;
 
+const ButtonContainer = styled.div`
+  display: inline-grid;
+  grid-template-columns: ${(props) =>
+    `repeat(${props.cols}, ${100 / props.cols}%)`};
+  margin-bottom: 3px;
+  justify-items: center;
+  align-items: center;
+`;
+
 const RatingTitle = styled.div`
   display: inline-grid;
   grid-template-columns: ${(props) =>
     `repeat(${props.cols}, ${100 / props.cols}%)`};
-  margin-bottom: 7px;
 `;
 
 const ScaleDiv = styled.div`
@@ -189,10 +206,14 @@ const RadioButtons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-
+  justify-self: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 25px;
   input {
-    height: 1.4em;
-    width: 100%;
+    height: 1.5em;
+    width: 20px;
   }
 `;
+
+const inputButtons = styled.input``;
