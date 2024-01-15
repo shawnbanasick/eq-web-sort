@@ -208,7 +208,7 @@ const StyledButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 200px;
+  width: auto;
   height: 50px;
   justify-self: right;
   margin-right: 35px;

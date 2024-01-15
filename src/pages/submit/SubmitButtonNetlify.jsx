@@ -33,7 +33,7 @@ const SubmitResultsButton = (props) => {
   const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
 
   const btnTransferText =
-    ReactHtmlParser(decodeHTML(langObj.btnTransferEmail)) || "";
+    ReactHtmlParser(decodeHTML(langObj.btnTransferText)) || "";
 
   const encode = (data) => {
     return Object.keys(data)
@@ -218,27 +218,6 @@ const TransmittingSpin = styled.div`
   }
 `;
 
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.2em;
-  width: 65vw;
-  font-size: 1.35em;
-  margin-top: 25px;
-  padding: 5px;
-  align-self: center;
-`;
-
 const SpacerDiv = styled.div`
   height: 300px;
-`;
-
-const EmailButtonDiv = styled.div`
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;

@@ -6,17 +6,17 @@
    <!-- "setupTarget" options: firebase, local, email, netlifyForm, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
    <item id="databaseOptions">Include_Google_Options</item>
-   <item id="setupTarget">email</item>
+   <item id="setupTarget">NetlifyForm</item>
    <!-- STEIN -->
    <item id="steinApiUrl">https://</item>
    <!-- EMAIL -->
    <item id="emailAddress">ken.q.tools@gmail.com</item>  
    <item id="emailSubject">EQ Websort Results</item>  
    <!-- SECOND PROJECT LINKING-->
-   <item id="linkToSecondProject">false</item> 
-   <item id="secondProjectUrl">https://</item> 
+   <item id="linkToSecondProject">true</item> 
+   <item id="secondProjectUrl">https://linking-test-2.netlify.app/</item> 
    <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
-   <item id="useImages">true</item>
+   <item id="useImages">false</item>
    <item id="numImages">30</item>
    <item id="imageFileType">jpg</item>
    <item id="imageType">postSortImageModal169</item>

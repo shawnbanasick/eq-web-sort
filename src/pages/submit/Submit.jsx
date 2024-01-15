@@ -21,7 +21,6 @@ const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getUrlUsercode = (state) => state.urlUsercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
 const getLocalUsercode = (state) => state.localUsercode;
@@ -35,10 +34,10 @@ const SubmitPage = () => {
   const mapObj = useSettingsStore(getMapObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
   const localUsercode = useStore(getLocalUsercode);
+  const urlUsercode = localStorage.getItem("urlUsercode") || "";
 
   // PERSISTENT STATE
   const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
@@ -75,12 +74,11 @@ const SubmitPage = () => {
       transmissionResults["projectName"] = configObj.studyTitle;
       transmissionResults["partId"] = localStorage.getItem("partId") || "";
       transmissionResults["randomId"] = uuid().substring(0, 12);
-      transmissionResults["urlUsercode"] = urlUsercode;
+      transmissionResults["urlUsercode"] =
+        localStorage.getItem("urlUsercode") || "";
       const dateString = getCurrentDateTime();
 
       transmissionResults["dateTime"] = dateString;
-      // let timeLanding = localStorage.getItem("timeOnlandingPage") || "00:00:00";
-      // console.log(timeLanding);
       transmissionResults["timeLanding"] =
         localStorage.getItem("timeOnlandingPage") || "00:00:00";
       transmissionResults["timePresort"] =
