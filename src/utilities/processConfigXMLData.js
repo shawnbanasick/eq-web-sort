@@ -368,7 +368,7 @@ const processConfigXMLData = (dataObject) => {
       }
 
       // likert 5 question
-      if (questionType === "likert5") {
+      if (questionType === "likert") {
         tempObj.id = `itemNum${j + 1}`;
         let isRequired = JSON.parse(surveyData[j][0].attributes.required);
         if (isRequired === "true" || isRequired === true) {
@@ -378,7 +378,7 @@ const processConfigXMLData = (dataObject) => {
           requiredAnswersObj[`itemNum${j + 1}`] = "no response";
         }
         tempObj.itemNum = j + 1;
-        tempObj.type = "likert5";
+        tempObj.type = "likert";
         try {
           tempObj.required = surveyData[j][0].attributes.required;
         } catch (error) {

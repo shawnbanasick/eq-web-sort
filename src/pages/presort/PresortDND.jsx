@@ -44,7 +44,7 @@ function PresortDND(props) {
     ReactHtmlParser(decodeHTML(langObj.presortAgreement)) || "";
   const btnNeutral = ReactHtmlParser(decodeHTML(langObj.presortNeutral)) || "";
   const onPageInstructions =
-    ReactHtmlParser(decodeHTML(langObj.onPageInstructions)) || "";
+    ReactHtmlParser(decodeHTML(langObj.presortOnPageInstructions)) || "";
 
   // initialize local state
   let [presortSortedStatementsNum, setPresortSortedStatementsNum] = useState(

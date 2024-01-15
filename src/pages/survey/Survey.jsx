@@ -8,7 +8,7 @@ import SurveyCheckboxElement from "./SurveyCheckboxElement";
 import SurveyRating2Element from "./SurveyRating2Element";
 import SurveyRating5Element from "./SurveyRating5Element";
 import SurveyRating10Element from "./SurveyRating10Element";
-import SurveyLikert5Element from "./SurveyLikert5Element";
+import SurveyLikertElement from "./SurveyLikertElement";
 import SurveyInformationElement from "./SurveyInformationElement";
 import { v4 as uuid } from "uuid";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
@@ -125,9 +125,9 @@ const SurveyPage = () => {
             />
           );
         }
-        if (object.type === "likert5") {
+        if (object.type === "likert") {
           return (
-            <SurveyLikert5Element
+            <SurveyLikertElement
               key={uuid()}
               check={checkRequiredQuestionsComplete}
               opts={object}

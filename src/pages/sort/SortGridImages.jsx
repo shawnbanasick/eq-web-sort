@@ -57,7 +57,6 @@ const SortGridImages = (props) => {
   const columnColorsArray = [...mapObj.columnColorsArray];
   const columnHeadersColorsArray = [...mapObj.columnHeadersColorsArray];
   const qSortPattern = [...mapObj.qSortPattern];
-  const maxNumCardsInCol = Math.max(...qSortPattern);
 
   let presortColumnStatements = JSON.parse(
     localStorage.getItem("columnStatements")
@@ -95,16 +94,6 @@ const SortGridImages = (props) => {
   if (configObj.sortDirection === "negative") {
     sortDirection = "ltr";
   }
-
-  /*
-  if (+cardHeight === 0) {
-    cardHeight = +(
-      (window.innerHeight - 150) /
-      (maxNumCardsInCol + 1)
-    ).toFixed();
-    setCardHeight(+cardHeight);
-  }
-*/
 
   const handleOpenImageModal = (e, src) => {
     if (e.detail === 2) {

@@ -47,6 +47,7 @@ const LogInSubmitButton = (props) => {
     } else {
       setLocalPartIdWarning1(false);
       value1 = true;
+      localStorage.setItem("localParticipantName", localParticipantName);
     }
 
     if (localUsercode.length === 0) {
@@ -54,8 +55,8 @@ const LogInSubmitButton = (props) => {
       setLocalPartIdWarning2(true);
     } else {
       setLocalPartIdWarning2(false);
-
       value2 = true;
+      localStorage.setItem("localUsercode", localUsercode);
     }
 
     if (value1 === true && value2 === true) {

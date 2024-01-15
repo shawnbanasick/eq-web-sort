@@ -14,18 +14,24 @@ const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 const getSetHasDownloadedQsorts = (state) => state.setHasDownloadedQsorts;
 const getSetTriggerLocalSubmitSuccessModal = (state) =>
   state.setTriggerLocalSubmitSuccessModal;
+const getSurveyQuestionObjArray = (state) => state.surveyQuestionObjArray;
 
 const getLangObj = (state) => state.langObj;
 
 const SubmitLocalResultsButton = (props) => {
+  console.log("props.results", props.results);
+
   // STATE
   const langObj = useSettingsStore(getLangObj);
+
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
   let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
   const setHasDownloadedQsorts = useLocalPersist(getSetHasDownloadedQsorts);
   const setTriggerLocalSubmitSuccessModal = useStore(
     getSetTriggerLocalSubmitSuccessModal
   );
+  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray);
+  console.log("surveyQuestionObjArray", surveyQuestionObjArray);
 
   const btnTransferText =
     ReactHtmlParser(decodeHTML(langObj.localSaveDataButton)) || "";
@@ -35,14 +41,19 @@ const SubmitLocalResultsButton = (props) => {
     e.target.disabled = true;
 
     try {
-      console.log(JSON.stringify(props.results, null, 2));
-
+      // reset names in case of page reload
+      let localParticipantName = localStorage.getItem("localParticipantName");
+      let localUsercode = localStorage.getItem("localUsercode");
+      const resultsProject = JSON.parse(JSON.stringify(props.results));
+      resultsProject.partId = localParticipantName;
+      resultsProject.usercode = localUsercode;
+      // set results object
       const participantDesignation1 = uuid();
       const participantDesignation = participantDesignation1.substring(0, 8);
-
-      localStoredQsorts[participantDesignation] = props.results;
+      localStoredQsorts[participantDesignation] = resultsProject;
       setLocalStoredQsorts(localStoredQsorts);
 
+      // clean up for next participant
       localStorage.removeItem("cumulativelandingPageDuration");
       localStorage.removeItem("cumulativepresortPageDuration");
       localStorage.removeItem("cumulativesortPageDuration");
@@ -58,6 +69,22 @@ const SubmitLocalResultsButton = (props) => {
       localStorage.removeItem("timeOnsortPage");
       localStorage.removeItem("timeOnpostsortPage");
       localStorage.removeItem("timeOnsurveyPage");
+      localStorage.removeItem("resultsSurvey");
+      localStorage.removeItem("resultsSort");
+      localStorage.removeItem("resultsPresort");
+      localStorage.removeItem("resultsPostsort");
+      localStorage.removeItem("HC-requiredCommentsObj");
+      localStorage.removeItem("HC2-requiredCommentsObj");
+      localStorage.removeItem("LC-requiredCommentsObj");
+      localStorage.removeItem("LC2-requiredCommentsObj");
+      localStorage.removeItem("postsortCommentCardCount");
+      localStorage.removeItem("allCommentsObj");
+      localStorage.removeItem("localParticipantName");
+      localStorage.removeItem("localUsercode");
+
+      surveyQuestionObjArray.forEach((question) => {
+        localStorage.removeItem(question.id);
+      });
 
       setTriggerLocalSubmitSuccessModal(true);
       setHasDownloadedQsorts(false);

@@ -47,7 +47,7 @@ const StyledFooter = () => {
 
   let logoHtml = ReactHtmlParser(
     decodeHTML(
-      `{{{center}}}{{{img src="./images/logo.png" height="40" width="250" /}}}{{{/center}}}`
+      `{{{center}}}{{{img src="./logo/logo.png" height="40" width="250" /}}}{{{/center}}}`
     )
   );
 

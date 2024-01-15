@@ -168,18 +168,6 @@ const RadioContainer = styled.div`
   }
 `;
 
-const ItemContainer = styled.div`
-  display: inline-grid;
-  margin-bottom: 15px;
-  padding-left: 3px;
-  padding-bottom: 8px;
-  height: 40px;
-  width: 100%;
-
-  align-items: end;
-  background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
-`;
-
 const ButtonContainer = styled.div`
   display: inline-grid;
   grid-template-columns: ${(props) =>
@@ -215,5 +203,3 @@ const RadioButtons = styled.div`
     width: 20px;
   }
 `;
-
-const inputButtons = styled.input``;
