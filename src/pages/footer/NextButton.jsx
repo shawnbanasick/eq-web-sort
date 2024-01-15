@@ -57,7 +57,7 @@ const LinkButton = (props) => {
   const postsortCommentsRequired = configObj.postsortCommentsRequired;
 
   // PERSISTENT STATE
-  const sortColumns = JSON.parse(localStorage.getItem("sortColumns"));
+  const sortColumns = JSON.parse(localStorage.getItem("sortColumns")) || [];
 
   const {
     history,
@@ -89,8 +89,8 @@ const LinkButton = (props) => {
       if (isSortingFinished === false) {
         // check to see if finished, but had sorting registration error
         if (
-          statementsObj.columnStatements.statementList.length === 0 ||
-          sortColumns.imagesList.length === 0
+          statementsObj?.columnStatements?.statementList?.length === 0 ||
+          sortColumns?.imagesList?.length === 0
         ) {
           if (allowUnforcedSorts === true) {
             // unforced ok -> allow nav

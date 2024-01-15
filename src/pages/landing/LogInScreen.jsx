@@ -82,6 +82,8 @@ const LogInScreen = () => {
           if (userAccessOK && userPartIdOK) {
             setDisplayLandingContent(true);
             setPartId(userInputPartId);
+            localStorage.setItem("partId", userInputPartId);
+
             setDisplayNextButton(true);
             setIsLoggedIn(true);
           } else if (userAccessOK === false) {
@@ -140,6 +142,8 @@ const LogInScreen = () => {
       if (userAccessOK && userPartIdOK) {
         setDisplayLandingContent(true);
         setPartId(userInputPartId);
+        localStorage.setItem("partId", userInputPartId);
+
         setDisplayNextButton(true);
         setIsLoggedIn(true);
       } else if (userAccessOK === false) {

@@ -50,6 +50,7 @@ const LogInScreen = () => {
           userPartIdOK = true;
           setDisplayLandingContent(true);
           setPartId(userInputPartId);
+          localStorage.setItem("partId", userInputPartId);
           setDisplayNextButton(true);
           setIsLoggedIn(true);
         }
@@ -84,6 +85,7 @@ const LogInScreen = () => {
       userPartIdOK = true;
       setDisplayLandingContent(true);
       setPartId(userInputPartId);
+      localStorage.setItem("partId", userInputPartId);
       setDisplayNextButton(true);
       setIsLoggedIn(true);
     }

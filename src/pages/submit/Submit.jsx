@@ -21,8 +21,6 @@ const getConfigObj = (state) => state.configObj;
 const getMapObj = (state) => state.mapObj;
 const getSetCurrentPage = (state) => state.setCurrentPage;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
-const getPartId = (state) => state.partId;
-// const getUsercode = (state) => state.usercode;
 const getUrlUsercode = (state) => state.urlUsercode;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
@@ -37,8 +35,6 @@ const SubmitPage = () => {
   const mapObj = useSettingsStore(getMapObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
-  const partId = useStore(getPartId);
-  // const usercode = useStore(getUsercode);
   const urlUsercode = useStore(getUrlUsercode);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const localParticipantName = useStore(getParticipantName);
@@ -77,7 +73,7 @@ const SubmitPage = () => {
     try {
       // finish setup and format results object
       transmissionResults["projectName"] = configObj.studyTitle;
-      transmissionResults["partId"] = partId;
+      transmissionResults["partId"] = localStorage.getItem("partId") || "";
       transmissionResults["randomId"] = uuid().substring(0, 12);
       transmissionResults["urlUsercode"] = urlUsercode;
       const dateString = getCurrentDateTime();
