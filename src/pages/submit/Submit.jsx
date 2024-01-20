@@ -231,7 +231,7 @@ const SubmitPage = () => {
         </ContainerDiv>
       </React.Fragment>
     );
-  } else if (configObj.setupTarget === "netlifyForm") {
+  } else if (configObj.setupTarget === "netlify") {
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>

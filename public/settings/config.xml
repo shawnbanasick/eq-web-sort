@@ -3,10 +3,10 @@
    <config version="5.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
-   <!-- "setupTarget" options: firebase, local, email, netlifyForm, or sheets -->
+   <!-- "setupTarget" options: firebase, local, email, netlify, or sheets -->
    <item id="studyTitle">My_Q_project</item> 
    <item id="databaseOptions">Include_Google_Options</item>
-   <item id="setupTarget">netlifyForm</item>
+   <item id="setupTarget">netlify</item>
    <!-- STEIN -->
    <item id="steinApiUrl">https://</item>
    <!-- EMAIL -->
