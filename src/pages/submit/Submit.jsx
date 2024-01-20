@@ -101,25 +101,25 @@ const SubmitPage = () => {
           localStorage.getItem("timeOnsurveyPage") || "00:00:00";
       }
 
-      let numPos = resultsPresort.npos;
+      let numPos = resultsPresort?.npos;
       if (isNaN(numPos)) {
         numPos = 0;
       }
-      let numNeu = resultsPresort.nneu;
+      let numNeu = resultsPresort?.nneu;
       if (isNaN(numNeu)) {
         numNeu = 0;
       }
-      let numNeg = resultsPresort.nneg;
+      let numNeg = resultsPresort?.nneg;
       if (isNaN(numNeg)) {
         numNeg = 0;
       }
 
       transmissionResults["npos"] = numPos;
-      transmissionResults["posStateNums"] = resultsPresort.posStateNums;
+      transmissionResults["posStateNums"] = resultsPresort.posStateNums || [];
       transmissionResults["nneu"] = numNeu;
-      transmissionResults["neuStateNums"] = resultsPresort.neuStateNums;
+      transmissionResults["neuStateNums"] = resultsPresort.neuStateNums || [];
       transmissionResults["nneg"] = numNeg;
-      transmissionResults["negStateNums"] = resultsPresort.negStateNums;
+      transmissionResults["negStateNums"] = resultsPresort.negStateNums || [];
 
       // if project included POSTSORT, read in complete sorted results
       if (configObj.showPostsort) {

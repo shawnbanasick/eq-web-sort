@@ -88,13 +88,8 @@ const LinkButton = (props) => {
     if (currentPage === "sort") {
       if (isSortingFinished === false) {
         // check to see if finished, but had sorting registration error
-        if (
-          statementsObj?.columnStatements?.statementList?.length === 0 ||
-          sortColumns?.imagesList?.length === 0
-        ) {
+        if (sortColumns?.imagesList?.length === 0) {
           if (allowUnforcedSorts === true) {
-            // unforced ok -> allow nav
-
             // persist results to localStorage
             setResults(sortResults1);
             // localStorage.setItem("resultsSort", JSON.stringify(sortResults1));
@@ -143,8 +138,6 @@ const LinkButton = (props) => {
       let postsortCommentCardCount = +localStorage.getItem(
         "postsortCommentCardCount"
       );
-      console.log(postsortCommentCardCount);
-
       const required1 =
         getObjectValues(
           JSON.parse(localStorage.getItem("HC-requiredCommentsObj"))

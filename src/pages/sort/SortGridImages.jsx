@@ -19,15 +19,12 @@ const getMapObj = (state) => state.mapObj;
 const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
-// let getCardHeight = (state) => state.cardHeight;
-// const getSetCardHeight = (state) => state.setCardHeight;
 const getResults = (state) => state.results;
 const getSortFinModalHasBeenShown = (state) =>
   state.sortFinishedModalHasBeenShown;
 const getSortGridResults = (state) => state.sortGridResults;
 const getSetIsSortingFinished = (state) => state.setIsSortingFinished;
 const getSetResults = (state) => state.setResults;
-const getSetSortFinModal = (state) => state.setSortFinishedModalHasBeenShown;
 const getSetTriggerSortingFinModal = (state) =>
   state.setTriggerSortingFinishedModal;
 const getSetSortGridResults = (state) => state.setSortGridResults;
@@ -39,14 +36,11 @@ const SortGridImages = (props) => {
   const setIsSortingCards = useStore(getSetIsSortingCards);
   const setSortCompleted = useStore(getSetSortCompleted);
   const setProgressScoreAdditionalSort = useStore(getSetProgScoreAddSort);
-  //let cardHeight = useStore(getCardHeight);
-  //const setCardHeight = useStore(getSetCardHeight);
   const results = useStore(getResults);
   const sortFinishedModalHasBeenShown = useStore(getSortFinModalHasBeenShown);
   const sortGridResults = useStore(getSortGridResults);
   const setIsSortingFinished = useStore(getSetIsSortingFinished);
   const setResults = useStore(getSetResults);
-  const setSortFinishedModalHasBeenShown = useStore(getSetSortFinModal);
   const setTriggerSortingFinishedModal = useStore(getSetTriggerSortingFinModal);
   const setSortGridResults = useStore(getSetSortGridResults);
   const greenCardColor = configObj.greenCardColor;
@@ -132,12 +126,6 @@ const SortGridImages = (props) => {
       setIsSortingFinished(manageDragResults.sortFinished);
       setResults(manageDragResults.results);
 
-      setSortFinishedModalHasBeenShown(
-        manageDragResults.sortFinishedModalHasBeenShown
-      );
-      setTriggerSortingFinishedModal(
-        manageDragResults.triggerSortingFinishedModal
-      );
       setSortGridResults(manageDragResults.sortGridResults);
 
       // source and destination are objects
@@ -192,11 +180,19 @@ const SortGridImages = (props) => {
 
         // global state updates
         setColumnStatements(columnStatements);
+        const hasShownSortFinModal = localStorage.getItem(
+          "hasShownSortFinModal"
+        );
 
         if (columnStatements.imagesList.length === 0) {
           setIsSortingCards(false);
           setSortCompleted(true);
+          if (hasShownSortFinModal === "false") {
+            localStorage.setItem("hasShownSortFinModal", true);
+            setTriggerSortingFinishedModal(true);
+          }
         } else {
+          localStorage.setItem("hasShownSortFinModal", false);
           setIsSortingCards(true);
           setSortCompleted(false);
         }

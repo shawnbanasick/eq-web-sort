@@ -33,7 +33,7 @@ const SubmitResultsButton = (props) => {
   const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
 
   const btnTransferText =
-    ReactHtmlParser(decodeHTML(langObj.btnTransferText)) || "";
+    ReactHtmlParser(decodeHTML(langObj.btnTransfer)) || "";
 
   const encode = (data) => {
     return Object.keys(data)
@@ -61,7 +61,16 @@ const SubmitResultsButton = (props) => {
         qSortData: formattedResultsTxt,
       }),
     })
-      .then(() => {
+      .then((response) => {
+        if (response.status !== 200) {
+          console.log(
+            "data error - there was an setup error - check your Netlify form setup"
+          );
+          setTriggerTransmissionFailModal(true);
+          e.target.disabled = false;
+          return;
+        }
+
         // SUCCESS
         console.log("Success!");
         // reset localStorage
@@ -143,7 +152,7 @@ const StyledButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   text-decoration: none;
-  width: 400px;
+  width: auto;
   height: 50px;
   justify-self: right;
   margin-right: 35px;
