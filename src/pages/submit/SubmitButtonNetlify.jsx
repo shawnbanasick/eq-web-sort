@@ -62,6 +62,7 @@ const SubmitResultsButton = (props) => {
       }),
     })
       .then((response) => {
+        console.log("response.status: ", response.status);
         if (response.status !== 200) {
           console.log(
             "data error - there was an setup error - check your Netlify form setup"

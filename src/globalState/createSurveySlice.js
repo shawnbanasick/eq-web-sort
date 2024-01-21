@@ -1,5 +1,5 @@
 const createSurveySlice = (set, get) => ({
-  triggerSurveyModal: false,
+  triggerSurveyModal: true,
   resultsSurvey: {},
   triggerSurveyPreventNavModal: false,
   checkRequiredQuestionsComplete: false,

@@ -1,7 +1,7 @@
 const createPostsortSlice = (set, get) => ({
   resultsPostsort: {},
   statementCommentsObj: {},
-  triggerPostsortModal: false,
+  triggerPostsortModal: true,
   postsortCommentCheckObj: {},
   showPostsortCommentHighlighting: false,
   triggerPostsortPreventNavModal: false,
