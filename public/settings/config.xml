@@ -16,7 +16,7 @@
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://linking-test-2.netlify.app/</item> 
    <!-- IMAGE OPTIONS  (imageFormat: 169 or 43)-->
-   <item id="useImages">true</item>
+   <item id="useImages">false</item>
    <item id="numImages">30</item>
    <item id="imageFileType">png</item>
    <item id="imageFormat">postSortImageModal169</item>
@@ -52,9 +52,9 @@
    <item id="warnOverloadedColumn">true</item>
    <item id="condOfInstFontSize">20</item>
    
-   <item id="setMinCardHeightSort">false</item>
+   <item id="setMinCardHeightSort">true</item>
    <item id="minCardHeightSort">260</item>
-   <item id="setDefaultFontSizeSort">false</item>
+   <item id="setDefaultFontSizeSort">true</item>
    <item id="defaultFontSizeSort">8</item>
    
    <item id="sortDirection">positive</item> 
@@ -66,9 +66,9 @@
    <item id="showBackButton">true</item>
    <item id="postsortCommentsRequired">false</item>
    
-   <item id="setDefaultFontSizePostsort">false</item>
+   <item id="setDefaultFontSizePostsort">true</item>
    <item id="defaultFontSizePostsort">8</item>
-   <item id="setMinCardHeightPostsort">false</item>
+   <item id="setMinCardHeightPostsort">true</item>
    <item id="minCardHeightPostsort">60</item>
 
 

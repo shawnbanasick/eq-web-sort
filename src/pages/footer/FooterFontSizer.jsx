@@ -76,6 +76,7 @@ const FooterFontSizer = () => {
     if (currentPage === "sort") {
       const currentSize = cardFontSizeSort;
       const newSize = currentSize - 1;
+      console.log("sort", currentSize, newSize);
       localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
       setCardFontSizeSort(newSize);
     }
