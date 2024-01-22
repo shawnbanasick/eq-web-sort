@@ -37,6 +37,7 @@ const FooterFontSizer = () => {
 
   if (cardFontSizeSortPersist && currentPage === "sort") {
     cardFontSizeSort = cardFontSizeSortPersist;
+    console.log("sort", cardFontSizeSortPersist, cardFontSizeSort);
   }
 
   if (cardFontSizePostsortPersist && currentPage === "postsort") {

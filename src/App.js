@@ -101,6 +101,9 @@ function App() {
           const configData = convert.xml2js(response.data, options);
           let info = processConfigXMLData(configData);
           shuffleCards = info.shuffleCards;
+
+          console.log("info.configObj", info.configObj);
+
           setConfigObj(info.configObj);
           setSurveyQuestionObjArray(info.surveyQuestionObjArray);
           setRequiredAnswersObj(info.requiredAnswersObj);
