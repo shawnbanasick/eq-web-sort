@@ -15,12 +15,11 @@
    <!-- SECOND PROJECT LINKING-->
    <item id="linkToSecondProject">false</item> 
    <item id="secondProjectUrl">https://linking-test-2.netlify.app/</item> 
-   <!-- IMAGE OPTIONS  (imageType: 169 or 43)-->
+   <!-- IMAGE OPTIONS  (imageFormat: 169 or 43)-->
    <item id="useImages">true</item>
    <item id="numImages">30</item>
    <item id="imageFileType">png</item>
-   <item id="imageType">postSortImageModal169</item>
-   <item id="shuffleImages">false</item>
+   <item id="imageFormat">postSortImageModal169</item>
    <!-- OTHER GENERAL OPTIONS -->
    <item id="headerBarColor">#337ab7</item>
    <item id="shuffleCards">true</item>

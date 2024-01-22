@@ -238,6 +238,7 @@ const SubmitPage = () => {
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
           <SubmitButtonNetlify results={transmissionResults} />
+          <ContentDiv>{transferTextBelow}</ContentDiv>
         </ContainerDiv>
       </React.Fragment>
     );
@@ -280,7 +281,7 @@ const SortTitleBar = styled.div`
 
 const ContainerDiv = styled.div`
   display: flex;
-  min-height: 800px;
+  min-height: 600px;
   width: calc(100vw-4px);
   flex-direction: column;
   justify-content: center;

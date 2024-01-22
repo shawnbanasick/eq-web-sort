@@ -132,13 +132,10 @@ const SubmitResultsButton = (props) => {
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
-      <ContainerDiv>
-        <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
-          {btnTransferText}
-        </StyledButton>
-        {transmittingData ? <TransmittingSpin /> : null}
-      </ContainerDiv>
-      <SpacerDiv />
+      <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
+        {btnTransferText}
+      </StyledButton>
+      {transmittingData ? <TransmittingSpin /> : null}
     </React.Fragment>
   );
 };
@@ -172,14 +169,6 @@ const StyledButton = styled.button`
   &:focus {
     background-color: ${({ theme }) => theme.focus};
   }
-`;
-
-const ContainerDiv = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  align-items: center;
-  grid-template-areas: "a b c";
 `;
 
 const DisabledButton = styled.button`

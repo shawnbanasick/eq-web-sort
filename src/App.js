@@ -132,7 +132,7 @@ function App() {
               imagesArray.push(item);
             }
 
-            if (info.configObj.shuffleImages === true) {
+            if (info.configObj.shuffleCards === true) {
               const shuffledCards = shuffle(imagesArray);
               imagesArray = [...shuffledCards];
             }

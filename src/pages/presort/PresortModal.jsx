@@ -17,10 +17,12 @@ const PresortModal = () => {
   const triggerPresortModal = useStore(getTriggerPresortModal);
   const setTriggerPresortModal = useStore(getSetTriggerPresortModal);
 
+  /*
   const hasPresortSortingStarted = localStorage.getItem("columns");
   if (hasPresortSortingStarted && hasPresortSortingStarted.length > 0) {
     setTriggerPresortModal(false);
   }
+  */
 
   const onCloseModal = () => {
     setTriggerPresortModal(false);

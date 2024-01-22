@@ -162,7 +162,7 @@ const HighCards2Display = (props) => {
           center
           onClose={() => setOpenImageModal(false)}
           classNames={{
-            modal: `${configObj.imageType}`,
+            modal: `${configObj.imageFormat}`,
             overlay: "dualImageOverlay",
           }}
         >
