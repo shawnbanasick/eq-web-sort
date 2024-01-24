@@ -63,6 +63,8 @@ Survey Questions
 <kbd><img src="https://github.com/shawnbanasick/eq-web-sort/blob/main/readme_assets/surveyScreen.png?raw=true" width="700" /></kbd>
 </p>
 
+# [Version 5.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v5.0.0/EQ-Web-Sort-5.0.0-with-Google.zip)
+
 ### EQ Web Sort, when used with EQ Web Sort Configurator, can also be used for offline, in-person Q sort data collection using a notebook computer ---
 
 ### [visual guide (A4 size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_A4.pdf)
