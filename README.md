@@ -4,13 +4,29 @@
 <kbd><img src="./readme_assets/web_sort.svg"  width="1100"></kbd>
 </p>
 
-# [Version 3.0.0 Download link](https://github.com/shawnbanasick/eq-web-sort/releases/download/v3.0.0/eq-web-sort-v300.zip) Use with EQ Web Sort Configurator v3.0.0
+# Download links are below.
 
-### EQ Web Sort is do-it-yourself software to set up online Q sorting for a Q methodology project. No programming skills are required. If you can do basic file editing (edit, save, and drag/drop files) you can set up a free online Q sort.
+# [Version 5.0.0 Download link (the "no Google" version)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v5.0.0/EQ-Web-Sort-5.0.0-NO-Google.zip)
 
-### Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_configurator_v3)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to link to a free online database and how to upload the files to a free web host.
+# Use with EQ Web Sort Configurator v5.0.0
 
-### To see a preview, give the [English language demo](https://eng-demo.netlify.app/#/) or the [non-English language demo](https://jpn-demo.netlify.app/#/) (use access code "demo") a try.
+## What is this?
+
+### EQ Web Sort is multifunctional, highly customizable software for digital Q sorting.
+
+### No programming skills are required. If you can do basic file editing (edit, save, and drag/drop files) you can set up a free online Q sort.
+
+### Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_configurator_v3)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to save participant data and how to upload the files to a free web host (Netlify).
+
+# Demonstration Links:
+
+### [Statements](https://ipad-demo.netlify.app/#/)
+
+### [Japanese Statements](https://jpn-demo.netlify.app/#/) (use access code "demo")
+
+### [Image sorting (16x9)](https://kobe-college-images.netlify.app/#/)
+
+### [Image sorting (4x3)](https://ken-q-tools-branding.netlify.app/#/)
 
 <br />
 <p align="center">
@@ -19,7 +35,7 @@
 
 <br />
 
-### [Demo video](https://youtu.be/723gJhElR7Q)
+### [Demo video](https://youtu.be/lMy4ARVEcCI)
 
 <br />
 <br />
@@ -64,7 +80,3 @@ License: GPL-3
 ## Bugs
 
 If you discover a problem with the software or want to make a feature request, send an email to ken.q.tools@gmail.com.
-
-## Extras
-
-This project is sponsored by Browserstack.
