@@ -80,6 +80,7 @@ const SortColumnImages = (props) => {
                         <img
                           src={item.element.props.src}
                           alt={item.element.props.alt}
+                          style={{ border: "1px solid black" }}
                         />
                       </ImageDiv>
                     )}

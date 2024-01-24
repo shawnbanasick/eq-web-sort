@@ -53,7 +53,6 @@ function App() {
   useEffect(() => {
     const unloadCallback = (event) => {
       const e = event || window.event;
-      //console.log(e)
       e.preventDefault();
       if (e) {
         e.returnValue = "";
@@ -102,8 +101,6 @@ function App() {
           let info = processConfigXMLData(configData);
           shuffleCards = info.shuffleCards;
 
-          console.log("info.configObj", info.configObj);
-
           setConfigObj(info.configObj);
           setSurveyQuestionObjArray(info.surveyQuestionObjArray);
           setRequiredAnswersObj(info.requiredAnswersObj);
@@ -111,7 +108,7 @@ function App() {
           if (info.configObj.useImages === true) {
             for (let i = 0; i < info.configObj.numImages; i++) {
               let item = {};
-              item.backgroundColor = "#e0e0e0";
+              item.backgroundColor = "white";
               item.element = (
                 // eslint-disable-next-line
                 <img

@@ -37,18 +37,14 @@ const FooterFontSizer = () => {
 
   if (cardFontSizeSortPersist && currentPage === "sort") {
     cardFontSizeSort = cardFontSizeSortPersist;
-    console.log("sort", cardFontSizeSortPersist, cardFontSizeSort);
   }
 
   if (cardFontSizePostsortPersist && currentPage === "postsort") {
     cardFontSizePostsort = cardFontSizePostsortPersist;
   }
 
-  console.log(currentPage);
-
   const increaseFontSize = () => {
     if (currentPage === "presort") {
-      console.log("presort");
       const currentSize = cardFontSizePresort;
       const newSize = currentSize + 1;
       localStorage.setItem("fontSizePresort", JSON.stringify(newSize));
@@ -77,7 +73,6 @@ const FooterFontSizer = () => {
     if (currentPage === "sort") {
       const currentSize = cardFontSizeSort;
       const newSize = currentSize - 1;
-      console.log("sort", currentSize, newSize);
       localStorage.setItem("fontSizeSort", JSON.stringify(newSize));
       setCardFontSizeSort(newSize);
     }

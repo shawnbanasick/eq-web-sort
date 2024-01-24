@@ -93,6 +93,10 @@ const LandingPage = () => {
       configObj.setDefaultFontSizePostsort === true
     ) {
       setCardFontSizePostsort(configObj.defaultFontSizePostsort);
+      localStorage.setItem(
+        "fontSizePostsort",
+        configObj.defaultFontSizePostsort
+      );
     }
 
     // POSTSORT card height
@@ -101,6 +105,10 @@ const LandingPage = () => {
       configObj.setMinCardHeightPostsort === true
     ) {
       setMinCardHeightPostsort(configObj.minCardHeightPostsort);
+      localStorage.setItem(
+        "cardHeightPostsort",
+        configObj.minCardHeightPostsort
+      );
     }
 
     // set participant Id if set in URL

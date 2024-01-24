@@ -769,6 +769,12 @@ footer {
 }
 
 /*
+
+#DroppableContainer > img {
+  width: 23.5vw !important;
+  height: auto;
+}
+
 .imageModal {
   display: flex;
   justify-content: center;
@@ -804,7 +810,7 @@ footer {
 
   .postSortImageModal43 {
     background: black;
-    width: 40vw;
+    width: 30vw;
     max-width: none;
    }
 

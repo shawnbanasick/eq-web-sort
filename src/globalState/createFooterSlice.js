@@ -1,14 +1,14 @@
 const createFooterSlice = (set, get) => ({
-  cardFontSizePresort: 15,
-  cardFontSizeSort: 15,
-  cardFontSizePostsort: 15,
+  cardFontSizePresort: 5,
+  cardFontSizeSort: 5,
+  cardFontSizePostsort: 5,
   currentPage: "landing",
   progressScore: 10,
   progressScoreAdditional: 0,
   progressScoreAdditionalSort: 0,
   displayNextButton: false,
-  minCardHeightSort: 120,
-  minCardHeightPostsort: 120,
+  minCardHeightSort: 40,
+  minCardHeightPostsort: 40,
 
   setMinCardHeightPostsort: (inputValue) => {
     set(() => ({ minCardHeightPostsort: inputValue }));

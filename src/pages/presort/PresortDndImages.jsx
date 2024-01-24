@@ -27,9 +27,6 @@ const getSetProgressScoreAdditional = (state) =>
  *  cardsDivImg, negDivImg,
  */
 
-// todo - add double click to enlarge image
-// todo - add scrolling on ios Safari
-
 function PresortDNDImages(props) {
   // STATE
   const langObj = useSettingsStore(getLangObj);
@@ -44,6 +41,10 @@ function PresortDNDImages(props) {
   const setResults = useStore(getSetResults);
   const setProgressScoreAdditional = useStore(getSetProgressScoreAdditional);
 
+  let imageWidth = "24vw";
+  if (configObj.imageFormat === "postSortImageModal43") {
+    imageWidth = "20vw";
+  }
   const statementsName =
     ReactHtmlParser(decodeHTML(langObj.presortStatements)) || "";
   const btnDisagreement =
@@ -430,12 +431,14 @@ function PresortDNDImages(props) {
                               {(provided, snapshot) => {
                                 return (
                                   <DroppableContainer
+                                    id="DroppableContainer"
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
+                                    imageWidth={imageWidth}
                                     style={{
                                       userSelect: "none",
-                                      padding: 6,
+                                      padding: 2,
                                       margin: "0 0 8px 0",
                                       overflow: "hidden",
                                       fontSize: cardFontSize,
@@ -568,14 +571,18 @@ const DroppableContainer = styled.div`
   border-radius: 2px;
   width: 27.8vw;
   // margin-left: 15px;
-  border: 1px solid #a8a8a8;
+  // border: 1px solid #a8a8a8;
+  img {
+    width: ${(props) => props.imageWidth} !important;
+    height: auto;
+    border: 1px solid black;
+  }
 `;
 
 const ThreeColCardWrapper = styled.div`
   margin: 4px;
   img {
-    max-width: 98%;
-    max-height: 98%;
+    object-fit: contain;
     padding: 0px;
   }
 `;
