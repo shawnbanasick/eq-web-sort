@@ -507,6 +507,10 @@ const processConfigXMLData = (dataObject) => {
     let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     if (!resultsSurvey) {
       localStorage.setItem("resultsSurvey", JSON.stringify(requiredAnswersObj));
+      localStorage.setItem(
+        "resultsSurveyArchive",
+        JSON.stringify(requiredAnswersObj)
+      );
     }
   }
   let returnObj = {};

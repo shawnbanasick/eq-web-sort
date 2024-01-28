@@ -56,6 +56,22 @@ const LandingPage = () => {
   localStorage.removeItem("sortColumns");
   localStorage.removeItem("columnStatements");
   localStorage.removeItem("presortSortedCards");
+  localStorage.removeItem("resultsPresort");
+  localStorage.removeItem("allCommentsObj");
+  localStorage.removeItem("resultsPostsort");
+  localStorage.removeItem("HC-requiredCommentsObj");
+  localStorage.removeItem("LC-requiredCommentsObj");
+  localStorage.removeItem("HC2-requiredCommentsObj");
+  localStorage.removeItem("LC2-requiredCommentsObj");
+  let archive = JSON.parse(localStorage.getItem("resultsSurveyArchive"));
+  console.log(archive);
+  if (archive) {
+    localStorage.setItem("resultsSurvey", JSON.stringify(archive));
+    let keys = Object.keys(archive);
+    keys.forEach((key) => {
+      localStorage.removeItem(key);
+    });
+  }
 
   useEffect(() => {
     // display "Next" button if anonymous log in
