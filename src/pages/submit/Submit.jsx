@@ -150,8 +150,15 @@ const SubmitPage = () => {
       }
 
       // *** SORT RESULTS
-      const resultsSort = convertObjectToResults(resultsSortObj);
-      transmissionResults["sort"] = resultsSort;
+      const resultsSort = convertObjectToResults(
+        resultsSortObj,
+        resultsPresort,
+        configObj.traceSorts
+      );
+      if (configObj.traceSorts === true || configObj.traceSorts === "true") {
+        transmissionResults["presortTrace"] = resultsSort.presortTraceText;
+      }
+      transmissionResults["sort"] = resultsSort.resultsText;
 
       // remove null values to prevent errors
       for (const property in transmissionResults) {

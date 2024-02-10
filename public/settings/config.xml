@@ -22,7 +22,7 @@
    <item id="imageFormat">postSortImageModal169</item>
 
    <!-- OTHER GENERAL OPTIONS -->
-   <item id="shuffleCards">true</item>
+   <item id="shuffleCards">false</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item> 
 
@@ -46,6 +46,7 @@
 
    <item id="setDefaultFontSizePresort">true</item>
    <item id="defaultFontSizePresort">22</item>
+   <item id="traceSorts">false</item>
   
 
    <!-- SORT -->
@@ -151,14 +152,5 @@
         <label>12. {{{u}}}Please{{{/u}}} rate the following statements</label>
         <note>Please answer all of the ratings</note>
    </item>
-   
-   <item id="survey">
-        <input type="text" required="true" limited="true" limitLength="5" restricted="true"></input>
-        <label>Test limit length</label>
-        <note>Just 5 numbers</note>
-        <placeholder>input numbers here</placeholder>
-   </item>
-
-
        
   </config>
