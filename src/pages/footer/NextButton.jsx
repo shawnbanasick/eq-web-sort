@@ -21,7 +21,6 @@ const getSetTrigSortPrevNavModal = (state) =>
   state.setTriggerSortPreventNavModal;
 const getSetTrigSortOverColMod = (state) =>
   state.setTriggerSortOverloadedColumnModal;
-const getStatementsObj = (state) => state.statementsObj;
 const getColumnStatements = (state) => state.columnStatements;
 const getSetResults = (state) => state.setResults;
 const getSetShowPostsortCommentHighlighting = (state) =>
@@ -43,7 +42,6 @@ const LinkButton = (props) => {
   const hasOverloadedColumn = useStore(getHasOverloadedColumn);
   const setTriggerSortPreventNavModal = useStore(getSetTrigSortPrevNavModal);
   const setTriggerSortOverloadedColModal = useStore(getSetTrigSortOverColMod);
-  const statementsObj = useSettingsStore(getStatementsObj);
   const columnStatements = useSettingsStore(getColumnStatements);
   const setResults = useStore(getSetResults);
   const setShowPostsortCommentHighlighting = useStore(
