@@ -101,9 +101,16 @@ const processConfigXMLData = (dataObject) => {
         }
 
         try {
-          tempObj.limitLength = JSON.parse(
-            surveyData[j][0].attributes.maxlength
-          );
+          if (surveyData[j][0].attributes.maxlength === undefined) {
+            tempObj.limitLength = JSON.parse(
+              surveyData[j][0].attributes.limitLength
+            );
+          } else {
+            let oldMaxLength = JSON.parse(
+              surveyData[j][0].attributes.maxlength
+            );
+            tempObj.limitLength = oldMaxLength;
+          }
         } catch (error) {
           console.log(error);
           tempObj.limitLength = "999";

@@ -31,10 +31,10 @@ const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 
 const SurveyPage = () => {
   // STATE
-  const langObj = useSettingsStore(getLangObj);
   const configObj = useSettingsStore(getConfigObj);
-  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray);
+  const langObj = useSettingsStore(getLangObj);
   const requiredAnswersObj = useSettingsStore(getRequiredAnswersObj);
+  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray);
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setCurrentPage = useStore(getSetCurrentPage);
   const checkRequiredQuestionsComplete = useStore(getCheckReqQuesComplete);

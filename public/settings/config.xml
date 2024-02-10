@@ -6,7 +6,7 @@
    <!-- "setupTarget" options: netlify, firebase, local, email, or sheets -->
    <item id="studyTitle">statementsTest</item> 
    <item id="databaseOptions">Include_Google_Options</item>
-   <item id="setupTarget">local</item>
+   <item id="setupTarget">firebase</item>
    <!-- STEIN -->
    <item id="steinApiUrl"></item>
    <!-- EMAIL -->
@@ -151,5 +151,14 @@
         <label>12. {{{u}}}Please{{{/u}}} rate the following statements</label>
         <note>Please answer all of the ratings</note>
    </item>
+   
+   <item id="survey">
+        <input type="text" required="true" limited="true" limitLength="5" restricted="true"></input>
+        <label>Test limit length</label>
+        <note>Just 5 numbers</note>
+        <placeholder>input numbers here</placeholder>
+   </item>
+
+
        
   </config>
