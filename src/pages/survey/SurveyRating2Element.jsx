@@ -256,14 +256,14 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
+  grid-template-columns: minmax(30%, 1000px) 100px 100px 1fr;
   margin-bottom: 17px;
   padding-left: 5px;
   padding-bottom: 8px;
   height: 40px;
-  // align-items: end;
-  justify-items: center;
-  align-items: center;
+  align-items: end;
+  justify-items: left;
+  // align-items: left;
   background-color: ${(props) => (props.indexVal % 2 ? "white" : "#ececec")};
   &:hover {
     background-color: rgba(131, 202, 254, 0.4);
@@ -272,7 +272,7 @@ const ItemContainer = styled.div`
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 100px 100px 150px;
+  grid-template-columns: minmax(30%, 1000px) 100px 100px 1fr;
   margin-bottom: 7px;
 `;
 

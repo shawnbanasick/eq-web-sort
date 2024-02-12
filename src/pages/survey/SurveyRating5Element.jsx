@@ -274,7 +274,7 @@ const RadioContainer = styled.div`
 
 const ItemContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 50px 50px 50px 50px 50px 50px;
+  grid-template-columns: minmax(30%, 1000px) 50px 50px 50px 50px 50px 1fr;
   margin-bottom: 17px;
   padding-bottom: 8px;
   height: 40px;
@@ -288,7 +288,7 @@ const ItemContainer = styled.div`
 
 const RatingTitle = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(30%, 900px) 50px 50px 50px 50px 50px 50px;
+  grid-template-columns: minmax(30%, 1000px) 50px 50px 50px 50px 50px 1fr;
   margin-bottom: 7px;
   align-items: end;
 `;
