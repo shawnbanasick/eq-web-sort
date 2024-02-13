@@ -12,7 +12,7 @@
 
 # [Version 6.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.0/eq-web-sort-6.0.0-WITH-Google.zip)
 
-# Use with EQ Web Sort Configurator v6.0.0
+# Use with EQ Web Sort Configurator [v6.0.0](https://github.com/shawnbanasick/eq_web_configurator)
 
 ## What is this?
 
