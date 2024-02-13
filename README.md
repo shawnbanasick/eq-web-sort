@@ -6,11 +6,11 @@
 
 # Download links are below.
 
-# [Version 5.0.0 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v5.0.0/EQ-Web-Sort-5.0.0-NO-Google.zip)
+# [Version 6.0.0 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.0/eq-web-sort-6.0.0-NO-Google.zip)
 
-# [Version 5.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v5.0.0/EQ-Web-Sort-5.0.0-with-Google.zip)
+# [Version 6.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.0/eq-web-sort-6.0.0-WITH-Google.zip)
 
-# Use with EQ Web Sort Configurator v5.0.0
+# Use with EQ Web Sort Configurator v6.0.0
 
 ## What is this?
 
@@ -73,7 +73,7 @@ Survey Questions
 
 ## Citation
 
-`Banasick, S. (2023). EQ Web Sort (Version 3.0.0) [Computer software]. https://doi.org/10.5281/zenodo.8339819`
+`Banasick, S. (2024). EQ Web Sort (Version 6.0.0) [Computer software]. https://doi.org/10.5281/zenodo.8339819`
 
 ## License
 
