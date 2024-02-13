@@ -8,6 +8,8 @@
 
 # [Version 6.0.0 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.0/eq-web-sort-6.0.0-NO-Google.zip)
 
+## Netlify's GDPR [compliance statement](https://docs.netlify.com/platform/security-checklist/)
+
 # [Version 6.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.0/eq-web-sort-6.0.0-WITH-Google.zip)
 
 # Use with EQ Web Sort Configurator v6.0.0
@@ -18,7 +20,7 @@
 
 ### No programming skills are required. If you can do basic file editing (edit, save, and drag/drop files) you can set up a free online Q sort.
 
-### Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_configurator_v3)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to save participant data and how to upload the files to a free web host (Netlify).
+### Use the EQ Web Sort Configurator ([homepage](https://github.com/shawnbanasick/eq_web_configurator)) to set up an EQ Web Sort online project. The configurator includes step-by-step visual guides showing how to save participant data and how to upload the files to a free web host (Netlify).
 
 # Demonstration Links:
 
