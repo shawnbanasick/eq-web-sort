@@ -61,6 +61,7 @@ const SurveyPage = () => {
   useEffect(() => {
     let startTime = Date.now();
     setCurrentPage("survey");
+    localStorage.setItem("currentPage", "survey");
     return () => {
       calculateTimeOnPage(startTime, "surveyPage", "surveyPage");
     };

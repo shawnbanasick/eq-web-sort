@@ -156,6 +156,7 @@ const Sort = () => {
     let startTime = Date.now();
     const setStateAsync = async () => {
       await setPresortNoReturn(true);
+      localStorage.setItem("currentPage", "sort");
       await setCurrentPage("sort");
     };
     setStateAsync();

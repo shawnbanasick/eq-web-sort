@@ -64,7 +64,24 @@ const LandingPage = () => {
   localStorage.removeItem("HC2-requiredCommentsObj");
   localStorage.removeItem("LC2-requiredCommentsObj");
   let archive = JSON.parse(localStorage.getItem("resultsSurveyArchive"));
+  let surveyResults = JSON.parse(localStorage.getItem("resultsSurvey"));
   console.log(archive);
+
+  if (surveyResults) {
+    console.log(configObj.requiredAnswersObj);
+  }
+
+  const isLandingReload = localStorage.getItem("currentPage");
+  if (isLandingReload === "landing") {
+    localStorage.setItem(
+      "resultsSurvey",
+      JSON.stringify(configObj.requiredAnswersObj)
+    );
+    let keys2 = Object.keys(configObj.requiredAnswersObj);
+
+    console.log(keys2.length);
+  }
+
   if (archive) {
     localStorage.setItem("resultsSurvey", JSON.stringify(archive));
     let keys = Object.keys(archive);
@@ -214,6 +231,7 @@ const LandingPage = () => {
     const startTime = Date.now();
     setProgressScore(10);
     setCurrentPage("landing");
+    localStorage.setItem("currentPage", "landing");
     return () => {
       // will persist in localStorage
       calculateTimeOnPage(startTime, "landingPage", "landingPage");

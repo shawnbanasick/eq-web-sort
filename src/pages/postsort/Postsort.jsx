@@ -70,6 +70,7 @@ const PostSort = () => {
     let startTime = Date.now();
     const setStateAsync = async () => {
       await setCurrentPage("postsort");
+      localStorage.setItem("currentPage", "postsort");
       await setProgressScore(50);
     };
     setStateAsync();

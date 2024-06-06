@@ -44,6 +44,7 @@ const SubmitPage = () => {
 
   useEffect(() => {
     setCurrentPage("submit");
+    localStorage.setItem("currentPage", "submit");
   }, [setCurrentPage]);
 
   // Language

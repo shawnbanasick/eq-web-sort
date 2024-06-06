@@ -51,6 +51,7 @@ const PresortPage = (props) => {
     let startTime = Date.now();
     const setStateAsync = async () => {
       await setCurrentPage("presort");
+      localStorage.setItem("currentPage", "presort");
       await setProgressScore(20);
     };
     setStateAsync();

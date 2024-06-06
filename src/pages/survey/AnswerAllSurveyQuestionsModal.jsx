@@ -16,6 +16,7 @@ const AnswerAllSurveyQuestionsModal = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
   const triggerModalOpen = useStore(getTriggerModalOpen);
+  console.log("triggerModalOpen: ", triggerModalOpen);
   const setTriggerSurveyPreventNavModal = useStore(getSetTrigSurvPrevNavModal);
 
   const modalHead =

@@ -512,6 +512,7 @@ const processConfigXMLData = (dataObject) => {
       }
     }
     let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+    console.log("process config resultsSurvey", resultsSurvey);
     if (!resultsSurvey) {
       localStorage.setItem("resultsSurvey", JSON.stringify(requiredAnswersObj));
       localStorage.setItem(
@@ -519,6 +520,7 @@ const processConfigXMLData = (dataObject) => {
         JSON.stringify(requiredAnswersObj)
       );
     }
+    configObj.requiredAnswersObj = requiredAnswersObj;
   }
   let returnObj = {};
   let shuffleCards = configObj?.shuffleCards;
