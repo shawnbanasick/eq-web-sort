@@ -51,18 +51,18 @@ const LandingPage = () => {
   const setMinCardHeightSort = useStore(getSetMinCardHeightSort);
   const setMinCardHeightPostsort = useStore(getSetMinCardHeightPostsort);
 
-  // clear local storage if previous sorts exist
-  localStorage.removeItem("columns");
-  localStorage.removeItem("sortColumns");
-  localStorage.removeItem("columnStatements");
-  localStorage.removeItem("presortSortedCards");
-  localStorage.removeItem("resultsPresort");
-  localStorage.removeItem("allCommentsObj");
-  localStorage.removeItem("resultsPostsort");
-  localStorage.removeItem("HC-requiredCommentsObj");
-  localStorage.removeItem("LC-requiredCommentsObj");
-  localStorage.removeItem("HC2-requiredCommentsObj");
-  localStorage.removeItem("LC2-requiredCommentsObj");
+  // calc time on page
+  useEffect(() => {
+    const startTime = Date.now();
+    setProgressScore(10);
+    setCurrentPage("landing");
+    localStorage.setItem("currentPage", "landing");
+    return () => {
+      // will persist in localStorage
+      calculateTimeOnPage(startTime, "landingPage", "landingPage");
+    };
+  }, [setCurrentPage, setProgressScore]);
+
   let archive = JSON.parse(localStorage.getItem("resultsSurveyArchive"));
   let surveyResults = JSON.parse(localStorage.getItem("resultsSurvey"));
   console.log(archive);
@@ -73,15 +73,54 @@ const LandingPage = () => {
 
   const isLandingReload = localStorage.getItem("currentPage");
   if (isLandingReload === "landing") {
+    // localStorage.clear();
+
+    // clear local storage if previous sorts exist
+    localStorage.removeItem("columns");
+    localStorage.removeItem("sortColumns");
+    localStorage.removeItem("columnStatements");
+    localStorage.removeItem("presortSortedCards");
+    localStorage.removeItem("HC-requiredCommentsObj");
+    localStorage.removeItem("LC-requiredCommentsObj");
+    localStorage.removeItem("HC2-requiredCommentsObj");
+    localStorage.removeItem("LC2-requiredCommentsObj");
+    localStorage.removeItem("cumulativelandingPageDuration");
+    localStorage.removeItem("cumulativepresortPageDuration");
+    localStorage.removeItem("cumulativesortPageDuration");
+    localStorage.removeItem("cumulativepostsortPageDuration");
+    localStorage.removeItem("cumulativesurveyPageDuration");
+    localStorage.removeItem("lastAccesslandingPage");
+    localStorage.removeItem("lastAccesspresortPage");
+    localStorage.removeItem("lastAccesssortPage");
+    localStorage.removeItem("lastAccesspostsortPage");
+    localStorage.removeItem("lastAccesssurveyPage");
+    localStorage.removeItem("timeOnlandingPage");
+    localStorage.removeItem("timeOnpresortPage");
+    localStorage.removeItem("timeOnsortPage");
+    localStorage.removeItem("timeOnpostsortPage");
+    localStorage.removeItem("timeOnsurveyPage");
+    localStorage.removeItem("resultsPresort");
+    localStorage.removeItem("resultsSort");
+    localStorage.removeItem("resultsPostsort");
+    localStorage.removeItem("resultsSurvey");
+    localStorage.removeItem("postsortCommentCardCount");
+    localStorage.removeItem("allCommentsObj");
+
     localStorage.setItem(
       "resultsSurvey",
       JSON.stringify(configObj.requiredAnswersObj)
     );
-    let keys2 = Object.keys(configObj.requiredAnswersObj);
 
-    console.log(keys2.length);
+    let keys = Object.keys(archive);
+    console.log(keys.length);
+    keys.forEach((key, index) => {
+      let varName = `itemNum${index + 1}`;
+      localStorage.removeItem(varName);
+      localStorage.removeItem(key);
+    });
   }
 
+  /*
   if (archive) {
     localStorage.setItem("resultsSurvey", JSON.stringify(archive));
     let keys = Object.keys(archive);
@@ -89,6 +128,7 @@ const LandingPage = () => {
       localStorage.removeItem(key);
     });
   }
+    */
 
   useEffect(() => {
     // display "Next" button if anonymous log in
@@ -225,18 +265,6 @@ const LandingPage = () => {
     }
     setPostsortCommentCheckObj(postsortCommentCheckObj);
   }, [mapObj, configObj, setPostsortCommentCheckObj]);
-
-  // calc time on page
-  useEffect(() => {
-    const startTime = Date.now();
-    setProgressScore(10);
-    setCurrentPage("landing");
-    localStorage.setItem("currentPage", "landing");
-    return () => {
-      // will persist in localStorage
-      calculateTimeOnPage(startTime, "landingPage", "landingPage");
-    };
-  }, [setCurrentPage, setProgressScore]);
 
   // check for complete
   let displayLogInScreen = false;

@@ -511,6 +511,7 @@ const processConfigXMLData = (dataObject) => {
         surveyQuestionArray.push(tempObj);
       }
     }
+
     let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     console.log("process config resultsSurvey", resultsSurvey);
     if (!resultsSurvey) {
@@ -520,6 +521,7 @@ const processConfigXMLData = (dataObject) => {
         JSON.stringify(requiredAnswersObj)
       );
     }
+
     configObj.requiredAnswersObj = requiredAnswersObj;
   }
   let returnObj = {};
