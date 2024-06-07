@@ -111,7 +111,7 @@ const LandingPage = () => {
       JSON.stringify(configObj.requiredAnswersObj)
     );
 
-    let keys = Object.keys(archive);
+    let keys = Object.keys(configObj.requiredAnswersObj);
     console.log(keys.length);
     keys.forEach((key, index) => {
       let varName = `itemNum${index + 1}`;
