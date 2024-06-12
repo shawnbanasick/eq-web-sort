@@ -1400,6 +1400,11 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@netlify/blobs@^7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@netlify/blobs/-/blobs-7.3.0.tgz#3331cfe79781c679f73bb2ee67619c4b2d1e5bb3"
+  integrity sha512-wN/kNTZo4xjlUM/C0WILOkJbe8p4AFquSGkZEIoIcgnsx5ikp2GyqGiq1WMLee7QdbnqeIV2g2hn/PjT324E5w==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
