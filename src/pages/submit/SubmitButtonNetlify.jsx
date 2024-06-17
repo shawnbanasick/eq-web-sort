@@ -51,7 +51,6 @@ const SubmitResultsButton = (props) => {
     for (const [key, value] of Object.entries(props.results)) {
       formattedResultsTxt = formattedResultsTxt + `${key}:| ${value} | `;
     }
-    console.log(JSON.stringify(formattedResultsTxt, null, 2));
 
     fetch("/", {
       method: "POST",
@@ -74,6 +73,8 @@ const SubmitResultsButton = (props) => {
 
         // SUCCESS
         console.log("Success!");
+        console.log(JSON.stringify(formattedResultsTxt, null, 2));
+
         // reset localStorage
         let urlUsercode = localStorage.getItem("urlUsercode");
         localStorage.clear();
