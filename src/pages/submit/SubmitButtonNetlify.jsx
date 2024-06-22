@@ -47,9 +47,13 @@ const SubmitResultsButton = (props) => {
     // create results object for transmission - * is a delimiter
     e.target.disabled = true;
 
+    let results = props.results;
+    let keys = Object.keys(results);
     let formattedResultsTxt = "";
-    for (const [key, value] of Object.entries(props.results)) {
-      formattedResultsTxt = formattedResultsTxt + `${key}:| ${value} | `;
+
+    for (let i = 0; i < keys.length; i++) {
+      let value = results[keys[i]];
+      formattedResultsTxt += `${keys[i]}:| ${value} | `;
     }
 
     fetch("/", {

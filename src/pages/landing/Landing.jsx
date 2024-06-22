@@ -63,11 +63,21 @@ const LandingPage = () => {
     };
   }, [setCurrentPage, setProgressScore]);
 
-  let archive = JSON.parse(localStorage.getItem("resultsSurveyArchive"));
-  let surveyResults = JSON.parse(localStorage.getItem("resultsSurvey"));
-  console.log(archive);
+  let archive;
+  if (localStorage.getItem("resultsSurveyArchive" !== undefined)) {
+    archive = JSON.parse(localStorage.getItem("resultsSurveyArchive"));
+  }
 
-  if (surveyResults) {
+  let surveyResults;
+  if (localStorage.getItem("resultsSurvey" !== undefined)) {
+    surveyResults = JSON.parse(localStorage.getItem("resultsSurvey"));
+  }
+
+  if (
+    (surveyResults && configObj.showSurvey === "true") ||
+    configObj.showSurvey === true
+  ) {
+    console.log(archive);
     console.log(configObj.requiredAnswersObj);
   }
 
@@ -106,29 +116,20 @@ const LandingPage = () => {
     localStorage.removeItem("postsortCommentCardCount");
     localStorage.removeItem("allCommentsObj");
 
-    localStorage.setItem(
-      "resultsSurvey",
-      JSON.stringify(configObj.requiredAnswersObj)
-    );
+    if (configObj.requiredAnswersObj !== undefined) {
+      localStorage.setItem(
+        "resultsSurvey",
+        JSON.stringify(configObj.requiredAnswersObj)
+      );
 
-    let keys = Object.keys(configObj.requiredAnswersObj);
-    console.log(keys.length);
-    keys.forEach((key, index) => {
-      let varName = `itemNum${index + 1}`;
-      localStorage.removeItem(varName);
-      localStorage.removeItem(key);
-    });
+      let keys = Object.keys(configObj.requiredAnswersObj);
+      keys.forEach((key, index) => {
+        let varName = `itemNum${index + 1}`;
+        localStorage.removeItem(varName);
+        localStorage.removeItem(key);
+      });
+    }
   }
-
-  /*
-  if (archive) {
-    localStorage.setItem("resultsSurvey", JSON.stringify(archive));
-    let keys = Object.keys(archive);
-    keys.forEach((key) => {
-      localStorage.removeItem(key);
-    });
-  }
-    */
 
   useEffect(() => {
     // display "Next" button if anonymous log in
