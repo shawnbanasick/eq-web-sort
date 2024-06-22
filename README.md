@@ -6,11 +6,11 @@
 
 # Download links are below.
 
-# [Version 6.0.1 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.2/eq-web-sort-602-NO-Google.zip)
+# [Version 6.0.2 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.2/eq-web-sort-602-NO-Google.zip)
 
 ## Netlify's GDPR [compliance statement](https://docs.netlify.com/platform/security-checklist/)
 
-# [Version 6.0.1 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.2/eq-web-sort-602-WITH-Google.zip)
+# [Version 6.0.2 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v6.0.2/eq-web-sort-602-WITH-Google.zip)
 
 # Use with EQ Web Sort Configurator [v6.0.0](https://github.com/shawnbanasick/eq_web_configurator)
 
