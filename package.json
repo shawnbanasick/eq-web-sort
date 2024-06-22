@@ -4,6 +4,7 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
+    "@hello-pangea/dnd": "^16.6.0",
     "@netlify/blobs": "^7.3.0",
     "@ramonak/react-progress-bar": "^3.2.1",
     "@risingstack/react-easy-state": "^6.3.0",
