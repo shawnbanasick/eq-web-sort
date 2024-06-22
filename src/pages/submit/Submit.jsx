@@ -40,7 +40,12 @@ const SubmitPage = () => {
   const urlUsercode = localStorage.getItem("urlUsercode") || "";
 
   // PERSISTENT STATE
-  const resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
+  let resultsSurveyFromStorage;
+  if (localStorage.getItem("resultsSurvey" !== undefined)) {
+    resultsSurveyFromStorage = JSON.parse(
+      localStorage.getItem("resultsSurvey")
+    );
+  }
 
   useEffect(() => {
     setCurrentPage("submit");
@@ -143,10 +148,10 @@ const SubmitPage = () => {
       }
 
       // ** SURVEY, read in results
-      if (configObj.showSurvey) {
-        const keys2 = Object.keys(resultsSurvey);
+      if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
+        const keys2 = Object.keys(resultsSurveyFromStorage);
         for (let ii = 0; ii < keys2.length; ii++) {
-          transmissionResults[keys2[ii]] = resultsSurvey[keys2[ii]];
+          transmissionResults[keys2[ii]] = resultsSurveyFromStorage[keys2[ii]];
         }
       }
 
