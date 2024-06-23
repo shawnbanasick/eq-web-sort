@@ -1,10 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import detectMobileBrowser from "../../utilities/detectMobileBrowser";
 
 const LoadingScreen = () => {
+  let isMobile = detectMobileBrowser();
+
+  let isDisplayText;
+  if (isMobile) {
+    isDisplayText = <MobileTextDiv>Loading</MobileTextDiv>;
+  } else {
+    isDisplayText = <TextDiv>Loading</TextDiv>;
+  }
+
   return (
     <Container>
-      <TextDiv>Loading</TextDiv>
+      {isDisplayText}
       <div>
         <div id="loading" />
       </div>
@@ -28,5 +38,14 @@ const TextDiv = styled.div`
   font-weight: bold;
   align-self: center;
   margin-right: 70px;
+  margin-top: 40px;
+`;
+
+const MobileTextDiv = styled.div`
+  font-size: 44px;
+  font-style: italic;
+  font-weight: bold;
+  align-self: center;
+  margin-right: 30px;
   margin-top: 40px;
 `;

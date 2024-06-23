@@ -25,6 +25,7 @@
    <item id="shuffleCards">false</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item> 
+   <item id="useMobileMode">true</item> 
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->

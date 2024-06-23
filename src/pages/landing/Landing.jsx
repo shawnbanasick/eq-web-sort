@@ -13,6 +13,7 @@ import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
+import detectMobileBrowser from "../../utilities/detectMobileBrowser";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -50,7 +51,8 @@ const LandingPage = () => {
   const setCardFontSizePostsort = useStore(getSetCardFontSizePostsort);
   const setMinCardHeightSort = useStore(getSetMinCardHeightSort);
   const setMinCardHeightPostsort = useStore(getSetMinCardHeightPostsort);
-
+  const mobileWelcomeTextHtml =
+    ReactHtmlParser(decodeHTML(langObj.mobileWelcomeText)) || "";
   // calc time on page
   useEffect(() => {
     const startTime = Date.now();
@@ -310,6 +312,32 @@ const LandingPage = () => {
       displayPartIdScreen = false;
     }
 
+    if (
+      configObj.useMobileMode === true ||
+      configObj.useMobileMode === "true"
+    ) {
+      let isMobile = detectMobileBrowser();
+
+      if (isMobile) {
+        return (
+          <React.Fragment>
+            {dataLoaded && (
+              <React.Fragment>
+                <MobileSortTitleBar background={headerBarColor}>
+                  {landingHead}
+                </MobileSortTitleBar>
+                <MobileContainerDiv>
+                  <ContentDiv>
+                    <div>{mobileWelcomeTextHtml}</div>
+                  </ContentDiv>
+                </MobileContainerDiv>
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        );
+      }
+    }
+
     return (
       <React.Fragment>
         {dataLoaded && (
@@ -378,6 +406,26 @@ const ContainerDiv = styled.div`
   }
 `;
 
+const MobileContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+  padding-top: 50px;
+  transition: 0.3s ease all;
+  margin-top: 50px;
+
+  img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  iframe {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+`;
+
 const ContentDiv = styled.div`
   display: flex;
   width: 75vw;
@@ -402,6 +450,23 @@ const SortTitleBar = styled.div`
   color: white;
   font-weight: bold;
   font-size: 28px;
+  position: fixed;
+  top: 0;
+`;
+
+const MobileSortTitleBar = styled.div`
+  width: 100vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 8px;
+  min-height: 50px;
+  background-color: ${(props) => props.background};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
   position: fixed;
   top: 0;
 `;

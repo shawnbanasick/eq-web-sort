@@ -19,7 +19,10 @@ import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
 import shuffle from "lodash/shuffle";
 import convert from "xml-js";
+import detectMobileBrowser from "./utilities/detectMobileBrowser";
+import MobileFooter from "./pages/footer/MobileFooter";
 
+const getConfigObj = (state) => state.configObj;
 const getSetConfigObj = (state) => state.setConfigObj;
 const getSetLangObj = (state) => state.setLangObj;
 const getSetMapObj = (state) => state.setMapObj;
@@ -35,6 +38,7 @@ const getDisableRefreshCheck = (state) => state.disableRefreshCheck;
 function App() {
   // STATE
   const [isLoading, setLoading] = useState(true);
+  const configObj = useSettingsStore(getConfigObj);
 
   const setConfigObj = useSettingsStore(getSetConfigObj);
   const setLangObj = useSettingsStore(getSetLangObj);
@@ -199,6 +203,33 @@ function App() {
 
   if (isLoading) {
     return <LoadingScreen />;
+  }
+
+  if (configObj.useMobileMode === true || configObj.useMobileMode === "true") {
+    let isMobile = detectMobileBrowser();
+    if (isMobile) {
+      console.log("Mobile Mode");
+      return (
+        <div className="App">
+          <Router>
+            <Switch>
+              <Route exact path="/presort" component={PresortPage} />
+
+              {/* <Route exact path="/presort" component={PresortPage} />
+          <Route exact path="/sort" component={SortPage} />
+          <Route exact path="/postsort" component={PostsortPage} />
+          <Route exact path="/survey" component={SurveyPage} />
+          <Route exact path="/submit" component={SubmitPage} /> */}
+              <Route exact path="/" component={LandingPage} />
+              <Route component={NoPageFound} />
+            </Switch>
+            <Suspense>
+              <MobileFooter />
+            </Suspense>
+          </Router>
+        </div>
+      );
+    }
   }
 
   return (
