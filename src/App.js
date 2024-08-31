@@ -19,8 +19,9 @@ import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
 import shuffle from "lodash/shuffle";
 import convert from "xml-js";
-import detectMobileBrowser from "./utilities/detectMobileBrowser";
+// import detectMobileBrowser from "./utilities/detectMobileBrowser";
 import MobileFooter from "./pages/footer/MobileFooter";
+// import MobilePresortPage from "./pages/presort/MobilePresort";
 
 const getConfigObj = (state) => state.configObj;
 const getSetConfigObj = (state) => state.setConfigObj;
@@ -34,6 +35,7 @@ const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetDataLoaded = (state) => state.setDataLoaded;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getDisableRefreshCheck = (state) => state.disableRefreshCheck;
+const getCurrentPage = (state) => state.currentPage;
 
 function App() {
   // STATE
@@ -53,6 +55,7 @@ function App() {
   const setDataLoaded = useStore(getSetDataLoaded);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const disableRefreshCheck = useStore(getDisableRefreshCheck);
+  const currentPage = useStore(getCurrentPage);
 
   useEffect(() => {
     const unloadCallback = (event) => {
@@ -68,12 +71,35 @@ function App() {
       window.removeEventListener("beforeunload", unloadCallback);
     } else {
       window.addEventListener("beforeunload", unloadCallback);
+
       return () => {
         //cleanup function
         window.removeEventListener("beforeunload", unloadCallback);
       };
     }
   }, [displayGoodbyeMessage, disableRefreshCheck]);
+
+  // useEffect(() => {
+  //   const unloadEvent = (event) => {
+  //     const e = event || window.event;
+  //     e.preventDefault();
+  //     if (e) {
+  //       e.returnValue = "";
+  //     }
+  //     return "";
+  //   };
+
+  //   if (displayGoodbyeMessage) {
+  //       // reset localStorage
+  //       let submitted = localStorage.getItem("submitted");
+  //       if (currentPage === "submit" && submitted === "true") {
+  //         let urlUsercode = localStorage.getItem("urlUsercode");
+  //         localStorage.clear();
+  //         localStorage.setItem("urlUsercode", urlUsercode);
+  //       } else {
+  //         window
+  //       }
+  //     }
 
   useEffect(() => {
     let shuffleCards;
@@ -206,17 +232,17 @@ function App() {
   }
 
   if (configObj.useMobileMode === true || configObj.useMobileMode === "true") {
-    let isMobile = detectMobileBrowser();
+    let isMobile = false; // let isMobile = detectMobileBrowser();
     if (isMobile) {
       console.log("Mobile Mode");
       return (
         <div className="App">
           <Router>
             <Switch>
-              <Route exact path="/presort" component={PresortPage} />
+              {/*<Route exact path="/presort" component={MobilePresortPage} />
 
-              {/* <Route exact path="/presort" component={PresortPage} />
-          <Route exact path="/sort" component={SortPage} />
+               <Route exact path="/presort" component={PresortPage} />
+              <Route exact path="/sort" component={SortPage} />
           <Route exact path="/postsort" component={PostsortPage} />
           <Route exact path="/survey" component={SurveyPage} />
           <Route exact path="/submit" component={SubmitPage} /> */}

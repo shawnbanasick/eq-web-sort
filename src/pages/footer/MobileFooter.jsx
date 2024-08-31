@@ -36,7 +36,8 @@ const StyledFooter = () => {
   let showCardHeightSizer = true;
   let displayHelpButton = true;
   let showFooterFontSizer = true;
-  let showProgressBar = true;
+  let showProgressBar = false;
+  let showLogo = false;
 
   let showBackButton;
   let backButtonText = langObj.postsortBackButtonText;
@@ -138,6 +139,7 @@ const StyledFooter = () => {
 
   if (currentPage === "landing") {
     showProgressBar = false;
+    showLogo = true;
   }
 
   let CenterContent = (
@@ -165,9 +167,19 @@ const StyledFooter = () => {
 
   const nextPage = getNextPage(currentPage, showPostsort, showSurvey);
 
+  let showFooter = true;
+  if (currentPage === "presort") {
+    showFooter = false;
+  }
+
+  if (showFooter === false) {
+    return null;
+  }
+  console.log(currentPage, showPostsort, showSurvey, nextPage, showFooter);
+
   return (
     <StyledFooterDiv>
-      <LogoContainer>{logoHtml}</LogoContainer>
+      {showLogo && <LogoContainer>{logoHtml}</LogoContainer>}
       <CenterDiv>{CenterContent}</CenterDiv>
       <ButtonDiv>
         {showBackButton && (
@@ -191,8 +203,9 @@ const StyledFooterDiv = styled.footer`
   left: 0px;
   border-top: 1px solid lightgray;
 
-  display: inline-grid;
-  grid-template-columns: 16% 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 

@@ -3,6 +3,14 @@ const convertObjectToResults = (
   resultsPresort,
   traceSorts
 ) => {
+  // columnStatements is an object with a key of vCols = sort results
+  // resultsPresort is an object with keys posStateNums, neuStateNums, negStateNums
+  // traceSorts (get all presort column values) is an object with keys of sortResults, sortResultsPresort, sortResultsTrace
+
+  if (columnStatements.length === 0 || columnStatements === undefined) {
+    return;
+  }
+
   let columnSortValues = Object.keys(columnStatements.vCols);
 
   const sortArray = [];
@@ -12,9 +20,9 @@ const convertObjectToResults = (
   let negStateNums;
 
   if (resultsPresort !== undefined) {
-    let posStateNums2 = resultsPresort.posStateNums;
-    let neuStateNums2 = resultsPresort.neuStateNums;
-    let negStateNums2 = resultsPresort.negStateNums;
+    let posStateNums2 = resultsPresort?.posStateNums;
+    let neuStateNums2 = resultsPresort?.neuStateNums;
+    let negStateNums2 = resultsPresort?.negStateNums;
     posStateNums = posStateNums2.split(",");
     neuStateNums = neuStateNums2.split(",");
     negStateNums = negStateNums2.split(",");
@@ -25,7 +33,7 @@ const convertObjectToResults = (
   // old style loops for speed
   //
   for (let i = 0; i < columnSortValues.length; i++) {
-    let tempArray1 = columnStatements.vCols[columnSortValues[i]];
+    let tempArray1 = columnStatements?.vCols[columnSortValues[i]];
     let presortVal;
     // convert column key to column sort value
     let sortValue1 = columnSortValues[i];
@@ -82,7 +90,11 @@ const convertObjectToResults = (
     );
   }
 
-  return { resultsText, presortTraceText };
+  if (traceSorts === true || traceSorts === "true") {
+    return { sort: resultsText, presortTrace: presortTraceText };
+  } else {
+    return { sort: resultsText };
+  }
 };
 
 export default convertObjectToResults;

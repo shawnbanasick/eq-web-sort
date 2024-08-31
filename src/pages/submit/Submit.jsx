@@ -15,6 +15,7 @@ import SubmitButtonEmail from "./SubmitButtonEmail";
 import convertObjectToResults from "../sort/convertObjectToResults";
 import getCurrentDateTime from "../../utilities/getCurrentDateTime";
 import SubmitButtonNetlify from "./SubmitButtonNetlify";
+import createPresortObject from "./createPresortObject";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -40,11 +41,11 @@ const SubmitPage = () => {
   const urlUsercode = localStorage.getItem("urlUsercode") || "";
 
   // PERSISTENT STATE
-  let resultsSurveyFromStorage;
-  if (localStorage.getItem("resultsSurvey" !== undefined)) {
-    resultsSurveyFromStorage = JSON.parse(
-      localStorage.getItem("resultsSurvey")
-    );
+  let resultsSurveyFromStorage = JSON.parse(
+    localStorage.getItem("resultsSurvey")
+  );
+  if (resultsSurveyFromStorage === undefined) {
+    resultsSurveyFromStorage = {};
   }
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const SubmitPage = () => {
     localStorage.setItem("currentPage", "submit");
   }, [setCurrentPage]);
 
-  // Language
+  // Language - grab translations
   const transferTextAbove =
     ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
   const transferTextBelow =
@@ -65,120 +66,160 @@ const SubmitPage = () => {
     decodeHTML(langObj.linkedProjectBtnMessage) || "";
   const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead)) || "";
 
-  // PERSISTENT STATE
+  // PERSISTENT STATE - read in results if they exist in local storage
   const resultsPresort =
     JSON.parse(localStorage.getItem("resultsPresort")) || {};
   const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
 
   // config options
   const headerBarColor = configObj.headerBarColor;
+  const dateString = getCurrentDateTime();
 
-  useEffect(() => {
-    // format results for transmission
-    try {
-      // finish setup and format results object
-      transmissionResults["projectName"] = configObj.studyTitle;
-      transmissionResults["partId"] = localStorage.getItem("partId") || "";
-      transmissionResults["randomId"] = uuid().substring(0, 12);
-      transmissionResults["urlUsercode"] =
-        localStorage.getItem("urlUsercode") || "";
-      const dateString = getCurrentDateTime();
+  // useEffect(() => {
+  // format results for transmission
+  try {
+    // finish setup and format results object
+    transmissionResults["projectName"] = configObj.studyTitle;
+    transmissionResults["partId"] =
+      localStorage.getItem("partId") || "no part ID";
+    transmissionResults["randomId"] = uuid().substring(0, 12);
+    transmissionResults["urlUsercode"] =
+      localStorage.getItem("urlUsercode") || "no usercode set";
+  } catch (error) {
+    console.log(error);
+    alert("1: " + error.message);
+  }
 
-      transmissionResults["dateTime"] = dateString;
-      transmissionResults["timeLanding"] =
-        localStorage.getItem("timeOnlandingPage") || "00:00:00";
-      transmissionResults["timePresort"] =
-        localStorage.getItem("timeOnpresortPage") || "00:00:00";
-      transmissionResults["timeSort"] =
-        localStorage.getItem("timeOnsortPage") || "00:00:00";
+  try {
+    transmissionResults["dateTime"] = dateString;
+    transmissionResults["timeLanding"] =
+      localStorage.getItem("timeOnlandingPage") || "00:00:00";
+    transmissionResults["timePresort"] =
+      localStorage.getItem("timeOnpresortPage") || "00:00:00";
+    transmissionResults["timeSort"] =
+      localStorage.getItem("timeOnsortPage") || "00:00:00";
+  } catch (error) {
+    console.log(error);
+    alert("2: " + error.message);
+  }
 
-      if (configObj.setupTarget === "local") {
-        transmissionResults["partId"] = localParticipantName;
-        transmissionResults["usercode"] = localUsercode;
-      }
+  try {
+    if (configObj.setupTarget === "local") {
+      transmissionResults["partId"] = localParticipantName || "no part ID";
+      transmissionResults["usercode"] = localUsercode || "no usercode set";
+    }
 
-      if (configObj.showPostsort === true) {
-        transmissionResults["timePostsort"] =
-          localStorage.getItem("timeOnpostsortPage") || "00:00:00";
-      }
+    if (configObj.showPostsort === true) {
+      transmissionResults["timePostsort"] =
+        localStorage.getItem("timeOnpostsortPage") || "00:00:00";
+    }
 
-      if (configObj.showSurvey === true) {
-        transmissionResults["timeSurvey"] =
-          localStorage.getItem("timeOnsurveyPage") || "00:00:00";
-      }
+    if (configObj.showSurvey === true) {
+      transmissionResults["timeSurvey"] =
+        localStorage.getItem("timeOnsurveyPage") || "00:00:00";
+    }
+  } catch (error) {
+    console.log(error);
+    alert("3: " + error.message);
+  }
 
-      let numPos = resultsPresort?.npos;
-      if (isNaN(numPos)) {
-        numPos = 0;
-      }
-      let numNeu = resultsPresort?.nneu;
-      if (isNaN(numNeu)) {
-        numNeu = 0;
-      }
-      let numNeg = resultsPresort?.nneg;
-      if (isNaN(numNeg)) {
-        numNeg = 0;
-      }
+  try {
+    const presortObject = createPresortObject();
+    transmissionResults = {
+      ...transmissionResults,
+      ...presortObject,
+    };
+  } catch (error) {
+    console.log(error);
+    alert("4: " + error.message);
+  }
 
-      transmissionResults["npos"] = numPos;
-      transmissionResults["posStateNums"] = resultsPresort.posStateNums || [];
-      transmissionResults["nneu"] = numNeu;
-      transmissionResults["neuStateNums"] = resultsPresort.neuStateNums || [];
-      transmissionResults["nneg"] = numNeg;
-      transmissionResults["negStateNums"] = resultsPresort.negStateNums || [];
-
-      // if project included POSTSORT, read in complete sorted results
-      if (configObj.showPostsort) {
-        const resultsPostsort =
-          JSON.parse(localStorage.getItem("resultsPostsort")) || {};
-        const newPostsortObject = calculatePostsortResults(
-          resultsPostsort,
-          mapObj,
-          configObj
-        );
-        const keys = Object.keys(newPostsortObject);
-        for (let i = 0; i < keys.length; i++) {
-          // skip unnecessary entries
-          let skipText = keys[i].substring(0, 9);
-          if (skipText === "textArea-") {
-            continue;
-          }
-          transmissionResults[keys[i]] = newPostsortObject[keys[i]];
+  try {
+    // if project included POSTSORT, read in complete sorted results
+    if (configObj.showPostsort) {
+      const resultsPostsort =
+        JSON.parse(localStorage.getItem("resultsPostsort")) || {};
+      const newPostsortObject = calculatePostsortResults(
+        resultsPostsort,
+        mapObj,
+        configObj
+      );
+      const keys = Object.keys(newPostsortObject);
+      for (let i = 0; i < keys.length; i++) {
+        // skip unnecessary entries
+        let skipText = keys[i].substring(0, 9);
+        if (skipText === "textArea-") {
+          continue;
         }
+        transmissionResults[keys[i]] = newPostsortObject[keys[i]];
       }
+    }
+  } catch (error) {
+    console.log(error);
+    alert("5: " + error.message);
+  }
 
-      // ** SURVEY, read in results
-      if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
-        const keys2 = Object.keys(resultsSurveyFromStorage);
-        for (let ii = 0; ii < keys2.length; ii++) {
-          transmissionResults[keys2[ii]] = resultsSurveyFromStorage[keys2[ii]];
-        }
-      }
+  // ** IF SURVEY, read in results
+  try {
+    if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
+      transmissionResults = {
+        ...transmissionResults,
+        ...resultsSurveyFromStorage,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    alert("6: " + error.message);
+  }
 
-      // *** SORT RESULTS
-      const resultsSort = convertObjectToResults(
-        resultsSortObj,
-        resultsPresort,
+  let resultsSort;
+  try {
+    // *** SORT RESULTS to obtain consistent results object
+    if (
+      Object.keys(resultsSortObj).length !== 0 &&
+      resultsSortObj !== undefined &&
+      Object.keys(resultsPresort).length !== 0 &&
+      resultsPresort !== undefined
+    ) {
+      resultsSort = convertObjectToResults(
+        // all results
+        { ...resultsSortObj },
+        // presort results
+        { ...resultsPresort },
+
         configObj.traceSorts
       );
-      if (configObj.traceSorts === true || configObj.traceSorts === "true") {
-        transmissionResults["presortTrace"] = resultsSort.presortTraceText;
-      }
-      transmissionResults["sort"] = resultsSort.resultsText;
-
-      // remove null values to prevent errors
-      for (const property in transmissionResults) {
-        if (
-          transmissionResults[property] === null ||
-          transmissionResults[property] === undefined
-        ) {
-          transmissionResults[property] = "no data";
-        }
-      }
-    } catch (error) {
-      console.log(error);
     }
-  }); // *** end useEffect
+  } catch (error) {
+    console.log(error);
+    alert("7: " + error.message);
+  }
+
+  try {
+    transmissionResults = {
+      ...transmissionResults,
+      ...resultsSort,
+    };
+  } catch (error) {
+    console.log(error);
+    alert("8: " + error.message);
+  }
+
+  try {
+    // remove null values to prevent errors
+    for (const property in transmissionResults) {
+      if (
+        transmissionResults[property] === null ||
+        transmissionResults[property] === undefined
+      ) {
+        transmissionResults[property] = "no data";
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    alert("9: " + error.message);
+  }
+  // }); // *** end useEffect
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {

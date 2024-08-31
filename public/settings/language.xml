@@ -12,7 +12,6 @@
         <item id="cardHeightText">Card Height</item>
         <item id="btnHelp">Help me!</item>
         <item id="btnNext">Continue</item>
-        <item id="landingNext">Accept and Continue</item>
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
@@ -120,10 +119,6 @@
         <!-- LINKING -->
         <item id="linkedProjectFallbackMessage">Please click the button to begin the next Q sort</item>   
          <item id="linkedProjectBtnMessage">Begin Next Q sort</item>   
-
-        <!-- MOBILE -->
-        <item id="mobileWelcomeText">Thank you for participating in this research project. We will respect your privacy. You do not need to participate if you feel uncomfortable.{{{br/}}}{{{br/}}} We will destroy the data when the research is complete. {{{br/}}}{{{br/}}}If you agree, click on the "Accept and Continue" button below.</item>   
-
 
 
    </language>

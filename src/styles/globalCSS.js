@@ -524,7 +524,10 @@ footer {
 /***********************************
   PRESORT CSS  ** IMAGES ** 
  *******************************************************************************/
-
+  #presortFinishedModal  {
+  max-width: 380px !important;
+  margin-right: 10px !important;
+}
 
 
 #imageGrid .cardsDivImg{

@@ -13,7 +13,7 @@ import parseParams from "./parseParams";
 import LocalStart from "./LocalStart";
 import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
-import detectMobileBrowser from "../../utilities/detectMobileBrowser";
+// import detectMobileBrowser from "../../utilities/detectMobileBrowser";
 
 const getLangObj = (state) => state.langObj;
 const getConfigObj = (state) => state.configObj;
@@ -51,8 +51,8 @@ const LandingPage = () => {
   const setCardFontSizePostsort = useStore(getSetCardFontSizePostsort);
   const setMinCardHeightSort = useStore(getSetMinCardHeightSort);
   const setMinCardHeightPostsort = useStore(getSetMinCardHeightPostsort);
-  const mobileWelcomeTextHtml =
-    ReactHtmlParser(decodeHTML(langObj.mobileWelcomeText)) || "";
+  // const mobileWelcomeTextHtml =
+  //   ReactHtmlParser(decodeHTML(langObj?.mobileWelcomeText)) || "";
   // calc time on page
   useEffect(() => {
     const startTime = Date.now();
@@ -312,31 +312,31 @@ const LandingPage = () => {
       displayPartIdScreen = false;
     }
 
-    if (
-      configObj.useMobileMode === true ||
-      configObj.useMobileMode === "true"
-    ) {
-      let isMobile = detectMobileBrowser();
+    // if (
+    //   configObj.useMobileMode === true ||
+    //   configObj.useMobileMode === "true"
+    // ) {
+    //   let isMobile = detectMobileBrowser();
 
-      if (isMobile) {
-        return (
-          <React.Fragment>
-            {dataLoaded && (
-              <React.Fragment>
-                <MobileSortTitleBar background={headerBarColor}>
-                  {landingHead}
-                </MobileSortTitleBar>
-                <MobileContainerDiv>
-                  <ContentDiv>
-                    <div>{mobileWelcomeTextHtml}</div>
-                  </ContentDiv>
-                </MobileContainerDiv>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        );
-      }
-    }
+    //   if (isMobile) {
+    //     return (
+    //       <React.Fragment>
+    //         {dataLoaded && (
+    //           <React.Fragment>
+    //             <MobileSortTitleBar background={headerBarColor}>
+    //               {landingHead}
+    //             </MobileSortTitleBar>
+    //             <MobileContainerDiv>
+    //               <MobileContentDiv>
+    //                 <div>{mobileWelcomeTextHtml}</div>
+    //               </MobileContentDiv>
+    //             </MobileContainerDiv>
+    //           </React.Fragment>
+    //         )}
+    //       </React.Fragment>
+    //     );
+    //   }
+    // }
 
     return (
       <React.Fragment>
@@ -430,6 +430,17 @@ const ContentDiv = styled.div`
   display: flex;
   width: 75vw;
   font-size: 1.25em;
+  visibility: ${(props) => (props.view ? "hidden" : "visible")};
+  animation: ${(props) => (props.view ? fadeOut : fadeIn)} 0.5s linear;
+  transition: visibility 0.5s linear;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MobileContentDiv = styled.div`
+  display: flex;
+  width: 75vw;
+  font-size: 3.1vh;
   visibility: ${(props) => (props.view ? "hidden" : "visible")};
   animation: ${(props) => (props.view ? fadeOut : fadeIn)} 0.5s linear;
   transition: visibility 0.5s linear;

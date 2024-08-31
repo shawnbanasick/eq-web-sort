@@ -202,6 +202,7 @@ const LinkButton = (props) => {
       {...rest} // `children` is just another prop!
       width={props.width}
       onClick={(event) => {
+        console.log("clicked");
         onClick && onClick(event);
         goToNextPage = checkForNextPageConditions(
           allowUnforcedSorts,
@@ -220,7 +221,7 @@ export default withRouter(LinkButton);
 const NextButton = styled.button`
   border-color: #2e6da4;
   color: white;
-  font-size: 0.8em;
+  font-size: 1.5vh;
   font-weight: bold;
   padding: 0.5em;
   border-radius: 3px;

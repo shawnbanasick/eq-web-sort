@@ -68,10 +68,8 @@ const SubmitResultsButton = (props) => {
           } else {
             // do success action - modal
             console.log("success! pushed to database");
-            // reset localStorage
+            localStorage.setItem("submitted", "true");
             let urlUsercode = localStorage.getItem("urlUsercode");
-            localStorage.clear();
-            localStorage.setItem("urlUsercode", urlUsercode);
 
             if (configObj.linkToSecondProject === true) {
               setDisplayGoodbyeMessage(true);

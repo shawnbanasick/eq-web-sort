@@ -10,7 +10,15 @@ const createPresortSlice = (set, get) => ({
   triggerPresortFinishedModal: false,
   triggerPresortPreventNavModal: false,
   results: {},
+  mobilePresortResults: [],
+  triggerMobilePresortFinishedModal: false,
 
+  setTriggerMobilePresortFinishedModal: (bool) => {
+    set(() => ({ triggerMobilePresortFinishedModal: bool }));
+  },
+  setMobilePresortResults: (inputValue) => {
+    set(() => ({ mobilePresortResults: inputValue }));
+  },
   setPresortNoReturn: (inputValue) => {
     set(() => ({ presortNoReturn: inputValue }));
   },

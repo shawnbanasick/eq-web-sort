@@ -1,3 +1,5 @@
+import get from "lodash/get";
+
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
   const configObj = {};
