@@ -52,10 +52,7 @@ const SurveyDropdownElement = (props) => {
       JSON.parse(localStorage.getItem("resultsSurvey")) || {};
     setSelected(e);
 
-    console.log(originalOptions);
     let newArray = flatten(originalOptions);
-    console.log(newArray);
-    console.log(e);
 
     if (e.length !== 0) {
       let selected2 = "";

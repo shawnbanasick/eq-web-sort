@@ -6,7 +6,7 @@
    <!-- "setupTarget" options: netlify, firebase, local, email, or sheets -->
    <item id="studyTitle">Demo Project</item> 
    <item id="databaseOptions">Include_Google_Options</item>
-   <item id="setupTarget">netlify</item>
+   <item id="setupTarget">firebase</item>
    <!-- STEIN -->
    <item id="steinApiUrl"></item>
    <!-- EMAIL -->
