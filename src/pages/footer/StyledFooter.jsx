@@ -51,7 +51,14 @@ const StyledFooter = () => {
     )
   );
 
-  const nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext)) || "";
+  let nextButtonText;
+  if (currentPage === "landing") {
+    nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNextLanding)) || "";
+  } else if (currentPage === "consent") {
+    nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNextConsent)) || "";
+  } else {
+    nextButtonText = ReactHtmlParser(decodeHTML(langObj.btnNext)) || "";
+  }
 
   if (currentPage === "sort" && configObj.setupTarget === "local") {
     const usercode = localUsercode;
@@ -73,6 +80,8 @@ const StyledFooter = () => {
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;
   const useImages = configObj.useImages;
+  const showConsent = configObj.showConsentPage;
+  let showProgressBar = true;
 
   const totalProgressScore = calcProgressScore(
     currentPage,
@@ -83,6 +92,12 @@ const StyledFooter = () => {
     additionalProgress,
     additionalProgressSort
   );
+
+  if (currentPage === "consent") {
+    showProgressBar = false;
+  } else {
+    showProgressBar = true;
+  }
 
   if (currentPage === "submit") {
     displayNextButton = false;
@@ -121,7 +136,8 @@ const StyledFooter = () => {
   if (
     currentPage === "landing" ||
     currentPage === "survey" ||
-    currentPage === "submit"
+    currentPage === "submit" ||
+    currentPage === "consent"
   ) {
     showAdjustmentContainer = false;
   }
@@ -136,18 +152,25 @@ const StyledFooter = () => {
         </AdjustmentsContainer>
       )}
       <ProgressBarDiv>
-        <ProgressBar
-          completed={totalProgressScore}
-          width={"100px"}
-          bgColor="#337ab7"
-          labelColor="#f0f0f0"
-          baseBgColor="lightgray"
-        />
+        {showProgressBar && (
+          <ProgressBar
+            completed={totalProgressScore}
+            width={"100px"}
+            bgColor="#337ab7"
+            labelColor="#f0f0f0"
+            baseBgColor="lightgray"
+          />
+        )}
       </ProgressBarDiv>
     </React.Fragment>
   );
 
-  const nextPage = getNextPage(currentPage, showPostsort, showSurvey);
+  const nextPage = getNextPage(
+    currentPage,
+    showPostsort,
+    showSurvey,
+    showConsent
+  );
 
   return (
     <StyledFooterDiv>

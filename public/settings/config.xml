@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-   <config version="6.0.0" htmlParse="false">
+   <config version="7.0.0" htmlParse="false">
 
    <!-- GENERAL SETTINGS -->
    <!-- "setupTarget" options: netlify, firebase, local, email, or sheets -->
@@ -25,6 +25,10 @@
    <item id="shuffleCards">false</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item> 
+   <item id="showConsentPage">true</item> 
+   <item id="showConsentPageHelpModal">true</item> 
+
+
 
    <!-- ACCESS -->
    <!-- options: anonymous, partId-access, partId, access -->

@@ -83,6 +83,7 @@ const StyledFooter = () => {
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;
   const useImages = configObj.useImages;
+  const showConsent = configObj.showConsentPage;
 
   const totalProgressScore = calcProgressScore(
     currentPage,
@@ -165,7 +166,12 @@ const StyledFooter = () => {
     </React.Fragment>
   );
 
-  const nextPage = getNextPage(currentPage, showPostsort, showSurvey);
+  const nextPage = getNextPage(
+    currentPage,
+    showPostsort,
+    showSurvey,
+    showConsent
+  );
 
   let showFooter = true;
   if (currentPage === "presort") {

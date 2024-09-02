@@ -1,79 +1,39 @@
-const getNextPage = (currentPage, showPostsort, showSurvey) => {
-  if (showPostsort === true && showSurvey === true) {
-    if (currentPage === "landing") {
-      return `/presort`;
+const getNextPage = (currentPage, showPostsort, showSurvey, showConsent) => {
+  // if (showPostsort === true && showSurvey === true) {
+  if (currentPage === "consent") {
+    if (showConsent === true) {
+      return `/landing`;
     }
-    if (currentPage === "presort") {
-      return `/sort`;
-    }
-    if (currentPage === "sort") {
+    return `/presort`;
+  }
+  if (currentPage === "landing") {
+    return `/presort`;
+  }
+  if (currentPage === "presort") {
+    return `/sort`;
+  }
+  if (currentPage === "sort") {
+    if (showPostsort === true) {
       return `/postsort`;
     }
-    if (currentPage === "postsort") {
+    if (showSurvey === true) {
       return `/survey`;
     }
-    if (currentPage === "survey") {
-      return `/submit`;
-    }
-    if (currentPage === "submit") {
-      return `/`;
-    }
-    return `/nopagefound`;
+    return `/submit`;
   }
-
-  if (showPostsort === false && showSurvey === true) {
-    if (currentPage === "landing") {
-      return `/presort`;
-    }
-    if (currentPage === "presort") {
-      return `/sort`;
-    }
-    if (currentPage === "sort") {
+  if (currentPage === "postsort") {
+    if (showSurvey === true) {
       return `/survey`;
     }
-    if (currentPage === "survey") {
-      return `/submit`;
-    }
-    if (currentPage === "submit") {
-      return `/`;
-    }
-    return `/nopagefound`;
+    return `/submit`;
   }
-
-  if (showPostsort === true && showSurvey === false) {
-    if (currentPage === "landing") {
-      return `/presort`;
-    }
-    if (currentPage === "presort") {
-      return `/sort`;
-    }
-    if (currentPage === "sort") {
-      return `/postsort`;
-    }
-    if (currentPage === "postsort") {
-      return `/submit`;
-    }
-    if (currentPage === "submit") {
-      return `/`;
-    }
-    return `/nopagefound`;
+  if (currentPage === "survey") {
+    return `/submit`;
   }
-
-  if (showPostsort === false && showSurvey === false) {
-    if (currentPage === "landing") {
-      return `/presort`;
-    }
-    if (currentPage === "presort") {
-      return `/sort`;
-    }
-    if (currentPage === "sort") {
-      return `/submit`;
-    }
-    if (currentPage === "submit") {
-      return `/`;
-    }
-    return `/nopagefound`;
+  if (currentPage === "submit") {
+    return `/`;
   }
+  return `/nopagefound`;
 };
 
 export default getNextPage;

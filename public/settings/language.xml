@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
-   <language version="6.0.0" htmlParse="true">
+   <language version="7.0.0" htmlParse="true">
 ;
 
         <!-- MULTI-PURPOSE MODALS -->
@@ -10,8 +10,14 @@
         <!-- FOOTER -->
         <item id="fontSizeText">Text Size</item>
         <item id="cardHeightText">Card Height</item>
-        <item id="btnHelp">Help me!</item>
+        <item id="btnHelp">Help</item>
+        <item id="btnHelpLanding">Help</item>
+        <item id="btnHelpConsent">Contact Information</item>
+
         <item id="btnNext">Continue</item>
+        <item id="btnNextLanding">Start</item>
+        <item id="btnNextConsent">Agree</item>
+
 
         <!-- LANDING SCREEN -->
         <item id="landingHead">University Research Project</item>
@@ -46,6 +52,13 @@
         <item id="localSubmitSuccessModalHeader">Success</item>
         <item id="localSubmitSuccessModalText">Participant Q sort data have been succesfully saved to browser memory</item>
         <item id="returnToLocalPanelButtonText">Return to Control Panel</item>
+
+        <!-- CONSENT: get permission from participants-->
+        <item id="consentTitleBarText">Research Consent</item>
+        <item id="consentText">You are invited to participate in a research study conducted by [Principal Investigator’s Name] at [Institution or Organization]. Before you decide to participate, it is important that you understand why the research is being conducted and what it will involve. Please take the time to read the following information carefully. Feel free to contact the research team with any questions you may have.{{{br /}}}{{{br /}}}{{{b}}}Purpose of the Study{{{/b}}}{{{br /}}}The purpose of this study is to [briefly describe the purpose, e.g., understand the effects of a new teaching method on student performance]. This research will help us gain insights into [mention any broader implications or goals of the study]. {{{br /}}}{{{br /}}}{{{b}}}Study Procedures{{{/b}}}{{{br /}}}If you agree to participate, you will be asked to [describe the procedures involved, including what participants will do, how long it will take, and how frequently it will occur]. For example, you will be asked to complete evaluate a series of statements, sort them, and then reflect on the sorting. Additionally, there is a short questionnaires at the end. The study will take approximately [duration, e.g., 45 minutes]. {{{br /}}}{{{br /}}}{{{b}}}Benefits{{{/b}}}{{{br /}}}While there may not be direct benefits to you for participating, the information gathered from this study may help [describe potential benefits, e.g., improve educational methods, contribute to scientific knowledge, etc.]. You may also gain personal insights into [describe any personal benefits, if applicable].{{{br /}}}{{{br /}}}{{{b}}}Confidentiality{{{/b}}}{{{br /}}}All information collected in this study will be kept strictly confidential. Data will be stored securely and only the research team will have access to it. Your identity will not be disclosed in any reports or publications resulting from this study. [Describe how data will be anonymized, encrypted, or stored securely].{{{br /}}}{{{br /}}}{{{b}}}Voluntary Participation{{{/b}}}{{{br /}}}Your participation in this study is entirely voluntary. You are free to decline to participate, or to withdraw at any time, without penalty or loss of benefits to which you are otherwise entitled. If you decide to withdraw, close the webpage and any data collected up to that point will be deleted.{{{br /}}}{{{br /}}}{{{b}}}Consent{{{/b}}}{{{br /}}}By clicking on the "Agree" button on the bottom of this page, you are indicating that you have read and understood the information provided, and that you agree to participate in this study. If you have any questions about this study, please contact [Principal Investigator’s Name and Contact Information].</item>
+         <item id="consentHelpModalHead">Contact Information</item>
+        <item id="consentHelpModalText">Thank you for participating in this University Research Project. You can contact the research team by phone (1-555-867-5309) or by email at researchTeam@myMail.com</item>
+
 
         <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
         <item id="titleBarText">Preliminary Sorting</item>

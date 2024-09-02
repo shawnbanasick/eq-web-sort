@@ -38,6 +38,10 @@ const calcProgressScore = (
     totalProgressScore = 10;
     return totalProgressScore;
   }
+  if (currentPage === "consent") {
+    totalProgressScore = 15;
+    return totalProgressScore;
+  }
   if (currentPage === "presort") {
     totalProgressScore = +additionalProgress + adjustmentValue1;
     return totalProgressScore;

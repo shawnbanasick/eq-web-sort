@@ -19,6 +19,7 @@ import useStore from "./globalState/useStore";
 import cloneDeep from "lodash/cloneDeep";
 import shuffle from "lodash/shuffle";
 import convert from "xml-js";
+import ConsentPage from "./pages/consent/Consent";
 // import detectMobileBrowser from "./utilities/detectMobileBrowser";
 import MobileFooter from "./pages/footer/MobileFooter";
 // import MobilePresortPage from "./pages/presort/MobilePresort";
@@ -258,24 +259,49 @@ function App() {
     }
   }
 
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/presort" component={PresortPage} />
-          <Route exact path="/sort" component={SortPage} />
-          <Route exact path="/postsort" component={PostsortPage} />
-          <Route exact path="/survey" component={SurveyPage} />
-          <Route exact path="/submit" component={SubmitPage} />
-          <Route exact path="/" component={LandingPage} />
-          <Route component={NoPageFound} />
-        </Switch>
-        <Suspense>
-          <StyledFooter />
-        </Suspense>
-      </Router>
-    </div>
-  );
+  if (
+    configObj.showConsentPage === true ||
+    configObj.showConsentPage === "true"
+  ) {
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={ConsentPage} />
+            <Route exact path="/presort" component={PresortPage} />
+            <Route exact path="/sort" component={SortPage} />
+            <Route exact path="/postsort" component={PostsortPage} />
+            <Route exact path="/survey" component={SurveyPage} />
+            <Route exact path="/submit" component={SubmitPage} />
+            <Route exact path="/landing" component={LandingPage} />
+            <Route component={NoPageFound} />
+          </Switch>
+          <Suspense>
+            <StyledFooter />
+          </Suspense>
+        </Router>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/presort" component={PresortPage} />
+            <Route exact path="/sort" component={SortPage} />
+            <Route exact path="/postsort" component={PostsortPage} />
+            <Route exact path="/survey" component={SurveyPage} />
+            <Route exact path="/submit" component={SubmitPage} />
+            <Route component={NoPageFound} />
+          </Switch>
+          <Suspense>
+            <StyledFooter />
+          </Suspense>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

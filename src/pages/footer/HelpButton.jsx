@@ -6,6 +6,7 @@ import useSettingsStore from "../../globalState/useSettingsStore";
 import useStore from "../../globalState/useStore";
 
 const getLangObj = (state) => state.langObj;
+const getConfigObj = (state) => state.configObj;
 const getCurrentPage = (state) => state.currentPage;
 const getSetTriggerLandingModal = (state) => state.setTriggerLandingModal;
 const getSetTriggerPresortModal = (state) => state.setTriggerPresortModal;
@@ -13,10 +14,12 @@ const getSetTriggerSortModal = (state) => state.setTriggerSortModal;
 const getSetTriggerPostsortModal = (state) => state.setTriggerPostsortModal;
 const getSetTriggerSurveyModal = (state) => state.setTriggerSurveyModal;
 const getSetTriggerSubmitModal = (state) => state.setTriggerSubmitModal;
+const getSetTriggerConsentModal = (state) => state.setTriggerConsentModal;
 
 const HelpButton = () => {
   // STATE
   const langObj = useSettingsStore(getLangObj);
+  const configObj = useSettingsStore(getConfigObj);
   const currentPage = useStore(getCurrentPage);
   const setTriggerLandingModal = useStore(getSetTriggerLandingModal);
   const setTriggerPresortModal = useStore(getSetTriggerPresortModal);
@@ -24,12 +27,24 @@ const HelpButton = () => {
   const setTriggerPostsortModal = useStore(getSetTriggerPostsortModal);
   const setTriggerSurveyModal = useStore(getSetTriggerSurveyModal);
   const setTriggerSubmitModal = useStore(getSetTriggerSubmitModal);
+  const setTriggerConsentModal = useStore(getSetTriggerConsentModal);
 
-  const buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
+  let buttonText;
+  if (currentPage === "landing") {
+    buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelpLanding)) || "";
+  } else if (currentPage === "consent") {
+    buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelpConsent)) || "";
+  } else {
+    buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
+  }
 
   const handleOnClick = () => {
+    console.log("currentPage", currentPage);
     if (currentPage === "landing") {
       setTriggerLandingModal(true);
+    }
+    if (currentPage === "consent") {
+      setTriggerConsentModal(true);
     }
     if (currentPage === "presort") {
       setTriggerPresortModal(true);
@@ -47,6 +62,18 @@ const HelpButton = () => {
       setTriggerSubmitModal(true);
     }
   };
+
+  if (currentPage === "consent") {
+    if (configObj.showConsentPageHelpModal === true) {
+      return (
+        <StyledHelpButton tabindex="0" onClick={handleOnClick}>
+          {buttonText}
+        </StyledHelpButton>
+      );
+    } else {
+      return null;
+    }
+  }
 
   return (
     <StyledHelpButton tabindex="0" onClick={handleOnClick}>
