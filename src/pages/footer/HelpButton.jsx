@@ -29,13 +29,12 @@ const HelpButton = () => {
   const setTriggerSubmitModal = useStore(getSetTriggerSubmitModal);
   const setTriggerConsentModal = useStore(getSetTriggerConsentModal);
 
-  let buttonText;
+  let buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
   if (currentPage === "landing") {
     buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelpLanding)) || "";
-  } else if (currentPage === "consent") {
+  }
+  if (currentPage === "consent") {
     buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelpConsent)) || "";
-  } else {
-    buttonText = ReactHtmlParser(decodeHTML(langObj.btnHelp)) || "";
   }
 
   const handleOnClick = () => {

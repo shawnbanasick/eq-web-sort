@@ -25,7 +25,7 @@
    <item id="shuffleCards">false</item>
    <item id="headerBarColor">#337ab7</item>
    <item id="devMode">false</item> 
-   <item id="showConsentPage">true</item> 
+   <item id="showConsentPage">false</item> 
    <item id="showConsentPageHelpModal">true</item> 
 
 
