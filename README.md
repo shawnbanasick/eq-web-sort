@@ -6,11 +6,11 @@
 
 # Download links are below.
 
-# [Version 7.0.0 Download link (the "no Google" version for use with Netlify web hosting --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v7.0.0/eq-web-sort-700-NO-Google.zip)
+# [Version 7.0.0 Download link (the "no Google" version for storing participant Q sort data on Netlify --- best for GDPR)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v7.0.0/eq-web-sort-700-NO-Google.zip)
 
 ## Netlify's GDPR [compliance statement](https://docs.netlify.com/platform/security-checklist/)
 
-# [Version 7.0.0 Download link (the Google version for use with Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v7.0.0/eq-web-sort-700-WITH-Google.zip)
+# [Version 7.0.0 Download link (the Google version for storing participant Q sort data on Firebase or Google Sheets)](https://github.com/shawnbanasick/eq-web-sort/releases/download/v7.0.0/eq-web-sort-700-WITH-Google.zip)
 
 # Use with EQ Web Sort Configurator [v7.0.0](https://github.com/shawnbanasick/eq_web_configurator)
 
