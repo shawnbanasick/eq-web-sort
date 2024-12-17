@@ -33,6 +33,7 @@
    
    <!-- PRESORT -->
    <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="showPresort">false</item>
    <item id="defaultFontColor">#2a2a2a</item>
    <item id="defaultFontSizePresort">26</item>
    <item id="greenCardColor">#ccffcc</item>

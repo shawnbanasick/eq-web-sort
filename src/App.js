@@ -240,13 +240,6 @@ function App() {
         <div className="App">
           <Router>
             <Switch>
-              {/*<Route exact path="/presort" component={MobilePresortPage} />
-
-               <Route exact path="/presort" component={PresortPage} />
-              <Route exact path="/sort" component={SortPage} />
-          <Route exact path="/postsort" component={PostsortPage} />
-          <Route exact path="/survey" component={SurveyPage} />
-          <Route exact path="/submit" component={SubmitPage} /> */}
               <Route exact path="/" component={LandingPage} />
               <Route component={NoPageFound} />
             </Switch>
