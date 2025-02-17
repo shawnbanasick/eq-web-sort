@@ -73,6 +73,10 @@ Survey Questions
 
 ### [visual guide (US letter size)](https://shawnbanasick.github.io/eq-web-sort/readme_assets/local_guide_letter.pdf)
 
+## Data Privacy Policy
+
+EQ Web Sort is an open-source template software for online Q sorting. As such, it does not collect or retain any Q sort user data. EQ Web Sort does not create web cookies or web tokens. There are no links to web analytics software built into EQ Web Sort. When connected to a database (Firebase, Google Sheets, or Netlify ) by the research designer, EQ Web Sort only transmits the results of the Q sorting process and the results of the optional questionnaire to that database.
+
 ## Citation
 
 `Banasick, S. (2024). EQ Web Sort (Version 6.0.0) [Computer software]. https://doi.org/10.5281/zenodo.8339818`
