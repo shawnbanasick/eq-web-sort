@@ -80,6 +80,7 @@ const StyledFooter = () => {
     logoHtml = `${usercode} - ${projectName} - ${dateTime}`;
   }
 
+  const showPresort = configObj.showPresort;
   const showPostsort = configObj.showPostsort;
   const showSurvey = configObj.showSurvey;
   const useImages = configObj.useImages;
@@ -89,6 +90,7 @@ const StyledFooter = () => {
     currentPage,
     additionalProgress,
     additionalProgressSort,
+    showPresort,
     showPostsort,
     showSurvey,
     additionalProgress,
@@ -168,6 +170,7 @@ const StyledFooter = () => {
 
   const nextPage = getNextPage(
     currentPage,
+    showPresort,
     showPostsort,
     showSurvey,
     showConsent
@@ -181,7 +184,7 @@ const StyledFooter = () => {
   if (showFooter === false) {
     return null;
   }
-  console.log(currentPage, showPostsort, showSurvey, nextPage, showFooter);
+  console.log(currentPage, showPresort, showPostsort, showSurvey, nextPage, showFooter);
 
   return (
     <StyledFooterDiv>
