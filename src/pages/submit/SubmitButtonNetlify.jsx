@@ -12,8 +12,7 @@ const getConfigObj = (state) => state.configObj;
 const getDisplaySubmitFallback = (state) => state.displaySubmitFallback;
 const getTransmittingData = (state) => state.transmittingData;
 const getSetTransmittingData = (state) => state.setTransmittingData;
-const getSetCheckInternetConnection = (state) =>
-  state.setCheckInternetConnection;
+const getSetCheckInternetConnection = (state) => state.setCheckInternetConnection;
 const getSetDisableRefreshCheck = (state) => state.setDisableRefreshCheck;
 const getSetTrigTranFailMod = (state) => state.setTriggerTransmissionFailModal;
 const getSetTrigTransOKModal = (state) => state.setTriggerTransmissionOKModal;
@@ -32,18 +31,16 @@ const SubmitResultsButton = (props) => {
   const setDisplayGoodbyeMessage = useStore(getSetDisplayGoodbyeMessage);
   const setTriggerTransmissionOKModal = useStore(getSetTrigTransOKModal);
 
-  const btnTransferText =
-    ReactHtmlParser(decodeHTML(langObj.btnTransfer)) || "";
+  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.btnTransfer)) || "";
 
   const encode = (data) => {
     return Object.keys(data)
-      .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      )
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
   };
 
   const handleClick = (e) => {
+    e.preventDefault();
     // create results object for transmission - * is a delimiter
     e.target.disabled = true;
 
@@ -67,9 +64,7 @@ const SubmitResultsButton = (props) => {
       .then((response) => {
         console.log("response.status: ", response.status);
         if (response.status !== 200) {
-          console.log(
-            "data error - there was an setup error - check your Netlify form setup"
-          );
+          console.log("data error - there was an setup error - check your Netlify form setup");
           setTriggerTransmissionFailModal(true);
           e.target.disabled = false;
           return;
@@ -137,9 +132,11 @@ const SubmitResultsButton = (props) => {
     <React.Fragment>
       <SubmitSuccessModal />
       <SubmitFailureModal />
-      <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
-        {btnTransferText}
-      </StyledButton>
+      <form name="Q-sorts" data-netlify="true" data-netlify-honeypot="bot-field">
+        <StyledButton tabindex="0" onClick={(e) => handleClick(e)}>
+          {btnTransferText}
+        </StyledButton>
+      </form>
       {transmittingData ? <TransmittingSpin /> : null}
     </React.Fragment>
   );
@@ -164,8 +161,7 @@ const StyledButton = styled.button`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 20px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.secondary : theme.primary};
+  background-color: ${({ theme, active }) => (active ? theme.secondary : theme.primary)};
 
   &:hover {
     background-color: ${({ theme }) => theme.secondary};
