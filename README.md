@@ -88,3 +88,7 @@ License: GPL-3
 ## Bugs
 
 If you discover a problem with the software or want to make a feature request, send an email to ken.q.tools@gmail.com.
+
+## Support
+
+This project is tested with BrowserStack
