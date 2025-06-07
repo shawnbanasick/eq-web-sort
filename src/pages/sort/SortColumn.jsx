@@ -32,8 +32,10 @@ const SortColumn = (props) => {
       <Droppable id="ColDroppable" droppableId={columnId} direction="vertical">
         {(provided, snapshot) => {
           if (snapshot.isDraggingOver) {
-            useStore.setState({ draggingOverColumnId: columnId });
-            useStore.setState({ currentSortValue: sortValue });
+            useStore.setState({
+              draggingOverColumnId: columnId,
+              currentSortValue: sortValue,
+            });
           }
           return (
             <DroppableColDiv
@@ -49,9 +51,7 @@ const SortColumn = (props) => {
               )}
             >
               {columnStatementsArray.map((item, index) => {
-                const statementHtml = ReactHtmlParser(
-                  `<div>${decodeHTML(item.statement)}</div>`
-                );
+                const statementHtml = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
                 return (
                   <Draggable
                     key={item.id}

@@ -1,5 +1,3 @@
-import get from "lodash/get";
-
 const processConfigXMLData = (dataObject) => {
   const data = dataObject.elements[0].elements;
   const configObj = {};
@@ -104,13 +102,9 @@ const processConfigXMLData = (dataObject) => {
 
         try {
           if (surveyData[j][0].attributes.maxlength === undefined) {
-            tempObj.limitLength = JSON.parse(
-              surveyData[j][0].attributes.limitLength
-            );
+            tempObj.limitLength = JSON.parse(surveyData[j][0].attributes.limitLength);
           } else {
-            let oldMaxLength = JSON.parse(
-              surveyData[j][0].attributes.maxlength
-            );
+            let oldMaxLength = JSON.parse(surveyData[j][0].attributes.maxlength);
             tempObj.limitLength = oldMaxLength;
           }
         } catch (error) {
@@ -406,8 +400,7 @@ const processConfigXMLData = (dataObject) => {
           tempObj.scale = surveyData[j][0].attributes.scale;
         } catch (error) {
           console.log(error);
-          tempObj.scale =
-            "Strongly Disagree;;;Disagree;;;Neutral;;;Agree;;;Strongly Agree";
+          tempObj.scale = "Strongly Disagree;;;Disagree;;;Neutral;;;Agree;;;Strongly Agree";
         }
 
         try {
@@ -517,10 +510,7 @@ const processConfigXMLData = (dataObject) => {
     let resultsSurvey = JSON.parse(localStorage.getItem("resultsSurvey"));
     if (!resultsSurvey) {
       localStorage.setItem("resultsSurvey", JSON.stringify(requiredAnswersObj));
-      localStorage.setItem(
-        "resultsSurveyArchive",
-        JSON.stringify(requiredAnswersObj)
-      );
+      localStorage.setItem("resultsSurveyArchive", JSON.stringify(requiredAnswersObj));
     }
 
     configObj.requiredAnswersObj = requiredAnswersObj;

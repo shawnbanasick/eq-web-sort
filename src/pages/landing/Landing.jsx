@@ -24,8 +24,7 @@ const getSetUrlUsercode = (state) => state.setUrlUsercode;
 const getDisplayLandingContent = (state) => state.displayLandingContent;
 const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getMapObject = (state) => state.mapObj;
-const getSetPostsortCommentCheckObj = (state) =>
-  state.setPostsortCommentCheckObj;
+const getSetPostsortCommentCheckObj = (state) => state.setPostsortCommentCheckObj;
 const getSetCardFontSizeSort = (state) => state.setCardFontSizeSort;
 const getSetCardFontSizePostsort = (state) => state.setCardFontSizePostsort;
 const getSetMinCardHeightSort = (state) => state.setMinCardHeightSort;
@@ -45,8 +44,7 @@ const LandingPage = () => {
   const setPostsortCommentCheckObj = useStore(getSetPostsortCommentCheckObj);
   const headerBarColor = configObj.headerBarColor;
   const landingHead = ReactHtmlParser(decodeHTML(langObj.landingHead)) || "";
-  const welcomeTextHtml =
-    ReactHtmlParser(decodeHTML(langObj.welcomeText)) || "";
+  const welcomeTextHtml = ReactHtmlParser(decodeHTML(langObj.welcomeText)) || "";
   const setCardFontSizeSort = useStore(getSetCardFontSizeSort);
   const setCardFontSizePostsort = useStore(getSetCardFontSizePostsort);
   const setMinCardHeightSort = useStore(getSetMinCardHeightSort);
@@ -75,10 +73,7 @@ const LandingPage = () => {
     surveyResults = JSON.parse(localStorage.getItem("resultsSurvey"));
   }
 
-  if (
-    (surveyResults && configObj.showSurvey === "true") ||
-    configObj.showSurvey === true
-  ) {
+  if ((surveyResults && configObj.showSurvey === "true") || configObj.showSurvey === true) {
     console.log(archive);
     console.log(configObj.requiredAnswersObj);
   }
@@ -119,10 +114,7 @@ const LandingPage = () => {
     localStorage.removeItem("allCommentsObj");
 
     if (configObj.requiredAnswersObj !== undefined) {
-      localStorage.setItem(
-        "resultsSurvey",
-        JSON.stringify(configObj.requiredAnswersObj)
-      );
+      localStorage.setItem("resultsSurvey", JSON.stringify(configObj.requiredAnswersObj));
 
       let keys = Object.keys(configObj.requiredAnswersObj);
       keys.forEach((key, index) => {
@@ -148,18 +140,12 @@ const LandingPage = () => {
     }
 
     // SORT font
-    if (
-      configObj.setDefaultFontSizeSort === "true" ||
-      configObj.setDefaultFontSizeSort === true
-    ) {
+    if (configObj.setDefaultFontSizeSort === "true" || configObj.setDefaultFontSizeSort === true) {
       localStorage.setItem("fontSizeSort", configObj.defaultFontSizeSort);
     }
 
     // SORT card height
-    if (
-      configObj.setMinCardHeightSort === "true" ||
-      configObj.setMinCardHeightSort === true
-    ) {
+    if (configObj.setMinCardHeightSort === "true" || configObj.setMinCardHeightSort === true) {
       localStorage.setItem("cardHeightSort", configObj.minCardHeightSort);
     }
 
@@ -169,10 +155,7 @@ const LandingPage = () => {
       configObj.setDefaultFontSizePostsort === true
     ) {
       setCardFontSizePostsort(configObj.defaultFontSizePostsort);
-      localStorage.setItem(
-        "fontSizePostsort",
-        configObj.defaultFontSizePostsort
-      );
+      localStorage.setItem("fontSizePostsort", configObj.defaultFontSizePostsort);
     }
 
     // POSTSORT card height
@@ -181,10 +164,7 @@ const LandingPage = () => {
       configObj.setMinCardHeightPostsort === true
     ) {
       setMinCardHeightPostsort(configObj.minCardHeightPostsort);
-      localStorage.setItem(
-        "cardHeightPostsort",
-        configObj.minCardHeightPostsort
-      );
+      localStorage.setItem("cardHeightPostsort", configObj.minCardHeightPostsort);
     }
 
     // set participant Id if set in URL
@@ -193,11 +173,7 @@ const LandingPage = () => {
     if (urlString === undefined || urlString === null) {
       let urlName = localStorage.getItem("urlUsercode");
       // if nothing in local storage, set to "not_set"
-      if (
-        urlName === null ||
-        urlName === undefined ||
-        urlName === "undefined"
-      ) {
+      if (urlName === null || urlName === undefined || urlName === "undefined") {
         console.log("no url usercode in storage");
         setUrlUsercode("not_set");
         localStorage.setItem("urlUsercode", "not_set");
@@ -290,10 +266,7 @@ const LandingPage = () => {
     if (initialScreenSetting === "anonymous") {
       displayLandingContent = true;
     }
-    if (
-      initialScreenSetting === "partId-access" &&
-      displayLandingContent === false
-    ) {
+    if (initialScreenSetting === "partId-access" && displayLandingContent === false) {
       displayLogInScreen = true;
     }
     if (initialScreenSetting === "partId" && displayLandingContent === false) {
@@ -342,9 +315,7 @@ const LandingPage = () => {
       <React.Fragment>
         {dataLoaded && (
           <React.Fragment>
-            <SortTitleBar background={headerBarColor}>
-              {landingHead}
-            </SortTitleBar>
+            <SortTitleBar background={headerBarColor}>{landingHead}</SortTitleBar>
             <LandingModal />
             <ContainerDiv>
               {isIeBrowser && <InternetExplorerWarning />}

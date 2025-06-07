@@ -22,13 +22,11 @@ const getSetIsSortingCards = (state) => state.setIsSortingCards;
 const getSetSortCompleted = (state) => state.setSortCompleted;
 const getSetProgScoreAddSort = (state) => state.setProgressScoreAdditionalSort;
 const getResults = (state) => state.results;
-const getSortFinModalHasBeenShown = (state) =>
-  state.sortFinishedModalHasBeenShown;
+const getSortFinModalHasBeenShown = (state) => state.sortFinishedModalHasBeenShown;
 const getSortGridResults = (state) => state.sortGridResults;
 const getSetIsSortingFinished = (state) => state.setIsSortingFinished;
 const getSetResults = (state) => state.setResults;
-const getSetTriggerSortingFinModal = (state) =>
-  state.setTriggerSortingFinishedModal;
+const getSetTriggerSortingFinModal = (state) => state.setTriggerSortingFinishedModal;
 const getSetSortGridResults = (state) => state.setSortGridResults;
 
 const SortGrid = (props) => {
@@ -58,9 +56,7 @@ const SortGrid = (props) => {
   const qSortPattern = [...mapObj.qSortPattern];
   const cardHeight = props.cardHeight;
 
-  let presortColumnStatements = JSON.parse(
-    localStorage.getItem("columnStatements")
-  );
+  let presortColumnStatements = JSON.parse(localStorage.getItem("columnStatements"));
 
   if (presortColumnStatements === null) {
     presortColumnStatements = [];
@@ -92,7 +88,7 @@ const SortGrid = (props) => {
   }
 
   // fire move and re-order functions
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     try {
       /*
     example result object:
@@ -110,9 +106,9 @@ const SortGrid = (props) => {
         sortGridResults
       );
 
+      // update global state
       setIsSortingFinished(manageDragResults.sortFinished);
       setResults(manageDragResults.results);
-
       setSortGridResults(manageDragResults.sortGridResults);
 
       // source and destination are objects
@@ -147,8 +143,7 @@ const SortGrid = (props) => {
         if (destination.droppableId === "statements") {
           destinationListArray = columnStatements.statementList;
         } else {
-          destinationListArray =
-            columnStatements.vCols[destination.droppableId];
+          destinationListArray = columnStatements.vCols[destination.droppableId];
         }
         const droppableSource = source;
         const droppableDestination = destination;
@@ -167,9 +162,7 @@ const SortGrid = (props) => {
 
         // global state updates
         setColumnStatements(columnStatements);
-        const hasShownSortFinModal = localStorage.getItem(
-          "hasShownSortFinModal"
-        );
+        const hasShownSortFinModal = localStorage.getItem("hasShownSortFinModal");
 
         if (columnStatements.statementList.length === 0) {
           setIsSortingCards(false);
@@ -240,9 +233,7 @@ const SortGrid = (props) => {
 
   const InnerList = React.memo((props) => {
     const items = props.statements.map((item, index) => {
-      const statementHtml = ReactHtmlParser(
-        `<div>${decodeHTML(item.statement)}</div>`
-      );
+      const statementHtml = ReactHtmlParser(`<div>${decodeHTML(item.statement)}</div>`);
       return (
         <Draggable
           key={item.id}
@@ -294,11 +285,7 @@ const SortGrid = (props) => {
         {columns}
         <SortFooterDiv id="SortFooterDiv">
           <CardSlider id="CardSlider">
-            <Droppable
-              id="Droppable"
-              droppableId="statements"
-              direction="horizontal"
-            >
+            <Droppable id="Droppable" droppableId="statements" direction="horizontal">
               {(provided, snapshot) => (
                 <HorizontalFeederDiv
                   id="HorizontalFeederDiv"

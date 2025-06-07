@@ -84,10 +84,7 @@ const convertObjectToResults = (
   }
   // remove trailing bar
   if (presortTraceText.charAt(presortTraceText.length - 1) === "|") {
-    presortTraceText = presortTraceText.substring(
-      0,
-      presortTraceText.length - 1
-    );
+    presortTraceText = presortTraceText.substring(0, presortTraceText.length - 1);
   }
 
   if (traceSorts === true || traceSorts === "true") {

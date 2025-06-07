@@ -77,10 +77,8 @@ const Sort = () => {
   const headerBarColor = configObj.headerBarColor;
   const fontColor = configObj.defaultFontColor;
 
-  const sortDisagreement =
-    ReactHtmlParser(decodeHTML(langObj.sortDisagreement)) || "";
-  const sortAgreement =
-    ReactHtmlParser(decodeHTML(langObj.sortAgreement)) || "";
+  const sortDisagreement = ReactHtmlParser(decodeHTML(langObj.sortDisagreement)) || "";
+  const sortAgreement = ReactHtmlParser(decodeHTML(langObj.sortAgreement)) || "";
   const condOfInst = ReactHtmlParser(decodeHTML(langObj.condOfInst)) || "";
 
   const qlength = qSortPattern.length;
@@ -111,8 +109,7 @@ const Sort = () => {
 
   // page resize
   useEffect(() => {
-    const columnWidth =
-      (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
+    const columnWidth = (dimensions.width - visibleWidthAdjust) / qSortPattern.length;
     setColumnWidth(columnWidth);
 
     const debouncedHandleResize = debounce(function handleResize() {
@@ -135,9 +132,7 @@ const Sort = () => {
      "conditions of instruction" section - so, I grab the height of titleBar 
      after render and reset the margin
     */
-    const sortGridMarginTop = +JSON.parse(
-      localStorage.getItem("sortGridMarginTop")
-    );
+    const sortGridMarginTop = +JSON.parse(localStorage.getItem("sortGridMarginTop"));
     let height = document.getElementById("sortTitleBarContainer").clientHeight;
 
     height = +JSON.stringify(height);
@@ -157,7 +152,9 @@ const Sort = () => {
     const setStateAsync = async () => {
       await setPresortNoReturn(true);
       localStorage.setItem("currentPage", "sort");
-      await setCurrentPage("sort");
+      setTimeout(() => {
+        setCurrentPage("sort");
+      }, 100);
     };
     setStateAsync();
     return () => {
@@ -175,9 +172,7 @@ const Sort = () => {
       <SortTitleBarContainer id="sortTitleBarContainer">
         <SortTitleBar id="sortTitleBar" background={headerBarColor}>
           <Disagree>{sortDisagreement}</Disagree>
-          <CondOfInst fontSize={configObj.condOfInstFontSize}>
-            {condOfInst}
-          </CondOfInst>
+          <CondOfInst fontSize={configObj.condOfInstFontSize}>{condOfInst}</CondOfInst>
           <Agree>{sortAgreement}</Agree>
         </SortTitleBar>
         <SortColGuides columnWidth={columnWidth} />

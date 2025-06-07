@@ -1,6 +1,7 @@
-const createPresortObject = () => {
+const createPresortObject = async () => {
   try {
-    const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort"));
+    const resultsPresort = await JSON.parse(localStorage.getItem("resultsPresort"));
+
     const presortObject = {};
     let numPos = resultsPresort?.npos;
     if (isNaN(numPos)) {

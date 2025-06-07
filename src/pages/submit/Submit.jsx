@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -26,8 +26,6 @@ const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getParticipantName = (state) => state.localParticipantName;
 const getLocalUsercode = (state) => state.localUsercode;
 
-let transmissionResults = {};
-
 const SubmitPage = () => {
   // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
@@ -40,186 +38,152 @@ const SubmitPage = () => {
   const localUsercode = useStore(getLocalUsercode);
   const urlUsercode = localStorage.getItem("urlUsercode") || "";
 
-  // PERSISTENT STATE
-  let resultsSurveyFromStorage = JSON.parse(
-    localStorage.getItem("resultsSurvey")
-  );
-  if (resultsSurveyFromStorage === undefined) {
-    resultsSurveyFromStorage = {};
-  }
-
-  useEffect(() => {
-    setCurrentPage("submit");
-    localStorage.setItem("currentPage", "submit");
-  }, [setCurrentPage]);
-
   // Language - grab translations
-  const transferTextAbove =
-    ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
-  const transferTextBelow =
-    ReactHtmlParser(decodeHTML(langObj.transferTextBelow)) || "";
-  const goodbyeMessage =
-    ReactHtmlParser(decodeHTML(langObj.goodbyeMessage)) || "";
+  const transferTextAbove = ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
+  const transferTextBelow = ReactHtmlParser(decodeHTML(langObj.transferTextBelow)) || "";
+  const goodbyeMessage = ReactHtmlParser(decodeHTML(langObj.goodbyeMessage)) || "";
   const linkedProjectFallbackMessage =
     ReactHtmlParser(decodeHTML(langObj.linkedProjectFallbackMessage)) || "";
-  const linkedProjectBtnMessage =
-    decodeHTML(langObj.linkedProjectBtnMessage) || "";
+  const linkedProjectBtnMessage = decodeHTML(langObj.linkedProjectBtnMessage) || "";
   const pageHeader = ReactHtmlParser(decodeHTML(langObj.transferHead)) || "";
-
-  // PERSISTENT STATE - read in results if they exist in local storage
-  const resultsPresort =
-    JSON.parse(localStorage.getItem("resultsPresort")) || {};
-  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
 
   // config options
   const headerBarColor = configObj.headerBarColor;
   const dateString = getCurrentDateTime();
 
-  // useEffect(() => {
-  // format results for transmission
-  try {
-    // finish setup and format results object
-    transmissionResults["projectName"] = configObj.studyTitle;
-    transmissionResults["partId"] =
-      localStorage.getItem("partId") || "no part ID";
-    transmissionResults["randomId"] = uuid().substring(0, 12);
-    transmissionResults["urlUsercode"] =
-      localStorage.getItem("urlUsercode") || "no usercode set";
-  } catch (error) {
-    console.log(error);
-    alert("1: " + error.message);
-  }
+  // State for async results
+  const [transmissionResults, setTransmissionResults] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  try {
-    transmissionResults["dateTime"] = dateString;
-    transmissionResults["timeLanding"] =
-      localStorage.getItem("timeOnlandingPage") || "00:00:00";
-    transmissionResults["timePresort"] =
-      localStorage.getItem("timeOnpresortPage") || "00:00:00";
-    transmissionResults["timeSort"] =
-      localStorage.getItem("timeOnsortPage") || "00:00:00";
-  } catch (error) {
-    console.log(error);
-    alert("2: " + error.message);
-  }
+  useEffect(() => {
+    setCurrentPage("submit");
+    localStorage.setItem("currentPage", "submit");
 
-  try {
-    if (configObj.setupTarget === "local") {
-      transmissionResults["partId"] = localParticipantName || "no part ID";
-      transmissionResults["usercode"] = localUsercode || "no usercode set";
-    }
+    const buildResults = async () => {
+      let results = {};
+      let resultsSurveyFromStorage = JSON.parse(localStorage.getItem("resultsSurvey"));
+      if (resultsSurveyFromStorage === undefined) {
+        resultsSurveyFromStorage = {};
+      }
+      const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort")) || {};
+      const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
 
-    if (configObj.showPostsort === true) {
-      transmissionResults["timePostsort"] =
-        localStorage.getItem("timeOnpostsortPage") || "00:00:00";
-    }
+      try {
+        results["projectName"] = configObj.studyTitle;
+        results["partId"] = localStorage.getItem("partId") || "no part ID";
+        results["randomId"] = uuid().substring(0, 12);
+        results["urlUsercode"] = localStorage.getItem("urlUsercode") || "no usercode set";
+      } catch (error) {
+        console.log(error);
+        alert("1: " + error.message);
+      }
 
-    if (configObj.showSurvey === true) {
-      transmissionResults["timeSurvey"] =
-        localStorage.getItem("timeOnsurveyPage") || "00:00:00";
-    }
-  } catch (error) {
-    console.log(error);
-    alert("3: " + error.message);
-  }
+      try {
+        results["dateTime"] = dateString;
+        results["timeLanding"] = localStorage.getItem("timeOnlandingPage") || "00:00:00";
+        results["timePresort"] = localStorage.getItem("timeOnpresortPage") || "00:00:00";
+        results["timeSort"] = localStorage.getItem("timeOnsortPage") || "00:00:00";
+      } catch (error) {
+        console.log(error);
+        alert("2: " + error.message);
+      }
 
-  try {
-    const presortObject = createPresortObject();
-    transmissionResults = {
-      ...transmissionResults,
-      ...presortObject,
-    };
-  } catch (error) {
-    console.log(error);
-    alert("4: " + error.message);
-  }
-
-  try {
-    // if project included POSTSORT, read in complete sorted results
-    if (configObj.showPostsort) {
-      const resultsPostsort =
-        JSON.parse(localStorage.getItem("resultsPostsort")) || {};
-      const newPostsortObject = calculatePostsortResults(
-        resultsPostsort,
-        mapObj,
-        configObj
-      );
-      const keys = Object.keys(newPostsortObject);
-      for (let i = 0; i < keys.length; i++) {
-        // skip unnecessary entries
-        let skipText = keys[i].substring(0, 9);
-        if (skipText === "textArea-") {
-          continue;
+      try {
+        if (configObj.setupTarget === "local") {
+          results["partId"] = localParticipantName || "no part ID";
+          results["usercode"] = localUsercode || "no usercode set";
         }
-        transmissionResults[keys[i]] = newPostsortObject[keys[i]];
+
+        if (configObj.showPostsort === true) {
+          results["timePostsort"] = localStorage.getItem("timeOnpostsortPage") || "00:00:00";
+        }
+
+        if (configObj.showSurvey === true) {
+          results["timeSurvey"] = localStorage.getItem("timeOnsurveyPage") || "00:00:00";
+        }
+      } catch (error) {
+        console.log(error);
+        alert("3: " + error.message);
       }
-    }
-  } catch (error) {
-    console.log(error);
-    alert("5: " + error.message);
-  }
 
-  // ** IF SURVEY, read in results
-  try {
-    if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
-      transmissionResults = {
-        ...transmissionResults,
-        ...resultsSurveyFromStorage,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    alert("6: " + error.message);
-  }
+      try {
+        const presortObject = await createPresortObject();
+        Object.assign(results, presortObject);
+      } catch (error) {
+        console.log(error);
+        alert("4: " + error.message);
+      }
 
-  let resultsSort;
-  try {
-    // *** SORT RESULTS to obtain consistent results object
-    if (
-      Object.keys(resultsSortObj).length !== 0 &&
-      resultsSortObj !== undefined &&
-      Object.keys(resultsPresort).length !== 0 &&
-      resultsPresort !== undefined
-    ) {
-      resultsSort = convertObjectToResults(
-        // all results
-        { ...resultsSortObj },
-        // presort results
-        { ...resultsPresort },
+      try {
+        if (configObj.showPostsort) {
+          const resultsPostsort = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
+          const newPostsortObject = calculatePostsortResults(resultsPostsort, mapObj, configObj);
+          const keys = Object.keys(newPostsortObject);
+          for (let i = 0; i < keys.length; i++) {
+            let skipText = keys[i].substring(0, 9);
+            if (skipText === "textArea-") {
+              continue;
+            }
+            results[keys[i]] = newPostsortObject[keys[i]];
+          }
+        }
+      } catch (error) {
+        console.log(error);
+        alert("5: " + error.message);
+      }
 
-        configObj.traceSorts
-      );
-    }
-  } catch (error) {
-    console.log(error);
-    alert("7: " + error.message);
-  }
+      try {
+        if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
+          Object.assign(results, resultsSurveyFromStorage);
+        }
+      } catch (error) {
+        console.log(error);
+        alert("6: " + error.message);
+      }
 
-  try {
-    transmissionResults = {
-      ...transmissionResults,
-      ...resultsSort,
+      let resultsSort;
+      try {
+        if (
+          Object.keys(resultsSortObj).length !== 0 &&
+          resultsSortObj !== undefined &&
+          Object.keys(resultsPresort).length !== 0 &&
+          resultsPresort !== undefined
+        ) {
+          resultsSort = await convertObjectToResults(
+            { ...resultsSortObj },
+            { ...resultsPresort },
+            configObj.traceSorts
+          );
+        }
+      } catch (error) {
+        console.log(error);
+        alert("7: " + error.message);
+      }
+
+      try {
+        Object.assign(results, resultsSort);
+      } catch (error) {
+        console.log(error);
+        alert("8: " + error.message);
+      }
+
+      try {
+        for (const property in results) {
+          if (results[property] === null || results[property] === undefined) {
+            results[property] = "no data";
+          }
+        }
+      } catch (error) {
+        console.log(error);
+        alert("9: " + error.message);
+      }
+
+      setTransmissionResults(results);
+      setLoading(false);
     };
-  } catch (error) {
-    console.log(error);
-    alert("8: " + error.message);
-  }
 
-  try {
-    // remove null values to prevent errors
-    for (const property in transmissionResults) {
-      if (
-        transmissionResults[property] === null ||
-        transmissionResults[property] === undefined
-      ) {
-        transmissionResults[property] = "no data";
-      }
-    }
-  } catch (error) {
-    console.log(error);
-    alert("9: " + error.message);
-  }
-  // }); // *** end useEffect
+    buildResults();
+  }, [setCurrentPage, configObj, mapObj, localParticipantName, localUsercode, dateString]);
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {
@@ -237,13 +201,23 @@ const SubmitPage = () => {
         </GoodbyeDiv>
       );
     } else {
-      // *** goodbye message for a normal firebase project ***
       return (
         <React.Fragment>
           <GoodbyeDiv>{goodbyeMessage}</GoodbyeDiv>
         </React.Fragment>
       );
     }
+  }
+
+  if (loading) {
+    return (
+      <React.Fragment>
+        <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
+        <ContainerDiv>
+          <ContentDiv>Loading...</ContentDiv>
+        </ContainerDiv>
+      </React.Fragment>
+    );
   }
 
   if (configObj.setupTarget === "local") {
@@ -262,10 +236,7 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
-          <SubmitButtonGS
-            results={transmissionResults}
-            api={configObj.steinApiUrl}
-          />
+          <SubmitButtonGS results={transmissionResults} api={configObj.steinApiUrl} />
 
           {displaySubmitFallback ? (
             <SubmitFallback results={transmissionResults} />
@@ -297,7 +268,6 @@ const SubmitPage = () => {
       </React.Fragment>
     );
   } else {
-    // *** default to FIREBASE ***
     return (
       <React.Fragment>
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
@@ -381,8 +351,7 @@ const StyledButton = styled.button`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 20px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.secondary : theme.primary};
+  background-color: ${({ theme, active }) => (active ? theme.secondary : theme.primary)};
 
   &:hover {
     background-color: ${({ theme }) => theme.secondary};

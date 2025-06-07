@@ -36,7 +36,7 @@ const getSetRequiredAnswersObj = (state) => state.setRequiredAnswersObj;
 const getSetDataLoaded = (state) => state.setDataLoaded;
 const getDisplayGoodbyeMessage = (state) => state.displayGoodbyeMessage;
 const getDisableRefreshCheck = (state) => state.disableRefreshCheck;
-const getCurrentPage = (state) => state.currentPage;
+// const getCurrentPage = (state) => state.currentPage;
 
 function App() {
   // STATE
@@ -48,15 +48,13 @@ function App() {
   const setMapObj = useSettingsStore(getSetMapObj);
   const setStatementsObj = useSettingsStore(getSetStatementsObj);
   const setColumnStatements = useSettingsStore(getSetColumnStatements);
-  const setResetColumnStatements = useSettingsStore(
-    getSetResetColumnStatements
-  );
+  const setResetColumnStatements = useSettingsStore(getSetResetColumnStatements);
   const setSurveyQuestionObjArray = useSettingsStore(getSetSurveyQuesObjArray);
   const setRequiredAnswersObj = useSettingsStore(getSetRequiredAnswersObj);
   const setDataLoaded = useStore(getSetDataLoaded);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
   const disableRefreshCheck = useStore(getDisableRefreshCheck);
-  const currentPage = useStore(getCurrentPage);
+  // const currentPage = useStore(getCurrentPage);
 
   useEffect(() => {
     const unloadCallback = (event) => {
@@ -143,9 +141,7 @@ function App() {
               item.element = (
                 // eslint-disable-next-line
                 <img
-                  src={`/settings/images/image${i + 1}.${
-                    info.configObj.imageFileType
-                  }`}
+                  src={`/settings/images/image${i + 1}.${info.configObj.imageFileType}`}
                   alt={`image${i + 1}`}
                   className="dragObject"
                 />
@@ -195,17 +191,11 @@ function App() {
         .then(function (response) {
           const options = { compact: true, ignoreComment: true, spaces: 4 };
           const statementsData = convert.xml2js(response.data, options);
-          const statementsObj = processStatementsXMLData(
-            statementsData,
-            shuffleCards,
-            vColsObj
-          );
+          const statementsObj = processStatementsXMLData(statementsData, shuffleCards, vColsObj);
           // add for images setup
           statementsObj.columnStatements.imagesList = imagesArray;
           setColumnStatements(statementsObj.columnStatements);
-          const resetColumnStatements = cloneDeep(
-            statementsObj.columnStatements
-          );
+          const resetColumnStatements = cloneDeep(statementsObj.columnStatements);
           setResetColumnStatements(resetColumnStatements);
           setStatementsObj(statementsObj);
         })
@@ -259,10 +249,7 @@ function App() {
     }
   }
 
-  if (
-    configObj.showConsentPage === true ||
-    configObj.showConsentPage === "true"
-  ) {
+  if (configObj.showConsentPage === true || configObj.showConsentPage === "true") {
     return (
       <div className="App">
         <Router>

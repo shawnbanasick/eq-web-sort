@@ -5,6 +5,8 @@ const calculateDragResults = (
   sortFinishedModalHasBeenShown,
   sortGridResults
 ) => {
+  console.log(JSON.stringify(sortGridResults, null, 2));
+
   try {
     let isSortingFinished = false;
     let triggerSortingFinishedModal = false;

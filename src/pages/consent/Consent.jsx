@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import calculateTimeOnPage from "../../utilities/calculateTimeOnPage";
 import decodeHTML from "../../utilities/decodeHTML";
@@ -19,7 +19,7 @@ const getSetDisplayNextButton = (state) => state.setDisplayNextButton;
 const getSetUrlUsercode = (state) => state.setUrlUsercode;
 
 const PostSort = () => {
-  const ElementRef = useRef(null);
+  // const ElementRef = useRef(null);
 
   // GLOBAL STATE
   const langObj = useSettingsStore(getLangObj);
@@ -54,11 +54,7 @@ const PostSort = () => {
     if (urlString === undefined || urlString === null) {
       let urlName = localStorage.getItem("urlUsercode");
       // if nothing in local storage, set to "not_set"
-      if (
-        urlName === null ||
-        urlName === undefined ||
-        urlName === "undefined"
-      ) {
+      if (urlName === null || urlName === undefined || urlName === "undefined") {
         console.log("no url usercode in storage");
         setUrlUsercode("not_set");
         localStorage.setItem("urlUsercode", "not_set");
@@ -81,8 +77,7 @@ const PostSort = () => {
     }
   }, [setUrlUsercode, configObj]);
 
-  const titleText =
-    ReactHtmlParser(decodeHTML(langObj.consentTitleBarText)) || "";
+  const titleText = ReactHtmlParser(decodeHTML(langObj.consentTitleBarText)) || "";
 
   return (
     <div>

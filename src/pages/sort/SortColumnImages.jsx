@@ -31,8 +31,10 @@ const SortColumnImages = (props) => {
       <Droppable id="ColDroppable" droppableId={columnId} direction="vertical">
         {(provided, snapshot) => {
           if (snapshot.isDraggingOver) {
-            useStore.setState({ draggingOverColumnId: columnId });
-            useStore.setState({ currentSortValue: sortValue });
+            useStore.setState({
+              draggingOverColumnId: columnId,
+              currentSortValue: sortValue,
+            });
           }
           return (
             <DroppableColDiv
@@ -61,9 +63,7 @@ const SortColumnImages = (props) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        onClick={(e) =>
-                          handleOpenImageModal(e, item.element.props.src)
-                        }
+                        onClick={(e) => handleOpenImageModal(e, item.element.props.src)}
                         style={getItemStyleImages(
                           snapshot.isDragging,
                           provided.draggableProps.style,
