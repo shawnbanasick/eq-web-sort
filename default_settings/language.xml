@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-   <language version="1.0" htmlParse="true">
+   <language version="7.0.0" htmlParse="true">
 ;
 
         <!-- MULTI-PURPOSE MODALS -->
@@ -10,12 +10,93 @@
         <!-- FOOTER -->
         <item id="fontSizeText">Text Size</item>
         <item id="cardHeightText">Card Height</item>
-        <item id="btnHelp">Help me!</item>
+        <item id="btnHelp">Help</item>
+        <item id="btnHelpLanding">Help</item>
+        <item id="btnHelpConsent">Contact Information</item>
+
+
         <item id="btnNext">Continue</item>
+        <item id="btnNextLanding">Start</item>
+        <item id="btnNextConsent">Agree</item>
 
         <!-- LANDING SCREEN -->
-        <item id="landingHead">University Research Project</item>
-        <item id="welcomeText">{{{h2}}}EQ Web Sort Demo Project - iPad Use in the Classroom.{{{/h2}}}{{{br/}}}{{{br}}}{{{p}}}Thank you for helping with this research project{{{/p}}}</item>
+        <item id="landingHead">Supervisee Responsiveness-2</item>
+        <item id="welcomeText">{{{!DOCTYPE html}}}
+{{{html lang=&quot;en&quot;}}}
+{{{head}}}
+    {{{meta charset=&quot;UTF-8&quot;}}}
+    {{{meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;}}}
+    {{{title}}}Sorting Activity Instructions{{{/title}}}
+    {{{style}}}
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        ul {
+            font-size: 16px;
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .highlight {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+    {{{/style}}}
+{{{/head}}}
+{{{body}}}
+    {{{h2}}}This is a sorting activity about your views on the factors that affected your responsiveness to university-based supervision provided by a doctoral supervisor.{{{/h2}}}
+    {{{div class=&quot;instructions&quot;}}}
+        {{{div class=&quot;section&quot;}}}
+            {{{p}}}Supervisee responsiveness is defined as how supervisees engage with and react to feedback and guidance during supervision.{{{/p}}}
+        {{{/div}}}
+        {{{div class=&quot;section&quot;}}}
+            {{{p}}}Please see a list of statements that were created during the first step of the study. I request you to sort (i.e., drag and drop) each statement into the grid according to how significant you believe each statement is in defining the factors that impacted your responsiveness toward {{{span class=&quot;highlight&quot;}}}UNIVERSITY-BASED INDIVIDUAL SUPERVISION EXPERIENCE{{{/span}}} with your {{{span class=&quot;highlight&quot;}}}DOCTORAL SUPERVISOR{{{/span}}}.{{{/p}}}
+        {{{/div}}}
+        {{{div class=&quot;section&quot;}}}
+            {{{p}}}Please consider the supervisory process and the supervisor you took into account in the first step of the study, or (if new to the study) the supervisory process with a particular doctoral supervisor that has completed.{{{/p}}}
+        {{{/div}}}
+        {{{div class=&quot;section&quot;}}}
+            {{{p}}}There are two parts in this sorting activity:{{{/p}}}
+            {{{ul}}}
+                {{{li}}}On the next screen, you will be asked to pre-sort the statements into three piles:
+                    {{{ul}}}
+                        {{{li}}}A pile of statements you generally agree with,{{{/li}}}
+                        {{{li}}}A pile of statements you generally disagree with,{{{/li}}}
+                        {{{li}}}A pile for the rest.{{{/li}}}
+                    {{{/ul}}}
+                {{{/li}}}
+                {{{li}}}Then, you will be asked to sort each of your three piles into a sorting grid. From left to right, the grid ranges from {{{span class=&quot;highlight&quot;}}}least significant{{{/span}}} to {{{span class=&quot;highlight&quot;}}}most significant{{{/span}}}.{{{/li}}}
+            {{{/ul}}}
+        {{{/div}}}
+        {{{div class=&quot;section&quot;}}}
+            {{{p}}}You can make changes as often as you wish. Thank you for participating in this study.{{{/p}}}
+        {{{/div}}}
+    {{{/div}}}
+{{{/body}}}
+{{{/html}}}
+</item>
 
         <!-- LANDING -> ACCESS CONTROL - only displayed if access is restricted -->
         <item id="accessCodeText">Access Code</item>
@@ -25,11 +106,9 @@
         <item id="accessCodeWarning">Access code invalid</item>
         <item id="partIdWarning">Invalid name or ID</item>
         <item id="loginHeaderText">Sign In</item>
-        <item id="loginWelcomeText">{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process. </item>
+        <item id="loginWelcomeText">{{{center}}}{{{h3}}}Welcome!{{{/h3}}}{{{/center}}}{{{br}}} Thank you for participating in this Q methodology research project. {{{br}}}Please {{{strong}}}sign in{{{/strong}}} using the form below to begin the process.</item>
         <item id="landingHelpModalHead">Welcome!</item>
-        <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please sign in to begin the process. After you submit your participant ID and/or the project access code, the instructions for the survey will appear. Please read them carefully, then click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.{{{br}}}{{{br}}} {{{center}}}{{{iframe width=&quot;640&quot; height=&quot;360&quot;
-    src=&quot;https://www.youtube.com/embed/723gJhElR7Q&quot;}}}
-    {{{/iframe}}}{{{/center}}}</item>
+        <item id="landingHelpModalText">Thank you for participating in this University Research Project. Please click the &quot;{{{b}}}Continue{{{/b}}}&quot; button at the bottom right side of the screen to go to the next step.</item>
 
         <!-- LOCAL DATA COLLECTION -->  
         <item id="localHeader">Offline Q-sort Control Panel</item>
@@ -40,7 +119,7 @@
         <item id="localDownloadButtonText">Save Q-sort Data to Disk</item>
         <item id="storedQsortsHeaderText">Stored Q-sorts</item>
         <item id="localDeleteModalHead">Delete Data Stored in Browser?</item>
-        <item id="localDeleteModalText">This will delete the particpant Q-sort data that is currently stored in the browser. You would usually only do this when you are starting a new project.{{{br}}}{{{br}}}{{{b}}}CAUTION - Deleted data cannot be recovered.{{{/b}}} {{{br}}}{{{br}}} {{{center}}}{{{/center}}}</item>
+        <item id="localDeleteModalText">This will delete the particpant Q-sort data that is currently stored in the browser. You would usually only do this when you are starting a new project.{{{br/}}}{{{br/}}}{{{b}}}CAUTION - Deleted data cannot be recovered.{{{/b}}} {{{br/}}}{{{br/}}} {{{center}}}{{{/center}}}</item>
         <item id="localParticipantsText">Participants</item>
         <item id="localSaveBeforeDeleteModalHeader">Delete Disabled</item>
         <item id="localSaveBeforeDeleteModalText">Save Q sort Data to Disk before deleting.</item>
@@ -49,27 +128,36 @@
         <item id="localSubmitSuccessModalText">Participant Q sort data have been succesfully saved to browser memory</item>
         <item id="returnToLocalPanelButtonText">Return to Control Panel</item>
 
-        <!-- PRESORT: rough sorting into three piles (leave blank to skip popup)-->
-        <item id="titleBarText">Preliminary Sorting</item>
-        <item id="presortAgreement">Agree (3)</item>
-        <item id="presortStatements">Statements</item>
-        <item id="presortNeutral">No Strong Feelings (2)</item>
-        <item id="presortDisagreement">Disagree (1)</item>
-        <item id="presortModalHead">Step 1 of 4</item>
-        <item id="presortModalText">Read the folowing statements carefully and split them up into three piles: a pile for statements you tend to disagree with, a pile for cards you tend to agree with, and a pile for the rest. Changes can be made later.{{{br}}}{{{br}}}If you want to read this instruction a second time, click the help-button at the bottom left corner.</item>
-        <item id="presortPreventNavModalHead">Navigation Disabled</item>
-        <item id="presortPreventNavModalText">Please finish the preliminary sorting before going to the next step.</item>
-        <item id="presortFinishedModalHead">Preliminary Sorting Complete</item>
-        <item id="presortFinishedModalText">You have completed this step. Please click the &quot;Continue&quot; button in the bottom right side of the page to go to the next step.</item>
+        <!-- CONSENT: get permission from participants -->
+        <item id="consentTitleBarText">Research Consent</item>
+        <item id="consentText">Dear participant, thank you for participating the first round of research on &quot;Supervisee Responsiveness&quot;. You are invited to participate in the second round of the research study conducted by Zubeyde Akpakir at Old Dominion University. Before you decide to participate, it is important that you understand why the research is being conducted and what it will involve. Please take the time to read the following information carefully. Feel free to contact the research team with any questions you may have. The purpose of this study is to understand the factors that affect supervisee responsiveness when supervision is provided by doctoral supervisors. If you agree to participate this round of the study, you will be asked to sort the statements regarding the factor affect supervisee responsiveness and then reflect on the sorting.  The study will take approximately 30 minutes. While there may not be direct benefits to you for participating, the information gathered from this study may help improve educational methods. All information collected in this study will be kept strictly confidential. Data will be stored securely and only the research team will have access to it. Your identity will not be disclosed in any reports or publications resulting from this study. Your participation in this study is entirely voluntary. You are free to decline to participate, or to withdraw at any time, without penalty or loss of benefits to which you are otherwise entitled. If you decide to withdraw, close the webpage and any data collected up to that point will be deleted.By clicking on the &quot;Agree&quot; button on the bottom of this page, you are indicating that you have read and understood the information provided, and that you agree to participate in this study. If you have any questions about this study, please contact Zubeyde Akpakir at zakpa001@odu.edu</item>
+        <item id="consentHelpModalHead">Contact Information</item>
+        <item id="consentHelpModalText">Thank you for participating in this dissertation research project. You can contact Zubeyde Akpakir  at zakpa001@odu.edu or the dissertation chair of this study Dr. Gulsah Kemer at gkemer@odu.edu . </item>
+
+
+        <!-- PRESORT: rough sorting into three piles -->
+        <item id="titleBarText"></item>
+        <item id="presortAgreement"></item>
+        <item id="presortStatements"></item>
+        <item id="presortNeutral"></item>
+        <item id="presortDisagreement"></item>
+        <item id="presortModalHead"></item>
+          <item id="presortModalText"></item>
+        <item id="presortPreventNavModalHead"></item>
+        <item id="presortPreventNavModalText"></item>
+        <item id="presortFinishedModalHead"></item>
+        <item id="presortFinishedModalText"></item>
+        <item id="presortOnPageInstructions"></item>
+        <item id="presortImageSortInstructions"></item>
 
         <!-- SORT: sorting (leave blank to skip popup) -->
         <item id="sortHelpModalHead">Step 2 of 4</item>
-        <item id="sortHelpModalText">In this step, please sort the statements in a grid pattern. Statements you most agree with should be placed on the far right side of the grid, and statements which you most disagree with should be placed on the far left side. Please watch the video for more information on how to sort the cards in this step.</item>
+        <item id="sortHelpModalText">In this step, please click and drag the statement cards to the appropriate column based on your perspective on the factors affect your responsiveness to university-based supervision provided by doctoral supervisor. {{{br/}}}{{{br/}}}{{{center}}}{{{iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/iRxC9Vv3dLo?rel=0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen}}}{{{/iframe}}}{{{/center}}}</item>
         <item id="sortAgreement">Agree</item>
         <item id="sortDisagreement">Disagree</item>
-        <item id="condOfInst">Sort the cards according to your experience with the iPads this semester</item>
+        <item id="condOfInst">Let’s sort the statements further: For your responsiveness to the doctoral supervisor you considered in the first round, please rate the statement’s priority/importance by clicking and dragging it on a scale from -4 (Disagree) to +4 (Agree).</item>
         <item id="sortingCompleteModalHead">Sorting Complete</item>
-        <item id="sortingCompleteModalText">You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br}}}{{{br}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.</item>
+        <item id="sortingCompleteModalText">You have completed the initial sorting. Please take a moment to confirm your placement of the cards.{{{br/}}}{{{br/}}}When you are satisfied with their placement, please click on the {{{b}}}blue &quot;Continue&quot; button{{{/b}}} at the bottom right-side of your screen to go to the next step.</item>
         <item id="sortPreventNavModalHead">Navigation Disabled</item>
         <item id="sortPreventNavModalText">Please finish the grid sorting before going to the next step.</item>
         <item id="sortOverloadedColumnModalHead">Navigation Disabled</item>
@@ -82,35 +170,43 @@
         <item id="postsortAgreement">Placed on Agree</item>
         <item id="postsortDisagreement">Placed on Disagree</item>
         <item id="postsortModalHead">Step 3 of 4</item>
-        <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.</item>
+        <item id="postsortModalText">You can use the buttons at the bottom of the page to change the font size or card height.{{{br/}}}{{{br/}}}{{{center}}}{{{iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/EFNlSiaEVVg?rel=0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen}}}{{{/iframe}}}{{{/h3}}}{{{/center}}}</item>
+        <item id="postsortPreventNavModalHead">Navigation Disabled</item>
+        <item id="postsortPreventNavModalText">Please add comments to all of the cards before going to the next step.</item>
+        <item id="postsortBackButtonText">Go Back</item>
 
         <!-- SURVEY: Additional questions, only displayed if showStep4 == true -->
         <item id="surveyHeader">Post-Sort Questionnaire</item>
         <item id="surveyModalHead">Step 4 of 4</item>
-        <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an &quot;*&quot; in their title are required.</item>
+        <item id="surveyModalText">Finally, please answer the following questions regarding your background. The questions marked with an &quot;*&quot; in their title are required.{{{br/}}}{{{br/}}}{{{center}}}{{{iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/68MHzgLn1zg?rel=0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen}}}{{{/iframe}}}{{{/center}}}</item>
         <item id="surveyPreventNavModalHead">Navigation Disabled</item>
         <item id="surveyPreventNavModalText">Please answer the required questions (outlined in yellow) before going to the next step.</item>
        
         <!-- SUBMIT -->
         <item id="btnTransfer">Submit Data</item>
-        <item id="btnTransferEmail">Open Email Client and Send Results</item>
-
         <item id="transferHead">Final Step</item>
-        <item id="transferTextAbove">{{{center}}}{{{h1}}}Ready to Submit{{{/h1}}}{{{/center}}}{{{br}}}{{{br}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}</item>
-        <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br}}}please wait a few minutes and click the submit button again.</item>
-        <item id="transferOkModalHeader">Success - The data have been sent to the server</item>   
-        <item id="transferOkModalText">Thank you for using EQ Web Sort!{{{br}}}{{{br}}}You can now close your browser tab.</item>
+        <item id="transferTextAbove">{{{h1}}}Ready to Submit{{{/h1}}}{{{br/}}}{{{br/}}} {{{h2}}}Please click the &quot;Submit Data&quot; button to transmit your results.{{{/h2}}}</item>
+        <item id="transferTextBelow">If the submission confirmation message does not appear, {{{br/}}}please wait a few minutes and click the submit button again.</item>
+        <item id="transferOkModalHeader">Success - The data have been sent to the server.</item>   
+        <item id="transferOkModalText">Thank you for using EQ Web Sort!{{{br/}}}{{{br/}}}You can now close your browser tab.</item>
         <item id="transferFailModalHeader">Connection to server failed</item>   
         <item id="transferFailModalText">Please try again in a few moments.</item>   
         <item id="fallbackMessage">Data transmission has failed. Please download the results and email them as an attachment to ken.q.tools@gmail.com. Thank you!</item>   
         <item id="btnDownload">Download</item>   
-        <item id="goodbyeMessage">Thank You! {{{br /}}}You can now close the browser tab</item>   
+        <item id="goodbyeMessage">{{{div}}}Thank You!{{{/div}}} {{{br/}}}{{{div}}}You can now close the browser tab{{{/div}}}</item>   
+
+        <!-- EMAIL -->
+        <item id="btnTransferEmail">Open Email Client and Send Results</item>
         <item id="clipboardResults">Copy Results to Clipboard</item>  
         <item id="clipboardEmail">Copy Email Address to Clipboard</item>  
         <item id="copiedText">Copied!</item>  
-        <item id="copyTextError">Error: Please try again</item>  
-        <item id="defaultEmailClientFail"> Your default email client should have automatically opened with the results in the email body. If it didn't, please use the buttons below to copy and paste the information into your email client.</item>  
+        <item id="copyTextError">Error: Please try again.</item>  
+        <item id="defaultEmailClientFail">Your default email client should have automatically opened with the results in the email body. If it didn&apos;t, please use the buttons below to copy and paste your information into an email.</item>   
+        <item id="emailMessage1">You don&apos;t have to add anything to this email. Please just click the SEND button.</item>
 
+        <!-- LINKING -->
+        <item id="linkedProjectFallbackMessage">Please click the button to begin the next Q sort</item>   
+         <item id="linkedProjectBtnMessage">Begin Next Q sort</item>   
 
 
    </language>
