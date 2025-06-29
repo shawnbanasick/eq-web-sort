@@ -20,9 +20,8 @@ const ReturnToLocalPanelButton = (props) => {
   const resetColumnStatements = useSettingsStore(getResetColumnStatements);
   const newColumnStatements = cloneDeep(resetColumnStatements);
 
-  const btnTransferText =
-    ReactHtmlParser(decodeHTML(langObj.returnToLocalPanelButtonText)) || "";
-
+  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.returnToLocalPanelButtonText)) || "";
+  console.log(btnTransferText);
   const {
     history,
     onClick,
@@ -68,8 +67,7 @@ const StyledButton = styled.button`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 20px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.secondary : theme.primary};
+  background-color: ${({ theme, active }) => (active ? theme.secondary : theme.primary)};
 
   &:hover {
     background-color: ${({ theme }) => theme.secondary};

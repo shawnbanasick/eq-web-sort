@@ -5,7 +5,7 @@ const calculateDragResults = (
   sortFinishedModalHasBeenShown,
   sortGridResults
 ) => {
-  console.log(JSON.stringify(sortGridResults, null, 2));
+  // console.log(JSON.stringify(sortGridResults, null, 2));
 
   try {
     let isSortingFinished = false;
@@ -37,7 +37,7 @@ const calculateDragResults = (
             catchNan = true;
           }
           resultsText += `${newValue}|`;
-          console.log(resultsText);
+          // console.log(resultsText);
         } // loop end
 
         if (catchNan === true) {
@@ -52,7 +52,7 @@ const calculateDragResults = (
             resultsText = resultsText.substring(0, resultsText.length - 1);
           }
 
-          console.log(resultsText);
+          // console.log(resultsText);
 
           results.sort = resultsText;
 

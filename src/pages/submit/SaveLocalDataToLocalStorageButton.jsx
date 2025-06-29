@@ -12,8 +12,7 @@ import useStore from "../../globalState/useStore";
 const getSetLocalStoredQsorts = (state) => state.setLocalStoredQsorts;
 const getLocalStoredQsorts = (state) => state.localStoredQsorts;
 const getSetHasDownloadedQsorts = (state) => state.setHasDownloadedQsorts;
-const getSetTriggerLocalSubmitSuccessModal = (state) =>
-  state.setTriggerLocalSubmitSuccessModal;
+const getSetTriggerLocalSubmitSuccessModal = (state) => state.setTriggerLocalSubmitSuccessModal;
 const getSurveyQuestionObjArray = (state) => state.surveyQuestionObjArray;
 
 const getLangObj = (state) => state.langObj;
@@ -23,18 +22,14 @@ const SubmitLocalResultsButton = (props) => {
 
   // STATE
   const langObj = useSettingsStore(getLangObj);
-
   const setLocalStoredQsorts = useLocalPersist(getSetLocalStoredQsorts);
   let localStoredQsorts = useLocalPersist(getLocalStoredQsorts);
   const setHasDownloadedQsorts = useLocalPersist(getSetHasDownloadedQsorts);
-  const setTriggerLocalSubmitSuccessModal = useStore(
-    getSetTriggerLocalSubmitSuccessModal
-  );
-  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray);
+  const setTriggerLocalSubmitSuccessModal = useStore(getSetTriggerLocalSubmitSuccessModal);
+  const surveyQuestionObjArray = useSettingsStore(getSurveyQuestionObjArray) || [];
   console.log("surveyQuestionObjArray", surveyQuestionObjArray);
 
-  const btnTransferText =
-    ReactHtmlParser(decodeHTML(langObj.localSaveDataButton)) || "";
+  const btnTransferText = ReactHtmlParser(decodeHTML(langObj.localSaveDataButton)) || "";
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -82,9 +77,11 @@ const SubmitLocalResultsButton = (props) => {
       localStorage.removeItem("localParticipantName");
       localStorage.removeItem("localUsercode");
 
-      surveyQuestionObjArray.forEach((question) => {
-        localStorage.removeItem(question.id);
-      });
+      if (surveyQuestionObjArray.length > 0) {
+        surveyQuestionObjArray.forEach((question) => {
+          localStorage.removeItem(question.id);
+        });
+      }
 
       setTriggerLocalSubmitSuccessModal(true);
       setHasDownloadedQsorts(false);
@@ -122,8 +119,7 @@ const StyledButton = styled.button`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 20px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.secondary : theme.primary};
+  background-color: ${({ theme, active }) => (active ? theme.secondary : theme.primary)};
 
   &:hover {
     background-color: ${({ theme }) => theme.secondary};

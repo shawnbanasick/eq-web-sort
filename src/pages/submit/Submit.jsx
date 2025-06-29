@@ -34,9 +34,8 @@ const SubmitPage = () => {
   const setCurrentPage = useStore(getSetCurrentPage);
   const displaySubmitFallback = useStore(getDisplaySubmitFallback);
   const displayGoodbyeMessage = useStore(getDisplayGoodbyeMessage);
-  const localParticipantName = useStore(getParticipantName);
-  const localUsercode = useStore(getLocalUsercode);
-  const urlUsercode = localStorage.getItem("urlUsercode") || "";
+  const localParticipantName = useStore(getParticipantName) || "";
+  const localUsercode = useStore(getLocalUsercode) || "";
 
   // Language - grab translations
   const transferTextAbove = ReactHtmlParser(decodeHTML(langObj.transferTextAbove)) || "";
@@ -52,138 +51,144 @@ const SubmitPage = () => {
   const dateString = getCurrentDateTime();
 
   // State for async results
-  const [transmissionResults, setTransmissionResults] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [finalResults, setfinalResults] = useState({});
+  // const [loading, setLoading] = useState(false);
+  const loading = false;
+
+  // results object key values
+  const projectName = configObj?.studyTitle || "";
+  const partId = localStorage.getItem("partId") || "no part ID";
+  const randomId = uuid().substring(0, 12);
+  const urlUsercode = localStorage.getItem("urlUsercode") || "no usercode set";
+  const timeLanding = localStorage.getItem("timeOnlandingPage") || "00:00:00";
+  const timePresort = localStorage.getItem("timeOnpresortPage") || "00:00:00";
+  const timeSort = localStorage.getItem("timeOnsortPage") || "00:00:00";
+  const timePostsort = localStorage.getItem("timeOnpostsortPage") || "00:00:00";
+  const timeSurvey = localStorage.getItem("timeOnsurveyPage") || "00:00:00";
+  const presortObject = createPresortObject();
+  const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort")) || {};
+  const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
+  const resultsSurveyFromStorage = JSON.parse(localStorage.getItem("resultsSurvey")) || {};
+  let resultsPostsort = {};
+  let newPostsortObject = {};
+  if (configObj.showPostsort) {
+    resultsPostsort = JSON.parse(localStorage.getItem("resultsPostsort"));
+    newPostsortObject = calculatePostsortResults(resultsPostsort, mapObj, configObj);
+  }
+  let resultsSort;
+  try {
+    if (
+      Object.keys(resultsSortObj).length !== 0 &&
+      resultsSortObj !== undefined &&
+      Object.keys(resultsPresort).length !== 0 &&
+      resultsPresort !== undefined
+    ) {
+      resultsSort = convertObjectToResults(
+        { ...resultsSortObj },
+        { ...resultsPresort },
+        configObj.traceSorts
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    alert("7: " + error.message);
+  }
 
   useEffect(() => {
     setCurrentPage("submit");
     localStorage.setItem("currentPage", "submit");
+  }, [setCurrentPage]);
 
-    const buildResults = async () => {
-      let results = {};
-      let resultsSurveyFromStorage = JSON.parse(localStorage.getItem("resultsSurvey"));
-      if (resultsSurveyFromStorage === undefined) {
-        resultsSurveyFromStorage = {};
-      }
-      const resultsPresort = JSON.parse(localStorage.getItem("resultsPresort")) || {};
-      const resultsSortObj = JSON.parse(localStorage.getItem("sortColumns")) || {};
+  // *** OLD BUILDER ***
+  let results = {};
 
-      try {
-        results["projectName"] = configObj.studyTitle;
-        results["partId"] = localStorage.getItem("partId") || "no part ID";
-        results["randomId"] = uuid().substring(0, 12);
-        results["urlUsercode"] = localStorage.getItem("urlUsercode") || "no usercode set";
-      } catch (error) {
-        console.log(error);
-        alert("1: " + error.message);
-      }
+  try {
+    results["projectName"] = projectName;
+    results["partId"] = partId;
+    results["randomId"] = randomId;
+    results["urlUsercode"] = urlUsercode;
+  } catch (error) {
+    console.log(error);
+    alert("1: " + error.message);
+  }
 
-      try {
-        results["dateTime"] = dateString;
-        results["timeLanding"] = localStorage.getItem("timeOnlandingPage") || "00:00:00";
-        results["timePresort"] = localStorage.getItem("timeOnpresortPage") || "00:00:00";
-        results["timeSort"] = localStorage.getItem("timeOnsortPage") || "00:00:00";
-      } catch (error) {
-        console.log(error);
-        alert("2: " + error.message);
-      }
+  try {
+    results["dateTime"] = dateString;
+    results["timeLanding"] = timeLanding;
+    results["timePresort"] = timePresort;
+    results["timeSort"] = timeSort;
+  } catch (error) {
+    console.log(error);
+    alert("2: " + error.message);
+  }
 
-      try {
-        if (configObj.setupTarget === "local") {
-          results["partId"] = localParticipantName || "no part ID";
-          results["usercode"] = localUsercode || "no usercode set";
+  try {
+    if (configObj.setupTarget === "local") {
+      results["partId"] = localParticipantName || "no part ID";
+      results["usercode"] = localUsercode || "no usercode set";
+    }
+
+    if (configObj.showPostsort === true) {
+      results["timePostsort"] = timePostsort;
+    }
+
+    if (configObj.showSurvey === true) {
+      results["timeSurvey"] = timeSurvey;
+    }
+  } catch (error) {
+    console.log(error);
+    alert("3: " + error.message);
+  }
+
+  try {
+    Object.assign(results, presortObject);
+  } catch (error) {
+    console.log(error);
+    alert("4: " + error.message);
+  }
+
+  try {
+    if (configObj.showPostsort) {
+      const keys = Object.keys(newPostsortObject);
+      for (let i = 0; i < keys.length; i++) {
+        let skipText = keys[i].substring(0, 9);
+        if (skipText === "textArea-") {
+          continue;
         }
-
-        if (configObj.showPostsort === true) {
-          results["timePostsort"] = localStorage.getItem("timeOnpostsortPage") || "00:00:00";
-        }
-
-        if (configObj.showSurvey === true) {
-          results["timeSurvey"] = localStorage.getItem("timeOnsurveyPage") || "00:00:00";
-        }
-      } catch (error) {
-        console.log(error);
-        alert("3: " + error.message);
+        results[keys[i]] = newPostsortObject[keys[i]];
       }
+    }
+  } catch (error) {
+    console.log(error);
+    alert("5: " + error.message);
+  }
 
-      try {
-        const presortObject = await createPresortObject();
-        Object.assign(results, presortObject);
-      } catch (error) {
-        console.log(error);
-        alert("4: " + error.message);
+  try {
+    if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
+      Object.assign(results, resultsSurveyFromStorage);
+    }
+  } catch (error) {
+    console.log(error);
+    alert("6: " + error.message);
+  }
+
+  try {
+    Object.assign(results, resultsSort);
+  } catch (error) {
+    console.log(error);
+    alert("8: " + error.message);
+  }
+
+  try {
+    for (const property in results) {
+      if (results[property] === null || results[property] === undefined) {
+        results[property] = "no data";
       }
-
-      try {
-        if (configObj.showPostsort) {
-          const resultsPostsort = JSON.parse(localStorage.getItem("resultsPostsort")) || {};
-          const newPostsortObject = calculatePostsortResults(resultsPostsort, mapObj, configObj);
-          const keys = Object.keys(newPostsortObject);
-          for (let i = 0; i < keys.length; i++) {
-            let skipText = keys[i].substring(0, 9);
-            if (skipText === "textArea-") {
-              continue;
-            }
-            results[keys[i]] = newPostsortObject[keys[i]];
-          }
-        }
-      } catch (error) {
-        console.log(error);
-        alert("5: " + error.message);
-      }
-
-      try {
-        if (configObj.showSurvey && resultsSurveyFromStorage !== undefined) {
-          Object.assign(results, resultsSurveyFromStorage);
-        }
-      } catch (error) {
-        console.log(error);
-        alert("6: " + error.message);
-      }
-
-      let resultsSort;
-      try {
-        if (
-          Object.keys(resultsSortObj).length !== 0 &&
-          resultsSortObj !== undefined &&
-          Object.keys(resultsPresort).length !== 0 &&
-          resultsPresort !== undefined
-        ) {
-          resultsSort = await convertObjectToResults(
-            { ...resultsSortObj },
-            { ...resultsPresort },
-            configObj.traceSorts
-          );
-        }
-      } catch (error) {
-        console.log(error);
-        alert("7: " + error.message);
-      }
-
-      try {
-        Object.assign(results, resultsSort);
-      } catch (error) {
-        console.log(error);
-        alert("8: " + error.message);
-      }
-
-      try {
-        for (const property in results) {
-          if (results[property] === null || results[property] === undefined) {
-            results[property] = "no data";
-          }
-        }
-      } catch (error) {
-        console.log(error);
-        alert("9: " + error.message);
-      }
-
-      setTransmissionResults(results);
-      setLoading(false);
-    };
-
-    buildResults();
-  }, [setCurrentPage, configObj, mapObj, localParticipantName, localUsercode, dateString]);
+    }
+  } catch (error) {
+    console.log(error);
+    alert("9: " + error.message);
+  }
 
   // early return if data submit success event
   if (displayGoodbyeMessage === true) {
@@ -226,7 +231,7 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <LocalSubmitSuccessModal />
         <ContainerDiv>
-          <SaveLocalDataToLocalStorageButton results={transmissionResults} />
+          <SaveLocalDataToLocalStorageButton results={results} />
         </ContainerDiv>
       </React.Fragment>
     );
@@ -236,10 +241,10 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
-          <SubmitButtonGS results={transmissionResults} api={configObj.steinApiUrl} />
+          <SubmitButtonGS results={results} api={configObj.steinApiUrl} />
 
           {displaySubmitFallback ? (
-            <SubmitFallback results={transmissionResults} />
+            <SubmitFallback results={results} />
           ) : (
             <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
@@ -252,7 +257,7 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
-          <SubmitButtonEmail results={transmissionResults} />
+          <SubmitButtonEmail results={results} />
         </ContainerDiv>
       </React.Fragment>
     );
@@ -262,7 +267,7 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
-          <SubmitButtonNetlify results={transmissionResults} />
+          <SubmitButtonNetlify results={results} />
           <ContentDiv>{transferTextBelow}</ContentDiv>
         </ContainerDiv>
       </React.Fragment>
@@ -273,10 +278,10 @@ const SubmitPage = () => {
         <SortTitleBar background={headerBarColor}>{pageHeader}</SortTitleBar>
         <ContainerDiv>
           <ContentDiv>{transferTextAbove}</ContentDiv>
-          <SubmitButton results={transmissionResults} />
+          <SubmitButton results={results} />
 
           {displaySubmitFallback ? (
-            <SubmitFallback results={transmissionResults} />
+            <SubmitFallback results={results} />
           ) : (
             <ContentDiv>{transferTextBelow}</ContentDiv>
           )}
@@ -389,4 +394,52 @@ const StyledButton = styled.button`
   "sort": "no data"
 }
 SubmitButton.jsx:60 
+
+*** Functional Solution ***
+   useEffect(
+     () => {
+   const resultsObj = () => ({
+     projectName: "",
+     partId: "",
+     randomId: "",
+     urlUsercode: "",
+     usercode: "",
+     dateTime: "",
+     timeLanding: "",
+     timePresort: "",
+     timeSort: "",
+     timePostsort: "",
+     timeSurvey: "",
+     npos: 0,
+     posStateNums: "",
+     nneu: 0,
+     neuStateNums: "",
+     sort: "",
+     presortTrace: "",
+   });
+
+    *** NEW BUILDER ***
+   const withProjectName = (resultsObj, projectName) => ({ ...resultsObj, projectName });
+   const withPartId = (resultsObj, partId) => ({ ...resultsObj, partId });
+   const withRandomId = (resultsObj, randomId) => ({ ...resultsObj, randomId });
+   const withUrlUsercode = (resultsObj, randomId) => ({ ...resultsObj, randomId });
+
+   const compose =
+     (...fns) =>
+     (x) =>
+       fns.reduce((acc, fn) => fn(acc), x);
+
+   const newBuildResults = compose(
+     (resultsObj) => withProjectName(resultsObj, projectName),
+     (resultsObj) => withPartId(resultsObj, partId),
+     (resultsObj) => withRandomId(resultsObj, randomId),
+     (resultsObj) => withUrlUsercode(resultsObj, urlUsercode)
+   );
+
+   const results = newBuildResults(resultsObj());
+
+   console.log(JSON.stringify(results, null, 2));
+
+
+
 */
