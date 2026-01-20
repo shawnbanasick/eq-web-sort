@@ -1,5 +1,4 @@
-const getNextPage = (currentPage, showPostsort, showSurvey, showConsent) => {
-  // if (showPostsort === true && showSurvey === true) {
+const getNextPage = (currentPage, showPresort, showPostsort, showSurvey, showConsent) => {
   if (currentPage === "consent") {
     if (showConsent === true) {
       return `/landing`;
@@ -7,7 +6,10 @@ const getNextPage = (currentPage, showPostsort, showSurvey, showConsent) => {
     return `/presort`;
   }
   if (currentPage === "landing") {
-    return `/presort`;
+    if (showPresort) {
+      return `/presort`;
+    }
+    return `/sort`;
   }
   if (currentPage === "presort") {
     return `/sort`;
