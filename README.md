@@ -1,4 +1,9 @@
+<p align="center">
+<kbd><img src="./readme_assets/deprecationMessage.png?raw-true"  width="700"></kbd>
+</p>
+
 # New Version - QUINCE
+
 ## If you need online sorting of text statements using a forced distribution, use the [QUINCE](https://quince-config.netlify.app/) software instead.
 
 <br />
@@ -6,6 +11,7 @@
 <br />
 
 <br />
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) <a href="https://doi.org/10.5281/zenodo.8339818"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8339818.svg" alt="DOI"></a>
 
 <p align="center">
