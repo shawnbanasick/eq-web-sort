@@ -4,7 +4,7 @@
 
 # New Version - QUINCE
 
-## If you need online sorting of text statements using a forced distribution, use the [QUINCE](https://quince-config.netlify.app/) software instead.
+## For online sorting of text statements use the Quince software instead. [Quince Configurator Link](https://quince-config.netlify.app/)
 
 <br />
 
