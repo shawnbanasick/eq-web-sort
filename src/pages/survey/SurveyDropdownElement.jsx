@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MultiSelect from "react-multi-select-component";
+import * as MultiSelect from "react-multi-select-component";
 import ReactHtmlParser from "react-html-parser";
 import decodeHTML from "../../utilities/decodeHTML";
 import useLocalStorage from "../../utilities/useLocalStorage";

@@ -2,6 +2,7 @@ const calcProgressScore = (
   currentPage,
   additionalProgress1,
   additionalProgressSort,
+  showPresort,
   showPostsort,
   showSurvey,
   additionalProgressState,

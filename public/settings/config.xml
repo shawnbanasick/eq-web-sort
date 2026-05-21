@@ -43,6 +43,7 @@
    
    <!-- PRESORT -->
    <!-- default colors #2a2a2a, #ccffcc, #e0e0e0, #ffe0f0 -->
+   <item id="showPresort">false</item>
    <item id="greenCardColor">#ccffcc</item>
    <item id="yellowCardColor">#e0e0e0</item>
    <item id="pinkCardColor">#ffe0e0</item>
