@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
    <statements version="6.0.0" htmlParse="false">
-     <statement id="1">I think the iPads helped to make a good learning environment for this class</statement>
-     <statement id="2">I learned concepts more easily in this class because we used the iPad</statement>
-     <statement id="3">I learned more from my classmates in this class than in my other classes because of the iPads</statement>
-     <statement id="4">The iPad helped me to learn things in this class that I would not have learned otherwise</statement>
-     <statement id="5">Using the iPad made it easier for me to make connections between the concepts used in the class</statement>
-     <statement id="6">Using iPads matches well with my preferred method of learning</statement>
-     <statement id="7">I feel using the iPads motivated me to work harder in this class</statement>
-     <statement id="8">I think that the iPad skills that I learned in this class will help me in other classes</statement>
-     <statement id="9">Using the iPad helped me to focus on the class concepts</statement>
-     <statement id="10">Using the iPad helped me to remember concepts from previous class sessions</statement>
-     <statement id="11">I participated more in this class than my other classes because of the iPads</statement>
-     <statement id="12">Using the iPads with Socrative made it easier for me to express my opinions on the course concepts</statement>
-     <statement id="13">It was interesting to use the iPads and Socrative to see the opinions of other students</statement>
-     <statement id="14">Using the iPads to give feedback on student presentations made them more interesting</statement>
-     <statement id="15">The Kahoot quizzes using iPads helped me to learn the course concepts</statement>
-     <statement id="16">Using the iPads in class made it more difficult for me to speak in English during class</statement>
-     <statement id="17">I wanted to use the iPad to access social media applications (LINE or Facebook) during class</statement>
-     <statement id="18">Using the iPads in this class wasted valuable class time</statement>
-     <statement id="19">It was difficult for me to understand how to use the iPad apps for this class</statement>
-     <statement id="20">Using the iPad in this class made the course concepts more confusing</statement>
-     <statement id="21">It was difficult to communicate my ideas using the iPad</statement>
-     <statement id="22">The iPad-related material was not well integrated with the other class material</statement>
-     <statement id="23">Having my opinions displayed in the screen in front of the class made me more reluctant to express my opinions</statement>
-     <statement id="24">I became bored while using the iPad during class</statement>
-     <statement id="25">I felt awkward when using the iPad because I am not as skilled with technology as other students seem to be</statement>
-     <statement id="26">The iPad made it more difficult for me to concentrate on the course concepts</statement>
-     <statement id="27">Using the iPad made it more difficult to speak in English with the Professor</statement>
-     <statement id="28">Using the iPad made it more difficult to speak in English with other students</statement>
-     <statement id="29">I lost some confidence in my ability to speak English during class because of the use of iPads</statement>
-     <statement id="30">Using iPads during class was inconvenient</statement>
-     <statement id="31">Use of the iPads didn’t improve the learning environment</statement>
-     <statement id="32">I feel more comfortable using technology after taking this classmates</statement>
-     <statement id="33">I wish more of my classes would use iPads</statement>
-   </statements>
+   <statement id="1"> "나는 행정 업무가 산더미처럼 밀려 있는 날에는 학생과 마주 앉아 있어도 온전히 상담에 집중하지 못하고 있다는 것을 스스로 느낄 때가 있다.",
+   <statement id="2"> "검사 채점과 심리검사 보고서 작성에 에너지를 다 쏟고 나면 정작 학생에게 집중하기가 힘들어, 이러한 기계적인 작업만큼은 AI가 대신해주길 바란다.",
+   <statement id="3"> "나는 사례회의나 수퍼비전 준비에 드는 물리적 시간을 줄이고, 대신 사례의 핵심을 고민하는 데 더 몰입하고 싶다.",
+   <statement id="4">"나는 학부모 상담 후 작성해야 하는 면담 기록이나 협의 내용 정리처럼 반복적인 소통 행정은 AI가 처리해준다면 훨씬 더 많은 에너지를 학생에게 쓸 수 있을 것 같다.",
+   <statement id="5">나는 학교 조직이 AI가 내놓은 데이터 수치에만 매몰되어 아이들의 성장을 위해 기다려주어야 할 교육적 시간의 가치를 잊게 될까 봐 두렵다.
+ <statement id="6">"나는 학생의 지난 상담 기록들을 일일이 검토하는 것 보다, AI가 요약해 준 흐름을 파악한 뒤 필요한 부분만 찾아보는 방식이 훨씬 합리적이라 생각한다.",
+  <statement id="7">  "나는 상담 기록이나 정리 같은 부차적인 노동은 AI에게 넘기고, 상담 전략을 세우는 판단에만 온전히 집중할 수 있다면 더할 나위 없겠다는 생각이 든다.",
+ <statement id="8">"나는 상담 일지를 직접 작성하는 다소 번거로운 시간조차 학생을 향한 책임감의 표현이라 믿기에, 이를 AI에게 일임하는 것이 과연 진정한 상담의 효율인지 의문이 든다.",   <statement id="9"> "나는 상담 선생님인 나에게조차 입을 떼지 못하던 아이들이 익명이 보장된 AI에게는 더 솔직한 속내를 보일 것이라 생각한다.",
+   <statement id="9"> "언제나 일관된 AI의 태도에 비해 나의 인간적인 감정 상태나 컨디션이 상담의 흐름을 가로막는 한계처럼 느껴질 때가 있다.",
+    <statement id="10">"나는 AI가 깊이 있는 심리적 개입보다는 학생들이 일상에서 겪는 가벼운 스트레스를 그때그때 해소해 주는 일시적인 방편에 가깝다고 생각한다.",
+    <statement id="11">"나는 비자발적 학생을 바로 마주하기보다 AI라는 완충지대를 먼저 활용하는 것이 상담자로서 학생의 마음을 여는 데 더 효과적인 전략이라 생각한다.",
+    <statement id="12">"나는 상담실 문을 나선 아이들이 혼자서도 마음을 다스릴 수 있도록 AI가 나의 빈자리를 채워주는 든든한 사후관리 요원이 될 수 있다고 생각한다.",
+   <statement id="13"> "일부 학생들에게는 상담자의 반응을 의식하게 되는 대면 상담보다, 정서적 반응이 느껴지지 않는 AI와의 대화가 더 편안한 소통의 통로가 될 수 있다고 생각한다.",
+   <statement id="14"> "AI가 분석한 학생의 심리 상태가 내 직관과 다를 때, 나는 데이터보다 내 직관을 먼저 믿을 것이다.",
+  <statement id="15">  "나는 AI가 장기간 누적된 학생의 언어 패턴을 분석해준다면 내가 놓쳤을 수도 있는 심리적 변화를 더 빠르게 알아챌 수 있을 것이라 기대한다.",
+  <statement id="16">  "나는 AI가 제안한 전략으로 인해 상담 사고가 발생했을 때 모든 윤리적 책임을 상담사 개인이 온전히 짊어져야 한다는 사실이 부당하게 느껴진다.",
+  <statement id="17">  "나는 상담이 전인적인 만남이기에 AI가 내놓는 분석 결과는 결국 인간의 복잡한 마음을 파편화된 데이터로 요약한 것에 불과하다고 생각한다.",
+ <statement id="18">   "나는 아무리 AI가 정교해져도 상담자와 학생 사이에서만 일어나는 말 없는 교감과 신뢰의 축적은 기술이 결코 만들어낼 수 없는 것이라 믿는다.",
+ <statement id="19">   "나는 AI가 내놓은 객관적 데이터가 나의 경험적 판단과 부딪힐 때, 데이터의 권위에 밀려 상담자로서의 내 주관을 포기하게 될까 봐 우려된다.",
+ <statement id="20">  "나는 AI가 상담의 보조를 넘어 상담의 방향을 주도적으로 제안하는 순간 상담자로서의 나의 전문적 권위가 심각하게 훼손될 것이라 우려한다.",
+ <statement id="21">   "나는 AI가 점점 더 많은 상담 기능을 대신하게 될수록 내가 전문상담교사로서 존재해야 할 이유가 조금씩 사라지는 것 같아 문득 불안할 때가 있다.",
+ <statement id="22">   "나는 AI가 내놓는 즉각적인 해결책에 길들여져 내담자의 문제를 깊이 있게 통찰하고 구조화하는 나만의 임상적 사고 능력이 점차 퇴화할까 봐 두렵다.",
+ <statement id="23">   "나는 상담의 효율성을 위해서라면 상담사의 개입 없이 AI가 학생에게 직접적인 조언이나 해결책을 제공하는 것도 허용될 수 있다고 본다.",
+ <statement id="24">   "나는 AI가 상담 기록을 실적 보고용 통계로 자동 요약해 준다면 학교 내 상담성과 증명에 대한 행정적 압박이 크게 해소될 것이라 믿는다.",
+<statement id="25">    "나는 AI가 생성한 공문이나 통계 자료에 행정적 오류가 발생했을 때 결국 모든 뒷감당을 내가 해야 한다는 생각에 AI 도입이 조심스럽다.",
+ <statement id="26">   "나는 AI 도입을 위한 시스템 학습과 적응 과정이 학교 현장에서 또 하나의 행정 업무로 쌓이는 것 같아 부담스럽다.",
+    <statement id="27">"나는 나이스(NEIS) 입력이나 월간 통계 보고처럼 반복되는 작업을 AI가 완전히 자동화해 주길 바란다.",
+    <statement id="28">"나는 AI가 상담 성과를 시각화된 데이터로 요약해 준다면 상담의 가치를 이해하지 못하는 학교 관리자들을 설득하는 과정이 훨씬 수월해질 것이라 기대한다.",
+   <statement id="29"> "나는 교육청에 제출할 각종 예방 교육 결과 보고서나 공문 초안을 AI로 빠르게 작성하여 상담 외적인 행정 소모를 최소화하고 싶다.",
+    <statement id="30">"아무리 AI가 행정을 돕는다 해도 AI가 만든 서류를 검토하고 승인하는 일 자체가 나에게는 새로운 행정적 짐이 될 뿐이다.",
+    <statement id="31">"나는 상담 인력이 부족한 학교 현실에서 AI가 상담실의 손길이 닿지 않는 사각지대를 메워주는 상시 안전망이 될 수 있다고 믿는다.",
+    <statement id="32">"나는 AI가 상담의 문턱을 낮춰줌으로써 상담실이 특별한 아이들만 찾는 장소라는 편견을 깨고 학교 생활의 일상적인 공간으로 자리 잡기를 기대한다.",
+    <statement id="33">"나는 학교 안에서도 마음의 문을 닫고 소통을 거부하는 고립된 아이들에게 AI가 세상과 대화를 시작하게 만드는 첫 번째 창구가 되어줄 수 있음을 기대한다.",
+    <statement id="34">"나는 AI가 가벼운 고민을 가진 아이들을 1차적으로 선별하는 필터 역할을 해줌으로써 내가 더 긴급한 학생에게 집중할 시간을 벌어줄 것이라 기대한다.",
+    <statement id="35">"나는 AI가 대면 상담을 받기 어려운 학생들에게 단순한 보조 도구를 넘어, 실질적이고 유효한 상담의 대안이 될 수 있다고 믿는다.",
+    <statement id="36">"나는 AI를 활용한 전교생 정서 스크리닝이 상담실을 제 발로 찾아오지 않는 고위험군 학생을 선제적으로 발굴하는 데 결정적인 기여를 할 것이라 확신한다.",
+    <statement id="37">"나는 상담교사가 모든 교실에 들어갈 수 없는 현실에서 AI 기반의 예방 교육 프로그램이 전교생의 심리적 면역력을 높여주는 효율적인 교육 도구가 될 것이라 생각한다.",
+    <statement id="38">"나는 AI 스크리닝의 오진으로 인해 아무 문제 없는 학생에게 심리적 문제가 있다는 낙인을 찍는 부작용이 생길까 봐 우려된다.",
+    <statement id="39">"나는 학교라는 공적 공간에서 AI를 활용하다가 학생의 민감한 정보가 유출될 경우, 그 법적·윤리적 책임을 오롯이 내가 져야 한다는 사실이 큰 부담으로 다가온다.",
+    <statement id="40">"나는 학생의 정보가 일단 AI에 입력되면 그것이 어디에 저장되고 어떻게 쓰이는지 상담자인 나조차 어떤 통제권도 가질 수 없다는 점이 우려된다.",
+    <statement id="41">"나는 AI가 수집한 상담 데이터가 상담실의 비밀보장 원칙을 넘어, 학교 관리자나 타 교사들에게 학생을 평가하는 자료로 무분별하게 공유될까 봐 우려된다.",
+    <statement id="42">"나는 교육청 차원의 명확한 가이드라인이나 제도적 보호 장치가 없는 상태에서 학교 현장에 AI를 도입하는 것은 상담교사에게만 모든 위험을 떠넘기는 무책임한 처사라고 생각한다.",
+    <statement id="43">"나는 학교 조직이 AI가 내놓은 데이터 수치에만 매몰되어 아이들의 성장을 위해 기다려주어야 할 교육적 시간의 가치를 잊게 될까 봐 두렵다."
+
+    
+   
